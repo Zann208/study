@@ -4,155 +4,372 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Google Data Center Hardware Hackathon 2026 — Study Console</title>
-<meta name="description" content="An independent preparation console for the Google Thailand Data Center Hardware Hackathon 2026, covering data center fundamentals, server hardware, networking, Linux, troubleshooting, automation, and mock challenges.">
-<meta name="theme-color" content="#07111f">
+<meta name="description" content="Independent preparation console for the Google Thailand Data Center Hardware Hackathon 2026: data center fundamentals, server hardware, networking, Linux, troubleshooting, automation, and mock challenges.">
+<meta name="theme-color" content="#08111f">
 <style>
 :root{
-  --bg:#07111f; --panel:#0d1a2b; --panel2:#11233a; --ink:#edf4ff; --dim:#9fb0c7; --faint:#6e839f;
-  --blue:#4285f4; --red:#ea4335; --yellow:#fbbc04; --green:#34a853; --cyan:#56d4ff;
-  --line:#1e3552; --line2:#2a476b; --ok:#72d68c;
-  --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --bg:#08111f;--bg2:#0a1424;--panel:#0e1a2b;--panel2:#122238;--panel3:#162942;
+  --ink:#edf4ff;--dim:#9eb0c7;--faint:#68809f;--line:#1d3552;--line2:#2a496e;
+  --blue:#4285f4;--red:#ea4335;--yellow:#fbbc04;--green:#34a853;--cyan:#62d7ff;
+  --ok:#77d991;--sidebar:268px;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--bg);scroll-behavior:smooth}
-body{font-family:var(--sans);color:var(--ink);background:
-  radial-gradient(circle at 20% 0%,rgba(66,133,244,.12),transparent 35%),
-  radial-gradient(circle at 90% 12%,rgba(52,168,83,.09),transparent 28%),
-  linear-gradient(rgba(86,212,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(86,212,255,.025) 1px,transparent 1px);
-  background-size:auto,auto,46px 46px,46px 46px;line-height:1.65;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}.wrap{max-width:1040px;margin:auto;padding:34px 22px 80px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:42px}.back{font-family:var(--mono);font-size:12px;color:var(--dim);border:1px solid var(--line);padding:8px 11px;border-radius:8px}.back:hover{border-color:var(--blue);color:var(--ink)}.status{font-family:var(--mono);font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--green)}
-.hero{border:1px solid var(--line);background:rgba(13,26,43,.84);border-radius:20px;padding:30px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--blue) 0 25%,var(--red) 25% 50%,var(--yellow) 50% 75%,var(--green) 75%)}
-.eyebrow{font:700 11px var(--mono);letter-spacing:1.8px;text-transform:uppercase;color:var(--cyan)}h1{font-size:clamp(30px,5vw,50px);line-height:1.05;letter-spacing:-1.7px;margin-top:12px;max-width:800px}.lede{font-size:17px;color:var(--dim);max-width:790px;margin-top:16px}.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.chip{font:700 10.5px var(--mono);letter-spacing:.8px;text-transform:uppercase;border:1px solid var(--line2);color:var(--dim);border-radius:999px;padding:6px 10px}.chip.strong{color:var(--yellow);border-color:rgba(251,188,4,.55)}
-.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:24px}.hero-box{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px}.hero-box b{display:block;font:800 11px var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--faint);margin-bottom:6px}.hero-box strong{font-size:20px}.hero-box p{font-size:13px;color:var(--dim);margin-top:4px}
-.section{margin-top:42px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:14px}.kicker{font:800 10.5px var(--mono);letter-spacing:1.5px;color:var(--faint);text-transform:uppercase}.section h2{font-size:24px;letter-spacing:-.5px;margin-top:3px}.section-intro{color:var(--dim);font-size:14px;max-width:610px}
-.progress-shell{height:8px;border-radius:999px;background:#08121f;border:1px solid var(--line);overflow:hidden;margin-top:16px}.progress-bar{height:100%;width:10%;background:linear-gradient(90deg,var(--blue),var(--green));transition:.2s}.progress-text{font:11px var(--mono);color:var(--faint);margin-top:8px}
-.path{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.module{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:17px 18px;display:flex;gap:14px;align-items:flex-start;transition:.15s}.module:hover{border-color:var(--line2);transform:translateY(-1px)}.num{font:800 12px var(--mono);color:var(--blue);border:1px solid rgba(66,133,244,.45);border-radius:8px;min-width:37px;height:37px;display:grid;place-items:center}.module h3{font-size:15px}.module p{font-size:12.5px;color:var(--dim);margin-top:4px}.badge{display:inline-block;font:800 9px var(--mono);letter-spacing:.8px;text-transform:uppercase;margin-top:8px;color:var(--faint)}.module.current{border-color:rgba(66,133,244,.62);background:linear-gradient(135deg,rgba(66,133,244,.10),var(--panel))}.module.current .badge{color:var(--cyan)}
-.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.tool{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:16px}.tool b{font:800 11px var(--mono);letter-spacing:1px;text-transform:uppercase}.tool p{color:var(--dim);font-size:12.5px;margin-top:7px}
-.lesson{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}.lesson-top{padding:24px;border-bottom:1px solid var(--line);background:linear-gradient(120deg,rgba(66,133,244,.10),rgba(52,168,83,.05))}.lesson-top .label{font:800 10px var(--mono);color:var(--cyan);letter-spacing:1.4px;text-transform:uppercase}.lesson-top h2{font-size:28px;margin-top:7px}.lesson-top p{color:var(--dim);margin-top:8px;max-width:760px}.lesson-body{padding:24px}.lesson-body h3{font-size:19px;margin:26px 0 9px}.lesson-body h3:first-child{margin-top:0}.lesson-body p{color:var(--dim);margin-top:8px}.simple{border-left:3px solid var(--green);padding:13px 16px;background:rgba(52,168,83,.07);border-radius:0 9px 9px 0;margin:14px 0;color:var(--ink)}.simple b{font:800 10px var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--green);display:block;margin-bottom:5px}
-.flow{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:16px 0}.node{font:700 12px var(--mono);border:1px solid var(--line2);background:var(--panel2);padding:8px 10px;border-radius:8px}.arrow{font-family:var(--mono);color:var(--faint)}
-.table-wrap{overflow:auto;margin-top:12px}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px 11px;border-bottom:1px solid var(--line)}th{font:800 10px var(--mono);letter-spacing:.8px;text-transform:uppercase;color:var(--faint)}td{color:var(--dim)}td:first-child{color:var(--ink);font-weight:700}
-.challenge{margin-top:24px;border:1px solid rgba(251,188,4,.42);background:rgba(251,188,4,.055);border-radius:13px;padding:18px}.challenge .c-label{font:800 10px var(--mono);letter-spacing:1.2px;color:var(--yellow);text-transform:uppercase}.challenge h3{margin:7px 0 5px}.challenge p{color:var(--dim)}details{margin-top:12px;border-top:1px solid rgba(251,188,4,.2);padding-top:10px}summary{cursor:pointer;font:800 11px var(--mono);color:var(--yellow)}details p{margin-top:8px}
-.quiz{display:grid;gap:10px;margin-top:15px}.q{border:1px solid var(--line);border-radius:11px;padding:15px;background:var(--panel2)}.q p{color:var(--ink);font-weight:700;font-size:14px}.opts{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.opt{cursor:pointer;background:transparent;color:var(--dim);border:1px solid var(--line2);padding:7px 10px;border-radius:7px;font-size:12px}.opt:hover{border-color:var(--blue);color:var(--ink)}.feedback{font:11px var(--mono);margin-top:8px;min-height:18px;color:var(--faint)}
-.complete{margin-top:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}.complete button{cursor:pointer;border:1px solid var(--green);background:rgba(52,168,83,.10);color:var(--ok);font:800 11px var(--mono);letter-spacing:.8px;padding:9px 12px;border-radius:8px}.complete span{font:11px var(--mono);color:var(--faint)}
-.next{margin-top:18px;background:linear-gradient(130deg,rgba(66,133,244,.11),rgba(52,168,83,.08));border:1px solid var(--line2);border-radius:13px;padding:17px}.next b{font:800 10px var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--cyan)}.next h3{margin-top:5px}.next p{font-size:13px;color:var(--dim);margin-top:5px}
-footer{margin-top:42px;border-top:1px solid var(--line);padding-top:20px;color:var(--faint);font:11px var(--mono);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-@media(max-width:760px){.hero-grid,.path{grid-template-columns:1fr}.tools{grid-template-columns:repeat(2,1fr)}.hero{padding:23px}.lesson-body{padding:19px}.wrap{padding:24px 16px 60px}}@media(max-width:440px){.tools{grid-template-columns:1fr}.status{display:none}}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button,input{font:inherit}
+::selection{background:rgba(66,133,244,.32);color:#fff}
+
+.app{min-height:100vh;background:
+ radial-gradient(circle at 42% -10%,rgba(66,133,244,.10),transparent 33%),
+ linear-gradient(rgba(98,215,255,.022) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(98,215,255,.022) 1px,transparent 1px),var(--bg);
+ background-size:auto,48px 48px,48px 48px,auto}
+
+/* Sidebar */
+.sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar);background:rgba(9,18,32,.96);border-right:1px solid var(--line);padding:20px 16px;display:flex;flex-direction:column;z-index:40;backdrop-filter:blur(14px)}
+.brand{display:flex;align-items:center;gap:11px;padding:4px 4px 17px;border-bottom:1px solid var(--line)}
+.brand-mark{width:34px;height:34px;border:1px solid var(--line2);border-radius:10px;display:grid;place-items:center;font:800 11px var(--mono);color:var(--cyan);position:relative;overflow:hidden;background:var(--panel)}
+.brand-mark:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,var(--blue) 0 25%,var(--red) 25% 50%,var(--yellow) 50% 75%,var(--green) 75%)}
+.brand-copy b{display:block;font-size:13px;line-height:1.2}.brand-copy span{display:block;margin-top:3px;font:9.5px var(--mono);letter-spacing:.7px;text-transform:uppercase;color:var(--faint)}
+
+.search-wrap{margin-top:15px;position:relative}.search-box{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:0 10px;transition:.15s}.search-box:focus-within{border-color:rgba(66,133,244,.75);box-shadow:0 0 0 3px rgba(66,133,244,.08)}.search-icon{font:700 12px var(--mono);color:var(--faint)}.search-box input{width:100%;background:none;border:0;outline:0;color:var(--ink);font-size:12px;padding:10px 0}.search-box input::placeholder{color:var(--faint)}.keycap{font:9px var(--mono);color:var(--faint);border:1px solid var(--line2);border-radius:4px;padding:1px 5px}
+.search-results{display:none;position:absolute;left:0;right:0;top:44px;background:#0c1829;border:1px solid var(--line2);border-radius:10px;box-shadow:0 14px 40px rgba(0,0,0,.32);max-height:310px;overflow:auto;padding:6px;z-index:60}.search-results.open{display:block}.search-result{display:block;padding:9px 10px;border-radius:7px}.search-result:hover{background:var(--panel2)}.search-result b{display:block;font-size:11.5px}.search-result span{display:block;font-size:10px;color:var(--faint);margin-top:2px}.no-result{padding:12px;font-size:11px;color:var(--faint)}
+
+.nav-label{font:800 9px var(--mono);letter-spacing:1.25px;color:var(--faint);text-transform:uppercase;margin:20px 8px 7px}.nav{display:grid;gap:3px}.nav a{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:7px;color:var(--dim);font-size:12px;transition:.12s}.nav a:hover{background:var(--panel);color:var(--ink)}.nav a.active{background:rgba(66,133,244,.11);color:#dbeaff}.nav-code{width:25px;font:800 9px var(--mono);color:var(--faint)}.nav a.active .nav-code{color:var(--blue)}
+
+.side-modules{display:grid;gap:2px}.side-module{display:flex;align-items:center;gap:9px;padding:6px 9px;border-radius:7px;color:var(--faint);font-size:10.5px}.side-module.current{color:var(--ink);background:var(--panel)}.side-module .n{font:800 9px var(--mono);width:20px;color:var(--faint)}.side-module.current .n{color:var(--cyan)}
+.side-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--line)}.countdown{padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--panel)}.countdown .lab{font:800 9px var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--faint)}.countdown strong{display:block;font-size:20px;margin-top:2px}.countdown span{font-size:10px;color:var(--dim)}.side-back{display:block;margin-top:8px;padding:8px 9px;border-radius:7px;font:700 10px var(--mono);color:var(--faint)}.side-back:hover{background:var(--panel);color:var(--ink)}
+
+/* Main */
+.main{margin-left:var(--sidebar);min-width:0}.main-inner{max-width:1050px;margin:0 auto;padding:34px 34px 80px}.mobile-bar{display:none}
+.hero{position:relative;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,rgba(18,34,56,.96),rgba(12,24,41,.92));padding:30px;overflow:hidden}.hero:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--blue) 0 25%,var(--red) 25% 50%,var(--yellow) 50% 75%,var(--green) 75%)}.hero:after{content:"GDC";position:absolute;right:22px;top:3px;font:900 86px/1 var(--mono);letter-spacing:-8px;color:rgba(255,255,255,.025);pointer-events:none}.eyebrow{font:800 10px var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan)}h1{font-size:clamp(30px,4.7vw,49px);line-height:1.06;letter-spacing:-1.6px;margin-top:10px;max-width:800px}.lede{font-size:16px;color:var(--dim);max-width:760px;margin-top:14px}.meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:19px}.chip{font:800 9.5px var(--mono);letter-spacing:.65px;text-transform:uppercase;border:1px solid var(--line2);color:var(--dim);border-radius:999px;padding:5px 9px}.chip.date{color:var(--yellow);border-color:rgba(251,188,4,.45)}
+.hero-stats{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:9px;margin-top:22px}.stat{border:1px solid var(--line);background:rgba(8,17,31,.38);border-radius:10px;padding:13px}.stat b{display:block;font:800 9px var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--faint)}.stat strong{display:block;font-size:16px;margin-top:4px}.stat span{display:block;color:var(--dim);font-size:11px;margin-top:2px}.progress-shell{height:6px;border-radius:999px;background:#07101d;border:1px solid var(--line);overflow:hidden;margin-top:17px}.progress-bar{height:100%;width:10%;background:linear-gradient(90deg,var(--blue),var(--green));transition:.2s}.progress-row{display:flex;justify-content:space-between;gap:12px;margin-top:7px;font:10px var(--mono);color:var(--faint)}
+
+.section{scroll-margin-top:24px;margin-top:38px}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:14px}.kicker{font:800 9.5px var(--mono);letter-spacing:1.35px;color:var(--faint);text-transform:uppercase}.section h2{font-size:23px;letter-spacing:-.45px;margin-top:3px}.section-intro{font-size:13px;color:var(--dim);max-width:570px}
+
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.quick{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:14px}.quick .qno{font:800 9px var(--mono);letter-spacing:1px;color:var(--faint)}.quick b{display:block;font-size:12px;margin-top:8px}.quick p{font-size:11px;color:var(--dim);margin-top:4px}
+
+.path{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.module{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:15px 16px;display:flex;gap:12px;align-items:flex-start;transition:.14s}.module:hover{border-color:var(--line2);transform:translateY(-1px)}.module.current{border-color:rgba(66,133,244,.55);background:linear-gradient(135deg,rgba(66,133,244,.095),var(--panel))}.num{min-width:34px;height:34px;border:1px solid var(--line2);border-radius:8px;display:grid;place-items:center;font:800 10px var(--mono);color:var(--faint)}.current .num{color:var(--blue);border-color:rgba(66,133,244,.48)}.module h3{font-size:13px}.module p{font-size:11.5px;color:var(--dim);margin-top:3px}.badge{display:inline-block;margin-top:6px;font:800 8.5px var(--mono);letter-spacing:.7px;text-transform:uppercase;color:var(--faint)}.current .badge{color:var(--cyan)}
+
+.lesson{background:var(--panel);border:1px solid var(--line);border-radius:15px;overflow:hidden}.lesson-top{padding:22px 24px;border-bottom:1px solid var(--line);background:linear-gradient(120deg,rgba(66,133,244,.10),rgba(52,168,83,.045))}.lesson-top .label{font:800 9.5px var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--cyan)}.lesson-top h2{font-size:27px;margin-top:6px}.lesson-top p{font-size:13px;color:var(--dim);max-width:760px;margin-top:7px}.lesson-body{padding:23px 24px}.lesson-block{scroll-margin-top:24px}.lesson-body h3{font-size:18px;margin:27px 0 8px}.lesson-body h3:first-child{margin-top:0}.lesson-body p{color:var(--dim);font-size:13.5px;margin-top:7px}.definition{border-left:3px solid var(--green);background:rgba(52,168,83,.065);padding:12px 14px;border-radius:0 8px 8px 0;margin:13px 0}.definition b{display:block;font:800 9px var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-bottom:4px}.definition p{margin:0;color:var(--ink);font-size:13px}.term-blue{color:#79a7ff;font-weight:700}.term-green{color:#74d590;font-weight:700}.term-yellow{color:#ffd55c;font-weight:700}.term-red{color:#ff887f;font-weight:700}
+.flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:14px 0}.node{font:700 11px var(--mono);border:1px solid var(--line2);background:var(--panel2);padding:7px 9px;border-radius:7px}.arrow{font:700 10px var(--mono);color:var(--faint)}
+.table-wrap{overflow:auto;margin-top:12px;border:1px solid var(--line);border-radius:10px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 11px;border-bottom:1px solid var(--line)}tr:last-child td{border-bottom:0}th{font:800 9px var(--mono);letter-spacing:.75px;text-transform:uppercase;color:var(--faint);background:rgba(8,17,31,.34)}td{color:var(--dim)}td:first-child{color:var(--ink);font-weight:700}
+.challenge{margin-top:22px;border:1px solid rgba(251,188,4,.38);background:rgba(251,188,4,.045);border-radius:11px;padding:16px}.challenge .c-label{font:800 9px var(--mono);letter-spacing:1.1px;color:var(--yellow);text-transform:uppercase}.challenge h3{margin:6px 0 4px}.challenge p{font-size:13px;color:var(--dim)}details{margin-top:10px;border-top:1px solid rgba(251,188,4,.18);padding-top:9px}summary{cursor:pointer;font:800 10px var(--mono);color:var(--yellow)}
+.quiz{display:grid;gap:9px;margin-top:13px}.q{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--panel2)}.q p{color:var(--ink);font-weight:700;font-size:13px}.opts{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.opt{cursor:pointer;background:transparent;color:var(--dim);border:1px solid var(--line2);padding:6px 9px;border-radius:6px;font-size:11px}.opt:hover:not(:disabled){border-color:var(--blue);color:var(--ink)}.opt:disabled{opacity:.72}.feedback{font:10px var(--mono);margin-top:7px;min-height:15px;color:var(--faint)}
+.complete{margin-top:18px;display:flex;align-items:center;gap:11px;flex-wrap:wrap}.complete button{cursor:pointer;border:1px solid var(--green);background:rgba(52,168,83,.09);color:var(--ok);font:800 10px var(--mono);letter-spacing:.7px;padding:8px 11px;border-radius:7px}.complete span{font:10px var(--mono);color:var(--faint)}
+.next{margin-top:17px;background:linear-gradient(130deg,rgba(66,133,244,.09),rgba(52,168,83,.06));border:1px solid var(--line2);border-radius:11px;padding:15px}.next b{font:800 9px var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--cyan)}.next h3{font-size:15px;margin-top:4px}.next p{font-size:12px;color:var(--dim);margin-top:3px}
+
+/* Glossary */
+.glossary-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.filter{cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--dim);border-radius:999px;padding:5px 9px;font:700 9.5px var(--mono)}.filter.active,.filter:hover{border-color:var(--line2);color:var(--ink);background:var(--panel2)}.terms{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.term-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px}.term-card .cat{font:800 8.5px var(--mono);letter-spacing:.85px;text-transform:uppercase;color:var(--faint)}.term-card h3{font-size:13px;margin-top:5px}.term-card p{font-size:11.5px;color:var(--dim);margin-top:4px}.term-card.hidden{display:none}
+
+footer{margin-top:38px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:10px var(--mono);color:var(--faint)}
+.overlay{display:none}
+
+@media(max-width:980px){:root{--sidebar:240px}.main-inner{padding:28px 24px 70px}.hero-stats{grid-template-columns:1fr 1fr}.hero-stats .stat:first-child{grid-column:1/-1}.terms{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.sidebar{transform:translateX(-100%);transition:.2s;width:278px;box-shadow:16px 0 45px rgba(0,0,0,.34)}.sidebar.open{transform:translateX(0)}.overlay{display:block;position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:35;opacity:0;pointer-events:none;transition:.2s}.overlay.open{opacity:1;pointer-events:auto}.main{margin-left:0}.mobile-bar{height:54px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 16px;border-bottom:1px solid var(--line);background:rgba(8,17,31,.92);position:sticky;top:0;z-index:30;backdrop-filter:blur(12px)}.menu-btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:7px;padding:6px 9px;font:800 11px var(--mono);cursor:pointer}.mobile-title{font-size:12px;font-weight:700}.main-inner{padding:18px 15px 58px}.hero{padding:22px}.hero:after{font-size:64px}.path{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,1fr)}.section-head{display:block}.section-intro{margin-top:6px}.lesson-body{padding:18px}.lesson-top{padding:19px}.terms{grid-template-columns:1fr}}
+@media(max-width:460px){.hero-stats,.quick-grid{grid-template-columns:1fr}.hero-stats .stat:first-child{grid-column:auto}.hero h1{font-size:29px}.lede{font-size:14px}.meta{gap:5px}.chip{font-size:8.5px}.progress-row{display:block}.progress-row span:last-child{display:block;margin-top:3px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="topbar"><a class="back" href="../">← Study Console</a><span class="status">Preparation console · 2026</span></div>
+<div class="app">
+  <div class="overlay" id="overlay"></div>
 
-  <header class="hero">
-    <div class="eyebrow">Independent preparation workspace</div>
-    <h1>Google Data Center Hardware Hackathon 2026</h1>
-    <p class="lede">A systematic preparation console for server hardware, networking, Linux, troubleshooting, automation, data center operations, and team-based technical challenges.</p>
-    <div class="meta"><span class="chip strong">26 Sep 2026</span><span class="chip">Thailand</span><span class="chip">Hardware + Systems</span><span class="chip">Beginner → Competition</span></div>
-    <div class="hero-grid">
-      <div class="hero-box"><b>Current focus</b><strong>Module 01 · Data Center Fundamentals</strong><p>Understand the whole system before learning individual commands.</p></div>
-      <div class="hero-box"><b>Training rule</b><strong>Learn → Test → Troubleshoot</strong><p>Every module ends with practical questions or a mini challenge.</p></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">GDC</div>
+      <div class="brand-copy"><b>Hardware Hackathon</b><span>Study Console 2026</span></div>
     </div>
-    <div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
-    <div class="progress-text" id="progressText">1 of 10 modules started</div>
-  </header>
 
-  <section class="section" id="path">
-    <div class="section-head"><div><div class="kicker">Roadmap</div><h2>Learning path</h2></div><p class="section-intro">Work in order. The early modules build the mental model needed for later troubleshooting challenges.</p></div>
-    <div class="path">
-      <a class="module current" href="#module1"><span class="num">01</span><span><h3>Data Center Fundamentals</h3><p>Servers, racks, network, power, cooling, redundancy.</p><span class="badge">Current module</span></span></a>
-      <div class="module"><span class="num">02</span><span><h3>Server Hardware</h3><p>CPU, RAM, storage, NIC, PSU, BIOS/UEFI, components and failures.</p><span class="badge">Next</span></span></div>
-      <div class="module"><span class="num">03</span><span><h3>Networking</h3><p>IP, subnet, gateway, MAC, ARP, DNS, DHCP, switching and routing.</p><span class="badge">Planned</span></span></div>
-      <div class="module"><span class="num">04</span><span><h3>Linux</h3><p>Shell, files, processes, services, network commands and logs.</p><span class="badge">Planned</span></span></div>
-      <div class="module"><span class="num">05</span><span><h3>Troubleshooting</h3><p>Diagnose faults layer by layer instead of guessing.</p><span class="badge">Planned</span></span></div>
-      <div class="module"><span class="num">06</span><span><h3>Bash &amp; Automation</h3><p>Variables, conditions, loops and simple infrastructure checks.</p><span class="badge">Planned</span></span></div>
-      <div class="module"><span class="num">07</span><span><h3>Services &amp; Security</h3><p>SSH, HTTP, ports, firewall basics, permissions and services.</p><span class="badge">Planned</span></span></div>
-      <div class="module"><span class="num">08</span><span><h3>Data Center Operations</h3><p>Racks, cabling, power, cooling, ESD safety and hardware replacement.</p><span class="badge">Planned</span></span></div>
-      <div class="module"><span class="num">09</span><span><h3>Team Challenges</h3><p>Task division, communication, fast decisions and incident notes.</p><span class="badge">Planned</span></span></div>
-      <div class="module"><span class="num">10</span><span><h3>Mock Hackathon</h3><p>Timed multi-fault scenarios with hints and revealable solutions.</p><span class="badge">Final stage</span></span></div>
+    <div class="search-wrap">
+      <div class="search-box"><span class="search-icon">⌕</span><input id="siteSearch" type="search" autocomplete="off" placeholder="Search topics or terms"><span class="keycap">/</span></div>
+      <div class="search-results" id="searchResults"></div>
     </div>
-  </section>
 
-  <section class="section">
-    <div class="section-head"><div><div class="kicker">Study modes</div><h2>Practice system</h2></div></div>
-    <div class="tools">
-      <div class="tool"><b>Learn</b><p>Simple explanations followed by correct technical terminology.</p></div>
-      <div class="tool"><b>Labs</b><p>Hands-on commands, hardware identification and troubleshooting steps.</p></div>
-      <div class="tool"><b>Quiz</b><p>Fast checks to make sure the key concepts are actually understood.</p></div>
-      <div class="tool"><b>Cheat Sheet</b><p>Compact commands, definitions and fault-isolation flow for revision.</p></div>
+    <div class="nav-label">Console</div>
+    <nav class="nav" id="mainNav">
+      <a href="#overview" class="active"><span class="nav-code">OV</span>Overview</a>
+      <a href="#roadmap"><span class="nav-code">RM</span>Roadmap</a>
+      <a href="#module1"><span class="nav-code">M1</span>Current lesson</a>
+      <a href="#terms"><span class="nav-code">TM</span>Key terms</a>
+    </nav>
+
+    <div class="nav-label">Modules</div>
+    <div class="side-modules">
+      <a class="side-module current" href="#module1"><span class="n">01</span>Data Center Fundamentals</a>
+      <div class="side-module"><span class="n">02</span>Server Hardware</div>
+      <div class="side-module"><span class="n">03</span>Networking</div>
+      <div class="side-module"><span class="n">04</span>Linux</div>
+      <div class="side-module"><span class="n">05</span>Troubleshooting</div>
+      <div class="side-module"><span class="n">06</span>Automation</div>
+      <div class="side-module"><span class="n">07</span>Services & Security</div>
+      <div class="side-module"><span class="n">08</span>Data Center Operations</div>
+      <div class="side-module"><span class="n">09</span>Team Challenges</div>
+      <div class="side-module"><span class="n">10</span>Mock Hackathon</div>
     </div>
-  </section>
 
-  <section class="section lesson" id="module1">
-    <div class="lesson-top"><div class="label">Module 01 · Start here</div><h2>Data Center Fundamentals</h2><p>Goal: build a clear picture of what a data center is, what a server does, and how the main systems connect together.</p></div>
-    <div class="lesson-body">
-      <h3>1. What is a data center?</h3>
-      <p>A data center is a facility that contains large numbers of computers called servers, plus the networking, power, cooling, and physical infrastructure needed to keep those servers available.</p>
-      <div class="simple"><b>Beginner version</b>A data center is a building full of powerful computers that run websites, apps, cloud services, storage, AI systems, and other online services.</div>
-
-      <h3>2. What is a server?</h3>
-      <p>A server is a computer that provides a service or resource to other computers over a network. A server can host a website, store files, run a database, process application requests, or perform many other jobs.</p>
-      <div class="simple"><b>Remember</b>A server is still a computer. It has a CPU, RAM, storage, a motherboard, power supply, and network interfaces. The main difference is its job, design, reliability requirements, and operating environment.</div>
-
-      <h3>3. How does a user reach a server?</h3>
-      <p>A simplified path looks like this:</p>
-      <div class="flow"><span class="node">User</span><span class="arrow">→</span><span class="node">Internet</span><span class="arrow">→</span><span class="node">Router</span><span class="arrow">→</span><span class="node">Switch</span><span class="arrow">→</span><span class="node">Server</span></div>
-      <p>Real data centers are much more complex, but this basic path is enough to begin understanding where network problems can happen.</p>
-
-      <h3>4. What is a rack?</h3>
-      <p>A rack is a standardized metal frame used to organize servers, switches, power equipment, and other data center hardware vertically. Equipment height is commonly measured in rack units, written as <strong>U</strong>.</p>
-      <div class="simple"><b>Example</b>A 1U server uses one rack unit of vertical space. A 2U server uses two rack units.</div>
-
-      <h3>5. The five systems you should always think about</h3>
-      <div class="table-wrap"><table><thead><tr><th>System</th><th>Purpose</th><th>Example failure</th></tr></thead><tbody>
-        <tr><td>Compute</td><td>CPU and RAM process workloads.</td><td>Bad RAM prevents a server from booting correctly.</td></tr>
-        <tr><td>Storage</td><td>Stores the operating system and data.</td><td>Failed disk causes missing data or boot failure.</td></tr>
-        <tr><td>Network</td><td>Connects servers to other systems.</td><td>Wrong IP or disconnected cable causes lost connectivity.</td></tr>
-        <tr><td>Power</td><td>Supplies electricity to equipment.</td><td>Failed PSU or power feed shuts a server down.</td></tr>
-        <tr><td>Cooling</td><td>Removes heat generated by equipment.</td><td>High temperature causes throttling or shutdown.</td></tr>
-      </tbody></table></div>
-
-      <h3>6. Why redundancy matters</h3>
-      <p>Data centers try to avoid a single point of failure. Important systems may have duplicate power supplies, multiple network links, backup power, redundant switches, or multiple copies of data.</p>
-      <div class="simple"><b>Key term</b><strong>Redundancy</strong> means having an additional component or path so the service can continue when one component fails.</div>
-
-      <h3>7. First troubleshooting mindset</h3>
-      <p>When a server or service fails, do not immediately guess the most complicated cause. Start from basic layers and move upward.</p>
-      <div class="flow"><span class="node">Power</span><span class="arrow">→</span><span class="node">Hardware</span><span class="arrow">→</span><span class="node">Operating System</span><span class="arrow">→</span><span class="node">Network</span><span class="arrow">→</span><span class="node">Service</span></div>
-      <p>This sequence will become much more detailed in Module 05.</p>
-
-      <div class="challenge">
-        <div class="c-label">Mini challenge 01</div>
-        <h3>A website suddenly becomes unreachable</h3>
-        <p>The server is physically installed in a rack. Name at least four major areas you would eventually need to consider while troubleshooting.</p>
-        <details><summary>Reveal answer</summary><p>Possible areas include power, server hardware, operating system, network connection/configuration, and the web service/application itself. The goal is not to guess one cause immediately; it is to isolate the failure systematically.</p></details>
-      </div>
-
-      <h3>Quick knowledge check</h3>
-      <div class="quiz">
-        <div class="q"><p>1. Which component connects a server to a network?</p><div class="opts"><button class="opt" data-correct="false">CPU</button><button class="opt" data-correct="true">NIC</button><button class="opt" data-correct="false">PSU</button></div><div class="feedback"></div></div>
-        <div class="q"><p>2. What does 1U describe?</p><div class="opts"><button class="opt" data-correct="true">Rack equipment height</button><button class="opt" data-correct="false">Network speed</button><button class="opt" data-correct="false">Power capacity</button></div><div class="feedback"></div></div>
-        <div class="q"><p>3. Why is redundancy used?</p><div class="opts"><button class="opt" data-correct="false">To make hardware heavier</button><button class="opt" data-correct="false">To reduce RAM usage</button><button class="opt" data-correct="true">To reduce single points of failure</button></div><div class="feedback"></div></div>
-      </div>
-
-      <div class="complete"><button id="completeBtn">MARK MODULE 01 COMPLETE</button><span id="completeState">Progress is stored in this browser.</span></div>
-      <div class="next"><b>Next module</b><h3>Module 02 · Server Hardware</h3><p>We will identify the components inside a server, learn what each part does, and begin hardware fault diagnosis.</p></div>
+    <div class="side-bottom">
+      <div class="countdown"><div class="lab">Hackathon countdown</div><strong id="daysLeft">-- days</strong><span>26 September 2026</span></div>
+      <a class="side-back" href="../">← Back to Study Console</a>
     </div>
-  </section>
+  </aside>
 
-  <footer><span>Independent study project by Zann</span><span>Not an official Google training resource</span></footer>
+  <main class="main">
+    <div class="mobile-bar"><button class="menu-btn" id="menuBtn">MENU</button><span class="mobile-title">GDC Hackathon Console</span><span></span></div>
+    <div class="main-inner">
+
+      <header class="hero" id="overview">
+        <div class="eyebrow">Independent preparation workspace</div>
+        <h1>Google Data Center Hardware Hackathon 2026</h1>
+        <p class="lede">One focused place to learn server hardware, networking, Linux, troubleshooting, automation, data center operations, and competition-style problem solving.</p>
+        <div class="meta"><span class="chip date">26 Sep 2026</span><span class="chip">Thailand</span><span class="chip">Hardware + Systems</span><span class="chip">Beginner → Competition</span></div>
+
+        <div class="hero-stats">
+          <div class="stat"><b>Current focus</b><strong>Module 01 · Data Center Fundamentals</strong><span>Build the whole-system mental model first.</span></div>
+          <div class="stat"><b>Training rule</b><strong>Learn → Test → Fix</strong><span>Every topic ends in practice.</span></div>
+          <div class="stat"><b>Primary goal</b><strong>Fast diagnosis</strong><span>Think in layers, not guesses.</span></div>
+        </div>
+        <div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="progress-row"><span id="progressText">1 of 10 modules started</span><span>Progress saved in this browser</span></div>
+      </header>
+
+      <section class="section">
+        <div class="section-head"><div><div class="kicker">How to use this console</div><h2>Simple study loop</h2></div><p class="section-intro">Keep it practical. Learn the idea, test yourself, then use it in a fault scenario.</p></div>
+        <div class="quick-grid">
+          <div class="quick"><span class="qno">01 · LEARN</span><b>Understand the system</b><p>Short explanations with correct technical terms.</p></div>
+          <div class="quick"><span class="qno">02 · CHECK</span><b>Answer quick questions</b><p>Confirm you actually understand the topic.</p></div>
+          <div class="quick"><span class="qno">03 · APPLY</span><b>Solve a mini challenge</b><p>Use the knowledge in a realistic problem.</p></div>
+          <div class="quick"><span class="qno">04 · REVIEW</span><b>Search key terms</b><p>Use the sidebar search for fast revision.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="roadmap">
+        <div class="section-head"><div><div class="kicker">Preparation roadmap</div><h2>10-module learning path</h2></div><p class="section-intro">The early modules create the foundation for the later timed troubleshooting exercises.</p></div>
+        <div class="path">
+          <a class="module current" href="#module1"><span class="num">01</span><span><h3>Data Center Fundamentals</h3><p>Servers, racks, power, cooling, network, redundancy.</p><span class="badge">Current</span></span></a>
+          <div class="module"><span class="num">02</span><span><h3>Server Hardware</h3><p>CPU, RAM, storage, NIC, PSU, BIOS/UEFI and failures.</p><span class="badge">Next</span></span></div>
+          <div class="module"><span class="num">03</span><span><h3>Networking</h3><p>IP, subnet, gateway, MAC, ARP, DNS, DHCP, switching.</p><span class="badge">Planned</span></span></div>
+          <div class="module"><span class="num">04</span><span><h3>Linux</h3><p>Shell, files, processes, services, network commands and logs.</p><span class="badge">Planned</span></span></div>
+          <div class="module"><span class="num">05</span><span><h3>Troubleshooting</h3><p>Diagnose faults layer by layer instead of guessing.</p><span class="badge">Planned</span></span></div>
+          <div class="module"><span class="num">06</span><span><h3>Bash & Automation</h3><p>Variables, loops, conditions and basic infrastructure checks.</p><span class="badge">Planned</span></span></div>
+          <div class="module"><span class="num">07</span><span><h3>Services & Security</h3><p>SSH, HTTP, ports, firewall basics, users and permissions.</p><span class="badge">Planned</span></span></div>
+          <div class="module"><span class="num">08</span><span><h3>Data Center Operations</h3><p>Cabling, power, cooling, ESD safety and hardware replacement.</p><span class="badge">Planned</span></span></div>
+          <div class="module"><span class="num">09</span><span><h3>Team Challenges</h3><p>Task division, communication, speed and incident notes.</p><span class="badge">Planned</span></span></div>
+          <div class="module"><span class="num">10</span><span><h3>Mock Hackathon</h3><p>Timed multi-fault scenarios with hints and revealable solutions.</p><span class="badge">Final stage</span></span></div>
+        </div>
+      </section>
+
+      <section class="section lesson" id="module1">
+        <div class="lesson-top"><div class="label">Module 01 · Start here</div><h2>Data Center Fundamentals</h2><p>Goal: understand what a data center is, what a server does, and how the major systems depend on each other.</p></div>
+        <div class="lesson-body">
+
+          <div class="lesson-block" id="what-is-dc">
+            <h3>1. What is a data center?</h3>
+            <p>A <span class="term-blue">data center</span> is a facility that contains large numbers of computers called servers, plus the networking, power, cooling, and physical infrastructure required to keep those systems running.</p>
+            <div class="definition"><b>Beginner version</b><p>A data center is a building full of powerful computers that run websites, apps, cloud services, storage, AI systems, and other online services.</p></div>
+          </div>
+
+          <div class="lesson-block" id="server">
+            <h3>2. What is a server?</h3>
+            <p>A <span class="term-blue">server</span> is a computer that provides a service or resource to other computers over a network. It can host a website, store files, run a database, or process application requests.</p>
+            <div class="definition"><b>Remember</b><p>A server is still a computer. It has a CPU, RAM, storage, motherboard, power supply, and network interfaces. Its design and job are what make it a server.</p></div>
+          </div>
+
+          <div class="lesson-block" id="network-path">
+            <h3>3. How does a user reach a server?</h3>
+            <p>A simplified path looks like this:</p>
+            <div class="flow"><span class="node">User</span><span class="arrow">→</span><span class="node">Internet</span><span class="arrow">→</span><span class="node">Router</span><span class="arrow">→</span><span class="node">Switch</span><span class="arrow">→</span><span class="node">Server</span></div>
+            <p>Real data centers are much more complex, but this path gives you a starting point for locating where a connectivity problem may exist.</p>
+          </div>
+
+          <div class="lesson-block" id="rack">
+            <h3>4. What is a rack?</h3>
+            <p>A <span class="term-green">rack</span> is a standardized metal frame used to organize servers, switches, power equipment, and other hardware vertically. Equipment height is measured in <span class="term-yellow">rack units</span>, written as <strong>U</strong>.</p>
+            <div class="definition"><b>Example</b><p>A 1U server uses one rack unit of vertical space. A 2U server uses two rack units.</p></div>
+          </div>
+
+          <div class="lesson-block" id="five-systems">
+            <h3>5. The five systems you should always think about</h3>
+            <div class="table-wrap"><table><thead><tr><th>System</th><th>Purpose</th><th>Example failure</th></tr></thead><tbody>
+              <tr><td>Compute</td><td>CPU and RAM process workloads.</td><td>Bad RAM may prevent normal boot.</td></tr>
+              <tr><td>Storage</td><td>Stores the OS and data.</td><td>A failed disk may cause boot or data problems.</td></tr>
+              <tr><td>Network</td><td>Connects servers to other systems.</td><td>Wrong IP or bad cable can remove connectivity.</td></tr>
+              <tr><td>Power</td><td>Supplies electricity to equipment.</td><td>A failed PSU can shut a server down.</td></tr>
+              <tr><td>Cooling</td><td>Removes heat generated by equipment.</td><td>High temperature can cause throttling or shutdown.</td></tr>
+            </tbody></table></div>
+          </div>
+
+          <div class="lesson-block" id="redundancy">
+            <h3>6. Why redundancy matters</h3>
+            <p>Data centers try to avoid a <span class="term-red">single point of failure</span>. Important systems may have duplicate power supplies, multiple network links, backup power, redundant switches, or multiple copies of data.</p>
+            <div class="definition"><b>Key term</b><p><span class="term-green">Redundancy</span> means having an additional component or path so a service can continue when one component fails.</p></div>
+          </div>
+
+          <div class="lesson-block" id="troubleshooting-mindset">
+            <h3>7. First troubleshooting mindset</h3>
+            <p>Do not start with the most complicated explanation. Begin with basic layers and move upward.</p>
+            <div class="flow"><span class="node">Power</span><span class="arrow">→</span><span class="node">Hardware</span><span class="arrow">→</span><span class="node">Operating System</span><span class="arrow">→</span><span class="node">Network</span><span class="arrow">→</span><span class="node">Service</span></div>
+            <p>This becomes a full fault-isolation workflow later in Module 05.</p>
+          </div>
+
+          <div class="challenge" id="challenge1">
+            <div class="c-label">Mini challenge 01</div>
+            <h3>A website suddenly becomes unreachable</h3>
+            <p>The server is physically installed in a rack. Name at least four major areas you would eventually consider while troubleshooting.</p>
+            <details><summary>Reveal answer</summary><p>Power, server hardware, operating system, network connection/configuration, and the web service/application are all valid areas. The goal is to isolate the failure systematically instead of guessing one cause.</p></details>
+          </div>
+
+          <h3 id="quiz1">Quick knowledge check</h3>
+          <div class="quiz">
+            <div class="q"><p>1. Which component connects a server to a network?</p><div class="opts"><button class="opt" data-correct="false">CPU</button><button class="opt" data-correct="true">NIC</button><button class="opt" data-correct="false">PSU</button></div><div class="feedback"></div></div>
+            <div class="q"><p>2. What does 1U describe?</p><div class="opts"><button class="opt" data-correct="true">Rack equipment height</button><button class="opt" data-correct="false">Network speed</button><button class="opt" data-correct="false">Power capacity</button></div><div class="feedback"></div></div>
+            <div class="q"><p>3. Why is redundancy used?</p><div class="opts"><button class="opt" data-correct="false">To make hardware heavier</button><button class="opt" data-correct="false">To reduce RAM usage</button><button class="opt" data-correct="true">To reduce single points of failure</button></div><div class="feedback"></div></div>
+          </div>
+
+          <div class="complete"><button id="completeBtn">MARK MODULE 01 COMPLETE</button><span id="completeState">Progress is stored in this browser.</span></div>
+          <div class="next"><b>Next module</b><h3>Module 02 · Server Hardware</h3><p>Identify the components inside a server, learn what each part does, and begin hardware fault diagnosis.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="terms">
+        <div class="section-head"><div><div class="kicker">Fast revision</div><h2>Key terms</h2></div><p class="section-intro">Use these as short exam-style definitions and quick reminders. You can also search them from the sidebar.</p></div>
+        <div class="glossary-tools" id="glossaryFilters">
+          <button class="filter active" data-filter="all">ALL</button>
+          <button class="filter" data-filter="hardware">HARDWARE</button>
+          <button class="filter" data-filter="network">NETWORK</button>
+          <button class="filter" data-filter="operations">OPERATIONS</button>
+        </div>
+        <div class="terms">
+          <article class="term-card" data-cat="operations" id="term-datacenter"><span class="cat">Operations</span><h3>Data Center</h3><p>A facility that houses computing systems and the power, cooling, networking, and physical infrastructure needed to operate them.</p></article>
+          <article class="term-card" data-cat="hardware" id="term-server"><span class="cat">Hardware</span><h3>Server</h3><p>A computer that provides services or resources to other computers over a network.</p></article>
+          <article class="term-card" data-cat="hardware" id="term-rack"><span class="cat">Hardware</span><h3>Rack</h3><p>A standardized frame used to mount and organize servers and other data center equipment.</p></article>
+          <article class="term-card" data-cat="hardware" id="term-nic"><span class="cat">Hardware</span><h3>NIC</h3><p>Network Interface Card. Hardware that allows a computer or server to connect to a network.</p></article>
+          <article class="term-card" data-cat="hardware" id="term-psu"><span class="cat">Hardware</span><h3>PSU</h3><p>Power Supply Unit. Converts incoming electrical power into usable power for server components.</p></article>
+          <article class="term-card" data-cat="network" id="term-switch"><span class="cat">Network</span><h3>Switch</h3><p>A network device that connects devices within the same local network and forwards traffic to the correct destination.</p></article>
+          <article class="term-card" data-cat="network" id="term-router"><span class="cat">Network</span><h3>Router</h3><p>A device that forwards traffic between different networks.</p></article>
+          <article class="term-card" data-cat="operations" id="term-redundancy"><span class="cat">Operations</span><h3>Redundancy</h3><p>Using additional components or paths so a system can continue operating when one component fails.</p></article>
+          <article class="term-card" data-cat="operations" id="term-spof"><span class="cat">Operations</span><h3>Single Point of Failure</h3><p>A component whose failure can stop the entire system or service because no backup path exists.</p></article>
+          <article class="term-card" data-cat="operations" id="term-cooling"><span class="cat">Operations</span><h3>Cooling</h3><p>The systems and airflow used to remove heat produced by servers and other equipment.</p></article>
+          <article class="term-card" data-cat="hardware" id="term-1u"><span class="cat">Hardware</span><h3>Rack Unit (U)</h3><p>A standard measurement of vertical rack space. 1U equals one unit of equipment height.</p></article>
+          <article class="term-card" data-cat="operations" id="term-troubleshooting"><span class="cat">Operations</span><h3>Troubleshooting</h3><p>A systematic process of identifying, isolating, and fixing the cause of a technical problem.</p></article>
+        </div>
+      </section>
+
+      <footer><span>Independent study project by Zann</span><span>Not an official Google training resource</span></footer>
+    </div>
+  </main>
 </div>
+
 <script>
-const key='gdc-hackathon-module1';
-const done=localStorage.getItem(key)==='done';
-const btn=document.getElementById('completeBtn');
-const state=document.getElementById('completeState');
-const bar=document.getElementById('progressBar');
-const text=document.getElementById('progressText');
-function render(){const d=localStorage.getItem(key)==='done';bar.style.width=d?'20%':'10%';text.textContent=d?'Module 01 complete · Module 02 next':'1 of 10 modules started';btn.textContent=d?'MODULE 01 COMPLETE':'MARK MODULE 01 COMPLETE';state.textContent=d?'Completed on this browser.':'Progress is stored in this browser.'}
-btn.addEventListener('click',()=>{localStorage.setItem(key,localStorage.getItem(key)==='done'?'':'done');render()});render();
-document.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{const q=b.closest('.q');q.querySelectorAll('.opt').forEach(x=>x.disabled=true);const f=q.querySelector('.feedback');if(b.dataset.correct==='true'){f.textContent='Correct.';f.style.color='var(--ok)'}else{f.textContent='Not quite. Review the section above and try to explain why.';f.style.color='var(--red)'}}));
+const completionKey='gdc-hackathon-module1';
+const progressBar=document.getElementById('progressBar');
+const progressText=document.getElementById('progressText');
+const completeBtn=document.getElementById('completeBtn');
+const completeState=document.getElementById('completeState');
+
+function renderProgress(){
+  const done=localStorage.getItem(completionKey)==='done';
+  progressBar.style.width=done?'20%':'10%';
+  progressText.textContent=done?'Module 01 complete · Module 02 next':'1 of 10 modules started';
+  completeBtn.textContent=done?'MODULE 01 COMPLETE':'MARK MODULE 01 COMPLETE';
+  completeState.textContent=done?'Completed on this browser.':'Progress is stored in this browser.';
+}
+completeBtn.addEventListener('click',()=>{
+  localStorage.setItem(completionKey,localStorage.getItem(completionKey)==='done'?'':'done');
+  renderProgress();
+});
+renderProgress();
+
+// Quiz feedback
+for(const button of document.querySelectorAll('.opt')){
+  button.addEventListener('click',()=>{
+    const q=button.closest('.q');
+    q.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    const feedback=q.querySelector('.feedback');
+    if(button.dataset.correct==='true'){
+      feedback.textContent='Correct.';
+      feedback.style.color='var(--ok)';
+    }else{
+      feedback.textContent='Not quite. Review the section above and try again mentally.';
+      feedback.style.color='var(--red)';
+    }
+  });
+}
+
+// Countdown
+function updateCountdown(){
+  const eventDate=new Date('2026-09-26T09:00:00+07:00');
+  const now=new Date();
+  const days=Math.max(0,Math.ceil((eventDate-now)/86400000));
+  document.getElementById('daysLeft').textContent=days===1?'1 day':days+' days';
+}
+updateCountdown();
+
+// Search index
+const searchIndex=[
+  {title:'Data Center',desc:'Definition and purpose',href:'#what-is-dc',keys:'data center facility cloud infrastructure'},
+  {title:'Server',desc:'What a server is and what it does',href:'#server',keys:'server computer service cpu ram storage'},
+  {title:'Network Path',desc:'User → Internet → Router → Switch → Server',href:'#network-path',keys:'network path router switch internet connectivity'},
+  {title:'Rack / Rack Unit',desc:'How data center hardware is mounted',href:'#rack',keys:'rack 1u 2u rack unit u'},
+  {title:'Five Core Systems',desc:'Compute, storage, network, power, cooling',href:'#five-systems',keys:'compute storage network power cooling cpu ram disk'},
+  {title:'Redundancy',desc:'Avoiding single points of failure',href:'#redundancy',keys:'redundancy backup duplicate spof single point failure'},
+  {title:'Troubleshooting Mindset',desc:'Power → Hardware → OS → Network → Service',href:'#troubleshooting-mindset',keys:'troubleshooting diagnose fault isolation power hardware os network service'},
+  {title:'Mini Challenge 01',desc:'Website unreachable scenario',href:'#challenge1',keys:'challenge website unreachable troubleshooting'},
+  {title:'Quiz',desc:'Module 01 knowledge check',href:'#quiz1',keys:'quiz questions knowledge check'},
+  {title:'NIC',desc:'Network Interface Card',href:'#term-nic',keys:'nic network interface card ethernet'},
+  {title:'PSU',desc:'Power Supply Unit',href:'#term-psu',keys:'psu power supply unit electricity'},
+  {title:'Switch',desc:'Connects devices in a local network',href:'#term-switch',keys:'switch network ethernet lan'},
+  {title:'Router',desc:'Forwards traffic between networks',href:'#term-router',keys:'router routing network gateway'},
+  {title:'Single Point of Failure',desc:'One failure can stop the service',href:'#term-spof',keys:'spof single point of failure redundancy'},
+  {title:'Cooling',desc:'Removing heat from data center equipment',href:'#term-cooling',keys:'cooling heat temperature airflow'},
+  {title:'Key Terms',desc:'Glossary for fast revision',href:'#terms',keys:'terms glossary definitions revision'}
+];
+const search=document.getElementById('siteSearch');
+const results=document.getElementById('searchResults');
+function renderSearch(){
+  const q=search.value.trim().toLowerCase();
+  if(!q){results.classList.remove('open');results.innerHTML='';return;}
+  const matches=searchIndex.filter(item=>(item.title+' '+item.desc+' '+item.keys).toLowerCase().includes(q)).slice(0,7);
+  results.innerHTML=matches.length?matches.map(item=>`<a class="search-result" href="${item.href}"><b>${item.title}</b><span>${item.desc}</span></a>`).join(''):'<div class="no-result">No matching topic yet.</div>';
+  results.classList.add('open');
+}
+search.addEventListener('input',renderSearch);
+results.addEventListener('click',()=>{results.classList.remove('open');search.blur();closeSidebar();});
+document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))results.classList.remove('open');});
+document.addEventListener('keydown',e=>{
+  if(e.key==='/' && document.activeElement!==search){e.preventDefault();search.focus();}
+  if(e.key==='Escape'){search.value='';results.classList.remove('open');search.blur();}
+});
+
+// Glossary filters
+for(const btn of document.querySelectorAll('.filter')){
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    document.querySelectorAll('.term-card').forEach(card=>card.classList.toggle('hidden',f!=='all'&&card.dataset.cat!==f));
+  });
+}
+
+// Active sidebar section
+const navLinks=[...document.querySelectorAll('#mainNav a')];
+const watched=['overview','roadmap','module1','terms'].map(id=>document.getElementById(id));
+const observer=new IntersectionObserver(entries=>{
+  const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+  if(!visible)return;
+  navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+visible.target.id));
+},{rootMargin:'-18% 0px -68% 0px',threshold:[0,.15,.4]});
+watched.forEach(s=>observer.observe(s));
+
+// Mobile sidebar
+const sidebar=document.getElementById('sidebar');
+const overlay=document.getElementById('overlay');
+function openSidebar(){sidebar.classList.add('open');overlay.classList.add('open');}
+function closeSidebar(){sidebar.classList.remove('open');overlay.classList.remove('open');}
+document.getElementById('menuBtn').addEventListener('click',openSidebar);
+overlay.addEventListener('click',closeSidebar);
+sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{if(innerWidth<=760)closeSidebar();}));
 </script>
 </body>
 </html>
