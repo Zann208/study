@@ -1,28 +1,47 @@
-# Study Consoles
+# Study Console
 
-Landing page for the study tools I build for my own coursework at Chiang Mai University.
+Central landing page for the browser-based study environments I build for coursework and technical preparation at Chiang Mai University.
 
-**→ [zann208.github.io/study](https://zann208.github.io/study)**
+**Live hub:** https://zann208.github.io/study/
 
-## The idea
+## Purpose
 
-Course material arrives as a pile of disconnected PDFs — lecture slides in one file, lab sheets in another, quizzes on the university LMS. Revising means opening six things and holding the connections in your head.
+The Study Console is the **single navigation hub**. Each course or preparation area stays in its own repository or subfolder so content can grow independently without making the landing page fragile.
 
-So for each course I build a single self-contained web app: the lectures rewritten for comprehension, every lab documented, and practice tools that generate their own questions. One HTML file, works offline, progress saved locally.
+The consoles are designed for revision, exam preparation, labs, calculations, troubleshooting practice and interactive learning. They use plain HTML, CSS and JavaScript so they remain easy to host, inspect and maintain.
 
-## The consoles
+## Current consoles
 
-| | Course | Repo | Live |
+| Code | Console | Source | Live |
 |---|---|---|---|
-| **NET** | 261434 Computer Network Design & Management | [netdes](https://github.com/Zann208/netdes) | [open ↗](https://zann208.github.io/netdes/) |
-| **WLN** | 269430 Wireless & Broadband Networks | [wnet](https://github.com/Zann208/wnet) | [open ↗](https://zann208.github.io/wnet/) |
-| **ALG** | 269202 Algorithms for iSNE | [algo](https://github.com/Zann208/algo) | [open ↗](https://zann208.github.io/algo/) |
+| **NET** | Computer Network Design & Management | [netdes](https://github.com/Zann208/netdes) | [open](https://zann208.github.io/netdes/) |
+| **WLN** | Wireless & Broadband Computer Networks | [wnet](https://github.com/Zann208/wnet) | [open](https://zann208.github.io/wnet/) |
+| **ALG** | Algorithms for iSNE | [algo](https://github.com/Zann208/algo) | [open](https://zann208.github.io/algo/) |
+| **PRV** | The Cult of Privacy Technologies | [privacy](https://github.com/Zann208/privacy) | [open](https://zann208.github.io/privacy/) |
+| **OS** | Operating Systems | [os](https://github.com/Zann208/os) | [open](https://zann208.github.io/os/) |
+| **GDC** | Google Data Center Hardware Hackathon 2026 | this repository: `google-dc-hackathon/` | [open](https://zann208.github.io/study/google-dc-hackathon/) |
 
-Each console shares a course switcher, so you can move between them from anywhere — and back to this landing page.
+## Long-term structure
 
-## Tech
+- `study` = central study hub and cross-course navigation.
+- Separate course repos = the source of truth for each course console.
+- `google-dc-hackathon/` = competition-preparation console maintained inside this hub.
+- `Zann208.github.io` = professional portfolio; it should link to the Study Console as a project, not duplicate every course page.
+- `Zann208/Zann208` = GitHub profile README; it should stay concise and recruiter-facing.
 
-Vanilla HTML, CSS and JavaScript. No framework, no build step, no dependencies. Each console is a single file that opens straight from disk.
+## Stability rules
+
+1. Keep one clear source of truth for every console.
+2. Prefer small, intentional edits over chains of patch scripts.
+3. Do not add overlapping workflows that automatically rewrite generated HTML after normal edits.
+4. Test navigation links and mobile layout after structural changes.
+5. Keep course-specific content inside its course repo; use this hub only for discovery and shared navigation.
+6. Keep naming consistent: NET, WLN, ALG, PRV, OS and GDC.
+7. Preserve `.nojekyll` for direct static GitHub Pages hosting.
+
+## Technology
+
+Vanilla HTML, CSS and JavaScript hosted with GitHub Pages. No framework is required for the central hub.
 
 ---
-Built by **Zann** — [portfolio](https://zann208.github.io) · [email](mailto:thuhtoozan_1@cmu.ac.th)
+Built by **Zann** · [portfolio](https://zann208.github.io/) · [GitHub](https://github.com/Zann208)
