@@ -1,0 +1,216 @@
+/* Study Console UI System v1 — legacy console bridge
+   Presentation-only compatibility layer for NETDES, WNET, ALGO, Privacy and OS.
+   Course text, formulas, questions, answers, code and functional scripts remain repository-local. */
+
+:root{
+  --bg:var(--sc-bg);
+  --bg2:var(--sc-surface);
+  --panel:var(--sc-surface);
+  --panel2:var(--sc-surface-2);
+  --panel3:var(--sc-surface-2);
+  --card:var(--sc-surface);
+  --surface:var(--sc-surface);
+  --surface2:var(--sc-surface-2);
+  --ink:var(--sc-text);
+  --text:var(--sc-text);
+  --fg:var(--sc-text);
+  --dim:var(--sc-muted);
+  --muted:var(--sc-muted);
+  --sub:var(--sc-muted);
+  --faint:var(--sc-faint);
+  --line:var(--sc-line);
+  --line2:var(--sc-line-strong);
+  --border:var(--sc-line);
+  --accent:var(--sc-accent);
+  --cy:var(--sc-accent);
+  --am:var(--sc-warn);
+  --gr:var(--sc-ok);
+  --ok:var(--sc-ok);
+  --rd:var(--sc-danger);
+  --red:var(--sc-danger);
+  --blue:var(--sc-info);
+  --yellow:var(--sc-warn);
+  --vi:var(--sc-info);
+  --sc-header:var(--sc-header-h);
+}
+
+html,body[data-study-console]{background:var(--sc-bg)!important}
+body[data-study-console]{
+  color:var(--sc-text)!important;
+  background-image:none!important;
+  overflow-x:hidden;
+}
+body[data-study-console] canvas#fx{display:none!important}
+body[data-study-console] p,
+body[data-study-console] li{overflow-wrap:anywhere}
+body[data-study-console] pre,
+body[data-study-console] .code,
+body[data-study-console] .pre{max-width:100%;overflow:auto}
+
+/* Existing course toolbar becomes a quiet local navigation row beneath the global shell. */
+body[data-study-console="netdes"] > nav,
+body[data-study-console="wnet"] > nav,
+body[data-study-console="algo"] > header#top,
+body[data-study-console="privacy"] .shell > header#top,
+body[data-study-console="os"] .shell > header#top{
+  position:sticky!important;
+  top:var(--sc-header-h)!important;
+  z-index:90!important;
+  min-height:46px!important;
+  background:var(--sc-surface)!important;
+  border-bottom:1px solid var(--sc-line)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Remove duplicated cross-console chrome; retain subject-local menu/search controls. */
+body[data-study-console] #csWrap,
+body[data-study-console] #themeBtn,
+body[data-study-console] #themebtn2,
+body[data-study-console] #fxBtn{
+  display:none!important;
+}
+
+body[data-study-console] .navin{
+  width:min(calc(100% - 32px),var(--sc-content))!important;
+  max-width:none!important;
+  margin-inline:auto!important;
+  min-height:46px!important;
+  padding-block:0!important;
+  gap:4px!important;
+}
+body[data-study-console] .tabstrip{
+  min-width:0;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+body[data-study-console] .tabstrip::-webkit-scrollbar{display:none}
+body[data-study-console] .tabbtn,
+body[data-study-console] .navbtn{
+  font-family:inherit!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  min-height:38px!important;
+  color:var(--sc-muted)!important;
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+}
+body[data-study-console] .tabbtn.on,
+body[data-study-console] .navbtn.on{
+  color:var(--sc-accent)!important;
+  background:var(--sc-accent-soft)!important;
+}
+body[data-study-console] .navtail{margin-left:auto!important}
+
+/* Shared learning surface normalization. */
+body[data-study-console] .panel,
+body[data-study-console] .box,
+body[data-study-console] .card,
+body[data-study-console] .item,
+body[data-study-console] .lesson,
+body[data-study-console] .lesson-block,
+body[data-study-console] .definition,
+body[data-study-console] .challenge,
+body[data-study-console] .term-card{
+  background:var(--sc-surface)!important;
+  color:var(--sc-text)!important;
+  border-color:var(--sc-line)!important;
+  box-shadow:none!important;
+}
+body[data-study-console] .panel,
+body[data-study-console] .card,
+body[data-study-console] .lesson,
+body[data-study-console] .lesson-block,
+body[data-study-console] .term-card{
+  border-radius:var(--sc-radius)!important;
+}
+body[data-study-console] h1,
+body[data-study-console] h2,
+body[data-study-console] h3,
+body[data-study-console] h4{
+  font-family:var(--sc-sans)!important;
+  color:var(--sc-text);
+  letter-spacing:-.015em;
+}
+body[data-study-console] p{line-height:1.7}
+body[data-study-console] .lede{
+  max-width:72ch;
+  color:var(--sc-muted)!important;
+}
+body[data-study-console] .btn,
+body[data-study-console] button:not(.sc-shell-button){
+  border-radius:var(--sc-radius-sm);
+  box-shadow:none;
+}
+body[data-study-console] .btn:hover{transform:none}
+body[data-study-console] .badge,
+body[data-study-console] .chip,
+body[data-study-console] .tag{
+  box-shadow:none!important;
+  text-shadow:none!important;
+}
+body[data-study-console] .tscroll,
+body[data-study-console] .table-wrap{
+  max-width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+body[data-study-console] table{max-width:none}
+body[data-study-console] th{
+  background:var(--sc-surface-2)!important;
+  color:var(--sc-text)!important;
+}
+body[data-study-console] th,
+body[data-study-console] td{border-color:var(--sc-line)!important}
+body[data-study-console] pre,
+body[data-study-console] .code{
+  background:var(--sc-surface-2)!important;
+  color:var(--sc-text)!important;
+  border-color:var(--sc-line)!important;
+  box-shadow:none!important;
+}
+body[data-study-console] input,
+body[data-study-console] select,
+body[data-study-console] textarea{
+  color:var(--sc-text);
+  background:var(--sc-surface);
+  border-color:var(--sc-line);
+  border-radius:var(--sc-radius-sm);
+}
+body[data-study-console] .ok,
+body[data-study-console] .t-good{color:var(--sc-ok)!important}
+body[data-study-console] .t-warn{color:var(--sc-warn)!important}
+body[data-study-console] .cy{color:var(--sc-accent)!important}
+body[data-study-console] .rd{color:var(--sc-danger)!important}
+
+@media (hover:hover) and (pointer:fine){
+  body[data-study-console] .panel:hover,
+  body[data-study-console] .card:hover,
+  body[data-study-console] .item:hover{
+    border-color:color-mix(in srgb,var(--sc-accent) 28%,var(--sc-line))!important;
+  }
+}
+
+@media (hover:none),(pointer:coarse){
+  body[data-study-console] a,
+  body[data-study-console] button{touch-action:manipulation}
+  body[data-study-console] .btn:active,
+  body[data-study-console] button:active{background-color:var(--sc-accent-soft)!important}
+}
+
+@media (max-width:820px){
+  body[data-study-console] .navin{
+    width:100%!important;
+    padding-inline:10px!important;
+    overflow-x:auto!important;
+  }
+  body[data-study-console] .wrap,
+  body[data-study-console] .main-inner{max-width:100%!important}
+}
+
+@media (max-width:430px){
+  body[data-study-console] .tabbtn,
+  body[data-study-console] .navbtn{min-height:42px!important}
+}
