@@ -1,27 +1,33 @@
 from pathlib import Path
 import base64, io, zipfile
 
-# One-shot migration generated from the reviewed learning-first builder package.
-# Writes only the approved Study Console v1 files listed below.
-EXPECTED = ['index.html', 'home.css', 'README.md', 'shared/v1/README.md', 'shared/v1/study-system.js', 'shared/v1/study-system.css', 'docs/TESTING.md', 'docs/MIGRATION.md', 'docs/UI-SYSTEM.md', 'google-dc-hackathon/index.html', 'google-dc-hackathon/gdc.css']
-PAYLOAD = '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[...truncated...]'
+# One-shot migration for the reviewed learning-first builder package.
+# The payload is split into small repository chunks to avoid transport truncation.
+EXPECTED = [
+    'index.html','home.css','README.md','shared/v1/README.md',
+    'shared/v1/study-system.js','shared/v1/study-system.css',
+    'docs/TESTING.md','docs/MIGRATION.md','docs/UI-SYSTEM.md',
+    'google-dc-hackathon/index.html','google-dc-hackathon/gdc.css'
+]
 
 repo = Path('.')
-current = (repo / 'index.html').read_text(encoding='utf-8')
-if 'Study Console' not in current:
-    raise RuntimeError('Unexpected Study Console baseline; refusing to overwrite unknown repository state')
+parts = sorted((repo / 'scripts' / 'payload').glob('part*.txt'))
+if [p.name for p in parts] != [f'part{i:02d}.txt' for i in range(7)]:
+    raise RuntimeError('Study Console migration payload is incomplete')
+payload = ''.join(p.read_text(encoding='utf-8').strip() for p in parts)
+raw = base64.b64decode(payload, validate=True)
 
-raw = base64.b64decode(PAYLOAD)
 with zipfile.ZipFile(io.BytesIO(raw)) as z:
-    names = z.namelist()
-    if names != EXPECTED:
-        raise RuntimeError(f'Unexpected package manifest: {names}')
-    for rel in names:
+    if z.namelist() != EXPECTED:
+        raise RuntimeError(f'Unexpected package manifest: {z.namelist()}')
+    bad = z.testzip()
+    if bad:
+        raise RuntimeError(f'Corrupt migration payload member: {bad}')
+    for rel in EXPECTED:
         target = repo / rel
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(z.read(rel))
 
-# Guardrails for the intended architecture and preserved Google DC functionality.
 home = (repo / 'index.html').read_text(encoding='utf-8')
 gdc = (repo / 'google-dc-hackathon/index.html').read_text(encoding='utf-8')
 shared = (repo / 'shared/v1/study-system.js').read_text(encoding='utf-8')
@@ -29,18 +35,18 @@ checks = {
     'shared stylesheet': 'shared/v1/study-system.css' in home,
     'six console cards': home.count('data-console-launch') == 6,
     'continue learning': 'data-continue-learning' in home,
-    'global shell': '← Study Console' in shared,
+    'global return route': '← Study Console' in shared,
     'console switcher': 'data-sc-switch' in shared,
     'theme persistence': 'study-console-theme' in shared,
     'GDC search': 'const searchIndex=[' in gdc,
     'GDC quiz': gdc.count('class="q"') == 3,
     'GDC modules': gdc.count('class="module') == 10,
-    'GDC progress key': "gdc-hackathon-module1" in gdc,
+    'GDC progress key': 'gdc-hackathon-module1' in gdc,
     'GDC countdown': '2026-09-26T09:00:00+07:00' in gdc,
     'GDC responsive drawer': 'innerWidth<=900' in gdc,
     'GDC aria state': "setAttribute('aria-expanded'" in gdc,
 }
-failed=[name for name,ok in checks.items() if not ok]
+failed = [name for name, ok in checks.items() if not ok]
 if failed:
     raise RuntimeError('Study Console v1 guardrails failed: ' + ', '.join(failed))
 print('Applied reviewed Study Console UI System v1')
