@@ -1,66 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Study Console — Zann</title>
-<meta name="description" content="Study Console is Zann's collection of independent browser-based technical learning environments for networking, algorithms, privacy, operating systems and data center preparation.">
-<meta name="theme-color" content="#070b14">
-<style>
-:root{
-  --bg:#070b14; --panel:#0e1626; --panel2:#121c30;
-  --ink:#e6edf7; --dim:#8fa3c0; --faint:#5d708e;
-  --cy:#22d3ee; --gr:#34d399; --vi:#a78bfa; --am:#f0b429;
-  --line:#1e2b44; --line2:#2b3d5c;
-  --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--bg);background-image:linear-gradient(rgba(34,211,238,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,.03) 1px,transparent 1px);background-size:46px 46px;scroll-behavior:smooth}
-body{color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
-a{text-decoration:none;color:inherit}.wrap{max-width:860px;margin:0 auto;padding:68px 22px 84px}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gr);font-weight:700}
-h1{font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-1px;line-height:1.14;margin-top:12px}.lede{color:var(--dim);font-size:17px;margin-top:14px;max-width:690px}
-.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--faint);border:1px solid var(--line2);border-radius:20px;padding:5px 12px}
-.grid{display:grid;gap:12px;margin-top:36px}.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;transition:.16s;position:relative;overflow:hidden}.card:hover{border-color:var(--ac);transform:translateY(-2px)}.card::before{content:"";position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--ac)}
-.chead{display:flex;align-items:center;gap:13px;flex-wrap:wrap}.mk{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:var(--mono);font-weight:800;font-size:12px;border:1px solid var(--ac);color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,transparent)}
-.ctitle{flex:1;min-width:190px}.ctitle b{display:block;font-size:18px;font-weight:700;letter-spacing:-.3px}.ctitle span{display:block;font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-top:3px;letter-spacing:.5px}.go{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1px;color:var(--ac);border:1px solid var(--ac);border-radius:7px;padding:6px 12px;white-space:nowrap}
-.cbody{color:var(--dim);font-size:15px;margin-top:14px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:13px}.tag{font-family:var(--mono);font-size:10px;letter-spacing:.7px;color:var(--faint);border:1px solid var(--line);border-radius:5px;padding:3px 8px}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.subgo{font-family:var(--mono);font-size:10.5px;font-weight:800;letter-spacing:.8px;border:1px solid var(--line2);border-radius:7px;padding:7px 10px;color:var(--dim);background:var(--panel2)}.subgo.hot{color:var(--am);border-color:var(--am)}.subgo:hover{border-color:var(--ac);color:var(--ac)}
-.c1{--ac:#22d3ee}.c2{--ac:#38bdf8}.c3{--ac:#f0b429}.c4{--ac:#a78bfa}.c5{--ac:#34d399}.c6{--ac:#4285f4}
-.note{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--gr);border-radius:0 12px 12px 0;padding:18px 22px;margin-top:30px;font-size:15px;color:var(--dim)}.note b{color:var(--ink);display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:7px}
-footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;gap:14px;flex-wrap:wrap;align-items:center}footer a{color:var(--faint);border-bottom:1px solid transparent}footer a:hover{color:var(--cy);border-bottom-color:var(--cy)}footer .zn{color:var(--cy);letter-spacing:2px;font-weight:700}@media(max-width:560px){.wrap{padding:44px 18px 60px}.go{display:none}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Study Console — Zann</title>
+  <meta name="description" content="Study Console is Zann's learning workspace for networking, algorithms, privacy, operating systems, and data center preparation.">
+  <meta name="theme-color" content="#f7f5f2">
+  <link rel="stylesheet" href="./shared/v1/study-system.css">
+  <link rel="stylesheet" href="./home.css">
 </head>
-<body>
-<div class="wrap">
-  <div class="eyebrow">// Independent Technical Learning Platform</div>
-  <h1>Study Console</h1>
-  <p class="lede">A collection of browser-based learning environments I build to understand technical subjects through explanations, visual tools, calculations, troubleshooting, and active practice.</p>
-  <p class="lede" style="margin-top:12px">Choose a console to open its topic map, tools, references, and practice systems.</p>
-  <div class="meta"><span class="chip">Built by Zann</span><span class="chip">Topic-focused</span><span class="chip">Browser-based</span><span class="chip">Interactive practice</span></div>
-  <div class="grid">
-    <a class="card c1" href="https://zann208.github.io/netdes/"><div class="chead"><span class="mk">NET</span><span class="ctitle"><b>Network Design &amp; Troubleshooting</b><span>switching · redundancy · verification</span></span><span class="go">OPEN ↗</span></div><p class="cbody">A hands-on networking workspace for architecture, switching, VLANs, redundancy, configuration verification, and troubleshooting practice.</p><div class="tags"><span class="tag">network modules</span><span class="tag">practice workbenches</span><span class="tag">STP simulator</span><span class="tag">EN / TH</span></div></a>
+<body data-console-id="home" data-console-name="Study Console">
+  <main class="sc-page">
+    <header class="home-intro">
+      <p class="sc-eyebrow">Personal technical learning workspace</p>
+      <h1 class="sc-page-title">Study Console</h1>
+      <p class="sc-lede">Choose a subject to continue learning, review concepts, or practice with interactive tools. Each console keeps the same navigation and learning patterns while preserving tools that are specific to the subject.</p>
+    </header>
 
-    <a class="card c2" href="https://zann208.github.io/wnet/"><div class="chead"><span class="mk">WLN</span><span class="ctitle"><b>Wireless Network Engineering</b><span>RF · Wi-Fi · capacity · security</span></span><span class="go">OPEN ↗</span></div><p class="cbody">A wireless networking workspace covering architecture, standards, connection procedures, RF design, link budgets, capacity planning, channel selection, and wireless security.</p><div class="tags"><span class="tag">wireless modules</span><span class="tag">RF calculators</span><span class="tag">question bank</span><span class="tag">review drills</span></div></a>
+    <section class="sc-section" data-continue-learning hidden aria-labelledby="continue-title">
+      <div class="sc-section-head">
+        <div><h2 id="continue-title">Continue learning</h2></div>
+      </div>
+      <div class="sc-panel continue-card">
+        <div><h3 data-continue-name></h3><p>Open the console you used most recently on this browser.</p></div>
+        <a class="sc-button sc-button-primary" data-continue-link href="#">Continue</a>
+      </div>
+    </section>
 
-    <div class="card c3">
-      <div class="chead"><span class="mk">ALG</span><span class="ctitle"><b>Algorithms &amp; Data Structures</b><span>complexity · structures · trees · C++</span></span><a class="go" href="https://zann208.github.io/algo/">OPEN ↗</a></div>
-      <p class="cbody">A structured algorithms workspace with beginner-friendly definitions, commented C++ examples, diagrams, quizzes, and focused data-structure practice.</p>
-      <div class="tags"><span class="tag">core topics</span><span class="tag">tree mastery</span><span class="tag">C++ practice</span><span class="tag">definition bank</span></div>
-      <div class="actions"><a class="subgo" href="https://zann208.github.io/algo/">OPEN CONSOLE</a><a class="subgo hot" href="https://zann208.github.io/algo/midterm.html">DEFINITION BANK</a></div>
-    </div>
+    <section class="sc-section" aria-labelledby="consoles-title">
+      <div class="sc-section-head">
+        <div><h2 id="consoles-title">My consoles</h2></div>
+        <p>Focused workspaces for concepts, review, calculations, troubleshooting, and active practice.</p>
+      </div>
+      <div class="sc-grid">
+        <a class="sc-card console-card" data-console-launch data-console-id="netdes" data-console-name="Network Design & Troubleshooting" href="https://zann208.github.io/netdes/">
+          <h3>Network Design &amp; Troubleshooting</h3>
+          <p>Study switching, VLANs, redundancy, configuration verification, and structured troubleshooting.</p>
+          <div class="sc-card-meta">Network modules · practice workbenches · STP simulator · EN / TH</div>
+          <span class="sc-card-action">Open console →</span>
+        </a>
+        <a class="sc-card console-card" data-console-launch data-console-id="wnet" data-console-name="Wireless Network Engineering" href="https://zann208.github.io/wnet/">
+          <h3>Wireless Network Engineering</h3>
+          <p>Learn RF behavior, Wi-Fi design, capacity, security, and practical wireless calculations.</p>
+          <div class="sc-card-meta">RF concepts · design tools · calculators · practice</div>
+          <span class="sc-card-action">Open console →</span>
+        </a>
+        <a class="sc-card console-card" data-console-launch data-console-id="algo" data-console-name="Algorithms & Data Structures" href="https://zann208.github.io/algo/">
+          <h3>Algorithms &amp; Data Structures</h3>
+          <p>Review core data structures, algorithms, complexity, and problem-solving patterns.</p>
+          <div class="sc-card-meta">Concepts · worked examples · visual practice</div>
+          <span class="sc-card-action">Open console →</span>
+        </a>
+        <a class="sc-card console-card" data-console-launch data-console-id="privacy" data-console-name="Privacy & Information Security" href="https://zann208.github.io/privacy/">
+          <h3>Privacy &amp; Information Security</h3>
+          <p>Study privacy principles, security concepts, risk, controls, and information protection.</p>
+          <div class="sc-card-meta">Concept review · security reasoning · practice</div>
+          <span class="sc-card-action">Open console →</span>
+        </a>
+        <a class="sc-card console-card" data-console-launch data-console-id="os" data-console-name="Operating Systems & Scheduling" href="https://zann208.github.io/os/">
+          <h3>Operating Systems &amp; Scheduling</h3>
+          <p>Learn process scheduling, memory, synchronization, deadlock, and operating-system behavior.</p>
+          <div class="sc-card-meta">Scheduling · Banker's Algorithm · calculations · review</div>
+          <span class="sc-card-action">Open console →</span>
+        </a>
+        <a class="sc-card console-card" data-console-launch data-console-id="gdc" data-console-name="Google Data Center Hardware Hackathon" href="./google-dc-hackathon/">
+          <h3>Google Data Center Hardware Hackathon</h3>
+          <p>Prepare with data center fundamentals, server hardware, networking, Linux, troubleshooting, automation, and mock challenges.</p>
+          <div class="sc-card-meta">10-module path · search · quiz · local progress</div>
+          <span class="sc-card-action">Open console →</span>
+        </a>
+      </div>
+    </section>
 
-    <a class="card c4" href="https://zann208.github.io/privacy/"><div class="chead"><span class="mk">PRV</span><span class="ctitle"><b>Privacy &amp; Information Security</b><span>threats · privacy risk · case analysis</span></span><span class="go">OPEN ↗</span></div><p class="cbody">A privacy and information-security workspace covering protection properties, attack models, quantitative analysis, and selected real-world privacy and security cases.</p><div class="tags"><span class="tag">privacy concepts</span><span class="tag">case files</span><span class="tag">entropy lab</span><span class="tag">recall cards</span></div></a>
+    <section class="sc-section" aria-labelledby="how-title">
+      <div class="sc-section-head"><div><h2 id="how-title">How to use Study Console</h2></div></div>
+      <div class="home-note"><strong>Learn actively.</strong> Read the explanation, work through the example, then use the quiz, calculator, simulator, or troubleshooting exercise when the console provides one. Progress stays local to your browser where it is already supported.</div>
+    </section>
 
-    <a class="card c5" href="https://zann208.github.io/os/"><div class="chead"><span class="mk">OS</span><span class="ctitle"><b>Operating Systems &amp; Scheduling</b><span>processes · concurrency · resources</span></span><span class="go">OPEN ↗</span></div><p class="cbody">An operating-systems workspace for processes, threads, CPU scheduling, synchronization, and deadlock, with interactive scheduling and Banker's Algorithm tools.</p><div class="tags"><span class="tag">concept modules</span><span class="tag">CPU scheduler</span><span class="tag">Banker's solver</span><span class="tag">recall cards</span></div></a>
-
-    <a class="card c6" href="./google-dc-hackathon/"><div class="chead"><span class="mk">GDC</span><span class="ctitle"><b>Google Data Center Hardware Hackathon 2026</b><span>Independent competition preparation</span></span><span class="go">OPEN ↗</span></div><p class="cbody">A systematic preparation workspace for data center fundamentals, server hardware, networking, Linux, troubleshooting, automation, operations, teamwork, and timed mock challenges.</p><div class="tags"><span class="tag">10-module path</span><span class="tag">hardware + Linux</span><span class="tag">troubleshooting</span><span class="tag">mock challenges</span></div></a>
-  </div>
-
-  <div class="note"><b>About the project</b>Study Console is my independent learning system. I turn technical subjects into focused browser-based workspaces with my own organization, explanations, tools, references, and practice flows. The public-facing consoles avoid university course codes, class schedules, instructor details, and lecture identifiers.</div>
-
-  <footer><span>Built by <span class="zn">ZANN</span></span><span>·</span><a href="https://zann208.github.io" target="_blank" rel="noopener">portfolio</a><a href="mailto:thuhtoozan_1@cmu.ac.th">email</a><a href="https://github.com/Zann208" target="_blank" rel="noopener">github</a></footer>
-</div>
+    <footer class="home-footer">
+      <span>Built by Zann</span>
+      <a href="https://zann208.github.io/">Portfolio</a>
+      <a href="https://github.com/Zann208">GitHub</a>
+    </footer>
+  </main>
+  <script src="./shared/v1/study-system.js"></script>
 </body>
 </html>

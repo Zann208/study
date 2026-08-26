@@ -10,6 +10,19 @@ Study Console is the **single navigation hub** for my personal technical learnin
 
 The consoles are designed for understanding, revision, calculations, troubleshooting practice, simulations, reference, and active recall. They use plain HTML, CSS and JavaScript so they remain easy to host, inspect and maintain.
 
+
+## Shared UI architecture
+
+The repository now hosts the canonical **Study Console UI System v1** under `shared/v1/`.
+
+- `shared/v1/study-system.css` — shared colors, typography, spacing, global navigation, buttons, cards, learning blocks, tables, quizzes, themes, accessibility and responsive primitives.
+- `shared/v1/study-system.js` — shared global console shell, console switcher, theme persistence, recent-console tracking and reusable navigation behavior.
+- `google-dc-hackathon/gdc.css` — only the subject-specific structures needed by the Google Data Center console.
+- `docs/UI-SYSTEM.md` — canonical design-system specification.
+- `docs/MIGRATION.md` — migration checklist for NETDES, WNET, ALGO, Privacy and OS.
+
+External consoles should pin the versioned assets at `https://zann208.github.io/study/shared/v1/` rather than depending on an unversioned latest file.
+
 ## Current consoles
 
 | Console | Focus | Source | Live |
