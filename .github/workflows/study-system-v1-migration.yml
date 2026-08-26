@@ -1,0 +1,47 @@
+name: Study Console UI System v1 migration
+
+on:
+  push:
+    paths:
+      - 'scripts/apply_study_system_v1.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: study-console-v1-migration
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply reviewed learning-first system
+        run: python scripts/apply_study_system_v1.py
+      - name: Validate shared JavaScript
+        run: node --check shared/v1/study-system.js
+      - name: Validate Google DC inline JavaScript
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, tempfile
+          html=Path('google-dc-hackathon/index.html').read_text(encoding='utf-8')
+          for i,src in enumerate(re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',html,re.S)):
+              if not src.strip():
+                  continue
+              p=Path(tempfile.gettempdir())/f'gdc-inline-{i}.js'
+              p.write_text(src,encoding='utf-8')
+              subprocess.run(['node','--check',str(p)],check=True)
+          PY
+      - name: Commit canonical Study Console v1
+        run: |
+          if git diff --quiet -- index.html home.css README.md shared docs google-dc-hackathon; then
+            echo "Study Console v1 already current"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html home.css README.md shared docs google-dc-hackathon
+          git commit -m "Adopt learning-first Study Console UI System v1"
+          git push
