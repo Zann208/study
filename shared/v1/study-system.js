@@ -16,6 +16,13 @@
   const storedTheme = localStorage.getItem('study-console-theme');
   if (storedTheme === 'light' || storedTheme === 'dark') root.dataset.theme = storedTheme;
 
+  /* Embedded lesson/reference pages live inside a parent console that already
+     owns the global shell. Never inject a second Study Console header there. */
+  if (window.self !== window.top) {
+    body.classList.add('sc-embedded');
+    return;
+  }
+
   function themeLabel(){
     const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
     return dark ? 'Use light theme' : 'Use dark theme';
