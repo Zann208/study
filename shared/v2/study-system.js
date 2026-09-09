@@ -24,7 +24,9 @@
     chevron: '<path d="m6 9 6 6 6-6"/>',
     arrow: '<path d="M4 12h16m-6-6 6 6-6 6"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/>',
-    moon: '<path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/>'
+    moon: '<path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/>',
+    menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
+    jump: '<path d="M9 5h11M9 12h11M9 19h11M3 5h1M3 12h1M3 19h1"/>'
   };
   const icon = (name, extra = '') => `<svg class="sc-icon ${extra}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${paths[name] || paths.home}</svg>`;
   document.querySelectorAll('[data-sc-icon]').forEach(node => { node.innerHTML = icon(node.dataset.scIcon); });
@@ -42,7 +44,7 @@
     } catch { return console.href; }
   };
   const header = document.createElement('header');
-  header.className = 'sc-global-header';
+  header.className = 'sc-global-header' + (current ? ' sc-subject-header' : '');
   const consoleLink = console => `<a href="${console.href}" ${console.id === currentId ? 'aria-current="page"' : ''}>${icon(console.icon)}<span>${console.name}</span></a>`;
   header.innerHTML = `<div class="sc-global-inner">
     <a class="sc-brand" href="${HOME}" aria-label="Study Console home"><span class="sc-brand-mark">${icon('home')}</span><span class="sc-brand-label">Study Console</span></a>
@@ -59,11 +61,25 @@
   body.prepend(header);
   const switcher = header.querySelector('[data-sc-switch]');
   const menu = header.querySelector('#sc-console-menu');
+  let closeSections = () => {};
+  let closeRail = () => {};
+  // Focusout runs before the browser finishes moving focus. Inspect its destination
+  // instead of checking activeElement in a microtask and hiding a link before click.
+  function dismissAfterFocusLeaves(container, dismiss, keepOpenFor = () => false) {
+    container.addEventListener('focusout', event => {
+      if (event.relatedTarget) {
+        if (!container.contains(event.relatedTarget) && !keepOpenFor(event.relatedTarget)) dismiss();
+      } else {
+        setTimeout(() => { if (!container.contains(document.activeElement) && !keepOpenFor(document.activeElement)) dismiss(); }, 0);
+      }
+    });
+  }
   const close = (restoreFocus = false) => {
     switcher.setAttribute('aria-expanded', 'false'); menu.hidden = true;
     if (restoreFocus) switcher.focus();
   };
   const open = (last = false, focus = false) => {
+    closeSections(); closeRail();
     switcher.setAttribute('aria-expanded', 'true'); menu.hidden = false;
     if (focus) { const links = menu.querySelectorAll('a'); links[last ? links.length - 1 : 0].focus(); }
   };
@@ -81,9 +97,7 @@
     if (event.key === 'End') next = links.length - 1;
     if (next !== null) { event.preventDefault(); links[next].focus(); }
   });
-  header.querySelector('.sc-switch').addEventListener('focusout', () => {
-    queueMicrotask(() => { if (!header.querySelector('.sc-switch').contains(document.activeElement)) close(); });
-  });
+  dismissAfterFocusLeaves(header.querySelector('.sc-switch'), close);
   document.addEventListener('click', event => { if (!header.querySelector('.sc-switch').contains(event.target)) close(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && !menu.hidden) { event.preventDefault(); close(true); } });
   // Course flashcard shortcuts must not react while the global controls have focus.
@@ -129,16 +143,164 @@
   window.addEventListener('pageshow', () => { close(); rememberCurrent(); renderContinue(); });
   window.addEventListener('hashchange', rememberCurrent);
   window.addEventListener('storage', event => { if (event.key === 'study-console-last' || event.key === null) renderContinue(); });
-  // Measure the native subject toolbar so sticky rows never overlap.
-  const localNav = body.querySelector(':scope > nav, :scope > header#top, :scope > .shell > header#top');
-  if (localNav) localNav.classList.add('sc-local-nav');
-  if ('ResizeObserver' in window) {
-    const resize = new ResizeObserver(() => {
-      root.style.setProperty('--sc-header-h', Math.ceil(header.getBoundingClientRect().height) + 'px');
-      if (localNav) root.style.setProperty('--sc-local-nav-h', Math.ceil(localNav.getBoundingClientRect().height) + 'px');
+  // Reparent the actual controls, retaining their event listeners and native IDs.
+  // One header owns the console switcher, subject navigation, and utility buttons.
+  const inner = header.querySelector('.sc-global-inner');
+  const actions = header.querySelector('.sc-global-actions');
+  const legacyHeader = body.querySelector(':scope > nav:not(#side), :scope > header#top, :scope > .shell > header#top');
+  const nativeControls = legacyHeader && legacyHeader.querySelector('.navin');
+  const examTools = currentId === 'privacy' && !nativeControls ? body.querySelector(':scope > .wrap > .tools') : null;
+  let localNav = null;
+  if (nativeControls || examTools) {
+    const controls = nativeControls || examTools;
+    localNav = document.createElement('nav');
+    localNav.id = 'sc-subject-menu';
+    localNav.className = 'sc-local-nav' + (examTools ? ' sc-tools-menu' : '');
+    localNav.setAttribute('aria-label', examTools ? 'Exam tools' : 'Subject sections');
+    controls.classList.add('sc-local-controls');
+    localNav.appendChild(controls);
+    inner.insertBefore(localNav, actions);
+    header.classList.add('sc-with-local');
+    const sectionButton = document.createElement('button');
+    sectionButton.type = 'button';
+    sectionButton.className = 'sc-shell-button sc-sections-toggle' + (examTools ? ' sc-tools-toggle' : '');
+    sectionButton.setAttribute('aria-controls', localNav.id);
+    sectionButton.setAttribute('aria-expanded', 'false');
+    sectionButton.setAttribute('aria-label', examTools ? 'Open exam tools' : 'Open subject sections');
+    sectionButton.innerHTML = icon('menu') + '<span>' + (examTools ? 'Exam tools' : 'Sections') + '</span>';
+    actions.prepend(sectionButton);
+    const compact = matchMedia('(max-width: 1100px)');
+    const isPopup = () => Boolean(examTools) || compact.matches;
+    function syncSections() {
+      const expanded = localNav.classList.contains('sc-local-open');
+      localNav.inert = isPopup() && !expanded;
+      sectionButton.setAttribute('aria-expanded', String(expanded));
+      if (localNav.inert) localNav.setAttribute('aria-hidden', 'true'); else localNav.removeAttribute('aria-hidden');
+    }
+    closeSections = (restoreFocus = false) => {
+      if (restoreFocus) sectionButton.focus();
+      localNav.classList.remove('sc-local-open'); syncSections();
+    };
+    function openSections(focus = false) {
+      close(); closeRail();
+      localNav.classList.add('sc-local-open'); syncSections();
+      if (window.navReflow) window.navReflow();
+      if (focus) {
+        const first = localNav.querySelector('.tabbtn,button:not(#logoBtn),a[href],input');
+        if (first) first.focus();
+      }
+    }
+    sectionButton.addEventListener('click', () => localNav.classList.contains('sc-local-open') ? closeSections() : openSections());
+    sectionButton.addEventListener('keydown', event => {
+      if (event.key === 'ArrowDown') { event.preventDefault(); openSections(true); }
     });
-    resize.observe(header); if (localNav) resize.observe(localNav);
+    localNav.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && isPopup()) { event.preventDefault(); closeSections(true); }
+    });
+    localNav.addEventListener('click', event => {
+      if (isPopup() && event.target.closest('.tabbtn,[data-j]')) closeSections(true);
+    });
+    document.addEventListener('click', event => {
+      if (!localNav.contains(event.target) && !sectionButton.contains(event.target)) closeSections();
+    });
+    dismissAfterFocusLeaves(localNav, closeSections, node => node === sectionButton);
+    if (compact.addEventListener) compact.addEventListener('change', () => {
+      closeSections();
+      if (window.navReflow) window.navReflow();
+    });
+    syncSections();
   }
+  // Sidebars already supply subject navigation. Move their existing mobile trigger
+  // into the same header instead of retaining an otherwise empty second toolbar.
+  const drawerTrigger = currentId === 'algo' ? document.getElementById('burger') : currentId === 'gdc' ? document.getElementById('menuBtn') : null;
+  if (drawerTrigger) {
+    drawerTrigger.classList.add('sc-shell-button', 'sc-drawer-toggle');
+    drawerTrigger.innerHTML = icon('menu') + '<span>Sections</span>';
+    drawerTrigger.setAttribute('aria-label', 'Open subject sections');
+    actions.prepend(drawerTrigger);
+    if (currentId === 'gdc') body.querySelector('.mobile-bar').style.setProperty('display', 'none', 'important');
+  }
+  if (legacyHeader && (nativeControls || drawerTrigger)) legacyHeader.style.setProperty('display', 'none', 'important');
+  const lessonHeader = body.querySelector(':scope > .top');
+  if (lessonHeader && currentId === 'algo') {
+    const back = lessonHeader.querySelector('a.back');
+    if (back) { back.classList.add('sc-shell-button', 'sc-lesson-back'); actions.prepend(back); }
+    lessonHeader.style.setProperty('display', 'none', 'important');
+  }
+  const searchButton = header.querySelector('#searchBtn');
+  if (searchButton) searchButton.setAttribute('aria-label', 'Search this subject');
+  if (examTools) examTools.querySelector('input').setAttribute('aria-label', 'Search the exam binder');
+
+  // The context rail overlays the page only when requested. Hover near the header's
+  // lower edge, use the Jump button on touch, or focus it with the keyboard.
+  const rail = document.getElementById('rail');
+  if (rail) {
+    const dock = document.createElement('div');
+    dock.className = 'sc-rail-dock';
+    dock.appendChild(rail); header.appendChild(dock);
+    const railButton = document.createElement('button');
+    railButton.type = 'button';
+    railButton.className = 'sc-shell-button sc-rail-toggle';
+    railButton.setAttribute('aria-controls', rail.id);
+    railButton.setAttribute('aria-expanded', 'false');
+    railButton.setAttribute('aria-label', 'Show topic navigation');
+    railButton.title = 'Jump to a topic';
+    railButton.innerHTML = icon('jump');
+    actions.insertBefore(railButton, themeButton);
+    rail.setAttribute('role', 'navigation');
+    rail.setAttribute('aria-label', 'Topic navigation');
+    const select = rail.querySelector('select');
+    if (select) select.setAttribute('aria-label', 'Jump to a topic or lab');
+    const pointer = matchMedia('(hover: hover) and (pointer: fine)');
+    let leaveTimer;
+    function showRail(focus = false) {
+      if (!body.classList.contains('hasrail')) return;
+      clearTimeout(leaveTimer);
+      close(); closeSections();
+      dock.classList.add('sc-rail-open'); rail.inert = false;
+      rail.removeAttribute('aria-hidden'); railButton.setAttribute('aria-expanded', 'true');
+      if (focus && select) select.focus();
+    }
+    closeRail = (restoreFocus = false) => {
+      clearTimeout(leaveTimer);
+      if (restoreFocus) railButton.focus();
+      dock.classList.remove('sc-rail-open'); rail.inert = true;
+      rail.setAttribute('aria-hidden', 'true'); railButton.setAttribute('aria-expanded', 'false');
+    };
+    const leave = () => {
+      clearTimeout(leaveTimer);
+      leaveTimer = setTimeout(() => { if (!rail.contains(document.activeElement)) closeRail(); }, 160);
+    };
+    dock.addEventListener('pointerenter', () => { if (pointer.matches) showRail(); });
+    dock.addEventListener('pointerleave', leave);
+    railButton.addEventListener('click', () => dock.classList.contains('sc-rail-open') ? closeRail() : showRail());
+    railButton.addEventListener('keydown', event => {
+      if (event.key === 'ArrowDown') { event.preventDefault(); showRail(true); }
+    });
+    rail.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { event.preventDefault(); closeRail(true); }
+    });
+    document.addEventListener('pointerdown', event => {
+      if (!dock.contains(event.target) && !railButton.contains(event.target)) closeRail();
+    });
+    dismissAfterFocusLeaves(dock, closeRail, node => node === railButton);
+    const syncRailPresence = () => {
+      const available = body.classList.contains('hasrail');
+      dock.hidden = !available; railButton.hidden = !available;
+      if (!available) closeRail();
+    };
+    if (window.MutationObserver) new MutationObserver(syncRailPresence).observe(body, { attributes: true, attributeFilter: ['class'] });
+    closeRail(); syncRailPresence();
+  }
+  root.style.setProperty('--sc-local-nav-h', '0px');
+  function measureHeader() {
+    root.style.setProperty('--sc-header-h', Math.ceil(header.getBoundingClientRect().height) + 'px');
+  }
+  if ('ResizeObserver' in window) {
+    const resize = new ResizeObserver(measureHeader);
+    resize.observe(header);
+  }
+  requestAnimationFrame(() => { measureHeader(); if (window.navReflow) window.navReflow(); });
   const main = document.querySelector('main');
   if (main) {
     if (!main.id) main.id = 'sc-main-content';

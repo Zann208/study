@@ -5,10 +5,13 @@ UI v2 is the shared interface for the Study hub, NETDES, WNET, ALGO, Privacy, OS
 ## Interface
 
 - Cool neutral surfaces, blue primary actions, readable sans-serif UI, and distinct semantic feedback colors.
-- One global header with a home link, accessible console switcher, and shared light/dark control.
+- One compact header with a home link, accessible console switcher, subject controls, and shared light/dark control.
 - Subjects and Engineering Lab have separate groups on the homepage and in the switcher.
-- Subject tabs, search, tool controls, and sidebars retain their native handlers.
-- Local toolbar heights are measured so sticky headers and section navigation do not overlap.
+- Subject tabs and search controls are moved into the header as the original DOM nodes, preserving IDs and event handlers. At narrow widths they open inside the Sections menu. The NETDES More menu continues to handle desktop overflow.
+- ALGO and Data Center sidebar buttons share the header on mobile. Standalone exam tools also use this header; embedded lesson pages keep inheriting their parent's shell.
+- The header height is measured; the old local-toolbar offset is zero. No second sticky subject header remains.
+- The topic/lab rail stays collapsed while reading. Hover just below the header or use its Jump button to reveal it. Pointer exit dismisses it, while keyboard focus keeps active controls available. Escape and outside clicks dismiss it. The rail is inert when closed and absent outside relevant study sections.
+- Switcher focus dismissal checks the incoming focus target. A focusout microtask must not hide links during pointer or keyboard focus transfer.
 - Existing mobile drawers gain focus handling, Escape dismissal, and accessible open/closed state.
 - The existing recent-console preference drives Continue learning. Stored URLs are restricted to the selected console's own path.
 
@@ -48,5 +51,7 @@ The WNET and Privacy `flatten-console.yml` workflows now perform read-only valid
 - Theme state checks cover saved/system preferences, disabled storage, corrupt state, iframe inheritance, cross-tab changes, and legacy initialization.
 - Local assets, primary routes, HTML IDs, and shared-asset inclusion checked.
 - Responsive rules account for narrow screens, scrollable subject tabs, mobile drawers, reduced motion, and light/dark contrast.
+
+The navigation follow-up runs the actual page scripts in a simulated DOM across ten entry pages and both desktop and compact menu states. It checks link activation and focus handoff, original subject-tab handlers after reparenting, sidebar actions, and pointer/keyboard/touch-button rail dismissal. Subject HTML changes are limited to the matching CSS/JS cache version, and subject scripts remain unchanged.
 
 These are source and programmatic checks. A real-browser visual and interaction walkthrough is a separate verification step; do not describe source checks as a device/browser test.
