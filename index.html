@@ -5,84 +5,68 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Study Console — Zann</title>
   <meta name="description" content="Study Console is Zann's learning workspace for networking, algorithms, privacy, operating systems, and data center preparation.">
-  <meta name="theme-color" content="#f7f5f2">
-  <link rel="stylesheet" href="./shared/v1/study-system.css">
+  <meta name="theme-color" content="#f5f7fb">
+  <script src="./shared/v2/theme-init.js"></script>
+  <link rel="stylesheet" href="./shared/v2/study-system.css">
   <link rel="stylesheet" href="./home.css">
 </head>
 <body data-console-id="home" data-console-name="Study Console">
-  <main class="sc-page">
-    <header class="home-intro">
-      <p class="sc-eyebrow">Personal technical learning workspace</p>
-      <h1 class="sc-page-title">Study Console</h1>
-      <p class="sc-lede">Choose a subject to continue learning, review concepts, or practice with interactive tools. Each console keeps the same navigation and learning patterns while preserving tools that are specific to the subject.</p>
+  <main class="sc-page home-workspace" id="main">
+    <header class="home-heading">
+      <div><p class="sc-eyebrow">Your learning workspace</p><h1 class="sc-page-title">Study Console</h1><p class="sc-lede">A place to understand, practice, and come back to.</p></div>
+      <a class="home-jump" href="#subjects">Explore your subjects <span aria-hidden="true">↓</span></a>
     </header>
-
-    <section class="sc-section" data-continue-learning hidden aria-labelledby="continue-title">
-      <div class="sc-section-head">
-        <div><h2 id="continue-title">Continue learning</h2></div>
-      </div>
-      <div class="sc-panel continue-card">
-        <div><h3 data-continue-name></h3><p>Open the console you used most recently on this browser.</p></div>
-        <a class="sc-button sc-button-primary" data-continue-link href="#">Continue</a>
-      </div>
+    <section class="home-continue" data-continue-learning hidden aria-labelledby="continue-title">
+      <div class="home-continue-mark" data-continue-icon aria-hidden="true"></div>
+      <div class="home-continue-copy"><h2 id="continue-title">Continue learning</h2><p data-continue-name></p></div>
+      <a class="sc-button sc-button-primary" data-continue-link href="#subjects">Pick up where you left off <span data-sc-icon="arrow"></span></a>
     </section>
-
-    <section class="sc-section" aria-labelledby="consoles-title">
-      <div class="sc-section-head">
-        <div><h2 id="consoles-title">My consoles</h2></div>
-        <p>Focused workspaces for concepts, review, calculations, troubleshooting, and active practice.</p>
-      </div>
-      <div class="sc-grid">
-        <a class="sc-card console-card" data-console-launch data-console-id="netdes" data-console-name="Network Design & Troubleshooting" href="https://zann208.github.io/netdes/">
-          <h3>Network Design &amp; Troubleshooting</h3>
-          <p>Study switching, VLANs, redundancy, configuration verification, and structured troubleshooting.</p>
-          <div class="sc-card-meta">Network modules · practice workbenches · STP simulator · EN / TH</div>
-          <span class="sc-card-action">Open console →</span>
-        </a>
-        <a class="sc-card console-card" data-console-launch data-console-id="wnet" data-console-name="Wireless Network Engineering" href="https://zann208.github.io/wnet/">
-          <h3>Wireless Network Engineering</h3>
-          <p>Learn RF behavior, Wi-Fi design, capacity, security, and practical wireless calculations.</p>
-          <div class="sc-card-meta">RF concepts · design tools · calculators · practice</div>
-          <span class="sc-card-action">Open console →</span>
-        </a>
-        <a class="sc-card console-card" data-console-launch data-console-id="algo" data-console-name="Algorithms & Data Structures" href="https://zann208.github.io/algo/">
-          <h3>Algorithms &amp; Data Structures</h3>
-          <p>Review core data structures, algorithms, complexity, and problem-solving patterns.</p>
-          <div class="sc-card-meta">Concepts · worked examples · visual practice</div>
-          <span class="sc-card-action">Open console →</span>
-        </a>
-        <a class="sc-card console-card" data-console-launch data-console-id="privacy" data-console-name="Privacy & Information Security" href="https://zann208.github.io/privacy/">
-          <h3>Privacy &amp; Information Security</h3>
-          <p>Study privacy principles, security concepts, risk, controls, and information protection.</p>
-          <div class="sc-card-meta">Concept review · security reasoning · practice</div>
-          <span class="sc-card-action">Open console →</span>
-        </a>
-        <a class="sc-card console-card" data-console-launch data-console-id="os" data-console-name="Operating Systems & Scheduling" href="https://zann208.github.io/os/">
-          <h3>Operating Systems &amp; Scheduling</h3>
-          <p>Learn process scheduling, memory, synchronization, deadlock, and operating-system behavior.</p>
-          <div class="sc-card-meta">Scheduling · Banker's Algorithm · calculations · review</div>
-          <span class="sc-card-action">Open console →</span>
-        </a>
-        <a class="sc-card console-card" data-console-launch data-console-id="gdc" data-console-name="Google Data Center Hardware Hackathon" href="./google-dc-hackathon/">
-          <h3>Google Data Center Hardware Hackathon</h3>
-          <p>Prepare with data center fundamentals, server hardware, networking, Linux, troubleshooting, automation, and mock challenges.</p>
-          <div class="sc-card-meta">10-module path · search · quiz · local progress</div>
-          <span class="sc-card-action">Open console →</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="sc-section" aria-labelledby="how-title">
-      <div class="sc-section-head"><div><h2 id="how-title">How to use Study Console</h2></div></div>
-      <div class="home-note"><strong>Learn actively.</strong> Read the explanation, work through the example, then use the quiz, calculator, simulator, or troubleshooting exercise when the console provides one. Progress stays local to your browser where it is already supported.</div>
-    </section>
-
-    <footer class="home-footer">
-      <span>Built by Zann</span>
-      <a href="https://zann208.github.io/">Portfolio</a>
-      <a href="https://github.com/Zann208">GitHub</a>
-    </footer>
+    <div class="home-layout">
+      <section class="home-subjects" id="subjects" aria-labelledby="subjects-title">
+        <div class="sc-section-head"><h2 id="subjects-title">Subjects</h2><p>Concepts, practice, and exam preparation</p></div>
+        <div class="home-subject-list">
+          <a class="home-subject" data-console-launch data-console-id="netdes" data-console-name="Network Design & Troubleshooting" href="https://zann208.github.io/netdes/">
+            <span class="home-subject-icon" data-sc-icon="network" aria-hidden="true"></span>
+            <div class="home-subject-copy"><h3>Network Design &amp; Troubleshooting</h3><p>Switching, VLANs, redundancy, and configuration verification.</p><span>Lab workbenches · STP simulator · EN / TH</span></div><span class="home-subject-open" data-sc-icon="arrow" aria-hidden="true"></span>
+          </a>
+          <a class="home-subject" data-console-launch data-console-id="wnet" data-console-name="Wireless Network Engineering" href="https://zann208.github.io/wnet/">
+            <span class="home-subject-icon" data-sc-icon="wireless" aria-hidden="true"></span>
+            <div class="home-subject-copy"><h3>Wireless Network Engineering</h3><p>RF behavior, Wi-Fi design, capacity, and security.</p><span>Calculators · design tools · practice</span></div><span class="home-subject-open" data-sc-icon="arrow" aria-hidden="true"></span>
+          </a>
+          <a class="home-subject" data-console-launch data-console-id="algo" data-console-name="Algorithms & Data Structures" href="https://zann208.github.io/algo/">
+            <span class="home-subject-icon" data-sc-icon="algorithm" aria-hidden="true"></span>
+            <div class="home-subject-copy"><h3>Algorithms &amp; Data Structures</h3><p>Data structures, complexity, and problem-solving patterns.</p><span>Worked examples · visual practice</span></div><span class="home-subject-open" data-sc-icon="arrow" aria-hidden="true"></span>
+          </a>
+          <a class="home-subject" data-console-launch data-console-id="privacy" data-console-name="Privacy & Information Security" href="https://zann208.github.io/privacy/">
+            <span class="home-subject-icon" data-sc-icon="shield" aria-hidden="true"></span>
+            <div class="home-subject-copy"><h3>Privacy &amp; Information Security</h3><p>Privacy principles, risk, controls, and information protection.</p><span>Concept review · security reasoning · practice</span></div><span class="home-subject-open" data-sc-icon="arrow" aria-hidden="true"></span>
+          </a>
+          <a class="home-subject" data-console-launch data-console-id="os" data-console-name="Operating Systems & Scheduling" href="https://zann208.github.io/os/">
+            <span class="home-subject-icon" data-sc-icon="system" aria-hidden="true"></span>
+            <div class="home-subject-copy"><h3>Operating Systems &amp; Scheduling</h3><p>Processes, memory, synchronization, and deadlock.</p><span>Scheduling · Banker's Algorithm · calculations</span></div><span class="home-subject-open" data-sc-icon="arrow" aria-hidden="true"></span>
+          </a>
+        </div>
+      </section>
+      <aside class="home-aside" aria-label="Engineering Lab and study guidance">
+        <section id="engineering-lab" aria-labelledby="engineering-title">
+          <div class="sc-section-head"><h2 id="engineering-title">Engineering Lab</h2></div>
+          <a class="home-engineering" data-console-launch data-console-id="gdc" data-console-name="Google Data Center Hardware Hackathon" href="./google-dc-hackathon/">
+            <span class="home-engineering-icon" data-sc-icon="server" aria-hidden="true"></span>
+            <h3>Google Data Center<br>Hardware Hackathon</h3>
+            <p>Server hardware, networking, Linux, troubleshooting, and hands-on preparation.</p>
+            <div class="home-engineering-meta">10-module path · search · quiz</div>
+            <span class="home-engineering-action">Open preparation console <span data-sc-icon="arrow" aria-hidden="true"></span></span>
+          </a>
+        </section>
+        <section class="home-study-note" aria-labelledby="study-note-title">
+          <h2 id="study-note-title">Make it an active session.</h2>
+          <p>Read the explanation. Work through an example. Then try the quiz, calculator, or simulator.</p>
+          <p class="home-local-note">Your saved progress stays in this browser.</p>
+        </section>
+      </aside>
+    </div>
+    <footer class="home-footer"><span>Built by Zann</span><div><a href="https://zann208.github.io/">Portfolio</a><a href="https://github.com/Zann208">GitHub</a></div></footer>
   </main>
-  <script src="./shared/v1/study-system.js"></script>
+  <script src="./shared/v2/study-system.js"></script>
 </body>
 </html>

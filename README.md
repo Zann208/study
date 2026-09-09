@@ -13,15 +13,16 @@ The consoles are designed for understanding, revision, calculations, troubleshoo
 
 ## Shared UI architecture
 
-The repository now hosts the canonical **Study Console UI System v1** under `shared/v1/`.
+The canonical interface is **Study Console UI v2** under `shared/v2/`. The homepage separates Subjects from Engineering Lab, and every console uses the same global navigation and theme.
 
-- `shared/v1/study-system.css` — shared colors, typography, spacing, global navigation, buttons, cards, learning blocks, tables, quizzes, themes, accessibility and responsive primitives.
-- `shared/v1/study-system.js` — shared global console shell, console switcher, theme persistence, recent-console tracking and reusable navigation behavior.
-- `google-dc-hackathon/gdc.css` — only the subject-specific structures needed by the Google Data Center console.
-- `docs/UI-SYSTEM.md` — canonical design-system specification.
-- `docs/MIGRATION.md` — migration checklist for NETDES, WNET, ALGO, Privacy and OS.
+- `shared/v2/theme-init.js` applies the shared theme before the page is styled.
+- `shared/v2/study-system.css` provides colors, typography, navigation, controls, and responsive primitives.
+- `shared/v2/study-system.js` provides the console switcher, theme control, recent-console tracking, and accessible navigation enhancements.
+- `shared/v2/legacy-console.css` connects existing subject interfaces to the shared system.
+- Subject repositories keep their original lessons, tools, and small local layout adapters.
+- [UI v2 architecture and content protection](docs/UI-SYSTEM-V2.md) documents the maintained system and delivery order.
 
-External consoles should pin the versioned assets at `https://zann208.github.io/study/shared/v1/` rather than depending on an unversioned latest file.
+External consoles use `https://zann208.github.io/study/shared/v2/`. The previous `shared/v1/` assets are retained unchanged for compatibility.
 
 ## Current consoles
 
@@ -33,6 +34,10 @@ External consoles should pin the versioned assets at `https://zann208.github.io/
 | **PRV** | Privacy & Information Security | [privacy](https://github.com/Zann208/privacy) | [open](https://zann208.github.io/privacy/) |
 | **OS** | Operating Systems & Scheduling | [os](https://github.com/Zann208/os) | [open](https://zann208.github.io/os/) |
 | **GDC** | Google Data Center Hardware Hackathon 2026 | this repository: `google-dc-hackathon/` | [open](https://zann208.github.io/study/google-dc-hackathon/) |
+
+## Content preservation
+
+During UI work, preserve original LAB numbers, professor topology fidelity, headings, technical content, examples, questions, answers, and learning-tool behavior. This takes precedence over older guidance below about renaming academic structure.
 
 ## Public identity rule
 
