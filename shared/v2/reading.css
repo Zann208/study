@@ -70,11 +70,11 @@ body.sc-reading .sc-reading-region .sc-reading-card {
 body.sc-reading .sc-reading-region .sc-reading-card > :first-child { margin-top: 0 !important; }
 body.sc-reading .sc-reading-region .sc-reading-card > :last-child { margin-bottom: 0 !important; }
 body.sc-reading .sc-reading-region .sc-reading-card .sc-reading-card { padding: 24px 0 !important; border-width: 1px 0 0 !important; border-radius: 0 !important; margin-block: 24px 0 !important; background: transparent !important; }
-body.sc-reading .sc-reading-region .ph { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; padding: 0 0 20px !important; margin: 0 0 22px !important; border: 0 !important; border-bottom: 1px solid var(--sc-line) !important; background: transparent !important; box-shadow: none !important; }
-body.sc-reading .sc-reading-region .ph h3 { flex: 1 1 260px; min-width: 0; margin: 0 !important; font-size: calc(var(--read-size) * 1.5) !important; line-height: 1.35 !important; }
+body.sc-reading .sc-reading-region .ph { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 0 0 20px !important; margin: 0 0 22px !important; border: 0 !important; border-bottom: 1px solid var(--sc-line) !important; background: transparent !important; box-shadow: none !important; }
+body.sc-reading .sc-reading-region .ph > :is(h2,h3) { flex: 1 1 240px; min-width: 0; margin: 0 !important; padding: 0 !important; font-size: calc(var(--read-size) * 1.5) !important; line-height: 1.35 !important; overflow-wrap: anywhere; }
 body.sc-reading .sc-reading-region :is(.badge,.tag,.eyebrow,.kicker,.key,.topic-label,.agcode,.mock-topic,.navgrid b) { font-family: var(--sc-sans) !important; font-size: .8125rem !important; line-height: 1.45 !important; letter-spacing: .015em !important; text-shadow: none; }
 body.sc-reading .sc-reading-region .ph .badge { flex: 0 0 auto; height: auto; min-width: 38px; padding: 7px 9px; white-space: nowrap; }
-body.sc-reading .sc-reading-region .ph .tag { align-self: center; margin-left: auto; white-space: normal; }
+body.sc-reading .sc-reading-region .ph :is(.tag,.right) { align-self: center; margin-left: auto; white-space: normal; }
 body.sc-reading .sc-reading-region :is(.foot,.footnav) { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 24px !important; padding-top: 18px !important; border-top: 1px solid var(--sc-line); }
 
 /* Callout meaning is conveyed by the original label plus a colored edge. */

@@ -170,7 +170,7 @@
     sectionButton.innerHTML = icon('menu') + '<span>' + (examTools ? 'Exam tools' : 'Sections') + '</span>';
     actions.prepend(sectionButton);
     const compact = matchMedia('(max-width: 1100px)');
-    const isPopup = () => Boolean(examTools) || compact.matches;
+    const isPopup = () => Boolean(examTools) || compact.matches || header.classList.contains('sc-nav-compact');
     function syncSections() {
       const expanded = localNav.classList.contains('sc-local-open');
       localNav.inert = isPopup() && !expanded;
@@ -204,11 +204,41 @@
       if (!localNav.contains(event.target) && !sectionButton.contains(event.target)) closeSections();
     });
     dismissAfterFocusLeaves(localNav, closeSections, node => node === sectionButton);
+    // Tabs must fit beside the actual console picker and utilities, including Aa.
+    // Measure in the inline layout and restore the result within the same frame.
+    // This also handles browser zoom, translated labels and late-loading fonts.
+    let previousPopup = isPopup();
+    function fitSections() {
+      header.classList.remove('sc-nav-compact');
+      if (!examTools && !compact.matches && !controls.querySelector('.tabstrip') && localNav.clientWidth > 0) {
+        header.classList.toggle('sc-nav-compact', controls.scrollWidth > localNav.clientWidth + 1);
+      }
+      if (previousPopup !== isPopup()) {
+        localNav.classList.remove('sc-local-open');
+        if (isPopup() && localNav.contains(document.activeElement)) sectionButton.focus();
+        else if (!isPopup() && document.activeElement === sectionButton) {
+          const active = localNav.querySelector('.tabbtn.on,.tabbtn');
+          if (active) active.focus();
+        }
+      }
+      previousPopup = isPopup(); syncSections();
+    }
+    let fitFrame;
+    const scheduleFit = () => {
+      cancelAnimationFrame(fitFrame);
+      fitFrame = requestAnimationFrame(fitSections);
+    };
+    if ('ResizeObserver' in window) {
+      const fitObserver = new ResizeObserver(scheduleFit);
+      fitObserver.observe(inner); fitObserver.observe(actions); fitObserver.observe(controls);
+    }
+    window.addEventListener('resize', scheduleFit);
+    if (document.fonts) document.fonts.ready.then(scheduleFit);
     if (compact.addEventListener) compact.addEventListener('change', () => {
-      closeSections();
+      fitSections();
       if (window.navReflow) window.navReflow();
     });
-    syncSections();
+    syncSections(); scheduleFit();
   }
   // Sidebars already supply subject navigation. Move their existing mobile trigger
   // into the same header instead of retaining an otherwise empty second toolbar.

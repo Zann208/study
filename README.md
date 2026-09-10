@@ -80,4 +80,4 @@ Academic affiliation can still appear on the professional portfolio/resume where
 Vanilla HTML, CSS and JavaScript hosted with GitHub Pages. No framework is required for the central hub.
 
 ---
-Built by **Zann** · [portfolio](https://zann208.github.io/) · [GitHub](https://github.com/Zann208)
+[Study Console](https://zann208.github.io/study/)

@@ -61,8 +61,8 @@ img, svg { max-width: 100%; }
 input, select, textarea { accent-color: var(--sc-accent); }
 
 /* These names are isolated from the original consoles' generic nav/button CSS. */
-.sc-global-header { position: sticky; inset: 0 0 auto; z-index: 100; width: 100%; min-height: 64px; margin: 0; padding: 0; border: 0; border-bottom: 1px solid var(--sc-line); background: var(--sc-surface); color: var(--sc-text); font-family: var(--sc-sans); box-shadow: none; }
-.sc-global-inner { display: flex; align-items: center; gap: 16px; max-width: 1600px; min-height: 64px; margin: 0 auto; padding: 10px 24px; }
+.sc-global-header { position: sticky; inset: 0 0 auto; z-index: 100; width: 100%; max-width: none; min-width: 0; min-height: 64px; margin: 0; padding: 0; border: 0; border-bottom: 1px solid var(--sc-line); background: var(--sc-surface); color: var(--sc-text); font-family: var(--sc-sans); box-shadow: none; }
+.sc-global-inner { display: flex; align-items: center; gap: 16px; width: 100%; max-width: 1600px; min-width: 0; min-height: 64px; margin: 0 auto; padding: 10px 24px; }
 .sc-global-header [hidden] { display: none !important; }
 .sc-brand { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 10px; color: var(--sc-text); font-size: 1rem; font-weight: 750; line-height: 1.25; letter-spacing: -.035em; text-decoration: none; }
 .sc-brand-mark { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--sc-accent); border-radius: 9px; color: var(--sc-accent); background: var(--sc-accent-soft); }
@@ -184,6 +184,15 @@ html[data-theme="dark"] .sc-button-primary, html[data-theme="dark"] .sc-button-p
 .sc-status.info { color: var(--sc-info); }
 .sc-status.warn { color: var(--sc-warn); }
 
+/* Use the same sections menu whenever the inline tabs run out of space. */
+.sc-global-header.sc-nav-compact .sc-sections-toggle { display: inline-flex !important; }
+.sc-global-header.sc-nav-compact .sc-local-nav { display: none; position: fixed; z-index: 15; top: calc(var(--sc-header-h) + 6px); right: 12px; width: min(480px, calc(100vw - 24px)); max-height: calc(100dvh - var(--sc-header-h) - 24px); overflow-y: auto; overscroll-behavior: contain; padding: 12px; border: 1px solid var(--sc-line); border-radius: 12px; background: var(--sc-surface); box-shadow: var(--sc-shadow); }
+.sc-global-header.sc-nav-compact .sc-local-nav.sc-local-open { display: block; }
+.sc-global-header.sc-nav-compact .sc-local-controls { display: flex; flex-wrap: wrap; gap: 6px; overflow: visible; }
+.sc-global-header.sc-nav-compact .sc-local-controls :is(.tabstrip,.morewrap,#moreList) { display: contents; }
+.sc-global-header.sc-nav-compact .sc-local-controls #moreBtn { display: none; }
+.sc-global-header.sc-nav-compact .sc-local-controls .tabbtn { min-height: 44px; padding: 12px; flex: 1 0 calc(50% - 6px); text-align: left; }
+.sc-global-header.sc-nav-compact .sc-local-controls .navtail { width: 100%; margin: 6px 0 0; padding-top: 10px; border-top: 1px solid var(--sc-line); }
 @media (max-width: 1100px) {
   .sc-global-header .sc-sections-toggle { display: inline-flex !important; }
   .sc-global-header .sc-local-nav { display: none; position: fixed; z-index: 15; top: calc(var(--sc-header-h) + 6px); right: 12px; width: min(480px, calc(100vw - 24px)); max-height: calc(100dvh - var(--sc-header-h) - 24px); overflow-y: auto; overscroll-behavior: contain; padding: 12px; border: 1px solid var(--sc-line); border-radius: 12px; background: var(--sc-surface); box-shadow: var(--sc-shadow); }
