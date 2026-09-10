@@ -19,6 +19,7 @@ The canonical interface is **Study Console UI v2** under `shared/v2/`. The homep
 - `shared/v2/study-system.css` provides colors, typography, navigation, controls, and responsive primitives.
 - `shared/v2/study-system.js` provides the console switcher, theme control, recent-console tracking, and accessible navigation enhancements.
 - `shared/v2/legacy-console.css` connects existing subject interfaces to the shared system.
+- `shared/v2/reading.css` and `reading.js` provide consistent lesson typography, content separation, reference-table layouts, and optional text-size/focus preferences without rewriting study material.
 - Subject repositories keep their original lessons, tools, and small local layout adapters.
 - [UI v2 architecture and content protection](docs/UI-SYSTEM-V2.md) documents the maintained system and delivery order.
 

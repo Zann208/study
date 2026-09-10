@@ -14,6 +14,8 @@ UI v2 is the shared interface for the Study hub, NETDES, WNET, ALGO, Privacy, OS
 - Switcher focus dismissal checks the incoming focus target. A focusout microtask must not hide links during pointer or keyboard focus transfer.
 - Existing mobile drawers gain focus handling, Escape dismissal, and accessible open/closed state.
 - The existing recent-console preference drives Continue learning. Stored URLs are restricted to the selected console's own path.
+- Lessons use a shared reading layout: a clear page/lesson/topic type scale, a limited prose width, larger paragraph and table text, aligned lesson headers, and distinct key-idea/example/remember/warning callouts. Original code whitespace and diagram markup are preserved.
+- The header's Aa control offers Standard, Large, and Larger text plus a Focus layout. Focus narrows the reading lane and stacks prose grids; it never hides lessons, changes answers, or changes the original expanded/collapsed state of notes.
 
 ## Canonical files
 
@@ -23,6 +25,8 @@ UI v2 is the shared interface for the Study hub, NETDES, WNET, ALGO, Privacy, OS
 | `shared/v2/study-system.css` | Tokens, shared header, controls, states, and responsive primitives. |
 | `shared/v2/study-system.js` | Console navigation, theme control, recent-console state, keyboard support, and mobile drawer enhancements. |
 | `shared/v2/legacy-console.css` | Maps existing UI variables and controls to v2 without altering learning logic. |
+| `shared/v2/reading.css` | Canonical lesson typography, content spacing, reference tables, semantic callouts, and reading-option presentation. |
+| `shared/v2/reading.js` | Adds presentation classes and informational-table scroll wrappers without rewriting lesson nodes. Provides reading preferences and formats subsequently inserted content. |
 | Subject `study-console-adapter.css` | Only subject-specific layout adjustments. |
 
 `shared/v1/` is retained unchanged. Do not modify v1 to deliver a v2 feature or add another general override layer in subject repositories.
@@ -33,7 +37,7 @@ Original lab numbers, headings, definitions, examples, formulas, questions, answ
 
 Nine subject/exam HTML pages were checked by reversing only the shared-asset references and removing the new theme-loader/bridge tags. Their complete bytes matched the original committed files. Every existing tracked JavaScript file remained unchanged. The main hub is the only rewritten HTML page.
 
-UI-only changes may modify shared styles, adapters, interface behavior, and asset references. Content edits need a separate user request. Preserve all existing learning-progress keys. UI v2 writes only the existing `study-console-theme` and `study-console-last` preferences.
+UI-only changes may modify shared styles, adapters, interface behavior, and asset references. Content edits need a separate user request. Preserve all existing learning-progress keys. Shared UI uses `study-console-theme`, `study-console-last`, and the device-local `study-console-reading` preference for text size and focus layout. Reading preferences also apply to embedded lesson pages.
 
 ## Delivery order
 
@@ -53,5 +57,7 @@ The WNET and Privacy `flatten-console.yml` workflows now perform read-only valid
 - Responsive rules account for narrow screens, scrollable subject tabs, mobile drawers, reduced motion, and light/dark contrast.
 
 The navigation follow-up runs the actual page scripts in a simulated DOM across ten entry pages and both desktop and compact menu states. It checks link activation and focus handoff, original subject-tab handlers after reparenting, sidebar actions, and pointer/keyboard/touch-button rail dismissal. Subject HTML changes are limited to the matching CSS/JS cache version, and subject scripts remain unchanged.
+
+The reading follow-up preserves all nine lesson/exam entry files byte-for-byte after removing the two reading asset tags. Runtime checks compare lesson text and order, code blocks, SVG markup, form values, expanded/collapsed note state, and existing storage before and after reading enhancement. Text-size/focus changes and dynamic content formatting are checked separately. Reference tables containing inputs or diagram elements are excluded from scroll wrapping.
 
 These are source and programmatic checks. A real-browser visual and interaction walkthrough is a separate verification step; do not describe source checks as a device/browser test.

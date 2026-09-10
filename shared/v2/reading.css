@@ -1,0 +1,191 @@
+/* Lesson presentation only. No topology, simulation, or answer-state rules. */
+body.sc-reading {
+  --read-size: 1.0625rem;
+  --read-leading: 1.8;
+  --read-width: 1080px;
+  --read-measure: 72ch;
+  --read-gap: 1.35rem;
+  --read-pad: clamp(20px, 3vw, 36px);
+}
+body.sc-reading[data-reading-size="large"] { --read-size: 1.1875rem; }
+body.sc-reading[data-reading-size="larger"] { --read-size: 1.3125rem; }
+body.sc-reading[data-reading-focus="true"] { --read-width: 850px; --read-measure: 65ch; --read-leading: 1.9; }
+
+/* The reading lane has one left edge. Tables, code and original figures retain
+   their own full-width or scrollable space within it. */
+body.sc-reading[data-console-id] .sc-reading-region {
+  width: min(calc(100% - 40px), var(--read-width)) !important;
+  max-width: var(--read-width) !important;
+  margin-inline: auto !important;
+  padding: 36px 0 76px !important;
+  color: var(--sc-text);
+  font-family: var(--sc-sans);
+  font-size: var(--read-size);
+  line-height: var(--read-leading);
+  text-align: left;
+}
+body.sc-reading[data-console-id] .sc-reading-region .sc-reading-region { width: 100% !important; padding: 0 !important; }
+body.sc-reading .sc-reading-region :is(p,li,dd,.answer,.agwhy,.agmemory,.mock-question,.intro,.sub2,.lede) {
+  font-family: var(--sc-sans) !important;
+  font-size: var(--read-size) !important;
+  line-height: var(--read-leading) !important;
+  letter-spacing: normal !important;
+}
+body.sc-reading .sc-reading-region :is(p,ul,ol,dl) { max-width: var(--read-measure); }
+body.sc-reading .sc-reading-region p { margin-block: .85em !important; color: var(--sc-text) !important; }
+body.sc-reading .sc-reading-region :is(ul,ol) { margin-block: 1em; padding-inline-start: 1.5em; }
+body.sc-reading .sc-reading-region li { margin-block: .5em; padding-inline-start: .15em; }
+body.sc-reading .sc-reading-region li::marker { color: var(--sc-accent); font-weight: 650; }
+body.sc-reading .sc-reading-region :is(b,strong) { font-weight: 700; }
+body.sc-reading .sc-reading-region :is(p,li,dd) > :is(b,strong):not([class]) { color: var(--sc-text); }
+body.sc-reading .sc-reading-region :is(p,li) > :is(b,strong):first-child:not([class]) { color: var(--sc-accent-strong); }
+body.sc-reading .sc-reading-region :is(.lede,.intro,.sub2) { color: var(--sc-muted) !important; }
+body.sc-reading .sc-reading-region :is(.box,.tip,.dbody,.note > .body) { font-size: var(--read-size); line-height: var(--read-leading); }
+body.sc-reading .sc-reading-region :is(p.ok,p.good,p.correct) { color: var(--sc-ok) !important; }
+body.sc-reading .sc-reading-region :is(p.no,p.bad,p.incorrect) { color: var(--sc-danger) !important; }
+body.sc-reading .sc-reading-region :is(.qopt,.opt,.mock-option) { font-size: max(1rem,calc(var(--read-size) * .94)) !important; line-height: 1.65 !important; text-align: left; }
+
+/* Page → lesson → topic → explanation: each level has a distinct scale. */
+body.sc-reading .sc-reading-region :is(h1,h2,h3,h4,h5) { font-family: var(--sc-sans) !important; color: var(--sc-text); text-transform: none; text-wrap: pretty; }
+body.sc-reading .sc-reading-region h1 { margin: 0 0 18px !important; font-size: clamp(1.9rem,3.2vw,2.6rem) !important; line-height: 1.22 !important; letter-spacing: -.035em !important; }
+body.sc-reading .sc-reading-region h1 .pre { display: block; margin-bottom: 12px; font: 650 .8125rem/1.4 var(--sc-sans) !important; letter-spacing: .04em !important; color: var(--sc-accent); }
+body.sc-reading .sc-reading-region h2 { margin: 2.3rem 0 1rem !important; font-size: calc(var(--read-size) * 1.52) !important; line-height: 1.35 !important; letter-spacing: -.025em !important; }
+body.sc-reading .sc-reading-region h3 { margin: 1.8rem 0 .85rem !important; font-size: calc(var(--read-size) * 1.28) !important; line-height: 1.4 !important; letter-spacing: -.015em !important; }
+body.sc-reading .sc-reading-region h4 { margin: 1.8rem 0 .7rem !important; padding-top: 1.25rem; border-top: 1px solid var(--sc-line); font-size: calc(var(--read-size) * 1.08) !important; line-height: 1.45 !important; font-weight: 750 !important; letter-spacing: 0 !important; color: var(--sc-accent); }
+body.sc-reading .sc-reading-region h5 { font-size: var(--read-size); line-height: 1.5; }
+body.sc-reading .sc-reading-region :is(h2,h3,h4):first-child { margin-top: 0 !important; }
+body.sc-reading .sc-reading-region h4:first-child { padding-top: 0; border-top: 0; }
+body.sc-reading .sc-reading-region :is(h2,h3) .sq { width: 5px; height: 1em; border-radius: 2px; flex-shrink: 0; box-shadow: none; }
+
+/* Larger lesson boundaries; quieter surfaces within a lesson. */
+body.sc-reading .sc-reading-region .sc-reading-card {
+  margin-block: 26px !important;
+  padding: var(--read-pad) !important;
+  border: 1px solid var(--sc-line) !important;
+  border-radius: 12px !important;
+  background: var(--sc-surface) !important;
+  box-shadow: none !important;
+  min-width: 0;
+}
+body.sc-reading .sc-reading-region .sc-reading-card > :first-child { margin-top: 0 !important; }
+body.sc-reading .sc-reading-region .sc-reading-card > :last-child { margin-bottom: 0 !important; }
+body.sc-reading .sc-reading-region .sc-reading-card .sc-reading-card { padding: 24px 0 !important; border-width: 1px 0 0 !important; border-radius: 0 !important; margin-block: 24px 0 !important; background: transparent !important; }
+body.sc-reading .sc-reading-region .ph { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; padding: 0 0 20px !important; margin: 0 0 22px !important; border: 0 !important; border-bottom: 1px solid var(--sc-line) !important; background: transparent !important; box-shadow: none !important; }
+body.sc-reading .sc-reading-region .ph h3 { flex: 1 1 260px; min-width: 0; margin: 0 !important; font-size: calc(var(--read-size) * 1.5) !important; line-height: 1.35 !important; }
+body.sc-reading .sc-reading-region :is(.badge,.tag,.eyebrow,.kicker,.key,.topic-label,.agcode,.mock-topic,.navgrid b) { font-family: var(--sc-sans) !important; font-size: .8125rem !important; line-height: 1.45 !important; letter-spacing: .015em !important; text-shadow: none; }
+body.sc-reading .sc-reading-region .ph .badge { flex: 0 0 auto; height: auto; min-width: 38px; padding: 7px 9px; white-space: nowrap; }
+body.sc-reading .sc-reading-region .ph .tag { align-self: center; margin-left: auto; white-space: normal; }
+body.sc-reading .sc-reading-region :is(.foot,.footnav) { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 24px !important; padding-top: 18px !important; border-top: 1px solid var(--sc-line); }
+
+/* Callout meaning is conveyed by the original label plus a colored edge. */
+body.sc-reading .sc-reading-region .sc-reading-callout {
+  --read-callout: var(--sc-accent);
+  --read-callout-bg: var(--sc-accent-soft);
+  margin-block: 20px !important;
+  padding: 18px 22px !important;
+  border: 0 !important;
+  border-left: 3px solid var(--read-callout) !important;
+  border-radius: 0 8px 8px 0 !important;
+  background: var(--read-callout-bg) !important;
+  color: var(--sc-text) !important;
+  font: 400 var(--read-size)/var(--read-leading) var(--sc-sans) !important;
+  box-shadow: none !important;
+}
+body.sc-reading .sc-reading-region .sc-reading-callout[data-reading-kind="example"] { --read-callout: var(--sc-info); --read-callout-bg: var(--sc-info-soft); }
+body.sc-reading .sc-reading-region .sc-reading-callout[data-reading-kind="warning"] { --read-callout: var(--sc-warn); --read-callout-bg: var(--sc-warn-soft); }
+body.sc-reading .sc-reading-region .sc-reading-callout[data-reading-kind="remember"] { --read-callout: var(--sc-ok); --read-callout-bg: var(--sc-ok-soft); }
+body.sc-reading .sc-reading-region .sc-reading-callout > :is(b,strong):first-child { display: block; margin-bottom: 8px; color: var(--read-callout) !important; font: 700 var(--read-size)/1.5 var(--sc-sans) !important; letter-spacing: 0; }
+body.sc-reading .sc-reading-region .sc-reading-callout > :first-child { margin-top: 0 !important; }
+body.sc-reading .sc-reading-region .sc-reading-callout > :last-child { margin-bottom: 0 !important; }
+
+/* Commands and calculations have space of their own. Diagram coordinates, SVG
+   labels, node sizes, and any original whitespace inside code remain untouched. */
+body.sc-reading .sc-reading-region :is(pre,.code,.formula,.eq):not(.sc-preserve-visual) { margin-block: 20px; max-width: 100%; padding: 20px 22px; border: 1px solid var(--sc-line-strong); border-radius: 8px; background: var(--sc-surface-2); font-family: var(--sc-mono); font-size: calc(var(--read-size) * .9); line-height: 1.85; overflow-x: auto; tab-size: 2; }
+body.sc-reading .sc-reading-region :is(.formula,.eq) { border-left: 3px solid var(--sc-accent); }
+body.sc-reading .sc-reading-region :is(p,li,td,dd) > code { padding: .1em .3em; border: 1px solid var(--sc-line); border-radius: 4px; font: .92em/1.5 var(--sc-mono); background: var(--sc-surface-2); overflow-wrap: anywhere; }
+body.sc-reading .sc-reading-region pre code { font: inherit; background: transparent; border: 0; padding: 0; }
+
+/* Readable comparison tables; only informational tables are scroll-wrapped. */
+body.sc-reading .sc-reading-region .sc-reading-table-scroll { max-width: 100%; margin-block: 20px; overflow-x: auto; overscroll-behavior-inline: contain; border: 1px solid var(--sc-line); border-radius: 8px; }
+body.sc-reading .sc-reading-region .sc-reading-table { width: 100%; margin: 0; border-collapse: collapse; font: 400 var(--read-size)/1.65 var(--sc-sans); }
+body.sc-reading .sc-reading-region .sc-reading-table :is(th,td) { padding: 14px 16px !important; vertical-align: top; text-align: left; font-size: calc(var(--read-size) * .94) !important; line-height: 1.7 !important; border-bottom: 1px solid var(--sc-line); }
+body.sc-reading .sc-reading-region .sc-reading-table th { position: static; background: var(--sc-surface-2); color: var(--sc-text); font-family: var(--sc-sans) !important; font-weight: 700; letter-spacing: 0 !important; text-transform: none; }
+body.sc-reading .sc-reading-region .sc-reading-table tbody tr:nth-child(even) { background: color-mix(in srgb,var(--sc-surface-2) 45%,transparent); }
+body.sc-reading .sc-reading-region .sc-reading-table tr:last-child td { border-bottom: 0; }
+
+/* Existing notes stay collapsible; questions and answers keep native behavior. */
+body.sc-reading .sc-reading-region details.note { padding: 0 !important; }
+body.sc-reading .sc-reading-region details > summary { padding: 16px 20px !important; font: 650 var(--read-size)/1.6 var(--sc-sans) !important; color: var(--sc-text); cursor: pointer; }
+body.sc-reading .sc-reading-region details[open] > summary { border-bottom: 1px solid var(--sc-line); background: var(--sc-surface-2); }
+body.sc-reading .sc-reading-region details > :is(.body,.dbody) { padding: 22px !important; }
+body.sc-reading .sc-reading-region summary .num { flex-shrink: 0; min-width: 30px; height: auto; font: 650 .875rem/1.5 var(--sc-sans); }
+body.sc-reading .sc-reading-region .sc-reading-prose-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)) !important; gap: 22px !important; align-items: start; }
+body.sc-reading .sc-reading-region .sc-reading-prose-grid > .sc-reading-card { margin-block: 0 !important; height: auto; }
+body.sc-reading[data-reading-focus="true"] .sc-reading-region .sc-reading-prose-grid { grid-template-columns: minmax(0,1fr) !important; }
+body.sc-reading .sc-reading-region .def .term { margin: 0 0 14px; padding-bottom: 12px; border-bottom: 1px solid var(--sc-line); color: var(--sc-accent); font: 750 calc(var(--read-size) * 1.15)/1.4 var(--sc-sans) !important; }
+body.sc-reading .sc-reading-region .def .answer { color: var(--sc-text); font-weight: 500; }
+/* Definition banks read as aligned term/answer rows instead of a wall of tiles. */
+body.sc-reading .sc-reading-region .week > .sc-reading-prose-grid { grid-template-columns: minmax(0,1fr) !important; gap: 14px !important; }
+body.sc-reading .sc-reading-region .def.sc-reading-card { display: grid; grid-template-columns: minmax(180px,.7fr) minmax(0,2fr); column-gap: 28px; row-gap: 12px; padding: 24px !important; }
+body.sc-reading .sc-reading-region .def > .term { grid-column: 1; grid-row: 1 / span 3; margin: 0; padding: 0; border: 0; }
+body.sc-reading .sc-reading-region .def > :is(.answer,.memory) { grid-column: 2; min-width: 0; margin: 0 !important; }
+body.sc-reading .sc-reading-region .def > .memory { padding: 12px 16px !important; }
+body.sc-reading[data-reading-focus="true"] .sc-reading-region .def.sc-reading-card { grid-template-columns: minmax(0,1fr); }
+body.sc-reading[data-reading-focus="true"] .sc-reading-region .def > :is(.term,.answer,.memory) { grid-column: 1; grid-row: auto; }
+body.sc-reading .sc-reading-region :is(.agq,.mock-qhead h2) { font: 700 calc(var(--read-size) * 1.18)/1.55 var(--sc-sans) !important; color: var(--sc-text); }
+body.sc-reading .sc-reading-region .agopt { padding: 14px 16px; font: var(--read-size)/1.7 var(--sc-sans); }
+body.sc-reading .sc-reading-region .agopt :is(.letter,.mark) { font-family: var(--sc-sans); font-size: .875rem; line-height: 1.6; }
+body.sc-reading .sc-reading-region .agopt.bad { opacity: 1; }
+
+/* WNET's existing runtime layout supplies these topic groups. Replace its dense
+   nested-card treatment without modifying its content or layout scripts. */
+body.sc-reading[data-console-id="wnet"] #notes .sc-reading-region { max-width: var(--read-width) !important; }
+body.sc-reading[data-console-id="wnet"] #notes article.item.sc-reading-card { padding: var(--read-pad) !important; margin-block: 30px !important; border: 1px solid var(--sc-line) !important; background: var(--sc-surface) !important; border-radius: 12px !important; }
+body.sc-reading[data-console-id="wnet"] #notes article.item > .ph { padding: 0 0 20px !important; border: 0 !important; border-bottom: 1px solid var(--sc-line) !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; }
+body.sc-reading[data-console-id="wnet"] #notes article.item > .ph h3 { font-size: calc(var(--read-size) * 1.5) !important; line-height: 1.35 !important; }
+body.sc-reading[data-console-id="wnet"] #notes .topic-stack { display: block !important; }
+body.sc-reading[data-console-id="wnet"] #notes .topic-block { padding: 26px 0 !important; margin: 0 !important; border: 0 !important; border-bottom: 1px solid var(--sc-line) !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; overflow: visible !important; }
+body.sc-reading[data-console-id="wnet"] #notes .topic-block:last-child { border-bottom: 0 !important; padding-bottom: 0 !important; }
+body.sc-reading[data-console-id="wnet"] #notes .topic-block > * { margin-left: 0 !important; margin-right: 0 !important; }
+body.sc-reading[data-console-id="wnet"] #notes .topic-block > h4 { margin: 0 0 16px !important; padding: 0 !important; border: 0 !important; background: transparent !important; font: 750 calc(var(--read-size) * 1.15)/1.5 var(--sc-sans) !important; color: var(--sc-accent) !important; }
+body.sc-reading[data-console-id="wnet"] #notes .topic-block > h4::before { content: none !important; }
+body.sc-reading[data-console-id="wnet"] #notes .topic-block p { color: var(--sc-text) !important; max-width: var(--read-measure) !important; font-size: var(--read-size) !important; line-height: var(--read-leading) !important; margin-block: .9em !important; }
+body.sc-reading[data-console-id="wnet"] #notes .topic-block .sc-reading-callout { margin-block: 20px !important; padding: 18px 22px !important; font-size: var(--read-size) !important; line-height: var(--read-leading) !important; border-radius: 0 8px 8px 0 !important; }
+body.sc-reading[data-console-id="wnet"] #notes .topic-block .tldr { background: var(--sc-accent-soft) !important; border: 0 !important; border-left: 3px solid var(--sc-accent) !important; padding: 18px 22px !important; }
+body.sc-reading[data-console-id="wnet"] #notes .topic-block details summary { padding: 16px 20px !important; font-size: var(--read-size) !important; line-height: 1.6 !important; }
+body.sc-reading[data-console-id="wnet"] #notes .topic-block .topic-label { padding: 0 0 8px !important; margin: 0 !important; border: 0 !important; background: transparent !important; color: var(--sc-muted) !important; font: 650 .8125rem/1.4 var(--sc-sans) !important; letter-spacing: .02em !important; }
+body.sc-reading .sc-reading-region :is(.chiBtn,.chiChapter,.aglearn) { min-height: 40px; font-family: var(--sc-sans); font-size: .875rem; line-height: 1.4; }
+
+/* Reading controls are part of the one existing header, never a new toolbar. */
+.sc-reading-options { position: relative; }
+.sc-global-header .sc-reading-toggle { min-width: 40px; font: 700 1rem/1 var(--sc-sans); color: var(--sc-muted); }
+.sc-reading-menu { position: fixed; z-index: 25; top: calc(var(--sc-header-h) + 6px); right: 12px; width: min(310px,calc(100vw - 24px)); max-height: calc(100dvh - var(--sc-header-h) - 24px); overflow-y: auto; padding: 20px; border: 1px solid var(--sc-line); border-radius: 12px; background: var(--sc-surface); box-shadow: var(--sc-shadow); color: var(--sc-text); font: 400 .875rem/1.5 var(--sc-sans); }
+.sc-reading-menu[hidden] { display: none !important; }
+.sc-reading-menu fieldset { margin: 0; padding: 0; border: 0; }
+.sc-reading-menu legend { margin-bottom: 12px; font-weight: 700; }
+.sc-reading-sizes { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+.sc-reading-sizes button { min-height: 44px; padding: 8px 4px; border: 1px solid var(--sc-line-strong); border-radius: 7px; background: var(--sc-surface); color: var(--sc-text); font: 600 .875rem/1.3 var(--sc-sans); }
+.sc-reading-sizes button[aria-pressed="true"] { border-color: var(--sc-accent); background: var(--sc-accent-soft); color: var(--sc-accent); }
+.sc-reading-focus-option { display: flex; align-items: flex-start; gap: 10px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--sc-line); cursor: pointer; }
+.sc-reading-focus-option input { width: 18px; height: 18px; margin: 3px 0 0; flex: 0 0 auto; }
+.sc-reading-focus-option strong { display: block; font-weight: 650; }
+.sc-reading-focus-option small { display: block; margin-top: 4px; color: var(--sc-muted); font: .8125rem/1.5 var(--sc-sans); }
+@media (max-width: 760px) {
+  body.sc-reading { --read-pad: 20px; }
+  body.sc-reading[data-console-id] .sc-reading-region { width: calc(100% - 24px) !important; padding-top: 26px !important; }
+  body.sc-reading .sc-reading-region .sc-reading-prose-grid { grid-template-columns: minmax(0,1fr) !important; }
+  body.sc-reading .sc-reading-region .def.sc-reading-card { grid-template-columns: minmax(0,1fr); padding: 20px !important; }
+  body.sc-reading .sc-reading-region .def > :is(.term,.answer,.memory) { grid-column: 1; grid-row: auto; }
+  body.sc-reading .sc-reading-region .ph .tag { flex-basis: 100%; margin-left: 0; }
+  body.sc-reading .sc-reading-region .sc-reading-table { min-width: 560px; }
+  body.sc-reading .sc-reading-region .sc-reading-card { margin-block: 20px !important; }
+  body.sc-reading .sc-reading-region .sc-reading-callout { padding: 16px 18px !important; }
+  .sc-global-header .sc-reading-toggle { min-width: 36px; padding-inline: 6px; }
+}
+@media print {
+  body.sc-reading { --read-size: 11pt; --read-width: 100%; --read-leading: 1.55; }
+  body.sc-reading[data-console-id] .sc-reading-region { width: 100% !important; padding: 0 !important; }
+  body.sc-reading .sc-reading-region .sc-reading-card { break-inside: auto; padding: 16px 0 !important; border-width: 0 0 1px !important; }
+  body.sc-reading .sc-reading-region .sc-reading-table-scroll { overflow: visible; }
+  .sc-reading-options { display: none !important; }
+}
