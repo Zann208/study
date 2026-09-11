@@ -17,6 +17,7 @@ UI v2 is the shared interface for the Study hub, NETDES, WNET, ALGO, Privacy, OS
 - Lessons use a shared reading layout: a clear page/lesson/topic type scale, a limited prose width, larger paragraph and table text, aligned lesson headers, and distinct key-idea/example/remember/warning callouts. Original code whitespace and diagram markup are preserved.
 - The header's Aa control offers Standard, Large, and Larger text plus a Focus layout. Focus narrows the reading lane and stacks prose grids; it never hides lessons, changes answers, or changes the original expanded/collapsed state of notes.
 - Card header titles use the same margin reset for both h2 and h3, so badges, titles, and status labels align without inheriting the spacing between prose sections.
+- The prose-width utility excludes the document body. Reading mode must never cap the page or header at the 780px prose width; lesson regions retain their own centered reading widths.
 
 ## Canonical files
 

@@ -130,7 +130,8 @@ body .sc-global-header .sc-rail-open > #rail { opacity: 1; visibility: visible; 
 
 /* Shared controls and learning surfaces. */
 .sc-page { max-width: var(--sc-content); margin: 0 auto; padding: 40px 28px 56px; }
-.sc-reading { max-width: var(--sc-reading); }
+/* The reading enhancement also marks body; only prose blocks get this width. */
+.sc-reading:not(body) { max-width: var(--sc-reading); }
 .sc-page-title { margin: 0; font-size: clamp(1.875rem, 3vw, 2.5rem); font-weight: 750; line-height: 1.15; letter-spacing: -.045em; }
 .sc-lede { max-width: 70ch; margin: 12px 0 0; color: var(--sc-muted); font-size: 1rem; }
 .sc-eyebrow { margin: 0 0 8px; color: var(--sc-accent); font-size: .8125rem; font-weight: 650; }
