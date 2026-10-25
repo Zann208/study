@@ -89,7 +89,7 @@ html.sc-v3 body { font-family: var(--sc-sans); }
 
 /* ---------- Buttons ---------- */
 .sc-btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: var(--sc-sp-2);
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--sc-sp-2); box-sizing: border-box;
   min-height: 36px; padding: 0 var(--sc-sp-4); border-radius: var(--sc-radius-pill);
   border: 1px solid var(--sc-line-strong); background: var(--sc-surface); color: var(--sc-text);
   font: var(--sc-fw-medium) var(--sc-fs-md)/1 var(--sc-sans); letter-spacing: var(--sc-ls-text);
