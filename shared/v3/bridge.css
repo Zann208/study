@@ -1,0 +1,102 @@
+/* Study Console UI v3 — legacy bridge.
+   Course consoles were written against their own short variable names (--bg, --panel,
+   --ink, --cy, ...). Migration deletes every console palette; this file is the single
+   place those names now resolve, always onto v3 tokens. It also maps the hard-coded
+   diagram colors found in the audit onto the diagram palette, so existing SVG stays
+   readable in light mode and keeps neon state colors on black.
+   Nothing here changes content; it only restyles. */
+
+html.sc-v3 {
+  /* surfaces and text */
+  --bg: var(--sc-bg); --bg2: var(--sc-surface-2);
+  --panel: var(--sc-surface); --panel2: var(--sc-surface-2); --panel3: var(--sc-surface-3);
+  --p: var(--sc-surface); --p2: var(--sc-surface-2); --p3: var(--sc-surface-3);
+  --card: var(--sc-surface); --surface: var(--sc-surface); --surface2: var(--sc-surface-2);
+  --ink: var(--sc-text); --text: var(--sc-text); --fg: var(--sc-text);
+  --dim: var(--sc-muted); --muted: var(--sc-muted); --sub: var(--sc-muted); --faint: var(--sc-faint);
+  --line: var(--sc-line); --line2: var(--sc-line-strong); --border: var(--sc-line);
+  --tline: var(--sc-dg-edge);
+  --shadow: var(--sc-shadow);
+  /* hues: distinct, neon on black, AA on white */
+  --cy: var(--sc-dg-1); --sk: var(--sc-dg-5); --vi: var(--sc-dg-2);
+  --vi2: color-mix(in srgb, var(--sc-dg-2) 72%, var(--sc-text));
+  --pk: var(--sc-dg-4); --am: var(--sc-dg-3); --am2: var(--sc-dg-3); --or: var(--sc-dg-3);
+  --gr: var(--sc-dg-6); --rd: var(--sc-danger);
+  --accent: var(--sc-accent); --ok: var(--sc-ok); --red: var(--sc-danger); --yellow: var(--sc-warn); --blue: var(--sc-info);
+  /* type: Apple system font; code font is applied by element in components.css */
+  --sans: var(--sc-sans);
+  --mono: var(--sc-sans);
+  --code: var(--sc-mono);
+  --sc-header: var(--sc-header-h);
+  background: var(--sc-bg);
+}
+/* OS used "vi" for its green accent */
+html.sc-v3[data-sc-console="os"] { --vi: var(--sc-dg-6); --vi2: color-mix(in srgb, var(--sc-dg-6) 72%, var(--sc-text)); }
+
+html.sc-v3 body {
+  background: var(--sc-bg); background-image: none;
+  color: var(--sc-text);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- legacy diagram colors -> diagram palette ---------- */
+html.sc-v3 svg :is([fill="#34d399" i]) { fill: var(--sc-dg-6); }
+html.sc-v3 svg :is([stroke="#34d399" i]) { stroke: var(--sc-dg-6); }
+html.sc-v3 svg :is([fill="#22d3ee" i]) { fill: var(--sc-dg-1); }
+html.sc-v3 svg :is([stroke="#22d3ee" i]) { stroke: var(--sc-dg-1); }
+html.sc-v3 svg :is([fill="#38bdf8" i], [fill="#6366f1" i]) { fill: var(--sc-dg-5); }
+html.sc-v3 svg :is([stroke="#38bdf8" i], [stroke="#6366f1" i]) { stroke: var(--sc-dg-5); }
+html.sc-v3 svg [fill="#a78bfa" i] { fill: var(--sc-dg-2); }
+html.sc-v3 svg [stroke="#a78bfa" i] { stroke: var(--sc-dg-2); }
+html.sc-v3 svg :is([fill="#fbbf24" i], [fill="#f0b429" i], [fill="#fb923c" i]) { fill: var(--sc-dg-3); }
+html.sc-v3 svg :is([stroke="#fbbf24" i], [stroke="#f0b429" i], [stroke="#fb923c" i]) { stroke: var(--sc-dg-3); }
+html.sc-v3 svg [fill="#f472b6" i] { fill: var(--sc-dg-4); }
+html.sc-v3 svg [stroke="#f472b6" i] { stroke: var(--sc-dg-4); }
+html.sc-v3 svg :is([fill="#f87171" i], [fill="#fb7185" i]) { fill: var(--sc-danger); }
+html.sc-v3 svg :is([stroke="#f87171" i], [stroke="#fb7185" i]) { stroke: var(--sc-danger); }
+/* structure: edges, labels, node fills, light text */
+html.sc-v3 svg :is([stroke="#3d5578" i], [stroke="#5d708e" i], [stroke="#63718c" i], [stroke="#4f6180" i], [stroke="#2b3d5c" i], [stroke="#465878" i]) { stroke: var(--sc-dg-edge); }
+html.sc-v3 svg :is([fill="#3d5578" i], [fill="#5d708e" i], [fill="#63718c" i], [fill="#4f6180" i]) { fill: var(--sc-dg-edge); }
+html.sc-v3 svg :is([fill="#94a3b8" i], [fill="#8fa3c0" i], [fill="#bcc9de" i]) { fill: var(--sc-muted); }
+html.sc-v3 svg :is([stroke="#94a3b8" i], [stroke="#8fa3c0" i], [stroke="#bcc9de" i]) { stroke: var(--sc-muted); }
+html.sc-v3 svg :is([fill="#152238" i], [fill="#0d1626" i], [fill="#0f1a2e" i], [fill="#121c30" i], [fill="#1e2b44" i]) { fill: var(--sc-dg-fill); }
+html.sc-v3 svg :is([stroke="#1e2b44" i], [stroke="#152238" i]) { stroke: var(--sc-line-strong); }
+html.sc-v3 svg :is([fill="#e6edf7" i], [fill="#e8eef8" i]) { fill: var(--sc-dg-ink); }
+html.sc-v3 svg :is([stroke="#e6edf7" i], [stroke="#e8eef8" i]) { stroke: var(--sc-dg-ink); }
+html.sc-v3 svg [fill="#1c1533" i] { fill: color-mix(in srgb, var(--sc-dg-2) 16%, var(--sc-surface)); }
+html.sc-v3 svg :is([fill="#07260f" i], [fill="#0d2a20" i]) { fill: color-mix(in srgb, var(--sc-dg-6) 16%, var(--sc-surface)); }
+html.sc-v3 svg :is([fill="#0b2230" i], [fill="#123044" i]) { fill: color-mix(in srgb, var(--sc-dg-1) 16%, var(--sc-surface)); }
+html.sc-v3 svg [fill="#2a1f10" i] { fill: color-mix(in srgb, var(--sc-dg-3) 16%, var(--sc-surface)); }
+
+/* ---------- legacy components: one geometry and type system ----------
+   Prefix :root.sc-v3 body gives (0,3,1) so these win over console class rules
+   for the properties listed; colors still come from the mapped variables. */
+:root.sc-v3 body :is(pre) {
+  background: var(--sc-code-bg); color: var(--sc-code-text);
+  border: 1px solid var(--sc-code-line); border-radius: var(--sc-radius);
+  font-size: var(--sc-fs-code); line-height: 1.6; tab-size: 4;
+}
+:root.sc-v3 body :not(pre) > code {
+  padding: .08em .36em; border-radius: 5px; background: var(--sc-surface-2);
+  font-size: .9em; color: inherit;
+}
+:root.sc-v3 body :is(table) { border-color: var(--sc-line); font-variant-numeric: tabular-nums; }
+:root.sc-v3 body :is(th) { color: var(--sc-muted); }
+:root.sc-v3 body :is(input, select, textarea, button) { font-family: inherit; }
+:root.sc-v3 body :is(input[type="range"], input[type="checkbox"], input[type="radio"]) { accent-color: var(--sc-accent); }
+:root.sc-v3 body ::selection { background: color-mix(in srgb, var(--sc-accent) 28%, transparent); }
+
+/* Embedded lesson pages (iframes inside a console) */
+html.sc-v3.sc-embedded body { background: transparent; }
+
+/* ---------- local palette scopes inside consoles ----------
+   Some interactive labs define their own palette on a wrapper (ALG Final Prep Lab
+   #fl-root and practice figures .fp-fig). They now use the shared tokens too:
+   neon state colors on black, AA colors on white, surfaces from the theme. */
+html.sc-v3:root :is(#fl-root, .fp-fig) {
+  --am: var(--sc-dg-3); --gr: var(--sc-dg-6); --cy: var(--sc-dg-1); --vi: var(--sc-dg-2); --rd: var(--sc-danger);
+  --ink: var(--sc-text); --dim: var(--sc-muted); --faint: var(--sc-faint);
+  --panel: var(--sc-surface); --panel2: var(--sc-surface-2);
+  --line: var(--sc-line); --line2: var(--sc-line-strong); --tline: var(--sc-dg-edge);
+}
+html.sc-v3:root .fp-fig { background: var(--sc-surface); }

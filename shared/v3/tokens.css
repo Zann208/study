@@ -1,0 +1,158 @@
+/* Study Console UI v3 — design tokens.
+   One variable system for the hub and every console. A console contributes
+   only its accent, which the shell writes from the registry.
+   v2 token names (--sc-*) are kept so older adapters keep resolving.
+   Dark theme is true black; light theme is a neutral Apple-style grey. */
+
+:root {
+  color-scheme: light;
+
+  /* Neutrals */
+  --sc-bg: #f5f5f7;
+  --sc-surface: #ffffff;
+  --sc-surface-2: #f2f2f5;
+  --sc-surface-3: #e8e8ed;
+  --sc-text: #1d1d1f;
+  --sc-muted: #424245;
+  --sc-faint: #636368;
+  --sc-line: #e3e3e8;
+  --sc-line-strong: #c7c7cc;
+
+  /* Accent (hub default; the shell replaces it per console) */
+  --sc-accent: #0066cc;
+  --sc-accent-strong: #004f9e;
+  --sc-accent-soft: #e8f1fc;
+  --sc-on-accent: #ffffff;
+
+  /* Semantic states: separate from the accent */
+  --sc-info: #0b6a8a;   --sc-info-soft: #e6f3f8;
+  --sc-ok: #1b7340;     --sc-ok-soft: #e7f5ec;
+  --sc-warn: #8a5300;   --sc-warn-soft: #fcf2e0;
+  --sc-danger: #b3261e; --sc-danger-soft: #fdecea;
+
+  /* Diagram palette: distinct state colors, AA on --sc-surface in both themes */
+  --sc-dg-1: #0b7a75; --sc-dg-2: #6a3fc7; --sc-dg-3: #b45309; --sc-dg-4: #c0265d;
+  --sc-dg-5: #1d64c4; --sc-dg-6: #15803d;
+  --sc-dg-ink: #1d1d1f; --sc-dg-edge: #86868b; --sc-dg-fill: #f5f5f7;
+
+  /* Code surfaces */
+  --sc-code-bg: #f5f5f7;
+  --sc-code-text: #1d1d1f;
+  --sc-code-line: #e3e3e8;
+  /* Syntax colors (Xcode default light / dark) */
+  --sc-tok-comment: #5d6c79; --sc-tok-string: #c41a16; --sc-tok-keyword: #9b2393;
+  --sc-tok-type: #0b4f79; --sc-tok-number: #1c00cf; --sc-tok-preproc: #643820;
+
+  /* Type: Apple system faces first; Inter and JetBrains Mono only where SF is absent */
+  --sc-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Inter", "Segoe UI", Roboto, "Noto Sans Myanmar", "Myanmar Text", "Padauk", Arial, sans-serif;
+  --sc-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Inter", "Segoe UI", Roboto, "Noto Sans Myanmar", "Myanmar Text", Arial, sans-serif;
+  --sc-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, "JetBrains Mono", "Cascadia Code", Consolas, "Liberation Mono", monospace;
+  --sc-font-sans: var(--sc-sans);   /* v2 alias */
+  --sc-fs-xs: .75rem;      /* 12  captions, badges */
+  --sc-fs-sm: .8125rem;    /* 13  menu meta */
+  --sc-fs-md: .875rem;     /* 14  UI controls, menu items */
+  --sc-fs-code: .875rem;   /* 14  code blocks */
+  --sc-fs-base: 1.0625rem; /* 17  body text (Apple body size) */
+  --sc-fs-lg: 1.1875rem;   /* 19  lead */
+  --sc-fs-xl: 1.3125rem;   /* 21  h3 */
+  --sc-fs-2xl: 1.625rem;   /* 26  h2 */
+  --sc-fs-3xl: 2rem;       /* 32  page title */
+  --sc-fs-4xl: 2.5rem;     /* 40  hub title */
+  --sc-lh-tight: 1.15;
+  --sc-lh-ui: 1.4;
+  --sc-lh-read: 1.6;
+  --sc-ls-display: -.022em;
+  --sc-ls-text: -.01em;
+  --sc-fw-normal: 400; --sc-fw-medium: 500; --sc-fw-semibold: 600; --sc-fw-bold: 700;
+
+  /* Space: 4px grid */
+  --sc-sp-1: 4px; --sc-sp-2: 8px; --sc-sp-3: 12px; --sc-sp-4: 16px; --sc-sp-5: 20px;
+  --sc-sp-6: 24px; --sc-sp-7: 32px; --sc-sp-8: 40px; --sc-sp-9: 56px;
+
+  /* Radius */
+  --sc-radius-sm: 7px;
+  --sc-radius: 12px;
+  --sc-radius-lg: 18px;
+  --sc-radius-pill: 999px;
+
+  /* Elevation */
+  --sc-shadow-sm: 0 1px 2px rgb(0 0 0 / 6%);
+  --sc-shadow: 0 8px 28px rgb(0 0 0 / 9%);
+  --sc-shadow-lg: 0 22px 60px rgb(0 0 0 / 16%);
+
+  /* Motion */
+  --sc-ease: cubic-bezier(.25, .1, .25, 1);
+  --sc-dur-fast: 120ms;
+  --sc-dur: 180ms;
+  --sc-dur-slow: 260ms;
+
+  /* Layers */
+  --sc-z-sticky: 20;
+  --sc-z-menu: 30;
+  --sc-z-header: 40;
+  --sc-z-drawer: 50;
+  --sc-z-popover: 60;
+  --sc-z-palette: 70;
+  --sc-z-toast: 80;
+
+  /* Frame geometry (fixed so nothing jumps between consoles) */
+  --sc-header-h: 56px;
+  --sc-menu-w: 268px;
+  --sc-content: 1180px;
+  --sc-reading: 760px;
+  --sc-touch: 44px;
+  --sc-focus: 0 0 0 3px color-mix(in srgb, var(--sc-accent) 45%, transparent);
+
+  /* Breakpoints (documentation only; media queries use the literals)
+     sm 600px: top bar collapses to icons, drawer footer holds controls
+     md 900px: left menu becomes a drawer
+     lg 1200px: wide content */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --sc-bg: #000000; --sc-surface: #0e0e10; --sc-surface-2: #1c1c1e; --sc-surface-3: #2c2c2e;
+    --sc-text: #f5f5f7; --sc-muted: #c7c7cc; --sc-faint: #98989f;
+    --sc-line: #232326; --sc-line-strong: #3a3a3c;
+    --sc-accent: #2997ff; --sc-accent-strong: #6cb6ff; --sc-accent-soft: #0b2540; --sc-on-accent: #000000;
+    --sc-info: #6fc3e3; --sc-info-soft: #0d2630;
+    --sc-ok: #6fd39a; --sc-ok-soft: #0e2a1a;
+    --sc-warn: #f2c06b; --sc-warn-soft: #2e2210;
+    --sc-danger: #ff8a80; --sc-danger-soft: #331512;
+    --sc-dg-1: #2ee6d6; --sc-dg-2: #b69bff; --sc-dg-3: #ffc24d; --sc-dg-4: #ff7eb3;
+    --sc-dg-5: #6fb2ff; --sc-dg-6: #4ade80;
+    --sc-dg-ink: #f5f5f7; --sc-dg-edge: #8e8e93; --sc-dg-fill: #1c1c1e;
+    --sc-code-bg: #161618; --sc-code-text: #f5f5f7; --sc-code-line: #2c2c2e;
+    --sc-tok-comment: #7f8c98; --sc-tok-string: #fc6a5d; --sc-tok-keyword: #fc5fa3;
+    --sc-tok-type: #5dd8ff; --sc-tok-number: #d0bf69; --sc-tok-preproc: #fd8f3f;
+    --sc-shadow-sm: 0 1px 2px rgb(0 0 0 / 60%);
+    --sc-shadow: 0 10px 30px rgb(0 0 0 / 70%);
+    --sc-shadow-lg: 0 24px 70px rgb(0 0 0 / 80%);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --sc-bg: #000000; --sc-surface: #0e0e10; --sc-surface-2: #1c1c1e; --sc-surface-3: #2c2c2e;
+  --sc-text: #f5f5f7; --sc-muted: #c7c7cc; --sc-faint: #98989f;
+  --sc-line: #232326; --sc-line-strong: #3a3a3c;
+  --sc-accent: #2997ff; --sc-accent-strong: #6cb6ff; --sc-accent-soft: #0b2540; --sc-on-accent: #000000;
+  --sc-info: #6fc3e3; --sc-info-soft: #0d2630;
+  --sc-ok: #6fd39a; --sc-ok-soft: #0e2a1a;
+  --sc-warn: #f2c06b; --sc-warn-soft: #2e2210;
+  --sc-danger: #ff8a80; --sc-danger-soft: #331512;
+  --sc-dg-1: #2ee6d6; --sc-dg-2: #b69bff; --sc-dg-3: #ffc24d; --sc-dg-4: #ff7eb3;
+  --sc-dg-5: #6fb2ff; --sc-dg-6: #4ade80;
+  --sc-dg-ink: #f5f5f7; --sc-dg-edge: #8e8e93; --sc-dg-fill: #1c1c1e;
+  --sc-code-bg: #161618; --sc-code-text: #f5f5f7; --sc-code-line: #2c2c2e;
+  --sc-tok-comment: #7f8c98; --sc-tok-string: #fc6a5d; --sc-tok-keyword: #fc5fa3;
+  --sc-tok-type: #5dd8ff; --sc-tok-number: #d0bf69; --sc-tok-preproc: #fd8f3f;
+  --sc-shadow-sm: 0 1px 2px rgb(0 0 0 / 60%);
+  --sc-shadow: 0 10px 30px rgb(0 0 0 / 70%);
+  --sc-shadow-lg: 0 24px 70px rgb(0 0 0 / 80%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --sc-dur-fast: 0ms; --sc-dur: 0ms; --sc-dur-slow: 0ms; }
+}
