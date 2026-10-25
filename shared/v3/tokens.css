@@ -101,6 +101,7 @@
   --sc-content: 1180px;
   --sc-reading: 760px;
   --sc-touch: 44px;
+  --sc-sticky-top: 0px;      /* where a console's own sticky bars should stick; the frame raises it */
   --sc-focus: 0 0 0 3px color-mix(in srgb, var(--sc-accent) 45%, transparent);
 
   /* Breakpoints (documentation only; media queries use the literals)

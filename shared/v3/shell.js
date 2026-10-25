@@ -395,20 +395,22 @@
         '<div class="sc3-palette-foot"><span><kbd class="sc3-kbd">↑</kbd><kbd class="sc3-kbd">↓</kbd> move</span><span><kbd class="sc3-kbd">Enter</kbd> open</span><span><kbd class="sc3-kbd">Esc</kbd> close</span></div>' +
       '</div>';
 
-    // Content: a console's own <main> becomes the frame's main (selectors such as 'main .wrap'
-    // keep working); any other element is wrapped in a new <main>.
+    // Content stays where the console put it. A console <main> that is a direct child of
+    // <body> is used as is (never moved, so iframes inside it do not reload); any other
+    // element is wrapped in a new <main> at its own position.
     var content = null, main;
     if (typeof m.content === 'string') content = document.querySelector(m.content);
     else if (m.content && m.content.nodeType === 1) content = m.content;
-    if (content && content.tagName === 'MAIN') {
+    if (content && content.tagName === 'MAIN' && content.parentNode === body) {
       main = content;
-      if (!main.id) main.id = 'sc3-main';
-      main.classList.add('sc3-main');
-      main.setAttribute('tabindex', '-1');
     } else {
-      main = el('main', { class: 'sc3-main', id: 'sc3-main', tabindex: '-1' });
-      if (content) main.appendChild(content);
+      main = el('main', { 'data-sc3-wrap': '' });
+      if (content) { content.parentNode.insertBefore(main, content); main.appendChild(content); }
+      else body.appendChild(main);
     }
+    if (!main.id) main.id = 'sc3-main';
+    main.classList.add('sc3-main');
+    main.setAttribute('tabindex', '-1');
     var skip = el('a', { class: 'sc3-skip', href: '#' + main.id }, 'Skip to content');
 
     var sectionbar = el('div', { class: 'sc3-sectionbar', role: 'navigation', 'aria-label': 'Sections on this page', hidden: true });
@@ -418,14 +420,9 @@
       '<select id="sc3-sec-select" class="sc3-sec-select"></select>' +
       '<button type="button" class="sc3-iconbtn sc3-sec-next" aria-label="Next section" title="Next section (J)">' + icon('chevron', 'sc3-rot270') + '</button>' +
       '<button type="button" class="sc3-sec-top">Top</button>';
-    var column = el('div', { class: 'sc3-column' });
-    column.appendChild(sectionbar); column.appendChild(main);
-    var frame = el('div', { class: 'sc3-frame' });
-    frame.appendChild(menu); frame.appendChild(scrim); frame.appendChild(column);
+    // Frame chrome goes in front of <main>; the layout is done in CSS (fixed menu, sticky bars).
+    [skip, top, menu, scrim, sectionbar].forEach(function (n) { body.insertBefore(n, main); });
     body.insertBefore(palette, body.firstChild);
-    body.insertBefore(frame, body.firstChild);
-    body.insertBefore(top, body.firstChild);
-    body.insertBefore(skip, body.firstChild);
 
     state.ui = { top: top, menu: menu, scrim: scrim, main: main, palette: palette, sectionbar: sectionbar, render: {} };
     buildMenu(parent);
@@ -970,9 +967,12 @@
   }
   function unmount() {
     var b = document.body;
-    ['.sc3-skip', '.sc3-top', '.sc3-palette'].forEach(function (s) { var n = b.querySelector(s); if (n) n.remove(); });
-    var frame = b.querySelector('.sc3-frame');
-    if (frame) frame.remove();
+    ['.sc3-skip', '.sc3-top', '.sc3-palette', '.sc3-menu', '.sc3-scrim', '.sc3-sectionbar'].forEach(function (s) { var n = b.querySelector(s); if (n) n.remove(); });
+    var main = b.querySelector('main.sc3-main');
+    if (main && main.hasAttribute('data-sc3-wrap')) {
+      while (main.firstChild) main.parentNode.insertBefore(main.firstChild, main);
+      main.remove();
+    } else if (main) main.classList.remove('sc3-main');
     document.documentElement.classList.remove('sc3-drawer-open', 'sc3-palette-open');
     openPop = null;
     state.ui = null;

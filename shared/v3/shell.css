@@ -9,6 +9,7 @@
 }
 
 body.sc3 {
+  --sc-sticky-top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px));
   margin: 0;
   background: var(--sc-bg);
   color: var(--sc-text);
@@ -178,13 +179,16 @@ html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
 }
 
 /* ---------- Frame + left menu ---------- */
-.sc3-frame { display: grid; grid-template-columns: var(--sc-menu-w) minmax(0, 1fr); min-height: calc(100vh - var(--sc-header-h)); }
-html.sc3-menu-hidden .sc3-frame { grid-template-columns: minmax(0, 1fr); }
+/* Desktop layout: fixed menu on the left, everything else offset by its width.
+   <main> stays in the console's DOM position, so nothing is re-parented. */
+body.sc3 { padding-left: var(--sc-menu-w); min-height: 100vh; box-sizing: border-box; }
+body.sc3 > .sc3-top { margin-left: calc(-1 * var(--sc-menu-w)); }
+html.sc3-menu-hidden body.sc3 { padding-left: 0; }
+html.sc3-menu-hidden body.sc3 > .sc3-top { margin-left: 0; }
 html.sc3-menu-hidden .sc3-menu { display: none; }
 
 .sc3-menu {
-  position: sticky; top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); z-index: var(--sc-z-menu);
-  height: calc(100vh - var(--sc-header-h) - env(safe-area-inset-top, 0px)); height: calc(100dvh - var(--sc-header-h) - env(safe-area-inset-top, 0px));
+  position: fixed; left: 0; bottom: 0; top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); width: var(--sc-menu-w); z-index: var(--sc-z-menu);
   display: flex; flex-direction: column; background: var(--sc-surface); border-right: 1px solid var(--sc-line);
   font-size: var(--sc-fs-md); line-height: var(--sc-lh-ui);
 }
@@ -240,7 +244,6 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
 .sc3-scrim { position: fixed; inset: 0; z-index: calc(var(--sc-z-drawer) - 1); background: rgb(8 12 20 / 45%); animation: sc3-fade var(--sc-dur) var(--sc-ease); }
 
 /* ---------- Section bar: sticky under the header on pages with sections ---------- */
-.sc3-column { min-width: 0; display: flex; flex-direction: column; }
 .sc3-sectionbar {
   position: sticky; top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); z-index: var(--sc-z-sticky);
   display: flex; align-items: center; gap: var(--sc-sp-2); box-sizing: border-box; height: 48px;
@@ -266,6 +269,7 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
 }
 .sc3-sec-top:hover { color: var(--sc-text); border-color: var(--sc-line-strong); }
 html.sc3-has-sections { scroll-padding-top: calc(var(--sc-header-h) + 48px + 16px); }
+html.sc3-has-sections body.sc3 { --sc-sticky-top: calc(var(--sc-header-h) + 48px + env(safe-area-inset-top, 0px)); }
 .sc3-subitem { display: flex; gap: 8px; align-items: baseline; }
 .sc3-subbadge { flex: none; min-width: 2.6em; font-size: var(--sc-fs-xs); color: var(--sc-faint); font-variant-numeric: tabular-nums; }
 .sc3-sublist { margin: 2px 0 6px; max-height: 50vh; overflow-y: auto; border-left: 1px solid var(--sc-line); margin-left: 16px; }
@@ -330,7 +334,8 @@ html.sc3-palette-open { overflow: hidden; }
   .sc3-search-btn { min-width: 160px; }
 }
 @media (max-width: 899px) {
-  .sc3-frame { grid-template-columns: minmax(0, 1fr); }
+  body.sc3 { padding-left: 0; }
+  body.sc3 > .sc3-top { margin-left: 0; }
   html.sc3-menu-hidden .sc3-menu { display: flex; }
   .sc3-menu-toggle { display: inline-grid; }
   .sc3-menu {
@@ -376,7 +381,7 @@ html.sc3-palette-open { overflow: hidden; }
 }
 @media print {
   .sc3-top, .sc3-menu, .sc3-skip, .sc3-palette, .sc3-scrim { display: none; }
-  .sc3-frame { display: block; }
+  body.sc3 { padding-left: 0; }
 }
 
 /* Menu items that open another page carry no progress dot */
