@@ -193,6 +193,19 @@
     return { groups: groups, views: views, byId: byId };
   }
 
+  /* Sections of a view: static array or a function evaluated against the live page. */
+  function childrenOf(v) {
+    var list = v && v.children;
+    try { if (typeof list === 'function') list = list(); } catch (e) { list = null; }
+    return Array.isArray(list) ? list.filter(function (c) { return c && c.id && c.title; }) : [];
+  }
+  function sublistHTML(v, kids) {
+    return '<ul class="sc3-sublist">' + kids.map(function (ch) {
+      return '<li><a class="sc3-subitem" data-nav data-view="' + esc(v.id) + '" data-anchor="' + esc(ch.id) + '" href="#/' + esc(v.id) + '/' + esc(ch.id) + '">' +
+        (ch.badge ? '<span class="sc3-subbadge">' + esc(ch.badge) + '</span>' : '') + '<span>' + esc(ch.title) + '</span></a></li>';
+    }).join('') + '</ul>';
+  }
+
   /* Menu label in the current language (views may carry titles: { my: '...' }) */
   function labelFor(v) {
     var l = currentLang();
@@ -260,8 +273,7 @@
     state.ui.render.active();
     state.ui.render.progress();
     if (anchor) {
-      var target = document.getElementById(anchor);
-      if (target) target.scrollIntoView({ block: 'start' });
+      jumpToAnchor(anchor);
     } else if (changed && !(opts && opts.keepScroll)) {
       window.scrollTo(0, 0);
     }
@@ -270,6 +282,17 @@
       if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
     }
     document.dispatchEvent(new CustomEvent('sc-view-change', { detail: { view: v.id, anchor: anchor } }));
+  }
+  function jumpToAnchor(id) {
+    var target = document.getElementById(id);
+    if (!target) return;
+    if (target.tagName === 'DETAILS') target.open = true;
+    var parentDetails = target.parentElement && target.parentElement.closest('details');
+    if (parentDetails) parentDetails.open = true;
+    var offset = (state.ui ? state.ui.top.getBoundingClientRect().bottom : 0) + (state.ui && state.ui.sectionbar && !state.ui.sectionbar.hidden ? state.ui.sectionbar.offsetHeight : 0) + 12;
+    state.sectionLock = Date.now() + 450;
+    window.scrollTo({ top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset), behavior: 'instant' });
+    if (state.ui && state.ui.render.syncSection) state.ui.render.syncSection(id);
   }
   function rememberLast() {
     var c = state.console;
@@ -301,9 +324,12 @@
         var t = typeof h === 'string' ? h : h.title;
         if (t) items.push({ type: 'section', title: t, meta: v.title, view: v.id, anchor: h.anchor || null });
       });
+      childrenOf(v).forEach(function (ch) {
+        items.push({ type: 'section', title: ch.title, meta: v.title + (ch.badge ? ' · ' + ch.badge : ''), view: v.id, anchor: ch.id });
+      });
     });
     (state.manifest.terms || []).forEach(function (t) {
-      items.push({ type: 'term', title: t.title, meta: 'Term', view: t.view, anchor: t.anchor || null });
+      items.push({ type: 'term', title: t.title, meta: t.meta || 'Term', view: t.view, anchor: t.anchor || null });
     });
     var listed = {};
     items.forEach(function (it) { if (it.console) listed[it.console] = true; });
@@ -385,20 +411,30 @@
     }
     var skip = el('a', { class: 'sc3-skip', href: '#' + main.id }, 'Skip to content');
 
+    var sectionbar = el('div', { class: 'sc3-sectionbar', role: 'navigation', 'aria-label': 'Sections on this page', hidden: true });
+    sectionbar.innerHTML =
+      '<button type="button" class="sc3-iconbtn sc3-sec-prev" aria-label="Previous section" title="Previous section (K)">' + icon('chevron', 'sc3-rot90') + '</button>' +
+      '<label class="sc3-sr" for="sc3-sec-select">Jump to section</label>' +
+      '<select id="sc3-sec-select" class="sc3-sec-select"></select>' +
+      '<button type="button" class="sc3-iconbtn sc3-sec-next" aria-label="Next section" title="Next section (J)">' + icon('chevron', 'sc3-rot270') + '</button>' +
+      '<button type="button" class="sc3-sec-top">Top</button>';
+    var column = el('div', { class: 'sc3-column' });
+    column.appendChild(sectionbar); column.appendChild(main);
     var frame = el('div', { class: 'sc3-frame' });
-    frame.appendChild(menu); frame.appendChild(scrim); frame.appendChild(main);
+    frame.appendChild(menu); frame.appendChild(scrim); frame.appendChild(column);
     body.insertBefore(palette, body.firstChild);
     body.insertBefore(frame, body.firstChild);
     body.insertBefore(top, body.firstChild);
     body.insertBefore(skip, body.firstChild);
 
-    state.ui = { top: top, menu: menu, scrim: scrim, main: main, palette: palette, render: {} };
+    state.ui = { top: top, menu: menu, scrim: scrim, main: main, palette: palette, sectionbar: sectionbar, render: {} };
     buildMenu(parent);
     buildControls();
     wireSwitcher();
     wireDrawer();
     wireSearch();
     wireProgress();
+    wireSections();
     wireKeys();
     if (read(KEYS.menuHidden, '0') === '1') document.documentElement.classList.add('sc3-menu-hidden');
   }
@@ -430,13 +466,6 @@
           '<span class="sc3-item-label">' + esc(labelFor(v)) + '</span>' +
           (v.badge ? '<span class="sc3-badge">' + esc(v.badge) + '</span>' : '') +
           '<span class="sc3-sr" data-sr-state></span></a>';
-        if (v.children && v.children.length) {
-          html += '<ul class="sc3-sublist">';
-          v.children.forEach(function (ch) {
-            html += '<li><a class="sc3-subitem" data-nav data-view="' + esc(v.id) + '" data-anchor="' + esc(ch.id) + '" href="#/' + esc(v.id) + '/' + esc(ch.id) + '">' + esc(ch.title) + '</a></li>';
-          });
-          html += '</ul>';
-        }
         html += '</li>';
       });
       html += '</ul></section>';
@@ -463,6 +492,13 @@
 
     ui.render.active = function () {
       var cur = state.current && state.current.id;
+      menu.querySelectorAll('.sc3-sublist').forEach(function (n) { n.remove(); });
+      state.sections = childrenOf(state.current);
+      if (state.sections.length) {
+        var host = menu.querySelector('.sc3-item[data-view="' + (window.CSS && CSS.escape ? CSS.escape(cur) : cur) + '"]');
+        if (host) host.parentNode.insertAdjacentHTML('beforeend', sublistHTML(state.current, state.sections));
+      }
+      if (ui.render.sections) ui.render.sections();
       menu.querySelectorAll('.sc3-item').forEach(function (a) {
         var on = a.dataset.view === cur;
         a.classList.toggle('is-active', on);
@@ -813,6 +849,60 @@
     };
   }
 
+  /* ---------- Section bar (pages with sections) ---------- */
+  function wireSections() {
+    var ui = state.ui, bar = ui.sectionbar, sel = bar.querySelector('select');
+    var prev = bar.querySelector('.sc3-sec-prev'), next = bar.querySelector('.sc3-sec-next');
+    function idx() { return sel.selectedIndex; }
+    function go(i) {
+      var s = state.sections || [];
+      if (i < 0 || i >= s.length) return;
+      sel.selectedIndex = i;
+      navigate(state.current.id, s[i].id, { keepScroll: true, replace: true });
+    }
+    sel.addEventListener('change', function () { go(sel.selectedIndex); });
+    prev.addEventListener('click', function () { go(idx() - 1); });
+    next.addEventListener('click', function () { go(idx() + 1); });
+    bar.querySelector('.sc3-sec-top').addEventListener('click', function () { window.scrollTo(0, 0); });
+    ui.render.sections = function () {
+      var s = state.sections || [], show = s.length > 1 && !(state.current && state.current.sectionBar === false);
+      bar.hidden = !show;
+      document.documentElement.classList.toggle('sc3-has-sections', show);
+      if (!show) return;
+      sel.innerHTML = s.map(function (c) { return '<option value="' + esc(c.id) + '">' + esc((c.badge ? c.badge + ' · ' : '') + c.title) + '</option>'; }).join('');
+      sync();
+    };
+    ui.render.syncSection = function (id) {
+      var s = state.sections || [];
+      for (var i = 0; i < s.length; i++) if (s[i].id === id) { sel.selectedIndex = i; break; }
+      buttons();
+    };
+    function buttons() {
+      prev.disabled = idx() <= 0; next.disabled = idx() >= (state.sections || []).length - 1;
+      var curId = sel.value;
+      ui.menu.querySelectorAll('.sc3-subitem').forEach(function (a) {
+        var on = a.dataset.anchor === curId;
+        a.classList.toggle('is-current', on);
+        if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+      });
+    }
+    function sync() {
+      if (state.sectionLock && Date.now() < state.sectionLock) return;
+      var s = state.sections || [], best = 0, line = ui.top.getBoundingClientRect().bottom + bar.offsetHeight + 24;
+      for (var i = 0; i < s.length; i++) {
+        var n = document.getElementById(s[i].id);
+        if (n && n.getClientRects().length && n.getBoundingClientRect().top <= line) best = i;
+      }
+      sel.selectedIndex = best; buttons();
+    }
+    var t = null;
+    window.addEventListener('scroll', function () {
+      if (t || bar.hidden) return;
+      t = setTimeout(function () { t = null; if (state.ui === ui && !bar.hidden) sync(); }, 120);
+    }, { passive: true });
+    ui.render.stepSection = function (d) { if (!bar.hidden) go(idx() + d); };
+  }
+
   /* ---------- Global keys ---------- */
   var keysWired = false;
   function wireKeys() {
@@ -830,6 +920,8 @@
       if ((e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)) { e.preventDefault(); openSearch(); return; }
       if (typing || e.metaKey || e.ctrlKey || e.altKey) return;
       if (e.key === '/') { e.preventDefault(); openSearch(); }
+      else if ((e.key === 'j' || e.key === 'J') && state.ui.render.stepSection) state.ui.render.stepSection(1);
+      else if ((e.key === 'k' || e.key === 'K') && state.ui.render.stepSection) state.ui.render.stepSection(-1);
       else if (e.key === '[' && !narrow.matches) setMenuHidden(!document.documentElement.classList.contains('sc3-menu-hidden'));
     });
     window.addEventListener('hashchange', function () {
@@ -903,6 +995,7 @@
     mount: mount,
     navigate: navigate,
     refreshProgress: function () { if (state.ui) state.ui.render.progress(); },
+    refreshSections: function () { if (state.ui) state.ui.render.active(); },
     setTheme: setTheme,
     openSearch: openSearch,
     current: function () { return state.current && state.current.id; },
