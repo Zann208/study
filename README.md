@@ -13,17 +13,14 @@ The consoles are designed for understanding, revision, calculations, troubleshoo
 
 ## Shared UI architecture
 
-The canonical interface is **Study Console UI v2** under `shared/v2/`. The homepage separates Subjects from Engineering Lab, and every console uses the same global navigation and theme.
+The canonical interface is **Study Console UI v3** under `shared/v3/`. Every console uses one master frame (top bar, left menu, search, progress, theme, language and reading controls) drawn by the shared shell from a small manifest the console provides. Consoles stay separately deployable.
 
-- `shared/v2/theme-init.js` applies the shared theme before the page is styled.
-- `shared/v2/study-system.css` provides colors, typography, navigation, controls, and responsive primitives.
-- `shared/v2/study-system.js` provides the console switcher, theme control, recent-console tracking, and accessible navigation enhancements.
-- `shared/v2/legacy-console.css` connects existing subject interfaces to the shared system.
-- `shared/v2/reading.css` and `reading.js` provide consistent lesson typography, content separation, reference-table layouts, and optional text-size/focus preferences without rewriting study material.
-- Subject repositories keep their original lessons, tools, and small local layout adapters.
-- [UI v2 architecture and content protection](docs/UI-SYSTEM-V2.md) documents the maintained system and delivery order.
+- `shared/v3/boot.js` is the only tag a page needs: it applies the theme before paint, supports `?ui=v2` rollback, and loads the versioned v3 assets.
+- `shared/v3/tokens.css`, `shell.css`, `shell.js`, `components.css` and `bridge.css` are the tokens, frame, components and legacy-variable adapter.
+- `shared/v3/diagram.js` is the shared diagram standard; `shared/v3/preview.html` is the live design-system page.
+- [UI v3 architecture, manifest contract, rollback and cache busting](docs/UI-SYSTEM-V3.md).
 
-External consoles use `https://zann208.github.io/study/shared/v2/`. The previous `shared/v1/` assets are retained unchanged for compatibility.
+UI v2 (`shared/v2/`) stays live as the frozen rollback: each migrated page keeps a `*.v2.html` snapshot, reachable with `?ui=v2`. `shared/v1/` is retained unchanged for compatibility.
 
 ## Current consoles
 
