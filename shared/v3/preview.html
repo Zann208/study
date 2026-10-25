@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Design System — Study Console</title>
+<meta name="description" content="Live preview of the Study Console v3 tokens, components and diagram standard.">
+<script src="./boot.js?v=20261025-2" data-console="home"></script>
+<style>
+  /* Page-only layout for the preview. Everything shown inside comes from tokens.css and components.css. */
+  .pv { max-width: 980px; margin: 0 auto; padding: var(--sc-sp-8) 28px var(--sc-sp-9); }
+  .pv > header { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sc-sp-3); padding-bottom: var(--sc-sp-7); margin-bottom: var(--sc-sp-7); border-bottom: 1px solid var(--sc-line); }
+  .pv section { scroll-margin-top: calc(var(--sc-sticky-top) + 16px); margin-bottom: var(--sc-sp-9); }
+  .pv h2 { margin: 0 0 var(--sc-sp-2); font-size: var(--sc-fs-2xl); font-weight: 650; }
+  .pv h3 { margin: var(--sc-sp-6) 0 var(--sc-sp-3); font-size: var(--sc-fs-md); font-weight: 600; color: var(--sc-muted); letter-spacing: 0; font-family: var(--sc-sans); }
+  .pv .note { margin: 0 0 var(--sc-sp-4); color: var(--sc-muted); font-size: var(--sc-fs-md); max-width: 70ch; }
+  .sw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)); gap: var(--sc-sp-3); }
+  .sw { border: 1px solid var(--sc-line); border-radius: var(--sc-radius); overflow: hidden; background: var(--sc-surface); }
+  .sw i { display: block; height: 52px; border-bottom: 1px solid var(--sc-line); }
+  .sw span { display: block; padding: 8px 10px; font-size: var(--sc-fs-xs); color: var(--sc-muted); }
+  .sw code { font-size: var(--sc-fs-xs); color: var(--sc-text); }
+  .type-row { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--sc-sp-4); align-items: baseline; padding: var(--sc-sp-3) 0; border-bottom: 1px solid var(--sc-line); }
+  .type-row code { font-size: var(--sc-fs-xs); color: var(--sc-faint); }
+  .accent-pick { justify-self: start; flex-wrap: wrap; max-width: 100%; }
+  @media (max-width: 600px) { .pv { padding: 28px 16px 48px; } .type-row { grid-template-columns: 1fr; gap: 4px; } }
+</style>
+</head>
+<body data-console-id="home" data-console-name="Study Console">
+<main class="pv" id="main">
+  <header>
+    <p class="sc-eyebrow">Study Console UI v3</p>
+    <h1 class="sc-page-title">Design system</h1>
+    <p class="sc-lede">Tokens, components and the diagram standard that every console shares. Toggle the theme in the top bar to check both modes; pick a console accent to see it applied.</p>
+    <div class="sc-seg accent-pick" role="group" aria-label="Console accent" id="accentPick"></div>
+  </header>
+
+  <section id="colour" aria-labelledby="colour-h">
+    <h2 id="colour-h">Colour</h2>
+    <p class="note">Neutrals are true black in dark mode and Apple grey in light mode. Each console owns one accent; meaning (success, warning, danger) uses the semantic set, never the accent.</p>
+    <h3>Neutrals</h3>
+    <div class="sw-grid" data-swatches="bg surface surface-2 surface-3 line line-strong faint muted text"></div>
+    <h3>Accent and semantic</h3>
+    <div class="sw-grid" data-swatches="accent accent-strong accent-soft info ok warn danger"></div>
+    <h3>Diagram palette</h3>
+    <div class="sw-grid" data-swatches="dg-1 dg-2 dg-3 dg-4 dg-5 dg-6 dg-ink dg-edge dg-fill"></div>
+  </section>
+
+  <section id="type" aria-labelledby="type-h">
+    <h2 id="type-h">Type</h2>
+    <p class="note">Apple system font (SF Pro) for all reading and interface text. SF Mono only for code, pseudocode, commands and configuration. Body text is 17px.</p>
+    <div class="type-row"><code>--sc-fs-3xl</code><span style="font: 700 var(--sc-fs-3xl)/1.15 var(--sc-display); letter-spacing: var(--sc-ls-display)">Spanning tree root election</span></div>
+    <div class="type-row"><code>--sc-fs-2xl</code><span style="font: 650 var(--sc-fs-2xl)/1.2 var(--sc-display)">Inter-VLAN routing</span></div>
+    <div class="type-row"><code>--sc-fs-xl</code><span style="font: 600 var(--sc-fs-xl)/1.25 var(--sc-display)">Worked example</span></div>
+    <div class="type-row"><code>--sc-fs-base</code><span style="font-size: var(--sc-fs-base)">A switch with the lowest bridge ID becomes the root bridge.</span></div>
+    <div class="type-row"><code>--sc-fs-md</code><span style="font-size: var(--sc-fs-md)">Menu items, buttons and controls</span></div>
+    <div class="type-row"><code>--sc-fs-sm</code><span style="font-size: var(--sc-fs-sm); color: var(--sc-muted)">Captions and secondary labels</span></div>
+    <div class="type-row"><code>--sc-mono</code><code style="font-size: var(--sc-fs-code); color: var(--sc-text)">show spanning-tree vlan 10</code></div>
+  </section>
+
+  <section id="controls" aria-labelledby="controls-h">
+    <h2 id="controls-h">Controls</h2>
+    <h3>Buttons</h3>
+    <div class="sc-row">
+      <button class="sc-btn sc-btn--primary" type="button">Check answer</button>
+      <button class="sc-btn" type="button">Show hint</button>
+      <button class="sc-btn sc-btn--ghost" type="button">Skip</button>
+      <button class="sc-btn sc-btn--danger" type="button">Reset progress</button>
+      <button class="sc-btn sc-btn--sm" type="button">Small</button>
+      <button class="sc-btn" type="button" disabled>Disabled</button>
+    </div>
+    <h3>Tabs</h3>
+    <div class="sc-tabs" role="tablist" aria-label="Example tabs">
+      <button class="sc-tab" role="tab" aria-selected="true" type="button">Notes</button>
+      <button class="sc-tab" role="tab" aria-selected="false" type="button">Lab</button>
+      <button class="sc-tab" role="tab" aria-selected="false" type="button">Practice</button>
+      <button class="sc-tab" role="tab" aria-selected="false" type="button">Cheat sheet</button>
+    </div>
+    <h3>Segmented control, chips and badges</h3>
+    <div class="sc-row">
+      <div class="sc-seg" role="group" aria-label="Mode"><button type="button" aria-pressed="true">Learn</button><button type="button" aria-pressed="false">Test</button><button type="button" aria-pressed="false">Fix</button></div>
+      <button class="sc-chip is-on" type="button" aria-pressed="true">Chapter 4</button>
+      <button class="sc-chip" type="button" aria-pressed="false">Chapter 5</button>
+      <span class="sc-badge">M1</span><span class="sc-badge">NET</span>
+    </div>
+    <h3>Inputs</h3>
+    <div class="sc-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--sc-sp-4)">
+      <label class="sc-field"><span class="sc-label">Bridge priority</span><input class="sc-input" type="number" value="32768"></label>
+      <label class="sc-field"><span class="sc-label">Port role</span><select class="sc-input sc-select"><option>Root</option><option>Designated</option><option>Alternate</option></select></label>
+      <label class="sc-field"><span class="sc-label">Link cost</span><input class="sc-range" type="range" min="1" max="100" value="19"></label>
+    </div>
+    <p style="margin-top:var(--sc-sp-3)"><label class="sc-check"><input type="checkbox" checked> Mark chapter as done</label></p>
+  </section>
+
+  <section id="content" aria-labelledby="content-h">
+    <h2 id="content-h">Content blocks</h2>
+    <h3>Callouts</h3>
+    <div class="sc-stack">
+      <div class="sc-callout sc-callout--key"><span class="sc-callout-label">Key idea</span>The root bridge is the switch with the lowest bridge ID: priority first, then MAC address.</div>
+      <div class="sc-callout sc-callout--example"><span class="sc-callout-label">Example</span>SW1 32768.0011 beats SW2 32768.0022 because the MAC is lower.</div>
+      <div class="sc-callout sc-callout--remember"><span class="sc-callout-label">Remember</span>Every non-root switch has exactly one root port.</div>
+      <div class="sc-callout sc-callout--warning"><span class="sc-callout-label">Warning</span>Changing the priority on a production switch triggers a topology change.</div>
+      <div class="sc-trap"><strong>Lowest cost wins, not highest bandwidth number.</strong><span class="sc-muted">Cost is inverse to bandwidth; read the table direction carefully.</span></div>
+      <div class="sc-def"><span class="sc-def-term">Designated port</span><span class="sc-def-body">The port on a segment with the best path to the root; it forwards for that segment.</span></div>
+    </div>
+    <h3>Card</h3>
+    <div class="sc-card"><div class="sc-card-head"><span class="sc-badge">10</span><h3 style="margin:0;color:var(--sc-text);font-size:var(--sc-fs-lg);font-family:var(--sc-display)">Spanning Tree Protocol</h3></div><p style="margin:0;color:var(--sc-muted)">Loop prevention, port roles and states, and the election process.</p></div>
+    <h3>Table with sticky header</h3>
+    <div class="sc-table-wrap" style="max-height:220px">
+      <table class="sc-table">
+        <thead><tr><th>Link speed</th><th class="num">Short cost</th><th class="num">Long cost</th></tr></thead>
+        <tbody>
+          <tr><td>10 Mb/s</td><td class="num">100</td><td class="num">2,000,000</td></tr>
+          <tr><td>100 Mb/s</td><td class="num">19</td><td class="num">200,000</td></tr>
+          <tr><td>1 Gb/s</td><td class="num">4</td><td class="num">20,000</td></tr>
+          <tr><td>10 Gb/s</td><td class="num">2</td><td class="num">2,000</td></tr>
+          <tr><td>100 Gb/s</td><td class="num">n/a</td><td class="num">200</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="code" aria-labelledby="code-h">
+    <h2 id="code-h">Code, pseudocode, commands, configs</h2>
+    <p class="note">All four use SF Mono on the code surface. Inline terms such as <code>spanning-tree portfast</code> stay in the text flow.</p>
+    <h3>Pseudocode</h3>
+    <div class="sc-code-head"><span>Pseudocode</span><span>Dijkstra</span></div>
+    <pre class="sc-code pseudo"><span class="tok-keyword">for each</span> vertex v <span class="tok-keyword">in</span> G:
+    dist[v] ← ∞
+dist[s] ← <span class="tok-number">0</span>
+<span class="tok-keyword">while</span> Q <span class="tok-keyword">not empty</span>:
+    u ← extract-min(Q)        <span class="tok-comment">// closest unvisited vertex</span></pre>
+    <h3>Command</h3>
+    <pre class="sc-code cli">SW1# <span class="tok-keyword">show</span> spanning-tree vlan <span class="tok-number">10</span></pre>
+    <h3>Configuration</h3>
+    <div class="sc-code-head"><span>Cisco IOS</span><span>SW1</span></div>
+    <pre class="sc-code"><span class="tok-preproc">interface</span> GigabitEthernet0/1
+ switchport mode trunk
+ switchport trunk allowed vlan <span class="tok-number">10,20</span>
+ description <span class="tok-string">"Uplink to SW2"</span></pre>
+    <h3>Code</h3>
+    <pre class="sc-code"><span class="tok-type">int</span> height(<span class="tok-type">Node</span>* n) {
+    <span class="tok-keyword">if</span> (!n) <span class="tok-keyword">return</span> <span class="tok-number">0</span>;   <span class="tok-comment">// empty tree</span>
+    <span class="tok-keyword">return</span> <span class="tok-number">1</span> + std::max(height(n-&gt;left), height(n-&gt;right));
+}</pre>
+    <p style="margin-top:var(--sc-sp-3);font-size:var(--sc-fs-md);color:var(--sc-muted)">Keyboard keys: <kbd class="sc-kbd">/</kbd> search, <kbd class="sc-kbd">J</kbd> <kbd class="sc-kbd">K</kbd> next and previous section, <kbd class="sc-kbd">[</kbd> hide menu.</p>
+  </section>
+
+  <section id="practice" aria-labelledby="practice-h">
+    <h2 id="practice-h">Practice</h2>
+    <h3>Quiz</h3>
+    <div class="sc-quiz" id="quiz">
+      <div class="sc-quiz-meta"><span>Question 3 of 10</span><span>Score 2</span></div>
+      <p class="sc-quiz-q">Which port state learns MAC addresses but does not forward frames?</p>
+      <button class="sc-option" data-key="A" type="button">Blocking</button>
+      <button class="sc-option" data-key="B" type="button" data-correct>Learning</button>
+      <button class="sc-option" data-key="C" type="button">Listening</button>
+      <button class="sc-option" data-key="D" type="button">Forwarding</button>
+      <div class="sc-feedback" hidden id="quizFeedback">Learning: the port fills its MAC table before it starts forwarding.</div>
+    </div>
+    <h3>Mock exam bar</h3>
+    <div class="sc-mock-bar"><span class="sc-mock-timer">42:15</span><div class="sc-mock-progress" aria-label="Progress 40 percent"><span style="width:40%"></span></div><button class="sc-btn sc-btn--sm" type="button">Flag</button><button class="sc-btn sc-btn--sm sc-btn--primary" type="button">Submit</button></div>
+    <h3>Score</h3>
+    <dl class="sc-mock-score"><div><dt>Score</dt><dd>34/40</dd></div><div><dt>Accuracy</dt><dd>85%</dd></div><div><dt>Time</dt><dd>37:45</dd></div></dl>
+  </section>
+
+  <section id="diagram" aria-labelledby="diagram-h">
+    <h2 id="diagram-h">Diagrams and labs</h2>
+    <p class="note">Diagrams are drawn with <code>shared/v3/diagram.js</code>: diagram tokens only, text at least 13px, an accessible name and a visible legend. The lab panel pairs a stage with controls and a stepper.</p>
+    <div class="sc-lab">
+      <div class="sc-lab-stage" id="dgStage"></div>
+      <div class="sc-lab-side">
+        <label class="sc-field"><span class="sc-label">SW2 priority</span><select class="sc-input sc-select" id="dgPri"><option value="32768">32768</option><option value="4096">4096</option></select></label>
+        <p style="margin:0;font-size:var(--sc-fs-md);color:var(--sc-muted)" id="dgNote">SW1 is root: equal priority, lower MAC.</p>
+      </div>
+      <div class="sc-lab-foot">
+        <div class="sc-stepper"><button class="sc-btn sc-btn--sm" type="button" id="dgPrev" aria-label="Previous step">Prev</button><span class="sc-stepper-count" id="dgCount">1 / 3</span><button class="sc-btn sc-btn--sm" type="button" id="dgNext" aria-label="Next step">Next</button></div>
+        <span style="font-size:var(--sc-fs-sm);color:var(--sc-faint)">Step through the election</span>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="./diagram.js?v=20261025-2"></script>
+<script>
+(function () {
+  'use strict';
+  var S = window.StudyShell;
+
+  // Swatches read the live token values, so the page always matches tokens.css.
+  function paintSwatches() {
+    var cs = getComputedStyle(document.documentElement);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-swatches]'), function (grid) {
+      grid.innerHTML = grid.getAttribute('data-swatches').split(' ').map(function (n) {
+        var main = document.getElementById('main'), v = getComputedStyle(main).getPropertyValue('--sc-' + n).trim() || cs.getPropertyValue('--sc-' + n).trim();
+        return '<div class="sw"><i style="background:var(--sc-' + n + ')"></i><span><code>--sc-' + n + '</code><br>' + v + '</span></div>';
+      }).join('');
+    });
+  }
+
+  // Accent picker: preview each console's accent on this page only.
+  var pick = document.getElementById('accentPick'), chosen = 'home';
+  function applyAccent() {
+    var c = S && S.consoles.filter(function (x) { return x.id === chosen; })[0], main = document.getElementById('main');
+    if (!c || !c.accent) return;
+    var dark = document.documentElement.dataset.theme === 'dark', a = dark ? c.accent.dark : c.accent.light;
+    main.style.setProperty('--sc-accent', a);
+    main.style.setProperty('--sc-accent-strong', a);
+    main.style.setProperty('--sc-accent-soft', 'color-mix(in srgb, ' + a + ' ' + (dark ? 18 : 10) + '%, var(--sc-surface))');
+    main.style.setProperty('--sc-on-accent', dark ? '#000000' : '#ffffff');
+    Array.prototype.forEach.call(pick.children, function (b) { b.setAttribute('aria-pressed', String(b.dataset.id === chosen)); });
+    paintSwatches();
+  }
+  if (S) {
+    pick.innerHTML = S.consoles.map(function (c) { return '<button type="button" data-id="' + c.id + '" aria-pressed="false">' + c.code + '</button>'; }).join('');
+    pick.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { chosen = b.dataset.id; applyAccent(); } });
+  }
+
+  // Quiz demo
+  var quiz = document.getElementById('quiz');
+  quiz.addEventListener('click', function (e) {
+    var b = e.target.closest('.sc-option'); if (!b) return;
+    Array.prototype.forEach.call(quiz.querySelectorAll('.sc-option'), function (o) {
+      o.classList.toggle('is-correct', o.hasAttribute('data-correct'));
+      o.classList.toggle('is-wrong', o === b && !o.hasAttribute('data-correct'));
+    });
+    document.getElementById('quizFeedback').hidden = false;
+  });
+
+  // Diagram demo: three-step root election.
+  var step = 0, STEPS = 3;
+  function draw() {
+    var stage = document.getElementById('dgStage'), low = document.getElementById('dgPri').value === '4096';
+    stage.innerHTML = '';
+    var d = StudyDiagram.create(stage, { width: 520, height: 230, label: 'Spanning tree root election between three switches' });
+    var root = low ? 2 : 1;
+    function tone(n) { return step === 0 ? 0 : (n === root ? 1 : 2); }
+    var s1 = d.node({ x: 40, y: 30, w: 150, h: 56, label: 'SW1', sub: '32768.0011', tone: tone(1), strong: step > 0 && root === 1, mono: true });
+    var s2 = d.node({ x: 330, y: 30, w: 150, h: 56, label: 'SW2', sub: (low ? '4096' : '32768') + '.0022', tone: tone(2), strong: step > 0 && root === 2, mono: true });
+    var s3 = d.node({ x: 185, y: 150, w: 150, h: 56, label: 'SW3', sub: '32768.0033', tone: tone(3), mono: true });
+    var blocked = step === 2;
+    d.edge(s1, s2, { label: 'cost 4', tone: step === 2 ? 1 : 0 });
+    d.edge(s1, s3, { label: 'cost 4', tone: step === 2 ? (root === 1 ? 1 : 3) : 0, dashed: blocked && root === 2 });
+    d.edge(s2, s3, { label: 'cost 4', tone: step === 2 ? (root === 2 ? 1 : 3) : 0, dashed: blocked && root === 1 });
+    d.legend([{ tone: 1, label: 'Root bridge and root paths' }, { tone: 2, label: 'Non-root bridge' }, { tone: 3, line: true, dashed: true, label: 'Blocked link' }]);
+    document.getElementById('dgCount').textContent = (step + 1) + ' / ' + STEPS;
+    document.getElementById('dgNote').textContent = step === 0 ? 'Each switch starts by claiming to be root.'
+      : step === 1 ? (low ? 'SW2 is root: priority 4096 is lowest.' : 'SW1 is root: equal priority, lower MAC.')
+      : 'The link furthest from the root is blocked to break the loop.';
+  }
+  document.getElementById('dgPri').addEventListener('change', draw);
+  document.getElementById('dgPrev').addEventListener('click', function () { step = Math.max(0, step - 1); draw(); });
+  document.getElementById('dgNext').addEventListener('click', function () { step = Math.min(STEPS - 1, step + 1); draw(); });
+
+  document.addEventListener('sc-theme-change', function () { applyAccent(); paintSwatches(); });
+
+  (window.StudyConsole = window.StudyConsole || []).push({
+    id: 'home',
+    title: 'Design system',
+    subtitle: 'Study Console UI v3',
+    docTitle: 'Design System — Study Console',
+    content: '#main',
+    defaultView: 'components',
+    router: { show: function () {} },
+    groups: [
+      { label: 'Reference', views: [{ id: 'components', title: 'Components', track: false, children: [
+        { id: 'colour', title: 'Colour' }, { id: 'type', title: 'Type' }, { id: 'controls', title: 'Controls' },
+        { id: 'content', title: 'Content blocks' }, { id: 'code', title: 'Code' }, { id: 'practice', title: 'Practice' },
+        { id: 'diagram', title: 'Diagrams and labs' }
+      ] }] },
+      { label: 'Workspace', views: [{ id: 'hub', title: 'Back to Study Console', href: '../../', track: false }] }
+    ]
+  });
+
+  paintSwatches();
+  applyAccent();
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -84,6 +84,13 @@ html.sc-v3 body { font-family: var(--sc-sans); }
 }
 :not(pre) > code.sc-code, .sc-inline-code { display: inline; padding: .1em .38em; border-radius: 5px; background: var(--sc-surface-2); font-size: .9em; white-space: normal; border: 0; }
 .sc-code-head { display: flex; justify-content: space-between; align-items: center; padding: 6px var(--sc-sp-3); font-size: var(--sc-fs-xs); color: var(--sc-faint); border: 1px solid var(--sc-code-line); border-bottom: 0; border-radius: var(--sc-radius) var(--sc-radius) 0 0; background: var(--sc-surface-2); }
+/* Optional syntax colouring (Xcode-style); wrap tokens in spans with these classes. */
+.sc-code .tok-comment { color: var(--sc-tok-comment); font-style: italic; }
+.sc-code .tok-string { color: var(--sc-tok-string); }
+.sc-code .tok-keyword { color: var(--sc-tok-keyword); font-weight: 600; }
+.sc-code .tok-type { color: var(--sc-tok-type); }
+.sc-code .tok-number { color: var(--sc-tok-number); }
+.sc-code .tok-preproc { color: var(--sc-tok-preproc); }
 .sc-code-head + .sc-code { border-top-left-radius: 0; border-top-right-radius: 0; }
 .sc-kbd { display: inline-block; padding: 1px 6px; border: 1px solid var(--sc-line-strong); border-bottom-width: 2px; border-radius: 6px; font-size: .85em; background: var(--sc-surface); }
 
@@ -181,7 +188,7 @@ html.sc-v3 body { font-family: var(--sc-sans); }
 
 /* ---------- Mock exam ---------- */
 .sc-mock-bar {
-  position: sticky; top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); z-index: var(--sc-z-sticky);
+  position: sticky; top: calc(var(--sc-sticky-top) + 8px); z-index: var(--sc-z-sticky);
   display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-sp-3) var(--sc-sp-5); padding: var(--sc-sp-3) var(--sc-sp-4);
   background: color-mix(in srgb, var(--sc-surface) 88%, transparent); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
   border: 1px solid var(--sc-line); border-radius: var(--sc-radius);
