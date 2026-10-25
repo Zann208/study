@@ -328,7 +328,9 @@
         items.push({ type: 'section', title: ch.title, meta: v.title + (ch.badge ? ' · ' + ch.badge : ''), view: v.id, anchor: ch.id });
       });
     });
-    (state.manifest.terms || []).forEach(function (t) {
+    var terms = state.manifest.terms;
+    try { if (typeof terms === 'function') terms = terms(); } catch (e) { terms = []; }
+    (Array.isArray(terms) ? terms : []).forEach(function (t) {
       items.push({ type: 'term', title: t.title, meta: t.meta || 'Term', view: t.view, anchor: t.anchor || null });
     });
     var listed = {};
@@ -846,6 +848,40 @@
     };
   }
 
+  /* ---------- Wide reference tables scroll inside their own box (as v2 reading.js did) ---------- */
+  var seenTables = typeof WeakSet === 'function' ? new WeakSet() : null;
+  function clippedByAncestor(node, stop) {
+    for (var p = node.parentElement; p && p !== stop; p = p.parentElement) {
+      if (/(auto|scroll|hidden|clip)/.test(getComputedStyle(p).overflowX)) return true;
+    }
+    return false;
+  }
+  function wrapTables(root) {
+    if (!root || !seenTables) return;
+    Array.prototype.forEach.call(root.querySelectorAll('table'), function (t) {
+      if (seenTables.has(t)) return;
+      seenTables.add(t);
+      if (t.getAttribute('role') === 'presentation' || t.querySelector('input,select,textarea,button,svg,canvas')) return;
+      if (clippedByAncestor(t, root)) return;
+      var box = document.createElement('div');
+      box.className = 'sc-table-scroll';
+      box.tabIndex = 0;
+      box.setAttribute('role', 'region');
+      box.setAttribute('aria-label', t.caption ? t.caption.textContent.trim() : 'Table');
+      t.parentNode.insertBefore(box, t);
+      box.appendChild(t);
+    });
+  }
+  function watchTables(main) {
+    wrapTables(main);
+    if (!window.MutationObserver) return;
+    var pending = null;
+    new MutationObserver(function () {
+      if (pending) return;
+      pending = setTimeout(function () { pending = null; wrapTables(main); }, 150);
+    }).observe(main, { childList: true, subtree: true });
+  }
+
   /* ---------- Section bar (pages with sections) ---------- */
   function wireSections() {
     var ui = state.ui, bar = ui.sectionbar, sel = bar.querySelector('select');
@@ -963,6 +999,7 @@
     try { restore = manifest.restore ? manifest.restore() : null; } catch (e) { restore = null; }
     var start = (h && state.byId[h.view]) ? h : { view: (restore && state.byId[restore]) ? restore : (manifest.defaultView || (state.views[0] && state.views[0].id)), anchor: null };
     navigate(start.view, start.anchor, { replace: true, initial: true });
+    setTimeout(function () { if (state.ui) watchTables(state.ui.main); }, 0);
     return true;
   }
   function unmount() {

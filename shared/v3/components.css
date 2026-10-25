@@ -72,6 +72,10 @@ html.sc-v3 body { font-family: var(--sc-sans); }
 .sc-table tbody tr:hover td { background: color-mix(in srgb, var(--sc-surface-2) 60%, transparent); }
 .sc-table .num { text-align: right; font-variant-numeric: tabular-nums; }
 
+/* Wide reference tables get their own horizontal scroll (the shell adds this wrapper) */
+.sc-table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+.sc-table-scroll:focus-visible { outline: none; box-shadow: var(--sc-focus); border-radius: var(--sc-radius-sm); }
+
 /* ---------- Code block ---------- */
 .sc-code {
   display: block; margin: 0; padding: var(--sc-sp-4); overflow-x: auto; tab-size: 4;

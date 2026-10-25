@@ -33,6 +33,9 @@ html.sc-v3 {
 /* OS used "vi" for its green accent */
 html.sc-v3[data-sc-console="os"] { --vi: var(--sc-dg-6); --vi2: color-mix(in srgb, var(--sc-dg-6) 72%, var(--sc-text)); }
 
+/* long unbroken strings (OIDs, file names, URLs) wrap instead of widening the page */
+html.sc-v3 body main { overflow-wrap: break-word; }
+
 html.sc-v3 body {
   background: var(--sc-bg); background-image: none;
   color: var(--sc-text);
@@ -78,7 +81,7 @@ html.sc-v3 svg [fill="#2a1f10" i] { fill: color-mix(in srgb, var(--sc-dg-3) 16%,
 }
 :root.sc-v3 body :not(pre) > code {
   padding: .08em .36em; border-radius: 5px; background: var(--sc-surface-2);
-  font-size: .9em; color: inherit;
+  font-size: .9em; color: inherit; overflow-wrap: anywhere;
 }
 :root.sc-v3 body :is(table) { border-color: var(--sc-line); font-variant-numeric: tabular-nums; }
 :root.sc-v3 body :is(th) { color: var(--sc-muted); }
@@ -100,3 +103,9 @@ html.sc-v3:root :is(#fl-root, .fp-fig) {
   --line: var(--sc-line); --line2: var(--sc-line-strong); --tline: var(--sc-dg-edge);
 }
 html.sc-v3:root .fp-fig { background: var(--sc-surface); }
+
+/* WLN course pipeline: its own phone rule stacks the steps, but an inline column list
+   on the element beat it. Inline styles can only be overridden with !important. */
+@media (max-width: 700px) {
+  html.sc-v3 .pipe[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+}
