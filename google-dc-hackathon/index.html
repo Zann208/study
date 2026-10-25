@@ -6,56 +6,13 @@
 <title>Google Data Center Hardware Hackathon 2026 — Study Console</title>
 <meta name="description" content="Independent preparation console for the Google Thailand Data Center Hardware Hackathon 2026: data center fundamentals, server hardware, networking, Linux, troubleshooting, automation, and mock challenges.">
 <meta name="theme-color" content="#08111f">
-<script src="../shared/v2/theme-init.js"></script>
-<link rel="stylesheet" href="../shared/v2/study-system.css?v=20260911-width1">
-<link rel="stylesheet" href="./gdc.css">
-<link rel="stylesheet" href="../shared/v2/reading.css?v=20260910-layout2">
+<script src="../shared/v3/boot.js?v=20261025-1" data-console="gdc" data-v2="index.v2.html"></script>
+<link rel="stylesheet" href="./gdc.css?v=20261025-1">
 </head>
 <body data-console-id="gdc" data-console-name="Google Data Center Hardware Hackathon">
-<div class="app">
-  <div class="overlay" id="overlay"></div>
-
-  <aside class="sidebar" id="sidebar">
-    <div class="brand">
-      <div class="brand-copy"><b>Hardware Hackathon</b><span>Study Console 2026</span></div>
-    </div>
-
-    <div class="search-wrap">
-      <div class="search-box"><span class="search-icon">⌕</span><input id="siteSearch" type="search" autocomplete="off" placeholder="Search topics or terms"><span class="keycap">/</span></div>
-      <div class="search-results" id="searchResults"></div>
-    </div>
-
-    <div class="nav-label">Console</div>
-    <nav class="nav" id="mainNav">
-      <a href="#overview" class="active"><span class="nav-code">OV</span>Overview</a>
-      <a href="#roadmap"><span class="nav-code">RM</span>Roadmap</a>
-      <a href="#module1"><span class="nav-code">M1</span>Current lesson</a>
-      <a href="#terms"><span class="nav-code">TM</span>Key terms</a>
-    </nav>
-
-    <div class="nav-label">Modules</div>
-    <div class="side-modules">
-      <a class="side-module current" href="#module1"><span class="n">01</span>Data Center Fundamentals</a>
-      <div class="side-module"><span class="n">02</span>Server Hardware</div>
-      <div class="side-module"><span class="n">03</span>Networking</div>
-      <div class="side-module"><span class="n">04</span>Linux</div>
-      <div class="side-module"><span class="n">05</span>Troubleshooting</div>
-      <div class="side-module"><span class="n">06</span>Automation</div>
-      <div class="side-module"><span class="n">07</span>Services & Security</div>
-      <div class="side-module"><span class="n">08</span>Data Center Operations</div>
-      <div class="side-module"><span class="n">09</span>Team Challenges</div>
-      <div class="side-module"><span class="n">10</span>Mock Hackathon</div>
-    </div>
-
-    <div class="side-bottom">
-      <div class="countdown"><div class="lab">Hackathon countdown</div><strong id="daysLeft">-- days</strong><span>26 September 2026</span></div>
-      <a class="side-back" href="../">← Study Console</a>
-    </div>
-  </aside>
-
   <main class="main">
-    <div class="mobile-bar"><button class="menu-btn" id="menuBtn" type="button" aria-label="Open course navigation" aria-expanded="false">Lessons</button><span class="mobile-title">GDC Hackathon Console</span><span></span></div>
     <div class="main-inner">
+      <div class="countdown"><div class="lab">Hackathon countdown</div><strong id="daysLeft">-- days</strong><span>26 September 2026</span></div>
 
       <header class="hero" id="overview">
         <div class="eyebrow">Independent preparation workspace</div>
@@ -197,7 +154,6 @@
       <footer><span>Independent study project</span><span>Not an official Google training resource</span></footer>
     </div>
   </main>
-</div>
 
 <script>
 const completionKey='gdc-hackathon-module1';
@@ -264,22 +220,6 @@ const searchIndex=[
   {title:'Cooling',desc:'Removing heat from data center equipment',href:'#term-cooling',keys:'cooling heat temperature airflow'},
   {title:'Key Terms',desc:'Glossary for fast revision',href:'#terms',keys:'terms glossary definitions revision'}
 ];
-const search=document.getElementById('siteSearch');
-const results=document.getElementById('searchResults');
-function renderSearch(){
-  const q=search.value.trim().toLowerCase();
-  if(!q){results.classList.remove('open');results.innerHTML='';return;}
-  const matches=searchIndex.filter(item=>(item.title+' '+item.desc+' '+item.keys).toLowerCase().includes(q)).slice(0,7);
-  results.innerHTML=matches.length?matches.map(item=>`<a class="search-result" href="${item.href}"><b>${item.title}</b><span>${item.desc}</span></a>`).join(''):'<div class="no-result">No matching topic yet.</div>';
-  results.classList.add('open');
-}
-search.addEventListener('input',renderSearch);
-results.addEventListener('click',()=>{results.classList.remove('open');search.blur();closeSidebar();});
-document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))results.classList.remove('open');});
-document.addEventListener('keydown',e=>{
-  if(e.key==='/' && document.activeElement!==search){e.preventDefault();search.focus();}
-  if(e.key==='Escape'){search.value='';results.classList.remove('open');search.blur();}
-});
 
 // Glossary filters
 for(const btn of document.querySelectorAll('.filter')){
@@ -291,34 +231,29 @@ for(const btn of document.querySelectorAll('.filter')){
   });
 }
 
-// Active sidebar section
-const navLinks=[...document.querySelectorAll('#mainNav a')];
-const watched=['overview','roadmap','module1','terms'].map(id=>document.getElementById(id));
-const observer=new IntersectionObserver(entries=>{
-  const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
-  if(!visible)return;
-  navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+visible.target.id));
-},{rootMargin:'-18% 0px -68% 0px',threshold:[0,.15,.4]});
-watched.forEach(s=>observer.observe(s));
-
-// Mobile sidebar
-const sidebar=document.getElementById('sidebar');
-const overlay=document.getElementById('overlay');
-const menuBtn=document.getElementById('menuBtn');
-function setSidebarOpen(open){
-  sidebar.classList.toggle('open',open);
-  overlay.classList.toggle('open',open);
-  menuBtn.setAttribute('aria-expanded',String(open));
-}
-function openSidebar(){setSidebarOpen(true);}
-function closeSidebar(){setSidebarOpen(false);}
-menuBtn.addEventListener('click',()=>setSidebarOpen(!sidebar.classList.contains('open')));
-overlay.addEventListener('click',closeSidebar);
-sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{if(innerWidth<=900)closeSidebar();}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSidebar();});
-window.addEventListener('resize',()=>{if(innerWidth>900)closeSidebar();});
 </script>
-<script src="../shared/v2/study-system.js?v=20260910-layout2"></script>
-<script src="../shared/v2/reading.js?v=20260910-reading1" defer></script>
+<script>
+/* Study Console v3: this console's manifest. One scrolling guide; its parts are sections. */
+(function () {
+  (window.StudyConsole = window.StudyConsole || []).push({
+    id: 'gdc',
+    title: 'Google Data Center Hardware Hackathon',
+    subtitle: '10-module preparation path',
+    content: 'body > main',
+    defaultView: 'guide',
+    router: { show: function () {} },
+    terms: searchIndex.map(function (s) { return { title: s.title, meta: s.desc, view: 'guide', anchor: s.href.replace('#', '') }; }),
+    progress: { read: function () { try { return localStorage.getItem(completionKey) === 'done' ? { guide: 'done' } : {}; } catch (e) { return {}; } } },
+    groups: [
+      { label: 'Console', views: [{ id: 'guide', title: 'Module 01 guide', badge: 'M1', children: [
+        { id: 'overview', title: 'Overview', badge: 'OV' },
+        { id: 'roadmap', title: 'Roadmap', badge: 'RM' },
+        { id: 'module1', title: 'Data Center Fundamentals', badge: '01' },
+        { id: 'terms', title: 'Key terms', badge: 'TM' }
+      ] }] }
+    ]
+  });
+})();
+</script>
 </body>
 </html>
