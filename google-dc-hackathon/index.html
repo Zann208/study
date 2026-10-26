@@ -6,7 +6,7 @@
 <title>Google Data Center Hardware Hackathon 2026 — Study Console</title>
 <meta name="description" content="Independent preparation console for the Google Thailand Data Center Hardware Hackathon 2026: data center fundamentals, server hardware, networking, Linux, troubleshooting, automation, and mock challenges.">
 <meta name="theme-color" content="#08111f">
-<script src="../shared/v3/boot.js?v=20261025-2" data-console="gdc" data-v2="index.v2.html"></script>
+<script src="../shared/v3/boot.js?v=20261026-1" data-console="gdc" data-v2="index.v2.html"></script>
 <link rel="stylesheet" href="./gdc.css?v=20261025-1">
 </head>
 <body data-console-id="gdc" data-console-name="Google Data Center Hardware Hackathon">
@@ -15,32 +15,17 @@
       <div class="countdown"><div class="lab">Hackathon countdown</div><strong id="daysLeft">-- days</strong><span>26 September 2026</span></div>
 
       <header class="hero" id="overview">
-        <div class="eyebrow">Independent preparation workspace</div>
         <h1>Google Data Center Hardware Hackathon 2026</h1>
-        <p class="lede">One focused place to learn server hardware, networking, Linux, troubleshooting, automation, data center operations, and competition-style problem solving.</p>
-        <div class="meta"><span class="chip date">26 Sep 2026</span><span class="chip">Thailand</span><span class="chip">Hardware + Systems</span><span class="chip">Beginner → Competition</span></div>
+        <p class="lede">Server hardware, networking, Linux, troubleshooting, automation, data center operations.</p>
+        <div class="meta"><span class="chip date">26 Sep 2026</span><span class="chip">Thailand</span><span class="chip">Hardware + Systems</span></div>
 
-        <div class="hero-stats">
-          <div class="stat"><b>Current focus</b><strong>Module 01 · Data Center Fundamentals</strong><span>Build the whole-system mental model first.</span></div>
-          <div class="stat"><b>Training rule</b><strong>Learn → Test → Fix</strong><span>Every topic ends in practice.</span></div>
-          <div class="stat"><b>Primary goal</b><strong>Fast diagnosis</strong><span>Think in layers, not guesses.</span></div>
-        </div>
         <div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
-        <div class="progress-row"><span id="progressText">1 of 10 modules started</span><span>Progress saved in this browser</span></div>
+        <div class="progress-row"><span id="progressText">1 of 10 modules started</span></div>
       </header>
 
-      <section class="section">
-        <div class="section-head"><div><div class="kicker">How to use this console</div><h2>Simple study loop</h2></div><p class="section-intro">Keep it practical. Learn the idea, test yourself, then use it in a fault scenario.</p></div>
-        <div class="quick-grid">
-          <div class="quick"><span class="qno">01 · LEARN</span><b>Understand the system</b><p>Short explanations with correct technical terms.</p></div>
-          <div class="quick"><span class="qno">02 · CHECK</span><b>Answer quick questions</b><p>Confirm you actually understand the topic.</p></div>
-          <div class="quick"><span class="qno">03 · APPLY</span><b>Solve a mini challenge</b><p>Use the knowledge in a realistic problem.</p></div>
-          <div class="quick"><span class="qno">04 · REVIEW</span><b>Search key terms</b><p>Use the sidebar search for fast revision.</p></div>
-        </div>
-      </section>
 
       <section class="section" id="roadmap">
-        <div class="section-head"><div><div class="kicker">Preparation roadmap</div><h2>10-module learning path</h2></div><p class="section-intro">The early modules create the foundation for the later timed troubleshooting exercises.</p></div>
+        <div class="section-head"><div><h2>Modules</h2></div></div>
         <div class="path">
           <a class="module current" href="#module1"><span class="num">01</span><span><h3>Data Center Fundamentals</h3><p>Servers, racks, power, cooling, network, redundancy.</p><span class="badge">Current</span></span></a>
           <div class="module"><span class="num">02</span><span><h3>Server Hardware</h3><p>CPU, RAM, storage, NIC, PSU, BIOS/UEFI and failures.</p><span class="badge">Next</span></span></div>
@@ -56,7 +41,7 @@
       </section>
 
       <section class="section lesson" id="module1">
-        <div class="lesson-top"><div class="label">Module 01 · Start here</div><h2>Data Center Fundamentals</h2><p>Goal: understand what a data center is, what a server does, and how the major systems depend on each other.</p></div>
+        <div class="lesson-top"><div class="label">Module 01</div><h2>Data Center Fundamentals</h2><p>Goal: understand what a data center is, what a server does, and how the major systems depend on each other.</p></div>
         <div class="lesson-body">
 
           <div class="lesson-block" id="what-is-dc">
@@ -128,7 +113,7 @@
       </section>
 
       <section class="section" id="terms">
-        <div class="section-head"><div><div class="kicker">Fast revision</div><h2>Key terms</h2></div><p class="section-intro">Use these as short exam-style definitions and quick reminders. You can also search them from the sidebar.</p></div>
+        <div class="section-head"><div><h2>Key terms</h2></div></div>
         <div class="glossary-tools" id="glossaryFilters">
           <button class="filter active" data-filter="all">All</button>
           <button class="filter" data-filter="hardware">Hardware</button>
@@ -247,7 +232,7 @@ for(const btn of document.querySelectorAll('.filter')){
     groups: [
       { label: 'Console', views: [{ id: 'guide', title: 'Module 01 guide', badge: 'M1', children: [
         { id: 'overview', title: 'Overview', badge: 'OV' },
-        { id: 'roadmap', title: 'Roadmap', badge: 'RM' },
+        { id: 'roadmap', title: 'Modules', badge: 'MD' },
         { id: 'module1', title: 'Data Center Fundamentals', badge: '01' },
         { id: 'terms', title: 'Key terms', badge: 'TM' }
       ] }] }

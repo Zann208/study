@@ -190,7 +190,7 @@ html.sc-v3 body { font-family: var(--sc-sans); }
 .sc-mock-bar {
   position: sticky; top: calc(var(--sc-sticky-top) + 8px); z-index: var(--sc-z-sticky);
   display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-sp-3) var(--sc-sp-5); padding: var(--sc-sp-3) var(--sc-sp-4);
-  background: color-mix(in srgb, var(--sc-surface) 88%, transparent); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  background: var(--sc-surface);
   border: 1px solid var(--sc-line); border-radius: var(--sc-radius);
 }
 .sc-mock-timer { font: var(--sc-fw-semibold) var(--sc-fs-xl)/1 var(--sc-sans); font-variant-numeric: tabular-nums; }

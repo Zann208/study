@@ -29,7 +29,7 @@ Live preview of tokens and components: https://zann208.github.io/study/shared/v3
 1. Replace the v2 theme script and shared stylesheets with one tag, first in `<head>`:
 
    ```html
-   <script src="https://zann208.github.io/study/shared/v3/boot.js?v=20261025-2"
+   <script src="https://zann208.github.io/study/shared/v3/boot.js?v=20261026-1"
            data-console="algo" data-v2="index.v2.html"></script>
    ```
 
@@ -78,7 +78,7 @@ Live preview of tokens and components: https://zann208.github.io/study/shared/v3
 
 Kept from v2 (unchanged meaning): `study-console-theme`, `study-console-last`, `study-console-reading`.
 
-New in v3: `study-console-v3-menu` (collapsed groups), `study-console-v3-menu-hidden`, `study-console-v3-visited`, `study-console-v3-done`; session key `study-console-ui` (rollback choice).
+New in v3: `study-console-v3-menu` (collapsed groups), `study-console-v3-menu-hidden`, `study-console-v3-visited`, `study-console-v3-done`, `study-console-v3-sections` (pages that show the section bar, so its space is reserved before the first paint); session key `study-console-ui` (rollback choice).
 
 Legacy per-console theme keys (`algoTheme`, `privTheme`, `osTheme`, `nd_light`, `wn_light`) are read once to migrate the theme. Each console's own progress and language keys are untouched and are read through its manifest.
 
@@ -100,7 +100,15 @@ Existing console diagrams keep their markup; `bridge.css` maps their legacy fill
 - Left menu (268px): groups with remembered collapse, progress dots, current-page and current-section highlighting, Hide menu (`[`).
 - Below 900px the menu becomes a drawer with a close button; below 600px header controls move into the drawer footer. All touch targets are at least 44px and respect safe-area insets.
 - Wide tables get their own horizontal scroll; long inline code wraps.
+- Frame space (top bar, menu, section bar, scrollbar) is reserved from the first paint by `boot.js`, so pages do not move when the shell mounts.
+- Switching consoles is a normal page load; where the browser supports cross-document view transitions (Chrome 126+, Safari 18.2+) the bar and menu stay in place. Hovering a console link prefetches its HTML (Chrome).
+- If a console changes page on its own (a button inside a lesson), the frame follows: menu, address and section bar update, and Back returns to the previous page.
+- Iframes inside a console (ALG definition banks, PRV midterm pack) load the first time their page is opened.
 - Reduced motion is honoured.
+
+## Writing
+
+Titles are the plain name of the page ("Chapters", "Final exam", "Cheat sheet"). No slogans, eyebrow labels, marketing lines, instructions on how to use the page, welcome dialogs or status words such as "exam ready". A line under a title only states scope (chapters, topics, term).
 
 ## QA checklist
 

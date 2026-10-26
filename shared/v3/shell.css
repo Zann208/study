@@ -8,6 +8,32 @@
   --sc-accent-strong: color-mix(in srgb, var(--sc-accent) 78%, var(--sc-text));
 }
 
+/* Frame space is reserved from the first paint (boot.js sets html.sc-v3 in <head>), so the
+   page does not move when the shell mounts at the end of <body>. */
+html.sc-v3:not(.sc-embedded) {
+  --sc-frame-top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px));
+  --sc-frame-left: var(--sc-menu-w);
+}
+html.sc-v3.sc3-has-sections:not(.sc-embedded) { --sc-frame-top: calc(var(--sc-header-h) + 48px + env(safe-area-inset-top, 0px)); }
+html.sc-v3.sc3-menu-hidden:not(.sc-embedded) { --sc-frame-left: 0px; }
+html.sc-v3:not(.sc-embedded) body {
+  margin: 0; padding-top: var(--sc-frame-top); padding-left: var(--sc-frame-left);
+  min-height: 100vh; box-sizing: border-box;
+}
+/* Placeholders for the bar and menu until the shell draws them */
+html.sc-v3:not(.sc-embedded) body:not(.sc3)::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px));
+  background: var(--sc-surface); border-bottom: 1px solid var(--sc-line); z-index: var(--sc-z-header);
+}
+html.sc-v3:not(.sc-embedded) body:not(.sc3)::after {
+  content: ""; position: fixed; left: 0; bottom: 0; top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); width: var(--sc-frame-left);
+  background: var(--sc-surface); border-right: 1px solid var(--sc-line); z-index: var(--sc-z-menu);
+}
+@media (max-width: 899px) {
+  html.sc-v3:not(.sc-embedded) { --sc-frame-left: 0px; }
+  html.sc-v3:not(.sc-embedded) body:not(.sc3)::after { display: none; }
+}
+
 body.sc3 {
   --sc-sticky-top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px));
   margin: 0;
@@ -29,7 +55,8 @@ body.sc3::before {          /* paints the band above the sticky header on notche
   content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
   background: var(--sc-surface); z-index: var(--sc-z-header);
 }
-html:has(body.sc3) { scrollbar-gutter: stable; scroll-padding-top: calc(var(--sc-header-h) + 16px); }
+html.sc-v3:not(.sc-embedded) { scrollbar-gutter: stable; }
+html:has(body.sc3) { scroll-padding-top: calc(var(--sc-header-h) + 16px); }
 
 .sc3 .sc3-icon { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .sc3 :is(a, button, input, [tabindex]):focus-visible { outline: none; box-shadow: var(--sc-focus); }
@@ -49,11 +76,11 @@ html:has(body.sc3) { scrollbar-gutter: stable; scroll-padding-top: calc(var(--sc
 
 /* ---------- Top bar ---------- */
 .sc3-top {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: var(--sc-z-header);
-  height: var(--sc-header-h);
-  background: color-mix(in srgb, var(--sc-surface) 82%, transparent);
-  -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+  position: fixed; top: 0; left: 0; right: 0; z-index: var(--sc-z-header);
+  height: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); padding-top: env(safe-area-inset-top, 0px);
+  background: var(--sc-surface);
   border-bottom: 1px solid var(--sc-line);
+  view-transition-name: sc3-top;
 }
 .sc3-top-inner {
   height: 100%; display: flex; align-items: center; gap: var(--sc-sp-2);
@@ -181,16 +208,13 @@ html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
 /* ---------- Frame + left menu ---------- */
 /* Desktop layout: fixed menu on the left, everything else offset by its width.
    <main> stays in the console's DOM position, so nothing is re-parented. */
-body.sc3 { padding-left: var(--sc-menu-w); min-height: 100vh; box-sizing: border-box; }
-body.sc3 > .sc3-top { margin-left: calc(-1 * var(--sc-menu-w)); }
-html.sc3-menu-hidden body.sc3 { padding-left: 0; }
-html.sc3-menu-hidden body.sc3 > .sc3-top { margin-left: 0; }
 html.sc3-menu-hidden .sc3-menu { display: none; }
 
 .sc3-menu {
   position: fixed; left: 0; bottom: 0; top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); width: var(--sc-menu-w); z-index: var(--sc-z-menu);
   display: flex; flex-direction: column; background: var(--sc-surface); border-right: 1px solid var(--sc-line);
   font-size: var(--sc-fs-md); line-height: var(--sc-lh-ui);
+  view-transition-name: sc3-menu;
 }
 .sc3-menu-scroll { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: var(--sc-sp-3) var(--sc-sp-2) var(--sc-sp-4); padding-left: max(8px, env(safe-area-inset-left, 0px)); }
 .sc3-menu-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--sc-sp-2); row-gap: 2px; align-items: start; padding: var(--sc-sp-1) var(--sc-sp-3) var(--sc-sp-3); }
@@ -245,11 +269,10 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
 
 /* ---------- Section bar: sticky under the header on pages with sections ---------- */
 .sc3-sectionbar {
-  position: sticky; top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); z-index: var(--sc-z-sticky);
+  position: fixed; top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); left: var(--sc-frame-left); right: 0; z-index: var(--sc-z-sticky);
   display: flex; align-items: center; gap: var(--sc-sp-2); box-sizing: border-box; height: 48px;
   padding: 0 max(12px, env(safe-area-inset-right, 0px)) 0 12px;
-  background: color-mix(in srgb, var(--sc-bg) 86%, transparent);
-  -webkit-backdrop-filter: saturate(180%) blur(18px); backdrop-filter: saturate(180%) blur(18px);
+  background: var(--sc-bg);
   border-bottom: 1px solid var(--sc-line); font: var(--sc-fs-md)/1.3 var(--sc-sans);
 }
 .sc3-sectionbar[hidden] { display: none; }
@@ -284,7 +307,6 @@ html.sc3-has-sections body.sc3 { --sc-sticky-top: calc(var(--sc-header-h) + 48px
 
 /* ---------- Content slot ---------- */
 .sc3-main { min-width: 0; outline: none; }
-.sc3-main.sc3-switching > * { animation: sc3-swap var(--sc-dur) var(--sc-ease); }
 
 /* Reading size: scales lesson content (written in px by most consoles) without touching the frame. */
 body.sc3[data-reading-size="large"] .sc3-main > * { zoom: 1.08; }
@@ -334,8 +356,6 @@ html.sc3-palette-open { overflow: hidden; }
   .sc3-search-btn { min-width: 160px; }
 }
 @media (max-width: 899px) {
-  body.sc3 { padding-left: 0; }
-  body.sc3 > .sc3-top { margin-left: 0; }
   html.sc3-menu-hidden .sc3-menu { display: flex; }
   .sc3-menu-toggle { display: inline-grid; }
   .sc3-menu {
@@ -372,16 +392,22 @@ html.sc3-palette-open { overflow: hidden; }
   .sc3-search-btn { width: var(--sc-touch); height: var(--sc-touch); }
 }
 
+/* Switching consoles: same-origin page navigations keep the bar and menu in place
+   (Chrome 126+, Safari 18.2+); other browsers just load the page. */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 120ms; }
+::view-transition-group(sc3-top), ::view-transition-group(sc3-menu) { animation-duration: 0s; }
+
 @keyframes sc3-fade { from { opacity: 0; } }
 @keyframes sc3-pop { from { opacity: 0; transform: translateY(-4px); } }
-@keyframes sc3-swap { from { opacity: .35; } }
 
 @media (prefers-reduced-motion: reduce) {
   .sc3 *, .sc3 *::before, .sc3 *::after { animation-duration: 0ms !important; transition-duration: 0ms !important; }
+  @view-transition { navigation: none; }
 }
 @media print {
   .sc3-top, .sc3-menu, .sc3-skip, .sc3-palette, .sc3-scrim { display: none; }
-  body.sc3 { padding-left: 0; }
+  html.sc-v3 body, html.sc-v3 body.sc3 { padding: 0; }
 }
 
 /* Menu items that open another page carry no progress dot */

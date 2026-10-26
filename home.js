@@ -56,7 +56,6 @@
     id: 'home',
     kind: 'hub',
     title: 'Study Console',
-    subtitle: 'Your learning workspace',
     content: '#main',
     defaultView: 'overview',
     router: { show: function () {} },

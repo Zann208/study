@@ -6,19 +6,18 @@
   <title>Study Console</title>
   <meta name="description" content="Study Console is a learning workspace for networking, algorithms, privacy, operating systems, and data center preparation.">
   <meta name="theme-color" content="#f5f5f7">
-  <script src="./shared/v3/boot.js?v=20261025-2" data-console="home" data-v2="index.v2.html"></script>
+  <script src="./shared/v3/boot.js?v=20261026-1" data-console="home" data-v2="index.v2.html"></script>
   <link rel="stylesheet" href="./home.css?v=20261025-1">
 </head>
 <body data-console-id="home" data-console-name="Study Console">
   <main class="home-workspace" id="main">
     <header class="home-heading">
-      <div><p class="sc-eyebrow">Your learning workspace</p><h1 class="sc-page-title">Study Console</h1><p class="sc-lede">A place to understand, practice, and come back to.</p></div>
-      <a class="home-jump" href="#subjects">Explore your subjects <span aria-hidden="true">↓</span></a>
+      <h1 class="sc-page-title">Study Console</h1>
     </header>
     <section class="home-continue" data-continue-learning hidden aria-labelledby="continue-title">
       <div class="home-continue-mark" data-continue-icon aria-hidden="true"></div>
       <div class="home-continue-copy"><h2 id="continue-title">Continue learning</h2><p data-continue-name></p></div>
-      <a class="sc-btn sc-btn--primary" data-continue-link href="#subjects">Pick up where you left off <span data-sc-icon="arrow"></span></a>
+      <a class="sc-btn sc-btn--primary" data-continue-link href="#subjects">Continue <span data-sc-icon="arrow"></span></a>
     </section>
     <div class="home-layout">
       <section class="home-subjects" id="subjects" aria-labelledby="subjects-title">
@@ -26,7 +25,7 @@
         <div class="home-subject-list">
           <a class="home-subject" data-console-launch data-console-id="netdes" data-console-name="Network Design & Troubleshooting" href="https://zann208.github.io/netdes/">
             <span class="home-subject-icon" data-sc-icon="network" aria-hidden="true"></span>
-            <div class="home-subject-copy"><h3>Network Design &amp; Troubleshooting</h3><p>Switching, VLANs, redundancy, and configuration verification.</p><span>Lab workbenches · STP simulator · EN / TH</span></div><span class="home-subject-open" data-sc-icon="arrow" aria-hidden="true"></span>
+            <div class="home-subject-copy"><h3>Network Design &amp; Troubleshooting</h3><p>Switching, VLANs, redundancy, and configuration verification.</p><span>Lab workbenches · STP simulator · EN / MY</span></div><span class="home-subject-open" data-sc-icon="arrow" aria-hidden="true"></span>
           </a>
           <a class="home-subject" data-console-launch data-console-id="wnet" data-console-name="Wireless Network Engineering" href="https://zann208.github.io/wnet/">
             <span class="home-subject-icon" data-sc-icon="wireless" aria-hidden="true"></span>
@@ -46,7 +45,7 @@
           </a>
         </div>
       </section>
-      <aside class="home-aside" aria-label="Engineering Lab and study guidance">
+      <aside class="home-aside" aria-label="Engineering Lab">
         <section id="engineering-lab" aria-labelledby="engineering-title">
           <div class="home-section-head"><h2 id="engineering-title">Engineering Lab</h2></div>
           <a class="home-engineering" data-console-launch data-console-id="gdc" data-console-name="Google Data Center Hardware Hackathon" href="./google-dc-hackathon/">
@@ -54,18 +53,13 @@
             <h3>Google Data Center<br>Hardware Hackathon</h3>
             <p>Server hardware, networking, Linux, troubleshooting, and hands-on preparation.</p>
             <div class="home-engineering-meta">10-module path · search · quiz</div>
-            <span class="home-engineering-action">Open preparation console <span data-sc-icon="arrow" aria-hidden="true"></span></span>
+            <span class="home-engineering-action">Open <span data-sc-icon="arrow" aria-hidden="true"></span></span>
           </a>
-        </section>
-        <section class="home-study-note" aria-labelledby="study-note-title">
-          <h2 id="study-note-title">Make it an active session.</h2>
-          <p>Read the explanation. Work through an example. Then try the quiz, calculator, or simulator.</p>
-          <p class="home-local-note">Your saved progress stays in this browser.</p>
         </section>
       </aside>
     </div>
     <footer class="home-footer"><span>Study Console</span><div><a href="https://zann208.github.io/">Portfolio</a><a href="https://github.com/Zann208">GitHub</a></div></footer>
   </main>
-  <script src="./home.js?v=20261025-1"></script>
+  <script src="./home.js?v=20261026-1"></script>
 </body>
 </html>

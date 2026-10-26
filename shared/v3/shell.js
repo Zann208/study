@@ -21,6 +21,7 @@
     reading: 'study-console-reading',      // shared with v2
     menu: 'study-console-v3-menu',         // collapsed groups per console
     menuHidden: 'study-console-v3-menu-hidden',
+    sections: 'study-console-v3-sections',
     visited: 'study-console-v3-visited',
     done: 'study-console-v3-done',          // pages the learner marked done
     ui: 'study-console-ui'                 // sessionStorage: 'v2' forces the old shell
@@ -258,10 +259,6 @@
     var changed = !state.current || state.current.id !== v.id;
     state.current = v;
     var main = state.ui.main;
-    if (changed && !(opts && opts.initial)) {
-      main.classList.add('sc3-switching');
-      window.setTimeout(function () { main.classList.remove('sc3-switching'); }, 140);
-    }
     try {
       var r = state.manifest.router;
       if (typeof r === 'function') r(v.id, anchor);
@@ -278,10 +275,43 @@
       window.scrollTo(0, 0);
     }
     if (changed && !(opts && opts.initial)) {
-      var h = main.querySelector('h1');
-      if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+      var h = (viewNode(v) || main).querySelector('h1');
+      if (h && h.getClientRects().length) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
     }
     document.dispatchEvent(new CustomEvent('sc-view-change', { detail: { view: v.id, anchor: anchor } }));
+  }
+  function viewNode(v) {
+    if (!v || v.external || !state.manifest.viewElement) return null;
+    try { return state.manifest.viewElement(v.id) || null; } catch (e) { return null; }
+  }
+  /* A console can change page on its own (a button inside a lesson, its own shortcuts).
+     Watch the view elements and bring the frame (menu, address, sections) in line. */
+  function adoptView(v) {
+    if (!v || (state.current && state.current.id === v.id)) return;
+    state.current = v;
+    var hash = '#/' + v.id;
+    if (location.hash !== hash) history.pushState(null, '', hash);
+    markVisited(v.id);
+    rememberLast();
+    state.ui.render.active();
+    state.ui.render.progress();
+    document.dispatchEvent(new CustomEvent('sc-view-change', { detail: { view: v.id, anchor: null, adopted: true } }));
+  }
+  function watchViews() {
+    if (!window.MutationObserver || !state.manifest.viewElement) return;
+    var pairs = [];
+    state.views.forEach(function (v) { var n = viewNode(v); if (n) pairs.push([v, n]); });
+    if (pairs.length < 2) return;
+    var pending = false;
+    function check() {
+      pending = false;
+      if (!state.ui) return;
+      var cur = viewNode(state.current);
+      if (cur && cur.getClientRects().length) return;
+      for (var i = 0; i < pairs.length; i++) if (pairs[i][1].getClientRects().length) { adoptView(pairs[i][0]); return; }
+    }
+    state.viewWatch = new MutationObserver(function () { if (!pending) { pending = true; requestAnimationFrame(check); } });
+    pairs.forEach(function (p) { state.viewWatch.observe(p[1], { attributes: true, attributeFilter: ['class', 'style', 'hidden'] }); });
   }
   function jumpToAnchor(id) {
     var target = document.getElementById(id);
@@ -293,6 +323,16 @@
     state.sectionLock = Date.now() + 450;
     window.scrollTo({ top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset), behavior: 'instant' });
     if (state.ui && state.ui.render.syncSection) state.ui.render.syncSection(id);
+  }
+  // boot.js reads this before the first paint to reserve the section bar's height.
+  function rememberSections(show) {
+    if (!state.current) return;
+    var map = readJSON(KEYS.sections, {}), keys = [location.pathname + (location.hash || '#')], changed = false;
+    if (state.bareLoad) { keys.push(location.pathname + '#'); state.bareLoad = false; }  // page opened without a hash
+    keys.forEach(function (k) { if (!!map[k] !== show) { changed = true; if (show) map[k] = 1; else delete map[k]; } });
+    if (!changed) return;
+    var all = Object.keys(map); if (all.length > 200) delete map[all[0]];
+    write(KEYS.sections, JSON.stringify(map));
   }
   function rememberLast() {
     var c = state.console;
@@ -901,6 +941,7 @@
       var s = state.sections || [], show = s.length > 1 && !(state.current && state.current.sectionBar === false);
       bar.hidden = !show;
       document.documentElement.classList.toggle('sc3-has-sections', show);
+      rememberSections(show);
       if (!show) return;
       sel.innerHTML = s.map(function (c) { return '<option value="' + esc(c.id) + '">' + esc((c.badge ? c.badge + ' · ' : '') + c.title) + '</option>'; }).join('');
       sync();
@@ -965,6 +1006,16 @@
 
   /* ---------- Cross-console navigation ---------- */
   var consoleNavigator = null;   // prototype hook; real pages follow the link
+  // Fetch the next console's HTML while the pointer rests on its link (Chrome; ignored elsewhere).
+  function addPrefetchRules() {
+    try {
+      if (!HTMLScriptElement.supports || !HTMLScriptElement.supports('speculationrules') || document.getElementById('sc3-spec')) return;
+      var sr = document.createElement('script');
+      sr.type = 'speculationrules'; sr.id = 'sc3-spec';
+      sr.textContent = JSON.stringify({ prefetch: [{ where: { selector_matches: 'a[data-console-target]' }, eagerness: 'moderate' }] });
+      document.head.appendChild(sr);
+    } catch (e) { /* not supported */ }
+  }
   function goConsole(id, href) {
     if (consoleNavigator && consoleNavigator(id) !== false) return;
     location.href = href || (consoleById(id) || {}).href || HOME;
@@ -983,6 +1034,7 @@
     if (!manifest || !manifest.id) throw new Error('StudyShell.mount needs a manifest with an id');
     if (state.ui) unmount();
     state.manifest = manifest;
+    state.bareLoad = !location.hash || location.hash === '#';
     state.console = consoleById(manifest.kind === 'exam' ? manifest.parent : manifest.id) ||
       { id: manifest.id, code: manifest.code || manifest.id.toUpperCase(), name: manifest.title, short: manifest.title, accent: manifest.accent };
     var n = normalize(manifest);
@@ -991,6 +1043,7 @@
     var t = storedTheme();
     applyTheme(t || effectiveTheme());
     build();
+    addPrefetchRules();
     applyReading(readingPrefs());
     state.ui.render.theme();
     state.ui.render.lang();
@@ -999,11 +1052,13 @@
     try { restore = manifest.restore ? manifest.restore() : null; } catch (e) { restore = null; }
     var start = (h && state.byId[h.view]) ? h : { view: (restore && state.byId[restore]) ? restore : (manifest.defaultView || (state.views[0] && state.views[0].id)), anchor: null };
     navigate(start.view, start.anchor, { replace: true, initial: true });
+    watchViews();
     setTimeout(function () { if (state.ui) watchTables(state.ui.main); }, 0);
     return true;
   }
   function unmount() {
     var b = document.body;
+    if (state.viewWatch) { state.viewWatch.disconnect(); state.viewWatch = null; }
     ['.sc3-skip', '.sc3-top', '.sc3-palette', '.sc3-menu', '.sc3-scrim', '.sc3-sectionbar'].forEach(function (s) { var n = b.querySelector(s); if (n) n.remove(); });
     var main = b.querySelector('main.sc3-main');
     if (main && main.hasAttribute('data-sc3-wrap')) {

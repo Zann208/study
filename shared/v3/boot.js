@@ -70,12 +70,20 @@
   root.setAttribute('data-sc-ui', 'v3');
   if (embedded) root.classList.add('sc-embedded');
   if (script && script.getAttribute('data-console')) root.setAttribute('data-sc-console', script.getAttribute('data-console'));
+  // Restore the frame's last layout before the first paint so the page does not jump when the shell mounts.
+  if (!embedded) {
+    try {
+      if (localStorage.getItem('study-console-v3-menu-hidden') === '1') root.classList.add('sc3-menu-hidden');
+      var secs = JSON.parse(localStorage.getItem('study-console-v3-sections') || '{}');
+      if (secs && secs[location.pathname + (location.hash || '#')]) root.classList.add('sc3-has-sections');
+    } catch (e) { /* storage blocked */ }
+  }
 
   var tags = [
     '<link rel="preconnect" href="https://fonts.googleapis.com">',
     '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
-    // Only used where SF Pro / SF Mono are not installed; browsers skip unused faces.
-    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">',
+    // Only used where SF Pro / SF Mono are not installed. Loaded without blocking the first paint.
+    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media=\'all\'">',
     '<link rel="stylesheet" href="' + base + 'tokens.css' + q + '">'
   ];
   if (!embedded) tags.push('<link rel="stylesheet" href="' + base + 'shell.css' + q + '">');
