@@ -33,7 +33,8 @@
     area.hidden = !c;
     if (!c) return;
     area.querySelector('[data-continue-name]').textContent = c.name;
-    area.querySelector('[data-continue-link]').href = approved(last.href || c.href, c);
+    var link = area.matches('a') ? area : area.querySelector('[data-continue-link]');
+    if (link) link.href = approved(last.href || c.href, c);
     var mark = area.querySelector('[data-continue-icon]');
     if (mark && S.icon) mark.innerHTML = S.icon(c.icon);
   }
@@ -71,6 +72,33 @@
       { label: 'Engineering Lab', views: [linkOut('gdc', 'Data Center Prep', 'GDC')] }
     ]
   });
+
+  // Search button opens the frame's search across every console.
+  Array.prototype.forEach.call(document.querySelectorAll('[data-open-search]'), function (b) {
+    b.addEventListener('click', function () { if (S && S.openSearch) S.openSearch(); });
+  });
+
+  // Console tiles: the glow follows the pointer (pointer devices only, never with reduced motion).
+  var fine = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var grid = document.querySelector('.home-grid');
+  if (grid && fine && !still) {
+    var pending = null;
+    grid.addEventListener('pointermove', function (e) {
+      var tile = e.target.closest && e.target.closest('.home-tile');
+      if (!tile) return;
+      if (pending) cancelAnimationFrame(pending);
+      pending = requestAnimationFrame(function () {
+        var r = tile.getBoundingClientRect();
+        tile.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        tile.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+    grid.addEventListener('pointerout', function (e) {
+      var tile = e.target.closest && e.target.closest('.home-tile');
+      if (tile && !tile.contains(e.relatedTarget)) { tile.style.removeProperty('--mx'); tile.style.removeProperty('--my'); }
+    });
+  }
 
   paintIcons();
   renderContinue();
