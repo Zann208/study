@@ -51,6 +51,8 @@
 .home-title {
   margin: 0; font-family: var(--sc-display); font-weight: 700;
   font-size: clamp(3rem, 1.6rem + 5.6vw, 6.25rem); line-height: .98; letter-spacing: -.05em;
+  /* room for descenders (the y in Study): the gradient text is clipped to the box */
+  padding: .04em 0 .16em; margin-bottom: -.16em;
   /* a specular highlight passes over the title once when the page opens */
   background: linear-gradient(100deg, var(--sc-text) 0 40%, color-mix(in srgb, var(--sc-text) 30%, var(--sc-glow-1)) 48%, var(--sc-text) 56% 100%);
   background-size: 260% 100%; background-position: 100% 0;
