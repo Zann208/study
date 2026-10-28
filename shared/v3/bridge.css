@@ -91,6 +91,9 @@ html.sc-v3 svg [fill="#2a1f10" i] { fill: color-mix(in srgb, var(--sc-dg-3) 16%,
 
 /* Embedded lesson pages (iframes inside a console) */
 html.sc-v3.sc-embedded body { background: transparent; }
+/* The page colour lives on <html> so the frame's light field (z-index -1) shows through the body. */
+html.sc-v3:not(.sc-embedded) { background: var(--sc-bg); }
+html.sc-v3:not(.sc-embedded) body { background-color: transparent; }
 
 /* ---------- local palette scopes inside consoles ----------
    Some interactive labs define their own palette on a wrapper (ALG Final Prep Lab

@@ -336,6 +336,33 @@ html.sc3-has-sections body.sc3 { --sc-sticky-top: calc(var(--sc-header-h) + 48px
 }
 @media (max-width: 599px) { .sc3-sec-top { display: none; } }
 
+/* ---------- Light field behind consoles ----------
+   The hub's gradient and grain, tinted by the console's own accent and kept softer so
+   text on the page stays easy to read. Fixed behind the content; blobs move on the
+   compositor only; still with reduced motion. */
+.sc3-field { position: fixed; z-index: -1; inset: var(--sc-frame-top, 56px) 0 0 var(--sc-frame-left, 0px); overflow: hidden; pointer-events: none; animation: sc3-field-in 1.2s var(--sc-ease) both; }
+.sc3-field i { position: absolute; width: 58vmax; height: 58vmax; border-radius: 50%; opacity: .26; will-change: transform; }
+.sc3-field-a { top: -30vmax; left: -14vmax; background: radial-gradient(closest-side, var(--sc-accent), transparent); animation: sc3-drift-a 38s ease-in-out infinite alternate; }
+.sc3-field-b { top: -24vmax; right: -24vmax; background: radial-gradient(closest-side, var(--sc-glow-2), transparent); opacity: .2; animation: sc3-drift-b 45s ease-in-out infinite alternate; }
+.sc3-field-c { bottom: -38vmax; left: 30%; background: radial-gradient(closest-side, var(--sc-glow-3), transparent); opacity: .16; animation: sc3-drift-c 52s ease-in-out infinite alternate; }
+:root[data-theme="dark"] .sc3-field i { opacity: .2; }
+:root[data-theme="dark"] .sc3-field .sc3-field-b { opacity: .17; }
+:root[data-theme="dark"] .sc3-field .sc3-field-c { opacity: .12; }
+.sc3-field::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; opacity: .2; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+:root[data-theme="dark"] .sc3-field::before { opacity: .2; mix-blend-mode: soft-light; }
+/* calmer toward the bottom of the screen, where most reading happens */
+.sc3-field::after { content: ""; position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, transparent 0%, transparent 30%, color-mix(in srgb, var(--sc-bg) 70%, transparent) 75%, var(--sc-bg) 100%); }
+@keyframes sc3-field-in { from { opacity: 0; } }
+@keyframes sc3-drift-a { to { transform: translate3d(12vmax, 8vmax, 0) scale(1.1); } }
+@keyframes sc3-drift-b { to { transform: translate3d(-10vmax, 10vmax, 0) scale(.92); } }
+@keyframes sc3-drift-c { to { transform: translate3d(-8vmax, -10vmax, 0) scale(1.12); } }
+@media (prefers-reduced-motion: reduce) { .sc3-field, .sc3-field i { animation: none; } }
+@media print { .sc3-field { display: none; } }
+
 /* ---------- Content slot ---------- */
 .sc3-main { min-width: 0; outline: none; }
 

@@ -465,6 +465,12 @@
     // Frame chrome goes in front of <main>; the layout is done in CSS (fixed menu, sticky bars).
     [skip, top, menu, scrim, sectionbar].forEach(function (n) { body.insertBefore(n, main); });
     body.insertBefore(palette, body.firstChild);
+    // Light field behind every console (the hub draws its own, stronger one).
+    if (!document.querySelector('.home-aurora') && !body.querySelector(':scope > .sc3-field')) {
+      var field = el('div', { class: 'sc3-field', 'aria-hidden': 'true' });
+      field.innerHTML = '<i class="sc3-field-a"></i><i class="sc3-field-b"></i><i class="sc3-field-c"></i>';
+      body.insertBefore(field, body.firstChild);
+    }
 
     state.ui = { top: top, menu: menu, scrim: scrim, main: main, palette: palette, sectionbar: sectionbar, render: {} };
     buildMenu(parent);
@@ -1067,7 +1073,7 @@
   function unmount() {
     var b = document.body;
     if (state.viewWatch) { state.viewWatch.disconnect(); state.viewWatch = null; }
-    ['.sc3-skip', '.sc3-top', '.sc3-palette', '.sc3-menu', '.sc3-scrim', '.sc3-sectionbar'].forEach(function (s) { var n = b.querySelector(s); if (n) n.remove(); });
+    ['.sc3-skip', '.sc3-top', '.sc3-palette', '.sc3-menu', '.sc3-scrim', '.sc3-sectionbar', '.sc3-field'].forEach(function (s) { var n = b.querySelector(s); if (n) n.remove(); });
     var main = b.querySelector('main.sc3-main');
     if (main && main.hasAttribute('data-sc3-wrap')) {
       while (main.firstChild) main.parentNode.insertBefore(main.firstChild, main);
