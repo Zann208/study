@@ -25,13 +25,22 @@
 /* Fixed behind the content area; soft radial blobs drift on the compositor (transform only). */
 .home-aurora { position: fixed; z-index: -1; inset: var(--sc-frame-top, 56px) 0 0 var(--sc-frame-left, 0px); overflow: hidden; pointer-events: none; animation: home-aurora-in 1.4s var(--sc-ease) both; }
 .home-aurora i { position: absolute; width: 62vmax; height: 62vmax; border-radius: 50%; opacity: .55; will-change: transform; }
-.home-aurora-a { top: -26vmax; left: -12vmax; background: radial-gradient(closest-side, #1fd1c1, transparent); animation: home-drift-a 34s ease-in-out infinite alternate; }
-.home-aurora-b { top: -18vmax; right: -22vmax; background: radial-gradient(closest-side, #7a5cff, transparent); animation: home-drift-b 41s ease-in-out infinite alternate; }
-.home-aurora-c { bottom: -34vmax; left: 22%; background: radial-gradient(closest-side, #2f8cff, transparent); opacity: .42; animation: home-drift-c 47s ease-in-out infinite alternate; }
-:root[data-theme="dark"] .home-aurora i { opacity: .34; }
+.home-aurora-a { top: -26vmax; left: -12vmax; background: radial-gradient(closest-side, var(--sc-glow-1), transparent); animation: home-drift-a 34s ease-in-out infinite alternate; }
+.home-aurora-b { top: -18vmax; right: -22vmax; background: radial-gradient(closest-side, var(--sc-glow-2), transparent); animation: home-drift-b 41s ease-in-out infinite alternate; }
+.home-aurora-c { bottom: -34vmax; left: 22%; background: radial-gradient(closest-side, var(--sc-glow-3), transparent); opacity: .42; animation: home-drift-c 47s ease-in-out infinite alternate; }
+:root[data-theme="dark"] .home-aurora i { opacity: .38; }
+.home-aurora i.home-aurora-a { opacity: .44; }
+:root[data-theme="dark"] .home-aurora i.home-aurora-a { opacity: .32; }
 :root[data-theme="dark"] .home-aurora-c { opacity: .26; }
 /* fade the field into the page further down so long content stays readable */
-.home-aurora::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 0%, transparent 35%, var(--sc-bg) 92%); }
+.home-aurora::after { content: ""; position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, transparent 0%, transparent 35%, var(--sc-bg) 92%); }
+/* Film grain over the light field: one static noise tile, no animation */
+.home-aurora::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; opacity: .24; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+:root[data-theme="dark"] .home-aurora::before { opacity: .22; mix-blend-mode: soft-light; }
 @keyframes home-aurora-in { from { opacity: 0; } }
 @keyframes home-drift-a { to { transform: translate3d(14vmax, 8vmax, 0) scale(1.12); } }
 @keyframes home-drift-b { to { transform: translate3d(-12vmax, 12vmax, 0) scale(.9); } }
@@ -43,7 +52,7 @@
   margin: 0; font-family: var(--sc-display); font-weight: 700;
   font-size: clamp(3rem, 1.6rem + 5.6vw, 6.25rem); line-height: .98; letter-spacing: -.05em;
   /* a specular highlight passes over the title once when the page opens */
-  background: linear-gradient(100deg, var(--sc-text) 0 40%, color-mix(in srgb, var(--sc-text) 35%, #7cc8f6) 48%, var(--sc-text) 56% 100%);
+  background: linear-gradient(100deg, var(--sc-text) 0 40%, color-mix(in srgb, var(--sc-text) 30%, var(--sc-glow-1)) 48%, var(--sc-text) 56% 100%);
   background-size: 260% 100%; background-position: 100% 0;
   -webkit-background-clip: text; background-clip: text; color: transparent;
   animation: home-sweep 1.8s .35s var(--sc-ease) both;
