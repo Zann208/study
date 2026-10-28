@@ -409,7 +409,7 @@
         '<span class="sc3-sep" aria-hidden="true"></span>' +
         '<div class="sc3-switch">' +
           '<button type="button" class="sc3-switch-btn" aria-haspopup="true" aria-expanded="false" aria-controls="sc3-switch-pop">' +
-            '<span class="sc3-dot" aria-hidden="true"></span><span class="sc3-switch-code">' + esc(c.code) + '</span>' +
+            '<span class="sc3-switch-mark" aria-hidden="true">' + icon(c.icon || 'home') + '</span><span class="sc3-switch-code">' + esc(c.code) + '</span>' +
             '<span class="sc3-switch-name">' + esc(c.short) + '</span>' + icon('chevron', 'sc3-caret') + '</button>' +
           '<div class="sc3-pop sc3-switch-pop" id="sc3-switch-pop" hidden></div>' +
         '</div>' +
@@ -486,8 +486,9 @@
       html += '<a class="sc3-menu-back" href="' + esc(parent.href) + '" data-console-target="' + esc(parent.id) + '">' + icon('back') +
         '<span>Back to ' + esc(parent.short) + '</span></a>';
     }
-    html += '<div class="sc3-menu-head"><span class="sc3-menu-title">' + esc(m.title || state.console.name) + '</span>' +
-      (m.subtitle ? '<span class="sc3-menu-sub">' + esc(m.subtitle) + '</span>' : '') +
+    html += '<div class="sc3-menu-head"><div class="sc3-menu-id"><span class="sc3-menu-mark" aria-hidden="true">' + icon(state.console.icon || 'home') + '</span>' +
+      '<span class="sc3-menu-names"><span class="sc3-menu-title">' + esc(m.title || state.console.name) + '</span>' +
+      (m.subtitle ? '<span class="sc3-menu-sub">' + esc(m.subtitle) + '</span>' : '') + '</span></div>' +
       '<button type="button" class="sc3-iconbtn sc3-drawer-close" aria-label="Close menu">' + icon('close') + '</button></div>';
     state.groups.forEach(function (g) {
       var isCollapsed = collapsed.indexOf(g.key) >= 0;
@@ -501,7 +502,7 @@
       g.views.forEach(function (v) {
         var href = v.href || ('#/' + v.id);
         html += '<li><a class="sc3-item" data-nav data-view="' + esc(v.id) + '" href="' + esc(href) + '"' + (v.href ? ' data-console-target="' + esc(v.console || '') + '"' : '') + '>' +
-          '<span class="sc3-pdot" data-state="none" aria-hidden="true"></span>' +
+          '<span class="sc3-pdot" data-state="none" aria-hidden="true"></span>' + consoleMark(v.console) +
           '<span class="sc3-item-label">' + esc(labelFor(v)) + '</span>' +
           (v.badge ? '<span class="sc3-badge">' + esc(v.badge) + '</span>' : '') +
           '<span class="sc3-sr" data-sr-state></span></a>';
@@ -707,13 +708,20 @@
     if (openPop && !openPop.pop.contains(e.target) && !openPop.btn.contains(e.target)) closePop(false);
   });
 
+  /* Small icon tile in a console's own colour, the same style as the hub's console tiles. */
+  function accentVars(c) { return '--row-l:' + esc(c.accent.light) + ';--row-d:' + esc(c.accent.dark); }
+  function consoleMark(id) {
+    var c = id && consoleById(id);
+    return c && c.accent ? '<span class="sc3-item-mark" style="' + accentVars(c) + '" aria-hidden="true">' + icon(c.icon) + '</span>' : '';
+  }
+
   /* ---------- Console switcher ---------- */
   function wireSwitcher() {
     var ui = state.ui, btn = ui.top.querySelector('.sc3-switch-btn'), pop = ui.top.querySelector('.sc3-switch-pop');
     function row(c) {
       var cur = c.id === state.console.id;
       return '<a class="sc3-switch-row' + (cur ? ' is-current' : '') + '" href="' + esc(c.href) + '" data-console-target="' + esc(c.id) + '"' +
-        (cur ? ' aria-current="page"' : '') + ' style="--row-accent:' + esc(effectiveTheme() === 'dark' ? c.accent.dark : c.accent.light) + '">' +
+        (cur ? ' aria-current="page"' : '') + ' style="' + accentVars(c) + '">' +
         '<span class="sc3-switch-icon">' + icon(c.icon) + '</span>' +
         '<span class="sc3-switch-copy"><b>' + esc(c.name) + '</b><span>' + esc(c.code) + (c.blurb ? ' · ' + esc(c.blurb) : '') + '</span></span></a>';
     }

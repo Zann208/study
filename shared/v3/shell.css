@@ -84,6 +84,11 @@ html:has(body.sc3) { scroll-padding-top: calc(var(--sc-header-h) + 16px); }
   border-bottom: 1px solid var(--sc-line);
   view-transition-name: sc3-top;
 }
+.sc3-top::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, #1fd1c1 20%, #7a5cff 50%, #2f8cff 80%, transparent); opacity: .55;
+}
+:root[data-theme="dark"] .sc3-top::after { opacity: .8; box-shadow: 0 0 10px rgb(122 92 255 / 45%); }
 .sc3-top-inner {
   height: 100%; display: flex; align-items: center; gap: var(--sc-sp-2);
   padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px));
@@ -106,16 +111,36 @@ html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
   font-family: var(--sc-display); font-weight: var(--sc-fw-semibold); letter-spacing: var(--sc-ls-text);
 }
 .sc3-brand:hover { background: var(--sc-surface-2); }
+/* Logo: the hub's light field (teal, violet, blue) in a tile */
 .sc3-brand-mark {
-  width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px;
-  background: var(--sc-text); color: var(--sc-surface);
+  width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; color: #fff;
+  background: radial-gradient(circle at 20% 15%, #1fd1c1, transparent 62%), radial-gradient(circle at 90% 30%, #7a5cff, transparent 65%), radial-gradient(circle at 50% 110%, #2f8cff, transparent 70%), #2b2f6b;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 18%);
 }
+:root[data-theme="dark"] .sc3-brand-mark { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 18%), 0 0 14px rgb(122 92 255 / 35%); }
 .sc3-brand-mark .sc3-icon { width: 16px; height: 16px; stroke-width: 2; }
 .sc3-sep { width: 1px; height: 22px; background: var(--sc-line); flex: none; }
 
 .sc3-switch { position: relative; flex: none; }
 .sc3-switch-btn { height: 40px; display: inline-flex; align-items: center; gap: var(--sc-sp-2); padding: 0 10px; color: var(--sc-text); }
-.sc3-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--sc-accent); flex: none; }
+/* Console icon tiles in the frame: the same style as the hub's console tiles */
+.sc3-switch-mark, .sc3-menu-mark, .sc3-switch-icon, .sc3-item-mark {
+  display: grid; place-items: center; flex: none; color: var(--row-accent);
+  background: color-mix(in srgb, var(--row-accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--row-accent) 30%, transparent);
+}
+.sc3-switch-mark, .sc3-menu-mark { --row-accent: var(--sc-accent); }
+.sc3-switch-icon, .sc3-item-mark { --row-accent: var(--row-l, var(--sc-accent)); }
+:root[data-theme="dark"] :is(.sc3-switch-icon, .sc3-item-mark) { --row-accent: var(--row-d, var(--sc-accent)); }
+:root[data-theme="dark"] :is(.sc3-switch-mark, .sc3-menu-mark, .sc3-switch-icon, .sc3-item-mark) .sc3-icon { filter: drop-shadow(0 0 5px color-mix(in srgb, var(--row-accent) 65%, transparent)); }
+.sc3-switch-mark { width: 26px; height: 26px; border-radius: 8px; }
+.sc3 .sc3-switch-mark .sc3-icon { width: 15px; height: 15px; }
+.sc3-menu-mark { width: 36px; height: 36px; border-radius: 10px; }
+.sc3 .sc3-menu-mark .sc3-icon { width: 19px; height: 19px; }
+.sc3-item-mark { width: 22px; height: 22px; border-radius: 6px; margin-left: -4px; }
+.sc3 .sc3-item-mark .sc3-icon { width: 13px; height: 13px; }
+.sc3-item-mark ~ .sc3-item-label { margin-left: -2px; }
+.sc3-item[data-console-target] .sc3-pdot { display: none; }
 .sc3-switch-code { font: var(--sc-fw-bold) var(--sc-fs-xs)/1 var(--sc-mono); letter-spacing: .06em; color: var(--sc-accent); }
 .sc3-switch-name { font-weight: var(--sc-fw-medium); white-space: nowrap; }
 .sc3-caret { width: 14px; height: 14px; color: var(--sc-faint); transition: transform var(--sc-dur) var(--sc-ease); }
@@ -172,10 +197,7 @@ html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
 }
 .sc3-switch-row:hover, .sc3-switch-row:focus-visible { background: var(--sc-surface-2); }
 .sc3-switch-row.is-current { background: var(--sc-accent-soft); }
-.sc3-switch-icon {
-  width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; flex: none;
-  color: var(--row-accent); background: color-mix(in srgb, var(--row-accent) 14%, var(--sc-surface));
-}
+.sc3-switch-icon { width: 34px; height: 34px; border-radius: 10px; }
 .sc3-switch-copy { min-width: 0; display: grid; }
 .sc3-switch-copy b { font-weight: var(--sc-fw-medium); }
 .sc3-switch-copy span { font-size: var(--sc-fs-xs); color: var(--sc-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -222,6 +244,8 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
 .sc3-menu-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--sc-sp-2); row-gap: 2px; align-items: start; padding: var(--sc-sp-1) var(--sc-sp-3) var(--sc-sp-3); }
 .sc3-menu-head > :not(.sc3-drawer-close) { grid-column: 1; }
 .sc3-drawer-close { grid-column: 2; grid-row: 1 / span 2; display: none; margin: -6px -8px 0 0; }
+.sc3-menu-id { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.sc3-menu-names { display: grid; gap: 2px; min-width: 0; }
 .sc3-menu-title { font-family: var(--sc-display); font-weight: var(--sc-fw-semibold); font-size: var(--sc-fs-base); letter-spacing: var(--sc-ls-text); line-height: 1.25; text-wrap: balance; }
 .sc3-menu-sub { font-size: var(--sc-fs-xs); color: var(--sc-faint); }
 .sc3-menu-back {
@@ -246,6 +270,11 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
 }
 .sc3-item:hover { background: var(--sc-surface-2); color: var(--sc-text); }
 .sc3-item.is-active { background: var(--sc-accent-soft); color: var(--sc-text); font-weight: var(--sc-fw-medium); }
+.sc3-item.is-active::before, .sc3-switch-row.is-current::before {
+  content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 0 3px 3px 0;
+  background: var(--sc-accent); box-shadow: 0 0 8px color-mix(in srgb, var(--sc-accent) 70%, transparent), 0 0 18px color-mix(in srgb, var(--sc-accent) 40%, transparent);
+}
+.sc3-switch-row { position: relative; }
 .sc3-item-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sc3-badge {
   font: 500 var(--sc-fs-xs)/1 var(--sc-mono); color: var(--sc-faint); padding: 3px 6px; border-radius: 5px;
