@@ -89,6 +89,7 @@
   if (!embedded) tags.push('<link rel="stylesheet" href="' + base + 'shell.css' + q + '">');
   tags.push('<link rel="stylesheet" href="' + base + 'components.css' + q + '">');
   tags.push('<link rel="stylesheet" href="' + base + 'bridge.css' + q + '">');
+  tags.push('<link rel="stylesheet" href="' + base + 'reading.css' + q + '">');
   if (!embedded) tags.push('<script src="' + base + 'shell.js' + q + '"><\/script>');
   document.write(tags.join(''));
 })();

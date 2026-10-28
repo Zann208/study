@@ -8,15 +8,19 @@
   color-scheme: light;
 
   /* Neutrals */
-  --sc-bg: #f5f5f7;
+  /* Light: a cool grey page so white surfaces lift off it; text in three clear steps */
+  --sc-bg: #eceef2;
   --sc-surface: #ffffff;
-  --sc-surface-2: #f2f2f5;
-  --sc-surface-3: #e8e8ed;
-  --sc-text: #1d1d1f;
-  --sc-muted: #424245;
-  --sc-faint: #636368;
-  --sc-line: #e3e3e8;
-  --sc-line-strong: #c7c7cc;
+  --sc-surface-2: #f4f5f8;
+  --sc-surface-3: #e8eaef;
+  --sc-text: #141519;
+  --sc-text-body: #2a2c32;
+  --sc-muted: #4d5058;
+  --sc-faint: #62666f;
+  --sc-line: #e1e3e9;
+  --sc-line-strong: #c8cbd3;
+  /* Cards lift with a soft shadow in light mode; dark mode uses borders only */
+  --sc-shadow-card: 0 1px 2px rgb(20 24 36 / 5%), 0 12px 32px -18px rgb(20 24 36 / 22%);
 
   /* Accent (hub default; the shell replaces it per console) */
   --sc-accent: #0066cc;
@@ -31,16 +35,16 @@
   --sc-danger: #b3261e; --sc-danger-soft: #fdecea;
 
   /* Diagram palette: distinct state colors, AA on --sc-surface in both themes */
-  --sc-dg-1: #0b7a75; --sc-dg-2: #6a3fc7; --sc-dg-3: #b45309; --sc-dg-4: #c0265d;
+  --sc-dg-1: #086a65; --sc-dg-2: #6a3fc7; --sc-dg-3: #9c4706; --sc-dg-4: #c0265d;
   --sc-dg-5: #1d64c4; --sc-dg-6: #137238;
   /* Light field (hub background, logo, bar edge): leans on the portfolio's wine, plum and slate */
   --sc-glow-1: #c4525d; --sc-glow-2: #8a55d6; --sc-glow-3: #4f7fc4;
-  --sc-dg-ink: #1d1d1f; --sc-dg-edge: #86868b; --sc-dg-fill: #f5f5f7;
+  --sc-dg-ink: #141519; --sc-dg-edge: #86868b; --sc-dg-fill: #f4f5f8;
 
   /* Code surfaces */
-  --sc-code-bg: #f5f5f7;
-  --sc-code-text: #1d1d1f;
-  --sc-code-line: #e3e3e8;
+  --sc-code-bg: #f4f5f8;
+  --sc-code-text: #141519;
+  --sc-code-line: #e1e3e9;
   /* Syntax colors (Xcode default light / dark) */
   --sc-tok-comment: #5d6c79; --sc-tok-string: #c41a16; --sc-tok-keyword: #9b2393;
   --sc-tok-type: #0b4f79; --sc-tok-number: #1c00cf; --sc-tok-preproc: #643820;
@@ -116,7 +120,7 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
     --sc-bg: #000000; --sc-surface: #0e0e10; --sc-surface-2: #1c1c1e; --sc-surface-3: #2c2c2e;
-    --sc-text: #f5f5f7; --sc-muted: #c7c7cc; --sc-faint: #98989f;
+    --sc-text: #f5f5f7; --sc-text-body: #dcdce1; --sc-muted: #c7c7cc; --sc-faint: #98989f; --sc-shadow-card: none;
     --sc-line: #232326; --sc-line-strong: #3a3a3c;
     --sc-accent: #2997ff; --sc-accent-strong: #6cb6ff; --sc-accent-soft: #0b2540; --sc-on-accent: #000000;
     --sc-info: #6fc3e3; --sc-info-soft: #0d2630;
@@ -138,7 +142,7 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
   --sc-bg: #000000; --sc-surface: #0e0e10; --sc-surface-2: #1c1c1e; --sc-surface-3: #2c2c2e;
-  --sc-text: #f5f5f7; --sc-muted: #c7c7cc; --sc-faint: #98989f;
+  --sc-text: #f5f5f7; --sc-text-body: #dcdce1; --sc-muted: #c7c7cc; --sc-faint: #98989f; --sc-shadow-card: none;
   --sc-line: #232326; --sc-line-strong: #3a3a3c;
   --sc-accent: #2997ff; --sc-accent-strong: #6cb6ff; --sc-accent-soft: #0b2540; --sc-on-accent: #000000;
   --sc-info: #6fc3e3; --sc-info-soft: #0d2630;

@@ -22,6 +22,8 @@
     menu: 'study-console-v3-menu',         // collapsed groups per console
     menuHidden: 'study-console-v3-menu-hidden',
     sections: 'study-console-v3-sections',
+    paged: 'study-console-v3-paged',
+    page: 'study-console-v3-page',
     visited: 'study-console-v3-visited',
     done: 'study-console-v3-done',          // pages the learner marked done
     ui: 'study-console-ui'                 // sessionStorage: 'v2' forces the old shell
@@ -313,9 +315,94 @@
     state.viewWatch = new MutationObserver(function () { if (!pending) { pending = true; requestAnimationFrame(check); } });
     pairs.forEach(function (p) { state.viewWatch.observe(p[1], { attributes: true, attributeFilter: ['class', 'style', 'hidden'] }); });
   }
+  /* ---------- One topic at a time ----------
+     Long views (topics, chapters, labs) show one top-level section at a time with
+     previous / next at its end. "Show all" in the section bar turns it off (remembered).
+     Search, J/K, deep links and console jumps reveal the section they point into. */
+  function pagedPref() { return read(KEYS.paged, '1') !== '0'; }
+  function pageKey() { return location.pathname + '#' + (state.current ? state.current.id : ''); }
+  function clearPaging() {
+    var p = state.paging;
+    if (p) {
+      p.tops.forEach(function (t) { t.el.classList.remove('sc3-paged-hidden'); });
+      if (p.pager && p.pager.parentNode) p.pager.parentNode.removeChild(p.pager);
+    }
+    state.paging = null;
+    document.documentElement.classList.remove('sc3-paged');
+  }
+  function setupPaging(preferId) {
+    clearPaging();
+    var ui = state.ui, mode = ui && ui.sectionbar.querySelector('.sc3-sec-mode');
+    if (!ui || ui.sectionbar.hidden || !state.current) { if (mode) mode.hidden = true; return; }
+    var els = (state.sections || []).map(function (c) { var n = document.getElementById(c.id); return n ? { el: n, id: c.id, title: c.title, badge: c.badge } : null; }).filter(Boolean);
+    var tops = els.filter(function (a) { return !els.some(function (b) { return b !== a && b.el.contains(a.el); }); });
+    var total = 0;
+    tops.forEach(function (t) { total += t.el.getBoundingClientRect().height; });
+    var long = tops.length >= 3 && total > window.innerHeight * 3.5;
+    if (mode) { mode.hidden = !long; }
+    if (!long) return;
+    var on = pagedPref();
+    if (mode) { mode.textContent = on ? 'Show all' : 'One at a time'; mode.setAttribute('aria-pressed', String(!on)); }
+    if (!on) return;
+    var saved = readJSON(KEYS.page, {});
+    var start = 0, want = preferId || saved[pageKey()];
+    tops.forEach(function (t, i) { if (t.id === want) start = i; });
+    state.paging = { active: true, tops: tops, cur: -1, pager: null };
+    document.documentElement.classList.add('sc3-paged');
+    showTop(start);
+  }
+  function showTop(i) {
+    var p = state.paging;
+    if (!p || i < 0 || i >= p.tops.length || i === p.cur) return;
+    p.tops.forEach(function (t, k) { t.el.classList.toggle('sc3-paged-hidden', k !== i); });
+    p.cur = i;
+    var map = readJSON(KEYS.page, {}); map[pageKey()] = p.tops[i].id;
+    var keys = Object.keys(map); if (keys.length > 100) delete map[keys[0]];
+    write(KEYS.page, JSON.stringify(map));
+    if (p.pager && p.pager.parentNode) p.pager.parentNode.removeChild(p.pager);
+    var prev = p.tops[i - 1], next = p.tops[i + 1], v = state.current.id;
+    function card(t, cls, label) {
+      return t ? '<a class="sc3-pager-link ' + cls + '" href="#/' + esc(v) + '/' + esc(t.id) + '" data-sc3-page="' + esc(t.id) + '">' +
+        '<small>' + label + '</small><b>' + esc((t.badge ? t.badge + '  ' : '') + t.title) + '</b></a>' : '<span class="sc3-pager-link is-empty"></span>';
+    }
+    var nav = document.createElement('nav');
+    nav.className = 'sc3-pager'; nav.setAttribute('aria-label', 'Previous and next');
+    nav.innerHTML = card(prev, 'is-prev', 'Previous') + '<span class="sc3-pager-count">' + (i + 1) + ' of ' + p.tops.length + '</span>' + card(next, 'is-next', 'Next');
+    p.tops[i].el.parentNode.insertBefore(nav, p.tops[i].el.nextSibling);
+    p.pager = nav;
+  }
+  // Show the section that contains el (used before any scroll to it). Returns true if it changed.
+  function reveal(el) {
+    var p = state.paging;
+    if (!p || !el || !el.nodeType) return false;
+    for (var i = 0; i < p.tops.length; i++) {
+      if (p.tops[i].el === el || p.tops[i].el.contains(el)) {
+        if (i === p.cur) return false;
+        showTop(i);
+        var h = '#/' + state.current.id + '/' + p.tops[i].id;
+        if (location.hash !== h) history.replaceState(null, '', h);
+        return true;
+      }
+    }
+    return false;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-sc3-page]');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0 || !state.current) return;
+    e.preventDefault();
+    navigate(state.current.id, a.getAttribute('data-sc3-page'), { keepScroll: true });
+  });
+  // Consoles scroll to their own targets (next-topic buttons, chapter maps); reveal the target first.
+  if (!Element.prototype.__sc3Reveal) {
+    var nativeScrollIntoView = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = function () { try { reveal(this); } catch (e) { /* ignore */ } return nativeScrollIntoView.apply(this, arguments); };
+    Element.prototype.__sc3Reveal = true;
+  }
+
   function jumpToAnchor(id) {
     var target = document.getElementById(id);
     if (!target) return;
+    reveal(target);
     if (target.tagName === 'DETAILS') target.open = true;
     var parentDetails = target.parentElement && target.parentElement.closest('details');
     if (parentDetails) parentDetails.open = true;
@@ -461,7 +548,8 @@
       '<label class="sc3-sr" for="sc3-sec-select">Jump to section</label>' +
       '<select id="sc3-sec-select" class="sc3-sec-select"></select>' +
       '<button type="button" class="sc3-iconbtn sc3-sec-next" aria-label="Next section" title="Next section (J)">' + icon('chevron', 'sc3-rot270') + '</button>' +
-      '<button type="button" class="sc3-sec-top">Top</button>';
+      '<button type="button" class="sc3-sec-top">Top</button>' +
+      '<button type="button" class="sc3-sec-mode" aria-pressed="false" hidden>Show all</button>';
     // Frame chrome goes in front of <main>; the layout is done in CSS (fixed menu, sticky bars).
     [skip, top, menu, scrim, sectionbar].forEach(function (n) { body.insertBefore(n, main); });
     body.insertBefore(palette, body.firstChild);
@@ -956,10 +1044,18 @@
       bar.hidden = !show;
       document.documentElement.classList.toggle('sc3-has-sections', show);
       rememberSections(show);
-      if (!show) return;
+      if (!show) { setupPaging(); return; }
       sel.innerHTML = s.map(function (c) { return '<option value="' + esc(c.id) + '">' + esc((c.badge ? c.badge + ' · ' : '') + c.title) + '</option>'; }).join('');
+      setupPaging();
       sync();
     };
+    var mode = bar.querySelector('.sc3-sec-mode');
+    mode.addEventListener('click', function () {
+      write(KEYS.paged, pagedPref() ? '0' : '1');
+      var keep = state.paging && state.paging.active ? state.paging.tops[state.paging.cur] : null;
+      setupPaging(keep ? keep.el.id : null);
+      if (keep) jumpToAnchor(keep.el.id); else sync();
+    });
     ui.render.syncSection = function (id) {
       var s = state.sections || [];
       for (var i = 0; i < s.length; i++) if (s[i].id === id) { sel.selectedIndex = i; break; }
@@ -976,11 +1072,14 @@
     }
     function sync() {
       if (state.sectionLock && Date.now() < state.sectionLock) return;
-      var s = state.sections || [], best = 0, line = ui.top.getBoundingClientRect().bottom + bar.offsetHeight + 24;
+      var s = state.sections || [], best = -1, first = -1, line = ui.top.getBoundingClientRect().bottom + bar.offsetHeight + 24;
       for (var i = 0; i < s.length; i++) {
         var n = document.getElementById(s[i].id);
-        if (n && n.getClientRects().length && n.getBoundingClientRect().top <= line) best = i;
+        if (!n || !n.getClientRects().length) continue;
+        if (first < 0) first = i;
+        if (n.getBoundingClientRect().top <= line) best = i;
       }
+      if (best < 0) best = Math.max(0, first);
       sel.selectedIndex = best; buttons();
     }
     var t = null;
@@ -1072,6 +1171,7 @@
   }
   function unmount() {
     var b = document.body;
+    clearPaging();
     if (state.viewWatch) { state.viewWatch.disconnect(); state.viewWatch = null; }
     ['.sc3-skip', '.sc3-top', '.sc3-palette', '.sc3-menu', '.sc3-scrim', '.sc3-sectionbar', '.sc3-field'].forEach(function (s) { var n = b.querySelector(s); if (n) n.remove(); });
     var main = b.querySelector('main.sc3-main');
@@ -1102,6 +1202,7 @@
     navigate: navigate,
     refreshProgress: function () { if (state.ui) state.ui.render.progress(); },
     refreshSections: function () { if (state.ui) state.ui.render.active(); },
+    reveal: function (el) { return reveal(el); },
     setTheme: setTheme,
     openSearch: openSearch,
     current: function () { return state.current && state.current.id; },

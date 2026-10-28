@@ -1,0 +1,179 @@
+/* Study Console UI v3 — reading layer.
+   One reading rhythm for every console's lessons, applied over each console's own CSS
+   without touching its markup:
+   - a section opens with a clear header (bigger title, accent tint), so topics never blur together
+   - subheads read as headings (sentence case, separated by a hairline), not tiny capitals
+   - body text 17px / 1.72 in a softer ink, lines held near 70 characters
+   - tables, callouts and notes one size up, quieter table headers
+   - in light mode cards lift with a soft shadow off the grey page
+   Selectors are scoped by console (html[data-sc-console]) so their weight beats the
+   consoles' single-class rules. Loaded by boot.js after bridge.css. */
+
+:root {
+  --read-size: 1.0625rem;            /* 17px body */
+  --read-lh: 1.72;
+  --read-measure: 70ch;
+  --read-small: .9375rem;            /* 15px tables, notes */
+  --read-accent: var(--sc-accent);
+  --read-head: var(--sc-display);
+}
+
+/* ======================================================================
+   NET and WLN: topic articles (.item) with a header row (.ph)
+   ====================================================================== */
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main {
+  --read-tint: color-mix(in srgb, var(--read-accent) 9%, var(--sc-surface));
+}
+
+/* Section opening */
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main .item > .ph {
+  gap: 12px; align-items: center;
+  background: linear-gradient(115deg, var(--read-tint), var(--sc-surface) 72%);
+}
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main .item > .ph h3 {
+  font: 700 1.5rem/1.25 var(--read-head); letter-spacing: -.022em; color: var(--sc-text); margin: 0;
+}
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main .item > .ph .badge {
+  font: 600 .8125rem/1 var(--sc-mono); letter-spacing: .02em; text-transform: none;
+  padding: 6px 11px; border-radius: 999px; background: var(--sc-surface);
+  color: var(--read-accent); border-color: color-mix(in srgb, var(--read-accent) 45%, transparent);
+}
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main .item > .ph .tag { font-size: .8125rem; color: var(--sc-faint); }
+
+/* NET: the article is the card; its header becomes the card's top band */
+:root[data-sc-console="netdes"] main .item {
+  border-radius: 18px; padding: 26px 30px 28px; margin-top: 22px;
+  box-shadow: var(--sc-shadow-card);
+}
+:root[data-sc-console="netdes"] main .item > .ph {
+  margin: -26px -30px 22px; padding: 20px 30px 18px; border-radius: 18px 18px 0 0;
+  border-bottom: 1px solid var(--sc-line);
+}
+:root[data-sc-console="netdes"] main .item > p.tldr {
+  font-size: 1.0625rem; line-height: 1.55; font-weight: 600; color: var(--sc-text);
+  padding: 14px 18px; border-radius: 12px; border-left: 3px solid var(--read-accent);
+  background: color-mix(in srgb, var(--read-accent) 7%, var(--sc-surface-2));
+}
+
+/* WLN: the header row and each topic block are separate cards (set by chapter-layout.js) */
+:root[data-sc-console="wnet"] main .item > .ph { border-radius: 16px; padding: 18px 22px !important; }
+:root[data-sc-console="wnet"] main .topic-block { border-radius: 16px !important; box-shadow: var(--sc-shadow-card) !important; border-color: var(--sc-line) !important; }
+:root[data-sc-console="wnet"] main .topic-block > h4 { font: 650 1.125rem/1.35 var(--read-head) !important; letter-spacing: -.012em !important; color: var(--sc-text) !important; }
+:root[data-sc-console="wnet"] main .topic-label { font: 650 .75rem/1.2 var(--sc-sans) !important; letter-spacing: .04em !important; }
+:root[data-sc-console="wnet"] main .tldr { font-size: 1.0625rem !important; line-height: 1.55 !important; font-weight: 600; }
+
+/* Subheads inside a NET topic: real headings with a hairline above */
+:root[data-sc-console="netdes"] main .item > h4 {
+  display: flex; align-items: center; gap: 10px;
+  margin: 34px 0 12px; padding-top: 22px; border-top: 1px solid var(--sc-line);
+  font: 650 1.0625rem/1.35 var(--read-head); letter-spacing: -.01em; text-transform: none; color: var(--sc-text);
+}
+:root[data-sc-console="netdes"] main .item > h4::before {
+  content: ""; flex: none; width: 4px; height: 1.05em; border-radius: 2px; background: var(--read-accent);
+}
+
+/* Body text */
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main :is(.item, .topic-block) :is(p:not([class]), ul:not([class]) > li, ul.pts > li, ol > li) {
+  font-size: var(--read-size); line-height: var(--read-lh); color: var(--sc-text-body); max-width: var(--read-measure);
+}
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main :is(.item, .topic-block) p:not([class]) + p:not([class]) { margin-top: .7em; }
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main :is(.item, .topic-block, .panel) p.sub2 {
+  font-size: var(--read-small); line-height: 1.6; color: var(--sc-muted); max-width: var(--read-measure);
+}
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main :is(.item, .topic-block) .box { font-size: 1rem; line-height: 1.65; padding: 14px 18px; border-radius: 12px; }
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main :is(.item, .topic-block) .box > b:first-child { font: 650 .75rem/1.3 var(--sc-sans); letter-spacing: .04em; margin-bottom: 4px; }
+/* The consoles' ".box b:first-child" label rule also caught the first bold word in each list item */
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main .box :is(li, p, td) > b:first-child {
+  display: inline; font: inherit; font-weight: 700; letter-spacing: 0; text-transform: none; margin: 0; color: inherit;
+}
+/* In one-at-a-time reading the frame's previous / next replaces the topic's own arrows */
+:root.sc3-paged[data-sc-console="netdes"] main .item > .tnav { display: none; }
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main :is(.item, .topic-block) details > summary { font: 600 .9375rem/1.4 var(--sc-sans); letter-spacing: 0; padding: 11px 16px; }
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main :is(.item, .topic-block) .dbody { font-size: 1rem; line-height: 1.65; }
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main .panel { box-shadow: var(--sc-shadow-card); border-radius: 16px; }
+
+/* ======================================================================
+   OS and PRV: chapters and notes are <details class="note">
+   ====================================================================== */
+:root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note {
+  border-radius: 16px; box-shadow: var(--sc-shadow-card); border-color: var(--sc-line); overflow: hidden;
+}
+:root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note > summary {
+  font: 650 1.125rem/1.35 var(--read-head); letter-spacing: -.015em; padding: 16px 20px;
+}
+:root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note[open] > summary {
+  background: linear-gradient(115deg, color-mix(in srgb, var(--read-accent) 9%, var(--sc-surface)), var(--sc-surface) 72%);
+  border-bottom: 1px solid var(--sc-line);
+}
+:root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note > .body {
+  font-size: var(--read-size); line-height: var(--read-lh); color: var(--sc-text-body); padding: 6px 24px 24px;
+}
+:root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note > .body :is(p:not([class]), ul > li, ol > li) { max-width: var(--read-measure); }
+:root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note > .body > h4 {
+  display: flex; align-items: center; gap: 10px;
+  margin: 30px 0 10px; padding-top: 20px; border-top: 1px solid var(--sc-line);
+  font: 650 1.0625rem/1.35 var(--read-head); letter-spacing: -.01em; text-transform: none; color: var(--sc-text);
+}
+:root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note > .body > h4::before {
+  content: ""; flex: none; width: 4px; height: 1.05em; border-radius: 2px; background: var(--read-accent);
+}
+:root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note > .body > h4:first-child { margin-top: 16px; padding-top: 0; border-top: 0; }
+:root:is([data-sc-console="os"], [data-sc-console="privacy"]) main :is(.tip, .box, .formula) { font-size: 1rem; line-height: 1.65; border-radius: 12px; }
+:root:is([data-sc-console="os"], [data-sc-console="privacy"]) main p.sub2 { font-size: var(--read-small); color: var(--sc-muted); }
+:root:is([data-sc-console="os"], [data-sc-console="privacy"]) main :is(.panel, .card, .case) { box-shadow: var(--sc-shadow-card); border-radius: 16px; }
+
+/* ======================================================================
+   ALG: each topic is a .card with an h2
+   ====================================================================== */
+:root[data-sc-console="algo"] main .page > .card {
+  border-radius: 18px; padding: 26px 30px 28px; box-shadow: var(--sc-shadow-card);
+}
+:root[data-sc-console="algo"] main .page > .card > h2 {
+  font: 700 1.375rem/1.3 var(--read-head); letter-spacing: -.02em; color: var(--sc-text);
+  margin: -26px -30px 18px; padding: 20px 30px 16px; border-radius: 18px 18px 0 0; border-bottom: 1px solid var(--sc-line);
+  background: linear-gradient(115deg, color-mix(in srgb, var(--read-accent) 9%, var(--sc-surface)), var(--sc-surface) 72%);
+}
+:root[data-sc-console="algo"] main .page > .card > :is(p:not([class]), ul > li, ol > li) {
+  font-size: var(--read-size); line-height: var(--read-lh); color: var(--sc-text-body); max-width: var(--read-measure);
+}
+:root[data-sc-console="algo"] main .page > .card > h3 {
+  margin: 28px 0 10px; padding-top: 20px; border-top: 1px solid var(--sc-line);
+  font: 650 1.0625rem/1.35 var(--read-head); letter-spacing: -.01em; color: var(--sc-text);
+}
+:root[data-sc-console="algo"] main .page > .card .box { font-size: 1rem; line-height: 1.65; border-radius: 12px; }
+
+/* ======================================================================
+   Tables in lessons (all consoles): one size up, calm headers, roomier rows
+   ====================================================================== */
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"], [data-sc-console="os"], [data-sc-console="privacy"], [data-sc-console="algo"])
+  main :is(.item, .topic-block, details.note, .page > .card, .panel) table:not(.a4c) { font-size: var(--read-small); line-height: 1.55; }
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"], [data-sc-console="os"], [data-sc-console="privacy"], [data-sc-console="algo"])
+  main :is(.item, .topic-block, details.note, .page > .card, .panel) table:not(.a4c) th {
+  font: 600 .8125rem/1.35 var(--sc-sans); letter-spacing: .01em; text-transform: none; color: var(--sc-muted);
+  background: var(--sc-surface-2); padding: 10px 14px;
+}
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"], [data-sc-console="os"], [data-sc-console="privacy"], [data-sc-console="algo"])
+  main :is(.item, .topic-block, details.note, .page > .card, .panel) table:not(.a4c) td { padding: 11px 14px; }
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"], [data-sc-console="os"], [data-sc-console="privacy"], [data-sc-console="algo"])
+  main :is(.item, .topic-block, details.note, .page > .card, .panel) table:not(.a4c) tr:hover > td { background: color-mix(in srgb, var(--read-accent) 4%, transparent); }
+
+/* ======================================================================
+   Page titles (h1 of each view): one size for every console
+   ====================================================================== */
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"], [data-sc-console="os"], [data-sc-console="privacy"]) main section.tab > .wrap > h1,
+:root[data-sc-console="algo"] main .page > h1 {
+  font: 700 clamp(1.875rem, 1.4rem + 1.6vw, 2.5rem)/1.12 var(--read-head); letter-spacing: -.03em; color: var(--sc-text);
+}
+
+/* ======================================================================
+   Phones
+   ====================================================================== */
+@media (max-width: 599px) {
+  :root { --read-size: 1rem; --read-lh: 1.68; }
+  :root[data-sc-console="netdes"] main .item { padding: 20px 18px 22px; }
+  :root[data-sc-console="netdes"] main .item > .ph { margin: -20px -18px 18px; padding: 16px 18px 14px; }
+  :root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main .item > .ph h3 { font-size: 1.25rem; }
+  :root[data-sc-console="algo"] main .page > .card { padding: 20px 18px 22px; }
+  :root[data-sc-console="algo"] main .page > .card > h2 { margin: -20px -18px 16px; padding: 16px 18px 14px; font-size: 1.1875rem; }
+  :root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note > .body { padding: 4px 16px 18px; }
+}

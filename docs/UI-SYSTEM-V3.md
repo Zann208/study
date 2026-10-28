@@ -20,6 +20,7 @@ Live preview of tokens and components: https://zann208.github.io/study/shared/v3
 | `shared/v3/shell.css` | The frame (`.sc3-` prefix): top bar, menu, drawer, section bar, popovers, search palette. |
 | `shared/v3/shell.js` | `window.StudyShell`: console registry, mounting from a manifest, routing, search, progress, theme, language and reading controls, keyboard support. |
 | `shared/v3/components.css` | Shared components (`.sc-` prefix): type contract, prose, cards, callouts, definitions, traps, tables, code blocks, buttons, tabs, segmented controls, inputs, chips, badges, lab panel and stepper, diagram frame and legend, quiz, mock exam, utilities. |
+| `shared/v3/reading.css` | Reading layer over each console's lessons: section headers with an accent tint, subheads as real headings with a hairline above, 17px body text at 1.72 line height held near 70 characters, larger tables and callouts, card shadows in light mode. Scoped per console with `html[data-sc-console]`. |
 | `shared/v3/bridge.css` | Backward-compatible adapter. Maps the legacy variable names consoles already use (`--bg`, `--panel`, `--ink`, `--cy`, `--am`, `--mono` and so on) and legacy hard-coded SVG colours onto v3 tokens, so existing lessons pick up the new look without being edited. |
 | `shared/v3/diagram.js` | `window.StudyDiagram`: token-only SVG nodes, edges and legends. |
 | `shared/v3/preview.html` | Live design-system page. |
@@ -104,6 +105,7 @@ Existing console diagrams keep their markup; `bridge.css` maps their legacy fill
 - Switching consoles is a normal page load; where the browser supports cross-document view transitions (Chrome 126+, Safari 18.2+) the bar and menu stay in place. Hovering a console link prefetches its HTML (Chrome).
 - If a console changes page on its own (a button inside a lesson), the frame follows: menu, address and section bar update, and Back returns to the previous page.
 - Iframes inside a console (ALG definition banks, PRV midterm pack) load the first time their page is opened.
+- Long views (three or more top-level sections taller than three and a half screens) show one section at a time with Previous and Next cards at its end. "Show all" in the section bar switches back (remembered in `study-console-v3-paged`); the last section read per view is kept in `study-console-v3-page`. Search, J/K, deep links and a console's own `scrollIntoView` jumps reveal the right section; consoles that scroll by position call `StudyShell.reveal(el)` first. Printing shows every section.
 - Reduced motion is honoured.
 
 ## Writing
