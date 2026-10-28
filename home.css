@@ -59,6 +59,25 @@
   -webkit-background-clip: text; background-clip: text; color: transparent;
   animation: home-sweep 1.8s .35s var(--sc-ease) both;
 }
+/* Title: on hover a light follows the pointer through the letters (a copy of the text on top, clipped the same way) */
+.home-title { position: relative; }
+.home-title::after {
+  content: attr(data-text); position: absolute; inset: 0; padding: inherit; pointer-events: none;
+  background: radial-gradient(240px circle at var(--tx, 50%) var(--ty, 50%), var(--sc-glow-1), var(--sc-glow-2) 38%, var(--sc-glow-3) 58%, transparent 72%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  opacity: 0; transition: opacity .35s var(--sc-ease);
+}
+.home-title.is-lit::after { opacity: 1; }
+.home-title.is-lit { filter: drop-shadow(0 0 22px color-mix(in srgb, var(--sc-glow-2) 28%, transparent)); }
+
+/* Page: a soft light follows the pointer anywhere on the hub, under the content */
+.home-cursor {
+  position: fixed; z-index: -1; left: 0; top: 0; width: 640px; height: 640px; margin: -320px 0 0 -320px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--sc-glow-2) 22%, transparent), color-mix(in srgb, var(--sc-glow-1) 10%, transparent) 55%, transparent);
+  opacity: 0; transition: opacity .5s var(--sc-ease); will-change: transform;
+}
+:root[data-theme="dark"] .home-cursor { background: radial-gradient(closest-side, color-mix(in srgb, var(--sc-glow-2) 30%, transparent), color-mix(in srgb, var(--sc-glow-1) 14%, transparent) 55%, transparent); }
+.home-cursor.is-on { opacity: 1; }
 @keyframes home-sweep { from { background-position: 100% 0; } to { background-position: 0 0; } }
 .home-sub { max-width: 34em; margin: 18px 0 0; color: var(--sc-muted); font-size: clamp(1.0625rem, .95rem + .45vw, 1.3125rem); line-height: 1.45; letter-spacing: -.01em; }
 .home-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
@@ -81,24 +100,63 @@
 .home-search kbd { margin-left: 6px; padding: 4px 9px; border-radius: 999px; border: 1px solid var(--home-edge); font: 500 .75rem/1 var(--sc-mono); color: var(--sc-faint); }
 .home-continue:hover, .home-search:hover { border-color: color-mix(in srgb, var(--sc-accent) 55%, transparent); background: var(--sc-surface); color: var(--sc-text); }
 
-/* ---------- Note from the author ---------- */
-.home-note {
-  margin-top: 64px;
-  display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 26px; align-items: start;
-  padding: 28px; border-radius: 24px; border: 1px solid var(--home-edge); background: var(--home-glass);
+/* ---------- Author message: a conversation ----------
+   Monochrome on purpose (black and white, gradient and grain), so the console colours above stay the colour. */
+.home-chat { margin-top: 64px; }
+.home-chat-window {
+  --chat-bg: linear-gradient(165deg, #ffffff 0%, #f1f1f3 55%, #e6e6e9 100%);
+  --chat-bubble: #e9e9eb; --chat-ink: #1d1d1f; --chat-line: rgb(0 0 0 / 9%); --chat-faint: #6e6e73;
+  position: relative; isolation: isolate; overflow: hidden; border-radius: 26px; border: 1px solid var(--chat-line); background: var(--chat-bg); color: var(--chat-ink);
 }
-.home-note-photo { width: 88px; height: 88px; border-radius: 22px; object-fit: cover; background: var(--sc-surface-2); }
-.home-note-body { max-width: 62ch; }
-.home-note h2 { margin: 2px 0 10px; font-family: var(--sc-display); font-size: 1.375rem; font-weight: 650; letter-spacing: -.025em; }
-.home-note p { margin: 0 0 10px; color: var(--sc-muted); font-size: 1rem; line-height: 1.6; }
-.home-note-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--home-edge); }
-.home-note-sign { font-family: var(--sc-display); font-weight: 600; letter-spacing: -.01em; }
-.home-note-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.home-note-links a {
-  display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; box-sizing: border-box; border-radius: 999px;
-  border: 1px solid var(--home-edge); color: var(--sc-text); text-decoration: none; font-size: .875rem; font-weight: 500;
+:root[data-theme="dark"] .home-chat-window {
+  --chat-bg: linear-gradient(165deg, #1b1b1d 0%, #0c0c0d 55%, #000 100%);
+  --chat-bubble: #2a2a2d; --chat-ink: #f5f5f7; --chat-line: rgb(255 255 255 / 10%); --chat-faint: #98989f;
 }
-.home-note-links a:hover { border-color: color-mix(in srgb, var(--sc-accent) 55%, transparent); color: var(--sc-accent); }
+.home-chat-window::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .28; mix-blend-mode: overlay; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+:root[data-theme="dark"] .home-chat-window::before { opacity: .22; mix-blend-mode: soft-light; }
+.home-chat-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 16px 20px; border-bottom: 1px solid var(--chat-line); }
+.home-chat-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--chat-line); }
+.home-chat-who { display: grid; gap: 1px; margin-right: auto; }
+.home-chat-who b { font-family: var(--sc-display); font-size: 1.0625rem; font-weight: 650; letter-spacing: -.015em; }
+:root.sc-v3 body .home-chat code { background: none; border: 0; padding: 0; border-radius: 0; }
+.home-chat-who code { font: 500 .75rem/1.3 var(--sc-mono); color: var(--chat-faint); }
+.home-chat-links { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.home-chat-links a {
+  display: inline-flex; align-items: center; min-height: 34px; padding: 0 14px; box-sizing: border-box; border-radius: 999px;
+  border: 1px solid var(--chat-line); color: var(--chat-ink); text-decoration: none; font-size: .8125rem; font-weight: 500;
+  transition: background var(--sc-dur-fast) var(--sc-ease), color var(--sc-dur-fast) var(--sc-ease);
+}
+.home-chat-links a:hover, .home-chat-links a:focus-visible { background: var(--chat-ink); color: var(--chat-bubble); }
+.home-chat-thread { padding: 18px 20px 22px; }
+.home-chat-day { margin: 0 0 14px; text-align: center; }
+.home-chat-day code, .home-chat-status { font: 500 .6875rem/1 var(--sc-mono); color: var(--chat-faint); background: none; border: 0; padding: 0; letter-spacing: .02em; }
+.home-chat-group { display: flex; align-items: flex-end; gap: 10px; }
+.home-chat-mini { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex: none; }
+.home-chat-bubbles { display: grid; justify-items: start; gap: 4px; min-width: 0; }
+.home-chat-bubble {
+  max-width: 34em; margin: 0; padding: 11px 16px; border-radius: 20px; background: var(--chat-bubble); color: var(--chat-ink);
+  font-size: 1rem; line-height: 1.5; letter-spacing: -.005em;
+  transition: transform var(--sc-dur) var(--sc-ease);
+}
+.home-chat-bubble:first-child { border-bottom-left-radius: 8px; }
+.home-chat-bubble:nth-child(2) { border-top-left-radius: 8px; border-bottom-left-radius: 6px; }
+.home-chat-bubble:hover { transform: translateX(3px); }
+.home-chat-status { display: block; margin: 6px 0 0 42px; }
+.home-chat-typing { display: none; gap: 4px; align-items: center; padding: 14px 16px; border-radius: 20px; background: var(--chat-bubble); }
+.home-chat-typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--chat-faint); animation: home-dot 1s ease-in-out infinite; }
+.home-chat-typing i:nth-child(2) { animation-delay: .15s; }
+.home-chat-typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes home-dot { 0%, 60%, 100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-3px); opacity: 1; } }
+/* Sequence (only when the script runs and motion is allowed): typing, message, typing, message, delivered */
+.home-chat.is-staged [data-chat-msg], .home-chat.is-staged [data-chat-status] { display: none; }
+.home-chat.is-staged [data-chat-msg].is-in { display: block; animation: home-pop .42s var(--sc-ease) both; }
+.home-chat.is-staged [data-chat-status].is-in { display: block; animation: home-pop .3s var(--sc-ease) both; }
+.home-chat.is-typing .home-chat-typing { display: inline-flex; }
+@keyframes home-pop { from { opacity: 0; transform: translateY(8px) scale(.97); transform-origin: left bottom; } }
 
 /* ---------- Consoles ---------- */
 .home-consoles { margin-top: 8px; }
@@ -148,14 +206,12 @@
   .home-hero { padding: 16px 0 32px; }
   .home-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .home-tile { min-height: 0; }
-  .home-note { grid-template-columns: 60px minmax(0, 1fr); gap: 16px; padding: 20px; border-radius: 20px; }
-  .home-note-photo { width: 60px; height: 60px; border-radius: 16px; }
-  .home-note h2 { font-size: 1.1875rem; margin-top: 0; }
-  .home-note-body { display: contents; }
-  .home-note h2 { align-self: center; }
-  .home-note p, .home-note-foot { grid-column: 1 / -1; }
+  .home-chat-head { padding: 14px 16px; }
+  .home-chat-links { width: 100%; }
+  .home-chat-thread { padding: 16px 14px 18px; }
+  .home-chat-bubble { font-size: .9688rem; }
   .home-consoles { margin-top: 0; }
-  .home-note { margin-top: 44px; }
+  .home-chat { margin-top: 44px; }
   .home-search { flex: 1; justify-content: center; }
   .home-continue { flex: 1 1 100%; }
 }
@@ -163,6 +219,8 @@
 /* ---------- Motion preferences ---------- */
 @media (prefers-reduced-motion: reduce) {
   .home-aurora, .home-aurora i, .home-title { animation: none; }
+  .home-cursor, .home-title::after { display: none; }
+  .home-chat-typing i, .home-chat-bubble { animation: none; transition: none; }
   .home-title { background-position: 0 0; }
   .home-tile, .home-tile::before { transition: none; }
   .home-tile:hover, .home-tile:focus-visible { transform: none; }

@@ -100,6 +100,46 @@
     });
   }
 
+  // Pointer light on the whole page and through the title (mouse and trackpad only).
+  if (fine && !still) {
+    var glow = document.querySelector('.home-cursor'), title = document.querySelector('.home-title'), frame = null, last = null;
+    window.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
+      last = e;
+      if (frame) return;
+      frame = requestAnimationFrame(function () {
+        frame = null;
+        if (glow) { glow.style.transform = 'translate3d(' + last.clientX + 'px,' + last.clientY + 'px,0)'; glow.classList.add('is-on'); }
+        if (title) {
+          var r = title.getBoundingClientRect(), inside = last.clientX >= r.left && last.clientX <= r.right && last.clientY >= r.top && last.clientY <= r.bottom;
+          title.classList.toggle('is-lit', inside);
+          if (inside) { title.style.setProperty('--tx', (last.clientX - r.left) + 'px'); title.style.setProperty('--ty', (last.clientY - r.top) + 'px'); }
+        }
+      });
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', function () { if (glow) glow.classList.remove('is-on'); if (title) title.classList.remove('is-lit'); });
+  }
+
+  // Author message: plays like a conversation the first time it scrolls into view.
+  var chat = document.querySelector('.home-chat');
+  if (chat && !still && 'IntersectionObserver' in window) {
+    var msgs = chat.querySelectorAll('[data-chat-msg]'), status = chat.querySelector('[data-chat-status]');
+    chat.classList.add('is-staged');
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries.some(function (en) { return en.isIntersecting; })) return;
+      io.disconnect();
+      var t = 0;
+      Array.prototype.forEach.call(msgs, function (m, i) {
+        setTimeout(function () { chat.classList.add('is-typing'); }, t);
+        t += i === 0 ? 900 : 1300;
+        setTimeout(function () { chat.classList.remove('is-typing'); m.classList.add('is-in'); }, t);
+        t += 250;
+      });
+      setTimeout(function () { if (status) status.classList.add('is-in'); }, t + 200);
+    }, { threshold: 0.35 });
+    io.observe(chat);
+  }
+
   paintIcons();
   renderContinue();
 })();
