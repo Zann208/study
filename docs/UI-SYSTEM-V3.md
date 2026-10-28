@@ -29,7 +29,7 @@ Live preview of tokens and components: https://zann208.github.io/study/shared/v3
 1. Replace the v2 theme script and shared stylesheets with one tag, first in `<head>`:
 
    ```html
-   <script src="https://zann208.github.io/study/shared/v3/boot.js?v=20261026-1"
+   <script src="https://zann208.github.io/study/shared/v3/boot.js?v=20261028-1"
            data-console="algo" data-v2="index.v2.html"></script>
    ```
 

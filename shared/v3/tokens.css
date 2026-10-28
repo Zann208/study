@@ -32,7 +32,7 @@
 
   /* Diagram palette: distinct state colors, AA on --sc-surface in both themes */
   --sc-dg-1: #0b7a75; --sc-dg-2: #6a3fc7; --sc-dg-3: #b45309; --sc-dg-4: #c0265d;
-  --sc-dg-5: #1d64c4; --sc-dg-6: #15803d;
+  --sc-dg-5: #1d64c4; --sc-dg-6: #137238;
   --sc-dg-ink: #1d1d1f; --sc-dg-edge: #86868b; --sc-dg-fill: #f5f5f7;
 
   /* Code surfaces */

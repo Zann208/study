@@ -60,6 +60,8 @@ html:has(body.sc3) { scroll-padding-top: calc(var(--sc-header-h) + 16px); }
 
 .sc3 .sc3-icon { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .sc3 :is(a, button, input, [tabindex]):focus-visible { outline: none; box-shadow: var(--sc-focus); }
+/* Page titles take focus after a page change for screen readers; they are not controls, so no ring. */
+.sc3 :is(h1, h2)[tabindex="-1"]:focus { outline: none; box-shadow: none; }
 .sc3 .sc3-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .sc3 .sc3-kbd {
   font: 500 var(--sc-fs-xs)/1 var(--sc-mono); color: var(--sc-faint);
