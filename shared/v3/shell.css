@@ -80,15 +80,15 @@ html:has(body.sc3) { scroll-padding-top: calc(var(--sc-header-h) + 16px); }
 .sc3-top {
   position: fixed; top: 0; left: 0; right: 0; z-index: var(--sc-z-header);
   height: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); padding-top: env(safe-area-inset-top, 0px);
-  background: var(--sc-surface);
+  background: var(--sc-chrome);
   border-bottom: 1px solid var(--sc-line);
   view-transition-name: sc3-top;
 }
+/* one maroon hairline under the bar: the brand line, same on every console */
 .sc3-top::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; pointer-events: none;
-  background: linear-gradient(90deg, transparent, var(--sc-glow-1) 30%, var(--sc-glow-2) 70%, transparent); opacity: .5;
+  background: linear-gradient(90deg, var(--sc-maroon) 0, color-mix(in srgb, var(--sc-maroon) 40%, transparent) 40%, transparent 85%); opacity: .55;
 }
-:root[data-theme="dark"] .sc3-top::after { opacity: .7; }
 .sc3-top-inner {
   height: 100%; display: flex; align-items: center; gap: var(--sc-sp-2);
   padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px));
@@ -107,22 +107,21 @@ html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
 
 /* Logo: the hub's pixel lockup, ISNE over STUDY CONSOLE (Silkscreen, OFL, self-hosted).
    Sizes sit on the font's 8px grid so the pixels stay crisp: 32px over 8px. */
-@font-face { font-family: "Silkscreen"; src: url("./fonts/silkscreen-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+/* (Silkscreen is declared in tokens.css) */
 .sc3-brand {
   display: inline-flex; align-items: center; height: 44px; padding: 0 8px; flex: none;
   color: var(--sc-text); text-decoration: none; border-radius: var(--sc-radius-sm);
-  --logo-maroon: #7a242c; --logo-shadow: rgb(122 36 44 / 22%);
+  --logo-maroon: var(--sc-maroon-mark); --logo-shadow: var(--sc-maroon-shadow);
 }
-:root[data-theme="dark"] .sc3-brand { --logo-maroon: #c93f4d; --logo-shadow: #3d1117; }
 .sc3-brand:hover { background: var(--sc-surface-2); }
-.sc3-logo { display: inline-grid; justify-items: start; gap: 2px; font-family: "Silkscreen", var(--sc-mono); font-weight: 400; line-height: 1; }
+.sc3-logo { display: inline-grid; justify-items: start; gap: 2px; font-family: var(--sc-pixel); font-weight: 400; line-height: 1; }
 .sc3-logo-isne { font-size: 32px; letter-spacing: 0; margin-left: -3px; color: var(--logo-maroon); text-shadow: 2px 2px 0 var(--logo-shadow); }
 .sc3-logo-sub { font-size: 8px; letter-spacing: .07em; color: var(--sc-text); }
 .sc3-brand:hover .sc3-logo-isne { transform: translate(1px, 1px); text-shadow: 1px 1px 0 var(--logo-shadow); }
 .sc3-sep { width: 1px; height: 22px; background: var(--sc-line); flex: none; }
 
 .sc3-switch { position: relative; flex: none; }
-.sc3-switch-btn { height: 40px; display: inline-flex; align-items: center; gap: var(--sc-sp-2); padding: 0 10px; color: var(--sc-text); }
+.sc3-switch-btn { height: 40px; display: inline-flex; align-items: center; gap: var(--sc-sp-2); padding: 0 10px; color: var(--sc-text); font-weight: 500; }
 /* Console icon tiles in the frame: the same style as the hub's console tiles */
 .sc3-switch-mark, .sc3-menu-mark, .sc3-switch-icon, .sc3-item-mark {
   display: grid; place-items: center; flex: none; color: var(--row-accent);
@@ -235,17 +234,18 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
 
 .sc3-menu {
   position: fixed; left: 0; bottom: 0; top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); width: var(--sc-menu-w); z-index: var(--sc-z-menu);
-  display: flex; flex-direction: column; background: var(--sc-surface); border-right: 1px solid var(--sc-line);
+  display: flex; flex-direction: column; background: var(--sc-chrome); border-right: 1px solid var(--sc-line);
   font-size: var(--sc-fs-md); line-height: var(--sc-lh-ui);
   view-transition-name: sc3-menu;
 }
 .sc3-menu-scroll { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: var(--sc-sp-3) var(--sc-sp-2) var(--sc-sp-4); padding-left: max(8px, env(safe-area-inset-left, 0px)); }
+.sc3-menu-head:not(:has(.sc3-menu-id)) { display: none; }   /* hub: no title; the drawer close button only shows on small screens */
 .sc3-menu-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--sc-sp-2); row-gap: 2px; align-items: start; padding: var(--sc-sp-1) var(--sc-sp-3) var(--sc-sp-3); }
 .sc3-menu-head > :not(.sc3-drawer-close) { grid-column: 1; }
 .sc3-drawer-close { grid-column: 2; grid-row: 1 / span 2; display: none; margin: -6px -8px 0 0; }
 .sc3-menu-id { display: flex; align-items: center; gap: 12px; min-width: 0; }
 .sc3-menu-names { display: grid; gap: 2px; min-width: 0; }
-.sc3-menu-title { font-family: var(--sc-display); font-weight: var(--sc-fw-semibold); font-size: var(--sc-fs-base); letter-spacing: var(--sc-ls-text); line-height: 1.25; text-wrap: balance; }
+.sc3-menu-title { font-family: var(--sc-display); font-weight: var(--sc-fw-semibold); font-size: var(--sc-fs-md); letter-spacing: 0; line-height: 1.3; text-wrap: balance; }
 .sc3-menu-sub { font-size: var(--sc-fs-xs); color: var(--sc-faint); }
 .sc3-menu-back {
   display: flex; align-items: center; gap: var(--sc-sp-2); margin: 0 0 var(--sc-sp-2); padding: 8px 12px;
@@ -256,31 +256,31 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
 .sc3-group + .sc3-group { margin-top: var(--sc-sp-2); }
 .sc3-group-btn {
   width: 100%; display: flex; align-items: center; gap: var(--sc-sp-2); padding: 6px 12px; min-height: 32px;
-  font: var(--sc-fw-bold) var(--sc-fs-xs)/1.2 var(--sc-sans); letter-spacing: .07em; text-transform: uppercase; color: var(--sc-faint);
+  font: 400 8px/1.2 var(--sc-pixel); letter-spacing: .08em; text-transform: uppercase; color: var(--sc-faint);   /* pixel labels tie the menu to the logo */
   background: none; border: 0; border-radius: var(--sc-radius-sm); cursor: pointer; text-align: left;
 }
 .sc3-group-btn:hover { color: var(--sc-text); background: var(--sc-surface-2); }
 .sc3-group-btn > span:first-child { flex: 1; }
-.sc3-group-count { font-family: var(--sc-mono); letter-spacing: 0; font-weight: 500; opacity: .8; }
+.sc3-group-count { font: 500 11px/1 var(--sc-mono); letter-spacing: 0; opacity: .8; }
 .sc3-group-list, .sc3-sublist { list-style: none; margin: 2px 0 0; padding: 0; }
 .sc3-item {
   position: relative; display: flex; align-items: center; gap: 10px; min-height: 36px; padding: 6px 10px 6px 12px;
   color: var(--sc-muted); text-decoration: none; border-radius: var(--sc-radius-sm);
 }
 .sc3-item:hover { background: var(--sc-surface-2); color: var(--sc-text); }
-.sc3-item.is-active { background: var(--sc-accent-soft); color: var(--sc-text); font-weight: var(--sc-fw-medium); }
+.sc3-item.is-active { background: color-mix(in srgb, var(--sc-accent) 11%, var(--sc-chrome)); color: var(--sc-text); font-weight: var(--sc-fw-semibold); }
 .sc3-item.is-active::before, .sc3-switch-row.is-current::before {
-  content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 0 3px 3px 0;
+  content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 0;
   background: var(--sc-accent);
 }
 .sc3-switch-row { position: relative; }
 .sc3-item-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sc3-badge {
-  font: 500 var(--sc-fs-xs)/1 var(--sc-mono); color: var(--sc-faint); padding: 3px 6px; border-radius: 5px;
+  font: 500 11px/1 var(--sc-mono); color: var(--sc-faint); padding: 3px 6px; border-radius: 4px;
   background: var(--sc-surface-2); white-space: nowrap;
 }
 .sc3-item.is-active .sc3-badge { color: var(--sc-accent); background: var(--sc-surface); }
-.sc3-pdot { width: 9px; height: 9px; border-radius: 50%; flex: none; border: 1.5px solid var(--sc-line-strong); box-sizing: border-box; }
+.sc3-pdot { width: 8px; height: 8px; border-radius: 1px;   /* square, like a pixel */ flex: none; border: 1.5px solid var(--sc-line-strong); box-sizing: border-box; }
 .sc3-pdot[data-state="visited"] { border-color: var(--sc-accent); background: color-mix(in srgb, var(--sc-accent) 30%, transparent); }
 .sc3-pdot[data-state="done"] { border-color: var(--sc-ok); background: var(--sc-ok); }
 .sc3-subitem {
@@ -302,7 +302,7 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
   position: fixed; top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px)); left: var(--sc-frame-left); right: 0; z-index: var(--sc-z-sticky);
   display: flex; align-items: center; gap: var(--sc-sp-2); box-sizing: border-box; height: 48px;
   padding: 0 max(12px, env(safe-area-inset-right, 0px)) 0 12px;
-  background: var(--sc-bg);
+  background: var(--sc-chrome);
   border-bottom: 1px solid var(--sc-line); font: var(--sc-fs-md)/1.3 var(--sc-sans);
 }
 .sc3-sectionbar[hidden] { display: none; }
@@ -355,6 +355,14 @@ html.sc3-has-sections body.sc3 { --sc-sticky-top: calc(var(--sc-header-h) + 48px
 :root[data-theme="dark"] .sc3-field::before { opacity: .3; mix-blend-mode: soft-light; }
 /* calmer toward the bottom of the screen, where most reading happens */
 .sc3-field::after { content: ""; position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, transparent 0%, transparent 30%, color-mix(in srgb, var(--sc-bg) 70%, transparent) 75%, var(--sc-bg) 100%); }
+/* pointer light inside the field (also used by the hub's field) */
+.sc3-spot {
+  position: absolute; left: 0; top: 0; width: 560px; height: 560px; margin: -280px 0 0 -280px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--sc-glow-1) 30%, transparent), transparent);
+  opacity: 0; transition: opacity .6s var(--sc-ease); will-change: transform;
+}
+.sc3-spot.is-on { opacity: .7; }
+:root[data-theme="dark"] .sc3-spot { background: radial-gradient(closest-side, color-mix(in srgb, var(--sc-glow-1) 45%, transparent), transparent); }
 @keyframes sc3-field-in { from { opacity: 0; } }
 @keyframes sc3-drift-a { to { transform: translate3d(12vmax, 8vmax, 0) scale(1.1); } }
 @keyframes sc3-drift-b { to { transform: translate3d(-10vmax, 10vmax, 0) scale(.92); } }
@@ -382,7 +390,7 @@ html.sc3-has-sections body.sc3 { --sc-sticky-top: calc(var(--sc-header-h) + 48px
 }
 .sc3-pager-link.is-next { text-align: right; }
 .sc3-pager-link small { font-size: var(--sc-fs-sm); color: var(--sc-faint); }
-.sc3-pager-link b { font-family: var(--sc-display); font-size: var(--sc-fs-base); font-weight: 650; letter-spacing: -.01em; line-height: 1.3; white-space: pre-wrap; }
+.sc3-pager-link b { font-family: var(--sc-display); font-size: var(--sc-fs-base); font-weight: 600; letter-spacing: -.01em; line-height: 1.3; white-space: pre-wrap; }
 .sc3-pager-link:hover, .sc3-pager-link:focus-visible { border-color: color-mix(in srgb, var(--sc-accent) 60%, transparent); }
 .sc3-pager-link.is-next:hover { transform: translateX(2px); }
 .sc3-pager-link.is-prev:hover { transform: translateX(-2px); }
@@ -459,6 +467,7 @@ html.sc3-palette-open { overflow: hidden; }
   .sc3-hide-menu { display: none; }
   .sc3-drawer-close { display: inline-grid; }
   .sc3-item, .sc3-group-btn, .sc3-menu-back { min-height: var(--sc-touch); }
+  .sc3-menu-head:not(:has(.sc3-menu-id)) { display: flex; justify-content: flex-end; padding-bottom: 0; }
   .sc3-iconbtn, .sc3-brand, .sc3-switch-btn, .sc3-progress, .sc3-hide-menu { min-width: var(--sc-touch); height: var(--sc-touch); }
   .sc3-seg { padding: 0; }
   .sc3-seg-btn { height: var(--sc-touch); min-width: var(--sc-touch); }

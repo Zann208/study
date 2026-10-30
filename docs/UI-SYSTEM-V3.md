@@ -6,8 +6,9 @@ Live preview of tokens and components: https://zann208.github.io/study/shared/v3
 
 ## Look
 
-- Apple system typography. SF Pro (with Inter as the web fallback) for all reading and interface text, 17px body. SF Mono (with JetBrains Mono as the fallback) only for code, pseudocode, commands and configuration: `pre`, `code`, `kbd`, `samp`, `.mono`, `.code`, `.pseudo`, `.cli`, `.cmd`.
-- True black background in dark mode, Apple grey (`#f5f5f7`) in light mode. No gradients behind content.
+- ISNE theme: Entaneer CMU maroon (`#7a242c` light, `#d26a75` dark) over warm paper neutrals (`#ecebe8` page, `#ffffff` surfaces) in light mode and warm graphite (`#0f0e0f`, `#171516`) in dark mode. Maroon marks the brand, active states and links; content colours stay muted earth tones.
+- Self-hosted IBM Plex Sans for all reading and interface text (17px body), IBM Plex Mono only for code, pseudocode, commands and configuration (`pre`, `code`, `kbd`, `samp`, `.mono`, `.code`, `.pseudo`, `.cli`, `.cmd`). Silkscreen (pixel) only for the ISNE logo, menu group labels and console codes. Fonts live in `shared/v3/fonts/` with their OFL licences.
+- Background field: soft drifting colour blobs with visible grain behind the content, plus a faint light that follows the pointer (mouse only, off with reduced motion). No glows on controls or cards.
 - One accent per console. Semantic colours (info, ok, warn, danger) carry meaning; the accent never does.
 - A six-colour diagram palette that is tuned per theme and shared by every console.
 

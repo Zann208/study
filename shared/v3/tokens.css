@@ -1,64 +1,80 @@
 /* Study Console UI v3 — design tokens.
    One variable system for the hub and every console. A console contributes
    only its accent, which the shell writes from the registry.
-   v2 token names (--sc-*) are kept so older adapters keep resolving.
-   Dark theme is true black; light theme is a neutral Apple-style grey. */
+   Theme: the ISNE pixel mark. Entaneer CMU maroon with warm graphite and grey,
+   grain over a soft field, and muted earth tones per console (no neon).
+   Type: IBM Plex Sans for reading and interface, IBM Plex Mono for code, commands
+   and configs, Silkscreen only for the logo and small labels. All self-hosted (OFL). */
+
+@font-face { font-family: "IBM Plex Sans"; src: url("./fonts/plex-sans-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans"; src: url("./fonts/plex-sans-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans"; src: url("./fonts/plex-sans-500.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans"; src: url("./fonts/plex-sans-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans"; src: url("./fonts/plex-sans-700.woff2") format("woff2"); font-weight: 700 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("./fonts/plex-mono-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("./fonts/plex-mono-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("./fonts/plex-mono-600.woff2") format("woff2"); font-weight: 600 900; font-display: swap; }
+@font-face { font-family: "Silkscreen"; src: url("./fonts/silkscreen-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 
 :root {
   color-scheme: light;
 
-  /* Neutrals */
-  /* Light: a cool grey page so white surfaces lift off it; text in three clear steps */
-  --sc-bg: #eceef2;
+  /* Neutrals: warm paper greys from the portfolio; text in three clear steps */
+  --sc-bg: #ecebe8;
   --sc-surface: #ffffff;
-  --sc-surface-2: #f4f5f8;
-  --sc-surface-3: #e8eaef;
-  --sc-text: #141519;
-  --sc-text-body: #2a2c32;
-  --sc-muted: #4d5058;
-  --sc-faint: #62666f;
-  --sc-line: #e1e3e9;
-  --sc-line-strong: #c8cbd3;
+  --sc-surface-2: #f3f1ee;
+  --sc-surface-3: #e8e5e1;
+  --sc-chrome: #f7f6f3;          /* top bar, menu, section bar */
+  --sc-text: #181816;
+  --sc-text-body: #2d2b28;
+  --sc-muted: #55524d;
+  --sc-faint: #66635d;
+  --sc-line: #e0ddd8;
+  --sc-line-strong: #c7c2bb;
   /* Cards lift with a soft shadow in light mode; dark mode uses borders only */
-  --sc-shadow-card: 0 1px 2px rgb(20 24 36 / 5%), 0 12px 32px -18px rgb(20 24 36 / 22%);
+  --sc-shadow-card: 0 1px 2px rgb(40 30 28 / 5%), 0 12px 30px -18px rgb(40 30 28 / 20%);
 
-  /* Accent (hub default; the shell replaces it per console) */
-  --sc-accent: #0066cc;
-  --sc-accent-strong: #004f9e;
-  --sc-accent-soft: #e8f1fc;
+  /* Accent: Entaneer maroon on the hub; the shell replaces it per console */
+  --sc-accent: #7a242c;
+  --sc-accent-strong: #5d171b;
+  --sc-accent-soft: #f4e7e8;
   --sc-on-accent: #ffffff;
+  --sc-maroon: #7a242c;          /* the brand colour, same on every console */
+  --sc-maroon-mark: #7a242c;     /* logo fill */
+  --sc-maroon-shadow: rgb(122 36 44 / 22%);
 
-  /* Semantic states: separate from the accent */
-  --sc-info: #0b6a8a;   --sc-info-soft: #e6f3f8;
-  --sc-ok: #1b7340;     --sc-ok-soft: #e7f5ec;
-  --sc-warn: #8a5300;   --sc-warn-soft: #fcf2e0;
-  --sc-danger: #b3261e; --sc-danger-soft: #fdecea;
+  /* Semantic states: muted, separate from the accent */
+  --sc-info: #36597a;   --sc-info-soft: #e9eef3;
+  --sc-ok: #3f6232;     --sc-ok-soft: #ebf0e6;
+  --sc-warn: #7d5a1e;   --sc-warn-soft: #f4eddf;
+  --sc-danger: #9b2c2c; --sc-danger-soft: #f6e6e4;
 
-  /* Diagram palette: distinct state colors, AA on --sc-surface in both themes */
-  --sc-dg-1: #086a65; --sc-dg-2: #6a3fc7; --sc-dg-3: #9c4706; --sc-dg-4: #c0265d;
-  --sc-dg-5: #1d64c4; --sc-dg-6: #137238;
-  /* Light field (hub background, bar edge): Entaneer CMU maroon from the portfolio, with greys */
-  --sc-glow-1: #a8424d; --sc-glow-2: #8e9099; --sc-glow-3: #b9bbc3;
-  --sc-dg-ink: #141519; --sc-dg-edge: #86868b; --sc-dg-fill: #f4f5f8;
+  /* Diagram and highlight palette: earth tones, AA on every light surface */
+  --sc-dg-1: #2f6862; --sc-dg-2: #5e4a7d; --sc-dg-3: #7d5a1e; --sc-dg-4: #8c3546;
+  --sc-dg-5: #36597a; --sc-dg-6: #3f6232;
+  /* Field behind pages: maroon with warm greys */
+  --sc-glow-1: #a8424d; --sc-glow-2: #a39d97; --sc-glow-3: #c9c4be;
+  --sc-dg-ink: #181816; --sc-dg-edge: #8a857e; --sc-dg-fill: #f3f1ee;
 
   /* Code surfaces */
-  --sc-code-bg: #f4f5f8;
-  --sc-code-text: #141519;
-  --sc-code-line: #e1e3e9;
-  /* Syntax colors (Xcode default light / dark) */
-  --sc-tok-comment: #5d6c79; --sc-tok-string: #c41a16; --sc-tok-keyword: #9b2393;
-  --sc-tok-type: #0b4f79; --sc-tok-number: #1c00cf; --sc-tok-preproc: #643820;
+  --sc-code-bg: #f3f1ee;
+  --sc-code-text: #181816;
+  --sc-code-line: #e0ddd8;
+  /* Syntax colours, muted to the theme */
+  --sc-tok-comment: #6b6862; --sc-tok-string: #8e3f33; --sc-tok-keyword: #7a242c;
+  --sc-tok-type: #36597a; --sc-tok-number: #5e4a7d; --sc-tok-preproc: #7d5a1e;
 
-  /* Type: Apple system faces first; Inter and JetBrains Mono only where SF is absent */
-  --sc-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Inter", "Segoe UI", Roboto, "Noto Sans Myanmar", "Myanmar Text", "Padauk", Arial, sans-serif;
-  --sc-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Inter", "Segoe UI", Roboto, "Noto Sans Myanmar", "Myanmar Text", Arial, sans-serif;
-  --sc-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, "JetBrains Mono", "Cascadia Code", Consolas, "Liberation Mono", monospace;
+  /* Type: IBM Plex (self-hosted); Myanmar script falls back to Noto Sans Myanmar */
+  --sc-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Myanmar", "Myanmar Text", "Padauk", Arial, sans-serif;
+  --sc-display: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Myanmar", "Myanmar Text", Arial, sans-serif;
+  --sc-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --sc-pixel: "Silkscreen", "IBM Plex Mono", monospace;
   --sc-font-sans: var(--sc-sans);   /* v2 alias */
   --sc-fs-xs: .75rem;      /* 12  captions, badges */
   --sc-fs-sm: .8125rem;    /* 13  menu meta */
   --sc-fs-md: .875rem;     /* 14  UI controls, menu items */
   --sc-fs-code: .875rem;   /* 14  code blocks */
-  --sc-fs-base: 1.0625rem; /* 17  body text (Apple body size) */
+  --sc-fs-base: 1.0625rem; /* 17  body text */
   --sc-fs-lg: 1.1875rem;   /* 19  lead */
   --sc-fs-xl: 1.3125rem;   /* 21  h3 */
   --sc-fs-2xl: 1.625rem;   /* 26  h2 */
@@ -67,8 +83,8 @@
   --sc-lh-tight: 1.15;
   --sc-lh-ui: 1.4;
   --sc-lh-read: 1.6;
-  --sc-ls-display: -.022em;
-  --sc-ls-text: -.01em;
+  --sc-ls-display: -.018em;
+  --sc-ls-text: 0;
   --sc-fw-normal: 400; --sc-fw-medium: 500; --sc-fw-semibold: 600; --sc-fw-bold: 700;
 
   /* Space: 4px grid */
@@ -76,9 +92,9 @@
   --sc-sp-6: 24px; --sc-sp-7: 32px; --sc-sp-8: 40px; --sc-sp-9: 56px;
 
   /* Radius */
-  --sc-radius-sm: 7px;
-  --sc-radius: 12px;
-  --sc-radius-lg: 18px;
+  --sc-radius-sm: 6px;
+  --sc-radius: 10px;
+  --sc-radius-lg: 14px;
   --sc-radius-pill: 999px;
 
   /* Elevation */
@@ -119,20 +135,22 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --sc-bg: #000000; --sc-surface: #0e0e10; --sc-surface-2: #1c1c1e; --sc-surface-3: #2c2c2e;
-    --sc-glow-1: #8c2a34; --sc-glow-2: #45464e; --sc-glow-3: #2a2b31; --sc-text: #f5f5f7; --sc-text-body: #dcdce1; --sc-muted: #c7c7cc; --sc-faint: #98989f; --sc-shadow-card: none;
-    --sc-line: #232326; --sc-line-strong: #3a3a3c;
-    --sc-accent: #2997ff; --sc-accent-strong: #6cb6ff; --sc-accent-soft: #0b2540; --sc-on-accent: #000000;
-    --sc-info: #6fc3e3; --sc-info-soft: #0d2630;
-    --sc-ok: #6fd39a; --sc-ok-soft: #0e2a1a;
-    --sc-warn: #f2c06b; --sc-warn-soft: #2e2210;
-    --sc-danger: #ff8a80; --sc-danger-soft: #331512;
-    --sc-dg-1: #2ee6d6; --sc-dg-2: #b69bff; --sc-dg-3: #ffc24d; --sc-dg-4: #ff7eb3;
-    --sc-dg-5: #6fb2ff; --sc-dg-6: #4ade80;
-    --sc-dg-ink: #f5f5f7; --sc-dg-edge: #8e8e93; --sc-dg-fill: #1c1c1e;
-    --sc-code-bg: #161618; --sc-code-text: #f5f5f7; --sc-code-line: #2c2c2e;
-    --sc-tok-comment: #7f8c98; --sc-tok-string: #fc6a5d; --sc-tok-keyword: #fc5fa3;
-    --sc-tok-type: #5dd8ff; --sc-tok-number: #d0bf69; --sc-tok-preproc: #fd8f3f;
+    --sc-bg: #0f0e0f; --sc-surface: #171516; --sc-surface-2: #211e20; --sc-surface-3: #2c282a; --sc-chrome: #131112;
+    --sc-text: #f2efef; --sc-text-body: #d9d4d5; --sc-muted: #b8b1b3; --sc-faint: #8f888a; --sc-shadow-card: none;
+    --sc-line: #2a2628; --sc-line-strong: #3d383a;
+    --sc-accent: #d26a75; --sc-accent-strong: #e8939b; --sc-accent-soft: #2e1a1d; --sc-on-accent: #160b0c;
+    --sc-maroon: #d26a75; --sc-maroon-mark: #c93f4d; --sc-maroon-shadow: #3d1117;
+    --sc-glow-1: #7a242c; --sc-glow-2: #3b3638; --sc-glow-3: #262224;
+    --sc-info: #98b5d1; --sc-info-soft: #1b2229;
+    --sc-ok: #a3c48b; --sc-ok-soft: #1c2318;
+    --sc-warn: #d6b06a; --sc-warn-soft: #29221a;
+    --sc-danger: #e39a92; --sc-danger-soft: #2c1a19;
+    --sc-dg-1: #86b8b0; --sc-dg-2: #b3a0cf; --sc-dg-3: #d1ad69; --sc-dg-4: #d99aa6;
+    --sc-dg-5: #98b5d1; --sc-dg-6: #a3c48b;
+    --sc-dg-ink: #f2efef; --sc-dg-edge: #8f888a; --sc-dg-fill: #211e20;
+    --sc-code-bg: #1b1819; --sc-code-text: #f2efef; --sc-code-line: #2c282a;
+    --sc-tok-comment: #8f888a; --sc-tok-string: #dc9686; --sc-tok-keyword: #e8939b;
+    --sc-tok-type: #98b5d1; --sc-tok-number: #b3a0cf; --sc-tok-preproc: #d1ad69;
     --sc-shadow-sm: 0 1px 2px rgb(0 0 0 / 60%);
     --sc-shadow: 0 10px 30px rgb(0 0 0 / 70%);
     --sc-shadow-lg: 0 24px 70px rgb(0 0 0 / 80%);
@@ -141,20 +159,22 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --sc-bg: #000000; --sc-surface: #0e0e10; --sc-surface-2: #1c1c1e; --sc-surface-3: #2c2c2e;
-  --sc-glow-1: #8c2a34; --sc-glow-2: #45464e; --sc-glow-3: #2a2b31; --sc-text: #f5f5f7; --sc-text-body: #dcdce1; --sc-muted: #c7c7cc; --sc-faint: #98989f; --sc-shadow-card: none;
-  --sc-line: #232326; --sc-line-strong: #3a3a3c;
-  --sc-accent: #2997ff; --sc-accent-strong: #6cb6ff; --sc-accent-soft: #0b2540; --sc-on-accent: #000000;
-  --sc-info: #6fc3e3; --sc-info-soft: #0d2630;
-  --sc-ok: #6fd39a; --sc-ok-soft: #0e2a1a;
-  --sc-warn: #f2c06b; --sc-warn-soft: #2e2210;
-  --sc-danger: #ff8a80; --sc-danger-soft: #331512;
-  --sc-dg-1: #2ee6d6; --sc-dg-2: #b69bff; --sc-dg-3: #ffc24d; --sc-dg-4: #ff7eb3;
-  --sc-dg-5: #6fb2ff; --sc-dg-6: #4ade80;
-  --sc-dg-ink: #f5f5f7; --sc-dg-edge: #8e8e93; --sc-dg-fill: #1c1c1e;
-  --sc-code-bg: #161618; --sc-code-text: #f5f5f7; --sc-code-line: #2c2c2e;
-  --sc-tok-comment: #7f8c98; --sc-tok-string: #fc6a5d; --sc-tok-keyword: #fc5fa3;
-  --sc-tok-type: #5dd8ff; --sc-tok-number: #d0bf69; --sc-tok-preproc: #fd8f3f;
+  --sc-bg: #0f0e0f; --sc-surface: #171516; --sc-surface-2: #211e20; --sc-surface-3: #2c282a; --sc-chrome: #131112;
+  --sc-text: #f2efef; --sc-text-body: #d9d4d5; --sc-muted: #b8b1b3; --sc-faint: #8f888a; --sc-shadow-card: none;
+  --sc-line: #2a2628; --sc-line-strong: #3d383a;
+  --sc-accent: #d26a75; --sc-accent-strong: #e8939b; --sc-accent-soft: #2e1a1d; --sc-on-accent: #160b0c;
+  --sc-maroon: #d26a75; --sc-maroon-mark: #c93f4d; --sc-maroon-shadow: #3d1117;
+  --sc-glow-1: #7a242c; --sc-glow-2: #3b3638; --sc-glow-3: #262224;
+  --sc-info: #98b5d1; --sc-info-soft: #1b2229;
+  --sc-ok: #a3c48b; --sc-ok-soft: #1c2318;
+  --sc-warn: #d6b06a; --sc-warn-soft: #29221a;
+  --sc-danger: #e39a92; --sc-danger-soft: #2c1a19;
+  --sc-dg-1: #86b8b0; --sc-dg-2: #b3a0cf; --sc-dg-3: #d1ad69; --sc-dg-4: #d99aa6;
+  --sc-dg-5: #98b5d1; --sc-dg-6: #a3c48b;
+  --sc-dg-ink: #f2efef; --sc-dg-edge: #8f888a; --sc-dg-fill: #211e20;
+  --sc-code-bg: #1b1819; --sc-code-text: #f2efef; --sc-code-line: #2c282a;
+  --sc-tok-comment: #8f888a; --sc-tok-string: #dc9686; --sc-tok-keyword: #e8939b;
+  --sc-tok-type: #98b5d1; --sc-tok-number: #b3a0cf; --sc-tok-preproc: #d1ad69;
   --sc-shadow-sm: 0 1px 2px rgb(0 0 0 / 60%);
   --sc-shadow: 0 10px 30px rgb(0 0 0 / 70%);
   --sc-shadow-lg: 0 24px 70px rgb(0 0 0 / 80%);

@@ -80,10 +80,9 @@
   }
 
   var tags = [
-    '<link rel="preconnect" href="https://fonts.googleapis.com">',
-    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
-    // Only used where SF Pro / SF Mono are not installed. Loaded without blocking the first paint.
-    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media=\'all\'">',
+    // IBM Plex is self-hosted next to these files; preload the two weights every page uses first.
+    '<link rel="preload" href="' + base + 'fonts/plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>',
+    '<link rel="preload" href="' + base + 'fonts/plex-sans-600.woff2" as="font" type="font/woff2" crossorigin>',
     '<link rel="stylesheet" href="' + base + 'tokens.css' + q + '">'
   ];
   if (!embedded) tags.push('<link rel="stylesheet" href="' + base + 'shell.css' + q + '">');

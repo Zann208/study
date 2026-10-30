@@ -31,7 +31,7 @@
   background: linear-gradient(115deg, var(--read-tint), var(--sc-surface) 72%);
 }
 :root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main .item > .ph h3 {
-  font: 700 1.5rem/1.25 var(--read-head); letter-spacing: -.022em; color: var(--sc-text); margin: 0;
+  font: 700 1.5rem/1.25 var(--read-head); letter-spacing: -.015em; color: var(--sc-text); margin: 0;
 }
 :root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main .item > .ph .badge {
   font: 600 .8125rem/1 var(--sc-mono); letter-spacing: .02em; text-transform: none;
@@ -58,15 +58,15 @@
 /* WLN: the header row and each topic block are separate cards (set by chapter-layout.js) */
 :root[data-sc-console="wnet"] main .item > .ph { border-radius: 16px; padding: 18px 22px !important; }
 :root[data-sc-console="wnet"] main .topic-block { border-radius: 16px !important; box-shadow: var(--sc-shadow-card) !important; border-color: var(--sc-line) !important; }
-:root[data-sc-console="wnet"] main .topic-block > h4 { font: 650 1.125rem/1.35 var(--read-head) !important; letter-spacing: -.012em !important; color: var(--sc-text) !important; }
-:root[data-sc-console="wnet"] main .topic-label { font: 650 .75rem/1.2 var(--sc-sans) !important; letter-spacing: .04em !important; }
+:root[data-sc-console="wnet"] main .topic-block > h4 { font: 600 1.125rem/1.35 var(--read-head) !important; letter-spacing: -.012em !important; color: var(--sc-text) !important; }
+:root[data-sc-console="wnet"] main .topic-label { font: 600 .75rem/1.2 var(--sc-sans) !important; letter-spacing: .04em !important; }
 :root[data-sc-console="wnet"] main .tldr { font-size: 1.0625rem !important; line-height: 1.55 !important; font-weight: 600; }
 
 /* Subheads inside a NET topic: real headings with a hairline above */
 :root[data-sc-console="netdes"] main .item > h4 {
   display: flex; align-items: center; gap: 10px;
   margin: 34px 0 12px; padding-top: 22px; border-top: 1px solid var(--sc-line);
-  font: 650 1.0625rem/1.35 var(--read-head); letter-spacing: -.01em; text-transform: none; color: var(--sc-text);
+  font: 600 1.0625rem/1.35 var(--read-head); letter-spacing: -.01em; text-transform: none; color: var(--sc-text);
 }
 :root[data-sc-console="netdes"] main .item > h4::before {
   content: ""; flex: none; width: 4px; height: 1.05em; border-radius: 2px; background: var(--read-accent);
@@ -81,7 +81,7 @@
   font-size: var(--read-small); line-height: 1.6; color: var(--sc-muted); max-width: var(--read-measure);
 }
 :root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main :is(.item, .topic-block) .box { font-size: 1rem; line-height: 1.65; padding: 14px 18px; border-radius: 12px; }
-:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main :is(.item, .topic-block) .box > b:first-child { font: 650 .75rem/1.3 var(--sc-sans); letter-spacing: .04em; margin-bottom: 4px; }
+:root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main :is(.item, .topic-block) .box > b:first-child { font: 600 .75rem/1.3 var(--sc-sans); letter-spacing: .04em; margin-bottom: 4px; }
 /* The consoles' ".box b:first-child" label rule also caught the first bold word in each list item */
 :root:is([data-sc-console="netdes"], [data-sc-console="wnet"]) main .box :is(li, p, td) > b:first-child {
   display: inline; font: inherit; font-weight: 700; letter-spacing: 0; text-transform: none; margin: 0; color: inherit;
@@ -99,7 +99,7 @@
   border-radius: 16px; box-shadow: var(--sc-shadow-card); border-color: var(--sc-line); overflow: hidden;
 }
 :root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note > summary {
-  font: 650 1.125rem/1.35 var(--read-head); letter-spacing: -.015em; padding: 16px 20px;
+  font: 600 1.125rem/1.35 var(--read-head); letter-spacing: -.015em; padding: 16px 20px;
 }
 :root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note[open] > summary {
   background: linear-gradient(115deg, color-mix(in srgb, var(--read-accent) 9%, var(--sc-surface)), var(--sc-surface) 72%);
@@ -112,7 +112,7 @@
 :root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note > .body > h4 {
   display: flex; align-items: center; gap: 10px;
   margin: 30px 0 10px; padding-top: 20px; border-top: 1px solid var(--sc-line);
-  font: 650 1.0625rem/1.35 var(--read-head); letter-spacing: -.01em; text-transform: none; color: var(--sc-text);
+  font: 600 1.0625rem/1.35 var(--read-head); letter-spacing: -.01em; text-transform: none; color: var(--sc-text);
 }
 :root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note > .body > h4::before {
   content: ""; flex: none; width: 4px; height: 1.05em; border-radius: 2px; background: var(--read-accent);
@@ -138,7 +138,7 @@
 }
 :root[data-sc-console="algo"] main .page > .card > h3 {
   margin: 28px 0 10px; padding-top: 20px; border-top: 1px solid var(--sc-line);
-  font: 650 1.0625rem/1.35 var(--read-head); letter-spacing: -.01em; color: var(--sc-text);
+  font: 600 1.0625rem/1.35 var(--read-head); letter-spacing: -.01em; color: var(--sc-text);
 }
 :root[data-sc-console="algo"] main .page > .card .box { font-size: 1rem; line-height: 1.65; border-radius: 12px; }
 
@@ -162,7 +162,7 @@
    ====================================================================== */
 :root:is([data-sc-console="netdes"], [data-sc-console="wnet"], [data-sc-console="os"], [data-sc-console="privacy"]) main section.tab > .wrap > h1,
 :root[data-sc-console="algo"] main .page > h1 {
-  font: 700 clamp(1.875rem, 1.4rem + 1.6vw, 2.5rem)/1.12 var(--read-head); letter-spacing: -.03em; color: var(--sc-text);
+  font: 700 clamp(1.875rem, 1.4rem + 1.6vw, 2.5rem)/1.12 var(--read-head); letter-spacing: -.02em; color: var(--sc-text);
 }
 
 /* ======================================================================

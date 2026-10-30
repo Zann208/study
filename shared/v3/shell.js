@@ -34,24 +34,24 @@
   /* Single console registry. The hub cards and the switcher both read this. */
   var CONSOLES = [
     { id: 'home', code: 'SC', name: 'Study Console', short: 'Home', group: 'hub', href: HOME, icon: 'home',
-      accent: { light: '#7a242c', dark: '#d97a83' } },
+      accent: { light: '#7a242c', dark: '#d26a75' } },
     { id: 'netdes', code: 'NET', name: 'Network Design & Troubleshooting', short: 'Network Design', group: 'subjects',
-      href: 'https://zann208.github.io/netdes/', icon: 'network', accent: { light: '#0b7268', dark: '#5ee2cf' },
+      href: 'https://zann208.github.io/netdes/', icon: 'network', accent: { light: '#2f6862', dark: '#86b8b0' },
       blurb: 'Switching, VLANs, redundancy, and configuration verification.' },
     { id: 'wnet', code: 'WLN', name: 'Wireless Network Engineering', short: 'Wireless Networks', group: 'subjects',
-      href: 'https://zann208.github.io/wnet/', icon: 'wireless', accent: { light: '#6236c9', dark: '#c3adff' },
+      href: 'https://zann208.github.io/wnet/', icon: 'wireless', accent: { light: '#5e4a7d', dark: '#b3a0cf' },
       blurb: 'RF behavior, Wi-Fi design, capacity, and security.' },
     { id: 'algo', code: 'ALG', name: 'Algorithms & Data Structures', short: 'Algorithms', group: 'subjects',
-      href: 'https://zann208.github.io/algo/', icon: 'algorithm', accent: { light: '#9a5800', dark: '#fbbf3c' },
+      href: 'https://zann208.github.io/algo/', icon: 'algorithm', accent: { light: '#7d5a1e', dark: '#d1ad69' },
       blurb: 'Data structures, complexity, and problem-solving patterns.' },
     { id: 'privacy', code: 'PRV', name: 'Privacy & Information Security', short: 'Privacy & Security', group: 'subjects',
-      href: 'https://zann208.github.io/privacy/', icon: 'shield', accent: { light: '#b4234a', dark: '#ff9cb4' },
+      href: 'https://zann208.github.io/privacy/', icon: 'shield', accent: { light: '#8e3f33', dark: '#dc9686' },
       blurb: 'Privacy principles, risk, controls, and information protection.' },
     { id: 'os', code: 'OS', name: 'Operating Systems & Scheduling', short: 'Operating Systems', group: 'subjects',
-      href: 'https://zann208.github.io/os/', icon: 'system', accent: { light: '#1d7245', dark: '#8ddba9' },
+      href: 'https://zann208.github.io/os/', icon: 'system', accent: { light: '#4a6236', dark: '#a8bf8c' },
       blurb: 'Processes, memory, synchronization, and deadlock.' },
     { id: 'gdc', code: 'GDC', name: 'Google Data Center Hardware Hackathon', short: 'Data Center Prep', group: 'lab',
-      href: HOME + 'google-dc-hackathon/', icon: 'server', accent: { light: '#0b67a3', dark: '#7cc8f6' },
+      href: HOME + 'google-dc-hackathon/', icon: 'server', accent: { light: '#36597a', dark: '#98b5d1' },
       blurb: 'Server hardware, networking, Linux, and troubleshooting.' }
   ];
 
@@ -315,6 +315,31 @@
     state.viewWatch = new MutationObserver(function () { if (!pending) { pending = true; requestAnimationFrame(check); } });
     pairs.forEach(function (p) { state.viewWatch.observe(p[1], { attributes: true, attributeFilter: ['class', 'style', 'hidden'] }); });
   }
+  /* A faint maroon light under the background field follows the pointer (mouse and trackpad
+     only, never with reduced motion). It sits behind every card, so it never covers text. */
+  var spotWired = false;
+  function wireFieldSpot() {
+    if (spotWired || !window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var field = document.querySelector('.home-aurora, .sc3-field');
+    if (!field) return;
+    spotWired = true;
+    var spot = document.createElement('span'); spot.className = 'sc3-spot';
+    field.appendChild(spot);
+    var last = null, frame = null;
+    window.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
+      last = e;
+      if (frame) return;
+      frame = requestAnimationFrame(function () {
+        frame = null;
+        var r = field.getBoundingClientRect();
+        spot.style.transform = 'translate3d(' + (last.clientX - r.left) + 'px,' + (last.clientY - r.top) + 'px,0)';
+        spot.classList.add('is-on');
+      });
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', function () { spot.classList.remove('is-on'); });
+  }
+
   /* ---------- One topic at a time ----------
      Long views (topics, chapters, labs) show one top-level section at a time with
      previous / next at its end. "Show all" in the section bar turns it off (remembered).
@@ -559,6 +584,7 @@
       field.innerHTML = '<i class="sc3-field-a"></i><i class="sc3-field-b"></i><i class="sc3-field-c"></i>';
       body.insertBefore(field, body.firstChild);
     }
+    wireFieldSpot();
 
     state.ui = { top: top, menu: menu, scrim: scrim, main: main, palette: palette, sectionbar: sectionbar, render: {} };
     buildMenu(parent);
@@ -580,9 +606,11 @@
       html += '<a class="sc3-menu-back" href="' + esc(parent.href) + '" data-console-target="' + esc(parent.id) + '">' + icon('back') +
         '<span>Back to ' + esc(parent.short) + '</span></a>';
     }
-    html += '<div class="sc3-menu-head"><div class="sc3-menu-id">' + (state.console.id === 'home' ? '' : '<span class="sc3-menu-mark" aria-hidden="true">' + icon(state.console.icon || 'home') + '</span>') +
+    // The hub needs no title in its menu (the logo says it); consoles show their icon and name.
+    var isHub = state.console.id === 'home';
+    html += '<div class="sc3-menu-head">' + (isHub ? '' : '<div class="sc3-menu-id"><span class="sc3-menu-mark" aria-hidden="true">' + icon(state.console.icon || 'home') + '</span>' +
       '<span class="sc3-menu-names"><span class="sc3-menu-title">' + esc(m.title || state.console.name) + '</span>' +
-      (m.subtitle ? '<span class="sc3-menu-sub">' + esc(m.subtitle) + '</span>' : '') + '</span></div>' +
+      (m.subtitle ? '<span class="sc3-menu-sub">' + esc(m.subtitle) + '</span>' : '') + '</span></div>') +
       '<button type="button" class="sc3-iconbtn sc3-drawer-close" aria-label="Close menu">' + icon('close') + '</button></div>';
     state.groups.forEach(function (g) {
       var isCollapsed = collapsed.indexOf(g.key) >= 0;
