@@ -34,7 +34,7 @@
   /* Single console registry. The hub cards and the switcher both read this. */
   var CONSOLES = [
     { id: 'home', code: 'SC', name: 'Study Console', short: 'Home', group: 'hub', href: HOME, icon: 'home',
-      accent: { light: '#0066cc', dark: '#2997ff' } },
+      accent: { light: '#7a242c', dark: '#d97a83' } },
     { id: 'netdes', code: 'NET', name: 'Network Design & Troubleshooting', short: 'Network Design', group: 'subjects',
       href: 'https://zann208.github.io/netdes/', icon: 'network', accent: { light: '#0b7268', dark: '#5ee2cf' },
       blurb: 'Switching, VLANs, redundancy, and configuration verification.' },
@@ -580,7 +580,7 @@
       html += '<a class="sc3-menu-back" href="' + esc(parent.href) + '" data-console-target="' + esc(parent.id) + '">' + icon('back') +
         '<span>Back to ' + esc(parent.short) + '</span></a>';
     }
-    html += '<div class="sc3-menu-head"><div class="sc3-menu-id"><span class="sc3-menu-mark" aria-hidden="true">' + icon(state.console.icon || 'home') + '</span>' +
+    html += '<div class="sc3-menu-head"><div class="sc3-menu-id">' + (state.console.id === 'home' ? '' : '<span class="sc3-menu-mark" aria-hidden="true">' + icon(state.console.icon || 'home') + '</span>') +
       '<span class="sc3-menu-names"><span class="sc3-menu-title">' + esc(m.title || state.console.name) + '</span>' +
       (m.subtitle ? '<span class="sc3-menu-sub">' + esc(m.subtitle) + '</span>' : '') + '</span></div>' +
       '<button type="button" class="sc3-iconbtn sc3-drawer-close" aria-label="Close menu">' + icon('close') + '</button></div>';

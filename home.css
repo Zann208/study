@@ -3,6 +3,9 @@
    lit by its own neon colour, the same accent it uses inside. Everything else stays quiet.
    Frame, tokens and controls come from /shared/v3/. */
 
+/* Pixel face for the title (Silkscreen, SIL Open Font License, self-hosted) */
+@font-face { font-family: "Silkscreen"; src: url("./assets/fonts/silkscreen-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+
 /* ---------- Console colours (match the shared registry) ---------- */
 .home-tile { --tile-l: var(--sc-accent); --tile-d: var(--sc-accent); --tile: var(--tile-l); }
 .home-tile[data-console-id="netdes"]  { --tile-l: #0b7268; --tile-d: #5ee2cf; }
@@ -12,9 +15,11 @@
 .home-tile[data-console-id="os"]      { --tile-l: #1d7245; --tile-d: #8ddba9; }
 .home-tile[data-console-id="gdc"]     { --tile-l: #0b67a3; --tile-d: #7cc8f6; }
 :root[data-theme="dark"] .home-tile { --tile: var(--tile-d); }
+:root[data-theme="dark"] .home { --home-maroon: #d97a83; }
 
 /* ---------- Page ---------- */
 .home {
+  --home-maroon: #7a242c;
   --home-glass: color-mix(in srgb, var(--sc-surface) 72%, transparent);
   --home-edge: color-mix(in srgb, var(--sc-text) 10%, transparent);
   position: relative; isolation: isolate;
@@ -36,11 +41,11 @@
 .home-aurora::after { content: ""; position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, transparent 0%, transparent 35%, var(--sc-bg) 92%); }
 /* Film grain over the light field: one static noise tile, no animation */
 .home-aurora::before {
-  content: ""; position: absolute; inset: 0; z-index: 1; opacity: .24; mix-blend-mode: overlay;
+  content: ""; position: absolute; inset: 0; z-index: 1; opacity: .34; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
 }
-:root[data-theme="dark"] .home-aurora::before { opacity: .22; mix-blend-mode: soft-light; }
+:root[data-theme="dark"] .home-aurora::before { opacity: .34; mix-blend-mode: soft-light; }
 @keyframes home-aurora-in { from { opacity: 0; } }
 @keyframes home-drift-a { to { transform: translate3d(14vmax, 8vmax, 0) scale(1.12); } }
 @keyframes home-drift-b { to { transform: translate3d(-12vmax, 12vmax, 0) scale(.9); } }
@@ -49,36 +54,23 @@
 /* ---------- Hero ---------- */
 .home-hero { padding: 28px 0 44px; }
 .home-title {
-  margin: 0; font-family: var(--sc-display); font-weight: 700;
-  font-size: clamp(3rem, 1.6rem + 5.6vw, 6.25rem); line-height: .98; letter-spacing: -.05em;
-  /* room for descenders (the y in Study): the gradient text is clipped to the box */
-  padding: .04em 0 .16em; margin-bottom: -.16em;
-  /* a specular highlight passes over the title once when the page opens */
-  background: linear-gradient(100deg, var(--sc-text) 0 40%, color-mix(in srgb, var(--sc-text) 30%, var(--sc-glow-1)) 48%, var(--sc-text) 56% 100%);
-  background-size: 260% 100%; background-position: 100% 0;
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  animation: home-sweep 1.8s .35s var(--sc-ease) both;
+  margin: 0; font-family: "Silkscreen", var(--sc-mono); font-weight: 400;
+  font-size: clamp(2.25rem, .9rem + 4.4vw, 4.75rem); line-height: 1.08; letter-spacing: 0;
+  color: var(--sc-text); cursor: default;
 }
-/* Title: on hover a light follows the pointer through the letters (a copy of the text on top, clipped the same way) */
-.home-title { position: relative; }
+:root:root:root .home .home-title { font-family: "Silkscreen", var(--sc-mono); letter-spacing: 0; }  /* beats the shared heading face */
+.home-title > span { display: inline-block; white-space: nowrap; }
+.home-title .px { display: inline-block; }
+.home-title .px-isne { color: var(--home-maroon); }
+/* Hover: the letters hop in sequence on a stepped timing and switch to maroon, a block cursor appears */
 .home-title::after {
-  content: attr(data-text); position: absolute; inset: 0; padding: inherit; pointer-events: none;
-  background: radial-gradient(240px circle at var(--tx, 50%) var(--ty, 50%), var(--sc-glow-1), var(--sc-glow-2) 38%, var(--sc-glow-3) 58%, transparent 72%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  opacity: 0; transition: opacity .35s var(--sc-ease);
+  content: ""; display: inline-block; width: .42em; height: .78em; margin-left: .14em; vertical-align: -.04em;
+  background: var(--home-maroon); opacity: 0;
 }
-.home-title.is-lit::after { opacity: 1; }
-.home-title.is-lit { filter: drop-shadow(0 0 22px color-mix(in srgb, var(--sc-glow-2) 28%, transparent)); }
-
-/* Page: a soft light follows the pointer anywhere on the hub, under the content */
-.home-cursor {
-  position: fixed; z-index: -1; left: 0; top: 0; width: 640px; height: 640px; margin: -320px 0 0 -320px; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--sc-glow-2) 22%, transparent), color-mix(in srgb, var(--sc-glow-1) 10%, transparent) 55%, transparent);
-  opacity: 0; transition: opacity .5s var(--sc-ease); will-change: transform;
-}
-:root[data-theme="dark"] .home-cursor { background: radial-gradient(closest-side, color-mix(in srgb, var(--sc-glow-2) 30%, transparent), color-mix(in srgb, var(--sc-glow-1) 14%, transparent) 55%, transparent); }
-.home-cursor.is-on { opacity: 1; }
-@keyframes home-sweep { from { background-position: 100% 0; } to { background-position: 0 0; } }
+.home-title:hover .px { animation: home-hop .42s steps(3, end) both; animation-delay: calc(var(--i) * 24ms); color: var(--home-maroon); }
+.home-title:hover::after { opacity: 1; animation: home-blink 1s steps(1, end) infinite; }
+@keyframes home-hop { 0% { transform: translateY(0); } 50% { transform: translateY(-.14em); } 100% { transform: translateY(0); } }
+@keyframes home-blink { 50% { opacity: 0; } }
 .home-sub { max-width: 34em; margin: 18px 0 0; color: var(--sc-muted); font-size: clamp(1.0625rem, .95rem + .45vw, 1.3125rem); line-height: 1.45; letter-spacing: -.01em; }
 .home-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
 
@@ -90,7 +82,8 @@
 }
 .home-continue { padding: 5px 20px 5px 5px; }
 .home-continue[hidden] { display: none; }
-.home-continue-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--sc-accent); color: var(--sc-on-accent); }
+.home-continue-mark { --mark: var(--mark-l, var(--sc-accent)); display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; color: var(--mark); background: color-mix(in srgb, var(--mark) 14%, transparent); border: 1px solid color-mix(in srgb, var(--mark) 35%, transparent); }
+:root[data-theme="dark"] .home-continue-mark { --mark: var(--mark-d, var(--sc-accent)); }
 .home-continue-mark .sc3-icon { width: 18px; height: 18px; }
 .home-continue-copy { display: grid; }
 .home-continue-copy small { color: var(--sc-faint); font-size: .75rem; }
@@ -164,20 +157,16 @@
 .home-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 
 .home-tile {
-  --mx: 50%; --my: -20%;
   position: relative; display: flex; flex-direction: column; min-height: 228px; padding: 24px 22px 22px; box-sizing: border-box;
   border-radius: 20px; overflow: hidden; text-decoration: none; color: var(--sc-text);
   border: 1px solid color-mix(in srgb, var(--tile) 22%, var(--home-edge));
-  background:
-    radial-gradient(420px circle at var(--mx) var(--my), color-mix(in srgb, var(--tile) 13%, transparent), transparent 62%),
-    var(--home-glass);
+  background: var(--home-glass);
   transition: border-color var(--sc-dur) var(--sc-ease), transform var(--sc-dur) var(--sc-ease);
 }
 /* the neon tube along the top edge, in the console's own colour */
 .home-tile::before {
   content: ""; position: absolute; top: 0; left: 22px; right: 22px; height: 2px; border-radius: 0 0 2px 2px;
   background: var(--tile);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--tile) 70%, transparent), 0 0 26px color-mix(in srgb, var(--tile) 45%, transparent);
   opacity: .75; transition: opacity var(--sc-dur) var(--sc-ease), left var(--sc-dur) var(--sc-ease), right var(--sc-dur) var(--sc-ease);
 }
 .home-tile:hover, .home-tile:focus-visible { border-color: color-mix(in srgb, var(--tile) 55%, transparent); transform: translateY(-2px); }
@@ -190,7 +179,6 @@
   border: 1px solid color-mix(in srgb, var(--tile) 28%, transparent);
 }
 .home-tile-icon .sc3-icon { width: 23px; height: 23px; }
-:root[data-theme="dark"] .home-tile-icon .sc3-icon { filter: drop-shadow(0 0 6px color-mix(in srgb, var(--tile) 70%, transparent)); }
 .home-tile-code { position: absolute; top: 24px; right: 22px; font: 500 .75rem/1 var(--sc-mono); color: var(--tile); letter-spacing: .04em; }
 .home-tile h3 { margin: 20px 0 6px; font-family: var(--sc-display); font-size: 1.125rem; font-weight: 650; line-height: 1.3; letter-spacing: -.02em; }
 .home-tile p { margin: 0; color: var(--sc-muted); font-size: .9375rem; line-height: 1.5; }
@@ -204,6 +192,7 @@
 @media (max-width: 680px) {
   .home { padding: 28px 16px 40px; }
   .home-hero { padding: 16px 0 32px; }
+  .home-title { font-size: clamp(1.75rem, 8.4vw, 2.5rem); }
   .home-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .home-tile { min-height: 0; }
   .home-chat-head { padding: 14px 16px; }
@@ -219,9 +208,8 @@
 /* ---------- Motion preferences ---------- */
 @media (prefers-reduced-motion: reduce) {
   .home-aurora, .home-aurora i, .home-title { animation: none; }
-  .home-cursor, .home-title::after { display: none; }
+  .home-title:hover .px, .home-title:hover::after { animation: none; }
   .home-chat-typing i, .home-chat-bubble { animation: none; transition: none; }
-  .home-title { background-position: 0 0; }
   .home-tile, .home-tile::before { transition: none; }
   .home-tile:hover, .home-tile:focus-visible { transform: none; }
 }

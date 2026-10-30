@@ -37,8 +37,8 @@
   /* Diagram palette: distinct state colors, AA on --sc-surface in both themes */
   --sc-dg-1: #086a65; --sc-dg-2: #6a3fc7; --sc-dg-3: #9c4706; --sc-dg-4: #c0265d;
   --sc-dg-5: #1d64c4; --sc-dg-6: #137238;
-  /* Light field (hub background, logo, bar edge): leans on the portfolio's wine, plum and slate */
-  --sc-glow-1: #c4525d; --sc-glow-2: #8a55d6; --sc-glow-3: #4f7fc4;
+  /* Light field (hub background, bar edge): Entaneer CMU maroon from the portfolio, with greys */
+  --sc-glow-1: #a8424d; --sc-glow-2: #8e9099; --sc-glow-3: #b9bbc3;
   --sc-dg-ink: #141519; --sc-dg-edge: #86868b; --sc-dg-fill: #f4f5f8;
 
   /* Code surfaces */
@@ -120,7 +120,7 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
     --sc-bg: #000000; --sc-surface: #0e0e10; --sc-surface-2: #1c1c1e; --sc-surface-3: #2c2c2e;
-    --sc-text: #f5f5f7; --sc-text-body: #dcdce1; --sc-muted: #c7c7cc; --sc-faint: #98989f; --sc-shadow-card: none;
+    --sc-glow-1: #8c2a34; --sc-glow-2: #45464e; --sc-glow-3: #2a2b31; --sc-text: #f5f5f7; --sc-text-body: #dcdce1; --sc-muted: #c7c7cc; --sc-faint: #98989f; --sc-shadow-card: none;
     --sc-line: #232326; --sc-line-strong: #3a3a3c;
     --sc-accent: #2997ff; --sc-accent-strong: #6cb6ff; --sc-accent-soft: #0b2540; --sc-on-accent: #000000;
     --sc-info: #6fc3e3; --sc-info-soft: #0d2630;
@@ -142,7 +142,7 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
   --sc-bg: #000000; --sc-surface: #0e0e10; --sc-surface-2: #1c1c1e; --sc-surface-3: #2c2c2e;
-  --sc-text: #f5f5f7; --sc-text-body: #dcdce1; --sc-muted: #c7c7cc; --sc-faint: #98989f; --sc-shadow-card: none;
+  --sc-glow-1: #8c2a34; --sc-glow-2: #45464e; --sc-glow-3: #2a2b31; --sc-text: #f5f5f7; --sc-text-body: #dcdce1; --sc-muted: #c7c7cc; --sc-faint: #98989f; --sc-shadow-card: none;
   --sc-line: #232326; --sc-line-strong: #3a3a3c;
   --sc-accent: #2997ff; --sc-accent-strong: #6cb6ff; --sc-accent-soft: #0b2540; --sc-on-accent: #000000;
   --sc-info: #6fc3e3; --sc-info-soft: #0d2630;

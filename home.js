@@ -37,6 +37,7 @@
     if (link) link.href = approved(last.href || c.href, c);
     var mark = area.querySelector('[data-continue-icon]');
     if (mark && S.icon) mark.innerHTML = S.icon(c.icon);
+    if (mark && c.accent) { mark.style.setProperty('--mark-l', c.accent.light); mark.style.setProperty('--mark-d', c.accent.dark); }
   }
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-console-launch]'), function (a) {
@@ -78,46 +79,18 @@
     b.addEventListener('click', function () { if (S && S.openSearch) S.openSearch(); });
   });
 
-  // Console tiles: the glow follows the pointer (pointer devices only, never with reduced motion).
-  var fine = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
   var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var grid = document.querySelector('.home-grid');
-  if (grid && fine && !still) {
-    var pending = null;
-    grid.addEventListener('pointermove', function (e) {
-      var tile = e.target.closest && e.target.closest('.home-tile');
-      if (!tile) return;
-      if (pending) cancelAnimationFrame(pending);
-      pending = requestAnimationFrame(function () {
-        var r = tile.getBoundingClientRect();
-        tile.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        tile.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
-    });
-    grid.addEventListener('pointerout', function (e) {
-      var tile = e.target.closest && e.target.closest('.home-tile');
-      if (tile && !tile.contains(e.relatedTarget)) { tile.style.removeProperty('--mx'); tile.style.removeProperty('--my'); }
-    });
-  }
 
-  // Pointer light on the whole page and through the title (mouse and trackpad only).
-  if (fine && !still) {
-    var glow = document.querySelector('.home-cursor'), title = document.querySelector('.home-title'), frame = null, last = null;
-    window.addEventListener('pointermove', function (e) {
-      if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
-      last = e;
-      if (frame) return;
-      frame = requestAnimationFrame(function () {
-        frame = null;
-        if (glow) { glow.style.transform = 'translate3d(' + last.clientX + 'px,' + last.clientY + 'px,0)'; glow.classList.add('is-on'); }
-        if (title) {
-          var r = title.getBoundingClientRect(), inside = last.clientX >= r.left && last.clientX <= r.right && last.clientY >= r.top && last.clientY <= r.bottom;
-          title.classList.toggle('is-lit', inside);
-          if (inside) { title.style.setProperty('--tx', (last.clientX - r.left) + 'px'); title.style.setProperty('--ty', (last.clientY - r.top) + 'px'); }
-        }
-      });
-    }, { passive: true });
-    document.documentElement.addEventListener('pointerleave', function () { if (glow) glow.classList.remove('is-on'); if (title) title.classList.remove('is-lit'); });
+  // Title: one span per letter so hover can step through them; screen readers get the plain text.
+  var title = document.querySelector('.home-title');
+  if (title && !title.querySelector('.px')) {
+    var text = title.textContent.trim(), i = 0;
+    title.setAttribute('aria-label', text);
+    title.innerHTML = text.split(' ').map(function (word, w) {
+      return '<span aria-hidden="true">' + word.split('').map(function (ch) {
+        return '<span class="px' + (w === 0 ? ' px-isne' : '') + '" style="--i:' + (i++) + '">' + ch + '</span>';
+      }).join('') + '</span>';
+    }).join(' ');
   }
 
   // Author message: plays like a conversation the first time it scrolls into view.

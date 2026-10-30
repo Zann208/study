@@ -86,9 +86,9 @@ html:has(body.sc3) { scroll-padding-top: calc(var(--sc-header-h) + 16px); }
 }
 .sc3-top::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; pointer-events: none;
-  background: linear-gradient(90deg, transparent, var(--sc-glow-1) 20%, var(--sc-glow-2) 50%, var(--sc-glow-3) 80%, transparent); opacity: .55;
+  background: linear-gradient(90deg, transparent, var(--sc-glow-1) 30%, var(--sc-glow-2) 70%, transparent); opacity: .5;
 }
-:root[data-theme="dark"] .sc3-top::after { opacity: .8; box-shadow: 0 0 10px color-mix(in srgb, var(--sc-glow-2) 45%, transparent); }
+:root[data-theme="dark"] .sc3-top::after { opacity: .7; }
 .sc3-top-inner {
   height: 100%; display: flex; align-items: center; gap: var(--sc-sp-2);
   padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px));
@@ -114,10 +114,10 @@ html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
 /* Logo: the hub's light field (teal, violet, blue) in a tile */
 .sc3-brand-mark {
   width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; color: #fff;
-  background: radial-gradient(circle at 18% 14%, var(--sc-glow-1), transparent 64%), radial-gradient(circle at 92% 30%, var(--sc-glow-2), transparent 66%), radial-gradient(circle at 50% 112%, var(--sc-glow-3), transparent 70%), #2a1d33;
+  background: radial-gradient(circle at 20% 16%, #b0414c, transparent 66%), radial-gradient(circle at 90% 100%, #3a3b42, transparent 70%), #5a1c23;
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 18%);
 }
-:root[data-theme="dark"] .sc3-brand-mark { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 18%), 0 0 14px color-mix(in srgb, var(--sc-glow-1) 40%, transparent); }
+
 .sc3-brand-mark .sc3-icon { width: 16px; height: 16px; stroke-width: 2; }
 .sc3-sep { width: 1px; height: 22px; background: var(--sc-line); flex: none; }
 
@@ -132,7 +132,6 @@ html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
 .sc3-switch-mark, .sc3-menu-mark { --row-accent: var(--sc-accent); }
 .sc3-switch-icon, .sc3-item-mark { --row-accent: var(--row-l, var(--sc-accent)); }
 :root[data-theme="dark"] :is(.sc3-switch-icon, .sc3-item-mark) { --row-accent: var(--row-d, var(--sc-accent)); }
-:root[data-theme="dark"] :is(.sc3-switch-mark, .sc3-menu-mark, .sc3-switch-icon, .sc3-item-mark) .sc3-icon { filter: drop-shadow(0 0 5px color-mix(in srgb, var(--row-accent) 65%, transparent)); }
 .sc3-switch-mark { width: 26px; height: 26px; border-radius: 8px; }
 .sc3 .sc3-switch-mark .sc3-icon { width: 15px; height: 15px; }
 .sc3-menu-mark { width: 36px; height: 36px; border-radius: 10px; }
@@ -272,7 +271,7 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
 .sc3-item.is-active { background: var(--sc-accent-soft); color: var(--sc-text); font-weight: var(--sc-fw-medium); }
 .sc3-item.is-active::before, .sc3-switch-row.is-current::before {
   content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 0 3px 3px 0;
-  background: var(--sc-accent); box-shadow: 0 0 8px color-mix(in srgb, var(--sc-accent) 70%, transparent), 0 0 18px color-mix(in srgb, var(--sc-accent) 40%, transparent);
+  background: var(--sc-accent);
 }
 .sc3-switch-row { position: relative; }
 .sc3-item-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -349,11 +348,11 @@ html.sc3-has-sections body.sc3 { --sc-sticky-top: calc(var(--sc-header-h) + 48px
 :root[data-theme="dark"] .sc3-field .sc3-field-b { opacity: .17; }
 :root[data-theme="dark"] .sc3-field .sc3-field-c { opacity: .12; }
 .sc3-field::before {
-  content: ""; position: absolute; inset: 0; z-index: 1; opacity: .2; mix-blend-mode: overlay;
+  content: ""; position: absolute; inset: 0; z-index: 1; opacity: .3; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
 }
-:root[data-theme="dark"] .sc3-field::before { opacity: .2; mix-blend-mode: soft-light; }
+:root[data-theme="dark"] .sc3-field::before { opacity: .3; mix-blend-mode: soft-light; }
 /* calmer toward the bottom of the screen, where most reading happens */
 .sc3-field::after { content: ""; position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, transparent 0%, transparent 30%, color-mix(in srgb, var(--sc-bg) 70%, transparent) 75%, var(--sc-bg) 100%); }
 @keyframes sc3-field-in { from { opacity: 0; } }
