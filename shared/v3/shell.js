@@ -35,7 +35,7 @@
   var CONSOLES = [
     { id: 'home', code: 'SC', name: 'Study Console', short: 'Home', group: 'hub', href: HOME, icon: 'home',
       accent: { light: '#7a242c', dark: '#d26a75' } },
-    { id: 'netdes', code: 'NET', name: 'Network Design & Troubleshooting', short: 'Network Design', group: 'subjects',
+    { id: 'netdes', code: 'NET', name: 'Network Design & Management', short: 'Network Design', group: 'subjects',
       href: 'https://zann208.github.io/netdes/', icon: 'network', accent: { light: '#2f6862', dark: '#86b8b0' },
       blurb: 'Switching, VLANs, redundancy, and configuration verification.' },
     { id: 'wnet', code: 'WLN', name: 'Wireless Network Engineering', short: 'Wireless Networks', group: 'subjects',
@@ -516,14 +516,16 @@
     top.innerHTML =
       '<div class="sc3-top-inner">' +
         '<button type="button" class="sc3-iconbtn sc3-menu-toggle" aria-controls="sc3-menu" aria-expanded="false" aria-label="Open menu">' + icon('menu') + '</button>' +
+        '<div class="sc3-top-lead">' +
         '<a class="sc3-brand" href="' + esc(HOME) + '" data-console-target="home" aria-label="ISNE Study Console home">' +
           '<span class="sc3-logo" aria-hidden="true"><span class="sc3-logo-isne">ISNE</span><span class="sc3-logo-sub">STUDY CONSOLE</span></span></a>' +
         '<span class="sc3-sep" aria-hidden="true"></span>' +
         '<div class="sc3-switch">' +
-          '<button type="button" class="sc3-switch-btn" aria-haspopup="true" aria-expanded="false" aria-controls="sc3-switch-pop">' +
-            '<span class="sc3-switch-mark" aria-hidden="true">' + icon(c.icon || 'home') + '</span><span class="sc3-switch-code">' + esc(c.code) + '</span>' +
-            '<span class="sc3-switch-name">' + esc(c.short) + '</span>' + icon('chevron', 'sc3-caret') + '</button>' +
+          '<button type="button" class="sc3-switch-btn" aria-haspopup="true" aria-expanded="false" aria-controls="sc3-switch-pop" aria-label="Switch console. Current: ' + esc(c.name) + '" title="' + esc(c.name) + '">' +
+            '<span class="sc3-switch-mark" aria-hidden="true">' + icon(c.icon || 'home') + '</span><span class="sc3-switch-code" aria-hidden="true">' + esc(c.code) + '</span>' +
+            icon('chevron', 'sc3-caret') + '</button>' +
           '<div class="sc3-pop sc3-switch-pop" id="sc3-switch-pop" hidden></div>' +
+        '</div>' +
         '</div>' +
         '<nav class="sc3-crumbs" aria-label="Breadcrumb"><ol></ol></nav>' +
         '<div class="sc3-actions">' +
@@ -609,8 +611,7 @@
     // The hub needs no title in its menu (the logo says it); consoles show their icon and name.
     var isHub = state.console.id === 'home';
     html += '<div class="sc3-menu-head">' + (isHub ? '' : '<div class="sc3-menu-id"><span class="sc3-menu-mark" aria-hidden="true">' + icon(state.console.icon || 'home') + '</span>' +
-      '<span class="sc3-menu-names"><span class="sc3-menu-title">' + esc(m.title || state.console.name) + '</span>' +
-      (m.subtitle ? '<span class="sc3-menu-sub">' + esc(m.subtitle) + '</span>' : '') + '</span></div>') +
+      '<span class="sc3-menu-names"><span class="sc3-menu-title">' + esc(m.title || state.console.name) + '</span></span></div>') +
       '<button type="button" class="sc3-iconbtn sc3-drawer-close" aria-label="Close menu">' + icon('close') + '</button></div>';
     state.groups.forEach(function (g) {
       var isCollapsed = collapsed.indexOf(g.key) >= 0;

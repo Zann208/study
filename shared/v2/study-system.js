@@ -6,7 +6,7 @@
   if (!body || document.querySelector('.sc-global-header')) return;
   const HOME = 'https://zann208.github.io/study/';
   const CONSOLES = [
-    { id: 'netdes', name: 'Network Design & Troubleshooting', short: 'Network Design', icon: 'network', href: 'https://zann208.github.io/netdes/' },
+    { id: 'netdes', name: 'Network Design & Management', short: 'Network Design', icon: 'network', href: 'https://zann208.github.io/netdes/' },
     { id: 'wnet', name: 'Wireless Network Engineering', short: 'Wireless Networks', icon: 'wireless', href: 'https://zann208.github.io/wnet/' },
     { id: 'algo', name: 'Algorithms & Data Structures', short: 'Algorithms', icon: 'algorithm', href: 'https://zann208.github.io/algo/' },
     { id: 'privacy', name: 'Privacy & Information Security', short: 'Privacy & Security', icon: 'shield', href: 'https://zann208.github.io/privacy/' },

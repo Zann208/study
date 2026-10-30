@@ -119,9 +119,18 @@ html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
 .sc3-logo-sub { font-size: 8px; letter-spacing: .07em; color: var(--sc-text); }
 .sc3-brand:hover .sc3-logo-isne { transform: translate(1px, 1px); text-shadow: 1px 1px 0 var(--logo-shadow); }
 .sc3-sep { width: 1px; height: 22px; background: var(--sc-line); flex: none; }
+/* Logo and console switch share one block as wide as the menu, so its right edge
+   continues the menu's border and the breadcrumbs start over the content column. */
+.sc3-top-lead { display: flex; align-items: center; gap: var(--sc-sp-2); flex: none; min-width: 0; }
+@media (min-width: 900px) {
+  html:not(.sc3-menu-hidden) .sc3-top-lead {
+    align-self: stretch; box-sizing: border-box; width: calc(var(--sc-menu-w) - 12px);
+    border-right: 1px solid var(--sc-line); margin-right: var(--sc-sp-2);
+  }
+}
 
 .sc3-switch { position: relative; flex: none; }
-.sc3-switch-btn { height: 40px; display: inline-flex; align-items: center; gap: var(--sc-sp-2); padding: 0 10px; color: var(--sc-text); font-weight: 500; }
+.sc3-switch-btn { height: 40px; display: inline-flex; align-items: center; gap: var(--sc-sp-2); padding: 0 8px; color: var(--sc-text); font-weight: 500; }
 /* Console icon tiles in the frame: the same style as the hub's console tiles */
 .sc3-switch-mark, .sc3-menu-mark, .sc3-switch-icon, .sc3-item-mark {
   display: grid; place-items: center; flex: none; color: var(--row-accent);
@@ -140,7 +149,6 @@ html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
 .sc3-item-mark ~ .sc3-item-label { margin-left: -2px; }
 .sc3-item[data-console-target] .sc3-pdot { display: none; }
 .sc3-switch-code { font: var(--sc-fw-bold) var(--sc-fs-xs)/1 var(--sc-mono); letter-spacing: .06em; color: var(--sc-accent); }
-.sc3-switch-name { font-weight: var(--sc-fw-medium); white-space: nowrap; }
 .sc3-caret { width: 14px; height: 14px; color: var(--sc-faint); transition: transform var(--sc-dur) var(--sc-ease); }
 [aria-expanded="true"] > .sc3-caret { transform: rotate(180deg); }
 
@@ -246,7 +254,6 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
 .sc3-menu-id { display: flex; align-items: center; gap: 12px; min-width: 0; }
 .sc3-menu-names { display: grid; gap: 2px; min-width: 0; }
 .sc3-menu-title { font-family: var(--sc-display); font-weight: var(--sc-fw-semibold); font-size: var(--sc-fs-md); letter-spacing: 0; line-height: 1.3; text-wrap: balance; }
-.sc3-menu-sub { font-size: var(--sc-fs-xs); color: var(--sc-faint); }
 .sc3-menu-back {
   display: flex; align-items: center; gap: var(--sc-sp-2); margin: 0 0 var(--sc-sp-2); padding: 8px 12px;
   color: var(--sc-muted); text-decoration: none; border-radius: var(--sc-radius-sm); border: 1px solid var(--sc-line);
@@ -480,7 +487,7 @@ html.sc3-palette-open { overflow: hidden; }
 @media (max-width: 599px) {
   .sc3-top-inner { gap: 2px; padding-left: max(6px, env(safe-area-inset-left, 0px)); padding-right: max(6px, env(safe-area-inset-right, 0px)); }
   .sc3-brand { padding: 0 4px; }
-  .sc3-sep, .sc3-crumbs, .sc3-switch-name, .sc3-controls { display: none; }
+  .sc3-sep, .sc3-crumbs, .sc3-controls { display: none; }
   .sc3-drawer-controls { display: flex; }
   .sc3-switch { position: static; }
   .sc3-switch-pop { left: 8px; right: 8px; width: auto; }

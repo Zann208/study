@@ -1,6 +1,6 @@
 (() => {
   const CONSOLES = [
-    {id:'netdes', name:'Network Design & Troubleshooting', href:'https://zann208.github.io/netdes/'},
+    {id:'netdes', name:'Network Design & Management', href:'https://zann208.github.io/netdes/'},
     {id:'wnet', name:'Wireless Network Engineering', href:'https://zann208.github.io/wnet/'},
     {id:'algo', name:'Algorithms & Data Structures', href:'https://zann208.github.io/algo/'},
     {id:'privacy', name:'Privacy & Information Security', href:'https://zann208.github.io/privacy/'},
