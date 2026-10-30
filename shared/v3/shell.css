@@ -105,20 +105,20 @@ html:has(body.sc3) { scroll-padding-top: calc(var(--sc-header-h) + 16px); }
 .sc3-menu-toggle { display: none; }
 html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
 
+/* Logo: the hub's pixel lockup, ISNE over STUDY CONSOLE (Silkscreen, OFL, self-hosted).
+   Sizes sit on the font's 8px grid so the pixels stay crisp: 32px over 8px. */
+@font-face { font-family: "Silkscreen"; src: url("./fonts/silkscreen-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 .sc3-brand {
-  display: inline-flex; align-items: center; gap: var(--sc-sp-2); height: 40px; padding: 0 8px 0 4px; flex: none;
+  display: inline-flex; align-items: center; height: 44px; padding: 0 8px; flex: none;
   color: var(--sc-text); text-decoration: none; border-radius: var(--sc-radius-sm);
-  font-family: var(--sc-display); font-weight: var(--sc-fw-semibold); letter-spacing: var(--sc-ls-text);
+  --logo-maroon: #7a242c; --logo-shadow: rgb(122 36 44 / 22%);
 }
+:root[data-theme="dark"] .sc3-brand { --logo-maroon: #c93f4d; --logo-shadow: #3d1117; }
 .sc3-brand:hover { background: var(--sc-surface-2); }
-/* Logo: the hub's light field (teal, violet, blue) in a tile */
-.sc3-brand-mark {
-  width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; color: #fff;
-  background: radial-gradient(circle at 20% 16%, #b0414c, transparent 66%), radial-gradient(circle at 90% 100%, #3a3b42, transparent 70%), #5a1c23;
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 18%);
-}
-
-.sc3-brand-mark .sc3-icon { width: 16px; height: 16px; stroke-width: 2; }
+.sc3-logo { display: inline-grid; justify-items: start; gap: 2px; font-family: "Silkscreen", var(--sc-mono); font-weight: 400; line-height: 1; }
+.sc3-logo-isne { font-size: 32px; letter-spacing: 0; margin-left: -3px; color: var(--logo-maroon); text-shadow: 2px 2px 0 var(--logo-shadow); }
+.sc3-logo-sub { font-size: 8px; letter-spacing: .07em; color: var(--sc-text); }
+.sc3-brand:hover .sc3-logo-isne { transform: translate(1px, 1px); text-shadow: 1px 1px 0 var(--logo-shadow); }
 .sc3-sep { width: 1px; height: 22px; background: var(--sc-line); flex: none; }
 
 .sc3-switch { position: relative; flex: none; }
@@ -443,7 +443,6 @@ html.sc3-palette-open { overflow: hidden; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1199px) {
-  .sc3-brand-text { display: none; }
   .sc3-search-btn { min-width: 160px; }
 }
 @media (max-width: 899px) {

@@ -491,8 +491,8 @@
     top.innerHTML =
       '<div class="sc3-top-inner">' +
         '<button type="button" class="sc3-iconbtn sc3-menu-toggle" aria-controls="sc3-menu" aria-expanded="false" aria-label="Open menu">' + icon('menu') + '</button>' +
-        '<a class="sc3-brand" href="' + esc(HOME) + '" data-console-target="home" aria-label="Study Console home">' +
-          '<span class="sc3-brand-mark">' + icon('home') + '</span><span class="sc3-brand-text">Study Console</span></a>' +
+        '<a class="sc3-brand" href="' + esc(HOME) + '" data-console-target="home" aria-label="ISNE Study Console home">' +
+          '<span class="sc3-logo" aria-hidden="true"><span class="sc3-logo-isne">ISNE</span><span class="sc3-logo-sub">STUDY CONSOLE</span></span></a>' +
         '<span class="sc3-sep" aria-hidden="true"></span>' +
         '<div class="sc3-switch">' +
           '<button type="button" class="sc3-switch-btn" aria-haspopup="true" aria-expanded="false" aria-controls="sc3-switch-pop">' +
