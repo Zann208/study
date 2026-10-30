@@ -86,11 +86,13 @@
   if (title && !title.querySelector('.px')) {
     var text = title.textContent.trim(), i = 0;
     title.setAttribute('aria-label', text);
-    title.innerHTML = text.split(' ').map(function (word, w) {
-      return '<span aria-hidden="true">' + word.split('').map(function (ch) {
-        return '<span class="px' + (w === 0 ? ' px-isne' : '') + '" style="--i:' + (i++) + '">' + ch + '</span>';
-      }).join('') + '</span>';
-    }).join(' ');
+    var words = text.split(' ');
+    var letters = function (word, cls) {
+      return word.split('').map(function (ch) { return '<span class="px ' + cls + '" style="--i:' + (i++) + '">' + ch + '</span>'; }).join('');
+    };
+    // "ISNE" is set large on its own line; the rest sits under it.
+    title.innerHTML = '<span class="home-title-isne" aria-hidden="true">' + letters(words[0], 'px-isne') + '</span>' +
+      '<span class="home-title-rest" aria-hidden="true">' + words.slice(1).map(function (w) { return '<span class="home-title-word">' + letters(w, 'px-rest') + '</span>'; }).join(' ') + '</span>';
   }
 
   // Author message: plays like a conversation the first time it scrolls into view.

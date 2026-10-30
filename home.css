@@ -15,11 +15,11 @@
 .home-tile[data-console-id="os"]      { --tile-l: #1d7245; --tile-d: #8ddba9; }
 .home-tile[data-console-id="gdc"]     { --tile-l: #0b67a3; --tile-d: #7cc8f6; }
 :root[data-theme="dark"] .home-tile { --tile: var(--tile-d); }
-:root[data-theme="dark"] .home { --home-maroon: #d97a83; }
+:root[data-theme="dark"] .home { --home-maroon: #c93f4d; --home-maroon-shadow: #3d1117; --home-ink: #e4e4e8; --home-on-maroon: #ffffff; }
 
 /* ---------- Page ---------- */
 .home {
-  --home-maroon: #7a242c;
+  --home-maroon: #7a242c; --home-maroon-shadow: rgb(122 36 44 / 22%); --home-ink: #2a2c32; --home-on-maroon: #ffffff;
   --home-glass: color-mix(in srgb, var(--sc-surface) 72%, transparent);
   --home-edge: color-mix(in srgb, var(--sc-text) 10%, transparent);
   position: relative; isolation: isolate;
@@ -53,23 +53,31 @@
 
 /* ---------- Hero ---------- */
 .home-hero { padding: 28px 0 44px; }
+/* Title lockup: ISNE large in Entaneer maroon with a pixel drop shadow, "Study Console" under it in neutral ink */
 .home-title {
-  margin: 0; font-family: "Silkscreen", var(--sc-mono); font-weight: 400;
-  font-size: clamp(2.25rem, .9rem + 4.4vw, 4.75rem); line-height: 1.08; letter-spacing: 0;
-  color: var(--sc-text); cursor: default;
+  margin: 0; display: inline-grid; justify-items: start; gap: .08em;
+  font-family: "Silkscreen", var(--sc-mono); font-weight: 400; letter-spacing: 0; line-height: 1; cursor: default;
+  font-size: clamp(5.75rem, 2rem + 9vw, 9.5rem);
 }
 :root:root:root .home .home-title { font-family: "Silkscreen", var(--sc-mono); letter-spacing: 0; }  /* beats the shared heading face */
-.home-title > span { display: inline-block; white-space: nowrap; }
 .home-title .px { display: inline-block; }
-.home-title .px-isne { color: var(--home-maroon); }
-/* Hover: the letters hop in sequence on a stepped timing and switch to maroon, a block cursor appears */
-.home-title::after {
-  content: ""; display: inline-block; width: .42em; height: .78em; margin-left: .14em; vertical-align: -.04em;
+.home-title-isne {
+  margin-left: -.09em; color: var(--home-maroon);   /* the pixel I carries side bearing; align it with the line below */
+  text-shadow: .055em .055em 0 var(--home-maroon-shadow);
+}
+.home-title-rest { font-size: .262em; color: var(--home-ink); }   /* sized so the line is as wide as ISNE */
+.home-title-word { display: inline-block; white-space: nowrap; }
+/* A block cursor after "Console", shown on hover */
+.home-title-rest::after {
+  content: ""; display: inline-block; width: .5em; height: .82em; margin-left: .16em; vertical-align: -.06em;
   background: var(--home-maroon); opacity: 0;
 }
-.home-title:hover .px { animation: home-hop .42s steps(3, end) both; animation-delay: calc(var(--i) * 24ms); color: var(--home-maroon); }
-.home-title:hover::after { opacity: 1; animation: home-blink 1s steps(1, end) infinite; }
-@keyframes home-hop { 0% { transform: translateY(0); } 50% { transform: translateY(-.14em); } 100% { transform: translateY(0); } }
+/* Hover: ISNE presses into its shadow; a maroon highlight runs letter by letter through "Study Console" and leaves it neutral */
+.home-title:hover .px-isne { animation: home-press .36s steps(2, end) both; animation-delay: calc(var(--i) * 40ms); }
+.home-title:hover .px-rest { animation: home-scan .5s steps(2, end) both; animation-delay: calc(120ms + (var(--i) - 4) * 32ms); }
+.home-title:hover .home-title-rest::after { opacity: 1; animation: home-blink 1s steps(1, end) .55s infinite; }
+@keyframes home-press { 50% { transform: translate(.04em, .04em); text-shadow: .015em .015em 0 var(--home-maroon-shadow); } }
+@keyframes home-scan { 50% { color: var(--home-on-maroon); background: var(--home-maroon); } }
 @keyframes home-blink { 50% { opacity: 0; } }
 .home-sub { max-width: 34em; margin: 18px 0 0; color: var(--sc-muted); font-size: clamp(1.0625rem, .95rem + .45vw, 1.3125rem); line-height: 1.45; letter-spacing: -.01em; }
 .home-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
@@ -192,7 +200,6 @@
 @media (max-width: 680px) {
   .home { padding: 28px 16px 40px; }
   .home-hero { padding: 16px 0 32px; }
-  .home-title { font-size: clamp(1.75rem, 8.4vw, 2.5rem); }
   .home-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .home-tile { min-height: 0; }
   .home-chat-head { padding: 14px 16px; }
@@ -208,7 +215,7 @@
 /* ---------- Motion preferences ---------- */
 @media (prefers-reduced-motion: reduce) {
   .home-aurora, .home-aurora i, .home-title { animation: none; }
-  .home-title:hover .px, .home-title:hover::after { animation: none; }
+  .home-title:hover .px, .home-title:hover .home-title-rest::after { animation: none; }
   .home-chat-typing i, .home-chat-bubble { animation: none; transition: none; }
   .home-tile, .home-tile::before { transition: none; }
   .home-tile:hover, .home-tile:focus-visible { transform: none; }
