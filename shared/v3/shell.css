@@ -14,7 +14,6 @@ html.sc-v3:not(.sc-embedded) {
   --sc-frame-top: calc(var(--sc-header-h) + env(safe-area-inset-top, 0px));
   --sc-frame-left: var(--sc-menu-w);
 }
-html.sc-v3.sc3-has-sections:not(.sc-embedded) { --sc-frame-top: calc(var(--sc-header-h) + 48px + env(safe-area-inset-top, 0px)); }
 html.sc-v3.sc3-menu-hidden:not(.sc-embedded) { --sc-frame-left: 0px; }
 html.sc-v3:not(.sc-embedded) body {
   margin: 0; padding-top: var(--sc-frame-top); padding-left: var(--sc-frame-left);
@@ -102,8 +101,8 @@ html:has(body.sc3) { scroll-padding-top: calc(var(--sc-header-h) + 16px); }
 .sc3-iconbtn:hover, .sc3-switch-btn:hover, .sc3-progress:hover, .sc3-hide-menu:hover { background: var(--sc-surface-2); color: var(--sc-text); }
 .sc3-iconbtn[aria-expanded="true"] { background: var(--sc-surface-2); color: var(--sc-text); }
 
-.sc3-menu-toggle { display: none; }
-html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
+.sc3-menu-toggle { display: inline-grid; }
+html:not(.sc3-menu-hidden) .sc3-menu-toggle { color: var(--sc-text); }
 
 /* Logo: the hub's pixel lockup, ISNE over STUDY CONSOLE (Silkscreen, OFL, self-hosted).
    Sizes sit on the font's 8px grid so the pixels stay crisp: 32px over 8px. */
@@ -124,7 +123,7 @@ html.sc3-menu-hidden .sc3-menu-toggle { display: inline-grid; }
 .sc3-top-lead { display: flex; align-items: center; gap: var(--sc-sp-2); flex: none; min-width: 0; }
 @media (min-width: 900px) {
   html:not(.sc3-menu-hidden) .sc3-top-lead {
-    align-self: stretch; box-sizing: border-box; width: calc(var(--sc-menu-w) - 12px);
+    align-self: stretch; box-sizing: border-box; width: calc(var(--sc-menu-w) - 12px - 40px - var(--sc-sp-2));
     border-right: 1px solid var(--sc-line); margin-right: var(--sc-sp-2);
   }
 }
@@ -312,7 +311,7 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
   background: var(--sc-chrome);
   border-bottom: 1px solid var(--sc-line); font: var(--sc-fs-md)/1.3 var(--sc-sans);
 }
-.sc3-sectionbar[hidden] { display: none; }
+.sc3-sectionbar, .sc3-sectionbar[hidden] { display: none !important; }
 .sc3-sectionbar .sc3-iconbtn { width: 36px; height: 36px; }
 .sc3-sectionbar .sc3-iconbtn:disabled { opacity: .35; cursor: default; background: none; }
 .sc3-rot90 { transform: rotate(90deg); }
@@ -328,8 +327,6 @@ html.sc3-menu-hidden .sc3-menu { display: none; }
   background: var(--sc-surface); color: var(--sc-muted); font: inherit; cursor: pointer;
 }
 .sc3-sec-top:hover { color: var(--sc-text); border-color: var(--sc-line-strong); }
-html.sc3-has-sections { scroll-padding-top: calc(var(--sc-header-h) + 48px + 16px); }
-html.sc3-has-sections body.sc3 { --sc-sticky-top: calc(var(--sc-header-h) + 48px + env(safe-area-inset-top, 0px)); }
 .sc3-subitem { display: flex; gap: 8px; align-items: baseline; }
 .sc3-subbadge { flex: none; min-width: 2.6em; font-size: var(--sc-fs-xs); color: var(--sc-faint); font-variant-numeric: tabular-nums; }
 .sc3-sublist { margin: 2px 0 6px; max-height: 50vh; overflow-y: auto; border-left: 1px solid var(--sc-line); margin-left: 16px; }

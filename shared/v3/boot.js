@@ -74,8 +74,6 @@
   if (!embedded) {
     try {
       if (localStorage.getItem('study-console-v3-menu-hidden') === '1') root.classList.add('sc3-menu-hidden');
-      var secs = JSON.parse(localStorage.getItem('study-console-v3-sections') || '{}');
-      if (secs && secs[location.pathname + (location.hash || '#')]) root.classList.add('sc3-has-sections');
     } catch (e) { /* storage blocked */ }
   }
 

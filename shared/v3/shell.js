@@ -639,7 +639,6 @@
     });
     html += '</div><div class="sc3-menu-foot">' +
       '<div class="sc3-drawer-controls" data-sc3-drawer-controls></div>' +
-      '<button type="button" class="sc3-hide-menu" aria-label="Hide menu">' + icon('sidebar') + '<span>Hide menu</span><kbd class="sc3-kbd">[</kbd></button>' +
       '</div>';
     menu.innerHTML = html;
 
@@ -652,7 +651,6 @@
         closeDrawer();
         navigate(a.dataset.view, a.dataset.anchor || null);
       }
-      if (e.target.closest('.sc3-hide-menu')) setMenuHidden(true);
       if (e.target.closest('.sc3-drawer-close')) closeDrawer(true);
     });
     menu.addEventListener('keydown', menuKeys);
@@ -738,7 +736,16 @@
   function setMenuHidden(hidden) {
     document.documentElement.classList.toggle('sc3-menu-hidden', hidden);
     write(KEYS.menuHidden, hidden ? '1' : '0');
-    if (hidden) state.ui.top.querySelector('.sc3-menu-toggle').focus();
+    syncMenuToggle();
+  }
+  // One control for the menu: the button at the top left shows and hides it on every screen size.
+  function syncMenuToggle() {
+    var t = state.ui && state.ui.top.querySelector('.sc3-menu-toggle');
+    if (!t || narrow.matches) return;
+    var hidden = document.documentElement.classList.contains('sc3-menu-hidden');
+    t.setAttribute('aria-expanded', String(!hidden));
+    t.setAttribute('aria-label', hidden ? 'Show menu' : 'Hide menu');
+    t.title = (hidden ? 'Show menu' : 'Hide menu') + ' ([)';
   }
 
   /* ---------- Controls: theme, language, reading size ---------- */
@@ -894,10 +901,12 @@
   function wireDrawer() {
     var ui = state.ui;
     ui.top.querySelector('.sc3-menu-toggle').addEventListener('click', function () {
-      if (!narrow.matches && document.documentElement.classList.contains('sc3-menu-hidden')) { setMenuHidden(false); return; }
+      if (!narrow.matches) { setMenuHidden(!document.documentElement.classList.contains('sc3-menu-hidden')); return; }
       if (document.documentElement.classList.contains('sc3-drawer-open')) closeDrawer(true); else openDrawer();
     });
     ui.scrim.addEventListener('click', function () { closeDrawer(true); });
+    syncMenuToggle();
+    if (narrow.addEventListener) narrow.addEventListener('change', syncMenuToggle);
     ui.menu.addEventListener('keydown', function (e) {
       if (e.key !== 'Tab' || !document.documentElement.classList.contains('sc3-drawer-open')) return;
       var f = Array.prototype.filter.call(ui.menu.querySelectorAll('a[href],button,input'), function (n) {
@@ -1075,10 +1084,12 @@
     next.addEventListener('click', function () { go(idx() + 1); });
     bar.querySelector('.sc3-sec-top').addEventListener('click', function () { window.scrollTo(0, 0); });
     ui.render.sections = function () {
+      // The section bar is retired: sections are reached from the menu. The select is still
+      // filled so the menu can highlight the section in view.
       var s = state.sections || [], show = s.length > 1 && !(state.current && state.current.sectionBar === false);
-      bar.hidden = !show;
-      document.documentElement.classList.toggle('sc3-has-sections', show);
-      rememberSections(show);
+      bar.hidden = true;
+      document.documentElement.classList.remove('sc3-has-sections');
+      rememberSections(false);
       if (!show) { setupPaging(); return; }
       sel.innerHTML = s.map(function (c) { return '<option value="' + esc(c.id) + '">' + esc((c.badge ? c.badge + ' · ' : '') + c.title) + '</option>'; }).join('');
       setupPaging();

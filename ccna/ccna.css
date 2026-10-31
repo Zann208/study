@@ -25,7 +25,12 @@
 :root[data-theme="light"] .sc3-field .sc3-field-a { opacity: .2; }
 :root[data-theme="light"] .sc3-field .sc3-field-b { opacity: .45; }
 :root[data-theme="light"] .sc3-field .sc3-field-c { opacity: .5; }
-.sc3-field::before { opacity: .36; }
+.sc3-field::before { opacity: .12; mix-blend-mode: normal; }
+:root[data-theme="dark"] .sc3-field::before { opacity: .16; mix-blend-mode: normal; }
+:root[data-theme="light"] .sc3-field::before { opacity: .22; mix-blend-mode: multiply; }
+/* pointer light: small and faint so it reads as a highlight, not a second glow */
+.sc3-field .sc3-spot { width: 300px; height: 300px; margin: -150px 0 0 -150px; background: radial-gradient(closest-side, color-mix(in srgb, var(--cc-hi) 22%, transparent), transparent); }
+.sc3-field .sc3-spot.is-on { opacity: .5; }
 .sc3-field::after { background: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--sc-bg) 55%, transparent) 100%); }
 @media (max-aspect-ratio: 1/1) {
   .sc3-field .sc3-field-a { width: 110vmax; height: 110vmax; left: -62vmax; top: -66vmax; }
