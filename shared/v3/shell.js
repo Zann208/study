@@ -80,6 +80,8 @@
     arrow: '<path d="M4 12h16m-6-6 6 6-6 6"/>',
     back: '<path d="M20 12H4m6-6-6 6 6 6"/>',
     sidebar: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/>',
+    panelClose: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M16 9.5 13.5 12l2.5 2.5"/>',
+    panelOpen: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M13.5 9.5 16 12l-2.5 2.5"/>',
     more: '<circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/>'
   };
 
@@ -741,8 +743,10 @@
   // One control for the menu: the button at the top left shows and hides it on every screen size.
   function syncMenuToggle() {
     var t = state.ui && state.ui.top.querySelector('.sc3-menu-toggle');
-    if (!t || narrow.matches) return;
+    if (!t) return;
+    if (narrow.matches) { t.innerHTML = icon('menu'); t.removeAttribute('title'); return; }
     var hidden = document.documentElement.classList.contains('sc3-menu-hidden');
+    t.innerHTML = icon(hidden ? 'panelOpen' : 'panelClose');
     t.setAttribute('aria-expanded', String(!hidden));
     t.setAttribute('aria-label', hidden ? 'Show menu' : 'Hide menu');
     t.title = (hidden ? 'Show menu' : 'Hide menu') + ' ([)';
