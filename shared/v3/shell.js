@@ -52,7 +52,10 @@
       blurb: 'Processes, memory, synchronization, and deadlock.' },
     { id: 'gdc', code: 'GDC', name: 'Google Data Center Hardware Hackathon', short: 'Data Center Prep', group: 'lab',
       href: HOME + 'google-dc-hackathon/', icon: 'server', accent: { light: '#36597a', dark: '#98b5d1' },
-      blurb: 'Server hardware, networking, Linux, and troubleshooting.' }
+      blurb: 'Server hardware, networking, Linux, and troubleshooting.' },
+    { id: 'ccna', code: 'CCN', name: 'Cisco CCNA 200-301', short: 'CCNA', group: 'cert',
+      href: HOME + 'ccna/', icon: 'router', accent: { light: '#2b2b2b', dark: '#d6d6d6' },
+      blurb: 'Exam domains, labs and case studies for the CCNA.' }
   ];
 
   var ICONS = {
@@ -62,6 +65,7 @@
     algorithm: '<circle cx="12" cy="4" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 6v5M5 17v-6h14v6"/>',
     shield: '<path d="m12 3 8 3v6c0 5-8 9-8 9S4 17 4 12V6zM8.5 12l2.5 2.5 4.5-5"/>',
     system: '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 8l3 2.5L7 13M13 13h4"/>',
+    router: '<circle cx="12" cy="12" r="9"/><path d="M12 5.5v4.2M10.2 7.3 12 5.5l1.8 1.8M12 18.5v-4.2M10.2 16.7 12 18.5l1.8-1.8M5.5 12h4.2M7.3 10.2 5.5 12l1.8 1.8M18.5 12h-4.2M16.7 10.2 18.5 12l-1.8 1.8"/>',
     server: '<rect x="4" y="3" width="16" height="7" rx="2"/><rect x="4" y="14" width="16" height="7" rx="2"/><path d="M8 6.5h.01M8 17.5h.01M12 6.5h4M12 17.5h4"/>',
     chevron: '<path d="m6 9 6 6 6-6"/>',
     menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
@@ -851,9 +855,11 @@
     function render() {
       var subjects = CONSOLES.filter(function (c) { return c.group === 'subjects'; });
       var lab = CONSOLES.filter(function (c) { return c.group === 'lab'; });
+      var cert = CONSOLES.filter(function (c) { return c.group === 'cert'; });
       pop.innerHTML = row(consoleById('home')) +
         '<p class="sc3-pop-title">Subjects</p>' + subjects.map(row).join('') +
-        '<p class="sc3-pop-title">Engineering Lab</p>' + lab.map(row).join('');
+        '<p class="sc3-pop-title">Engineering Lab</p>' + lab.map(row).join('') +
+        (cert.length ? '<p class="sc3-pop-title">Certification</p>' + cert.map(row).join('') : '');
     }
     btn.addEventListener('click', function () { render(); togglePop(btn, pop); });
     pop.addEventListener('keydown', function (e) {

@@ -70,7 +70,8 @@
         linkOut('privacy', 'Privacy & Security', 'PRV'),
         linkOut('os', 'Operating Systems', 'OS')
       ] },
-      { label: 'Engineering Lab', views: [linkOut('gdc', 'Data Center Prep', 'GDC')] }
+      { label: 'Engineering Lab', views: [linkOut('gdc', 'Data Center Prep', 'GDC')] },
+      { label: 'Certification', views: [linkOut('ccna', 'CCNA', 'CCN')] }
     ]
   });
 
