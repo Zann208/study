@@ -6,6 +6,9 @@
   var OBJ_NEXT = { todo: 'learning', learning: 'done', done: 'todo' };
   var OBJ_LABEL = { todo: 'Not started', learning: 'Learning', done: 'Done' };
   var LAB_NEXT = { planned: 'active', active: 'done', done: 'planned' };
+  var COV_LABEL = { full: 'v1.1 material covers this', partly: 'v1.1 covers part', 'new': 'New in v2.0' };
+  var SRC_LABEL = { official: 'Official', older: 'Older Cisco document', third: 'Third party', unverified: 'Unverified' };
+  var V2_LABEL = { v2: 'Built for v2.0', pending: 'v2.0 pending', v11: 'Built for v1.1', any: 'Any version', unknown: 'Version unclear' };
   var LAB_LABEL = { planned: 'Planned', active: 'In progress', done: 'Done' };
 
   /* ---------- state ---------- */
@@ -67,6 +70,7 @@
       d.objectives.forEach(function (o) {
         var s = objState(o.id);
         html += '<li class="cc-obj" data-s="' + s + '"><span class="cc-oid">' + o.id + '</span><div class="cc-otext">' + esc(o.text);
+        if (o.v11) html += '<p class="cc-cov" data-c="' + o.v11 + '"><b>' + COV_LABEL[o.v11] + '</b>' + (o.add ? esc(o.add) : '') + '</p>';
         if (o.subs) html += '<ul class="cc-subs">' + o.subs.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
         html += '</div><button type="button" class="cc-st" data-act="obj" data-id="' + o.id + '" aria-label="Objective ' + o.id + ': ' + OBJ_LABEL[s] + '. Change status">' + OBJ_LABEL[s] + '</button></li>';
       });
@@ -142,7 +146,51 @@
     chipEl.hidden = !chip; if (chip) chipEl.textContent = chip;
   }
 
-  function renderAll() { renderDomains(); renderLabs(); renderCases(); renderPractice(); renderProgress(); }
+
+  function host(url) { try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return 'source'; } }
+  function renderExam() {
+    var html = '';
+    D.facts.forEach(function (g) {
+      html += '<h3 class="cc-h3">' + esc(g.title) + '</h3><dl class="cc-facts">';
+      g.rows.forEach(function (r) {
+        html += '<div class="cc-fact" data-s="' + r.s + '"><dt>' + esc(r.k) + '</dt><dd>' + esc(r.v) + '</dd><span class="cc-src"><b>' + SRC_LABEL[r.s] + '</b>' +
+          (r.src ? '<a href="' + esc(r.src) + '" target="_blank" rel="noopener">' + esc(host(r.src)) + '</a>' : '') + '</span></div>';
+      });
+      html += '</dl>';
+    });
+    html += '<h3 class="cc-h3">Key dates</h3><ol class="cc-dates">' + D.timeline.map(function (t) { return '<li><b>' + esc(t.when) + '</b><span>' + esc(t.what) + '</span></li>'; }).join('') + '</ol>';
+    var c = D.changes;
+    function chips(a) { return '<ul class="cc-tags">' + a.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'; }
+    html += '<h3 class="cc-h3">Changes from v1.1</h3><div class="cc-chg"><div><h4>New in v2.0</h4>' + chips(c.added) + '</div><div><h4>No longer listed</h4>' + chips(c.dropped) +
+      '</div><div><h4>Unlisted but still needed</h4>' + chips(c.keep) + '</div></div><p class="cc-note cc-note--block">' + esc(c.check) + '</p>';
+    $('cc-exam-body').innerHTML = html;
+    $('cc-exam-aside').textContent = 'Checked ' + D.checked;
+  }
+  var resFilter = 'all';
+  function renderResources() {
+    var doms = ['all'].concat(D.domains.map(function (d) { return d.no; }));
+    var html = '<div class="cc-filter" role="group" aria-label="Filter by domain">' + doms.map(function (d) {
+      return '<button type="button" class="sc-chip' + (d === resFilter ? ' is-on' : '') + '" data-act="res-filter" data-id="' + d + '" aria-pressed="' + (d === resFilter) + '">' + (d === 'all' ? 'All domains' : d) + '</button>';
+    }).join('') + '</div>';
+    var cats = [], shown = 0;
+    D.resources.forEach(function (r) { if (cats.indexOf(r.cat) < 0) cats.push(r.cat); });
+    cats.forEach(function (cat) {
+      var rows = D.resources.filter(function (r) { return r.cat === cat && (resFilter === 'all' || r.dom === 'all' || r.dom.indexOf(resFilter) >= 0); });
+      if (!rows.length) return;
+      html += '<h3 class="cc-h3">' + esc(cat) + '</h3><ul class="cc-res">';
+      rows.forEach(function (r) {
+        shown++;
+        html += '<li class="cc-re" data-v="' + r.v2 + '"><div class="cc-re-head"><a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.name) + '</a><span class="cc-v2">' + V2_LABEL[r.v2] + '</span></div>' +
+          '<p class="cc-re-by">' + esc(r.by) + ' · ' + esc(r.cost) + ' · ' + (r.dom === 'all' ? 'All domains' : 'Domains ' + esc(r.dom.join(', '))) + '</p><p class="cc-re-note">' + esc(r.note) + '</p></li>';
+      });
+      html += '</ul>';
+    });
+    html += '<h3 class="cc-h3">Avoid</h3><ul class="cc-avoid">' + D.avoid.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul>';
+    $('cc-res-body').innerHTML = html;
+    $('cc-res-aside').textContent = shown + ' sources · checked ' + D.checked;
+  }
+
+  function renderAll() { renderExam(); renderResources(); renderDomains(); renderLabs(); renderCases(); renderPractice(); renderProgress(); }
 
   /* ---------- events ---------- */
   document.addEventListener('click', function (e) {
@@ -163,6 +211,9 @@
     } else if (act === 'del-score') {
       S.scores.splice(+b.getAttribute('data-i'), 1);
       save(); renderPractice(); renderProgress();
+    } else if (act === 'res-filter') {
+      resFilter = id; renderResources();
+      var f = document.querySelector('[data-act="res-filter"][data-id="' + id + '"]'); if (f) f.focus();
     } else if (act === 'export') {
       var blob = new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' });
       var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ccna-progress-' + today() + '.json';
@@ -209,6 +260,8 @@
   D.domains.forEach(function (d) {
     d.objectives.forEach(function (o) { terms.push({ title: o.id + ' ' + o.text, meta: 'Objective · ' + d.no, view: 'track', anchor: d.id }); });
   });
+  D.resources.forEach(function (r) { terms.push({ title: r.name, meta: 'Resource · ' + r.cat, view: 'track', anchor: 'resources' }); });
+  D.facts.forEach(function (g) { g.rows.forEach(function (r) { terms.push({ title: r.k, meta: 'Exam fact', view: 'track', anchor: 'exam' }); }); });
   D.labs.forEach(function (l) { terms.push({ title: l.id + ' ' + l.title, meta: 'Lab · ' + l.tool, view: 'track', anchor: 'labs' }); });
 
   renderAll();
@@ -223,11 +276,13 @@
     groups: [
       { label: 'Console', views: [{ id: 'track', title: 'CCNA track', badge: 'CCN', children: [
         { id: 'overview', title: 'Overview', badge: 'OV' },
-        { id: 'domains', title: 'Exam domains', badge: '01' },
-        { id: 'labs', title: 'Labs', badge: '02' },
-        { id: 'cases', title: 'Case studies', badge: '03' },
-        { id: 'practice', title: 'Practice', badge: '04' },
-        { id: 'progress', title: 'Progress', badge: '05' }
+        { id: 'exam', title: 'Exam facts', badge: '01' },
+        { id: 'domains', title: 'Exam domains', badge: '02' },
+        { id: 'resources', title: 'Resources', badge: '03' },
+        { id: 'labs', title: 'Labs', badge: '04' },
+        { id: 'cases', title: 'Case studies', badge: '05' },
+        { id: 'practice', title: 'Practice', badge: '06' },
+        { id: 'progress', title: 'Progress', badge: '07' }
       ] }] }
     ],
     terms: terms,
