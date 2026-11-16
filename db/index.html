@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script src="../shared/v3/boot.js?v=20261116-1" data-console="db"></script>
+<title>Database Systems</title>
+<meta name="description" content="Study console for Database Systems: the relational model, SQL DDL and queries, ER design, relational algebra, Datalog, indexing calculations, heuristic query optimization, transactions, users and privileges, with worked labs, a past paper, flashcards and a mock exam.">
+<meta name="theme-color" content="#0f0e0f">
+<style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  background:var(--bg);min-height:100vh;overflow-x:hidden}
+a{color:var(--vi);text-decoration:none}
+::selection{background:color-mix(in srgb,var(--vi) 32%,transparent)}
+:focus-visible{outline:2px solid var(--vi);outline-offset:2px;border-radius:5px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+
+/* ---------- layout ---------- */
+.wrap{max-width:1000px;margin:0 auto;padding:30px 18px 90px}
+.tab{display:none}
+.tab.on{display:block;animation:fade .22s ease}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(25px,4.4vw,36px);font-weight:800;letter-spacing:-.9px;line-height:1.14}
+.pre,.kicker{font-family:var(--mono);color:var(--vi);font-size:11px;display:block;letter-spacing:2.2px;
+  margin-bottom:8px;font-weight:700;text-transform:uppercase}
+h2.title{font-size:clamp(23px,4vw,32px);font-weight:800;letter-spacing:-.8px;line-height:1.16;margin-bottom:2px}
+.lede,.lead{color:var(--dim);margin-top:11px;font-size:16px;max-width:660px}
+h3{font-size:17.5px;font-weight:700;letter-spacing:-.25px}
+h4{font-family:var(--mono);font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--vi);
+  margin-top:19px;margin-bottom:2px;font-weight:700}
+p{margin-top:9px}
+b,strong{font-weight:680;color:var(--ink)}
+
+/* ---------- panels / cards ---------- */
+.panel,.card,.item{background:var(--panel);border:1px solid var(--line);border-radius:13px;
+  padding:19px 21px;margin-top:16px;position:relative;scroll-margin-top:118px}
+.panel::before{content:"";position:absolute;top:-1px;left:18px;width:38px;height:2px;background:var(--vi);border-radius:2px}
+.panel.pc::before{background:var(--cy)} .panel.pg::before{background:var(--gr)} .panel.pa::before{background:var(--am)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-top:16px}
+.grid2 .card{margin-top:0}
+
+/* ---------- badges / chips ---------- */
+.badge{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;
+  border-radius:5px;border:1px solid var(--line2);color:var(--faint);font-weight:700;display:inline-block}
+.badge.b1,.badge.vi{color:var(--vi);border-color:var(--vi);background:color-mix(in srgb,var(--vi) 10%,transparent)}
+.badge.b2,.badge.cy{color:var(--cy);border-color:var(--cy);background:color-mix(in srgb,var(--cy) 10%,transparent)}
+.badge.bb{color:var(--rd);border-color:var(--rd);background:color-mix(in srgb,var(--rd) 10%,transparent)}
+.badge.bw{color:var(--am);border-color:var(--am);background:color-mix(in srgb,var(--am) 10%,transparent)}
+.badge.gr{color:var(--gr);border-color:var(--gr)}
+.chiprow{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.9px;text-transform:uppercase;color:var(--faint);
+  border:1px solid var(--line2);border-radius:20px;padding:5px 12px;font-weight:600}
+.chip.c1{color:var(--vi);border-color:color-mix(in srgb,var(--vi) 45%,transparent)}
+.chip.c2{color:var(--cy);border-color:color-mix(in srgb,var(--cy) 45%,transparent)}
+
+/* ---------- tables ---------- */
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:11px;display:table}
+th,td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:1.3px;text-transform:uppercase;color:var(--vi);
+  font-weight:700;background:color-mix(in srgb,var(--vi) 7%,transparent);border-bottom:1px solid var(--line2)}
+tr:last-child td{border-bottom:0}
+.tscroll{overflow-x:auto;margin-top:10px}
+@media(max-width:640px){table{font-size:13px}th,td{padding:7px 8px}}
+
+/* ---------- callouts ---------- */
+.tip,.box{border-radius:9px;padding:11px 14px;margin-top:12px;font-size:14.5px;line-height:1.62}
+.tip b:first-child,.box b:first-child{font-family:var(--mono);font-size:10.5px;letter-spacing:.8px;
+  text-transform:uppercase;display:block;margin-bottom:3px}
+.t-good,.box.rl{background:color-mix(in srgb,var(--gr) 9%,var(--panel));border:1px solid color-mix(in srgb,var(--gr) 28%,transparent)}
+.t-good b:first-child,.box.rl b:first-child{color:var(--gr)}
+.t-warn,.box.trap{background:color-mix(in srgb,var(--am) 10%,var(--panel));border:1px solid color-mix(in srgb,var(--am) 30%,transparent)}
+.t-warn b:first-child,.box.trap b:first-child{color:var(--am)}
+.t-info,.box.wild{background:color-mix(in srgb,var(--cy) 9%,var(--panel));border:1px solid color-mix(in srgb,var(--cy) 26%,transparent)}
+.t-info b:first-child,.box.wild b:first-child{color:var(--cy)}
+.lesson{background:color-mix(in srgb,var(--gr) 9%,var(--panel));border-left:2px solid var(--gr);
+  border-radius:0 9px 9px 0;padding:10px 13px;margin-top:11px;font-size:14px}
+.lesson b:first-child{color:var(--gr);font-family:var(--mono);font-size:10.5px;letter-spacing:.8px;text-transform:uppercase}
+
+/* ---------- notes accordions ---------- */
+.switch{display:flex;gap:7px;margin-top:16px;flex-wrap:wrap}
+.sw{background:var(--panel);border:1px solid var(--line2);color:var(--dim);border-radius:9px;padding:9px 15px;
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.4px;cursor:pointer;transition:.14s}
+.sw:hover{color:var(--ink)}
+.sw.on1{color:var(--vi);border-color:var(--vi);background:color-mix(in srgb,var(--vi) 12%,transparent)}
+.sw.on2{color:var(--cy);border-color:var(--cy);background:color-mix(in srgb,var(--cy) 12%,transparent)}
+details.note{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-top:11px;
+  overflow:hidden;scroll-margin-top:118px}
+details.note[open]{border-color:var(--line2)}
+details.note>summary{cursor:pointer;padding:13px 16px;font-size:16px;font-weight:650;letter-spacing:-.2px;
+  display:flex;align-items:center;gap:11px;user-select:none;list-style:none}
+details.note>summary::-webkit-details-marker{display:none}
+details.note>summary::after{content:"+";margin-left:auto;font-family:var(--mono);font-size:17px;
+  color:var(--faint);font-weight:400;transition:.16s}
+details.note[open]>summary::after{content:"−";color:var(--vi)}
+details.note>summary:hover{background:var(--panel2)}
+.num{width:25px;height:25px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;font-weight:800;flex:0 0 auto}
+.n1{background:color-mix(in srgb,var(--vi) 17%,transparent);color:var(--vi);border:1px solid color-mix(in srgb,var(--vi) 42%,transparent)}
+.n2{background:color-mix(in srgb,var(--cy) 17%,transparent);color:var(--cy);border:1px solid color-mix(in srgb,var(--cy) 42%,transparent)}
+details.note>.body{padding:2px 16px 16px;border-top:1px solid var(--line);font-size:15px}
+details.note>.body>p:first-child{margin-top:12px}
+
+/* ---------- misc content ---------- */
+.mini{font-size:13px;color:var(--faint);display:inline-block}
+p.mini,.sub2{font-size:13px;color:var(--faint);margin-top:7px;display:block}
+.formula{font-family:var(--mono);font-size:14px;background:var(--panel3);border:1px solid var(--line2);
+  border-left:2px solid var(--vi);border-radius:0 9px 9px 0;padding:13px 15px;margin-top:12px;
+  color:var(--vi2);line-height:1.85;overflow-x:auto}
+.kbd,code{font-family:var(--mono);font-size:.88em;background:var(--panel3);color:var(--vi);
+  padding:1px 6px;border-radius:4px;border:1px solid var(--line)}
+ul.clean{list-style:none;margin-top:10px}
+ul.clean li{position:relative;padding-left:17px;margin-top:7px;font-size:15px}
+ul.clean li::before{content:"▸";position:absolute;left:0;color:var(--vi);font-size:12px;top:1px}
+ul:not(.clean){margin:9px 0 0 19px}
+ul:not(.clean) li{margin-top:6px}
+ol{margin:9px 0 0 21px}
+ol li{margin-top:7px}
+ol li::marker{font-family:var(--mono);color:var(--vi);font-size:12.5px}
+
+/* ---------- flashcards ---------- */
+.fc-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.btn{background:var(--panel);border:1px solid var(--line2);color:var(--dim);border-radius:9px;
+  padding:8px 14px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer;transition:.14s}
+.btn:hover{color:var(--ink);border-color:var(--vi)}
+.btn.primary{color:var(--vi);border-color:var(--vi);background:color-mix(in srgb,var(--vi) 12%,transparent)}
+.fc-stage{margin-top:16px}
+.fc{position:relative;min-height:230px;perspective:1400px;cursor:pointer}
+.fc .face{position:absolute;inset:0;backface-visibility:hidden;background:var(--panel);
+  border:1px solid var(--line2);border-radius:14px;padding:26px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;transition:transform .42s cubic-bezier(.4,.2,.2,1)}
+.fc .front{transform:rotateY(0)}
+.fc .back{transform:rotateY(180deg);background:var(--panel2);border-color:var(--vi)}
+.fc.flip .front{transform:rotateY(-180deg)}
+.fc.flip .back{transform:rotateY(0)}
+.fc .tag{position:absolute;top:14px;left:14px}
+.fc .q{font-size:19px;font-weight:650;letter-spacing:-.3px;max-width:600px}
+.fc .a{font-size:16px;color:var(--dim);max-width:620px;line-height:1.7}
+.fc .hint{position:absolute;bottom:13px;font-family:var(--mono);font-size:10px;letter-spacing:1.4px;
+  text-transform:uppercase;color:var(--faint)}
+.fc-nav{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:14px;flex-wrap:wrap}
+.fc-count{font-family:var(--mono);font-size:12px;color:var(--faint);min-width:66px;text-align:center}
+.fc-score{text-align:center;margin-top:11px;font-family:var(--mono);font-size:12px;color:var(--faint)}
+.fc-score .g{color:var(--gr)} .fc-score .r{color:var(--am)}
+
+/* ---------- quiz ---------- */
+.qbar{height:4px;background:var(--panel3);border-radius:3px;overflow:hidden;margin-top:16px}
+.qbar>div{height:100%;background:linear-gradient(90deg,var(--vi),var(--cy));transition:width .3s}
+.qmeta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;
+  color:var(--faint);margin-top:9px;letter-spacing:.5px}
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:20px 22px;margin-top:11px}
+.qcard h3{font-size:17.5px;line-height:1.5;margin-bottom:14px;font-weight:650}
+.opt{display:flex;align-items:flex-start;gap:11px;width:100%;text-align:left;background:var(--panel2);
+  border:1px solid var(--line2);color:var(--ink);border-radius:10px;padding:12px 14px;margin-top:8px;
+  cursor:pointer;font-size:15px;font-family:inherit;line-height:1.5;transition:.13s}
+.opt:hover{border-color:var(--vi)}
+.opt .mark{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--line2);flex:0 0 auto;margin-top:2px}
+.opt.sel{border-color:var(--vi)} .opt.sel .mark{background:var(--vi);border-color:var(--vi)}
+.opt.ok{border-color:var(--gr);background:color-mix(in srgb,var(--gr) 12%,var(--panel2))}
+.opt.ok .mark{background:var(--gr);border-color:var(--gr)}
+.opt.no{border-color:var(--rd);background:color-mix(in srgb,var(--rd) 12%,var(--panel2))}
+.opt.no .mark{background:var(--rd);border-color:var(--rd)}
+.opt.dim{opacity:.44}
+.expl{display:none} .expl.show{display:block}
+.qactions{display:flex;gap:9px;margin-top:15px}
+.qresult{text-align:center}
+.qresult .big{font-family:var(--mono);font-size:44px;font-weight:800;color:var(--vi);margin:6px 0}
+.review-item{text-align:left;font-size:13.5px;padding:7px 11px;border-radius:8px;margin-top:6px;
+  border:1px solid var(--line);background:var(--panel2)}
+.review-item.good{border-color:color-mix(in srgb,var(--gr) 40%,transparent);color:var(--gr)}
+.review-item.bad{border-color:color-mix(in srgb,var(--rd) 40%,transparent);color:var(--rd)}
+
+/* ---------- cheat sheet ---------- */
+.cheat h3{margin-top:24px;display:flex;align-items:center;gap:9px;font-size:16.5px}
+.cheat .card{margin-top:10px;padding:15px 17px}
+
+
+/* ---------- footer ---------- */
+.footer{text-align:center;color:var(--faint);font-family:var(--mono);font-size:10.5px;
+  padding:26px 0 46px;letter-spacing:.7px}
+.kv{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.kv:last-child{border-bottom:0}
+.kv b{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--faint);min-width:118px;padding-top:3px}
+@media(max-width:560px){.kv{flex-direction:column;gap:2px}}
+
+/* ---------- code blocks ---------- */
+pre.sql{font-family:var(--mono);font-size:13.5px;background:var(--panel3);border:1px solid var(--line2);
+  border-left:2px solid var(--cy);border-radius:0 9px 9px 0;padding:12px 15px;margin-top:12px;
+  color:var(--ink);line-height:1.7;overflow-x:auto;white-space:pre}
+pre.sql.ra{border-left-color:var(--vi)}
+.ra-sym{font-family:var(--mono);font-size:15px}
+
+/* ---------- worked labs / exam ---------- */
+.qa{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line2)}
+.qa:first-of-type{border-top:0;padding-top:0}
+.qa .qn{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--cy);font-weight:700;display:block;margin-bottom:4px}
+.qa p{margin-top:7px}
+.flag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.9px;text-transform:uppercase;
+  padding:2px 7px;border-radius:5px;border:1px solid color-mix(in srgb,var(--am) 55%,transparent);color:var(--am);
+  background:color-mix(in srgb,var(--am) 10%,transparent);font-weight:700;vertical-align:middle;margin-left:6px}
+.flag.ok{border-color:color-mix(in srgb,var(--gr) 55%,transparent);color:var(--gr);background:color-mix(in srgb,var(--gr) 10%,transparent)}
+.flag.no{border-color:color-mix(in srgb,var(--rd) 55%,transparent);color:var(--rd);background:color-mix(in srgb,var(--rd) 10%,transparent)}
+
+/* ---------- resources ---------- */
+.files td:first-child{white-space:nowrap}
+.files a{font-family:var(--mono);font-size:13px}
+.files .sz{color:var(--faint);font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+</style></head>
+<body data-study-console="db" data-console-id="db" data-console-name="Database Systems">
+<main id="main">
+
+<!-- ============ HOME ============ -->
+<section class="tab on" id="home"><div class="wrap">
+  <h1>Database Systems</h1>
+  <p class="lede">Ten topics, ten worked lab sets and a past mid-semester paper. Reference text: Elmasri &amp; Navathe, <i>Fundamentals of Database Systems</i>, 7th edition.</p>
+  <div class="chiprow">
+    <span class="chip c1">T1–3 · Model, DDL, ER</span>
+    <span class="chip c2">T4–6 · Algebra, SQL, Datalog</span>
+    <span class="chip c1">T7–8 · Indexing, optimization</span>
+    <span class="chip c2">T9–10 · Transactions, privileges</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <span class="badge b1">Part 1</span>
+      <h3 style="margin-bottom:8px">Model and design</h3>
+      <p style="font-size:14.5px">Topics 1–3. What a database is, relation states, keys and NULL, DDL with constraints and referential actions, ER diagrams with cardinality and participation.</p>
+    </div>
+    <div class="card">
+      <span class="badge b2">Part 2</span>
+      <h3 style="margin-bottom:8px">Query languages</h3>
+      <p style="font-size:14.5px">Topics 4–6. Relational algebra operations and notation, intermediate SQL (joins, grouping, subqueries, window functions), Datalog rules and recursive queries.</p>
+    </div>
+    <div class="card">
+      <span class="badge b1">Part 3</span>
+      <h3 style="margin-bottom:8px">Storage and optimization</h3>
+      <p style="font-size:14.5px">Topics 7–8. Blocking factors, single-level and multilevel indexes, block-access counts, and heuristic query-tree optimization.</p>
+    </div>
+    <div class="card">
+      <span class="badge gr">Part 4</span>
+      <h3 style="margin-bottom:8px">Operating the database</h3>
+      <p style="font-size:14.5px">Topics 9–10. Transactions, commit and rollback, isolation of uncommitted changes, and MySQL users, roles, GRANT and REVOKE.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Where each topic is practised</h3>
+    <div class="tscroll"><table>
+      <tr><th>Topic</th><th>Worked lab</th><th>Past paper</th></tr>
+      <tr><td class="mono">T1</td><td>Relational model review worksheet</td><td>Q1, Q2</td></tr>
+      <tr><td class="mono">T2</td><td>School database DDL</td><td>Q1</td></tr>
+      <tr><td class="mono">T3</td><td>Inventory ER, Vote ER</td><td>—</td></tr>
+      <tr><td class="mono">T4</td><td>Relational algebra answer sheet</td><td>Q4</td></tr>
+      <tr><td class="mono">T5</td><td>Intermediate SQL parts 1 and 2</td><td>Q3</td></tr>
+      <tr><td class="mono">T6</td><td>Datalog section of the review worksheet</td><td>Q4, Q5</td></tr>
+      <tr><td class="mono">T7</td><td>Index calculation</td><td>Q6</td></tr>
+      <tr><td class="mono">T8</td><td>Heuristic optimization query trees</td><td>Q7, Q8</td></tr>
+      <tr><td class="mono">T9</td><td>Transaction lab</td><td>—</td></tr>
+      <tr><td class="mono">T10</td><td>Users, privileges and roles</td><td>—</td></tr>
+    </table></div>
+    <p class="sub2">Topics 9 and 10 come from labs that follow the mid-semester paper; the paper does not cover them.</p>
+  </div>
+</div></section>
+
+<!-- ============ TOPICS ============ -->
+<section class="tab" id="topics"><div class="wrap">
+  <h1>Topics</h1>
+  <p class="lede">Each topic restates only what the source material says. Where the material is thin, the gap is marked.</p>
+
+  <details class="note" open id="t1">
+    <summary><span class="num n1">1</span> Databases and the relational model</summary>
+    <div class="body">
+      <h4>Definitions</h4>
+      <ul class="clean">
+        <li>A <b>database</b> is a collection of related data.</li>
+        <li><b>Data</b> are known facts that can be recorded and have implicit meaning.</li>
+        <li>A database represents some aspect of the real world, called the <b>miniworld</b> or <b>universe of discourse (UoD)</b>.</li>
+        <li>A <b>DBMS</b> (database management system) is a general-purpose software system that facilitates the process of defining, constructing, manipulating and sharing databases among various users and applications.</li>
+        <li>An <b>application program</b> accesses the database by sending queries or requests for data to the DBMS.</li>
+        <li>A <b>query</b> typically causes some data to be retrieved; a <b>transaction</b> may cause some data to be read and some data to be written into the database.</li>
+      </ul>
+
+      <h4>Relation schema and relation state</h4>
+      <p>A relation state <span class="ra-sym">r(R)</span> is a subset of <span class="ra-sym">dom(A<sub>1</sub>) × dom(A<sub>2</sub>) × … × dom(A<sub>n</sub>)</span>, where A<sub>1</sub> … A<sub>n</sub> are the attributes. For an Enrollment relation with attributes Student_number, CourseID and Grade, <span class="ra-sym">r(Enrollment) ⊆ dom(Student_number) × dom(CourseID) × dom(Grade)</span>: each tuple (row) is one possible combination drawn from those domains, and r(Enrollment) is one possible state of the Enrollment relation.</p>
+      <div class="tscroll"><table>
+        <tr><th>Word</th><th>Means</th></tr>
+        <tr><td>Schema</td><td>The relation name and its attributes (the column headings)</td></tr>
+        <tr><td>Attribute</td><td>A column</td></tr>
+        <tr><td>Tuple</td><td>A row</td></tr>
+        <tr><td>State</td><td>The set of tuples in the relation at one moment</td></tr>
+      </table></div>
+
+      <h4>Five statements to be able to illustrate</h4>
+      <ul class="clean">
+        <li><b>Tuples in a relation do not have any particular order.</b> Any order of the rows is the same relation.</li>
+        <li><b>NULL can have several meanings.</b> The worksheet example inserts a student whose Plan is NULL: the value may be unknown, not applicable, or not yet available.</li>
+        <li><b>Keys are always superkeys.</b> A <b>superkey</b> is any set of attributes that uniquely identifies a tuple. A <b>candidate key</b> is a minimal superkey: no proper subset of it still identifies a tuple uniquely.</li>
+        <li><b>A foreign-key value in a tuple can be NULL.</b> A foreign key (FK) is a link between the attributes of one table and the primary key of another; FK values are allowed to be NULL.</li>
+        <li><b>The delete operation can violate only referential integrity</b>, not key constraints nor entity integrity. <span class="flag">Past paper Q2.5 — no worked answer in the materials</span></li>
+      </ul>
+
+      <h4>Joining on a primary key / foreign key</h4>
+      <p>Joining Course (primary key Code) with Enrollment (foreign key CourseID) returns as many rows as there are foreign-key values in the field being joined: eight Enrollment rows give eight result rows.</p>
+
+      <h4>Explaining a referential-action constraint</h4>
+      <div class="formula">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)<br>ON DELETE SET DEFAULT ON UPDATE CASCADE;</div>
+      <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically. <span class="flag">Past paper Q1 — no worked answer in the materials; see Topic 2 for the referential actions</span></p>
+      <div class="tip t-info"><b>Source</b>Relational model review worksheet (questions and handwritten answers); past paper Q1 and Q2.</div>
+    </div>
+  </details>
+
+  <details class="note" id="t2">
+    <summary><span class="num n1">2</span> SQL DDL: tables, constraints and referential actions</summary>
+    <div class="body">
+      <h4>Creating a schema and a table</h4>
+      <pre class="sql">CREATE DATABASE SCHOOL;
+USE SCHOOL;
+
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName  VARCHAR(50) NOT NULL,
+    NickName  VARCHAR(50),
+    Age INTEGER CHECK (Age BETWEEN 3 AND 5)
+);</pre>
+      <h4>Constraint vocabulary used in the labs</h4>
+      <div class="tscroll"><table>
+        <tr><th>Clause</th><th>Effect</th><th>Lab example</th></tr>
+        <tr><td class="mono">PRIMARY KEY</td><td>Unique identifier of each row</td><td><code>StudentID INT PRIMARY KEY</code></td></tr>
+        <tr><td class="mono">NOT NULL</td><td>Value must be supplied</td><td><code>FirstName VARCHAR(50) NOT NULL</code></td></tr>
+        <tr><td class="mono">UNIQUE</td><td>No two rows share the value</td><td><code>RoomName VARCHAR(50) NOT NULL UNIQUE</code></td></tr>
+        <tr><td class="mono">DEFAULT</td><td>Value used when none is given</td><td><code>PhoneNumber VARCHAR(15) DEFAULT 'N/A'</code></td></tr>
+        <tr><td class="mono">CHECK</td><td>Row-level condition</td><td><code>CHECK (RelationToStudent IN ('Mother','Father','Other'))</code></td></tr>
+        <tr><td class="mono">FOREIGN KEY … REFERENCES</td><td>Link to another table's primary key</td><td><code>FOREIGN KEY (StudentID) REFERENCES Students(StudentID)</code></td></tr>
+        <tr><td class="mono">CONSTRAINT name</td><td>Names the constraint so it can be referred to</td><td><code>CONSTRAINT fk_sra_teacher FOREIGN KEY (TeacherID) …</code></td></tr>
+      </table></div>
+
+      <h4>Referential actions</h4>
+      <p>The action after <code>ON DELETE</code> or <code>ON UPDATE</code> says what happens to the referencing rows when the referenced row is deleted or its key changes.</p>
+      <ul class="clean">
+        <li><b>SET DEFAULT</b> — the lab's assignment table keeps its row and falls back to the reserved teacher: <code>TeacherID INT DEFAULT 1 … ON DELETE SET DEFAULT</code>.</li>
+        <li><b>SET NULL</b> — the worksheet's answer for "when a course instructor is removed, the corresponding AdvisorID should be set to NULL".</li>
+        <li><b>CASCADE</b> — the worksheet's answer for "if the instructor's name is updated, the change should cascade to the Student table".</li>
+      </ul>
+      <pre class="sql">ALTER TABLE Student
+ADD AdvisorID VARCHAR(255) NOT NULL;
+
+ALTER TABLE Student
+ADD CONSTRAINT FK_Advisor
+FOREIGN KEY (AdvisorID) REFERENCES Course(Instructor)
+ON UPDATE CASCADE
+ON DELETE SET NULL;</pre>
+      <div class="tip t-warn"><b>Watch</b>Adding a NOT NULL column to a table that already has rows, and a foreign key that references a non-key column, are both taken directly from the worksheet's handwritten answer. The materials do not discuss whether a DBMS will accept them.</div>
+      <div class="tip t-info"><b>Source</b>School database DDL practice (lab answers and requirements text); relational model review worksheet question 2.</div>
+    </div>
+  </details>
+
+  <details class="note" id="t3">
+    <summary><span class="num n1">3</span> ER modelling: entities, cardinality and participation</summary>
+    <div class="body">
+      <h4>Reading the notation</h4>
+      <ul class="clean">
+        <li>Rectangles are <b>entity types</b>; ovals are <b>attributes</b>; the key attribute is underlined; diamonds are <b>relationship types</b>.</li>
+        <li>A double-outlined attribute oval marks a <b>multivalued attribute</b> (the inventory diagram's Price_change, which holds the price history with Price and Datetime).</li>
+        <li>Attributes can also hang off a relationship (Supply carries Qty, Amount and RemainQty; "in" carries Qty and Amount).</li>
+        <li><b>Cardinality ratio</b> is written at each end of the relationship: 1, N or M.</li>
+        <li><b>Participation</b>: a double line means <b>total</b> participation (every instance must take part); a single line means <b>partial</b>.</li>
+      </ul>
+
+      <h4>Inventory: how the constraints were justified</h4>
+      <div class="tscroll"><table>
+        <tr><th>Relationship</th><th>Cardinality</th><th>Participation</th></tr>
+        <tr><td>Supplier — Supply — Product (N : M)</td><td>Each product can be supplied by 1 up to N suppliers; each supplier can supply at most N products</td><td>Every product must be supplied by some supplier (total, double line). A supplier may never have supplied anything (partial)</td></tr>
+        <tr><td>Product — sold by — Department (N : 1)</td><td>Each product is sold by 1 department; a department sells at most N products</td><td>Every product must be sold by a department (total). Not all departments sell products, e.g. HR (partial)</td></tr>
+        <tr><td>Customer — Issue — Invoice (1 : N)</td><td>A customer can have many invoices; an invoice is issued to one and only one customer</td><td>Every invoice must have a customer (total). A customer may never have bought anything (partial)</td></tr>
+        <tr><td>Product — in — Invoice (M : N)</td><td>A product can be in many invoices; an invoice can list many products</td><td>Every invoice must list at least one product (total). Not every product appears in an invoice (partial)</td></tr>
+      </table></div>
+
+      <h4>Vote: the same ideas on a legislative database</h4>
+      <ul class="clean">
+        <li>STATE (Name, Region) — have — CONGRESS_PERSON: a congressperson must represent exactly one state (1 : N, total on the congressperson side); a state can have many congresspersons.</li>
+        <li>CONGRESS_PERSON — sponsored — BILL: a bill can be sponsored by M persons (M : N).</li>
+        <li>CONGRESS_PERSON — voted — BILL with attribute Result: each congressperson can vote for N bills (M : N).</li>
+        <li>Enumerated domains appear in the requirements, not the diagram: Region, Party, Passed_or_failed and Vote each have a fixed set of values.</li>
+      </ul>
+      <div class="tip t-warn"><b>Thin</b>The materials contain two worked diagrams and the cardinality explanations above. Weak entities, specialization and the ER-to-relational mapping steps are not covered anywhere in the attached files.</div>
+      <div class="tip t-info"><b>Source</b>Inventory basic ER worked answer; Vote ER worked answer.</div>
+    </div>
+  </details>
+
+  <details class="note" id="t4">
+    <summary><span class="num n1">4</span> Relational algebra</summary>
+    <div class="body">
+      <h4>What it is</h4>
+      <p>A <b>procedural query language</b>: a set of operations (algebraic operations) that provides the theoretical foundation for relational queries. Each operation takes one or two relations and outputs a table.</p>
+      <div class="tscroll"><table>
+        <tr><th>Fundamental</th><th>Symbol</th><th>Additional</th><th>Symbol</th></tr>
+        <tr><td>Select</td><td class="ra-sym">σ</td><td>Intersection</td><td class="ra-sym">∩</td></tr>
+        <tr><td>Project</td><td class="ra-sym">π</td><td>Assignment</td><td class="ra-sym">←</td></tr>
+        <tr><td>Union</td><td class="ra-sym">∪</td><td>Join</td><td class="ra-sym">⋈</td></tr>
+        <tr><td>Set difference</td><td class="ra-sym">−</td><td>Division</td><td class="ra-sym">÷</td></tr>
+        <tr><td>Cartesian product</td><td class="ra-sym">×</td><td>Outer join</td><td class="ra-sym">⟕ ⟖ ⟗</td></tr>
+        <tr><td>Rename</td><td class="ra-sym">ρ</td><td></td><td></td></tr>
+      </table></div>
+
+      <h4>Select σ</h4>
+      <p>Selects tuples (horizontally) that satisfy a condition: <span class="ra-sym">σ<sub>&lt;condition&gt;</sub>(Relation)</span>. Comparison operators =, ≠, &lt;, ≤, &gt;, ≥; connectives AND (∧), OR (∨), NOT (¬).</p>
+      <pre class="sql ra">σ Dept_Name = "Finance" (INSTRUCTOR)
+σ Salary > 87000 (INSTRUCTOR)
+σ Dept_Name = "Finance" ∧ Salary > 87000 (INSTRUCTOR)
+σ Salary > 30000 ∧ Salary < 75000 (INSTRUCTOR)
+σ true (INSTRUCTOR)                      -- every instructor</pre>
+
+      <h4>Project π</h4>
+      <p>Returns the values of certain attributes (vertically), leaves the others out, and <b>eliminates duplicate rows</b>: <span class="ra-sym">π<sub>attr1, attr2, …</sub>(Relation)</span>.</p>
+      <pre class="sql ra">π ID, Name, Salary (INSTRUCTOR)
+π Name (σ Dept_Name = "Computer Science" (INSTRUCTOR))
+π Sex (EMPLOYEE)                          -- result: M, F (duplicates removed)</pre>
+
+      <h4>Union and join</h4>
+      <p>Union is a binary operator on two relations that removes duplicates. Join combines two tables on a condition: <span class="ra-sym">(Relation1) ⋈<sub>condition</sub> (Relation2)</span>. Joining on equality of attributes is an <b>equijoin</b>.</p>
+      <pre class="sql ra">σ Plan = "Gaming" (Student) ∪ σ Plan = "Paralympic" (Student)
+σ Grade = "A+" (Student ⋈ Student_number = Student_number Enrollment)
+EMPLOYEE ⋈ Dno = Dnumber (π Dnumber, Dname (DEPARTMENT))</pre>
+
+      <h4>Writing the symbols in plain text</h4>
+      <div class="tscroll"><table>
+        <tr><th>Symbol</th><th>Text form</th><th>Example</th></tr>
+        <tr><td class="ra-sym">σ</td><td><code>sigma_(...)</code></td><td><code>sigma_(gender='male')(employee)</code></td></tr>
+        <tr><td class="ra-sym">π</td><td><code>pi_(...)</code></td><td><code>pi_(name, age)(employee)</code></td></tr>
+        <tr><td class="ra-sym">⋈</td><td><code>join_(...)</code></td><td><code>join_(employee, department)</code></td></tr>
+      </table></div>
+      <div class="tip t-info"><b>Source</b>Handwritten relational algebra notes; relational algebra answer sheet; relational algebra section of the review worksheet.</div>
+    </div>
+  </details>
+
+  <details class="note" id="t5">
+    <summary><span class="num n1">5</span> Intermediate SQL</summary>
+    <div class="body">
+      <p>The two intermediate labs run against a sales database (Customer, CustomerAddress, Address, Product, ProductCategory, SalesOrderHeader, SalesOrderDetail). Each pattern below is lifted from a lab answer.</p>
+      <h4>Grouping and HAVING</h4>
+      <pre class="sql">SELECT AddressType, COUNT(AddressType)
+FROM CustomerAddress
+GROUP BY AddressType;
+
+SELECT SOH.SalesOrderNumber, COUNT(*) AS NumberOfProduct
+FROM SalesOrderHeader SOH
+JOIN SalesOrderDetail SOD ON SOH.SalesOrderID = SOD.SalesOrderID
+GROUP BY SOD.SalesOrderID, SOH.SalesOrderNumber
+HAVING AVG(UnitPrice) > 300;</pre>
+      <p class="sub2">Standard SQL requires every non-aggregated column in SELECT to appear in GROUP BY.</p>
+
+      <h4>Subquery in FROM</h4>
+      <pre class="sql">SELECT COUNT(*) AS Total_Customers_With_Multiple_Addresses
+FROM (SELECT c.CustomerID
+      FROM Customer c
+      JOIN CustomerAddress ca ON c.CustomerID = ca.CustomerID
+      GROUP BY c.CustomerID
+      HAVING COUNT(ca.AddressID) > 1) AS MultipleAddressCustomers;</pre>
+
+      <h4>Joins across several tables, DISTINCT, LIMIT</h4>
+      <pre class="sql">SELECT DISTINCT c.CustomerID, c.FirstName, c.LastName
+FROM Customer c
+JOIN SalesOrderHeader soh ON c.CustomerID = soh.CustomerID
+JOIN SalesOrderDetail sod ON soh.SalesOrderID = sod.SalesOrderID
+JOIN Product p ON sod.ProductID = p.ProductID
+WHERE p.StandardCost > 800;
+
+SELECT A.CountryRegion, A.City, COUNT(*) AS NumberofCustomer
+FROM Customer C
+JOIN CustomerAddress CA ON C.CustomerID = CA.CustomerID
+JOIN Address A ON CA.AddressID = A.AddressID
+GROUP BY A.City, A.CountryRegion
+ORDER BY NumberofCustomer DESC
+LIMIT 4;</pre>
+
+      <h4>NOT IN subquery vs NOT LIKE</h4>
+      <p>Lab 2 question 1 (totals for orders by customers not in London) has two accepted answers: a <code>NOT IN (subquery of London customers)</code> and a plain join with <code>WHERE a.City NOT LIKE 'London'</code>.</p>
+
+      <h4>Self-join</h4>
+      <pre class="sql">SELECT parent.ProductCategoryID, parent.Name, COUNT(*) AS NumberOfItems
+FROM ProductCategory AS parent
+JOIN ProductCategory AS child
+  ON parent.ProductCategoryID = child.ParentProductCategoryID
+GROUP BY parent.ProductCategoryID, parent.Name;</pre>
+
+      <h4>CASE with a window function</h4>
+      <pre class="sql">CASE WHEN COUNT(ca.AddressID) OVER (PARTITION BY c.CustomerID) > 1
+     THEN 'Y' ELSE 'N' END AS HasMultipleAddresses</pre>
+
+      <h4>Query semantics</h4>
+      <p>Several questions ask for "a short sentence that describes the meaning of the query". The lab answers read as: <i>find the average total due for each customer, highest to lowest</i>; <i>retrieve the most expensive price in each product category</i>. The past paper asks the same for a GROUP BY … HAVING query on EMPLOYEE.</p>
+      <div class="tip t-warn"><b>Inconsistent</b>Lab 2 questions 7 and 8 show the same <code>SELECT * FROM Product … LIKE '%Helmet%' …</code> query twice, with answers ("summation of the price", "products ordered at least once") that do not match it. Treat those two answers as unreliable.</div>
+      <div class="tip t-info"><b>Source</b>Intermediate SQL answers, parts 1 and 2; past paper Q3.</div>
+    </div>
+  </details>
+
+  <details class="note" id="t6">
+    <summary><span class="num n2">6</span> Datalog and recursive queries</summary>
+    <div class="body">
+      <h4>Datalog rules</h4>
+      <p>A rule has a head and a body: <code>ans(x, y) &lt;- R(x, y, z) AND z &gt; 20.0</code>. Underscores are attributes that are matched but not used. Translating a rule means producing (1) relational algebra, (2) SQL and (3) an English sentence.</p>
+      <pre class="sql">ans(x,y) <- WORKS_ON(x,y,z) AND z > 20.0        -- WORKS_ON(Essn, Pno, Hours)
+
+(1) π Essn, Pno (σ Hours > 20.0 (WORKS_ON))
+(2) SELECT Essn, Pno FROM WORKS_ON WHERE Hours > 20.0;
+(3) Display Essn and project number where the working hours are greater than 20.</pre>
+      <p>The past paper gives two further rules on a CUSTOMERS / PRODUCTS / SUPPLIERS / ORDERS / OFFERS schema, and asks why three rules are <b>not safe</b>: <code>S(x) &lt;- R(y)</code>, <code>S(x) &lt;- R(y) AND NOT R(x)</code>, <code>S(x) &lt;- R(y) AND x &lt; y</code>. <span class="flag">No worked answer for safety in the materials</span></p>
+
+      <h4>Recursive CTE (WITH RECURSIVE)</h4>
+      <pre class="sql">WITH RECURSIVE parents AS (
+  SELECT id, name, parent_id, 0 AS relative_depth        -- base case
+  FROM categories
+  WHERE name = 'Grandchild A1b'
+  UNION ALL
+  SELECT cat.id, cat.name, cat.parent_id, p.relative_depth - 1   -- recursive case
+  FROM categories cat, parents p
+  WHERE cat.id = p.parent_id )
+SELECT id, name, relative_depth FROM parents;</pre>
+      <p>On the worksheet's category tree (Root A → Child A1 → Grandchild A1b) the query walks from the named node up to the root, decreasing relative_depth by one per step. The worksheet asks for the result rows, the base and recursive cases, the meaning of the query, the purpose of the final SELECT, and a Datalog expression equivalent to it. <span class="flag">Only the sketch of the tree is answered by hand; the written answers are not in the file</span></p>
+      <div class="tip t-info"><b>Source</b>Datalog section of the review worksheet; relational algebra answer sheet Q5; past paper Q4 and Q5.</div>
+    </div>
+  </details>
+
+  <details class="note" id="t7">
+    <summary><span class="num n2">7</span> File organization and indexing calculations</summary>
+    <div class="body">
+      <p>One scenario is reused everywhere: a file of <b>r = 30,000</b> fixed-length EMPLOYEE records, block pointer <b>P = 6</b> bytes, record pointer <b>P<sub>R</sub> = 7</b> bytes. The worked answer sheet uses <b>B = 512</b> bytes and a 10-byte Phone field; the review worksheet uses B = 512 with a 9-byte Phone; the past paper uses <b>B = 1024</b> with a 9-byte Phone. Always recompute R from the field list you are given.</p>
+      <h4>Data file</h4>
+      <div class="formula">R   = sum of field sizes                       = 30+9+9+40+10+8+1+4+4 = 115 bytes<br>bfr = floor(B / R)                            = floor(512/115) = 4 records per block<br>b   = ceiling(r / bfr)                        = ceiling(30,000/4) = 7,500 blocks<br>left-over per block = B − bfr·R               = 512 − 460 = 52 bytes</div>
+      <p class="sub2">floor for bfr because a block cannot hold a fraction of a record (unspanned); ceiling for b so the last partial block is counted.</p>
+      <h4>Searching the data file without an index</h4>
+      <ul class="clean">
+        <li>Linear search: best 1 block, worst b = 7,500 blocks, average b/2 = 3,750 blocks.</li>
+        <li>Binary search on a file ordered by the key: about log<sub>2</sub>(7,500) ≈ 13 block accesses.</li>
+      </ul>
+      <h4>Single-level index</h4>
+      <div class="formula">index entry R<sub>i</sub> = key size + pointer size      = 9 + 6 = 15 bytes<br>bfr<sub>i</sub> (= fan-out fo) = floor(B / R<sub>i</sub>)         = floor(512/15) = 34 entries per block<br>primary index (file ordered by Ssn): r<sub>i</sub> = number of data blocks = 7,500 entries → b<sub>i</sub> = ceiling(7,500/34) = 221 blocks<br>binary search on index: ceiling(log<sub>2</sub> 221) = 8, plus 1 data block = 9 accesses<br>secondary index on a non-ordering field: dense, r<sub>i</sub> = r = 30,000 entries → b<sub>i</sub> = ceiling(30,000/34) = 883 blocks → log<sub>2</sub> 883 ≈ 10, plus 1 = 11 accesses</div>
+      <p>If the file is not ordered by the field, the appropriate index is a <b>secondary index</b>: an index on a non-ordering field, which can be created on any field, key or not.</p>
+      <h4>Multilevel index</h4>
+      <div class="formula">level 1: ceiling(r<sub>1</sub> / bfr<sub>i</sub>) blocks<br>level 2: ceiling(b<sub>1</sub> / bfr<sub>i</sub>) blocks … until a level fits in 1 block<br>levels t = ceiling(log<sub>fo</sub>(r<sub>1</sub>))<br>block accesses to fetch a record = t + 1</div>
+      <div class="tscroll"><table>
+        <tr><th>Case (B = 512)</th><th>Level 1</th><th>Level 2</th><th>Level 3</th><th>Total index blocks</th><th>Accesses</th></tr>
+        <tr><td>Primary on Ssn (7,500 entries)</td><td>221</td><td>7</td><td>1</td><td>229</td><td>3 + 1 = 4</td></tr>
+        <tr><td>Secondary on Ssn (30,000 entries)</td><td>883</td><td>26</td><td>1</td><td>910</td><td>3 + 1 = 4</td></tr>
+      </table></div>
+      <div class="tip t-warn"><b>Pointer size matters</b>The answer sheet builds every index entry with the 6-byte block pointer. The review worksheet and the past paper explicitly say the secondary index points at the <b>record</b> level, so the entry there is key + 7-byte record pointer = 16 bytes. The materials give no worked numbers for that variant; the exam page shows the method applied.</div>
+      <div class="tip t-info"><b>Source</b>Index calculation answer sheet (full); review worksheet question 2; past paper Q6.</div>
+    </div>
+  </details>
+
+  <details class="note" id="t8">
+    <summary><span class="num n2">8</span> Heuristic query optimization</summary>
+    <div class="body">
+      <p>A query is first written as a <b>query tree</b>: Cartesian products of the base relations at the bottom, one big selection of the whole WHERE clause above them, and the projection at the top. Heuristic optimization rewrites that tree into an equivalent one that is cheaper to execute.</p>
+      <h4>The four steps shown in the slides</h4>
+      <ol>
+        <li><b>Cascade selection</b> — split the single conjunctive σ into one σ per condition.</li>
+        <li><b>Move selection down</b> — push each σ as far down the tree as possible, next to the relation it restricts (e.g. <span class="ra-sym">σ<sub>ProdType = 'Widget'</sub></span> directly over Product, <span class="ra-sym">σ<sub>Date.Month = July</sub></span> directly over Invoice).</li>
+        <li><b>Cartesian product with select becomes join</b> — a × followed by a σ on a join condition is replaced by ⋈ with that condition.</li>
+        <li><b>Projection push-down</b> — add π nodes low in the tree so that only the attributes needed later (join keys and output columns) travel upward; e.g. <span class="ra-sym">π<sub>InvID, CustID</sub></span> over Invoice, <span class="ra-sym">π<sub>ID, Type</sub></span> over Customer.</li>
+      </ol>
+      <pre class="sql ra">π Type (σ ProdType = 'Widget' (σ Date.Month = July (Customer ⋈ Invoice ⋈ LineItem ⋈ Product)))</pre>
+      <h4>Choosing a join order</h4>
+      <p>The past paper asks how the optimizer decides between joining Enrollment with Student or with Course first, and what its points of consideration are. <span class="flag">No worked answer in the materials</span></p>
+      <h4>Worksheet example</h4>
+      <pre class="sql ra">π Title (σ Grade = 'A' ∧ Instructor = "…" (Course ⋈ Enrollment))</pre>
+      <p>Handwritten answer: start from π Title over σ over the Cartesian product of Course and Enrollment; cascade into σ Grade = 'A' and σ Instructor = "…"; move σ Grade = 'A' down onto Enrollment and σ Instructor = "…" down onto Course; replace the product with a join; keep π Title at the top.</p>
+      <div class="tip t-info"><b>Source</b>Heuristic optimization query-tree slides; review worksheet heuristic question; past paper Q7 and Q8.</div>
+    </div>
+  </details>
+
+  <details class="note" id="t9">
+    <summary><span class="num n2">9</span> Transactions, commit and rollback</summary>
+    <div class="body">
+      <p>The lab runs two sessions (connections A and B) against bank accounts 10001–10003 and asks what each session sees after each numbered query.</p>
+      <ul class="clean">
+        <li>A session <b>sees its own uncommitted changes</b> inside the same transaction: after A debits 100, A reads the decreased balance.</li>
+        <li>Another session <b>does not see uncommitted changes</b> (default isolation behaviour): B still reads the original balance.</li>
+        <li>While A holds a lock on the row, B's withdrawal and transfer <b>cannot complete</b>; they wait on A's uncommitted transaction.</li>
+        <li>After A executes <b>COMMIT</b>, the change is permanent and B's transfer completes.</li>
+        <li>After A executes <b>ROLLBACK</b>, all of A's changes are discarded (account 10003 is back to 1000).</li>
+        <li>A transaction that is begun and neither committed nor rolled back is, in most DBMSs, rolled back automatically; until then other sessions do not see its changes.</li>
+      </ul>
+      <div class="tip t-warn"><b>Thin</b>Only the answer sheet is in the materials; the lab sheet with the numbered queries is not, so the exact SQL for each step is unknown. Isolation levels, ACID properties and schedules are not covered in the attached files.</div>
+      <div class="tip t-info"><b>Source</b>Transaction lab answers.</div>
+    </div>
+  </details>
+
+  <details class="note" id="t10">
+    <summary><span class="num n2">10</span> Users, privileges and roles (MySQL)</summary>
+    <div class="body">
+      <h4>Accounts are user@host</h4>
+      <p><code>CREATE USER 'thisisme' IDENTIFIED BY '…'</code> without a host is interpreted as <code>'thisisme'@'%'</code>, which can connect from any host. For an application on the same host as the database, the correct form is <code>'thisisme'@'localhost'</code>; omitting the host violates the principle of least privilege.</p>
+      <pre class="sql">CREATE USER 'john'@'localhost' IDENTIFIED BY 'pass_123';
+CREATE USER 'salary_app'@'192.168.128.%' IDENTIFIED BY 'Pass123';   -- Docker subnet wildcard
+CREATE USER 'abdul'@'10.10.182.100' IDENTIFIED BY 'password9876';   -- one VPN address
+SELECT user, host FROM mysql.user;                                  -- list accounts</pre>
+      <h4>Roles</h4>
+      <pre class="sql">CREATE ROLE 'hr';
+GRANT 'hr' TO 'john'@'localhost','jane'@'localhost','dan'@'localhost','tommy'@'localhost';
+GRANT SELECT ON hr.* TO 'hr';</pre>
+      <h4>Granting at database, table and column level</h4>
+      <pre class="sql">GRANT UPDATE ON hr.employees TO 'john'@'localhost';
+GRANT INSERT, UPDATE, DELETE ON hr.* TO 'abdul'@'10.10.182.100';
+GRANT SELECT (employee_id, first_name, last_name, email, job_id, salary)
+  ON employees TO 'salary_app'@'192.168.128.%';
+FLUSH PRIVILEGES;</pre>
+      <h4>Revoking and removing</h4>
+      <pre class="sql">REVOKE UPDATE ON hr.employees FROM 'dan'@'localhost';      -- removes the mistaken grant-able UPDATE
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'dan'@'localhost';
+DROP USER 'dan'@'localhost';
+FLUSH PRIVILEGES;
+ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password</pre>
+      <p><b>Reading a GRANT</b>: <code>GRANT SELECT, INSERT, UPDATE ON hr.employees TO 'myuser'@'localhost' IDENTIFIED BY 'mypassword'</code> allows retrieving, adding and modifying employee records to user myuser connecting from the same host as the server, with that password.</p>
+      <div class="tip t-warn"><b>Check</b>The lab's answer to "remove the ability to grant the UPDATE privilege while keeping it" revokes UPDATE itself (<code>REVOKE UPDATE … FROM 'dan'@'localhost'</code>). Whether that satisfies the question as worded is not resolved in the materials.</div>
+      <div class="tip t-info"><b>Source</b>Users, privileges and roles lab answers.</div>
+    </div>
+  </details>
+</div></section>
+
+<!-- ============ LABS ============ -->
+<section class="tab" id="labs"><div class="wrap">
+  <h1>Labs</h1>
+  <p class="lede">The exercise sets, with the answers condensed from the worked sheets. Open the original PDF from Downloads for screenshots and full working.</p>
+
+  <details class="note" open id="lab1">
+    <summary><span class="num n1">1</span> Relational model review worksheet</summary>
+    <div class="body">
+      <p>A fill-in review on a small school schema: Student(Student_number, fname, lname, Class, Plan), Course(Code, Title, Instructor, Textbook), Enrollment(Student_number, CourseID, Grade).</p>
+      <div class="qa"><span class="qn">Definitions</span><p>Database, data, miniworld / universe of discourse, DBMS, application program, query vs transaction. Answers are in Topic 1.</p></div>
+      <div class="qa"><span class="qn">Keys</span><p>Mark the primary keys of the three tables and the foreign keys of Enrollment. The handwritten answer counts the key attributes as 2 + 2 + 2 + 1 + 1 = 8.</p></div>
+      <div class="qa"><span class="qn">Adding a constraint</span><p>What happens when a referential constraint is added to Enrollment: the Enrollment table is updated when there is an update or delete of the referenced Student foreign key.</p></div>
+      <div class="qa"><span class="qn">ALTER TABLE</span><p>Add AdvisorID VARCHAR(255) NOT NULL to Student, then a foreign key with ON UPDATE CASCADE and ON DELETE SET NULL. SQL in Topic 2.</p></div>
+      <div class="qa"><span class="qn">Relation statements</span><p>Illustrate relation state, unordered tuples, meanings of NULL, keys as superkeys, nullable FK on the school data. Covered in Topic 1.</p></div>
+      <div class="qa"><span class="qn">Join count</span><p>Joining Course and Enrollment on Code = CourseID gives 8 rows, one per foreign-key value.</p></div>
+      <div class="qa"><span class="qn">Relational algebra</span>
+        <pre class="sql ra">σ Plan = "Paralympic" (Student)
+σ Class = 2 (Student)
+π fname, lname, Class (σ fname LIKE "T%" (Student))
+π fname, lname (σ Plan = "Computer" (Student))
+σ Plan = "Gaming" (Student) ∪ σ Plan = "Paralympic" (Student)
+σ Grade = "A+" (Student ⋈ Enrollment)        -- all students who got A+</pre></div>
+      <div class="qa"><span class="qn">Datalog and recursion</span><p>The recursive CTE question and a Datalog exercise on Drinker / Frequents / Likes / Sells relations (Happy(d) defined from Frequents, Likes and Sells). <span class="flag">Written answers missing — only sketches are on the page</span></p></div>
+      <div class="qa"><span class="qn">Heuristic optimization and index calculation</span><p>Query-tree conversion (answered by hand, Topic 8) and a five-part secondary-index calculation with B = 512 and record pointers. <span class="flag">Index parts left blank in the worksheet; method in Topic 7</span></p></div>
+    </div>
+  </details>
+
+  <details class="note" id="lab2">
+    <summary><span class="num n1">2</span> School database DDL</summary>
+    <div class="body">
+      <p>Six CREATE statements for a kindergarten system, each driven by a sentence of requirements.</p>
+      <div class="qa"><span class="qn">1–2</span><p><code>CREATE DATABASE SCHOOL; USE SCHOOL;</code> then Students with Age restricted to 3–5 by CHECK (Topic 2).</p></div>
+      <div class="qa"><span class="qn">3 Parents</span>
+        <pre class="sql">CREATE TABLE Parents (
+    ParentID INT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName  VARCHAR(50) NOT NULL,
+    PhoneNumber VARCHAR(15) DEFAULT 'N/A',
+    RelationToStudent VARCHAR(10) CHECK (RelationToStudent IN ('Mother','Father','Other')),
+    StudentID INT,
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+);</pre>
+        <p>The sheet also shows a second version with <code>CHECK ('Mother' OR 'Father' OR 'Other')</code>. <span class="flag no">That CHECK does not test the column; use the IN form</span></p></div>
+      <div class="qa"><span class="qn">4 Rooms</span><p><code>RoomID INT PRIMARY KEY, RoomName VARCHAR(50) NOT NULL UNIQUE</code>.</p></div>
+      <div class="qa"><span class="qn">5 Employees</span><p>Answer uses <code>Age INT CHECK (Age &gt; 18)</code>. The question says "above or equal to 18"; the requirements text says "strictly greater than 18". <span class="flag">Source contradicts itself</span></p></div>
+      <div class="qa"><span class="qn">6 StudentRoomAssignment</span>
+        <pre class="sql">CREATE TABLE StudentRoomAssignment (
+    ID INT PRIMARY KEY,
+    StudentID INT NOT NULL,
+    RoomID INT NOT NULL,
+    TeacherID INT DEFAULT 1,
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID),
+    CONSTRAINT fk_sra_teacher FOREIGN KEY (TeacherID)
+        REFERENCES Employees(EmployeeID) ON DELETE SET DEFAULT
+);</pre>
+        <p>If an assigned teacher's record is deleted, TeacherID falls back to 1 (the director) and the assignment row survives.</p></div>
+    </div>
+  </details>
+
+  <details class="note" id="lab3">
+    <summary><span class="num n1">3</span> ER design: Inventory and Vote</summary>
+    <div class="body">
+      <div class="qa"><span class="qn">Inventory requirements</span><p>Record products (code, name, department that sells them, supplier contact); orders with one supplier each and per-product lines; invoices issued to customers with per-product lines; a price history that changes only at the end of the day; editable customer details; remaining stock in total and per purchase.</p>
+        <p>Entities: Supplier, Product, Department, Customer, Invoice. Relationships: Supply (N:M, with Qty, Amount, RemainQty), sold by (N:1), Issue (1:N), in (M:N, with Qty, Amount). Price_change is a multivalued attribute of Product holding Price and Datetime. Cardinality and participation reasoning is in Topic 3.</p></div>
+      <div class="qa"><span class="qn">Vote requirements</span><p>U.S. STATE (Name, Region), CONGRESS_PERSON (Name, District, Start_date, Party), BILL (Bill_name, Date_of_vote, Passed_or_failed, Sponsor), plus how each congressperson voted on each bill. Diagram: STATE 1—N CONGRESS_PERSON (have, total on the congressperson side), CONGRESS_PERSON M—N BILL (sponsored), CONGRESS_PERSON M—N BILL (voted, attribute Result).</p></div>
+    </div>
+  </details>
+
+  <details class="note" id="lab4">
+    <summary><span class="num n1">4</span> Relational algebra answer sheet</summary>
+    <div class="body">
+      <p>Company schema: EMPLOYEE, DEPARTMENT, WORKS_ON(Essn, Pno, Hours).</p>
+      <pre class="sql ra">1. All staff with salary > 10000          σ Salary > 10000 (EMPLOYEE)
+2. Ssn, fname, lname, salary of all staff  π Ssn, Fname, Lname, Salary (EMPLOYEE)
+3. Employees with their department name    EMPLOYEE ⋈ Dno = Dnumber (π Dnumber, Dname (DEPARTMENT))   -- equijoin
+4. Produce the result  M / F               π Sex (EMPLOYEE)                                           -- projection removes duplicates
+5. ans(x,y) <- WORKS_ON(x,y,z) AND z > 20.0
+   RA   π Essn, Pno (σ Hours > 20.0 (WORKS_ON))
+   SQL  SELECT Essn, Pno FROM WORKS_ON WHERE Hours > 20.0;
+   EN   Display Essn and project number where hours worked exceed 20.</pre>
+    </div>
+  </details>
+
+  <details class="note" id="lab5">
+    <summary><span class="num n1">5</span> Intermediate SQL, part 1</summary>
+    <div class="body">
+      <div class="qa"><span class="qn">1</span><p>Count of each distinct customer address type: GROUP BY AddressType.</p></div>
+      <div class="qa"><span class="qn">2</span><p>How many customers have more than one address: subquery in FROM with HAVING COUNT &gt; 1, then COUNT(*) outside.</p></div>
+      <div class="qa"><span class="qn">3</span><p>CustomerID, first and last name of customers with more than one address: GROUP BY the three columns, HAVING COUNT(c.CustomerID) &gt; 1.</p></div>
+      <div class="qa"><span class="qn">4</span><p>ProductID, Name and total revenue per product: SUM(sod.LineTotal) with GROUP BY p.ProductID, p.Name, ORDER BY TotalRevenue DESC.</p></div>
+      <div class="qa"><span class="qn">5</span><p>Customers who ordered products with StandardCost &gt; 800: four-table join with DISTINCT.</p></div>
+      <div class="qa"><span class="qn">6</span><p>Top four cities by customer count with country: GROUP BY City, CountryRegion, ORDER BY count DESC LIMIT 4.</p></div>
+      <div class="qa"><span class="qn">7</span><p>Per sales order, number of products, only where AVG(UnitPrice) &gt; 300: 19 rows.</p></div>
+      <div class="qa"><span class="qn">8</span><p>Discontinued products: <code>WHERE p.SellEndDate IS NOT NULL</code>, 98 rows.</p></div>
+      <div class="qa"><span class="qn">9–10 semantics</span><p>"Find the average total due for each customer and display their name and average total due from the highest to smallest." "Retrieve the most expensive price in each product category" (MAX(ListPrice) grouped by category name).</p></div>
+    </div>
+  </details>
+
+  <details class="note" id="lab6">
+    <summary><span class="num n1">6</span> Intermediate SQL, part 2</summary>
+    <div class="body">
+      <div class="qa"><span class="qn">1</span><p>SUM, AVG, MIN, MAX of TotalDue for customers not living in London: two accepted forms, NOT IN subquery or <code>a.City NOT LIKE 'London'</code>.</p></div>
+      <div class="qa"><span class="qn">2</span><p>Orders shipped to the main office: join SalesOrderHeader.ShipToAddressID to CustomerAddress.AddressID where AddressType = 'Main Office'.</p></div>
+      <div class="qa"><span class="qn">3</span><p>Discontinued products — same query as part 1 question 8. <span class="flag">Duplicate</span></p></div>
+      <div class="qa"><span class="qn">4</span><p>Name, colour, list price and category of black and blue products in the Bike parent category, ordered by list price descending: two accepted forms (ParentProductCategoryID IN subquery, or category Name LIKE '%Bikes%'); 43 rows.</p></div>
+      <div class="qa"><span class="qn">5</span><p>Direct sub-categories per parent category: self-join of ProductCategory (Topic 5).</p></div>
+      <div class="qa"><span class="qn">6</span><p>Customers and addresses ordered by CountryRegion, LastName, FirstName with a Y/N flag for multiple addresses: CASE over COUNT(…) OVER (PARTITION BY CustomerID).</p></div>
+      <div class="qa"><span class="qn">7–9 semantics</span><p>Question 9 repeats "retrieve the most expensive price in each product category". Questions 7 and 8 are unreliable in the source (see Topic 5). <span class="flag">Inconsistent</span></p></div>
+    </div>
+  </details>
+
+  <details class="note" id="lab7">
+    <summary><span class="num n2">7</span> Index calculation</summary>
+    <div class="body">
+      <p>Eleven questions on the 30,000-record EMPLOYEE file with B = 512, P = 6, P<sub>R</sub> = 7, R = 115.</p>
+      <div class="tscroll"><table>
+        <tr><th>Q</th><th>Asked</th><th>Answer</th></tr>
+        <tr><td>1</td><td>Record size</td><td>115 bytes</td></tr>
+        <tr><td>2</td><td>bfr, blocks, left-over</td><td>4 records/block; 7,500 blocks; 52 bytes</td></tr>
+        <tr><td>3</td><td>Linear search accesses</td><td>best 1, worst 7,500, average 3,750</td></tr>
+        <tr><td>4</td><td>Binary search on data file</td><td>log<sub>2</sub>(7,500) ≈ 13</td></tr>
+        <tr><td>5</td><td>Primary index on Ssn, single level</td><td>bfr<sub>i</sub> = 34; 7,500 entries; 221 blocks; 8 + 1 = 9 accesses</td></tr>
+        <tr><td>6</td><td>File not ordered by Ssn: which index</td><td>Secondary index (index on a non-ordering field)</td></tr>
+        <tr><td>7</td><td>Secondary single-level on Ssn</td><td>883 blocks; 10 + 1 = 11 accesses</td></tr>
+        <tr><td>8</td><td>Dense secondary index on Department_code, bfr<sub>i</sub></td><td>entry 15 bytes; 34 per block</td></tr>
+        <tr><td>9</td><td>Entries, blocks, accesses for Q8</td><td>30,000 entries; 883 blocks; 10 + 1 = 11</td></tr>
+        <tr><td>10</td><td>Multilevel primary index</td><td>221 / 7 / 1 → 3 levels, 229 blocks, 4 accesses</td></tr>
+        <tr><td>11</td><td>Multilevel secondary index</td><td>883 / 26 / 1 → 3 levels, 910 blocks, 4 accesses</td></tr>
+      </table></div>
+      <p class="sub2">Q8 states 1,000 distinct Department_code values evenly distributed, but the answer treats the index as dense with one entry per record; the distinct-value count is not used.</p>
+    </div>
+  </details>
+
+  <details class="note" id="lab8">
+    <summary><span class="num n2">8</span> Heuristic optimization</summary>
+    <div class="body">
+      <p>Six slides: the initial query tree for <span class="ra-sym">π<sub>Type</sub>(σ<sub>ProdType = 'Widget'</sub>(σ<sub>Date.Month = July</sub>(Customer ⋈ Invoice ⋈ LineItem ⋈ Product)))</span>, then the task "show the steps in converting a query tree during heuristic optimization into an equivalent one", followed by the four transformed trees: cascade selection, move selection down, Cartesian product with select to join, projection. Steps are listed in Topic 8.</p>
+    </div>
+  </details>
+
+  <details class="note" id="lab9">
+    <summary><span class="num n2">9</span> Transactions</summary>
+    <div class="body">
+      <div class="tscroll"><table>
+        <tr><th>Q</th><th>Asked</th><th>Answer</th></tr>
+        <tr><td>1</td><td>Balance Session A sees for 10001 after query 3</td><td>Decreased by 100 — a session sees its own uncommitted changes</td></tr>
+        <tr><td>2</td><td>Balance Session B sees</td><td>Original — uncommitted changes are invisible to other sessions</td></tr>
+        <tr><td>3</td><td>Does query 4 withdraw 500 from 10001?</td><td>No — connection A holds a lock</td></tr>
+        <tr><td>4</td><td>Does query 5 transfer 100 from 10001 to 10002?</td><td>No — A's transaction is not committed</td></tr>
+        <tr><td>5</td><td>What happens at query 7?</td><td>The transfer completes, because COMMIT made the change permanent</td></tr>
+        <tr><td>6–7</td><td>Balance of 10003 after query 10, and why</td><td>1000 — connection A rolled back, discarding its changes</td></tr>
+        <tr><td>8</td><td>Begin but never commit or rollback</td><td>Most DBMSs roll back automatically; until then other sessions do not see the change</td></tr>
+      </table></div>
+      <p class="sub2">The numbered queries themselves are not in the materials.</p>
+    </div>
+  </details>
+
+  <details class="note" id="lab10">
+    <summary><span class="num n2">10</span> Users, privileges and roles</summary>
+    <div class="body">
+      <p>Eleven tasks on an HR schema in MySQL: why a host-less CREATE USER is wrong; four localhost accounts with a shared password; an hr role granted in one statement; SELECT on hr.* for the role; ALTER USER to change a password; a salary_app account restricted to a Docker subnet with column-level SELECT; UPDATE on hr.employees for a director; revoking a mistaken grant; a VPN-address developer with INSERT, UPDATE, DELETE on hr.*; revoking everything and dropping a resigned user; reading a GRANT statement. All statements are in Topic 10.</p>
+    </div>
+  </details>
+</div></section>
+
+<!-- ============ EXAM ============ -->
+<section class="tab" id="exam"><div class="wrap">
+  <h1>Past paper</h1>
+  <p class="lede">One mid-semester paper: 8 questions, 90 marks, three hours, open PDF notes without internet. The materials contain the questions only; answer notes below point to where the method lives.</p>
+
+  <div class="panel" id="x1">
+    <h3><span class="badge b1">Q1 · 10</span> Referential actions</h3>
+    <div class="formula">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)<br>ON DELETE SET DEFAULT ON UPDATE CASCADE;</div>
+    <p>1.1 Explain the constraint technically. 1.2 Modify it so that (1) a resigning supervisor leaves the supervisees with no supervisor, and (2) a newly admitted employee is assigned an HR supervisor automatically.</p>
+    <p class="sub2">Method: Topic 2. Part (1) matches the worksheet's ON DELETE SET NULL; part (2) matches the DDL lab's DEFAULT value on the column. No model answer in the materials.</p>
+  </div>
+
+  <div class="panel" id="x2">
+    <h3><span class="badge b1">Q2 · 15</span> Illustrate with COMPANY data</h3>
+    <p>Give example data for: tuples have no order; several meanings of NULL; keys are always superkeys; an FK value can be NULL; delete can violate only referential integrity. The paper's own example: relation state r1 of DEPTLOCS = {&lt;1, Houston&gt;, &lt;5, Bellaire&gt;} as a subset of dom(A1) × dom(A2).</p>
+    <p class="sub2">Method: Topic 1 (the review worksheet works the first four on the school schema). The fifth statement has no worked answer.</p>
+  </div>
+
+  <div class="panel" id="x3">
+    <h3><span class="badge b1">Q3 · 10</span> Query semantics</h3>
+    <pre class="sql">SELECT Dno, COUNT(*)
+FROM EMPLOYEE
+WHERE Salary > 40000
+GROUP BY Dno
+HAVING COUNT(*) > 5;</pre>
+    <p class="sub2">Method: Topic 5 (semantics questions in both SQL labs). Write one sentence that names the grouping, the row filter and the group filter.</p>
+  </div>
+
+  <div class="panel" id="x4">
+    <h3><span class="badge b1">Q4 · 10</span> Datalog to RA, SQL and English</h3>
+    <pre class="sql">CUSTOMERS(CID, FName, LName, CAddress, Account)   PRODUCTS(PID, Prodname, Category)
+SUPPLIERS(SName, SAddress, Chain)                  ORDERS(CID, SName, PID, Quantity)
+OFFERS(Sname, PID, Price)
+
+1) ans(x, y) <- CUSTOMERS(_, x, y, _, z) AND z < 500
+2) ans(x) <- SUPPLIERS(x, z, _) AND z = "Chiang Mai" AND OFFERS(x, y, _)
+             AND PRODUCTS(y, _, "As seen on TV")</pre>
+    <p class="sub2">Method: Topic 6 and the RA answer sheet question 5, which works the same three-way translation on WORKS_ON.</p>
+  </div>
+
+  <div class="panel" id="x5">
+    <h3><span class="badge b1">Q5 · 10</span> Why these rules are not safe</h3>
+    <pre class="sql">1) S(x) <- R(y)
+2) S(x) <- R(y) AND NOT R(x)
+3) S(x) <- R(y) AND x < y</pre>
+    <p class="sub2"><span class="flag">Not covered by any worked answer in the materials.</span></p>
+  </div>
+
+  <div class="panel" id="x6">
+    <h3><span class="badge b1">Q6 · 20</span> Index calculation, B = 1024</h3>
+    <p>Block 1024 bytes, block pointer 6, record pointer 7, 30,000 fixed-length records with NAME 30, SSN 9, DEPARTMENTCODE 9, ADDRESS 40, PHONE 9, BIRTHDATE 8, SEX 1, JOBCODE 4, SALARY 4. File ordered by the non-key DEPARTMENTCODE; build a secondary index on SSN whose pointers point to the record level.</p>
+    <p>Asked: (1) bfr and number of blocks (unspanned); (2) first-level bfr<sub>i</sub>; (3) first-level entries and blocks; (4) levels and total blocks of a multilevel index; (5) block accesses to reach a record via the multilevel index.</p>
+    <div class="formula">R = 30+9+9+40+9+8+1+4+4 = 114 bytes → bfr = floor(1024/114) = 8 → b = ceiling(30,000/8) = 3,750 blocks<br>entry = 9 + 7 (record pointer) = 16 bytes → bfr<sub>i</sub> = floor(1024/16) = 64<br>secondary index is dense: r<sub>1</sub> = 30,000 entries → b<sub>1</sub> = ceiling(30,000/64) = 469 blocks<br>level 2: ceiling(469/64) = 8 blocks; level 3: ceiling(8/64) = 1 block → t = 3 levels, 469 + 8 + 1 = 478 blocks<br>accesses = t + 1 = 4</div>
+    <p class="sub2">The numbers above apply the answer-sheet method (Topic 7) to the paper's values; they are not from a marked answer. Check them against the formulas before relying on them.</p>
+  </div>
+
+  <div class="panel" id="x7">
+    <h3><span class="badge b1">Q7 · 5</span> Join order</h3>
+    <p>From a query tree, how does the optimizer decide between joining Enrollment with Student first or Enrollment with Course first, and what are its points of consideration?</p>
+    <p class="sub2"><span class="flag">Not covered by any worked answer in the materials.</span></p>
+  </div>
+
+  <div class="panel" id="x8">
+    <h3><span class="badge b1">Q8 · 10</span> Push-down projection</h3>
+    <pre class="sql">Customer(ID, Name, Type)   Invoice(InvID, CustID, Date, Amount)
+LineItem(InvID, LineNo, ProdID, Qty)   Product(ProdID, Description, ProdType)
+
+SELECT Name, Date, Amount
+FROM Customer, Invoice
+WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 3000</pre>
+    <p class="sub2">Method: Topic 8, step 4 — the heuristic optimization slides show projection push-down on the same Customer / Invoice schema.</p>
+  </div>
+</div></section>
+
+<!-- ============ DRILLS ============ -->
+<section class="tab" id="drills"><div class="wrap">
+  <h1>Drills</h1>
+
+  <div class="panel" id="flash">
+    <h2 class="title" style="font-size:21px">Flashcards</h2>
+    <p class="sub2">Click to flip. Keyboard: <b>Space</b> flip · <b>←/→</b> move · <b>G</b> got it · <b>A</b> again.</p>
+    <div class="fc-controls" id="fcFilters">
+      <button class="btn primary" data-f="all">All</button>
+      <button class="btn" data-f="t1">Topics 1–6</button>
+      <button class="btn" data-f="t2">Topics 7–10</button>
+      <button class="btn" id="fcShuffle" style="margin-left:auto">Shuffle</button>
+    </div>
+    <div class="fc-stage">
+      <div class="fc" id="fcCard">
+        <div class="face front"><span class="tag badge b1" id="fcTag">Topics 1–6</span><div class="q" id="fcQ"></div><span class="hint">click to flip</span></div>
+        <div class="face back"><div class="a" id="fcA"></div><span class="hint">click to flip back</span></div>
+      </div>
+      <div class="fc-nav">
+        <button class="btn" id="fcPrev">‹ Prev</button>
+        <span class="fc-count" id="fcCount"></span>
+        <button class="btn" id="fcNext">Next ›</button>
+        <button class="btn" id="fcAgain" style="margin-left:10px">↻ Again</button>
+        <button class="btn primary" id="fcKnow">✓ Got it</button>
+      </div>
+      <div class="fc-score" id="fcScore"></div>
+    </div>
+  </div>
+
+  <div class="panel pc" id="quiz">
+    <h2 class="title" style="font-size:21px">Mock exam</h2>
+    <p class="sub2">Single-answer questions grade the moment you click. Every question is drawn from the labs or the past paper.</p>
+    <div id="quizShell" class="quiz-shell"></div>
+  </div>
+</div></section>
+
+<!-- ============ CHEATSHEET ============ -->
+<section class="tab" id="cheat"><div class="wrap">
+  <h1>Cheat Sheet</h1>
+  <div class="cheat">
+
+    <h3><span class="badge b1">T7</span> Index formulas</h3>
+    <div class="card">
+      <div class="formula">R = Σ field sizes · bfr = floor(B/R) · b = ceiling(r/bfr) · left-over = B − bfr·R<br>R<sub>i</sub> = key + pointer · bfr<sub>i</sub> = fo = floor(B/R<sub>i</sub>) · b<sub>i</sub> = ceiling(r<sub>i</sub>/bfr<sub>i</sub>)<br>primary (file ordered by key): r<sub>i</sub> = b · secondary / dense: r<sub>i</sub> = r<br>linear: 1 / b / b÷2 · binary: ceiling(log<sub>2</sub> b) · index search: ceiling(log<sub>2</sub> b<sub>i</sub>) + 1<br>multilevel: t = ceiling(log<sub>fo</sub> r<sub>1</sub>) · accesses = t + 1 · blocks = b<sub>1</sub> + b<sub>2</sub> + … + 1</div>
+      <p class="mini">Block pointer when the index points at blocks; record pointer when it points at records.</p>
+    </div>
+
+    <h3><span class="badge b1">T2</span> Referential actions</h3>
+    <div class="card"><div class="tscroll"><table>
+      <tr><th>Action</th><th>When the referenced row is deleted / its key updated</th></tr>
+      <tr><td class="mono">CASCADE</td><td>referencing rows are deleted / updated to match</td></tr>
+      <tr><td class="mono">SET NULL</td><td>referencing FK becomes NULL</td></tr>
+      <tr><td class="mono">SET DEFAULT</td><td>referencing FK takes the column's DEFAULT</td></tr>
+    </table></div></div>
+
+    <h3><span class="badge b2">T4</span> Relational algebra symbols</h3>
+    <div class="card"><div class="tscroll"><table>
+      <tr><td><b>σ</b> select rows</td><td><b>π</b> project columns, no duplicates</td><td><b>∪ − ∩</b> set ops</td></tr>
+      <tr><td><b>×</b> Cartesian product</td><td><b>⋈</b> join (equijoin on =)</td><td><b>ρ</b> rename · <b>÷</b> division · <b>←</b> assignment</td></tr>
+      <tr><td colspan="3">Text form: <code>sigma_(cond)(R)</code> · <code>pi_(a,b)(R)</code> · <code>join_(R,S)</code></td></tr>
+    </table></div></div>
+
+    <h3><span class="badge b2">T8</span> Heuristic optimization order</h3>
+    <div class="card"><p><b>Cascade σ</b> → <b>move σ down</b> → <b>× + σ ⇒ ⋈</b> → <b>push π down</b>. Projections low in the tree carry only join keys and output columns.</p></div>
+
+    <h3><span class="badge gr">T10</span> MySQL privileges</h3>
+    <div class="card">
+      <div class="formula">CREATE USER 'u'@'host' IDENTIFIED BY '…';      -- host: localhost, 10.10.182.100, 192.168.128.%, % (any)<br>CREATE ROLE 'r'; GRANT 'r' TO 'u'@'host', …;    GRANT SELECT ON db.* TO 'r';<br>GRANT UPDATE ON db.table TO 'u'@'host';         GRANT SELECT (col1, col2) ON table TO 'u'@'host';<br>REVOKE UPDATE ON db.table FROM 'u'@'host';      REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'u'@'host';<br>ALTER USER 'u'@'host' IDENTIFIED BY '…';        DROP USER 'u'@'host';   FLUSH PRIVILEGES;</div>
+    </div>
+
+    <h3><span class="badge gr">T1 · T9</span> Fast facts</h3>
+    <div class="card"><div class="tscroll"><table>
+      <tr><td><b>Superkey</b></td><td>any attribute set that identifies a tuple; <b>candidate key</b> = minimal superkey</td></tr>
+      <tr><td><b>FK</b></td><td>links to another table's primary key; may be NULL</td></tr>
+      <tr><td><b>Delete</b></td><td>can violate only referential integrity</td></tr>
+      <tr><td><b>Uncommitted change</b></td><td>visible to its own session, invisible to others; blocks others on the locked row</td></tr>
+      <tr><td><b>COMMIT / ROLLBACK</b></td><td>make permanent / discard; an open transaction is usually rolled back automatically</td></tr>
+      <tr><td><b>Participation</b></td><td>double line = total, single line = partial</td></tr>
+    </table></div></div>
+  </div>
+</div></section>
+
+<!-- ============ RESOURCES ============ -->
+<section class="tab" id="resources"><div class="wrap">
+  <h1>Downloads</h1>
+  <p class="lede">The source files, renamed to match the topic order. Metadata has been removed; the contents are unchanged.</p>
+
+  <div class="panel">
+    <h3>Files</h3>
+    <div class="tscroll"><table class="files">
+      <tr><th>Topic</th><th>File</th><th>What it is</th><th>Pages</th></tr>
+      <tr><td class="mono">T1, T4, T6–8</td><td><a href="./files/01-relational-model-review-worksheet.pdf">01-relational-model-review-worksheet.pdf</a></td><td>Review worksheet with handwritten answers: relational model, DDL, relational algebra, Datalog, heuristic optimization, index calculation</td><td class="sz">15</td></tr>
+      <tr><td class="mono">T2</td><td><a href="./files/02-ddl-practice-school-database.pdf">02-ddl-practice-school-database.pdf</a></td><td>DDL practice: six CREATE statements plus the requirements text</td><td class="sz">4</td></tr>
+      <tr><td class="mono">T3</td><td><a href="./files/03-er-inventory-worked-answer.pdf">03-er-inventory-worked-answer.pdf</a></td><td>Inventory requirements, ER diagram and cardinality/participation justification</td><td class="sz">5</td></tr>
+      <tr><td class="mono">T3</td><td><a href="./files/03-er-vote-worked-answer.pdf">03-er-vote-worked-answer.pdf</a></td><td>Vote database requirements and ER diagram</td><td class="sz">1</td></tr>
+      <tr><td class="mono">T4</td><td><a href="./files/04-relational-algebra-notes.pdf">04-relational-algebra-notes.pdf</a></td><td>Handwritten notes: operations table, select and project with examples (scanned, no text layer)</td><td class="sz">3</td></tr>
+      <tr><td class="mono">T4</td><td><a href="./files/04-relational-algebra-answer-sheet.pdf">04-relational-algebra-answer-sheet.pdf</a></td><td>Answer sheet: five RA questions including a Datalog translation</td><td class="sz">3</td></tr>
+      <tr><td class="mono">T5</td><td><a href="./files/05-sql-intermediate-part-1-answers.pdf">05-sql-intermediate-part-1-answers.pdf</a></td><td>Intermediate SQL part 1: ten questions with answers</td><td class="sz">6</td></tr>
+      <tr><td class="mono">T5</td><td><a href="./files/05-sql-intermediate-part-2-answers.pdf">05-sql-intermediate-part-2-answers.pdf</a></td><td>Intermediate SQL part 2: nine questions with answers</td><td class="sz">6</td></tr>
+      <tr><td class="mono">T7</td><td><a href="./files/07-index-calculation-answers.pdf">07-index-calculation-answers.pdf</a></td><td>Index calculation: eleven worked questions, single-level and multilevel</td><td class="sz">4</td></tr>
+      <tr><td class="mono">T8</td><td><a href="./files/08-heuristic-optimization-query-trees.pdf">08-heuristic-optimization-query-trees.pdf</a></td><td>Query-tree slides: initial tree and four transformation steps</td><td class="sz">6</td></tr>
+      <tr><td class="mono">T9</td><td><a href="./files/09-transaction-lab-answers.pdf">09-transaction-lab-answers.pdf</a></td><td>Transaction lab answer table (eight questions)</td><td class="sz">2</td></tr>
+      <tr><td class="mono">T10</td><td><a href="./files/10-privileges-and-roles-answers.pdf">10-privileges-and-roles-answers.pdf</a></td><td>Users, privileges and roles: eleven tasks with SQL</td><td class="sz">4</td></tr>
+      <tr><td class="mono">Exam</td><td><a href="./files/exam-midterm-past-paper.pdf">exam-midterm-past-paper.pdf</a></td><td>Mid-semester past paper, eight questions, no answers</td><td class="sz">7</td></tr>
+    </table></div>
+  </div>
+
+  <div class="panel pa" id="srcnotes">
+    <h3>Source notes</h3>
+    <ul class="clean">
+      <li><b>Not included:</b> the full reference textbook (Elmasri &amp; Navathe, 7th edition, 1,273 pages). It is copyrighted and was marked not for sharing, so it is cited but not hosted here.</li>
+      <li><b>Two academic years:</b> the review worksheet and the past paper date from January 2025; the inventory ER answer is dated October 2025 and the handwritten algebra notes December 2025. The topics agree, but the scenario numbers (block size, field sizes) differ between years.</li>
+      <li><b>Duplicates:</b> "discontinued products" and "most expensive price per category" appear in both SQL parts with identical answers. Both files are kept because the rest of their content differs.</li>
+      <li><b>Unreliable answers:</b> SQL part 2 questions 7–8 (semantics do not match the query); DDL practice alternative CHECK syntax; Employees age boundary (&gt; 18 vs ≥ 18) contradicts itself in the source.</li>
+      <li><b>Missing pieces:</b> the transaction lab's numbered queries; written answers for the worksheet's Datalog, recursion and index parts; any answers for the past paper. Pages that depend on them are marked in place.</li>
+      <li><b>Scanned:</b> the handwritten algebra notes have no text layer; their content was transcribed into Topic 4.</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- ============ AUTHOR ============ -->
+<section class="tab" id="author"><div class="wrap">
+  <h1>About</h1>
+  <div class="panel pc">
+    <h3>This console</h3>
+    <div class="kv"><b>Title</b><span>Database Systems</span></div>
+    <div class="kv"><b>Text</b><span>Elmasri &amp; Navathe — <i>Fundamentals of Database Systems</i>, 7th edition</span></div>
+    <div class="kv"><b>Covered</b><span>Ten topics: relational model, DDL, ER design, relational algebra, intermediate SQL, Datalog, indexing, heuristic optimization, transactions, privileges</span></div>
+    <div class="kv"><b>Practice</b><span>Ten worked lab sets, one past paper, 43 flashcards, a 20-question mock exam</span></div>
+  </div>
+  <div class="box trap"><b>On the content</b>Every summary restates the attached lab sheets, answer sheets and past paper; nothing was added from outside them. Where a source is thin, contradictory or has no answer, the page says so instead of filling the gap. The textbook is referenced, not redistributed.</div>
+  <div class="panel pg">
+    <h3>Built with</h3>
+    <p>HTML, CSS and JavaScript on the shared Study Console frame. No framework or build step.</p>
+    <p class="sub2">Zann</p>
+  </div>
+</div></section>
+
+<div class="footer">Database Systems</div>
+</main>
+
+<script>
+/* ================= DATA ================= */
+var CARDS = [
+ {t:1,q:"What is a database?",a:"A collection of related data."},
+ {t:1,q:"What is data?",a:"Known facts that can be recorded and have implicit meaning."},
+ {t:1,q:"What is the miniworld?",a:"The aspect of the real world a database represents, also called the universe of discourse (UoD)."},
+ {t:1,q:"What is a DBMS?",a:"A general-purpose software system that facilitates defining, constructing, manipulating and sharing databases among various users and applications."},
+ {t:1,q:"Query vs transaction",a:"A query typically causes some data to be retrieved; a transaction may cause some data to be read and some to be written into the database."},
+ {t:1,q:"Relation state r(R)",a:"A subset of dom(A1) x dom(A2) x ... x dom(An) over the attributes A1..An. Each tuple is one combination of domain values."},
+ {t:1,q:"Superkey vs candidate key",a:"A superkey is any set of attributes that uniquely identifies a tuple. A candidate key is a minimal superkey: no proper subset still identifies a tuple."},
+ {t:1,q:"Can a foreign-key value be NULL?",a:"Yes. A foreign key links attributes of one table to another table's primary key, and its values are allowed to be NULL."},
+ {t:1,q:"Which constraint can a delete violate?",a:"Only referential integrity, not key constraints nor entity integrity."},
+ {t:1,q:"Do tuples have an order?",a:"No. Tuples in a relation do not have any particular order; any order of the rows is the same relation."},
+ {t:1,q:"ON DELETE SET NULL",a:"When the referenced row is deleted, the foreign key in the referencing rows is set to NULL (the worksheet's answer for a removed instructor)."},
+ {t:1,q:"ON UPDATE CASCADE",a:"When the referenced key changes, the change is copied to the referencing rows (the worksheet's answer for a renamed instructor)."},
+ {t:1,q:"ON DELETE SET DEFAULT",a:"When the referenced row is deleted, the referencing FK takes the column's DEFAULT; the DDL lab uses TeacherID DEFAULT 1 so assignments survive a teacher's deletion."},
+ {t:1,q:"Restrict a column to a list of values",a:"CHECK (RelationToStudent IN ('Mother','Father','Other')). The form CHECK ('Mother' OR 'Father' OR 'Other') does not test the column."},
+ {t:1,q:"Double line in an ER diagram",a:"Total participation: every instance of that entity must take part in the relationship. A single line is partial participation."},
+ {t:1,q:"Cardinality ratio",a:"The 1, N or M written at each end of a relationship: how many instances of one entity may relate to one instance of the other."},
+ {t:1,q:"Why is Customer-Invoice 1:N with total participation on Invoice?",a:"A customer can have many invoices; every invoice must be issued to exactly one customer, and there cannot be an invoice without a customer."},
+ {t:1,q:"What is relational algebra?",a:"A procedural query language: a set of algebraic operations that provides the theoretical foundation for relational queries."},
+ {t:1,q:"Six fundamental RA operations",a:"Select (sigma), Project (pi), Union, Set difference, Cartesian product, Rename (rho)."},
+ {t:1,q:"Additional RA operations",a:"Intersection, Assignment, Join, Division, Outer join."},
+ {t:1,q:"What does Project do to duplicates?",a:"It removes them. pi Sex (EMPLOYEE) returns just M and F."},
+ {t:1,q:"Equijoin",a:"A join whose condition is equality of attributes, e.g. EMPLOYEE join Dno = Dnumber (DEPARTMENT)."},
+ {t:1,q:"Text form of sigma, pi and join",a:"sigma_(cond)(R), pi_(a, b)(R), join_(R, S)."},
+ {t:1,q:"Rule for non-aggregated columns in SELECT",a:"Standard SQL requires every non-aggregated column in SELECT to appear in GROUP BY."},
+ {t:1,q:"Count customers with more than one address",a:"Subquery in FROM: GROUP BY CustomerID HAVING COUNT(AddressID) > 1, then COUNT(*) outside."},
+ {t:1,q:"Products that are discontinued",a:"WHERE SellEndDate IS NOT NULL (a product is discontinued when a sell end date has been issued)."},
+ {t:1,q:"Self-join use in the lab",a:"Counting direct sub-categories: ProductCategory AS parent JOIN ProductCategory AS child ON parent.ProductCategoryID = child.ParentProductCategoryID."},
+ {t:1,q:"Flag customers with multiple addresses",a:"CASE WHEN COUNT(ca.AddressID) OVER (PARTITION BY c.CustomerID) > 1 THEN 'Y' ELSE 'N' END."},
+ {t:1,q:"Translate ans(x,y) <- WORKS_ON(x,y,z) AND z > 20.0",a:"RA: pi Essn, Pno (sigma Hours > 20.0 (WORKS_ON)). SQL: SELECT Essn, Pno FROM WORKS_ON WHERE Hours > 20.0. English: Essn and project number where hours exceed 20."},
+ {t:1,q:"Base case and recursive case of WITH RECURSIVE",a:"The first SELECT (anchor row, relative_depth 0) is the base case; the SELECT after UNION ALL that joins the CTE to itself is the recursive case."},
+ {t:2,q:"Blocking factor",a:"bfr = floor(B / R): records per block, floored because a block cannot hold part of a record (unspanned)."},
+ {t:2,q:"Number of file blocks",a:"b = ceiling(r / bfr), ceiling so the last partially filled block is counted."},
+ {t:2,q:"Linear search cost on 7,500 blocks",a:"Best 1, worst 7,500, average 3,750 block accesses."},
+ {t:2,q:"Index blocking factor (fan-out)",a:"bfri = fo = floor(B / Ri) where Ri = key size + pointer size, e.g. floor(512/15) = 34."},
+ {t:2,q:"Primary vs secondary index entry count",a:"Primary index on an ordered key: one entry per data block (7,500). Secondary (dense) index: one entry per record (30,000)."},
+ {t:2,q:"Which index when the file is not ordered by the field?",a:"A secondary index: an index on a non-ordering field, which can be created on any field."},
+ {t:2,q:"Block accesses via a multilevel index",a:"t + 1, where t = ceiling(log_fo r1) is the number of levels; one block per level plus one data block."},
+ {t:2,q:"Four heuristic optimization steps",a:"Cascade selection; move selection down; replace Cartesian product plus selection with a join; push projection down."},
+ {t:2,q:"What does an uncommitted change look like to another session?",a:"Invisible: the other session reads the original value, and its own writes to the locked row cannot complete until COMMIT or ROLLBACK."},
+ {t:2,q:"Begin a transaction and never commit or roll back",a:"In most DBMSs it is rolled back automatically; until then other sessions never see the change."},
+ {t:2,q:"CREATE USER without @host",a:"Means user@'%', connectable from any host; for an app on the same host use @'localhost' (least privilege)."},
+ {t:2,q:"Column-level privilege",a:"GRANT SELECT (employee_id, first_name, last_name, email, job_id, salary) ON employees TO 'salary_app'@'192.168.128.%'."},
+ {t:2,q:"Remove a user completely",a:"REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'dan'@'localhost'; DROP USER 'dan'@'localhost'; FLUSH PRIVILEGES;"}
+];
+
+var QUIZ = [
+ {q:"A database is best described as",
+  o:["a query that retrieves data","the universe of discourse","a general-purpose software system","a collection of related data"], a:[3],
+  e:"The worksheet answer: a database is a collection of related data. The DBMS is the software; the miniworld is what it represents."},
+ {q:"Keys are always superkeys because",
+  o:["a key must be a single attribute","superkeys cannot contain NULL","a key is the first column of the table","a key is any attribute set that identifies a tuple, and a candidate key is the minimal such set"], a:[3],
+  e:"A superkey is any set of attributes that uniquely identifies a tuple; a candidate key is a minimal superkey, so every key is also a superkey."},
+ {q:"Which operation can violate referential integrity but not key or entity integrity?",
+  o:["Select","Insert","Update of a key","Delete"], a:[3],
+  e:"Past paper Q2.5: the delete operation can violate only referential integrity."},
+ {q:"The requirement 'when an instructor is removed, AdvisorID should be set to NULL' is written as",
+  o:["ON DELETE CASCADE","ON DELETE SET DEFAULT","ON DELETE SET NULL","ON UPDATE SET NULL"], a:[2],
+  e:"The worksheet answer uses ON DELETE SET NULL for the removal and ON UPDATE CASCADE for the rename."},
+ {q:"In the DDL lab, a deleted teacher must leave the assignment row intact with TeacherID = 1. The clause is",
+  o:["ON DELETE CASCADE","ON DELETE SET DEFAULT with TeacherID INT DEFAULT 1","ON DELETE SET NULL","CHECK (TeacherID = 1)"], a:[1],
+  e:"TeacherID INT DEFAULT 1 plus CONSTRAINT fk_sra_teacher ... ON DELETE SET DEFAULT."},
+ {q:"In the inventory ER diagram, 'every product must be sold by a department' is shown by",
+  o:["a double line between Product and sold by","the label N on the Product side","a double-outlined attribute","a dashed line"], a:[0],
+  e:"Total participation is indicated by a double line; a single line is partial participation."},
+ {q:"Which list holds only fundamental relational algebra operations?",
+  o:["Intersection, Assignment, Outer join","Join, Rename, Division, Union","Select, Project, Join, Division","Select, Project, Union, Set difference, Cartesian product, Rename"], a:[3],
+  e:"The handwritten notes list six fundamental operations; intersection, assignment, join, division and outer join are additional."},
+ {q:"pi Sex (EMPLOYEE) returns only two rows, M and F, because",
+  o:["EMPLOYEE has two rows","projection eliminates duplicate rows","selection removes NULL values","Sex is a key"], a:[1],
+  e:"Projection extracts the specified attributes and eliminates duplicates."},
+ {q:"The text form of a selection sigma_(gender='male')(employee) corresponds to",
+  o:["sigma gender='male' (employee)","join_(employee, gender)","rho gender (employee)","pi gender='male' (employee)"], a:[0],
+  e:"sigma_(...) replaces the sigma symbol; pi_(...) replaces pi; join_(...) replaces the join symbol."},
+ {q:"Which SQL lists customers who have more than one address?",
+  o:["WHERE COUNT(ca.AddressID) > 1","GROUP BY c.CustomerID, c.FirstName, c.LastName HAVING COUNT(c.CustomerID) > 1","ORDER BY COUNT(*) DESC LIMIT 1","SELECT DISTINCT CustomerID"], a:[1],
+  e:"Aggregates are filtered with HAVING after GROUP BY; WHERE cannot use COUNT."},
+ {q:"A product is discontinued when",
+  o:["ListPrice is 0","SellEndDate IS NOT NULL","StandardCost > 800","Color IS NULL"], a:[1],
+  e:"Both SQL labs: a product is discontinued when a sell end date has been issued."},
+ {q:"The semantic of SELECT pc.Name, MAX(p.ListPrice) FROM ProductCategory pc JOIN Product p ... GROUP BY pc.Name is",
+  o:["categories with no products","the cheapest product overall","the most expensive price in each product category","the number of products per category"], a:[2],
+  e:"Lab answer: retrieve the most expensive price in each product category."},
+ {q:"In a WITH RECURSIVE query, the part after UNION ALL that joins the CTE to itself is",
+  o:["the anchor","the base case","the recursive case","the final SELECT"], a:[2],
+  e:"The first SELECT (relative_depth 0) is the base case; the self-joining SELECT is the recursive case."},
+ {q:"With B = 512 and R = 115, the blocking factor and number of blocks for 30,000 records are",
+  o:["5 and 6,000","4 and 7,500","4.45 and 6,742","34 and 883"], a:[1],
+  e:"bfr = floor(512/115) = 4; b = ceiling(30,000/4) = 7,500."},
+ {q:"Searching a primary index of 221 blocks by binary search and then reading the record costs",
+  o:["8 + 1 = 9 block accesses","13 block accesses","4 block accesses","221 + 1"], a:[0],
+  e:"ceiling(log2 221) = 8 index blocks plus one data block."},
+ {q:"A multilevel index with levels of 883, 26 and 1 blocks needs how many block accesses to fetch a record?",
+  o:["3","4","910","27"], a:[1],
+  e:"One block per level (t = 3) plus one data block: 3 + 1 = 4."},
+ {q:"The first heuristic optimization step applied to the single selection over the whole WHERE clause is",
+  o:["sort the relations","push projection down","replace the product with a join","cascade the selection into one sigma per condition"], a:[3],
+  e:"Slides: cascade selection, move selection down, Cartesian product with select to join, projection."},
+ {q:"Session A has debited an account inside an open transaction. Session B reads the balance and sees",
+  o:["the decreased balance","the original balance","an error","NULL"], a:[1],
+  e:"The update has not been committed, so other sessions cannot see it (default isolation behaviour)."},
+ {q:"CREATE USER 'thisisme' IDENTIFIED BY 'pw'; for an app on the same host is wrong because",
+  o:["the password is too short","it omits the host and so allows connection from any host","CREATE USER needs FLUSH PRIVILEGES","usernames must be uppercase"], a:[1],
+  e:"Without @host the account is 'thisisme'@'%'; the correct form is 'thisisme'@'localhost' (least privilege)."},
+ {q:"Which statement grants the hr role to four users in a single statement?",
+  o:["GRANT 'hr' TO 'john'@'localhost','jane'@'localhost','dan'@'localhost','tommy'@'localhost';","GRANT ROLE hr;","ALTER USER ... ROLE hr","GRANT hr TO ALL"], a:[0],
+  e:"After CREATE ROLE 'hr', the role is granted to a comma-separated list of user@host accounts."}
+];
+
+/* ================= HELPERS ================= */
+var $=function(id){return document.getElementById(id)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function LSget(k,d){try{var v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}}
+function LSset(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+
+/* ================= TABS ================= */
+var TABS=['home','topics','labs','exam','drills','cheat','resources','author'];
+var scrollMem={};
+function go(tab,noPush){
+  if(TABS.indexOf(tab)<0) tab='home';
+  var cur=document.querySelector('.tab.on');
+  if(cur) scrollMem[cur.id]=window.scrollY;
+  TABS.forEach(function(t){
+    var el=$(t); if(el) el.classList.toggle('on',t===tab);
+  });
+  buildRail(tab);
+  LSset('dbTab',tab);
+  if(!noPush){
+    var y=scrollMem[tab]||0;
+    requestAnimationFrame(function(){window.scrollTo({top:y,behavior:'instant'})});
+  }
+}
+
+/* ================= SECTIONS =================
+   The Study Console frame draws the section bar and menu sub-items from anchorsFor(). */
+function anchorsFor(tab){
+  var out=[];
+  if(tab==='topics'||tab==='labs'){
+    document.querySelectorAll('#'+tab+' details.note').forEach(function(d,i){
+      if(!d.id) d.id=tab+'_'+i;
+      var s=d.querySelector('summary');
+      out.push({id:d.id,k:(tab==='topics'?'T ':'LAB ')+(i+1),t:s?s.textContent.replace(/^\s*\d+\s*/,'').trim():'section'});
+    });
+  } else if(tab==='exam'){
+    document.querySelectorAll('#exam .panel').forEach(function(p,i){
+      if(!p.id) p.id='x_'+i;
+      var h=p.querySelector('h3'); var b=h&&h.querySelector('.badge');
+      out.push({id:p.id,k:b?b.textContent.split('·')[0].trim():'Q',t:h?h.textContent.replace(/^Q\d+\s*·\s*\d+\s*/,'').trim():'question'});
+    });
+  } else if(tab==='cheat'){
+    document.querySelectorAll('#cheat .cheat h3').forEach(function(h,i){
+      if(!h.id) h.id='cs_'+i;
+      var b=h.querySelector('.badge');
+      out.push({id:h.id,k:b?b.textContent.trim():'·',t:h.textContent.replace(/^T[\d\s·]*\s*/,'').trim()});
+    });
+  }
+  return out;
+}
+function buildRail(){ if(window.StudyShell&&StudyShell.refreshSections) StudyShell.refreshSections(); }
+
+/* ================= FLASHCARDS ================= */
+var deck=CARDS.slice(), fcIdx=0, know=0, again=0;
+var fcCard=$('fcCard');
+function renderCard(){
+  if(!deck.length) return;
+  var c=deck[fcIdx];
+  fcCard.classList.remove('flip');
+  setTimeout(function(){
+    $('fcQ').textContent=c.q;
+    $('fcA').textContent=c.a;
+    var tag=$('fcTag');
+    tag.textContent=c.t===1?'Topics 1–6':'Topics 7–10';
+    tag.className='tag badge '+(c.t===1?'b1':'b2');
+    $('fcCount').textContent=(fcIdx+1)+' / '+deck.length;
+  }, fcCard.classList.contains('flip')?190:0);
+  $('fcScore').innerHTML='<b class="g">✓ '+know+' got it</b> &nbsp;·&nbsp; <b class="r">↻ '+again+' again</b>';
+}
+fcCard.addEventListener('click',function(){fcCard.classList.toggle('flip')});
+$('fcPrev').addEventListener('click',function(){fcIdx=(fcIdx-1+deck.length)%deck.length;renderCard()});
+$('fcNext').addEventListener('click',function(){fcIdx=(fcIdx+1)%deck.length;renderCard()});
+$('fcKnow').addEventListener('click',function(){know++;fcIdx=(fcIdx+1)%deck.length;renderCard()});
+$('fcAgain').addEventListener('click',function(){again++;fcIdx=(fcIdx+1)%deck.length;renderCard()});
+$('fcShuffle').addEventListener('click',function(){deck.sort(function(){return Math.random()-.5});fcIdx=0;renderCard()});
+document.querySelectorAll('#fcFilters [data-f]').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('#fcFilters [data-f]').forEach(function(x){x.classList.remove('primary')});
+    b.classList.add('primary');
+    var f=b.dataset.f;
+    deck = f==='all' ? CARDS.slice() : CARDS.filter(function(c){return c.t===(f==='t1'?1:2)});
+    fcIdx=0;know=0;again=0;renderCard();
+  });
+});
+renderCard();
+
+/* ================= QUIZ ================= */
+var shell=$('quizShell'), qIdx=0, qScore=0, qPicked=[], qResults=[];
+function startQuiz(){qIdx=0;qScore=0;qResults=[];renderQ()}
+window.startQuiz=startQuiz;
+function renderQ(){
+  var q=QUIZ[qIdx]; qPicked=[];
+  var opts=q.o.map(function(o,i){
+    return '<button class="opt" data-i="'+i+'"><span class="mark"></span><span>'+esc(o)+'</span></button>';
+  }).join('');
+  shell.innerHTML=
+    '<div class="qbar"><div style="width:'+(qIdx/QUIZ.length*100)+'%"></div></div>'+
+    '<div class="qmeta"><span>Question '+(qIdx+1)+' of '+QUIZ.length+'</span><span>Score: '+qScore+'</span></div>'+
+    '<div class="qcard"><h3>'+esc(q.q)+'</h3>'+
+    opts+
+    '<div class="expl tip t-info" id="expl"><b>Why</b>'+esc(q.e)+'</div>'+
+    '<div class="qactions">'+
+    '<button class="btn primary" id="nextBtn" style="display:none">'+(qIdx===QUIZ.length-1?'See results →':'Next →')+'</button>'+
+    '</div></div>';
+  var optEls=shell.querySelectorAll('.opt');
+  optEls.forEach(function(el){
+    el.addEventListener('click',function(){
+      if(shell.querySelector('#expl').classList.contains('show')) return;
+      qPicked=[+el.dataset.i]; grade();
+    });
+  });
+  shell.querySelector('#nextBtn').addEventListener('click',function(){
+    qIdx++; if(qIdx<QUIZ.length) renderQ(); else renderResults();
+  });
+}
+function grade(){
+  var q=QUIZ[qIdx], optEls=shell.querySelectorAll('.opt');
+  var correct=q.a.slice().sort().join(',')===qPicked.slice().sort().join(',');
+  if(correct) qScore++;
+  qResults.push({q:q.q,correct:correct});
+  optEls.forEach(function(el){
+    var i=+el.dataset.i;
+    if(q.a.indexOf(i)>=0) el.classList.add('ok');
+    else if(qPicked.indexOf(i)>=0) el.classList.add('no');
+    else el.classList.add('dim');
+    el.style.pointerEvents='none';
+  });
+  shell.querySelector('#expl').classList.add('show');
+  shell.querySelector('#nextBtn').style.display='';
+  shell.querySelector('.qmeta span:last-child').textContent='Score: '+qScore;
+  var best=parseInt(LSget('dbBest','0'),10)||0;
+  if(qIdx===QUIZ.length-1 && qScore>best) LSset('dbBest',String(qScore));
+}
+function renderResults(){
+  var pct=Math.round(qScore/QUIZ.length*100), msg;
+  if(pct>=90) msg="A-level. You own this material.";
+  else if(pct>=75) msg="Strong. Re-check the ones you missed below.";
+  else if(pct>=50) msg="Halfway there. Read the Topics again, then retry.";
+  else msg="Go through Topics and Flashcards, then come back.";
+  var best=parseInt(LSget('dbBest','0'),10)||0;
+  if(qScore>best){best=qScore;LSset('dbBest',String(best))}
+  shell.innerHTML='<div class="qcard qresult">'+
+    '<div class="big">'+qScore+' / '+QUIZ.length+'</div>'+
+    '<p>'+pct+'% — '+msg+'</p>'+
+    '<p class="sub2">Best so far: '+best+' / '+QUIZ.length+'</p>'+
+    '<div style="max-width:540px;margin:16px auto 20px">'+
+    qResults.map(function(r,i){
+      return '<div class="review-item '+(r.correct?'good':'bad')+'">'+(r.correct?'✓':'✗')+' Q'+(i+1)+' · '+esc(r.q)+'</div>';
+    }).join('')+
+    '</div><button class="btn primary" onclick="startQuiz()">↻ Try again</button></div>';
+}
+startQuiz();
+
+/* ================= KEYBOARD ================= */
+document.addEventListener('keydown',function(e){
+  var typing=/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
+  if(typing) return;
+  var onDrills=$('drills').classList.contains('on');
+  if(onDrills){
+    if(e.key===' '){e.preventDefault();fcCard.classList.toggle('flip')}
+    else if(e.key==='ArrowRight'){$('fcNext').click()}
+    else if(e.key==='ArrowLeft'){$('fcPrev').click()}
+    else if(e.key.toLowerCase()==='g'){$('fcKnow').click()}
+    else if(e.key.toLowerCase()==='a'){$('fcAgain').click()}
+  }
+});
+
+/* ================= BOOT ================= */
+go(LSget('dbTab','home'),true);
+</script>
+<script>
+/* Study Console v3: this console's manifest. The frame (header, menu, sections, search,
+   theme, reading size, progress) is drawn by shared/v3/shell.js from this object. */
+(function () {
+  function sections(tab) {
+    return function () {
+      return (typeof anchorsFor === 'function' ? anchorsFor(tab) : []).map(function (a) { return { id: a.id, title: a.t, badge: a.k }; });
+    };
+  }
+  function terms() {
+    var out = [];
+    CARDS.forEach(function (c) { out.push({ title: c.q, meta: 'Flashcard', view: 'drills' }); });
+    document.querySelectorAll('#topics details.note').forEach(function (d) {
+      var tag = d.querySelector('summary').textContent.replace(/^\s*\d+\s*/, '').trim();
+      d.querySelectorAll('h4').forEach(function (h) { var t = h.textContent.trim(); if (t.length > 2 && t.length < 80) out.push({ title: t, meta: tag, view: 'topics', anchor: d.id }); });
+    });
+    document.querySelectorAll('#exam .panel h3').forEach(function (h) { var p = h.closest('.panel'); out.push({ title: h.textContent.trim(), meta: 'Past paper', view: 'exam', anchor: p && p.id || null }); });
+    document.querySelectorAll('#cheat .cheat h3').forEach(function (h) { out.push({ title: h.textContent.trim(), meta: 'Cheat sheet', view: 'cheat', anchor: h.id || null }); });
+    document.querySelectorAll('#resources .files a').forEach(function (a) { out.push({ title: a.textContent.trim(), meta: 'Download', view: 'resources' }); });
+    return out;
+  }
+  (window.StudyConsole = window.StudyConsole || []).push({
+    id: 'db',
+    title: 'Database Systems',
+    subtitle: 'Ten topics, ten labs, a past paper',
+    content: '#main',
+    defaultView: 'home',
+    restore: function () { return LSget('dbTab', 'home'); },
+    router: { show: function (view, anchor) { go(view, !!anchor); } },
+    viewElement: function (id) { return document.getElementById(id); },
+    terms: terms,
+    progress: { read: function () { return (parseInt(LSget('dbBest', '0'), 10) || 0) > 0 ? { drills: 'visited' } : {}; } },
+    groups: [
+      { label: 'Start', views: [{ id: 'home', title: 'Home' }] },
+      { label: 'Study', views: [
+        { id: 'topics', title: 'Topics', badge: '10', children: sections('topics') },
+        { id: 'labs', title: 'Labs', badge: '10', children: sections('labs') }
+      ] },
+      { label: 'Practice', views: [
+        { id: 'exam', title: 'Past paper', badge: '8', children: sections('exam') },
+        { id: 'drills', title: 'Flashcards & mock exam' }
+      ] },
+      { label: 'Reference', views: [
+        { id: 'cheat', title: 'Cheat sheet', children: sections('cheat') },
+        { id: 'resources', title: 'Downloads', badge: '13' },
+        { id: 'author', title: 'About' }
+      ] }
+    ]
+  });
+})();
+</script>
+</body>
+</html>

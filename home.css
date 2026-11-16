@@ -13,6 +13,7 @@
 .home-tile[data-console-id="algo"]    { --tile-l: #7d5a1e; --tile-d: #d1ad69; }
 .home-tile[data-console-id="privacy"] { --tile-l: #8e3f33; --tile-d: #dc9686; }
 .home-tile[data-console-id="os"]      { --tile-l: #4a6236; --tile-d: #a8bf8c; }
+.home-tile[data-console-id="db"]      { --tile-l: #1f5f8b; --tile-d: #8fbfe0; }
 .home-tile[data-console-id="gdc"]     { --tile-l: #36597a; --tile-d: #98b5d1; }
 .home-tile[data-console-id="ccna"]    { --tile-l: #2b2b2b; --tile-d: #d6d6d6; }
 :root[data-theme="dark"] .home-tile { --tile: var(--tile-d); }

@@ -68,7 +68,8 @@
         linkOut('wnet', 'Wireless Networks', 'WLN'),
         linkOut('algo', 'Algorithms', 'ALG'),
         linkOut('privacy', 'Privacy & Security', 'PRV'),
-        linkOut('os', 'Operating Systems', 'OS')
+        linkOut('os', 'Operating Systems', 'OS'),
+        linkOut('db', 'Database Systems', 'DBS')
       ] },
       { label: 'Engineering Lab', views: [linkOut('gdc', 'Data Center Prep', 'GDC')] },
       { label: 'Certification', views: [linkOut('ccna', 'CCNA', 'CCN')] }

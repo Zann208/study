@@ -31,6 +31,7 @@ UI v2 (`shared/v2/`) stays live as the frozen rollback: each migrated page keeps
 | **ALG** | Algorithms & Data Structures | [algo](https://github.com/Zann208/algo) | [open](https://zann208.github.io/algo/) |
 | **PRV** | Privacy & Information Security | [privacy](https://github.com/Zann208/privacy) | [open](https://zann208.github.io/privacy/) |
 | **OS** | Operating Systems & Scheduling | [os](https://github.com/Zann208/os) | [open](https://zann208.github.io/os/) |
+| **DBS** | Database Systems | this repository: `db/` | [open](https://zann208.github.io/study/db/) |
 | **GDC** | Google Data Center Hardware Hackathon 2026 | this repository: `google-dc-hackathon/` | [open](https://zann208.github.io/study/google-dc-hackathon/) |
 | **CCN** | Cisco CCNA 200-301 | this repository: `ccna/` | [open](https://zann208.github.io/study/ccna/) |
 
@@ -69,7 +70,7 @@ Academic affiliation can still appear on the professional portfolio/resume where
 3. Do not add overlapping workflows that automatically rewrite generated HTML after normal edits.
 4. Test navigation links and mobile layout after structural changes.
 5. Keep topic-specific content inside its own repo; use this hub only for discovery and shared navigation.
-6. Keep naming consistent: NET, WLN, ALG, PRV, OS, GDC and CCN.
+6. Keep naming consistent: NET, WLN, ALG, PRV, OS, DBS, GDC and CCN.
 7. Preserve `.nojekyll` for direct static GitHub Pages hosting.
 8. Before adding new material, rewrite its framing into the console's own neutral topic structure rather than copying university labels.
 
