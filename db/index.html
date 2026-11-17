@@ -213,7 +213,27 @@ pre.sql.ra{border-left-color:var(--vi)}
 
 
 /* ---------- topics: course-detail block ---------- */
-details.deep{margin-top:20px;border:1px solid var(--line2);border-radius:10px;background:var(--panel2)}
+details.deep{--deep-glow:color-mix(in srgb,var(--vi) 72%,#fff);margin-top:20px;border:1px solid var(--line2);border-radius:10px;background:var(--panel2);
+  box-shadow:0 0 16px -8px color-mix(in srgb,var(--deep-glow) 55%,transparent);transition:box-shadow .3s,border-color .3s}
+html[data-theme="light"] details.deep{--deep-glow:var(--vi)}
+details.deep>summary{position:relative}
+details.deep>summary::before{content:"";position:absolute;inset:-1px;border-radius:10px;padding:1.5px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--deep-glow) 55%,transparent) 28%,var(--deep-glow) 44% 56%,color-mix(in srgb,var(--deep-glow) 55%,transparent) 72%,transparent) no-repeat,
+    linear-gradient(90deg,transparent,color-mix(in srgb,var(--deep-glow) 55%,transparent) 28%,var(--deep-glow) 44% 56%,color-mix(in srgb,var(--deep-glow) 55%,transparent) 72%,transparent) no-repeat;
+  background-size:28% 55%,28% 55%;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  filter:drop-shadow(0 0 3px var(--deep-glow)) drop-shadow(0 0 6px color-mix(in srgb,var(--deep-glow) 60%,transparent));
+  animation:deepRun 6s linear infinite}
+@keyframes deepRun{
+  0%{background-position:-45% 0,145% 100%}
+  50%{background-position:145% 0,145% 100%}
+  100%{background-position:145% 0,-45% 100%}}
+details.deep:hover{border-color:color-mix(in srgb,var(--deep-glow) 40%,var(--line2));box-shadow:0 0 20px -6px color-mix(in srgb,var(--deep-glow) 65%,transparent)}
+details.deep:hover>summary::before{animation-duration:3s}
+details.deep:hover>summary{color:var(--ink)}
+details.deep[open]{box-shadow:none}
+details.deep[open]>summary::before{display:none}
+@media (prefers-reduced-motion:reduce){details.deep>summary::before{display:none}details.deep{border-color:color-mix(in srgb,var(--deep-glow) 45%,var(--line2))}}
 details.deep>summary{list-style:none;cursor:pointer;padding:11px 15px;font-family:var(--mono);font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;font-weight:700;color:var(--faint);display:flex;align-items:center;gap:8px}
 details.deep>summary::-webkit-details-marker{display:none}
 details.deep>summary::after{content:"+";margin-left:auto;font-size:14px}
