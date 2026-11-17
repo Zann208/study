@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <script src="../shared/v3/boot.js?v=20261116-1" data-console="db"></script>
 <title>Database Systems</title>
-<meta name="description" content="Study console for Database Systems: the relational model, SQL DDL and queries, ER design, relational algebra, Datalog, indexing calculations, heuristic query optimization, transactions, users and privileges, with worked labs, a past paper, flashcards and a mock exam.">
+<meta name="description" content="Study console for Database Systems: plain-language topics from the relational model to transactions and privileges, a glossary of every term, flashcards, a topic quiz, index-calculation practice, a two-session transaction simulator, referential-action and SQL-order drills, worked labs and a past paper.">
 <meta name="theme-color" content="#0f0e0f">
 <style>
 <style>
@@ -211,14 +211,53 @@ pre.sql.ra{border-left-color:var(--vi)}
 .files a{font-family:var(--mono);font-size:13px}
 .files .sz{color:var(--faint);font-family:var(--mono);font-size:12px;white-space:nowrap}
 
+
+/* ---------- topics: course-detail block ---------- */
+details.deep{margin-top:20px;border:1px solid var(--line2);border-radius:10px;background:var(--panel2)}
+details.deep>summary{list-style:none;cursor:pointer;padding:11px 15px;font-family:var(--mono);font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;font-weight:700;color:var(--faint);display:flex;align-items:center;gap:8px}
+details.deep>summary::-webkit-details-marker{display:none}
+details.deep>summary::after{content:"+";margin-left:auto;font-size:14px}
+details.deep[open]>summary::after{content:"−"}
+details.deep[open]>summary{border-bottom:1px solid var(--line2);color:var(--ink)}
+details.deep>.deep-body{padding:4px 15px 15px}
+.lesson b:first-child{display:block;margin-bottom:5px}
+a.chip.tlink{text-transform:none;letter-spacing:.2px;font-size:12px;text-decoration:none;cursor:pointer}
+a.chip.tlink:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
+
+/* ---------- terms ---------- */
+.fld{border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-family:var(--mono);font-size:13.5px;background:var(--panel2);color:var(--ink);width:100%}
+.fld:focus{outline:1px solid var(--cy);border-color:var(--cy)}
+.flag.gen{border-color:var(--line2);color:var(--faint);background:transparent;font-weight:600}
+#termT .tterm{font-weight:700;color:var(--ink);white-space:nowrap}
+
+/* ---------- drills ---------- */
+.fc{position:relative}
+.ixrow{display:grid;grid-template-columns:28px 1fr 150px 70px;gap:10px;align-items:center;padding:9px 0;border-top:1px dashed var(--line2)}
+.ixrow:first-child{border-top:0}
+.ixrow .ixn{color:var(--faint);font-size:12px}
+.ixrow label{font-size:14.5px}
+.ixrow .ixw{grid-column:2 / -1;margin-top:2px}
+.whrow{grid-template-columns:1fr auto 90px}
+.rfgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.rfgrid .opt{margin-top:0;align-items:flex-start}
+.rfgrid table{font-size:13px}
+.btn.odbad{border-color:var(--rd);color:var(--rd);background:color-mix(in srgb,var(--rd) 10%,transparent)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+#txLog .review-item{text-align:left}
+#txLog code{font-size:12.5px}
+@media(max-width:760px){
+  .ixrow{grid-template-columns:22px 1fr;}
+  .ixrow .fld,.ixrow .ixst{grid-column:2}
+  .whrow{grid-template-columns:1fr}
+  .rfgrid{grid-template-columns:1fr}
+}
 </style></head>
 <body data-study-console="db" data-console-id="db" data-console-name="Database Systems">
 <main id="main">
-
 <!-- ============ HOME ============ -->
 <section class="tab on" id="home"><div class="wrap">
   <h1>Database Systems</h1>
-  <p class="lede">Ten topics, ten worked lab sets and a past mid-semester paper. Reference text: Elmasri &amp; Navathe, <i>Fundamentals of Database Systems</i>, 7th edition.</p>
+  <p class="lede">Ten topics explained from zero, a glossary of every term, six drills, ten worked lab sets and a past mid-semester paper. Reference text: Elmasri &amp; Navathe, <i>Fundamentals of Database Systems</i>, 7th edition.</p>
   <div class="chiprow">
     <span class="chip c1">T1–3 · Model, DDL, ER</span>
     <span class="chip c2">T4–6 · Algebra, SQL, Datalog</span>
@@ -226,43 +265,55 @@ pre.sql.ra{border-left-color:var(--vi)}
     <span class="chip c2">T9–10 · Transactions, privileges</span>
   </div>
 
+  <div class="panel pc">
+    <h3>New to databases? Use this path</h3>
+    <ol>
+      <li><a href="#/topics/t0">Topics → Start here</a>: the big picture and the library example used on every topic page.</li>
+      <li>Read each topic's plain explanation first. Open "From the course materials" only after the plain part makes sense.</li>
+      <li>When a word is new, click it under "Words to know", or search <a href="#/terms">Terms</a>.</li>
+      <li>After each topic, run <a href="#/flash">Flashcards</a> for that topic, then a short <a href="#/quiz">Quiz</a>.</li>
+      <li>Practise the hands-on drills: <a href="#/calc">Index practice</a>, <a href="#/sessions">Transaction sessions</a>, <a href="#/refact">Referential actions</a>, <a href="#/order">SQL clause order</a>.</li>
+      <li>Finish with the <a href="#/labs">Labs</a> and the <a href="#/exam">Past paper</a>.</li>
+    </ol>
+  </div>
+
   <div class="grid2">
     <div class="card">
       <span class="badge b1">Part 1</span>
       <h3 style="margin-bottom:8px">Model and design</h3>
-      <p style="font-size:14.5px">Topics 1–3. What a database is, relation states, keys and NULL, DDL with constraints and referential actions, ER diagrams with cardinality and participation.</p>
+      <p style="font-size:14.5px">Topics 1–3. What a database is, tables, keys and NULL, building tables with rules, and drawing ER diagrams.</p>
     </div>
     <div class="card">
       <span class="badge b2">Part 2</span>
       <h3 style="margin-bottom:8px">Query languages</h3>
-      <p style="font-size:14.5px">Topics 4–6. Relational algebra operations and notation, intermediate SQL (joins, grouping, subqueries, window functions), Datalog rules and recursive queries.</p>
+      <p style="font-size:14.5px">Topics 4–6. Relational algebra, SQL queries with joins and grouping, and Datalog rules with recursion.</p>
     </div>
     <div class="card">
       <span class="badge b1">Part 3</span>
       <h3 style="margin-bottom:8px">Storage and optimization</h3>
-      <p style="font-size:14.5px">Topics 7–8. Blocking factors, single-level and multilevel indexes, block-access counts, and heuristic query-tree optimization.</p>
+      <p style="font-size:14.5px">Topics 7–8. How data sits in disk blocks, how indexes cut the number of reads, and how the DBMS plans a query.</p>
     </div>
     <div class="card">
       <span class="badge gr">Part 4</span>
       <h3 style="margin-bottom:8px">Operating the database</h3>
-      <p style="font-size:14.5px">Topics 9–10. Transactions, commit and rollback, isolation of uncommitted changes, and MySQL users, roles, GRANT and REVOKE.</p>
+      <p style="font-size:14.5px">Topics 9–10. Transactions, commit and rollback, what other sessions can see, and MySQL users, roles and privileges.</p>
     </div>
   </div>
 
   <div class="panel">
     <h3>Where each topic is practised</h3>
     <div class="tscroll"><table>
-      <tr><th>Topic</th><th>Worked lab</th><th>Past paper</th></tr>
-      <tr><td class="mono">T1</td><td>Relational model review worksheet</td><td>Q1, Q2</td></tr>
-      <tr><td class="mono">T2</td><td>School database DDL</td><td>Q1</td></tr>
-      <tr><td class="mono">T3</td><td>Inventory ER, Vote ER</td><td>—</td></tr>
-      <tr><td class="mono">T4</td><td>Relational algebra answer sheet</td><td>Q4</td></tr>
-      <tr><td class="mono">T5</td><td>Intermediate SQL parts 1 and 2</td><td>Q3</td></tr>
-      <tr><td class="mono">T6</td><td>Datalog section of the review worksheet</td><td>Q4, Q5</td></tr>
-      <tr><td class="mono">T7</td><td>Index calculation</td><td>Q6</td></tr>
-      <tr><td class="mono">T8</td><td>Heuristic optimization query trees</td><td>Q7, Q8</td></tr>
-      <tr><td class="mono">T9</td><td>Transaction lab</td><td>—</td></tr>
-      <tr><td class="mono">T10</td><td>Users, privileges and roles</td><td>—</td></tr>
+      <tr><th>Topic</th><th>Drill</th><th>Worked lab</th><th>Past paper</th></tr>
+      <tr><td class="mono">T1</td><td>Flashcards, quiz</td><td>Relational model review worksheet</td><td>Q1, Q2</td></tr>
+      <tr><td class="mono">T2</td><td>Referential actions</td><td>School database DDL</td><td>Q1</td></tr>
+      <tr><td class="mono">T3</td><td>Flashcards, quiz</td><td>Inventory ER, Vote ER</td><td>—</td></tr>
+      <tr><td class="mono">T4</td><td>Flashcards, quiz</td><td>Relational algebra answer sheet</td><td>Q4</td></tr>
+      <tr><td class="mono">T5</td><td>SQL clause order</td><td>Intermediate SQL parts 1 and 2</td><td>Q3</td></tr>
+      <tr><td class="mono">T6</td><td>Flashcards, quiz</td><td>Datalog section of the review worksheet</td><td>Q4, Q5</td></tr>
+      <tr><td class="mono">T7</td><td>Index practice</td><td>Index calculation</td><td>Q6</td></tr>
+      <tr><td class="mono">T8</td><td>Flashcards, quiz</td><td>Heuristic optimization query trees</td><td>Q7, Q8</td></tr>
+      <tr><td class="mono">T9</td><td>Transaction sessions</td><td>Transaction lab</td><td>—</td></tr>
+      <tr><td class="mono">T10</td><td>Flashcards, quiz</td><td>Users, privileges and roles</td><td>—</td></tr>
     </table></div>
     <p class="sub2">Topics 9 and 10 come from labs that follow the mid-semester paper; the paper does not cover them.</p>
   </div>
@@ -271,12 +322,69 @@ pre.sql.ra{border-left-color:var(--vi)}
 <!-- ============ TOPICS ============ -->
 <section class="tab" id="topics"><div class="wrap">
   <h1>Topics</h1>
-  <p class="lede">Each topic restates only what the source material says. Where the material is thin, the gap is marked.</p>
+  <p class="lede">Each topic starts with a plain explanation built on one small library example. The course-specific detail (lab schemas, worked answers, flags) sits in a closed block at the end of each topic.</p>
+  <details class="note" open id="t0">
+    <summary><span class="num n1">0</span> Start here: the big picture</summary>
+    <div class="body">
+<div class="lesson"><b>In one line</b>A database is an organised, shared store of facts, and the DBMS is the program that looks after it for you.</div>
+<p>Think of a school library. It has members, books, and a record of who borrowed what. You could keep all of that in one spreadsheet, but it breaks down fast: two librarians edit the same row at once, someone types a member number that does not exist, a power cut loses half an edit, and anyone who opens the file can change everything.</p>
+<p>A <b>DBMS</b> (database management system) solves exactly those problems. It stores the data, checks your rules every time something changes, lets many people work at the same time safely, finds things quickly even in millions of rows, and controls who is allowed to do what.</p>
+<h4>How the ten topics fit together</h4>
+<div class="tscroll"><table>
+  <tr><th>Step</th><th>Question it answers</th><th>Topic</th></tr>
+  <tr><td>Understand</td><td>How does a relational database hold data at all?</td><td class="mono">T1</td></tr>
+  <tr><td>Design</td><td>What things and links does my system need? (draw it first)</td><td class="mono">T3</td></tr>
+  <tr><td>Build</td><td>How do I create the tables and their rules?</td><td class="mono">T2</td></tr>
+  <tr><td>Ask</td><td>How do I get answers out? (three ways of writing a question)</td><td class="mono">T4 · T5 · T6</td></tr>
+  <tr><td>Store</td><td>Where does data sit on disk, and how is it found fast?</td><td class="mono">T7</td></tr>
+  <tr><td>Plan</td><td>How does the DBMS choose the cheapest way to answer?</td><td class="mono">T8</td></tr>
+  <tr><td>Change safely</td><td>What happens when many people change data at once?</td><td class="mono">T9</td></tr>
+  <tr><td>Protect</td><td>Who is allowed to read or change what?</td><td class="mono">T10</td></tr>
+</table></div>
+<p class="sub2">The topics are numbered in the order the course materials use, which builds tables (T2) before drawing them (T3). The table above shows the order a real project follows.</p>
+<h4>The example used on every Topics page</h4>
+<div class="tscroll"><table>
+  <tr><th>Member</th><th>Book</th><th>Loan</th></tr>
+  <tr><td><code>MemberID</code>, <code>Name</code>, <code>Phone</code></td><td><code>BookID</code>, <code>Title</code>, <code>Author</code></td><td><code>LoanID</code>, <code>MemberID</code>, <code>BookID</code>, <code>DueDate</code></td></tr>
+</table></div>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Data">Data</a><a class="chip c2 tlink" href="#/terms" data-term="Database">Database</a><a class="chip c1 tlink" href="#/terms" data-term="DBMS">DBMS</a><a class="chip c2 tlink" href="#/terms" data-term="RDBMS">RDBMS</a><a class="chip c1 tlink" href="#/terms" data-term="Miniworld">Miniworld</a><a class="chip c2 tlink" href="#/terms" data-term="Query">Query</a><a class="chip c1 tlink" href="#/terms" data-term="Transaction">Transaction</a><a class="chip c2 tlink" href="#/terms" data-term="MySQL">MySQL</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>A DBMS stores data, enforces rules, handles many users at once, finds data fast and controls access.</li><li>The ten topics follow one path: understand, design, build, ask, store, plan, change safely, protect.</li></ul></div>
 
-  <details class="note" open id="t1">
+    </div>
+  </details>
+
+  <details class="note" id="t1">
     <summary><span class="num n1">1</span> Databases and the relational model</summary>
     <div class="body">
-      <h4>Definitions</h4>
+<div class="lesson"><b>In one line</b>In a relational database, everything is stored in tables, and tables are linked by matching values.</div>
+<p>A <b>table</b> (formal name: <b>relation</b>) is a grid. Each <b>row</b> (<b>tuple</b>) is one thing, such as one member. Each <b>column</b> (<b>attribute</b>) is one property of that thing, such as the member's name. The set of values a column is allowed to hold is its <b>domain</b>, for example "whole numbers" or "dates".</p>
+<div class="tscroll"><table>
+  <tr><th>MemberID</th><th>Name</th><th>Phone</th></tr>
+  <tr><td>1</td><td>Ana</td><td>081-111</td></tr>
+  <tr><td>2</td><td>Ben</td><td><i>NULL</i></td></tr>
+  <tr><td>3</td><td>Chai</td><td>089-333</td></tr>
+</table></div>
+<h4>Blueprint vs contents</h4>
+<p>The <b>schema</b> is the blueprint: the table's name and its columns, <code>Member(MemberID, Name, Phone)</code>. It rarely changes. The <b>state</b> is the rows that are inside the table right now. It changes every time someone adds, edits or deletes a row. The order of the rows does not matter: shuffle them and it is still the same table.</p>
+<h4>Keys: telling rows apart</h4>
+<ul class="clean">
+  <li>A <b>superkey</b> is any set of columns whose values are never repeated, so it always picks out exactly one row. <code>{MemberID, Name}</code> is a superkey.</li>
+  <li>A <b>candidate key</b> is a superkey with nothing extra in it: remove any column and it stops being unique. <code>{MemberID}</code> is one.</li>
+  <li>The <b>primary key (PK)</b> is the candidate key you choose as the official ID. It may not be NULL.</li>
+  <li>A <b>foreign key (FK)</b> is a column in one table that holds a key value from another table. <code>Loan.MemberID</code> points at <code>Member.MemberID</code>. That pointing is how tables are linked.</li>
+</ul>
+<h4>NULL means "no value here"</h4>
+<p>Ben's phone is NULL. That could mean the phone number is unknown, that he has no phone (does not apply), or that it simply has not been entered yet. NULL is not zero and not an empty string.</p>
+<h4>The three rules the DBMS guards</h4>
+<div class="tscroll"><table>
+  <tr><th>Rule</th><th>Plain meaning</th></tr>
+  <tr><td>Key constraint</td><td>No two rows may share the same key value.</td></tr>
+  <tr><td>Entity integrity</td><td>A primary key value can never be NULL.</td></tr>
+  <tr><td>Referential integrity</td><td>A foreign key must point at a row that really exists, or be NULL.</td></tr>
+</table></div>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Relation">Relation</a><a class="chip c2 tlink" href="#/terms" data-term="Tuple">Tuple</a><a class="chip c1 tlink" href="#/terms" data-term="Attribute">Attribute</a><a class="chip c2 tlink" href="#/terms" data-term="Domain">Domain</a><a class="chip c1 tlink" href="#/terms" data-term="Relation schema">Relation schema</a><a class="chip c2 tlink" href="#/terms" data-term="Relation state">Relation state</a><a class="chip c1 tlink" href="#/terms" data-term="Superkey">Superkey</a><a class="chip c2 tlink" href="#/terms" data-term="Candidate key">Candidate key</a><a class="chip c1 tlink" href="#/terms" data-term="Primary key">Primary key</a><a class="chip c2 tlink" href="#/terms" data-term="Foreign key">Foreign key</a><a class="chip c1 tlink" href="#/terms" data-term="NULL">NULL</a><a class="chip c2 tlink" href="#/terms" data-term="Entity integrity">Entity integrity</a><a class="chip c1 tlink" href="#/terms" data-term="Referential integrity">Referential integrity</a><a class="chip c2 tlink" href="#/terms" data-term="Key constraint">Key constraint</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Table = relation, row = tuple, column = attribute.</li><li>A primary key identifies each row and is never NULL.</li><li>A foreign key points at another table's key, and may be NULL.</li></ul></div>
+<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>Definitions</h4>
       <ul class="clean">
         <li>A <b>database</b> is a collection of related data.</li>
         <li><b>Data</b> are known facts that can be recorded and have implicit meaning.</li>
@@ -311,14 +419,52 @@ pre.sql.ra{border-left-color:var(--vi)}
       <h4>Explaining a referential-action constraint</h4>
       <div class="formula">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)<br>ON DELETE SET DEFAULT ON UPDATE CASCADE;</div>
       <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically. <span class="flag">Past paper Q1 — no worked answer in the materials; see Topic 2 for the referential actions</span></p>
-      <div class="tip t-info"><b>Source</b>Relational model review worksheet (questions and handwritten answers); past paper Q1 and Q2.</div>
+      <div class="tip t-info"><b>Source</b>Relational model review worksheet (questions and handwritten answers); past paper Q1 and Q2.</div></div></details>
     </div>
   </details>
 
   <details class="note" id="t2">
     <summary><span class="num n1">2</span> SQL DDL: tables, constraints and referential actions</summary>
     <div class="body">
-      <h4>Creating a schema and a table</h4>
+<div class="lesson"><b>In one line</b>DDL is the part of SQL that builds the empty tables and writes the rules the data must follow.</div>
+<p>SQL is the language you type to talk to a relational DBMS. Its commands fall into families:</p>
+<div class="tscroll"><table>
+  <tr><th>Family</th><th>Stands for</th><th>What it does</th><th>Commands</th></tr>
+  <tr><td class="mono">DDL</td><td>Data Definition Language</td><td>Builds and changes structure</td><td><code>CREATE</code> <code>ALTER</code> <code>DROP</code></td></tr>
+  <tr><td class="mono">DML</td><td>Data Manipulation Language</td><td>Reads and changes rows</td><td><code>SELECT</code> <code>INSERT</code> <code>UPDATE</code> <code>DELETE</code></td></tr>
+  <tr><td class="mono">DCL</td><td>Data Control Language</td><td>Gives and removes permissions</td><td><code>GRANT</code> <code>REVOKE</code></td></tr>
+  <tr><td class="mono">TCL</td><td>Transaction Control Language</td><td>Saves or undoes a group of changes</td><td><code>COMMIT</code> <code>ROLLBACK</code></td></tr>
+</table></div>
+<h4>A table with rules</h4>
+<pre class="sql">CREATE TABLE Member (
+    MemberID INT PRIMARY KEY,          -- the official ID
+    Name     VARCHAR(50) NOT NULL,     -- must be filled in
+    Phone    VARCHAR(15) UNIQUE,       -- no two members share a phone
+    Age      INT CHECK (Age >= 7),     -- any rule you can write as a condition
+    Status   VARCHAR(10) DEFAULT 'active'   -- used when nothing is given
+);</pre>
+<p>Every rule after a column is a <b>constraint</b>. Once it is written, the DBMS refuses any change that would break it. You do not have to remember to check; the database checks for you.</p>
+<h4>Linking two tables</h4>
+<pre class="sql">CREATE TABLE Loan (
+    LoanID   INT PRIMARY KEY,
+    MemberID INT,
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);</pre>
+<h4>What happens to the loans when a member changes?</h4>
+<p>The words after <code>ON DELETE</code> and <code>ON UPDATE</code> are <b>referential actions</b>. They answer: "if the member row is deleted, or its ID changes, what should happen to the loan rows that point at it?"</p>
+<div class="tscroll"><table>
+  <tr><th>Action</th><th>Think of it as</th><th>Result for the loan rows</th></tr>
+  <tr><td class="mono">CASCADE</td><td>Follow the parent</td><td>Deleted too, or their MemberID changes to the new value</td></tr>
+  <tr><td class="mono">SET NULL</td><td>Unlink</td><td>MemberID becomes NULL</td></tr>
+  <tr><td class="mono">SET DEFAULT</td><td>Re-link to a fallback</td><td>MemberID becomes the column's DEFAULT value</td></tr>
+  <tr><td class="mono">RESTRICT / NO ACTION</td><td>Refuse</td><td>The delete or update of the member is rejected; nothing changes</td></tr>
+</table></div>
+<p class="sub2">If you write no action, MySQL uses NO ACTION, which in MySQL behaves the same as RESTRICT.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="SQL">SQL</a><a class="chip c2 tlink" href="#/terms" data-term="DDL">DDL</a><a class="chip c1 tlink" href="#/terms" data-term="DML">DML</a><a class="chip c2 tlink" href="#/terms" data-term="DCL">DCL</a><a class="chip c1 tlink" href="#/terms" data-term="TCL">TCL</a><a class="chip c2 tlink" href="#/terms" data-term="CREATE TABLE">CREATE TABLE</a><a class="chip c1 tlink" href="#/terms" data-term="ALTER TABLE">ALTER TABLE</a><a class="chip c2 tlink" href="#/terms" data-term="NOT NULL">NOT NULL</a><a class="chip c1 tlink" href="#/terms" data-term="UNIQUE">UNIQUE</a><a class="chip c2 tlink" href="#/terms" data-term="DEFAULT">DEFAULT</a><a class="chip c1 tlink" href="#/terms" data-term="CHECK">CHECK</a><a class="chip c2 tlink" href="#/terms" data-term="REFERENCES">REFERENCES</a><a class="chip c1 tlink" href="#/terms" data-term="Referential action">Referential action</a><a class="chip c2 tlink" href="#/terms" data-term="CASCADE">CASCADE</a><a class="chip c1 tlink" href="#/terms" data-term="SET NULL">SET NULL</a><a class="chip c2 tlink" href="#/terms" data-term="SET DEFAULT">SET DEFAULT</a><a class="chip c1 tlink" href="#/terms" data-term="RESTRICT">RESTRICT</a><a class="chip c2 tlink" href="#/terms" data-term="NO ACTION">NO ACTION</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>DDL builds structure; constraints are rules the DBMS checks for you.</li><li>CASCADE follows, SET NULL unlinks, SET DEFAULT relinks, RESTRICT refuses.</li><li>In MySQL, no action written means RESTRICT.</li></ul></div>
+<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>Creating a schema and a table</h4>
       <pre class="sql">CREATE DATABASE SCHOOL;
 USE SCHOOL;
 
@@ -356,15 +502,38 @@ ADD CONSTRAINT FK_Advisor
 FOREIGN KEY (AdvisorID) REFERENCES Course(Instructor)
 ON UPDATE CASCADE
 ON DELETE SET NULL;</pre>
-      <div class="tip t-warn"><b>Watch</b>Adding a NOT NULL column to a table that already has rows, and a foreign key that references a non-key column, are both taken directly from the worksheet's handwritten answer. The materials do not discuss whether a DBMS will accept them.</div>
-      <div class="tip t-info"><b>Source</b>School database DDL practice (lab answers and requirements text); relational model review worksheet question 2.</div>
+      <div class="tip t-warn"><b>Will MySQL accept this?</b>Not as written. MySQL rejects <code>SET NULL</code> on a column declared <code>NOT NULL</code>, so the worksheet's <code>AdvisorID … NOT NULL</code> with <code>ON DELETE SET NULL</code> fails; drop the NOT NULL. MySQL also requires the referenced column to be indexed, ideally the parent's primary key. The DDL lab's <code>ON DELETE SET DEFAULT</code> is standard SQL, but MySQL's InnoDB engine rejects it; it runs on systems such as PostgreSQL. These notes come from the MySQL reference manual, not from the course files.</div>
+      <div class="tip t-info"><b>Source</b>School database DDL practice (lab answers and requirements text); relational model review worksheet question 2.</div></div></details>
     </div>
   </details>
 
   <details class="note" id="t3">
     <summary><span class="num n1">3</span> ER modelling: entities, cardinality and participation</summary>
     <div class="body">
-      <h4>Reading the notation</h4>
+<div class="lesson"><b>In one line</b>An ER diagram is a drawing of your data, made before you build any tables.</div>
+<p>Before writing <code>CREATE TABLE</code>, you sketch what the system needs to remember. ER stands for <b>Entity–Relationship</b>.</p>
+<div class="tscroll"><table>
+  <tr><th>Piece</th><th>Shape</th><th>Meaning</th><th>Library example</th></tr>
+  <tr><td>Entity type</td><td>Rectangle</td><td>A kind of thing you store</td><td>Member, Book</td></tr>
+  <tr><td>Attribute</td><td>Oval</td><td>A property of that thing</td><td>Name, Title</td></tr>
+  <tr><td>Key attribute</td><td>Oval, name underlined</td><td>The property that identifies each one</td><td><u>MemberID</u></td></tr>
+  <tr><td>Multivalued attribute</td><td>Double oval</td><td>Can hold several values for one thing</td><td>A member's phone numbers</td></tr>
+  <tr><td>Relationship type</td><td>Diamond</td><td>How things are connected</td><td>Member <i>borrows</i> Book</td></tr>
+</table></div>
+<h4>Cardinality: how many?</h4>
+<p>On each side of a diamond you write 1, N or M.</p>
+<ul class="clean">
+  <li><b>1 : 1</b> — one on each side. One member has one library card.</li>
+  <li><b>1 : N</b> — one on one side, many on the other. One branch holds many books; each book is in one branch.</li>
+  <li><b>M : N</b> — many on both sides. A member borrows many books, and a book is borrowed by many members over time.</li>
+</ul>
+<h4>Participation: must or may?</h4>
+<p>A <b>double line</b> from an entity to the diamond means <b>total</b> participation: every one of them must take part. A <b>single line</b> means <b>partial</b>: some may not. Every loan must belong to a member (total), but a member does not have to have borrowed anything (partial).</p>
+<h4>Attributes on a relationship</h4>
+<p>Some facts belong to the link, not to either thing. The due date is not a property of the member or of the book; it is a property of one borrowing. So <code>DueDate</code> hangs off the <i>borrows</i> diamond.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="ER model">ER model</a><a class="chip c2 tlink" href="#/terms" data-term="ERD">ERD</a><a class="chip c1 tlink" href="#/terms" data-term="Entity type">Entity type</a><a class="chip c2 tlink" href="#/terms" data-term="Key attribute">Key attribute</a><a class="chip c1 tlink" href="#/terms" data-term="Multivalued attribute">Multivalued attribute</a><a class="chip c2 tlink" href="#/terms" data-term="Relationship type">Relationship type</a><a class="chip c1 tlink" href="#/terms" data-term="Cardinality ratio">Cardinality ratio</a><a class="chip c2 tlink" href="#/terms" data-term="1 : N">1 : N</a><a class="chip c1 tlink" href="#/terms" data-term="M : N">M : N</a><a class="chip c2 tlink" href="#/terms" data-term="Total participation">Total participation</a><a class="chip c1 tlink" href="#/terms" data-term="Partial participation">Partial participation</a><a class="chip c2 tlink" href="#/terms" data-term="Weak entity">Weak entity</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Rectangle = entity type, oval = attribute, diamond = relationship.</li><li>1:1, 1:N, M:N say how many; double line = must, single line = may.</li><li>A fact about the link itself goes on the diamond.</li></ul></div>
+<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>Reading the notation</h4>
       <ul class="clean">
         <li>Rectangles are <b>entity types</b>; ovals are <b>attributes</b>; the key attribute is underlined; diamonds are <b>relationship types</b>.</li>
         <li>A double-outlined attribute oval marks a <b>multivalued attribute</b> (the inventory diagram's Price_change, which holds the price history with Price and Datetime).</li>
@@ -390,14 +559,34 @@ ON DELETE SET NULL;</pre>
         <li>Enumerated domains appear in the requirements, not the diagram: Region, Party, Passed_or_failed and Vote each have a fixed set of values.</li>
       </ul>
       <div class="tip t-warn"><b>Thin</b>The materials contain two worked diagrams and the cardinality explanations above. Weak entities, specialization and the ER-to-relational mapping steps are not covered anywhere in the attached files.</div>
-      <div class="tip t-info"><b>Source</b>Inventory basic ER worked answer; Vote ER worked answer.</div>
+      <div class="tip t-info"><b>Source</b>Inventory basic ER worked answer; Vote ER worked answer.</div></div></details>
     </div>
   </details>
 
   <details class="note" id="t4">
     <summary><span class="num n1">4</span> Relational algebra</summary>
     <div class="body">
-      <h4>What it is</h4>
+<div class="lesson"><b>In one line</b>Relational algebra is a small set of operations that take tables in and give a table out, so they can be chained into a question.</div>
+<p>Before learning SQL syntax, it helps to see the handful of moves every query is built from. Because each move returns a table, the result of one can be fed straight into the next, like steps in a recipe. It is called <b>procedural</b> because you spell out the steps.</p>
+<div class="tscroll"><table>
+  <tr><th>Symbol</th><th>Name</th><th>What it does</th><th>Library example</th></tr>
+  <tr><td class="ra-sym">σ</td><td>Select</td><td>Keeps only the <b>rows</b> that pass a test (a filter)</td><td><span class="ra-sym">σ<sub>Age &gt; 18</sub>(Member)</span></td></tr>
+  <tr><td class="ra-sym">π</td><td>Project</td><td>Keeps only some <b>columns</b>; repeated rows are dropped</td><td><span class="ra-sym">π<sub>Name</sub>(Member)</span></td></tr>
+  <tr><td class="ra-sym">×</td><td>Cartesian product</td><td>Pairs every row of one table with every row of the other</td><td><span class="ra-sym">Member × Book</span></td></tr>
+  <tr><td class="ra-sym">⋈</td><td>Join</td><td>Pairs only the rows that match a condition</td><td><span class="ra-sym">Member ⋈<sub>Member.MemberID = Loan.MemberID</sub> Loan</span></td></tr>
+  <tr><td class="ra-sym">∪ ∩ −</td><td>Union, intersection, difference</td><td>Set operations on two tables with the same columns</td><td>Members in branch A <span class="ra-sym">∪</span> members in branch B</td></tr>
+  <tr><td class="ra-sym">ρ</td><td>Rename</td><td>Gives a table or column a new name</td><td><span class="ra-sym">ρ<sub>M</sub>(Member)</span></td></tr>
+</table></div>
+<h4>Reading a chained expression</h4>
+<p>Read from the inside out. "Names of members who borrowed book 7":</p>
+<pre class="sql ra">π Name ( σ BookID = 7 ( Member ⋈ Loan ) )
+         └ 1. join members to their loans
+         └ 2. keep only loans of book 7
+└ 3. keep only the Name column</pre>
+<p class="sub2">Select (σ) works on rows and project (π) works on columns. Mixing them up is the most common beginner mistake.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="RA">RA</a><a class="chip c2 tlink" href="#/terms" data-term="Procedural language">Procedural language</a><a class="chip c1 tlink" href="#/terms" data-term="σ">σ</a><a class="chip c2 tlink" href="#/terms" data-term="π">π</a><a class="chip c1 tlink" href="#/terms" data-term="×">×</a><a class="chip c2 tlink" href="#/terms" data-term="⋈">⋈</a><a class="chip c1 tlink" href="#/terms" data-term="Equijoin">Equijoin</a><a class="chip c2 tlink" href="#/terms" data-term="∪">∪</a><a class="chip c1 tlink" href="#/terms" data-term="−">−</a><a class="chip c2 tlink" href="#/terms" data-term="∩">∩</a><a class="chip c1 tlink" href="#/terms" data-term="ρ">ρ</a><a class="chip c2 tlink" href="#/terms" data-term="Union compatible">Union compatible</a><a class="chip c1 tlink" href="#/terms" data-term="Outer join">Outer join</a><a class="chip c2 tlink" href="#/terms" data-term="÷">÷</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Every operation takes tables in and returns a table.</li><li>σ filters rows, π picks columns (and drops duplicates).</li><li>Read nested expressions from the inside out.</li></ul></div>
+<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>What it is</h4>
       <p>A <b>procedural query language</b>: a set of operations (algebraic operations) that provides the theoretical foundation for relational queries. Each operation takes one or two relations and outputs a table.</p>
       <div class="tscroll"><table>
         <tr><th>Fundamental</th><th>Symbol</th><th>Additional</th><th>Symbol</th></tr>
@@ -436,14 +625,43 @@ EMPLOYEE ⋈ Dno = Dnumber (π Dnumber, Dname (DEPARTMENT))</pre>
         <tr><td class="ra-sym">π</td><td><code>pi_(...)</code></td><td><code>pi_(name, age)(employee)</code></td></tr>
         <tr><td class="ra-sym">⋈</td><td><code>join_(...)</code></td><td><code>join_(employee, department)</code></td></tr>
       </table></div>
-      <div class="tip t-info"><b>Source</b>Handwritten relational algebra notes; relational algebra answer sheet; relational algebra section of the review worksheet.</div>
+      <div class="tip t-info"><b>Source</b>Handwritten relational algebra notes; relational algebra answer sheet; relational algebra section of the review worksheet.</div></div></details>
     </div>
   </details>
 
   <details class="note" id="t5">
     <summary><span class="num n1">5</span> Intermediate SQL</summary>
     <div class="body">
-      <p>The two intermediate labs run against a sales database (Customer, CustomerAddress, Address, Product, ProductCategory, SalesOrderHeader, SalesOrderDetail). Each pattern below is lifted from a lab answer.</p>
+<div class="lesson"><b>In one line</b>SQL is the language you actually type to ask questions; every SELECT is a recipe made of a few clauses.</div>
+<h4>The shape of a question</h4>
+<pre class="sql">SELECT   m.Name, COUNT(*) AS Loans     -- 5. which columns to show
+FROM     Member m                       -- 1. start from these tables
+JOIN     Loan l ON l.MemberID = m.MemberID
+WHERE    l.DueDate >= '2026-01-01'      -- 2. throw away rows you do not want
+GROUP BY m.Name                         -- 3. put the remaining rows into buckets
+HAVING   COUNT(*) > 2                   -- 4. throw away buckets you do not want
+ORDER BY Loans DESC                     -- 6. sort the result
+LIMIT    5;                             -- 7. keep only the first few</pre>
+<p>You <b>write</b> the clauses in the order SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT. The DBMS <b>thinks</b> in the order shown by the numbers: it needs the tables first, then filters rows, groups them, filters groups, and only then picks the columns to show.</p>
+<h4>The pieces in plain words</h4>
+<div class="tscroll"><table>
+  <tr><th>Piece</th><th>Plain meaning</th><th>Same idea in algebra</th></tr>
+  <tr><td><code>WHERE</code></td><td>Filter single rows</td><td class="ra-sym">σ</td></tr>
+  <tr><td><code>SELECT</code> list</td><td>Choose columns</td><td class="ra-sym">π</td></tr>
+  <tr><td><code>JOIN … ON</code></td><td>Combine matching rows from two tables</td><td class="ra-sym">⋈</td></tr>
+  <tr><td><code>COUNT SUM AVG MIN MAX</code></td><td>Aggregate functions: turn many values into one</td><td>—</td></tr>
+  <tr><td><code>GROUP BY</code></td><td>Make one bucket per distinct value; aggregates run per bucket</td><td>—</td></tr>
+  <tr><td><code>HAVING</code></td><td>Filter whole buckets, usually by an aggregate</td><td>—</td></tr>
+  <tr><td><code>DISTINCT</code></td><td>Remove repeated result rows</td><td>—</td></tr>
+  <tr><td>Subquery</td><td>A whole SELECT used inside another one</td><td>—</td></tr>
+</table></div>
+<h4>WHERE or HAVING?</h4>
+<p>Ask: "can I test this on one row by itself?" If yes, it goes in <code>WHERE</code> (<code>DueDate &gt;= …</code>). If it needs a whole group to answer (<code>COUNT(*) &gt; 2</code>), it goes in <code>HAVING</code>.</p>
+<h4>Window functions</h4>
+<p><code>COUNT(*) OVER (PARTITION BY MemberID)</code> also counts per group, but unlike GROUP BY it keeps every row and writes the group's count beside each one.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="SELECT">SELECT</a><a class="chip c2 tlink" href="#/terms" data-term="FROM">FROM</a><a class="chip c1 tlink" href="#/terms" data-term="WHERE">WHERE</a><a class="chip c2 tlink" href="#/terms" data-term="JOIN … ON">JOIN … ON</a><a class="chip c1 tlink" href="#/terms" data-term="Aggregate function">Aggregate function</a><a class="chip c2 tlink" href="#/terms" data-term="GROUP BY">GROUP BY</a><a class="chip c1 tlink" href="#/terms" data-term="HAVING">HAVING</a><a class="chip c2 tlink" href="#/terms" data-term="ORDER BY">ORDER BY</a><a class="chip c1 tlink" href="#/terms" data-term="LIMIT">LIMIT</a><a class="chip c2 tlink" href="#/terms" data-term="DISTINCT">DISTINCT</a><a class="chip c1 tlink" href="#/terms" data-term="Subquery">Subquery</a><a class="chip c2 tlink" href="#/terms" data-term="Self-join">Self-join</a><a class="chip c1 tlink" href="#/terms" data-term="IS NULL">IS NULL</a><a class="chip c2 tlink" href="#/terms" data-term="LIKE">LIKE</a><a class="chip c1 tlink" href="#/terms" data-term="Window function">Window function</a><a class="chip c2 tlink" href="#/terms" data-term="Query semantics">Query semantics</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Write: SELECT FROM WHERE GROUP BY HAVING ORDER BY LIMIT.</li><li>Run: FROM WHERE GROUP BY HAVING SELECT ORDER BY LIMIT.</li><li>One-row condition goes in WHERE; group condition goes in HAVING.</li></ul></div>
+<details class="deep"><summary>From the course materials</summary><div class="deep-body"><p>The two intermediate labs run against a sales database (Customer, CustomerAddress, Address, Product, ProductCategory, SalesOrderHeader, SalesOrderDetail). Each pattern below is lifted from a lab answer.</p>
       <h4>Grouping and HAVING</h4>
       <pre class="sql">SELECT AddressType, COUNT(AddressType)
 FROM CustomerAddress
@@ -497,14 +715,30 @@ GROUP BY parent.ProductCategoryID, parent.Name;</pre>
       <h4>Query semantics</h4>
       <p>Several questions ask for "a short sentence that describes the meaning of the query". The lab answers read as: <i>find the average total due for each customer, highest to lowest</i>; <i>retrieve the most expensive price in each product category</i>. The past paper asks the same for a GROUP BY … HAVING query on EMPLOYEE.</p>
       <div class="tip t-warn"><b>Inconsistent</b>Lab 2 questions 7 and 8 show the same <code>SELECT * FROM Product … LIKE '%Helmet%' …</code> query twice, with answers ("summation of the price", "products ordered at least once") that do not match it. Treat those two answers as unreliable.</div>
-      <div class="tip t-info"><b>Source</b>Intermediate SQL answers, parts 1 and 2; past paper Q3.</div>
+      <div class="tip t-info"><b>Source</b>Intermediate SQL answers, parts 1 and 2; past paper Q3.</div></div></details>
     </div>
   </details>
 
   <details class="note" id="t6">
     <summary><span class="num n2">6</span> Datalog and recursive queries</summary>
     <div class="body">
-      <h4>Datalog rules</h4>
+<div class="lesson"><b>In one line</b>Datalog writes a query as rules of the form "this is true if all of that is true".</div>
+<p>A rule has a <b>head</b> on the left and a <b>body</b> on the right of the arrow. The head is a result row; it is produced whenever every condition in the body can be matched.</p>
+<pre class="sql">late(n) <- Member(m, n, _) AND Loan(_, m, _, d) AND d < '2026-01-01'</pre>
+<ul class="clean">
+  <li>Read it as: "<i>n</i> is in <b>late</b> if there is a member with ID <i>m</i> and name <i>n</i>, and a loan for member <i>m</i> with due date <i>d</i>, and <i>d</i> is before 1 January 2026."</li>
+  <li>Columns are matched by <b>position</b>, not by name. <code>Member(m, n, _)</code> means first column m, second column n.</li>
+  <li><code>_</code> means "there is a value here but I do not care what it is".</li>
+  <li>Using the same letter twice (<i>m</i> in Member and in Loan) means the values must be equal. That is how Datalog joins.</li>
+</ul>
+<h4>Safe rules</h4>
+<p>A rule is <b>safe</b> when every variable in the head, and every variable used in a <code>NOT</code> or in a comparison, also appears in a normal (non-negated) table in the body. If a variable is not tied to a real table, it could stand for any value at all, and the answer would be infinite.</p>
+<h4>Recursion</h4>
+<p>A rule may use its own name in its body. That lets you follow a chain of any length: a category, its parent, the parent's parent, and so on. SQL does the same with <code>WITH RECURSIVE</code>: a <b>base case</b> gives the starting rows, a <b>recursive case</b> adds the next step from the rows found so far, and it repeats until no new rows appear.</p>
+<p class="sub2">The safety rule is standard Datalog theory; the course materials ask why three rules are unsafe but do not include the answer.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Datalog">Datalog</a><a class="chip c2 tlink" href="#/terms" data-term="Rule">Rule</a><a class="chip c1 tlink" href="#/terms" data-term="Head">Head</a><a class="chip c2 tlink" href="#/terms" data-term="Body">Body</a><a class="chip c1 tlink" href="#/terms" data-term="Anonymous variable">Anonymous variable</a><a class="chip c2 tlink" href="#/terms" data-term="Safe rule">Safe rule</a><a class="chip c1 tlink" href="#/terms" data-term="Recursive query">Recursive query</a><a class="chip c2 tlink" href="#/terms" data-term="WITH RECURSIVE">WITH RECURSIVE</a><a class="chip c1 tlink" href="#/terms" data-term="Base case">Base case</a><a class="chip c2 tlink" href="#/terms" data-term="Recursive case">Recursive case</a><a class="chip c1 tlink" href="#/terms" data-term="CTE">CTE</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>head &lt;- body: the head is produced when the whole body matches.</li><li>Same variable twice = a join; _ = do not care.</li><li>Safe: every head, NOT and comparison variable appears in a positive table.</li></ul></div>
+<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>Datalog rules</h4>
       <p>A rule has a head and a body: <code>ans(x, y) &lt;- R(x, y, z) AND z &gt; 20.0</code>. Underscores are attributes that are matched but not used. Translating a rule means producing (1) relational algebra, (2) SQL and (3) an English sentence.</p>
       <pre class="sql">ans(x,y) <- WORKS_ON(x,y,z) AND z > 20.0        -- WORKS_ON(Essn, Pno, Hours)
 
@@ -524,14 +758,42 @@ GROUP BY parent.ProductCategoryID, parent.Name;</pre>
   WHERE cat.id = p.parent_id )
 SELECT id, name, relative_depth FROM parents;</pre>
       <p>On the worksheet's category tree (Root A → Child A1 → Grandchild A1b) the query walks from the named node up to the root, decreasing relative_depth by one per step. The worksheet asks for the result rows, the base and recursive cases, the meaning of the query, the purpose of the final SELECT, and a Datalog expression equivalent to it. <span class="flag">Only the sketch of the tree is answered by hand; the written answers are not in the file</span></p>
-      <div class="tip t-info"><b>Source</b>Datalog section of the review worksheet; relational algebra answer sheet Q5; past paper Q4 and Q5.</div>
+      <div class="tip t-info"><b>Source</b>Datalog section of the review worksheet; relational algebra answer sheet Q5; past paper Q4 and Q5.</div></div></details>
     </div>
   </details>
 
   <details class="note" id="t7">
     <summary><span class="num n2">7</span> File organization and indexing calculations</summary>
     <div class="body">
-      <p>One scenario is reused everywhere: a file of <b>r = 30,000</b> fixed-length EMPLOYEE records, block pointer <b>P = 6</b> bytes, record pointer <b>P<sub>R</sub> = 7</b> bytes. The worked answer sheet uses <b>B = 512</b> bytes and a 10-byte Phone field; the review worksheet uses B = 512 with a 9-byte Phone; the past paper uses <b>B = 1024</b> with a 9-byte Phone. Always recompute R from the field list you are given.</p>
+<div class="lesson"><b>In one line</b>Data sits on disk in fixed-size blocks, reading a block is the slow part, and an index exists to read fewer blocks.</div>
+<p>The disk does not hand over one row at a time. It reads a whole <b>block</b> (also called a page), for example 512 or 4096 bytes. Reading a block takes far longer than any calculation done on it, so the cost of a search is measured in <b>block accesses</b>.</p>
+<h4>Fitting rows into blocks</h4>
+<div class="tscroll"><table>
+  <tr><th>Symbol</th><th>Meaning</th><th>Example</th></tr>
+  <tr><td class="mono">R</td><td>Record size: add up every field's size</td><td>100 bytes</td></tr>
+  <tr><td class="mono">B</td><td>Block size</td><td>1024 bytes</td></tr>
+  <tr><td class="mono">bfr</td><td>Blocking factor: whole records per block = floor(B / R)</td><td>floor(1024/100) = 10</td></tr>
+  <tr><td class="mono">r</td><td>Number of records</td><td>5,000</td></tr>
+  <tr><td class="mono">b</td><td>Number of blocks = ceiling(r / bfr)</td><td>ceiling(5000/10) = 500</td></tr>
+</table></div>
+<p>Round <b>down</b> for bfr because half a record does not fit. Round <b>up</b> for b because a half-full last block is still a block.</p>
+<h4>Finding a record without an index</h4>
+<ul class="clean">
+  <li><b>Linear search</b>: read blocks one by one. On average you read half of them (250 here).</li>
+  <li><b>Binary search</b>: only possible if the file is sorted on what you are looking for. Halve the range each time: about log<sub>2</sub>(500) ≈ 9 reads.</li>
+</ul>
+<h4>What an index is</h4>
+<p>It works like the index at the back of a textbook: a short, sorted list of (key, page number). In a database each <b>index entry</b> is (key value, pointer), and the pointer says where the block or record is. Entries are much smaller than full records, so the index fits in far fewer blocks and is quick to search.</p>
+<div class="tscroll"><table>
+  <tr><th>Index</th><th>Built on</th><th>Entries</th></tr>
+  <tr><td>Primary index</td><td>The field the file is sorted by (a key)</td><td>One per <b>block</b> (sparse)</td></tr>
+  <tr><td>Secondary index</td><td>Any other field</td><td>One per <b>record</b> (dense)</td></tr>
+</table></div>
+<h4>Multilevel index: an index of the index</h4>
+<p>If the index itself is many blocks long, build a small index on top of it, then another on top of that, until the top level fits in one block. To find a record you read one block per level, then the data block: <b>levels + 1</b> block accesses. That idea is the basis of the B-trees real databases use.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Block">Block</a><a class="chip c2 tlink" href="#/terms" data-term="B">B</a><a class="chip c1 tlink" href="#/terms" data-term="R">R</a><a class="chip c2 tlink" href="#/terms" data-term="r">r</a><a class="chip c1 tlink" href="#/terms" data-term="bfr">bfr</a><a class="chip c2 tlink" href="#/terms" data-term="b">b</a><a class="chip c1 tlink" href="#/terms" data-term="Unspanned">Unspanned</a><a class="chip c2 tlink" href="#/terms" data-term="P">P</a><a class="chip c1 tlink" href="#/terms" data-term="PR">PR</a><a class="chip c2 tlink" href="#/terms" data-term="Block access">Block access</a><a class="chip c1 tlink" href="#/terms" data-term="Linear search">Linear search</a><a class="chip c2 tlink" href="#/terms" data-term="Binary search">Binary search</a><a class="chip c1 tlink" href="#/terms" data-term="Index">Index</a><a class="chip c2 tlink" href="#/terms" data-term="Index entry">Index entry</a><a class="chip c1 tlink" href="#/terms" data-term="bfri">bfri</a><a class="chip c2 tlink" href="#/terms" data-term="fo">fo</a><a class="chip c1 tlink" href="#/terms" data-term="Primary index">Primary index</a><a class="chip c2 tlink" href="#/terms" data-term="Secondary index">Secondary index</a><a class="chip c1 tlink" href="#/terms" data-term="Dense index">Dense index</a><a class="chip c2 tlink" href="#/terms" data-term="Sparse index">Sparse index</a><a class="chip c1 tlink" href="#/terms" data-term="Multilevel index">Multilevel index</a><a class="chip c2 tlink" href="#/terms" data-term="t">t</a><a class="chip c1 tlink" href="#/terms" data-term="B+-tree">B+-tree</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Cost is counted in block reads.</li><li>bfr rounds down, number of blocks rounds up.</li><li>Primary index: one entry per block. Secondary: one per record. Multilevel: levels + 1 reads.</li></ul></div>
+<details class="deep"><summary>From the course materials</summary><div class="deep-body"><p>One scenario is reused everywhere: a file of <b>r = 30,000</b> fixed-length EMPLOYEE records, block pointer <b>P = 6</b> bytes, record pointer <b>P<sub>R</sub> = 7</b> bytes. The worked answer sheet uses <b>B = 512</b> bytes and a 10-byte Phone field; the review worksheet uses B = 512 with a 9-byte Phone; the past paper uses <b>B = 1024</b> with a 9-byte Phone. Always recompute R from the field list you are given.</p>
       <h4>Data file</h4>
       <div class="formula">R   = sum of field sizes                       = 30+9+9+40+10+8+1+4+4 = 115 bytes<br>bfr = floor(B / R)                            = floor(512/115) = 4 records per block<br>b   = ceiling(r / bfr)                        = ceiling(30,000/4) = 7,500 blocks<br>left-over per block = B − bfr·R               = 512 − 460 = 52 bytes</div>
       <p class="sub2">floor for bfr because a block cannot hold a fraction of a record (unspanned); ceiling for b so the last partial block is counted.</p>
@@ -551,14 +813,29 @@ SELECT id, name, relative_depth FROM parents;</pre>
         <tr><td>Secondary on Ssn (30,000 entries)</td><td>883</td><td>26</td><td>1</td><td>910</td><td>3 + 1 = 4</td></tr>
       </table></div>
       <div class="tip t-warn"><b>Pointer size matters</b>The answer sheet builds every index entry with the 6-byte block pointer. The review worksheet and the past paper explicitly say the secondary index points at the <b>record</b> level, so the entry there is key + 7-byte record pointer = 16 bytes. The materials give no worked numbers for that variant; the exam page shows the method applied.</div>
-      <div class="tip t-info"><b>Source</b>Index calculation answer sheet (full); review worksheet question 2; past paper Q6.</div>
+      <div class="tip t-info"><b>Source</b>Index calculation answer sheet (full); review worksheet question 2; past paper Q6.</div></div></details>
     </div>
   </details>
 
   <details class="note" id="t8">
     <summary><span class="num n2">8</span> Heuristic query optimization</summary>
     <div class="body">
-      <p>A query is first written as a <b>query tree</b>: Cartesian products of the base relations at the bottom, one big selection of the whole WHERE clause above them, and the projection at the top. Heuristic optimization rewrites that tree into an equivalent one that is cheaper to execute.</p>
+<div class="lesson"><b>In one line</b>You say what answer you want; the DBMS works out the cheapest order of steps to get it.</div>
+<p>SQL is <b>declarative</b>: it describes the result, not the method. The same question can be computed in many orders, and some orders are thousands of times slower. The part of the DBMS that picks the order is the <b>query optimizer</b>.</p>
+<h4>Query trees</h4>
+<p>A query can be drawn as a tree. The tables are the leaves at the bottom, each operation (σ, π, ⋈, ×) is a node, and data flows upward to the answer at the top. Rewriting the tree changes the steps without changing the answer.</p>
+<h4>The rules of thumb (heuristics)</h4>
+<ol>
+  <li><b>Split</b> a filter with many ANDs into separate small filters, so each can move on its own.</li>
+  <li><b>Filter early</b>: move each filter down the tree to sit right above the table it tests. Fewer rows go up.</li>
+  <li><b>Join, do not pair everything</b>: a Cartesian product followed by a matching condition is replaced by a join.</li>
+  <li><b>Carry only what you need</b>: keep just the columns used later (join keys and the output) as low as possible.</li>
+</ol>
+<h4>Why it matters</h4>
+<p>Pair 1,000 members with 50,000 loans and you get 50 million combinations before filtering. Filter the members to the 20 you want first, then join, and the work is tiny. Same answer, very different cost.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Query optimizer">Query optimizer</a><a class="chip c2 tlink" href="#/terms" data-term="Declarative language">Declarative language</a><a class="chip c1 tlink" href="#/terms" data-term="Query tree">Query tree</a><a class="chip c2 tlink" href="#/terms" data-term="Heuristic">Heuristic</a><a class="chip c1 tlink" href="#/terms" data-term="Cascade of selections">Cascade of selections</a><a class="chip c2 tlink" href="#/terms" data-term="Selection push-down">Selection push-down</a><a class="chip c1 tlink" href="#/terms" data-term="Projection push-down">Projection push-down</a><a class="chip c2 tlink" href="#/terms" data-term="Join order">Join order</a><a class="chip c1 tlink" href="#/terms" data-term="Cost-based optimization">Cost-based optimization</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>You say what you want; the optimizer decides how.</li><li>Filter early, join instead of pairing everything, carry only needed columns.</li></ul></div>
+<details class="deep"><summary>From the course materials</summary><div class="deep-body"><p>A query is first written as a <b>query tree</b>: Cartesian products of the base relations at the bottom, one big selection of the whole WHERE clause above them, and the projection at the top. Heuristic optimization rewrites that tree into an equivalent one that is cheaper to execute.</p>
       <h4>The four steps shown in the slides</h4>
       <ol>
         <li><b>Cascade selection</b> — split the single conjunctive σ into one σ per condition.</li>
@@ -572,14 +849,39 @@ SELECT id, name, relative_depth FROM parents;</pre>
       <h4>Worksheet example</h4>
       <pre class="sql ra">π Title (σ Grade = 'A' ∧ Instructor = "…" (Course ⋈ Enrollment))</pre>
       <p>Handwritten answer: start from π Title over σ over the Cartesian product of Course and Enrollment; cascade into σ Grade = 'A' and σ Instructor = "…"; move σ Grade = 'A' down onto Enrollment and σ Instructor = "…" down onto Course; replace the product with a join; keep π Title at the top.</p>
-      <div class="tip t-info"><b>Source</b>Heuristic optimization query-tree slides; review worksheet heuristic question; past paper Q7 and Q8.</div>
+      <div class="tip t-info"><b>Source</b>Heuristic optimization query-tree slides; review worksheet heuristic question; past paper Q7 and Q8.</div></div></details>
     </div>
   </details>
 
   <details class="note" id="t9">
     <summary><span class="num n2">9</span> Transactions, commit and rollback</summary>
     <div class="body">
-      <p>The lab runs two sessions (connections A and B) against bank accounts 10001–10003 and asks what each session sees after each numbered query.</p>
+<div class="lesson"><b>In one line</b>A transaction is a group of changes that must all happen, or none of them.</div>
+<p>Moving 100 from account A to account B is two changes: take 100 from A, add 100 to B. If the system crashes between them, money disappears. Wrapping both in a <b>transaction</b> makes them one unit.</p>
+<pre class="sql">START TRANSACTION;
+UPDATE Account SET Balance = Balance - 100 WHERE ID = 'A';
+UPDATE Account SET Balance = Balance + 100 WHERE ID = 'B';
+COMMIT;          -- make both changes permanent
+-- or ROLLBACK;  -- undo both as if nothing happened</pre>
+<h4>Two people at once</h4>
+<ul class="clean">
+  <li>Inside your transaction you <b>see your own changes</b> straight away, even before COMMIT.</li>
+  <li>Other sessions <b>do not see them</b> until you COMMIT. They keep seeing the last saved value.</li>
+  <li>While you are changing a row you hold a <b>lock</b> on it. Anyone else who tries to change that same row has to <b>wait</b> until you COMMIT or ROLLBACK.</li>
+  <li>If a transaction is never finished, the DBMS normally rolls it back (for example when the connection closes).</li>
+</ul>
+<h4>ACID: the four promises</h4>
+<div class="tscroll"><table>
+  <tr><th>Letter</th><th>Property</th><th>Plain meaning</th></tr>
+  <tr><td class="mono">A</td><td>Atomicity</td><td>All or nothing</td></tr>
+  <tr><td class="mono">C</td><td>Consistency</td><td>Rules hold before and after</td></tr>
+  <tr><td class="mono">I</td><td>Isolation</td><td>Others do not see your half-finished work</td></tr>
+  <tr><td class="mono">D</td><td>Durability</td><td>Once committed, it survives a crash</td></tr>
+</table></div>
+<p class="sub2">ACID and isolation levels are standard database theory; the course materials for this topic contain only the two-session lab.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Transaction">Transaction</a><a class="chip c2 tlink" href="#/terms" data-term="START TRANSACTION">START TRANSACTION</a><a class="chip c1 tlink" href="#/terms" data-term="COMMIT">COMMIT</a><a class="chip c2 tlink" href="#/terms" data-term="ROLLBACK">ROLLBACK</a><a class="chip c1 tlink" href="#/terms" data-term="Autocommit">Autocommit</a><a class="chip c2 tlink" href="#/terms" data-term="Session">Session</a><a class="chip c1 tlink" href="#/terms" data-term="Uncommitted change">Uncommitted change</a><a class="chip c2 tlink" href="#/terms" data-term="Lock">Lock</a><a class="chip c1 tlink" href="#/terms" data-term="Lock wait">Lock wait</a><a class="chip c2 tlink" href="#/terms" data-term="ACID">ACID</a><a class="chip c1 tlink" href="#/terms" data-term="Isolation level">Isolation level</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>A transaction is all or nothing: COMMIT saves, ROLLBACK undoes.</li><li>You see your own uncommitted changes; others do not.</li><li>Changing a row locks it; others wanting to change it must wait.</li></ul></div>
+<details class="deep"><summary>From the course materials</summary><div class="deep-body"><p>The lab runs two sessions (connections A and B) against bank accounts 10001–10003 and asks what each session sees after each numbered query.</p>
       <ul class="clean">
         <li>A session <b>sees its own uncommitted changes</b> inside the same transaction: after A debits 100, A reads the decreased balance.</li>
         <li>Another session <b>does not see uncommitted changes</b> (default isolation behaviour): B still reads the original balance.</li>
@@ -589,14 +891,37 @@ SELECT id, name, relative_depth FROM parents;</pre>
         <li>A transaction that is begun and neither committed nor rolled back is, in most DBMSs, rolled back automatically; until then other sessions do not see its changes.</li>
       </ul>
       <div class="tip t-warn"><b>Thin</b>Only the answer sheet is in the materials; the lab sheet with the numbered queries is not, so the exact SQL for each step is unknown. Isolation levels, ACID properties and schedules are not covered in the attached files.</div>
-      <div class="tip t-info"><b>Source</b>Transaction lab answers.</div>
+      <div class="tip t-info"><b>Source</b>Transaction lab answers.</div></div></details>
     </div>
   </details>
 
   <details class="note" id="t10">
     <summary><span class="num n2">10</span> Users, privileges and roles (MySQL)</summary>
     <div class="body">
-      <h4>Accounts are user@host</h4>
+<div class="lesson"><b>In one line</b>Every account gets only the permissions it needs, given with GRANT and taken back with REVOKE.</div>
+<p>A database is shared, so it must decide who can read and who can change. In MySQL an account is a <b>user name plus the host</b> it connects from: <code>'ana'@'localhost'</code> is a different account from <code>'ana'@'%'</code>, where <code>%</code> means any host.</p>
+<h4>Privileges and where they apply</h4>
+<div class="tscroll"><table>
+  <tr><th>Level</th><th>Written as</th><th>Covers</th></tr>
+  <tr><td>Global</td><td><code>*.*</code></td><td>Every database on the server</td></tr>
+  <tr><td>Database</td><td><code>library.*</code></td><td>Every table in one database</td></tr>
+  <tr><td>Table</td><td><code>library.Loan</code></td><td>One table</td></tr>
+  <tr><td>Column</td><td><code>SELECT (Name) ON library.Member</code></td><td>Only some columns of one table</td></tr>
+</table></div>
+<pre class="sql">CREATE USER 'desk'@'localhost' IDENTIFIED BY '…';
+GRANT SELECT, INSERT ON library.Loan TO 'desk'@'localhost';
+REVOKE INSERT ON library.Loan FROM 'desk'@'localhost';</pre>
+<h4>Roles: permissions in a bundle</h4>
+<p>Instead of granting the same five privileges to twenty librarians one by one, create a <b>role</b>, grant the privileges to the role once, and grant the role to each person. Change the role and everyone who holds it changes too.</p>
+<pre class="sql">CREATE ROLE 'librarian';
+GRANT SELECT, INSERT, UPDATE ON library.* TO 'librarian';
+GRANT 'librarian' TO 'ana'@'localhost', 'ben'@'localhost';</pre>
+<p class="sub2">In MySQL 8, a granted role is not switched on automatically: the user runs <code>SET ROLE</code>, or an administrator sets it with <code>SET DEFAULT ROLE</code>.</p>
+<h4>Least privilege</h4>
+<p>Give each account the smallest set of permissions, from the narrowest set of hosts, that still lets it do its job. If it is ever misused, the damage is limited.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Account">Account</a><a class="chip c2 tlink" href="#/terms" data-term="Host">Host</a><a class="chip c1 tlink" href="#/terms" data-term="localhost">localhost</a><a class="chip c2 tlink" href="#/terms" data-term="%">%</a><a class="chip c1 tlink" href="#/terms" data-term="Privilege">Privilege</a><a class="chip c2 tlink" href="#/terms" data-term="Privilege level">Privilege level</a><a class="chip c1 tlink" href="#/terms" data-term="GRANT">GRANT</a><a class="chip c2 tlink" href="#/terms" data-term="REVOKE">REVOKE</a><a class="chip c1 tlink" href="#/terms" data-term="GRANT OPTION">GRANT OPTION</a><a class="chip c2 tlink" href="#/terms" data-term="Role">Role</a><a class="chip c1 tlink" href="#/terms" data-term="Least privilege">Least privilege</a><a class="chip c2 tlink" href="#/terms" data-term="FLUSH PRIVILEGES">FLUSH PRIVILEGES</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>An account is user@host; % means any host.</li><li>GRANT gives, REVOKE takes away, at global, database, table or column level.</li><li>Roles bundle privileges; give the least that does the job.</li></ul></div>
+<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>Accounts are user@host</h4>
       <p><code>CREATE USER 'thisisme' IDENTIFIED BY '…'</code> without a host is interpreted as <code>'thisisme'@'%'</code>, which can connect from any host. For an application on the same host as the database, the correct form is <code>'thisisme'@'localhost'</code>; omitting the host violates the principle of least privilege.</p>
       <pre class="sql">CREATE USER 'john'@'localhost' IDENTIFIED BY 'pass_123';
 CREATE USER 'salary_app'@'192.168.128.%' IDENTIFIED BY 'Pass123';   -- Docker subnet wildcard
@@ -620,12 +945,20 @@ FLUSH PRIVILEGES;
 ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password</pre>
       <p><b>Reading a GRANT</b>: <code>GRANT SELECT, INSERT, UPDATE ON hr.employees TO 'myuser'@'localhost' IDENTIFIED BY 'mypassword'</code> allows retrieving, adding and modifying employee records to user myuser connecting from the same host as the server, with that password.</p>
       <div class="tip t-warn"><b>Check</b>The lab's answer to "remove the ability to grant the UPDATE privilege while keeping it" revokes UPDATE itself (<code>REVOKE UPDATE … FROM 'dan'@'localhost'</code>). Whether that satisfies the question as worded is not resolved in the materials.</div>
-      <div class="tip t-info"><b>Source</b>Users, privileges and roles lab answers.</div>
+      <div class="tip t-info"><b>Source</b>Users, privileges and roles lab answers.</div></div></details>
     </div>
   </details>
 </div></section>
 
-<!-- ============ LABS ============ -->
+<!-- ============ TERMS ============ -->
+<section class="tab" id="terms"><div class="wrap">
+  <h1>Terms</h1>
+  <p class="lede">Every technical word, short form and symbol used in the course, in plain language. Items marked <span class="flag gen">general</span> are standard database vocabulary that the course files use without defining, or do not mention.</p>
+  <input class="fld" id="termF" placeholder="search… e.g. FK, bfr, cascade, σ" style="margin-top:14px" autocomplete="off">
+  <div class="fc-controls" id="termTopics"></div>
+  <p class="sub2" id="termCount"></p>
+  <div class="panel"><div class="tscroll"><table id="termT"></table></div></div>
+</div></section>
 <section class="tab" id="labs"><div class="wrap">
   <h1>Labs</h1>
   <p class="lede">The exercise sets, with the answers condensed from the worked sheets. Open the original PDF from Downloads for screenshots and full working.</p>
@@ -791,7 +1124,162 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
   </details>
 </div></section>
 
-<!-- ============ EXAM ============ -->
+<!-- ============ DRILL: FLASHCARDS ============ -->
+<section class="tab" id="flash"><div class="wrap">
+  <h1>Flashcards</h1>
+  <p class="lede">Concept cards from every topic, plus a card for every term in the glossary. Cards you miss come back a few cards later in the same round.</p>
+  <div class="panel">
+    <div class="fc-controls" id="fcDeck">
+      <button class="btn primary" data-d="c">Concepts</button>
+      <button class="btn" data-d="t">Terms</button>
+      <button class="btn" data-d="both">Both</button>
+      <button class="btn" id="fcDir">Term first</button>
+    </div>
+    <div class="fc-controls">
+      <select class="fld" id="fcTopic" style="width:auto;min-width:220px"></select>
+      <button class="btn" id="fcSkipKnown">Hide known cards</button>
+      <button class="btn" id="fcShuffle">New round</button>
+      <button class="btn" id="fcReset" style="margin-left:auto">Reset known</button>
+    </div>
+    <div class="qbar" style="margin-top:14px"><div id="fcKnownBar" style="width:0"></div></div>
+    <p class="sub2" id="fcKnownTxt"></p>
+    <div class="fc-stage">
+      <div class="fc" id="fcCard">
+        <div class="face front"><span class="tag badge b1" id="fcTag"></span><div class="q" id="fcQ"></div><span class="hint">click to flip</span><span class="flag ok" id="fcKnownMark" style="position:absolute;top:14px;right:14px;display:none">known</span></div>
+        <div class="face back"><div class="a" id="fcA"></div><span class="hint">click to flip back</span></div>
+      </div>
+      <div class="qcard qresult" id="fcDone" style="display:none"></div>
+      <div class="fc-nav" id="fcNavRow">
+        <button class="btn" id="fcAgain">Again</button>
+        <span class="fc-count" id="fcCount"></span>
+        <button class="btn" id="fcNext">Skip</button>
+        <button class="btn primary" id="fcKnow">Got it</button>
+      </div>
+      <div class="fc-score" id="fcScore"></div>
+    </div>
+    <p class="sub2">Keyboard: <b>Space</b> flip · <b>G</b> got it · <b>A</b> again · <b>→</b> skip.</p>
+  </div>
+</div></section>
+
+<!-- ============ DRILL: QUIZ ============ -->
+<section class="tab" id="quiz"><div class="wrap">
+  <h1>Quiz</h1>
+  <p class="lede">Single-answer questions tagged by topic. Each answer is graded the moment you click, with the reason shown.</p>
+  <div class="panel pc"><div id="quizShell" class="quiz-shell"></div></div>
+</div></section>
+
+<!-- ============ DRILL: INDEX PRACTICE ============ -->
+<section class="tab" id="calc"><div class="wrap">
+  <h1>Index practice</h1>
+  <p class="lede">The full Topic 7 calculation, step by step. Start with the course scenario, whose answers match the worked answer sheet, then generate new problems with different numbers.</p>
+  <div class="fc-controls">
+    <button class="btn primary" id="ixCourse">Course scenario</button>
+    <button class="btn" id="ixNew">New random problem</button>
+  </div>
+  <div class="panel">
+    <h3 id="ixTitle"></h3>
+    <div id="ixParams"></div>
+  </div>
+  <div class="panel">
+    <h3>Answer each step</h3>
+    <p class="sub2">Whole numbers unless the step says otherwise. Wrong or checked answers reveal the working.</p>
+    <div id="ixRows"></div>
+    <div class="qactions">
+      <button class="btn" id="ixShow">Show all working</button>
+      <button class="btn primary" id="ixCheck">Check answers</button>
+    </div>
+    <p class="sub2" id="ixSummary"></p>
+  </div>
+  <div class="tip t-info"><b>Formulas</b>bfr = floor(B / R) · b = ceiling(r / bfr) · entry = key + pointer · bfri = floor(B / entry) · primary index entries = b · secondary (dense) entries = r · each level = ceiling(previous / bfri) until 1 · accesses = levels + 1</div>
+</div></section>
+
+<!-- ============ DRILL: TRANSACTION SESSIONS ============ -->
+<section class="tab" id="sessions"><div class="wrap">
+  <h1>Transaction sessions</h1>
+  <p class="lede">Two connections to the same accounts table. Session A can open a transaction; Session B runs every statement in autocommit mode, like the transaction lab. Run statements in any order and watch what each session sees.</p>
+  <div class="fc-controls">
+    <button class="btn" id="txPredict">Predict mode: off</button>
+    <button class="btn" id="txReset" style="margin-left:auto">Reset</button>
+  </div>
+  <div class="panel"><div id="txState"></div><p class="sub2" style="margin-top:8px">Saved on disk (committed): <span class="mono" id="txSaved"></span></p></div>
+  <div class="grid2">
+    <div class="card">
+      <span class="badge b1">Session A</span>
+      <div class="fc-controls">
+        <button class="btn" data-act="a-start">START TRANSACTION</button>
+        <button class="btn" data-act="a-upd-A-101">UPDATE A-101 − 100</button>
+        <button class="btn" data-act="a-upd-A-102">UPDATE A-102 + 100</button>
+        <button class="btn" data-act="a-sel">SELECT</button>
+        <button class="btn primary" data-act="a-commit">COMMIT</button>
+        <button class="btn" data-act="a-rollback">ROLLBACK</button>
+      </div>
+      <h4>What A sees</h4>
+      <div class="tscroll" id="txA"></div>
+    </div>
+    <div class="card">
+      <span class="badge b2">Session B</span>
+      <div class="fc-controls" id="txBtnsB">
+        <button class="btn" data-act="b-sel">SELECT</button>
+        <button class="btn" data-act="b-upd-A-101">UPDATE A-101 − 50</button>
+        <button class="btn" data-act="b-upd-A-102">UPDATE A-102 − 50</button>
+      </div>
+      <h4>What B sees</h4>
+      <div class="tscroll" id="txB"></div>
+    </div>
+  </div>
+  <div id="txPredictBox"></div>
+  <div class="panel">
+    <h3>Statement log <span class="sub2">newest first</span></h3>
+    <div id="txLog"></div>
+  </div>
+  <div class="tip t-info"><b>Try this</b>A: START TRANSACTION → A: UPDATE A-101 → A: SELECT → B: SELECT → B: UPDATE A-101 (B waits) → A: COMMIT (B finishes). Then reset and repeat with ROLLBACK instead of COMMIT.</div>
+  <p class="sub2">Modelled on MySQL InnoDB defaults: plain SELECTs never wait and read the last committed data, and an UPDATE waits for another session's row lock. START TRANSACTION inside an open transaction commits the old one first.</p>
+</div></section>
+
+<!-- ============ DRILL: REFERENTIAL ACTIONS ============ -->
+<section class="tab" id="refact"><div class="wrap">
+  <h1>Referential actions</h1>
+  <p class="lede">A member row is deleted or its ID changes. Pick what the Loan table looks like afterwards under the given foreign-key rule. <code>Loan.MemberID</code> has <code>DEFAULT 9</code>.</p>
+  <div class="grid2">
+    <div class="card"><h4>Member (parent) before</h4><div class="tscroll" id="rfParent"></div></div>
+    <div class="card"><h4>Loan (child) before</h4><div class="tscroll" id="rfChild"></div></div>
+  </div>
+  <div class="panel">
+    <h3>Rule on Loan.MemberID</h3>
+    <pre class="sql" id="rfRule"></pre>
+    <h4>Statement</h4>
+    <pre class="sql" id="rfSql"></pre>
+    <h4>Loan after the statement</h4>
+    <div id="rfOpts" class="rfgrid"></div>
+    <div id="rfFeedback"></div>
+    <div class="qactions"><span class="sub2" id="rfScore" style="margin-right:auto"></span><button class="btn primary" id="rfNext">Next scenario</button></div>
+  </div>
+</div></section>
+
+<!-- ============ DRILL: SQL CLAUSE ORDER ============ -->
+<section class="tab" id="order"><div class="wrap">
+  <h1>SQL clause order</h1>
+  <p class="lede">Two orders matter: the order you type a SELECT, and the order the DBMS processes it. Knowing the second explains why WHERE cannot use an aggregate and why a SELECT alias is usable in ORDER BY.</p>
+  <div class="panel">
+    <div class="fc-controls" id="odMode">
+      <button class="btn primary" data-m="write">Writing order</button>
+      <button class="btn" data-m="run">Processing order</button>
+    </div>
+    <p id="odPrompt">Put the clauses in the order you write them.</p>
+    <h4>Your order</h4>
+    <div class="fc-controls" id="odLine"></div>
+    <h4>Clauses</h4>
+    <div class="fc-controls" id="odPool"></div>
+    <div class="qactions"><button class="btn" id="odReset">Reset</button><button class="btn primary" id="odCheck">Check</button></div>
+    <div id="odFeedback"></div>
+  </div>
+  <div class="panel">
+    <h3>WHERE or HAVING?</h3>
+    <p class="sub2">The query groups orders by CustomerID. Where does each condition belong?</p>
+    <div id="whList"></div>
+    <div class="qactions"><span class="sub2" id="whScore" style="margin-right:auto"></span><button class="btn" id="whNew">Shuffle again</button></div>
+  </div>
+</div></section>
 <section class="tab" id="exam"><div class="wrap">
   <h1>Past paper</h1>
   <p class="lede">One mid-semester paper: 8 questions, 90 marks, three hours, open PDF notes without internet. The materials contain the questions only; answer notes below point to where the method lives.</p>
@@ -864,44 +1352,6 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
     <p class="sub2">Method: Topic 8, step 4 — the heuristic optimization slides show projection push-down on the same Customer / Invoice schema.</p>
   </div>
 </div></section>
-
-<!-- ============ DRILLS ============ -->
-<section class="tab" id="drills"><div class="wrap">
-  <h1>Drills</h1>
-
-  <div class="panel" id="flash">
-    <h2 class="title" style="font-size:21px">Flashcards</h2>
-    <p class="sub2">Click to flip. Keyboard: <b>Space</b> flip · <b>←/→</b> move · <b>G</b> got it · <b>A</b> again.</p>
-    <div class="fc-controls" id="fcFilters">
-      <button class="btn primary" data-f="all">All</button>
-      <button class="btn" data-f="t1">Topics 1–6</button>
-      <button class="btn" data-f="t2">Topics 7–10</button>
-      <button class="btn" id="fcShuffle" style="margin-left:auto">Shuffle</button>
-    </div>
-    <div class="fc-stage">
-      <div class="fc" id="fcCard">
-        <div class="face front"><span class="tag badge b1" id="fcTag">Topics 1–6</span><div class="q" id="fcQ"></div><span class="hint">click to flip</span></div>
-        <div class="face back"><div class="a" id="fcA"></div><span class="hint">click to flip back</span></div>
-      </div>
-      <div class="fc-nav">
-        <button class="btn" id="fcPrev">‹ Prev</button>
-        <span class="fc-count" id="fcCount"></span>
-        <button class="btn" id="fcNext">Next ›</button>
-        <button class="btn" id="fcAgain" style="margin-left:10px">↻ Again</button>
-        <button class="btn primary" id="fcKnow">✓ Got it</button>
-      </div>
-      <div class="fc-score" id="fcScore"></div>
-    </div>
-  </div>
-
-  <div class="panel pc" id="quiz">
-    <h2 class="title" style="font-size:21px">Mock exam</h2>
-    <p class="sub2">Single-answer questions grade the moment you click. Every question is drawn from the labs or the past paper.</p>
-    <div id="quizShell" class="quiz-shell"></div>
-  </div>
-</div></section>
-
-<!-- ============ CHEATSHEET ============ -->
 <section class="tab" id="cheat"><div class="wrap">
   <h1>Cheat Sheet</h1>
   <div class="cheat">
@@ -946,8 +1396,6 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
     </table></div></div>
   </div>
 </div></section>
-
-<!-- ============ RESOURCES ============ -->
 <section class="tab" id="resources"><div class="wrap">
   <h1>Downloads</h1>
   <p class="lede">The source files, renamed to match the topic order. Metadata has been removed; the contents are unchanged.</p>
@@ -980,6 +1428,7 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
       <li><b>Duplicates:</b> "discontinued products" and "most expensive price per category" appear in both SQL parts with identical answers. Both files are kept because the rest of their content differs.</li>
       <li><b>Unreliable answers:</b> SQL part 2 questions 7–8 (semantics do not match the query); DDL practice alternative CHECK syntax; Employees age boundary (&gt; 18 vs ≥ 18) contradicts itself in the source.</li>
       <li><b>Missing pieces:</b> the transaction lab's numbered queries; written answers for the worksheet's Datalog, recursion and index parts; any answers for the past paper. Pages that depend on them are marked in place.</li>
+      <li><b>Corrections from the MySQL manual:</b> SET NULL cannot be used on a NOT NULL column, and InnoDB rejects SET DEFAULT. Both affect lab answers and are flagged in Topic 2.</li>
       <li><b>Scanned:</b> the handwritten algebra notes have no text layer; their content was transcribed into Topic 4.</li>
     </ul>
   </div>
@@ -993,9 +1442,9 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
     <div class="kv"><b>Title</b><span>Database Systems</span></div>
     <div class="kv"><b>Text</b><span>Elmasri &amp; Navathe — <i>Fundamentals of Database Systems</i>, 7th edition</span></div>
     <div class="kv"><b>Covered</b><span>Ten topics: relational model, DDL, ER design, relational algebra, intermediate SQL, Datalog, indexing, heuristic optimization, transactions, privileges</span></div>
-    <div class="kv"><b>Practice</b><span>Ten worked lab sets, one past paper, 43 flashcards, a 20-question mock exam</span></div>
+    <div class="kv"><b>Practice</b><span>279 flashcards (75 concepts + 204 terms), 69 quiz questions, four interactive drills, ten worked lab sets, one past paper</span></div>
   </div>
-  <div class="box trap"><b>On the content</b>Every summary restates the attached lab sheets, answer sheets and past paper; nothing was added from outside them. Where a source is thin, contradictory or has no answer, the page says so instead of filling the gap. The textbook is referenced, not redistributed.</div>
+  <div class="box trap"><b>On the content</b>The "From the course materials" blocks, the labs and the past paper restate the attached lab sheets, answer sheets and past paper, and say so where a source is thin, contradictory or unanswered. The plain explanations, the Terms glossary and the drills also use standard database knowledge so that a first-time learner has the full picture; glossary entries that the course files do not define are marked "general". MySQL behaviour notes follow the MySQL reference manual. The textbook is referenced, not redistributed.</div>
   <div class="panel pg">
     <h3>Built with</h3>
     <p>HTML, CSS and JavaScript on the shared Study Console frame. No framework or build step.</p>
@@ -1007,132 +1456,394 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
 </main>
 
 <script>
-/* ================= DATA ================= */
+/* [term, stands for, meaning, topic (0 = basics), general (1 = not in the course files)] */
+var TERMS = [
+ ["Data","","Known facts that can be recorded and have an implicit meaning.",0,0],
+ ["Database","DB","A collection of related data.",0,0],
+ ["DBMS","Database Management System","Software that lets you define, build, change and share databases among many users and applications.",0,0],
+ ["RDBMS","Relational DBMS","A DBMS that stores data as tables linked by matching values. MySQL, PostgreSQL, SQL Server and Oracle are examples.",0,1],
+ ["Miniworld","","The part of the real world a database describes, such as a library or a bank.",0,0],
+ ["UoD","Universe of Discourse","Another name for the miniworld.",0,0],
+ ["Application program","","A program that uses the database by sending queries and requests to the DBMS.",0,0],
+ ["Query","","A request that usually retrieves data.",0,0],
+ ["Metadata","","Data about data: table names, column types, constraints.",0,1],
+ ["Catalog","","Where the DBMS stores the metadata (also called the data dictionary).",0,1],
+ ["MySQL","","A widely used open-source RDBMS. The privileges lab is written for it.",0,0],
+
+ ["Relation","","The formal name for a table.",1,0],
+ ["Tuple","","The formal name for a row: one thing stored in a table.",1,0],
+ ["Attribute","","The formal name for a column: one property of the things in a table.",1,0],
+ ["Domain","dom(A)","The set of values an attribute is allowed to take, such as integers or dates.",1,0],
+ ["Degree","","The number of attributes (columns) in a relation.",1,1],
+ ["Cardinality (of a relation)","","The number of tuples (rows) in a relation. Not the same as cardinality ratio in ER.",1,1],
+ ["Relation schema","R(A1, …, An)","The blueprint of a table: its name and its list of attributes.",1,0],
+ ["Relation state","r(R)","The set of rows in a table at one moment; a subset of dom(A1) × … × dom(An).",1,0],
+ ["Key","","A set of attributes whose values are unique for every row.",1,0],
+ ["Superkey","SK","Any set of attributes that uniquely identifies a row, even if it contains extra attributes.",1,0],
+ ["Candidate key","CK","A minimal superkey: remove any attribute and it is no longer unique.",1,0],
+ ["Primary key","PK","The candidate key chosen as the official identifier of each row. It may not be NULL.",1,0],
+ ["Alternate key","","A candidate key that was not chosen as the primary key.",1,1],
+ ["Composite key","","A key made of more than one attribute.",1,1],
+ ["Foreign key","FK","Attributes in one table that hold primary key values of another table, linking the two. May be NULL.",1,0],
+ ["Parent table","Referenced table","The table whose key is pointed at by a foreign key.",1,1],
+ ["Child table","Referencing table","The table that contains the foreign key.",1,1],
+ ["NULL","","A marker for 'no value': unknown, not applicable, or not yet available. Not zero, not an empty string.",1,0],
+ ["Constraint","","A rule the DBMS enforces on the data.",1,0],
+ ["Key constraint","","No two rows may have the same key value.",1,0],
+ ["Entity integrity","","A primary key value can never be NULL.",1,0],
+ ["Referential integrity","","A foreign key value must match an existing row in the parent table, or be NULL.",1,0],
+
+ ["SQL","Structured Query Language","The standard language for defining, querying and changing relational databases.",2,0],
+ ["DDL","Data Definition Language","SQL commands that create and change structure: CREATE, ALTER, DROP.",2,0],
+ ["DML","Data Manipulation Language","SQL commands that read and change rows: SELECT, INSERT, UPDATE, DELETE.",2,1],
+ ["DCL","Data Control Language","SQL commands for permissions: GRANT, REVOKE.",2,1],
+ ["TCL","Transaction Control Language","SQL commands that end transactions: COMMIT, ROLLBACK.",2,1],
+ ["Schema (database)","","In MySQL, a database. CREATE SCHEMA and CREATE DATABASE do the same thing.",2,1],
+ ["CREATE TABLE","","Builds a new empty table with its columns and constraints.",2,0],
+ ["ALTER TABLE","","Changes an existing table: add a column, add a constraint, and so on.",2,0],
+ ["DROP","","Removes a table, database, user or other object completely.",2,0],
+ ["INT","Integer","Whole-number data type.",2,0],
+ ["VARCHAR(n)","Variable character","Text data type holding up to n characters.",2,0],
+ ["NOT NULL","","Constraint: the column must always have a value.",2,0],
+ ["UNIQUE","","Constraint: no two rows may share the value.",2,0],
+ ["DEFAULT","","The value used when an INSERT does not supply one.",2,0],
+ ["CHECK","","Constraint: every row must satisfy the condition, e.g. CHECK (Age BETWEEN 3 AND 5).",2,0],
+ ["REFERENCES","","Names the parent table and column a foreign key points to.",2,0],
+ ["CONSTRAINT name","","Gives a constraint a name so it can be referred to and dropped later.",2,0],
+ ["Referential action","","What happens to child rows when the parent row is deleted (ON DELETE) or its key changes (ON UPDATE).",2,0],
+ ["CASCADE","","Referential action: child rows follow the parent (deleted with it, or updated to the new key).",2,0],
+ ["SET NULL","","Referential action: the child's foreign key becomes NULL. The column must not be NOT NULL.",2,0],
+ ["SET DEFAULT","","Referential action: the child's foreign key becomes the column's DEFAULT. Standard SQL; MySQL's InnoDB engine rejects it.",2,0],
+ ["RESTRICT","","Referential action: refuse to delete or update the parent while child rows point to it.",2,1],
+ ["NO ACTION","","Standard SQL default action. In MySQL it behaves the same as RESTRICT.",2,1],
+ ["InnoDB","","MySQL's default storage engine; it enforces foreign keys and supports transactions.",2,1],
+
+ ["ER model","Entity–Relationship model","A way of describing data as entities, attributes and relationships before building tables.",3,0],
+ ["ERD","Entity–Relationship Diagram","The drawing of an ER model.",3,0],
+ ["Entity","","One thing in the miniworld, such as one particular member.",3,0],
+ ["Entity type","","A kind of thing, drawn as a rectangle, such as Member.",3,0],
+ ["Key attribute","","The attribute that identifies each entity; its name is underlined.",3,0],
+ ["Multivalued attribute","","An attribute that can hold several values for one entity; drawn as a double oval.",3,0],
+ ["Composite attribute","","An attribute made of smaller parts, such as Address = Street + City.",3,1],
+ ["Derived attribute","","An attribute calculated from others, such as Age from BirthDate; drawn as a dashed oval.",3,1],
+ ["Relationship type","","How entity types are connected; drawn as a diamond, such as 'borrows'.",3,0],
+ ["Cardinality ratio","1:1, 1:N, M:N","How many entities on one side can relate to one entity on the other side.",3,0],
+ ["1 : N","One-to-many","One entity on one side relates to many on the other, e.g. one customer, many invoices.",3,0],
+ ["M : N","Many-to-many","Many on both sides, e.g. products and invoices. Built as a separate linking table.",3,0],
+ ["Participation","","Whether every entity must take part in a relationship.",3,0],
+ ["Total participation","","Every entity must take part; drawn as a double line.",3,0],
+ ["Partial participation","","Some entities may not take part; drawn as a single line.",3,0],
+ ["Weak entity","","An entity that cannot be identified by its own attributes alone and depends on an owner entity; drawn as a double rectangle.",3,1],
+
+ ["RA","Relational Algebra","A procedural query language: operations that take tables and return a table.",4,0],
+ ["Procedural language","","You say how to get the result, step by step. Relational algebra is procedural.",4,0],
+ ["Declarative language","","You say what result you want, not how. SQL is declarative.",4,1],
+ ["σ","Select (sigma)","Keeps the rows that satisfy a condition: σ condition (R).",4,0],
+ ["π","Project (pi)","Keeps chosen columns and removes duplicate rows: π a, b (R).",4,0],
+ ["ρ","Rename (rho)","Renames a relation or its attributes.",4,0],
+ ["∪","Union","All rows in either relation, duplicates removed.",4,0],
+ ["−","Set difference","Rows in the first relation that are not in the second.",4,0],
+ ["∩","Intersection","Rows that appear in both relations.",4,0],
+ ["×","Cartesian product","Every row of one relation paired with every row of the other.",4,0],
+ ["⋈","Join","Pairs rows from two relations that satisfy a condition.",4,0],
+ ["Theta join","","A join with any comparison condition (=, <, >, …).",4,1],
+ ["Equijoin","","A join whose condition uses only equality.",4,0],
+ ["Natural join","","An equijoin on all attributes with the same name, keeping one copy of each.",4,1],
+ ["Outer join","⟕ ⟖ ⟗","A join that also keeps unmatched rows from the left, right or both sides, filling the gaps with NULL.",4,0],
+ ["÷","Division","Finds the rows related to all values in another relation (\"members who borrowed every book\").",4,0],
+ ["←","Assignment","Stores an intermediate result under a name.",4,0],
+ ["Union compatible","","Two relations with the same number of attributes and matching domains; required for ∪, ∩ and −.",4,1],
+
+ ["SELECT","","Lists the columns or expressions to return.",5,0],
+ ["FROM","","Names the tables the query reads.",5,0],
+ ["WHERE","","Filters individual rows before grouping.",5,0],
+ ["JOIN … ON","","Combines rows of two tables that match the ON condition. JOIN means INNER JOIN.",5,0],
+ ["LEFT JOIN","","A join that keeps every row of the left table even when there is no match.",5,1],
+ ["Self-join","","Joining a table to itself under two aliases, e.g. parent and child categories.",5,0],
+ ["Alias","AS","A short temporary name for a table or column, e.g. Customer c or COUNT(*) AS Total.",5,0],
+ ["Aggregate function","","Turns many values into one: COUNT, SUM, AVG, MIN, MAX.",5,0],
+ ["GROUP BY","","Makes one group per distinct value; aggregates are computed per group.",5,0],
+ ["HAVING","","Filters groups after GROUP BY, usually with an aggregate.",5,0],
+ ["ORDER BY","ASC / DESC","Sorts the result, ascending (default) or descending.",5,0],
+ ["LIMIT","","Returns only the first n rows (MySQL).",5,0],
+ ["DISTINCT","","Removes duplicate result rows.",5,0],
+ ["Subquery","Nested query","A SELECT inside another statement.",5,0],
+ ["IN / NOT IN","","Tests whether a value is (or is not) in a list or subquery result.",5,0],
+ ["LIKE","","Pattern match on text: % is any run of characters, _ is exactly one.",5,0],
+ ["IS NULL","","The correct way to test for NULL; = NULL never matches.",5,0],
+ ["CASE","","An if-then-else expression inside a query.",5,0],
+ ["Window function","OVER (PARTITION BY …)","Computes a value over a group of rows while keeping every row.",5,0],
+ ["Query semantics","","What a query means, stated in one plain sentence.",5,0],
+
+ ["Datalog","","A rule-based query language: head <- body.",6,0],
+ ["Rule","","A Datalog statement: the head is true whenever the whole body is true.",6,0],
+ ["Head","","The left side of a rule: the result being defined.",6,0],
+ ["Body","","The right side of a rule: the conditions joined by AND.",6,0],
+ ["Anonymous variable","_","A position whose value is not needed.",6,0],
+ ["Safe rule","","Every variable in the head, in a NOT, or in a comparison also appears in a positive table in the body, so the answer is finite.",6,1],
+ ["EDB","Extensional database","The stored tables a Datalog program reads.",6,1],
+ ["IDB","Intensional database","The relations defined by rules.",6,1],
+ ["Recursive query","","A query that refers to itself to follow chains of any length.",6,0],
+ ["CTE","Common Table Expression","A named temporary result defined with WITH … AS (…).",6,1],
+ ["WITH RECURSIVE","","A CTE that refers to itself: base case, UNION ALL, recursive case.",6,0],
+ ["Base case","","The starting rows of a recursive query.",6,0],
+ ["Recursive case","","The part that builds the next rows from those already found.",6,0],
+
+ ["Block","Page","The fixed-size unit read from or written to disk.",7,0],
+ ["B","Block size","Size of one block in bytes.",7,0],
+ ["R","Record size","Size of one record in bytes; the sum of its field sizes.",7,0],
+ ["r","Number of records","How many records are in the file.",7,0],
+ ["bfr","Blocking factor","Records per block: floor(B / R).",7,0],
+ ["b","Number of blocks","Blocks the file needs: ceiling(r / bfr).",7,0],
+ ["Fixed-length record","","Every record has the same size, so bfr is the same for every block.",7,0],
+ ["Unspanned","","A record may not be split across two blocks; leftover space in a block is wasted.",7,0],
+ ["Spanned","","A record may continue into the next block.",7,1],
+ ["P","Block pointer","The address of a block on disk.",7,0],
+ ["PR","Record pointer","The address of one record: block address plus position in the block.",7,0],
+ ["Block access","","One block read from disk; the unit of cost.",7,0],
+ ["Linear search","","Reading blocks one after another: best 1, worst b, average b/2.",7,0],
+ ["Binary search","","Halving a sorted file each step: about log2(b) block accesses.",7,0],
+ ["Ordered file","Sorted file","A file whose records are stored in order of one field, the ordering field.",7,0],
+ ["Heap file","Unordered file","Records stored in no particular order.",7,1],
+ ["Index","","An extra file of (key, pointer) entries, sorted, used to find records with fewer block accesses.",7,0],
+ ["Index entry","","One (key value, pointer) pair in an index.",7,0],
+ ["Ri","Index entry size","Key size plus pointer size.",7,0],
+ ["bfri","Index blocking factor","Index entries per block: floor(B / Ri).",7,0],
+ ["fo","Fan-out","Same as bfri: how many child blocks one index block can point to.",7,0],
+ ["Primary index","","An index on the ordering key field of a sorted file: one entry per data block.",7,0],
+ ["Clustering index","","An index on an ordering field that is not a key: one entry per distinct value.",7,1],
+ ["Secondary index","","An index on a non-ordering field. Can be built on any field, key or not.",7,0],
+ ["Dense index","","One index entry for every record.",7,0],
+ ["Sparse index","Non-dense index","Index entries for only some records, e.g. one per block.",7,1],
+ ["Single-level index","","One index file searched by binary search.",7,0],
+ ["Multilevel index","","An index on the index, repeated until the top level fits in one block.",7,0],
+ ["t","Levels","Number of index levels: ceiling(log_fo(r1)).",7,0],
+ ["B+-tree","","The balanced multilevel index structure most real databases use.",7,1],
+ ["floor","⌊x⌋","Round down to a whole number.",7,0],
+ ["ceiling","⌈x⌉","Round up to a whole number.",7,0],
+
+ ["Query optimizer","","The part of the DBMS that chooses how to execute a query.",8,0],
+ ["Query tree","","A query drawn as a tree: tables at the leaves, operations as nodes, result at the root.",8,0],
+ ["Execution plan","Query plan","The chosen sequence of steps to run a query.",8,1],
+ ["Heuristic","","A rule of thumb that usually lowers cost, such as filtering early.",8,0],
+ ["Cascade of selections","","Splitting σ (c1 AND c2) into σ c1 (σ c2 (…)).",8,0],
+ ["Selection push-down","","Moving σ as close to its table as possible.",8,0],
+ ["Projection push-down","","Keeping only needed columns as low in the tree as possible.",8,0],
+ ["Intermediate result","","A temporary table produced between two steps of a plan.",8,1],
+ ["Cost-based optimization","","Estimating the cost of several plans from table statistics and picking the cheapest.",8,1],
+ ["Selectivity","","The fraction of rows a condition keeps. Most selective = keeps the fewest.",8,1],
+ ["Join order","","Which tables are joined first. Joining the smallest results first usually costs least.",8,0],
+
+ ["Transaction","","A group of reads and writes that succeeds or fails as one unit.",9,0],
+ ["START TRANSACTION","BEGIN","Starts a transaction explicitly.",9,0],
+ ["COMMIT","","Makes all changes in the transaction permanent and visible to others.",9,0],
+ ["ROLLBACK","","Undoes every change in the transaction.",9,0],
+ ["Autocommit","","Mode where each statement is its own transaction and commits immediately. MySQL's default.",9,1],
+ ["Session","Connection","One client's link to the database. Each session has its own transactions.",9,0],
+ ["Uncommitted change","","A change made inside a transaction that has not been committed. Only its own session can see it.",9,0],
+ ["Dirty read","","Reading another session's uncommitted change. Prevented at the usual isolation levels.",9,1],
+ ["Lock","","A mark that a session is using a row, making others wait to change it.",9,0],
+ ["Lock wait","","A statement paused until another session releases its lock. MySQL gives up after a timeout (50 seconds by default).",9,1],
+ ["Deadlock","","Two sessions each waiting for a lock the other holds. The DBMS rolls one back.",9,1],
+ ["Isolation level","","How much one transaction can see of others: READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ (InnoDB default), SERIALIZABLE.",9,1],
+ ["ACID","Atomicity, Consistency, Isolation, Durability","The four guarantees of a transaction.",9,1],
+ ["Atomicity","","All of a transaction happens, or none of it.",9,1],
+ ["Consistency","","A transaction takes the database from one valid state to another.",9,1],
+ ["Isolation","","Concurrent transactions do not see each other's unfinished work.",9,1],
+ ["Durability","","Committed changes survive crashes.",9,1],
+ ["Concurrency","","Many sessions working on the same data at the same time.",9,1],
+
+ ["Account","user@host","A MySQL login: a user name plus the host it may connect from.",10,0],
+ ["Host","","Where a connection comes from: localhost, an IP address, or a pattern.",10,0],
+ ["localhost","","The same machine as the database server.",10,0],
+ ["%","Wildcard","Matches any host, or any run of characters in an IP pattern such as 192.168.128.%.",10,0],
+ ["CREATE USER","","Creates an account with a password.",10,0],
+ ["ALTER USER","","Changes an account, e.g. its password.",10,0],
+ ["DROP USER","","Deletes an account.",10,0],
+ ["Privilege","","Permission to perform an action: SELECT, INSERT, UPDATE, DELETE, CREATE, and others.",10,0],
+ ["GRANT","","Gives privileges or roles to an account.",10,0],
+ ["REVOKE","","Takes privileges or roles away.",10,0],
+ ["GRANT OPTION","WITH GRANT OPTION","Lets the holder pass their privileges on to others.",10,0],
+ ["ALL PRIVILEGES","","Every privilege at the given level.",10,0],
+ ["Privilege level","","Where a privilege applies: global *.*, database db.*, table db.t, or column.",10,0],
+ ["Role","","A named bundle of privileges that can be granted to many accounts. In MySQL 8 it must be activated (SET ROLE or SET DEFAULT ROLE).",10,0],
+ ["FLUSH PRIVILEGES","","Reloads the privilege tables. Not needed after GRANT or REVOKE, but common in lab answers.",10,0],
+ ["mysql.user","","The system table listing every account.",10,0],
+ ["Least privilege","PoLP","Give each account only the permissions and hosts it needs.",10,0],
+ ["Authentication","","Proving who you are (user name and password).",10,1],
+ ["Authorization","","Deciding what you are allowed to do (privileges).",10,1]
+];
+
 var CARDS = [
- {t:1,q:"What is a database?",a:"A collection of related data."},
- {t:1,q:"What is data?",a:"Known facts that can be recorded and have implicit meaning."},
- {t:1,q:"What is the miniworld?",a:"The aspect of the real world a database represents, also called the universe of discourse (UoD)."},
- {t:1,q:"What is a DBMS?",a:"A general-purpose software system that facilitates defining, constructing, manipulating and sharing databases among various users and applications."},
- {t:1,q:"Query vs transaction",a:"A query typically causes some data to be retrieved; a transaction may cause some data to be read and some to be written into the database."},
- {t:1,q:"Relation state r(R)",a:"A subset of dom(A1) x dom(A2) x ... x dom(An) over the attributes A1..An. Each tuple is one combination of domain values."},
- {t:1,q:"Superkey vs candidate key",a:"A superkey is any set of attributes that uniquely identifies a tuple. A candidate key is a minimal superkey: no proper subset still identifies a tuple."},
- {t:1,q:"Can a foreign-key value be NULL?",a:"Yes. A foreign key links attributes of one table to another table's primary key, and its values are allowed to be NULL."},
- {t:1,q:"Which constraint can a delete violate?",a:"Only referential integrity, not key constraints nor entity integrity."},
- {t:1,q:"Do tuples have an order?",a:"No. Tuples in a relation do not have any particular order; any order of the rows is the same relation."},
- {t:1,q:"ON DELETE SET NULL",a:"When the referenced row is deleted, the foreign key in the referencing rows is set to NULL (the worksheet's answer for a removed instructor)."},
- {t:1,q:"ON UPDATE CASCADE",a:"When the referenced key changes, the change is copied to the referencing rows (the worksheet's answer for a renamed instructor)."},
- {t:1,q:"ON DELETE SET DEFAULT",a:"When the referenced row is deleted, the referencing FK takes the column's DEFAULT; the DDL lab uses TeacherID DEFAULT 1 so assignments survive a teacher's deletion."},
- {t:1,q:"Restrict a column to a list of values",a:"CHECK (RelationToStudent IN ('Mother','Father','Other')). The form CHECK ('Mother' OR 'Father' OR 'Other') does not test the column."},
- {t:1,q:"Double line in an ER diagram",a:"Total participation: every instance of that entity must take part in the relationship. A single line is partial participation."},
- {t:1,q:"Cardinality ratio",a:"The 1, N or M written at each end of a relationship: how many instances of one entity may relate to one instance of the other."},
- {t:1,q:"Why is Customer-Invoice 1:N with total participation on Invoice?",a:"A customer can have many invoices; every invoice must be issued to exactly one customer, and there cannot be an invoice without a customer."},
- {t:1,q:"What is relational algebra?",a:"A procedural query language: a set of algebraic operations that provides the theoretical foundation for relational queries."},
- {t:1,q:"Six fundamental RA operations",a:"Select (sigma), Project (pi), Union, Set difference, Cartesian product, Rename (rho)."},
- {t:1,q:"Additional RA operations",a:"Intersection, Assignment, Join, Division, Outer join."},
- {t:1,q:"What does Project do to duplicates?",a:"It removes them. pi Sex (EMPLOYEE) returns just M and F."},
- {t:1,q:"Equijoin",a:"A join whose condition is equality of attributes, e.g. EMPLOYEE join Dno = Dnumber (DEPARTMENT)."},
- {t:1,q:"Text form of sigma, pi and join",a:"sigma_(cond)(R), pi_(a, b)(R), join_(R, S)."},
- {t:1,q:"Rule for non-aggregated columns in SELECT",a:"Standard SQL requires every non-aggregated column in SELECT to appear in GROUP BY."},
- {t:1,q:"Count customers with more than one address",a:"Subquery in FROM: GROUP BY CustomerID HAVING COUNT(AddressID) > 1, then COUNT(*) outside."},
- {t:1,q:"Products that are discontinued",a:"WHERE SellEndDate IS NOT NULL (a product is discontinued when a sell end date has been issued)."},
- {t:1,q:"Self-join use in the lab",a:"Counting direct sub-categories: ProductCategory AS parent JOIN ProductCategory AS child ON parent.ProductCategoryID = child.ParentProductCategoryID."},
- {t:1,q:"Flag customers with multiple addresses",a:"CASE WHEN COUNT(ca.AddressID) OVER (PARTITION BY c.CustomerID) > 1 THEN 'Y' ELSE 'N' END."},
- {t:1,q:"Translate ans(x,y) <- WORKS_ON(x,y,z) AND z > 20.0",a:"RA: pi Essn, Pno (sigma Hours > 20.0 (WORKS_ON)). SQL: SELECT Essn, Pno FROM WORKS_ON WHERE Hours > 20.0. English: Essn and project number where hours exceed 20."},
- {t:1,q:"Base case and recursive case of WITH RECURSIVE",a:"The first SELECT (anchor row, relative_depth 0) is the base case; the SELECT after UNION ALL that joins the CTE to itself is the recursive case."},
- {t:2,q:"Blocking factor",a:"bfr = floor(B / R): records per block, floored because a block cannot hold part of a record (unspanned)."},
- {t:2,q:"Number of file blocks",a:"b = ceiling(r / bfr), ceiling so the last partially filled block is counted."},
- {t:2,q:"Linear search cost on 7,500 blocks",a:"Best 1, worst 7,500, average 3,750 block accesses."},
- {t:2,q:"Index blocking factor (fan-out)",a:"bfri = fo = floor(B / Ri) where Ri = key size + pointer size, e.g. floor(512/15) = 34."},
- {t:2,q:"Primary vs secondary index entry count",a:"Primary index on an ordered key: one entry per data block (7,500). Secondary (dense) index: one entry per record (30,000)."},
- {t:2,q:"Which index when the file is not ordered by the field?",a:"A secondary index: an index on a non-ordering field, which can be created on any field."},
- {t:2,q:"Block accesses via a multilevel index",a:"t + 1, where t = ceiling(log_fo r1) is the number of levels; one block per level plus one data block."},
- {t:2,q:"Four heuristic optimization steps",a:"Cascade selection; move selection down; replace Cartesian product plus selection with a join; push projection down."},
- {t:2,q:"What does an uncommitted change look like to another session?",a:"Invisible: the other session reads the original value, and its own writes to the locked row cannot complete until COMMIT or ROLLBACK."},
- {t:2,q:"Begin a transaction and never commit or roll back",a:"In most DBMSs it is rolled back automatically; until then other sessions never see the change."},
- {t:2,q:"CREATE USER without @host",a:"Means user@'%', connectable from any host; for an app on the same host use @'localhost' (least privilege)."},
- {t:2,q:"Column-level privilege",a:"GRANT SELECT (employee_id, first_name, last_name, email, job_id, salary) ON employees TO 'salary_app'@'192.168.128.%'."},
- {t:2,q:"Remove a user completely",a:"REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'dan'@'localhost'; DROP USER 'dan'@'localhost'; FLUSH PRIVILEGES;"}
+ {"t": 0,"q": "What is a database?","a": "A collection of related data."},
+ {"t": 0,"q": "What is data?","a": "Known facts that can be recorded and have implicit meaning."},
+ {"t": 0,"q": "What is the miniworld?","a": "The aspect of the real world a database represents, also called the universe of discourse (UoD)."},
+ {"t": 0,"q": "What is a DBMS?","a": "A general-purpose software system that facilitates defining, constructing, manipulating and sharing databases among various users and applications."},
+ {"t": 0,"q": "Query vs transaction","a": "A query typically causes some data to be retrieved; a transaction may cause some data to be read and some to be written into the database."},
+ {"t": 1,"q": "Relation state r(R)","a": "A subset of dom(A1) x dom(A2) x ... x dom(An) over the attributes A1..An. Each tuple is one combination of domain values."},
+ {"t": 1,"q": "Superkey vs candidate key","a": "A superkey is any set of attributes that uniquely identifies a tuple. A candidate key is a minimal superkey: no proper subset still identifies a tuple."},
+ {"t": 1,"q": "Can a foreign-key value be NULL?","a": "Yes. A foreign key links attributes of one table to another table's primary key, and its values are allowed to be NULL."},
+ {"t": 1,"q": "Which constraint can a delete violate?","a": "Only referential integrity, not key constraints nor entity integrity."},
+ {"t": 1,"q": "Do tuples have an order?","a": "No. Tuples in a relation do not have any particular order; any order of the rows is the same relation."},
+ {"t": 2,"q": "ON DELETE SET NULL","a": "When the referenced row is deleted, the foreign key in the referencing rows is set to NULL (the worksheet's answer for a removed instructor)."},
+ {"t": 2,"q": "ON UPDATE CASCADE","a": "When the referenced key changes, the change is copied to the referencing rows (the worksheet's answer for a renamed instructor)."},
+ {"t": 2,"q": "ON DELETE SET DEFAULT","a": "When the referenced row is deleted, the referencing FK takes the column's DEFAULT; the DDL lab uses TeacherID DEFAULT 1 so assignments survive a teacher's deletion."},
+ {"t": 2,"q": "Restrict a column to a list of values","a": "CHECK (RelationToStudent IN ('Mother','Father','Other')). The form CHECK ('Mother' OR 'Father' OR 'Other') does not test the column."},
+ {"t": 3,"q": "Double line in an ER diagram","a": "Total participation: every instance of that entity must take part in the relationship. A single line is partial participation."},
+ {"t": 3,"q": "Cardinality ratio","a": "The 1, N or M written at each end of a relationship: how many instances of one entity may relate to one instance of the other."},
+ {"t": 3,"q": "Why is Customer-Invoice 1:N with total participation on Invoice?","a": "A customer can have many invoices; every invoice must be issued to exactly one customer, and there cannot be an invoice without a customer."},
+ {"t": 4,"q": "What is relational algebra?","a": "A procedural query language: a set of algebraic operations that provides the theoretical foundation for relational queries."},
+ {"t": 4,"q": "Six fundamental RA operations","a": "Select (sigma), Project (pi), Union, Set difference, Cartesian product, Rename (rho)."},
+ {"t": 4,"q": "Additional RA operations","a": "Intersection, Assignment, Join, Division, Outer join."},
+ {"t": 4,"q": "What does Project do to duplicates?","a": "It removes them. pi Sex (EMPLOYEE) returns just M and F."},
+ {"t": 4,"q": "Equijoin","a": "A join whose condition is equality of attributes, e.g. EMPLOYEE join Dno = Dnumber (DEPARTMENT)."},
+ {"t": 4,"q": "Text form of sigma, pi and join","a": "sigma_(cond)(R), pi_(a, b)(R), join_(R, S)."},
+ {"t": 5,"q": "Rule for non-aggregated columns in SELECT","a": "Standard SQL requires every non-aggregated column in SELECT to appear in GROUP BY."},
+ {"t": 5,"q": "Count customers with more than one address","a": "Subquery in FROM: GROUP BY CustomerID HAVING COUNT(AddressID) > 1, then COUNT(*) outside."},
+ {"t": 5,"q": "Products that are discontinued","a": "WHERE SellEndDate IS NOT NULL (a product is discontinued when a sell end date has been issued)."},
+ {"t": 5,"q": "Self-join use in the lab","a": "Counting direct sub-categories: ProductCategory AS parent JOIN ProductCategory AS child ON parent.ProductCategoryID = child.ParentProductCategoryID."},
+ {"t": 5,"q": "Flag customers with multiple addresses","a": "CASE WHEN COUNT(ca.AddressID) OVER (PARTITION BY c.CustomerID) > 1 THEN 'Y' ELSE 'N' END."},
+ {"t": 6,"q": "Translate ans(x,y) <- WORKS_ON(x,y,z) AND z > 20.0","a": "RA: pi Essn, Pno (sigma Hours > 20.0 (WORKS_ON)). SQL: SELECT Essn, Pno FROM WORKS_ON WHERE Hours > 20.0. English: Essn and project number where hours exceed 20."},
+ {"t": 6,"q": "Base case and recursive case of WITH RECURSIVE","a": "The first SELECT (anchor row, relative_depth 0) is the base case; the SELECT after UNION ALL that joins the CTE to itself is the recursive case."},
+ {"t": 7,"q": "Blocking factor","a": "bfr = floor(B / R): records per block, floored because a block cannot hold part of a record (unspanned)."},
+ {"t": 7,"q": "Number of file blocks","a": "b = ceiling(r / bfr), ceiling so the last partially filled block is counted."},
+ {"t": 7,"q": "Linear search cost on 7,500 blocks","a": "Best 1, worst 7,500, average 3,750 block accesses."},
+ {"t": 7,"q": "Index blocking factor (fan-out)","a": "bfri = fo = floor(B / Ri) where Ri = key size + pointer size, e.g. floor(512/15) = 34."},
+ {"t": 7,"q": "Primary vs secondary index entry count","a": "Primary index on an ordered key: one entry per data block (7,500). Secondary (dense) index: one entry per record (30,000)."},
+ {"t": 7,"q": "Which index when the file is not ordered by the field?","a": "A secondary index: an index on a non-ordering field, which can be created on any field."},
+ {"t": 7,"q": "Block accesses via a multilevel index","a": "t + 1, where t = ceiling(log_fo r1) is the number of levels; one block per level plus one data block."},
+ {"t": 8,"q": "Four heuristic optimization steps","a": "Cascade selection; move selection down; replace Cartesian product plus selection with a join; push projection down."},
+ {"t": 9,"q": "What does an uncommitted change look like to another session?","a": "Invisible: the other session reads the original value, and its own writes to the locked row cannot complete until COMMIT or ROLLBACK."},
+ {"t": 9,"q": "Begin a transaction and never commit or roll back","a": "In most DBMSs it is rolled back automatically; until then other sessions never see the change."},
+ {"t": 10,"q": "CREATE USER without @host","a": "Means user@'%', connectable from any host; for an app on the same host use @'localhost' (least privilege)."},
+ {"t": 10,"q": "Column-level privilege","a": "GRANT SELECT (employee_id, first_name, last_name, email, job_id, salary) ON employees TO 'salary_app'@'192.168.128.%'."},
+ {"t": 10,"q": "Remove a user completely","a": "REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'dan'@'localhost'; DROP USER 'dan'@'localhost'; FLUSH PRIVILEGES;"},
+ {"t": 1,"q": "Schema vs state","a": "Schema: the table's name and columns (the blueprint, rarely changes). State: the rows in it right now (changes with every insert, update, delete)."},
+ {"t": 1,"q": "Entity integrity","a": "A primary key value can never be NULL."},
+ {"t": 1,"q": "Referential integrity","a": "A foreign key must match an existing row in the parent table, or be NULL."},
+ {"t": 1,"q": "What is a domain?","a": "The set of values an attribute may take, e.g. integers 3 to 5, or dates."},
+ {"t": 2,"q": "DDL, DML, DCL, TCL","a": "DDL builds structure (CREATE, ALTER, DROP). DML reads and changes rows (SELECT, INSERT, UPDATE, DELETE). DCL handles permissions (GRANT, REVOKE). TCL ends transactions (COMMIT, ROLLBACK)."},
+ {"t": 2,"q": "RESTRICT / NO ACTION","a": "Refuse to delete or update the parent row while child rows still point at it. In MySQL, NO ACTION is the default and behaves like RESTRICT."},
+ {"t": 2,"q": "SET NULL on a NOT NULL column","a": "Not allowed: the action would need to write NULL into a column that forbids it. MySQL rejects the definition."},
+ {"t": 2,"q": "SET DEFAULT in MySQL","a": "Standard SQL, but MySQL's InnoDB engine rejects foreign keys that use it. Other DBMSs (e.g. PostgreSQL) support it."},
+ {"t": 3,"q": "Entity type vs relationship type","a": "Entity type (rectangle): a kind of thing, e.g. Member. Relationship type (diamond): how things connect, e.g. borrows."},
+ {"t": 3,"q": "M:N in tables","a": "A many-to-many relationship becomes its own linking table holding the keys of both sides, e.g. Loan(MemberID, BookID)."},
+ {"t": 3,"q": "Multivalued attribute","a": "An attribute with several values for one entity, drawn as a double oval, e.g. a product's price history."},
+ {"t": 4,"q": "Select vs project","a": "Select (σ) chooses rows that pass a condition. Project (π) chooses columns and removes duplicates."},
+ {"t": 4,"q": "Cartesian product row count","a": "rows(A) x rows(B). 3 members x 4 books = 12 rows."},
+ {"t": 4,"q": "How do you read a nested RA expression?","a": "From the inside out: the innermost operation runs first, and its result feeds the next."},
+ {"t": 5,"q": "WHERE vs HAVING","a": "WHERE filters single rows before grouping. HAVING filters groups after GROUP BY, usually by an aggregate."},
+ {"t": 5,"q": "Order the DBMS processes a SELECT","a": "FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER BY, LIMIT."},
+ {"t": 5,"q": "Test for a missing value","a": "WHERE col IS NULL. Writing col = NULL never matches."},
+ {"t": 5,"q": "LIKE patterns","a": "% matches any run of characters, _ matches exactly one. LIKE 'T%' = starts with T."},
+ {"t": 6,"q": "Datalog: head and body","a": "head <- body. The head row is produced whenever every condition in the body can be matched."},
+ {"t": 6,"q": "When is a Datalog rule safe?","a": "When every variable in the head, in a NOT, or in a comparison also appears in a positive table in the body."},
+ {"t": 6,"q": "Same variable in two body atoms","a": "The values must be equal: that is how Datalog joins."},
+ {"t": 7,"q": "Why is cost measured in block accesses?","a": "Reading a block from disk takes far longer than processing it in memory, so block reads dominate the cost."},
+ {"t": 7,"q": "Primary index entry vs secondary index entry","a": "Both are (key, pointer). Primary: one per data block, block pointer. Secondary on a non-ordering field: one per record; the pointer may be a block or record pointer."},
+ {"t": 8,"q": "What does the query optimizer do?","a": "Chooses how to execute a query: the order of operations and the method for each."},
+ {"t": 8,"q": "Why push selections down?","a": "Filtering close to the tables shrinks intermediate results, so later joins handle fewer rows."},
+ {"t": 8,"q": "Query tree layout","a": "Tables at the leaves, operations as internal nodes, the final result at the root."},
+ {"t": 9,"q": "COMMIT vs ROLLBACK","a": "COMMIT makes the transaction's changes permanent and visible. ROLLBACK undoes all of them."},
+ {"t": 9,"q": "ACID","a": "Atomicity (all or nothing), Consistency (rules hold), Isolation (others do not see unfinished work), Durability (committed changes survive crashes)."},
+ {"t": 9,"q": "Session B updates a row Session A has changed but not committed","a": "B waits for A's lock. It continues after A commits or rolls back, or fails after the lock-wait timeout."},
+ {"t": 10,"q": "'ana'@'localhost' vs 'ana'@'%'","a": "Two different accounts. localhost: only from the server machine. %: from any host."},
+ {"t": 10,"q": "Why use a role?","a": "Grant privileges once to the role, then grant the role to many users. Changing the role changes everyone who has it."},
+ {"t": 10,"q": "Principle of least privilege","a": "Each account gets only the permissions and hosts it needs, so misuse does limited damage."}
 ];
-
 var QUIZ = [
- {q:"A database is best described as",
-  o:["a query that retrieves data","the universe of discourse","a general-purpose software system","a collection of related data"], a:[3],
-  e:"The worksheet answer: a database is a collection of related data. The DBMS is the software; the miniworld is what it represents."},
- {q:"Keys are always superkeys because",
-  o:["a key must be a single attribute","superkeys cannot contain NULL","a key is the first column of the table","a key is any attribute set that identifies a tuple, and a candidate key is the minimal such set"], a:[3],
-  e:"A superkey is any set of attributes that uniquely identifies a tuple; a candidate key is a minimal superkey, so every key is also a superkey."},
- {q:"Which operation can violate referential integrity but not key or entity integrity?",
-  o:["Select","Insert","Update of a key","Delete"], a:[3],
-  e:"Past paper Q2.5: the delete operation can violate only referential integrity."},
- {q:"The requirement 'when an instructor is removed, AdvisorID should be set to NULL' is written as",
-  o:["ON DELETE CASCADE","ON DELETE SET DEFAULT","ON DELETE SET NULL","ON UPDATE SET NULL"], a:[2],
-  e:"The worksheet answer uses ON DELETE SET NULL for the removal and ON UPDATE CASCADE for the rename."},
- {q:"In the DDL lab, a deleted teacher must leave the assignment row intact with TeacherID = 1. The clause is",
-  o:["ON DELETE CASCADE","ON DELETE SET DEFAULT with TeacherID INT DEFAULT 1","ON DELETE SET NULL","CHECK (TeacherID = 1)"], a:[1],
-  e:"TeacherID INT DEFAULT 1 plus CONSTRAINT fk_sra_teacher ... ON DELETE SET DEFAULT."},
- {q:"In the inventory ER diagram, 'every product must be sold by a department' is shown by",
-  o:["a double line between Product and sold by","the label N on the Product side","a double-outlined attribute","a dashed line"], a:[0],
-  e:"Total participation is indicated by a double line; a single line is partial participation."},
- {q:"Which list holds only fundamental relational algebra operations?",
-  o:["Intersection, Assignment, Outer join","Join, Rename, Division, Union","Select, Project, Join, Division","Select, Project, Union, Set difference, Cartesian product, Rename"], a:[3],
-  e:"The handwritten notes list six fundamental operations; intersection, assignment, join, division and outer join are additional."},
- {q:"pi Sex (EMPLOYEE) returns only two rows, M and F, because",
-  o:["EMPLOYEE has two rows","projection eliminates duplicate rows","selection removes NULL values","Sex is a key"], a:[1],
-  e:"Projection extracts the specified attributes and eliminates duplicates."},
- {q:"The text form of a selection sigma_(gender='male')(employee) corresponds to",
-  o:["sigma gender='male' (employee)","join_(employee, gender)","rho gender (employee)","pi gender='male' (employee)"], a:[0],
-  e:"sigma_(...) replaces the sigma symbol; pi_(...) replaces pi; join_(...) replaces the join symbol."},
- {q:"Which SQL lists customers who have more than one address?",
-  o:["WHERE COUNT(ca.AddressID) > 1","GROUP BY c.CustomerID, c.FirstName, c.LastName HAVING COUNT(c.CustomerID) > 1","ORDER BY COUNT(*) DESC LIMIT 1","SELECT DISTINCT CustomerID"], a:[1],
-  e:"Aggregates are filtered with HAVING after GROUP BY; WHERE cannot use COUNT."},
- {q:"A product is discontinued when",
-  o:["ListPrice is 0","SellEndDate IS NOT NULL","StandardCost > 800","Color IS NULL"], a:[1],
-  e:"Both SQL labs: a product is discontinued when a sell end date has been issued."},
- {q:"The semantic of SELECT pc.Name, MAX(p.ListPrice) FROM ProductCategory pc JOIN Product p ... GROUP BY pc.Name is",
-  o:["categories with no products","the cheapest product overall","the most expensive price in each product category","the number of products per category"], a:[2],
-  e:"Lab answer: retrieve the most expensive price in each product category."},
- {q:"In a WITH RECURSIVE query, the part after UNION ALL that joins the CTE to itself is",
-  o:["the anchor","the base case","the recursive case","the final SELECT"], a:[2],
-  e:"The first SELECT (relative_depth 0) is the base case; the self-joining SELECT is the recursive case."},
- {q:"With B = 512 and R = 115, the blocking factor and number of blocks for 30,000 records are",
-  o:["5 and 6,000","4 and 7,500","4.45 and 6,742","34 and 883"], a:[1],
-  e:"bfr = floor(512/115) = 4; b = ceiling(30,000/4) = 7,500."},
- {q:"Searching a primary index of 221 blocks by binary search and then reading the record costs",
-  o:["8 + 1 = 9 block accesses","13 block accesses","4 block accesses","221 + 1"], a:[0],
-  e:"ceiling(log2 221) = 8 index blocks plus one data block."},
- {q:"A multilevel index with levels of 883, 26 and 1 blocks needs how many block accesses to fetch a record?",
-  o:["3","4","910","27"], a:[1],
-  e:"One block per level (t = 3) plus one data block: 3 + 1 = 4."},
- {q:"The first heuristic optimization step applied to the single selection over the whole WHERE clause is",
-  o:["sort the relations","push projection down","replace the product with a join","cascade the selection into one sigma per condition"], a:[3],
-  e:"Slides: cascade selection, move selection down, Cartesian product with select to join, projection."},
- {q:"Session A has debited an account inside an open transaction. Session B reads the balance and sees",
-  o:["the decreased balance","the original balance","an error","NULL"], a:[1],
-  e:"The update has not been committed, so other sessions cannot see it (default isolation behaviour)."},
- {q:"CREATE USER 'thisisme' IDENTIFIED BY 'pw'; for an app on the same host is wrong because",
-  o:["the password is too short","it omits the host and so allows connection from any host","CREATE USER needs FLUSH PRIVILEGES","usernames must be uppercase"], a:[1],
-  e:"Without @host the account is 'thisisme'@'%'; the correct form is 'thisisme'@'localhost' (least privilege)."},
- {q:"Which statement grants the hr role to four users in a single statement?",
-  o:["GRANT 'hr' TO 'john'@'localhost','jane'@'localhost','dan'@'localhost','tommy'@'localhost';","GRANT ROLE hr;","ALTER USER ... ROLE hr","GRANT hr TO ALL"], a:[0],
-  e:"After CREATE ROLE 'hr', the role is granted to a comma-separated list of user@host accounts."}
+ {"t": 0,"q": "A database is best described as","o": ["a query that retrieves data","the universe of discourse","a general-purpose software system","a collection of related data"],"a": 3,"e": "The worksheet answer: a database is a collection of related data. The DBMS is the software; the miniworld is what it represents."},
+ {"t": 1,"q": "Keys are always superkeys because","o": ["a key must be a single attribute","superkeys cannot contain NULL","a key is the first column of the table","a key is any attribute set that identifies a tuple, and a candidate key is the minimal such set"],"a": 3,"e": "A superkey is any set of attributes that uniquely identifies a tuple; a candidate key is a minimal superkey, so every key is also a superkey."},
+ {"t": 1,"q": "Which operation can violate referential integrity but not key or entity integrity?","o": ["Select","Insert","Update of a key","Delete"],"a": 3,"e": "Past paper Q2.5: the delete operation can violate only referential integrity."},
+ {"t": 2,"q": "The requirement 'when an instructor is removed, AdvisorID should be set to NULL' is written as","o": ["ON DELETE CASCADE","ON DELETE SET DEFAULT","ON DELETE SET NULL","ON UPDATE SET NULL"],"a": 2,"e": "The worksheet answer uses ON DELETE SET NULL for the removal and ON UPDATE CASCADE for the rename."},
+ {"t": 2,"q": "In the DDL lab, a deleted teacher must leave the assignment row intact with TeacherID = 1. The clause is","o": ["ON DELETE CASCADE","ON DELETE SET DEFAULT with TeacherID INT DEFAULT 1","ON DELETE SET NULL","CHECK (TeacherID = 1)"],"a": 1,"e": "TeacherID INT DEFAULT 1 plus CONSTRAINT fk_sra_teacher ... ON DELETE SET DEFAULT."},
+ {"t": 3,"q": "In the inventory ER diagram, 'every product must be sold by a department' is shown by","o": ["a double line between Product and sold by","the label N on the Product side","a double-outlined attribute","a dashed line"],"a": 0,"e": "Total participation is indicated by a double line; a single line is partial participation."},
+ {"t": 4,"q": "Which list holds only fundamental relational algebra operations?","o": ["Intersection, Assignment, Outer join","Join, Rename, Division, Union","Select, Project, Join, Division","Select, Project, Union, Set difference, Cartesian product, Rename"],"a": 3,"e": "The handwritten notes list six fundamental operations; intersection, assignment, join, division and outer join are additional."},
+ {"t": 4,"q": "pi Sex (EMPLOYEE) returns only two rows, M and F, because","o": ["EMPLOYEE has two rows","projection eliminates duplicate rows","selection removes NULL values","Sex is a key"],"a": 1,"e": "Projection extracts the specified attributes and eliminates duplicates."},
+ {"t": 4,"q": "The text form of a selection sigma_(gender='male')(employee) corresponds to","o": ["sigma gender='male' (employee)","join_(employee, gender)","rho gender (employee)","pi gender='male' (employee)"],"a": 0,"e": "sigma_(...) replaces the sigma symbol; pi_(...) replaces pi; join_(...) replaces the join symbol."},
+ {"t": 5,"q": "Which SQL lists customers who have more than one address?","o": ["WHERE COUNT(ca.AddressID) > 1","GROUP BY c.CustomerID, c.FirstName, c.LastName HAVING COUNT(c.CustomerID) > 1","ORDER BY COUNT(*) DESC LIMIT 1","SELECT DISTINCT CustomerID"],"a": 1,"e": "Aggregates are filtered with HAVING after GROUP BY; WHERE cannot use COUNT."},
+ {"t": 5,"q": "A product is discontinued when","o": ["ListPrice is 0","SellEndDate IS NOT NULL","StandardCost > 800","Color IS NULL"],"a": 1,"e": "Both SQL labs: a product is discontinued when a sell end date has been issued."},
+ {"t": 5,"q": "The semantic of SELECT pc.Name, MAX(p.ListPrice) FROM ProductCategory pc JOIN Product p ... GROUP BY pc.Name is","o": ["categories with no products","the cheapest product overall","the most expensive price in each product category","the number of products per category"],"a": 2,"e": "Lab answer: retrieve the most expensive price in each product category."},
+ {"t": 6,"q": "In a WITH RECURSIVE query, the part after UNION ALL that joins the CTE to itself is","o": ["the anchor","the base case","the recursive case","the final SELECT"],"a": 2,"e": "The first SELECT (relative_depth 0) is the base case; the self-joining SELECT is the recursive case."},
+ {"t": 7,"q": "With B = 512 and R = 115, the blocking factor and number of blocks for 30,000 records are","o": ["5 and 6,000","4 and 7,500","4.45 and 6,742","34 and 883"],"a": 1,"e": "bfr = floor(512/115) = 4; b = ceiling(30,000/4) = 7,500."},
+ {"t": 7,"q": "Searching a primary index of 221 blocks by binary search and then reading the record costs","o": ["8 + 1 = 9 block accesses","13 block accesses","4 block accesses","221 + 1"],"a": 0,"e": "ceiling(log2 221) = 8 index blocks plus one data block."},
+ {"t": 7,"q": "A multilevel index with levels of 883, 26 and 1 blocks needs how many block accesses to fetch a record?","o": ["3","4","910","27"],"a": 1,"e": "One block per level (t = 3) plus one data block: 3 + 1 = 4."},
+ {"t": 8,"q": "The first heuristic optimization step applied to the single selection over the whole WHERE clause is","o": ["sort the relations","push projection down","replace the product with a join","cascade the selection into one sigma per condition"],"a": 3,"e": "Slides: cascade selection, move selection down, Cartesian product with select to join, projection."},
+ {"t": 9,"q": "Session A has debited an account inside an open transaction. Session B reads the balance and sees","o": ["the decreased balance","the original balance","an error","NULL"],"a": 1,"e": "The update has not been committed, so other sessions cannot see it (default isolation behaviour)."},
+ {"t": 10,"q": "CREATE USER 'thisisme' IDENTIFIED BY 'pw'; for an app on the same host is wrong because","o": ["the password is too short","it omits the host and so allows connection from any host","CREATE USER needs FLUSH PRIVILEGES","usernames must be uppercase"],"a": 1,"e": "Without @host the account is 'thisisme'@'%'; the correct form is 'thisisme'@'localhost' (least privilege)."},
+ {"t": 10,"q": "Which statement grants the hr role to four users in a single statement?","o": ["GRANT 'hr' TO 'john'@'localhost','jane'@'localhost','dan'@'localhost','tommy'@'localhost';","GRANT ROLE hr;","ALTER USER ... ROLE hr","GRANT hr TO ALL"],"a": 0,"e": "After CREATE ROLE 'hr', the role is granted to a comma-separated list of user@host accounts."},
+ {"t": 1,"q": "In Member(MemberID, Name, Phone), a tuple is","o": ["one row: one member","one column, such as Name","the table name and its columns","the set of values Phone may take"],"a": 0,"e": "Tuple is the formal name for a row."},
+ {"t": 1,"q": "The schema of a relation is","o": ["its name and list of attributes","the rows it holds right now","the number of rows","the values of its primary key"],"a": 0,"e": "The schema is the blueprint; the rows at one moment are the state."},
+ {"t": 1,"q": "Which statement about NULL is true?","o": ["It can mean unknown, not applicable, or not yet available","It is stored as 0","It is the same as an empty string","Two NULLs always compare equal"],"a": 0,"e": "NULL marks a missing value and can carry several meanings. It is not 0 or ''."},
+ {"t": 1,"q": "Entity integrity says that","o": ["a primary key value cannot be NULL","a foreign key must match a parent row","no two rows may be identical","every column must have a domain"],"a": 0,"e": "Entity integrity is about primary keys; referential integrity is about foreign keys."},
+ {"t": 1,"q": "A candidate key differs from other superkeys because it is","o": ["minimal: removing any attribute breaks uniqueness","allowed to contain NULL","always a single attribute","always numeric"],"a": 0,"e": "A candidate key is a minimal superkey."},
+ {"t": 1,"q": "A Loan row has MemberID = 9 but no member 9 exists. Which rule is broken?","o": ["Referential integrity","Entity integrity","Key constraint","Domain constraint"],"a": 0,"e": "A foreign key value must match an existing parent row or be NULL."},
+ {"t": 2,"q": "CREATE TABLE belongs to which family of SQL?","o": ["DDL","DML","DCL","TCL"],"a": 0,"e": "DDL defines structure: CREATE, ALTER, DROP."},
+ {"t": 2,"q": "Which constraint makes a column mandatory?","o": ["NOT NULL","UNIQUE","DEFAULT","CHECK"],"a": 0,"e": "NOT NULL rejects any row without a value in that column."},
+ {"t": 2,"q": "Child rows should disappear when their parent row is deleted. Use","o": ["ON DELETE CASCADE","ON DELETE SET NULL","ON DELETE RESTRICT","ON UPDATE CASCADE"],"a": 0,"e": "CASCADE makes child rows follow the parent."},
+ {"t": 2,"q": "In MySQL, a foreign key has no ON DELETE clause. Deleting a parent row that still has children","o": ["is rejected","deletes the children too","sets the children's key to NULL","sets the children's key to its DEFAULT"],"a": 0,"e": "The default is NO ACTION, which MySQL treats as RESTRICT."},
+ {"t": 2,"q": "Why can a foreign key column not be both NOT NULL and ON DELETE SET NULL?","o": ["SET NULL would have to write NULL into a column that forbids it","NOT NULL columns cannot be foreign keys","SET NULL only works with ON UPDATE","It is allowed and works normally"],"a": 0,"e": "MySQL rejects SET NULL on a column declared NOT NULL."},
+ {"t": 3,"q": "In an ER diagram, a diamond is","o": ["a relationship type","an entity type","a key attribute","a multivalued attribute"],"a": 0,"e": "Rectangles are entity types, ovals are attributes, diamonds are relationship types."},
+ {"t": 3,"q": "A student takes many courses and a course has many students. The cardinality ratio is","o": ["M:N","1:N","N:1","1:1"],"a": 0,"e": "Many on both sides is M:N."},
+ {"t": 3,"q": "Every invoice must belong to a customer. On the Invoice side this is shown as","o": ["a double line (total participation)","a single line (partial participation)","an underlined attribute","a double oval"],"a": 0,"e": "Total participation is drawn as a double line."},
+ {"t": 3,"q": "Where does the due date of one borrowing belong in an ER diagram?","o": ["On the relationship between Member and Book","On Member","On Book","It cannot be modelled"],"a": 0,"e": "It describes the link, not either entity, so it is an attribute of the relationship."},
+ {"t": 3,"q": "A double oval in an ER diagram marks","o": ["a multivalued attribute","a key attribute","a weak entity","a relationship"],"a": 0,"e": "The inventory diagram's Price_change is drawn this way."},
+ {"t": 4,"q": "Which operation chooses columns?","o": ["π (project)","σ (select)","× (Cartesian product)","∪ (union)"],"a": 0,"e": "Project picks columns; select picks rows."},
+ {"t": 4,"q": "σ Salary > 87000 (INSTRUCTOR) returns","o": ["every column of the instructors earning over 87000","only the Salary column","the number of such instructors","the instructors earning 87000 or less"],"a": 0,"e": "Select keeps whole rows that pass the condition."},
+ {"t": 4,"q": "Member has 3 rows and Book has 4. How many rows does Member × Book have?","o": ["12","7","4","3"],"a": 0,"e": "A Cartesian product pairs every row with every row: 3 x 4."},
+ {"t": 4,"q": "Union, intersection and difference require the two relations to be","o": ["union compatible: same number of attributes with matching domains","sorted on the key","joined first","the same size"],"a": 0,"e": "Set operations only make sense on rows of the same shape."},
+ {"t": 4,"q": "In π Name (σ BookID = 7 (Member ⋈ Loan)), which operation runs first?","o": ["The join","The selection","The projection","They run at the same time"],"a": 0,"e": "Read from the inside out."},
+ {"t": 5,"q": "The condition COUNT(*) > 5 belongs in","o": ["HAVING","WHERE","ORDER BY","FROM"],"a": 0,"e": "It needs a whole group to evaluate, so it filters groups."},
+ {"t": 5,"q": "Which clause does the DBMS process first?","o": ["FROM","SELECT","WHERE","ORDER BY"],"a": 0,"e": "FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER BY, LIMIT."},
+ {"t": 5,"q": "Which condition finds members with no phone recorded?","o": ["WHERE Phone IS NULL","WHERE Phone = NULL","WHERE Phone = ''","WHERE Phone = 0"],"a": 0,"e": "Comparisons with = NULL never match; use IS NULL."},
+ {"t": 5,"q": "LIKE 'T%' matches","o": ["text starting with T","text ending with T","exactly the text T%","text with exactly two characters"],"a": 0,"e": "% stands for any run of characters."},
+ {"t": 5,"q": "How does COUNT(*) OVER (PARTITION BY CustomerID) differ from GROUP BY CustomerID?","o": ["It keeps every row and adds the group's count beside it","It returns one row per customer","It only works on numbers","It sorts the result"],"a": 0,"e": "Window functions do not collapse rows."},
+ {"t": 5,"q": "SELECT Dno, COUNT(*) FROM EMPLOYEE WHERE Salary > 40000 GROUP BY Dno HAVING COUNT(*) > 5 means","o": ["for each department with more than five employees earning over 40000, show the department number and how many such employees","show every employee earning over 40000 in departments with more than five employees","count all departments with over 40000 in salary","show departments whose total salary is over 40000"],"a": 0,"e": "WHERE filters employees first, GROUP BY makes one group per department, HAVING keeps groups of more than five."},
+ {"t": 6,"q": "In a Datalog rule, _ means","o": ["a value is there but is not needed","NULL","any table","the end of the rule"],"a": 0,"e": "It is the anonymous variable."},
+ {"t": 6,"q": "Which rule is not safe?","o": ["S(x) <- R(y)","S(x) <- R(x)","S(x) <- R(x) AND x < 5","S(x, y) <- R(x) AND T(y)"],"a": 0,"e": "x appears in the head but in no table in the body, so it could be any value."},
+ {"t": 6,"q": "In Member(m, n, _) AND Loan(_, m, _, d), using m twice means","o": ["the two m values must be equal (a join)","m is renamed","m is ignored","the rule is unsafe"],"a": 0,"e": "Repeating a variable joins the atoms on that position."},
+ {"t": 6,"q": "A WITH RECURSIVE query stops when","o": ["the recursive step adds no new rows","it has run ten times","the base case is empty","ORDER BY is reached"],"a": 0,"e": "Each round builds on the rows found so far until nothing new appears."},
+ {"t": 7,"q": "B = 1024 and R = 100 bytes, unspanned. The blocking factor is","o": ["10","10.24","11","100"],"a": 0,"e": "floor(1024 / 100) = 10."},
+ {"t": 7,"q": "r = 5,000 records and bfr = 10. The file needs","o": ["500 blocks","50 blocks","5,000 blocks","510 blocks"],"a": 0,"e": "ceiling(5000 / 10) = 500."},
+ {"t": 7,"q": "Why is bfr rounded down?","o": ["A block cannot hold part of a record when records are unspanned","Rounding down is always safer","Disks round down","To leave space for an index"],"a": 0,"e": "Only whole records fit; the remainder is wasted space."},
+ {"t": 7,"q": "A secondary index on a non-ordering field has","o": ["one entry per record (dense)","one entry per block","one entry per distinct value only","no entries until searched"],"a": 0,"e": "The field is not sorted in the file, so every record needs an entry."},
+ {"t": 7,"q": "A primary index on the ordering key has","o": ["one entry per data block","one entry per record","one entry per index level","one entry per field"],"a": 0,"e": "Each entry points to a block; the first record of each block is its anchor."},
+ {"t": 7,"q": "B = 1024, key 9 bytes, record pointer 7 bytes. Index entries per block:","o": ["64","68","113","56"],"a": 0,"e": "Entry = 9 + 7 = 16 bytes; floor(1024 / 16) = 64."},
+ {"t": 7,"q": "A multilevel index has levels of 469, 8 and 1 blocks. Block accesses to fetch one record:","o": ["4","3","478","9"],"a": 0,"e": "One per level (3) plus the data block."},
+ {"t": 8,"q": "Why push selections down the query tree?","o": ["To shrink intermediate results early","To sort the output","To remove the need for joins","To use less memory for the final result only"],"a": 0,"e": "Fewer rows travel up to the expensive operations."},
+ {"t": 8,"q": "A Cartesian product followed by a selection on a join condition is replaced by","o": ["a join","a projection","a union","a division"],"a": 0,"e": "That is exactly what a join computes, without building every pair."},
+ {"t": 8,"q": "SQL is called declarative because","o": ["you state the result you want and the DBMS chooses the steps","every statement is declared first","it only declares tables","it has no operators"],"a": 0,"e": "The optimizer decides how to compute it."},
+ {"t": 9,"q": "After ROLLBACK,","o": ["every change made in the transaction is undone","only the last statement is undone","changes become visible to others","the session ends"],"a": 0,"e": "ROLLBACK discards the whole transaction."},
+ {"t": 9,"q": "Session B tries to UPDATE a row that Session A changed but has not committed. B","o": ["waits until A commits or rolls back","overwrites A's change immediately","sees an error at once","updates A's uncommitted value without waiting"],"a": 0,"e": "A holds a lock on the row."},
+ {"t": 9,"q": "The A in ACID stands for","o": ["Atomicity","Availability","Accuracy","Authorization"],"a": 0,"e": "All or nothing."},
+ {"t": 9,"q": "With autocommit on (MySQL's default), an UPDATE outside START TRANSACTION","o": ["is committed immediately","waits for COMMIT","is rolled back at the end of the session","is invisible to other sessions forever"],"a": 0,"e": "Each statement is its own transaction."},
+ {"t": 10,"q": "The account 'ana'@'%' can connect from","o": ["any host","only the server machine","no host until GRANT is run","only hosts named %"],"a": 0,"e": "% is the wildcard for any host."},
+ {"t": 10,"q": "GRANT SELECT ON hr.* TO 'hr' means","o": ["the hr role may read every table in the hr database","the hr user may read one table named *","everyone may read hr","the hr role may change hr data"],"a": 0,"e": "db.* is the database level; SELECT is read-only."},
+ {"t": 10,"q": "The main benefit of a role is","o": ["privileges are granted once and shared by everyone who holds the role","roles do not need passwords","roles bypass REVOKE","roles are faster than users"],"a": 0,"e": "Change the role once and every holder is updated."},
+ {"t": 10,"q": "REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'dan'@'localhost' leaves","o": ["the account existing with no privileges","the account deleted","only SELECT","dan able to grant privileges"],"a": 0,"e": "DROP USER is needed to remove the account itself."}
 ];
-
 /* ================= HELPERS ================= */
 var $=function(id){return document.getElementById(id)};
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function LSget(k,d){try{var v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}}
 function LSset(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function topicName(t){return TOPIC_NAMES[t]||('Topic '+t)}
+var TOPIC_NAMES={0:'Basics',1:'Relational model',2:'SQL DDL',3:'ER modelling',4:'Relational algebra',5:'Intermediate SQL',6:'Datalog',7:'Indexing',8:'Optimization',9:'Transactions',10:'Privileges'};
+function topicLabel(t){return t===0?'T0 Basics':'T'+t+' '+TOPIC_NAMES[t]}
 
 /* ================= TABS ================= */
-var TABS=['home','topics','labs','exam','drills','cheat','resources','author'];
+var TABS=['home','topics','terms','labs','flash','quiz','calc','sessions','refact','order','exam','cheat','resources','author'];
+var ALIAS={drills:'flash'};
 var scrollMem={};
 function go(tab,noPush){
+  if(ALIAS[tab]) tab=ALIAS[tab];
   if(TABS.indexOf(tab)<0) tab='home';
   var cur=document.querySelector('.tab.on');
   if(cur) scrollMem[cur.id]=window.scrollY;
-  TABS.forEach(function(t){
-    var el=$(t); if(el) el.classList.toggle('on',t===tab);
-  });
+  TABS.forEach(function(t){var el=$(t); if(el) el.classList.toggle('on',t===tab)});
+  if(tab==='terms') renderTerms();
   buildRail(tab);
   LSset('dbTab',tab);
   if(!noPush){
@@ -1141,15 +1852,15 @@ function go(tab,noPush){
   }
 }
 
-/* ================= SECTIONS =================
-   The Study Console frame draws the section bar and menu sub-items from anchorsFor(). */
+/* ================= SECTIONS (menu sub-items) ================= */
 function anchorsFor(tab){
   var out=[];
   if(tab==='topics'||tab==='labs'){
     document.querySelectorAll('#'+tab+' details.note').forEach(function(d,i){
       if(!d.id) d.id=tab+'_'+i;
-      var s=d.querySelector('summary');
-      out.push({id:d.id,k:(tab==='topics'?'T ':'LAB ')+(i+1),t:s?s.textContent.replace(/^\s*\d+\s*/,'').trim():'section'});
+      var s=d.querySelector('summary'); var n=s&&s.querySelector('.num');
+      var k=tab==='topics'?(n&&n.textContent.trim()==='0'?'START':'T '+(n?n.textContent.trim():i)):'LAB '+(i+1);
+      out.push({id:d.id,k:k,t:s?s.textContent.replace(/^\s*\d+\s*/,'').trim():'section'});
     });
   } else if(tab==='exam'){
     document.querySelectorAll('#exam .panel').forEach(function(p,i){
@@ -1168,123 +1879,496 @@ function anchorsFor(tab){
 }
 function buildRail(){ if(window.StudyShell&&StudyShell.refreshSections) StudyShell.refreshSections(); }
 
-/* ================= FLASHCARDS ================= */
-var deck=CARDS.slice(), fcIdx=0, know=0, again=0;
-var fcCard=$('fcCard');
-function renderCard(){
-  if(!deck.length) return;
-  var c=deck[fcIdx];
-  fcCard.classList.remove('flip');
-  setTimeout(function(){
-    $('fcQ').textContent=c.q;
-    $('fcA').textContent=c.a;
-    var tag=$('fcTag');
-    tag.textContent=c.t===1?'Topics 1–6':'Topics 7–10';
-    tag.className='tag badge '+(c.t===1?'b1':'b2');
-    $('fcCount').textContent=(fcIdx+1)+' / '+deck.length;
-  }, fcCard.classList.contains('flip')?190:0);
-  $('fcScore').innerHTML='<b class="g">✓ '+know+' got it</b> &nbsp;·&nbsp; <b class="r">↻ '+again+' again</b>';
-}
-fcCard.addEventListener('click',function(){fcCard.classList.toggle('flip')});
-$('fcPrev').addEventListener('click',function(){fcIdx=(fcIdx-1+deck.length)%deck.length;renderCard()});
-$('fcNext').addEventListener('click',function(){fcIdx=(fcIdx+1)%deck.length;renderCard()});
-$('fcKnow').addEventListener('click',function(){know++;fcIdx=(fcIdx+1)%deck.length;renderCard()});
-$('fcAgain').addEventListener('click',function(){again++;fcIdx=(fcIdx+1)%deck.length;renderCard()});
-$('fcShuffle').addEventListener('click',function(){deck.sort(function(){return Math.random()-.5});fcIdx=0;renderCard()});
-document.querySelectorAll('#fcFilters [data-f]').forEach(function(b){
-  b.addEventListener('click',function(){
-    document.querySelectorAll('#fcFilters [data-f]').forEach(function(x){x.classList.remove('primary')});
-    b.classList.add('primary');
-    var f=b.dataset.f;
-    deck = f==='all' ? CARDS.slice() : CARDS.filter(function(c){return c.t===(f==='t1'?1:2)});
-    fcIdx=0;know=0;again=0;renderCard();
+/* ================= TERMS ================= */
+var termTopic='all', termShortOnly=false;
+function abbr(s){return /^[A-Z][A-Za-z]{1,5}$/.test(s)&&(s.match(/[A-Z]/g)||[]).length>=2&&s!=='BEGIN'}
+function isShort(t){var k=t[0];return /^[σπρ∪−∩×⋈÷←%_]$/.test(k)||(!!t[1]&&(abbr(k)||/^[a-z]{1,4}$/.test(k)||/^[A-Z][a-z]?$/.test(k)))||abbr(t[1]||'')}
+function renderTerms(){
+  var q=($('termF').value||'').trim().toLowerCase();
+  var rows=TERMS.filter(function(t){
+    if(termTopic!=='all'&&t[3]!==+termTopic) return false;
+    if(termShortOnly&&!isShort(t)) return false;
+    if(!q) return true;
+    return (t[0]+' '+t[1]+' '+t[2]).toLowerCase().indexOf(q)>=0;
   });
-});
-renderCard();
-
-/* ================= QUIZ ================= */
-var shell=$('quizShell'), qIdx=0, qScore=0, qPicked=[], qResults=[];
-function startQuiz(){qIdx=0;qScore=0;qResults=[];renderQ()}
-window.startQuiz=startQuiz;
-function renderQ(){
-  var q=QUIZ[qIdx]; qPicked=[];
-  var opts=q.o.map(function(o,i){
-    return '<button class="opt" data-i="'+i+'"><span class="mark"></span><span>'+esc(o)+'</span></button>';
+  var html='<tr><th style="width:170px">Term</th><th style="width:220px">Stands for</th><th>Meaning</th><th style="width:70px">Topic</th></tr>';
+  html+=rows.map(function(t){
+    return '<tr><td class="mono tterm">'+esc(t[0])+'</td><td>'+esc(t[1]||'')+'</td><td>'+esc(t[2])+(t[4]?' <span class="flag gen">general</span>':'')+'</td><td class="mono">'+(t[3]===0?'T0':'T'+t[3])+'</td></tr>';
   }).join('');
-  shell.innerHTML=
-    '<div class="qbar"><div style="width:'+(qIdx/QUIZ.length*100)+'%"></div></div>'+
-    '<div class="qmeta"><span>Question '+(qIdx+1)+' of '+QUIZ.length+'</span><span>Score: '+qScore+'</span></div>'+
-    '<div class="qcard"><h3>'+esc(q.q)+'</h3>'+
-    opts+
-    '<div class="expl tip t-info" id="expl"><b>Why</b>'+esc(q.e)+'</div>'+
-    '<div class="qactions">'+
-    '<button class="btn primary" id="nextBtn" style="display:none">'+(qIdx===QUIZ.length-1?'See results →':'Next →')+'</button>'+
-    '</div></div>';
-  var optEls=shell.querySelectorAll('.opt');
-  optEls.forEach(function(el){
-    el.addEventListener('click',function(){
-      if(shell.querySelector('#expl').classList.contains('show')) return;
-      qPicked=[+el.dataset.i]; grade();
+  if(!rows.length) html+='<tr><td colspan="4" class="sub2">No term matches. Clear the search or pick All topics.</td></tr>';
+  $('termT').innerHTML=html;
+  $('termCount').textContent=rows.length+' of '+TERMS.length+' terms';
+}
+(function(){
+  var bar=$('termTopics');
+  var opts=['all',0,1,2,3,4,5,6,7,8,9,10];
+  bar.innerHTML=opts.map(function(t){return '<button class="btn'+(t==='all'?' primary':'')+'" data-t="'+t+'">'+(t==='all'?'All topics':(t===0?'T0':'T'+t))+'</button>'}).join('')+
+    '<button class="btn" id="termShort" style="margin-left:auto">Short forms only</button>';
+  bar.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    if(b.id==='termShort'){termShortOnly=!termShortOnly;b.classList.toggle('primary',termShortOnly);renderTerms();return}
+    bar.querySelectorAll('[data-t]').forEach(function(x){x.classList.remove('primary')});
+    b.classList.add('primary'); termTopic=b.dataset.t; renderTerms();
+  });
+  $('termF').addEventListener('input',renderTerms);
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a.tlink'); if(!a) return;
+    e.preventDefault();
+    $('termF').value=a.dataset.term; termTopic='all';
+    bar.querySelectorAll('[data-t]').forEach(function(x){x.classList.toggle('primary',x.dataset.t==='all')});
+    location.hash='#/terms'; go('terms'); window.scrollTo({top:0,behavior:'instant'});
+  });
+})();
+
+/* ================= FLASHCARDS ================= */
+var ALLCARDS=[];
+CARDS.forEach(function(c,i){ALLCARDS.push({id:'c'+i,kind:'c',t:c.t,q:c.q,a:c.a})});
+TERMS.forEach(function(t,i){ALLCARDS.push({id:'t'+i,kind:'t',t:t[3],term:t[0],sf:t[1],m:t[2]})});
+var fc={deck:'c',topic:'all',flipDir:false,skipKnown:false,queue:[],cur:null,got:0,again:0,missed:{}};
+var known={};
+try{known=JSON.parse(LSget('dbFcKnown','{}'))||{}}catch(e){known={}}
+function fcPool(){
+  return ALLCARDS.filter(function(c){
+    if(fc.deck!=='both'&&c.kind!==fc.deck) return false;
+    if(fc.topic!=='all'&&c.t!==+fc.topic) return false;
+    return true;
+  });
+}
+function fcStart(onlyMissed){
+  var pool=fcPool();
+  if(onlyMissed) pool=pool.filter(function(c){return fc.missed[c.id]});
+  else if(fc.skipKnown) pool=pool.filter(function(c){return !known[c.id]});
+  fc.queue=shuffle(pool.slice()); fc.got=0; fc.again=0; fc.missed={};
+  fcShow();
+}
+function fcFace(c){
+  if(c.kind==='c') return {q:c.q,a:c.a};
+  var name=c.term+(c.sf?' ('+c.sf+')':'');
+  return fc.flipDir?{q:c.m,a:name}:{q:name,a:c.m};
+}
+function fcShow(){
+  var card=$('fcCard'), done=$('fcDone');
+  var pool=fcPool(), kn=pool.filter(function(c){return known[c.id]}).length;
+  $('fcKnownBar').style.width=(pool.length?kn/pool.length*100:0)+'%';
+  $('fcKnownTxt').textContent=kn+' of '+pool.length+' cards in this deck marked known';
+  if(!fc.queue.length){
+    card.style.display='none'; $('fcNavRow').style.display='none'; done.style.display='';
+    var nm=Object.keys(fc.missed).length;
+    done.innerHTML='<div class="big">'+(fc.got)+' got it</div><p>'+(nm?nm+' card'+(nm>1?'s':'')+' needed another look.':'Clean round.')+'</p>'+
+      '<div class="qactions" style="justify-content:center">'+(nm?'<button class="btn primary" id="fcMissed">Study the missed ones</button>':'')+'<button class="btn" id="fcRestart">Start a new round</button></div>';
+    var m=$('fcMissed'); if(m) m.onclick=function(){fcStart(true)};
+    $('fcRestart').onclick=function(){fcStart(false)};
+    $('fcCount').textContent='';
+    return;
+  }
+  card.style.display=''; $('fcNavRow').style.display=''; done.style.display='none';
+  var c=fc.queue[0]; fc.cur=c; var f=fcFace(c);
+  card.classList.remove('flip');
+  setTimeout(function(){
+    $('fcQ').textContent=f.q; $('fcA').textContent=f.a;
+    var tag=$('fcTag'); tag.textContent=(c.kind==='t'?'Term · ':'')+(c.t===0?'T0':'T'+c.t)+' '+TOPIC_NAMES[c.t];
+    tag.className='tag badge '+(c.kind==='t'?'b2':'b1');
+    $('fcKnownMark').style.display=known[c.id]?'':'none';
+  },120);
+  $('fcCount').textContent=fc.queue.length+' left';
+  $('fcScore').innerHTML='<b class="g">'+fc.got+' got it</b> &nbsp;·&nbsp; <b class="r">'+fc.again+' again</b>';
+}
+function fcGot(){
+  if(!fc.cur) return;
+  known[fc.cur.id]=1; LSset('dbFcKnown',JSON.stringify(known));
+  fc.queue.shift(); fc.got++; fcShow();
+}
+function fcAgain(){
+  if(!fc.cur) return;
+  var c=fc.queue.shift(); fc.missed[c.id]=1; fc.again++;
+  delete known[c.id]; LSset('dbFcKnown',JSON.stringify(known));
+  fc.queue.splice(Math.min(3,fc.queue.length),0,c); fcShow();
+}
+function fcSkip(){ if(fc.queue.length>1){fc.queue.push(fc.queue.shift()); fcShow()} }
+(function(){
+  var sel=$('fcTopic');
+  sel.innerHTML='<option value="all">All topics</option>'+[0,1,2,3,4,5,6,7,8,9,10].map(function(t){return '<option value="'+t+'">'+topicLabel(t)+'</option>'}).join('');
+  sel.addEventListener('change',function(){fc.topic=sel.value;fcStart(false)});
+  document.querySelectorAll('#fcDeck [data-d]').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#fcDeck [data-d]').forEach(function(x){x.classList.remove('primary')});
+      b.classList.add('primary'); fc.deck=b.dataset.d; $('fcDir').style.display=fc.deck==='c'?'none':''; fcStart(false);
     });
   });
-  shell.querySelector('#nextBtn').addEventListener('click',function(){
-    qIdx++; if(qIdx<QUIZ.length) renderQ(); else renderResults();
+  $('fcDir').addEventListener('click',function(){fc.flipDir=!fc.flipDir;this.classList.toggle('primary',fc.flipDir);this.textContent=fc.flipDir?'Meaning first':'Term first';fcShow()});
+  $('fcSkipKnown').addEventListener('click',function(){fc.skipKnown=!fc.skipKnown;this.classList.toggle('primary',fc.skipKnown);fcStart(false)});
+  $('fcShuffle').addEventListener('click',function(){fcStart(false)});
+  $('fcReset').addEventListener('click',function(){
+    fcPool().forEach(function(c){delete known[c.id]}); LSset('dbFcKnown',JSON.stringify(known)); fcStart(false);
   });
+  $('fcCard').addEventListener('click',function(){this.classList.toggle('flip')});
+  $('fcKnow').addEventListener('click',fcGot);
+  $('fcAgain').addEventListener('click',fcAgain);
+  $('fcNext').addEventListener('click',fcSkip);
+  $('fcDir').style.display='none';
+  fcStart(false);
+})();
+
+/* ================= QUIZ ================= */
+var qz={topics:{},len:10,list:[],i:0,score:0,res:[],answered:false};
+[0,1,2,3,4,5,6,7,8,9,10].forEach(function(t){qz.topics[t]=true});
+function qzPool(){return QUIZ.filter(function(q){return qz.topics[q.t]})}
+function qzSetup(){
+  var counts={}; QUIZ.forEach(function(q){counts[q.t]=(counts[q.t]||0)+1});
+  var all=Object.keys(qz.topics).every(function(k){return qz.topics[k]});
+  var html='<div class="qcard"><h3>Build a quiz</h3><p class="sub2">Pick topics and a length. Questions and answer order are shuffled every time.</p>'+
+    '<h4>Topics</h4><div class="fc-controls" id="qzTopics"><button class="btn'+(all?' primary':'')+'" data-t="all">All</button>'+
+    [0,1,2,3,4,5,6,7,8,9,10].map(function(t){return '<button class="btn'+(qz.topics[t]&&!all?' primary':'')+'" data-t="'+t+'" title="'+esc(topicLabel(t))+'">'+(t===0?'T0':'T'+t)+' <span class="sub2">'+(counts[t]||0)+'</span></button>'}).join('')+'</div>'+
+    '<h4>Length</h4><div class="fc-controls" id="qzLen">'+[10,20,40,0].map(function(n){return '<button class="btn'+(qz.len===n?' primary':'')+'" data-n="'+n+'">'+(n?n:'All')+'</button>'}).join('')+'</div>'+
+    '<p class="sub2" id="qzAvail"></p>'+
+    '<div class="qactions"><button class="btn primary" id="qzGo">Start quiz</button></div>';
+  var last=LSget('dbQuizLast','');
+  if(last) html+='<p class="sub2">Last result: '+esc(last)+'</p>';
+  html+='</div>';
+  $('quizShell').innerHTML=html;
+  var avail=qzPool().length; $('qzAvail').textContent=avail+' questions available in the selected topics.';
+  $('qzGo').disabled=!avail;
+  $('qzTopics').onclick=function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var allOn=Object.keys(qz.topics).every(function(k){return qz.topics[k]});
+    if(b.dataset.t==='all'){Object.keys(qz.topics).forEach(function(k){qz.topics[k]=true})}
+    else if(allOn){Object.keys(qz.topics).forEach(function(k){qz.topics[k]=false});qz.topics[b.dataset.t]=true}
+    else{qz.topics[b.dataset.t]=!qz.topics[b.dataset.t]; if(!Object.keys(qz.topics).some(function(k){return qz.topics[k]})) qz.topics[b.dataset.t]=true}
+    qzSetup();
+  };
+  $('qzLen').onclick=function(e){var b=e.target.closest('button'); if(!b) return; qz.len=+b.dataset.n; qzSetup()};
+  $('qzGo').onclick=function(){qzBegin(shuffle(qzPool().slice()))};
 }
-function grade(){
-  var q=QUIZ[qIdx], optEls=shell.querySelectorAll('.opt');
-  var correct=q.a.slice().sort().join(',')===qPicked.slice().sort().join(',');
-  if(correct) qScore++;
-  qResults.push({q:q.q,correct:correct});
-  optEls.forEach(function(el){
-    var i=+el.dataset.i;
-    if(q.a.indexOf(i)>=0) el.classList.add('ok');
-    else if(qPicked.indexOf(i)>=0) el.classList.add('no');
-    else el.classList.add('dim');
-    el.style.pointerEvents='none';
+function qzBegin(list){
+  if(qz.len&&list.length>qz.len) list=list.slice(0,qz.len);
+  qz.list=list.map(function(q){
+    var idx=shuffle(q.o.map(function(_,i){return i}));
+    return {t:q.t,q:q.q,o:idx.map(function(i){return q.o[i]}),a:idx.indexOf(q.a),e:q.e,src:q};
   });
-  shell.querySelector('#expl').classList.add('show');
-  shell.querySelector('#nextBtn').style.display='';
-  shell.querySelector('.qmeta span:last-child').textContent='Score: '+qScore;
-  var best=parseInt(LSget('dbBest','0'),10)||0;
-  if(qIdx===QUIZ.length-1 && qScore>best) LSset('dbBest',String(qScore));
+  qz.i=0;qz.score=0;qz.res=[];qzRender();
 }
-function renderResults(){
-  var pct=Math.round(qScore/QUIZ.length*100), msg;
-  if(pct>=90) msg="A-level. You own this material.";
-  else if(pct>=75) msg="Strong. Re-check the ones you missed below.";
-  else if(pct>=50) msg="Halfway there. Read the Topics again, then retry.";
-  else msg="Go through Topics and Flashcards, then come back.";
-  var best=parseInt(LSget('dbBest','0'),10)||0;
-  if(qScore>best){best=qScore;LSset('dbBest',String(best))}
-  shell.innerHTML='<div class="qcard qresult">'+
-    '<div class="big">'+qScore+' / '+QUIZ.length+'</div>'+
-    '<p>'+pct+'% — '+msg+'</p>'+
-    '<p class="sub2">Best so far: '+best+' / '+QUIZ.length+'</p>'+
-    '<div style="max-width:540px;margin:16px auto 20px">'+
-    qResults.map(function(r,i){
-      return '<div class="review-item '+(r.correct?'good':'bad')+'">'+(r.correct?'✓':'✗')+' Q'+(i+1)+' · '+esc(r.q)+'</div>';
-    }).join('')+
-    '</div><button class="btn primary" onclick="startQuiz()">↻ Try again</button></div>';
+function qzRender(){
+  var q=qz.list[qz.i]; qz.answered=false;
+  $('quizShell').innerHTML=
+    '<div class="qbar"><div style="width:'+(qz.i/qz.list.length*100)+'%"></div></div>'+
+    '<div class="qmeta"><span>Question '+(qz.i+1)+' of '+qz.list.length+' · '+esc(topicLabel(q.t))+'</span><span id="qzScore">Score: '+qz.score+'</span></div>'+
+    '<div class="qcard"><h3>'+esc(q.q)+'</h3>'+
+    q.o.map(function(o,i){return '<button class="opt" data-i="'+i+'"><span class="mark">'+'ABCD'[i]+'</span><span>'+esc(o)+'</span></button>'}).join('')+
+    '<div class="expl tip t-info" id="expl"><b>Why</b>'+esc(q.e)+'</div>'+
+    '<div class="qactions"><button class="btn" id="qzQuit">End quiz</button><button class="btn primary" id="nextBtn" style="display:none">'+(qz.i===qz.list.length-1?'See results':'Next')+'</button></div></div>';
+  $('quizShell').querySelectorAll('.opt').forEach(function(el){el.addEventListener('click',function(){qzAnswer(+el.dataset.i)})});
+  $('nextBtn').onclick=qzNext;
+  $('qzQuit').onclick=function(){qz.list=qz.list.slice(0,qz.res.length); if(qz.res.length) qzResults(); else qzSetup()};
 }
-startQuiz();
+function qzAnswer(i){
+  if(qz.answered) return; qz.answered=true;
+  var q=qz.list[qz.i], ok=i===q.a; if(ok) qz.score++;
+  qz.res.push({q:q,ok:ok,pick:i});
+  $('quizShell').querySelectorAll('.opt').forEach(function(el){
+    var k=+el.dataset.i; el.style.pointerEvents='none';
+    if(k===q.a) el.classList.add('ok'); else if(k===i) el.classList.add('no'); else el.classList.add('dim');
+  });
+  $('expl').classList.add('show'); $('nextBtn').style.display=''; $('qzScore').textContent='Score: '+qz.score;
+}
+function qzNext(){ qz.i++; if(qz.i<qz.list.length) qzRender(); else qzResults(); }
+function qzResults(){
+  var n=qz.res.length, pct=n?Math.round(qz.score/n*100):0;
+  LSset('dbQuizLast',qz.score+' / '+n+' ('+pct+'%)');
+  var best=parseInt(LSget('dbBest','0'),10)||0; if(pct>best) LSset('dbBest',String(pct));
+  var by={}; qz.res.forEach(function(r){var t=r.q.t; by[t]=by[t]||{n:0,ok:0}; by[t].n++; if(r.ok) by[t].ok++});
+  var msg=pct>=90?'Excellent. Move on to the past paper.':pct>=75?'Strong. Review the misses below.':pct>=50?'Halfway. Reread the weak topics, then retry.':'Start with the Topics pages and flashcards, then come back.';
+  var missed=qz.res.filter(function(r){return !r.ok});
+  $('quizShell').innerHTML='<div class="qcard qresult"><div class="big">'+qz.score+' / '+n+'</div><p>'+pct+'% · '+msg+'</p>'+
+    '<div class="tscroll" style="max-width:560px;margin:14px auto"><table><tr><th>Topic</th><th>Correct</th></tr>'+
+    Object.keys(by).sort(function(a,b){return a-b}).map(function(t){var x=by[t];return '<tr><td>'+esc(topicLabel(+t))+'</td><td class="mono">'+x.ok+' / '+x.n+(x.ok<x.n?' <a href="#/topics/t'+t+'" class="sub2">review</a>':'')+'</td></tr>'}).join('')+'</table></div>'+
+    '<div style="max-width:620px;margin:0 auto 18px;text-align:left">'+
+    qz.res.map(function(r,i){return '<div class="review-item '+(r.ok?'good':'bad')+'">'+(r.ok?'Correct':'Missed')+' · Q'+(i+1)+' · '+esc(r.q.q)+(r.ok?'':'<br><span class="sub2">Answer: '+esc(r.q.o[r.q.a])+'</span>')+'</div>'}).join('')+
+    '</div><div class="qactions" style="justify-content:center">'+(missed.length?'<button class="btn primary" id="qzRetry">Retry the '+missed.length+' missed</button>':'')+'<button class="btn" id="qzNew">New quiz</button></div></div>';
+  var r=$('qzRetry'); if(r) r.onclick=function(){var keep=qz.len;qz.len=0;qzBegin(shuffle(missed.map(function(m){return m.q.src})));qz.len=keep};
+  $('qzNew').onclick=qzSetup;
+}
+qzSetup();
+
+/* ================= INDEX PRACTICE ================= */
+function clog2(n){return n<=1?0:Math.ceil(Math.log2(n)-1e-12)}
+function levelsOf(r1,fo){var lv=[];var n=r1;do{n=Math.ceil(n/fo);lv.push(n)}while(n>1);return lv}
+var IX=null;
+function ixCourse(){
+  return {B:512,r:30000,P:6,PR:7,key:'Ssn',
+    fields:[['Name',30],['Ssn',9],['Department_code',9],['Address',40],['Phone',10],['Birth_date',8],['Sex',1],['Job_code',4],['Salary',4]],
+    secPtr:'P',label:'Course scenario (index calculation answer sheet)'};
+}
+function ixRandom(){
+  var P=pick([6,7,8]);
+  return {B:pick([512,1024,2048,4096]),r:pick([10000,20000,25000,30000,50000,80000,100000]),P:P,PR:P+1,key:'ID',
+    fields:[['Name',pick([20,25,30,35,40])],['ID',pick([9,10,12])],['Dept_code',pick([4,6,9])],['Address',pick([30,40,50,60])],['Phone',pick([9,10,12])],['Birth_date',8],['Sex',1],['Job_code',pick([4,6])],['Salary',pick([4,6,8])]],
+    secPtr:pick(['P','PR']),label:'Random problem'};
+}
+function ixSolve(p){
+  var R=p.fields.reduce(function(s,f){return s+f[1]},0);
+  var K=p.fields.filter(function(f){return f[0]===p.key})[0][1];
+  var bfr=Math.floor(p.B/R), b=Math.ceil(p.r/bfr), waste=p.B-bfr*R;
+  var e1=K+p.P, fo1=Math.floor(p.B/e1), b1=Math.ceil(b/fo1), lv1=levelsOf(b,fo1);
+  var sp=p.secPtr==='P'?p.P:p.PR, e2=K+sp, fo2=Math.floor(p.B/e2), b2=Math.ceil(p.r/fo2), lv2=levelsOf(p.r,fo2);
+  var sum=function(a){return a.reduce(function(s,x){return s+x},0)};
+  return [
+    {k:'R',l:'Record size R (bytes)',v:R,w:'R = '+p.fields.map(function(f){return f[1]}).join(' + ')+' = '+R},
+    {k:'bfr',l:'Blocking factor bfr',v:bfr,w:'bfr = floor(B / R) = floor('+p.B+' / '+R+') = '+bfr},
+    {k:'b',l:'Number of file blocks b',v:b,w:'b = ceiling(r / bfr) = ceiling('+p.r+' / '+bfr+') = '+b},
+    {k:'waste',l:'Unused bytes per block',v:waste,w:'B − bfr × R = '+p.B+' − '+bfr+' × '+R+' = '+waste},
+    {k:'lin',l:'Linear search, average block accesses',v:b/2,tol:0.5,w:'b / 2 = '+b+' / 2 = '+(b/2)+(b%2?' (either neighbouring whole number is accepted)':'')},
+    {k:'bin',l:'Binary search on the data file (ordered by '+p.key+'), block accesses',v:clog2(b),w:'ceiling(log2 b) = ceiling(log2 '+b+') = '+clog2(b)},
+    {k:'fo1',l:'Primary index on '+p.key+': entries per block bfri',v:fo1,w:'entry = key + P = '+K+' + '+p.P+' = '+e1+' bytes; bfri = floor('+p.B+' / '+e1+') = '+fo1},
+    {k:'b1',l:'Primary index: first-level blocks',v:b1,w:'one entry per data block: ri = b = '+b+'; blocks = ceiling('+b+' / '+fo1+') = '+b1},
+    {k:'s1',l:'Primary index, single level: block accesses to fetch a record',v:clog2(b1)+1,w:'binary search on the index + 1 data block = ceiling(log2 '+b1+') + 1 = '+clog2(b1)+' + 1 = '+(clog2(b1)+1)},
+    {k:'m1',l:'Primary index, multilevel: block accesses',v:lv1.length+1,w:'levels: '+lv1.join(' → ')+' blocks, t = '+lv1.length+'; accesses = t + 1 = '+(lv1.length+1)},
+    {k:'fo2',l:'Secondary index on '+p.key+' using '+(p.secPtr==='P'?'the block pointer P':'the record pointer PR')+': entries per block',v:fo2,w:'entry = key + '+p.secPtr+' = '+K+' + '+sp+' = '+e2+' bytes; bfri = floor('+p.B+' / '+e2+') = '+fo2},
+    {k:'b2',l:'Secondary index: first-level blocks',v:b2,w:'dense, one entry per record: ri = r = '+p.r+'; blocks = ceiling('+p.r+' / '+fo2+') = '+b2},
+    {k:'t2',l:'Secondary index, multilevel: number of levels t',v:lv2.length,w:'levels: '+lv2.join(' → ')+' blocks, so t = '+lv2.length},
+    {k:'tb2',l:'Secondary index, multilevel: total index blocks',v:sum(lv2),w:lv2.join(' + ')+' = '+sum(lv2)},
+    {k:'a2',l:'Secondary index, multilevel: block accesses to fetch a record',v:lv2.length+1,w:'t + 1 = '+lv2.length+' + 1 = '+(lv2.length+1)}
+  ];
+}
+function ixLoad(p){
+  IX={p:p,ans:ixSolve(p)};
+  $('ixTitle').textContent=p.label;
+  $('ixParams').innerHTML='<div class="kv"><b>Block size B</b><span>'+p.B+' bytes</span></div>'+
+    '<div class="kv"><b>Records r</b><span>'+p.r.toLocaleString('en-US')+' fixed-length, unspanned</span></div>'+
+    '<div class="kv"><b>Block pointer P</b><span>'+p.P+' bytes</span></div>'+
+    '<div class="kv"><b>Record pointer PR</b><span>'+p.PR+' bytes</span></div>'+
+    '<div class="kv"><b>File ordered by</b><span>'+p.key+' (a key)</span></div>'+
+    '<div class="tscroll" style="margin-top:12px"><table><tr>'+p.fields.map(function(f){return '<th>'+esc(f[0])+'</th>'}).join('')+'</tr><tr>'+p.fields.map(function(f){return '<td class="mono">'+f[1]+'</td>'}).join('')+'</tr></table></div>';
+  $('ixRows').innerHTML=IX.ans.map(function(a,i){
+    return '<div class="ixrow" data-i="'+i+'"><span class="ixn mono">'+(i+1)+'</span><label for="ix_'+i+'">'+esc(a.l)+'</label>'+
+      '<input class="fld ixin" id="ix_'+i+'" inputmode="decimal" autocomplete="off"><span class="ixst"></span><div class="ixw formula" style="display:none">'+esc(a.w)+'</div></div>';
+  }).join('');
+  $('ixSummary').textContent='';
+}
+function ixCheck(showAll){
+  var ok=0, tried=0;
+  IX.ans.forEach(function(a,i){
+    var row=$('ixRows').children[i], inp=$('ix_'+i), st=row.querySelector('.ixst'), w=row.querySelector('.ixw');
+    var raw=inp.value.replace(/[, ]/g,'');
+    if(raw===''){st.innerHTML=''; if(showAll) w.style.display=''; return}
+    tried++;
+    var v=parseFloat(raw), good=!isNaN(v)&&Math.abs(v-a.v)<=(a.tol||1e-9);
+    if(good) ok++;
+    st.innerHTML=good?'<span class="flag ok">correct</span>':'<span class="flag no">check</span>';
+    if(!good||showAll) w.style.display='';
+  });
+  $('ixSummary').textContent=tried?ok+' of '+tried+' answered correctly ('+IX.ans.length+' questions).':'Type at least one answer, then check.';
+}
+$('ixCheck').onclick=function(){ixCheck(false)};
+$('ixShow').onclick=function(){
+  IX.ans.forEach(function(a,i){$('ixRows').children[i].querySelector('.ixw').style.display=''});
+};
+$('ixNew').onclick=function(){ixLoad(ixRandom())};
+$('ixCourse').onclick=function(){ixLoad(ixCourse())};
+ixLoad(ixCourse());
+
+/* ================= TRANSACTION SESSIONS ================= */
+var TX;
+var ACCTS=['A-101','A-102'];
+function txReset(){
+  TX={saved:{'A-101':1000,'A-102':500},pend:{},inTx:false,locks:{},wait:null,predict:$('txPredict').classList.contains('primary'),log:[]};
+  txLog('sys','Both sessions are connected. Autocommit is on. Saved balances: A-101 = 1000, A-102 = 500.');
+  txDraw();
+}
+function aView(k){return TX.saved[k]+(TX.pend[k]||0)}
+function txLog(who,msg,sql){TX.log.unshift({who:who,msg:msg,sql:sql||''})}
+function txDraw(){
+  function tbl(view){return '<table><tr><th>Account</th><th>Balance</th></tr>'+ACCTS.map(function(k){
+    var v=view(k), diff=v!==TX.saved[k];
+    return '<tr><td class="mono">'+k+(TX.locks[k]?' <span class="flag">locked by A</span>':'')+'</td><td class="mono">'+v+(diff?' <span class="flag">uncommitted</span>':'')+'</td></tr>'}).join('')+'</table>'}
+  $('txA').innerHTML=tbl(aView);
+  $('txB').innerHTML=tbl(function(k){return TX.saved[k]});
+  $('txSaved').innerHTML=ACCTS.map(function(k){return k+' = '+TX.saved[k]}).join(' · ');
+  $('txState').innerHTML=(TX.inTx?'<span class="flag">A: inside a transaction</span>':'<span class="flag ok">A: autocommit</span>')+
+    (TX.wait?' <span class="flag no">B: waiting for a lock on '+TX.wait.k+'</span>':' <span class="flag ok">B: ready</span>');
+  document.querySelectorAll('#txBtnsB button').forEach(function(b){b.disabled=!!TX.wait});
+  $('txLog').innerHTML=TX.log.map(function(l){
+    return '<div class="review-item'+(l.who==='A'?'':l.who==='B'?' good':'')+'"><b class="mono">'+(l.who==='sys'?'·':'Session '+l.who)+'</b> '+(l.sql?'<code>'+esc(l.sql)+'</code><br>':'')+esc(l.msg)+'</div>';
+  }).join('');
+}
+function txRelease(how){
+  var w=TX.wait; TX.locks={};
+  if(w){
+    TX.saved[w.k]+=w.d; TX.wait=null;
+    txLog('B','The waiting statement now runs on the '+(how==='commit'?'newly committed':'restored')+' value and commits at once (autocommit). '+w.k+' = '+TX.saved[w.k]+'.');
+  }
+}
+function txDo(act){
+  var m;
+  if(act==='a-start'){
+    if(TX.inTx){
+      ACCTS.forEach(function(k){TX.saved[k]+=TX.pend[k]||0}); TX.pend={}; TX.inTx=true; txRelease('commit');
+      txLog('A','MySQL commits the open transaction implicitly before starting a new one.','START TRANSACTION;');
+    } else { TX.inTx=true; txLog('A','A transaction begins. A\'s changes stay private until COMMIT.','START TRANSACTION;'); }
+  } else if((m=act.match(/^a-upd-(.+)$/))){
+    var k=m[1], d=k==='A-101'?-100:100, sql='UPDATE Account SET Balance = Balance '+(d<0?'- ':'+ ')+Math.abs(d)+" WHERE ID = '"+k+"';";
+    if(TX.inTx){
+      TX.pend[k]=(TX.pend[k]||0)+d; TX.locks[k]=true;
+      txLog('A','A now sees '+k+' = '+aView(k)+'. The change is not committed, so B still sees '+TX.saved[k]+'. A holds a lock on '+k+'.',sql);
+    } else {
+      TX.saved[k]+=d; txLog('A','Autocommit: the change is saved immediately. Everyone now sees '+k+' = '+TX.saved[k]+'.',sql);
+    }
+  } else if(act==='a-sel'){ txSelect('A'); return }
+  else if(act==='b-sel'){ txSelect('B'); return }
+  else if(act==='a-commit'){
+    if(!TX.inTx){txLog('A','No transaction is open, so there is nothing to commit.','COMMIT;')}
+    else{ACCTS.forEach(function(k){TX.saved[k]+=TX.pend[k]||0}); TX.pend={}; TX.inTx=false;
+      txLog('A','A\'s changes are now permanent and visible to every session. Locks are released.','COMMIT;'); txRelease('commit')}
+  } else if(act==='a-rollback'){
+    if(!TX.inTx){txLog('A','No transaction is open, so there is nothing to undo.','ROLLBACK;')}
+    else{TX.pend={}; TX.inTx=false; txLog('A','Every change in the transaction is discarded. Balances return to the saved values. Locks are released.','ROLLBACK;'); txRelease('rollback')}
+  } else if((m=act.match(/^b-upd-(.+)$/))){
+    var kb=m[1], sqlb='UPDATE Account SET Balance = Balance - 50'+" WHERE ID = '"+kb+"';";
+    if(TX.locks[kb]){TX.wait={k:kb,d:-50}; txLog('B','Blocked: A holds a lock on '+kb+'. B waits until A commits or rolls back. (MySQL gives up after 50 seconds by default.)',sqlb)}
+    else{TX.saved[kb]-=50; txLog('B','No lock in the way. Autocommit saves it immediately: '+kb+' = '+TX.saved[kb]+'.',sqlb)}
+  }
+  txDraw();
+}
+function txSelect(who){
+  var view=who==='A'?aView:function(k){return TX.saved[k]};
+  var k=ACCTS.filter(function(x){return TX.pend[x]})[0]||'A-101';
+  var shown=ACCTS.map(function(x){return x+' = '+view(x)}).join(', ');
+  var why=who==='A'?(TX.inTx&&Object.keys(TX.pend).length?'A sees its own uncommitted changes.':'A sees the saved values.'):(TX.inTx&&Object.keys(TX.pend).length?'B sees only committed data; A\'s changes are invisible to B.':'B sees the saved values.');
+  if(TX.predict&&TX.wait===null){
+    var right=view(k), other=who==='A'?TX.saved[k]:aView(k);
+    if(right!==other){
+      var opts=shuffle([right,other]);
+      $('txPredictBox').innerHTML='<div class="qcard"><h3>Predict: what balance does Session '+who+' see for '+k+'?</h3>'+
+        opts.map(function(v){return '<button class="opt" data-v="'+v+'"><span class="mark"></span><span class="mono">'+v+'</span></button>'}).join('')+'</div>';
+      $('txPredictBox').querySelectorAll('.opt').forEach(function(el){el.onclick=function(){
+        var good=+el.dataset.v===right;
+        $('txPredictBox').innerHTML='<div class="tip '+(good?'t-good':'t-warn')+'"><b>'+(good?'Correct':'Not quite')+'</b>Session '+who+' sees '+k+' = '+right+'. '+esc(why)+'</div>';
+        txLog(who,shown+'. '+why,'SELECT * FROM Account;'); txDraw();
+      }});
+      return;
+    }
+  }
+  $('txPredictBox').innerHTML='';
+  txLog(who,shown+'. '+why,'SELECT * FROM Account;'); txDraw();
+}
+document.querySelectorAll('#sessions [data-act]').forEach(function(b){b.addEventListener('click',function(){$('txPredictBox').innerHTML='';txDo(b.dataset.act)})});
+$('txReset').onclick=function(){$('txPredictBox').innerHTML='';txReset()};
+$('txPredict').onclick=function(){this.classList.toggle('primary');TX.predict=this.classList.contains('primary');this.textContent=TX.predict?'Predict mode: on':'Predict mode: off'};
+txReset();
+
+/* ================= REFERENTIAL ACTIONS ================= */
+var RF={n:0,ok:0,cur:null};
+var RF_MEMBERS=[[1,'Ana'],[2,'Ben'],[3,'Chai'],[9,'Unassigned']];
+var RF_LOANS=[['L1',1,'SQL Basics'],['L2',2,'Data Models'],['L3',2,'Indexing'],['L4',3,'Transactions']];
+var RF_ACTIONS=['CASCADE','SET NULL','SET DEFAULT','RESTRICT'];
+function rfOutcome(op,id,newId,act){
+  if(act==='RESTRICT') return RF_LOANS.map(function(l){return l.slice()});
+  var out=[];
+  RF_LOANS.forEach(function(l){
+    if(l[1]!==id){out.push(l.slice());return}
+    if(act==='CASCADE'){ if(op==='UPDATE') out.push([l[0],newId,l[2]]); return }
+    if(act==='SET NULL'){ out.push([l[0],null,l[2]]); return }
+    if(act==='SET DEFAULT'){ out.push([l[0],9,l[2]]); return }
+  });
+  return out;
+}
+function rfTable(rows){
+  return '<table><tr><th>LoanID</th><th>MemberID</th><th>Book</th></tr>'+(rows.length?rows.map(function(r){return '<tr><td class="mono">'+r[0]+'</td><td class="mono">'+(r[1]===null?'<i>NULL</i>':r[1])+'</td><td>'+esc(r[2])+'</td></tr>'}).join(''):'')+'</table>';
+}
+function rfNew(){
+  var op=pick(['DELETE','UPDATE']), id=pick([1,2,3]), newId=pick([5,7]), act=pick(RF_ACTIONS);
+  var sql=op==='DELETE'?'DELETE FROM Member WHERE MemberID = '+id+';':'UPDATE Member SET MemberID = '+newId+' WHERE MemberID = '+id+';';
+  var opts=shuffle(RF_ACTIONS.map(function(a){return {a:a,rows:rfOutcome(op,id,newId,a)}}));
+  RF.cur={op:op,id:id,newId:newId,act:act};
+  $('rfRule').textContent='FOREIGN KEY (MemberID) REFERENCES Member(MemberID)\n    ON '+op+' '+act;
+  $('rfSql').textContent=sql;
+  $('rfOpts').innerHTML=opts.map(function(o,i){
+    return '<button class="opt rfopt" data-a="'+o.a+'"><span class="mark">'+'ABCD'[i]+'</span><div class="tscroll" style="flex:1;margin:0">'+rfTable(o.rows)+'</div></button>';
+  }).join('');
+  $('rfFeedback').innerHTML='';
+  $('rfOpts').querySelectorAll('.rfopt').forEach(function(el){el.onclick=function(){rfAnswer(el)}});
+}
+function rfAnswer(el){
+  if(RF.cur.done) return; RF.cur.done=true;
+  var c=RF.cur, good=el.dataset.a===c.act; RF.n++; if(good) RF.ok++;
+  $('rfOpts').querySelectorAll('.rfopt').forEach(function(x){x.style.pointerEvents='none'; if(x.dataset.a===c.act) x.classList.add('ok'); else if(x===el) x.classList.add('no'); else x.classList.add('dim')});
+  var what=c.op==='DELETE'?'Member '+c.id+' is deleted':'Member '+c.id+' changes its ID to '+c.newId;
+  var ex={
+    'CASCADE':c.op==='DELETE'?'CASCADE: the loans of member '+c.id+' are deleted along with the member.':'CASCADE: the loans follow the parent, so their MemberID becomes '+c.newId+'.',
+    'SET NULL':what+'. SET NULL unlinks the loans: their MemberID becomes NULL. This only works if Loan.MemberID allows NULL.',
+    'SET DEFAULT':what+'. SET DEFAULT relinks the loans to the column default, 9 (Unassigned). Standard SQL; MySQL\'s InnoDB engine rejects this action.',
+    'RESTRICT':'RESTRICT: member '+c.id+' still has loans, so the '+c.op+' is rejected with an error. Neither table changes.'
+  }[c.act];
+  $('rfFeedback').innerHTML='<div class="tip '+(good?'t-good':'t-warn')+'"><b>'+(good?'Correct':'Not quite')+'</b>'+esc(ex)+'</div>';
+  $('rfScore').textContent=RF.ok+' / '+RF.n+' correct';
+}
+(function(){
+  $('rfParent').innerHTML='<table><tr><th>MemberID</th><th>Name</th></tr>'+RF_MEMBERS.map(function(m){return '<tr><td class="mono">'+m[0]+'</td><td>'+m[1]+'</td></tr>'}).join('')+'</table>';
+  $('rfChild').innerHTML=rfTable(RF_LOANS);
+  $('rfNext').onclick=rfNew; rfNew();
+})();
+
+/* ================= SQL CLAUSE ORDER ================= */
+var ORD_WRITE=['SELECT','FROM','WHERE','GROUP BY','HAVING','ORDER BY','LIMIT'];
+var ORD_RUN=['FROM','WHERE','GROUP BY','HAVING','SELECT','ORDER BY','LIMIT'];
+var OD={mode:'write',picked:[]};
+function odDraw(){
+  var target=OD.mode==='write'?ORD_WRITE:ORD_RUN;
+  var left=target.filter(function(c){return OD.picked.indexOf(c)<0});
+  $('odPool').innerHTML=shuffleStable(left).map(function(c){return '<button class="btn" data-c="'+c+'">'+c+'</button>'}).join('')||'<span class="sub2">All clauses placed. Check your order.</span>';
+  $('odLine').innerHTML=OD.picked.length?OD.picked.map(function(c,i){return '<button class="btn primary" data-i="'+i+'">'+(i+1)+'. '+c+'</button>'}).join(''):'<span class="sub2">Click the clauses below in order.</span>';
+  $('odFeedback').innerHTML='';
+}
+var odSeed={};
+function shuffleStable(a){return a.slice().sort(function(x,y){odSeed[x]=odSeed[x]||Math.random();odSeed[y]=odSeed[y]||Math.random();return odSeed[x]-odSeed[y]})}
+$('odPool').onclick=function(e){var b=e.target.closest('button'); if(!b) return; OD.picked.push(b.dataset.c); odDraw()};
+$('odLine').onclick=function(e){var b=e.target.closest('button'); if(!b) return; OD.picked.splice(+b.dataset.i,1); odDraw()};
+$('odCheck').onclick=function(){
+  var target=OD.mode==='write'?ORD_WRITE:ORD_RUN;
+  if(OD.picked.length<target.length){$('odFeedback').innerHTML='<div class="tip t-info"><b>Not finished</b>Place all '+target.length+' clauses first.</div>';return}
+  var wrong=OD.picked.map(function(c,i){return c===target[i]?-1:i}).filter(function(i){return i>=0});
+  $('odLine').querySelectorAll('button').forEach(function(b,i){b.classList.toggle('odbad',wrong.indexOf(i)>=0)});
+  $('odFeedback').innerHTML=wrong.length?'<div class="tip t-warn"><b>Not quite</b>Positions '+wrong.map(function(i){return i+1}).join(', ')+' are out of place. Correct order: '+target.join(' → ')+'.</div>':
+    '<div class="tip t-good"><b>Correct</b>'+(OD.mode==='write'?'This is the order you type a SELECT statement.':'This is the logical order the DBMS evaluates the clauses: it needs the rows (FROM, WHERE), the groups (GROUP BY, HAVING) and only then the output columns (SELECT).')+'</div>';
+};
+$('odReset').onclick=function(){OD.picked=[];odSeed={};odDraw()};
+document.querySelectorAll('#odMode [data-m]').forEach(function(b){b.onclick=function(){
+  document.querySelectorAll('#odMode [data-m]').forEach(function(x){x.classList.remove('primary')}); b.classList.add('primary');
+  OD.mode=b.dataset.m; OD.picked=[]; odSeed={}; odDraw();
+  $('odPrompt').textContent=OD.mode==='write'?'Put the clauses in the order you write them.':'Put the clauses in the order the DBMS processes them.';
+}});
+odDraw();
+
+var WH=[["OrderDate >= '2026-01-01'",'WHERE'],['COUNT(*) > 5','HAVING'],['SUM(TotalDue) > 1000','HAVING'],["City = 'London'",'WHERE'],['AVG(UnitPrice) > 300','HAVING'],['TotalDue > 500','WHERE'],['MAX(ListPrice) < 100','HAVING'],["Status <> 'cancelled'",'WHERE'],['COUNT(DISTINCT ProductID) >= 3','HAVING'],['CustomerID NOT IN (SELECT …)','WHERE'],['SellEndDate IS NOT NULL','WHERE'],['MIN(OrderDate) < \'2025-01-01\'','HAVING']];
+function whDraw(){
+  var items=shuffle(WH.slice()), score={n:0,ok:0};
+  $('whList').innerHTML=items.map(function(w,i){
+    return '<div class="ixrow whrow"><code>'+esc(w[0])+'</code><span><button class="btn" data-i="'+i+'" data-c="WHERE">WHERE</button> <button class="btn" data-i="'+i+'" data-c="HAVING">HAVING</button></span><span class="ixst"></span></div>';
+  }).join('');
+  $('whScore').textContent='';
+  $('whList').onclick=function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var row=b.closest('.whrow'); if(row.dataset.done) return; row.dataset.done=1;
+    var w=items[+b.dataset.i], good=b.dataset.c===w[1]; score.n++; if(good) score.ok++;
+    row.querySelectorAll('button').forEach(function(x){x.disabled=true; if(x.dataset.c===w[1]) x.classList.add('primary')});
+    row.querySelector('.ixst').innerHTML=good?'<span class="flag ok">correct</span>':'<span class="flag no">'+w[1]+'</span>';
+    $('whScore').textContent=score.ok+' / '+score.n+' correct'+(score.n===items.length?'. Rule: if it can be tested on one row, WHERE; if it needs an aggregate over a group, HAVING.':'');
+  };
+}
+$('whNew').onclick=whDraw; whDraw();
 
 /* ================= KEYBOARD ================= */
 document.addEventListener('keydown',function(e){
-  var typing=/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
-  if(typing) return;
-  var onDrills=$('drills').classList.contains('on');
-  if(onDrills){
-    if(e.key===' '){e.preventDefault();fcCard.classList.toggle('flip')}
-    else if(e.key==='ArrowRight'){$('fcNext').click()}
-    else if(e.key==='ArrowLeft'){$('fcPrev').click()}
-    else if(e.key.toLowerCase()==='g'){$('fcKnow').click()}
-    else if(e.key.toLowerCase()==='a'){$('fcAgain').click()}
-  }
+  if(/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) return;
+  if(!$('flash').classList.contains('on')) return;
+  if(e.key===' '){e.preventDefault();$('fcCard').classList.toggle('flip')}
+  else if(e.key==='ArrowRight'){fcSkip()}
+  else if(e.key.toLowerCase()==='g'){fcGot()}
+  else if(e.key.toLowerCase()==='a'){fcAgain()}
 });
 
 /* ================= BOOT ================= */
 go(LSget('dbTab','home'),true);
+
 </script>
 <script>
 /* Study Console v3: this console's manifest. The frame (header, menu, sections, search,
@@ -1297,36 +2381,47 @@ go(LSget('dbTab','home'),true);
   }
   function terms() {
     var out = [];
-    CARDS.forEach(function (c) { out.push({ title: c.q, meta: 'Flashcard', view: 'drills' }); });
+    TERMS.forEach(function (t) { out.push({ title: t[0] + (t[1] ? ' (' + t[1] + ')' : ''), meta: 'Term · ' + (t[3] === 0 ? 'T0' : 'T' + t[3]), view: 'terms' }); });
+    CARDS.forEach(function (c) { out.push({ title: c.q, meta: 'Flashcard', view: 'flash' }); });
     document.querySelectorAll('#topics details.note').forEach(function (d) {
       var tag = d.querySelector('summary').textContent.replace(/^\s*\d+\s*/, '').trim();
-      d.querySelectorAll('h4').forEach(function (h) { var t = h.textContent.trim(); if (t.length > 2 && t.length < 80) out.push({ title: t, meta: tag, view: 'topics', anchor: d.id }); });
+      out.push({ title: tag, meta: 'Topic', view: 'topics', anchor: d.id });
+      d.querySelectorAll('h4').forEach(function (h) { var t = h.textContent.trim(); if (t.length > 2 && t.length < 80 && t !== 'Words to know') out.push({ title: t, meta: tag, view: 'topics', anchor: d.id }); });
     });
     document.querySelectorAll('#exam .panel h3').forEach(function (h) { var p = h.closest('.panel'); out.push({ title: h.textContent.trim(), meta: 'Past paper', view: 'exam', anchor: p && p.id || null }); });
     document.querySelectorAll('#cheat .cheat h3').forEach(function (h) { out.push({ title: h.textContent.trim(), meta: 'Cheat sheet', view: 'cheat', anchor: h.id || null }); });
     document.querySelectorAll('#resources .files a').forEach(function (a) { out.push({ title: a.textContent.trim(), meta: 'Download', view: 'resources' }); });
+    [['Index practice','calc'],['Transaction sessions','sessions'],['Referential actions','refact'],['SQL clause order','order'],['Quiz','quiz'],['Flashcards','flash']].forEach(function (d) { out.push({ title: d[0], meta: 'Drill', view: d[1] }); });
     return out;
   }
   (window.StudyConsole = window.StudyConsole || []).push({
     id: 'db',
     title: 'Database Systems',
-    subtitle: 'Ten topics, ten labs, a past paper',
+    subtitle: 'Ten topics, terms, drills, labs, a past paper',
     content: '#main',
     defaultView: 'home',
     restore: function () { return LSget('dbTab', 'home'); },
     router: { show: function (view, anchor) { go(view, !!anchor); } },
-    viewElement: function (id) { return document.getElementById(id); },
+    viewElement: function (id) { return document.getElementById(ALIAS[id] || id); },
     terms: terms,
-    progress: { read: function () { return (parseInt(LSget('dbBest', '0'), 10) || 0) > 0 ? { drills: 'visited' } : {}; } },
+    progress: { read: function () { return (parseInt(LSget('dbBest', '0'), 10) || 0) > 0 ? { quiz: 'visited' } : {}; } },
     groups: [
       { label: 'Start', views: [{ id: 'home', title: 'Home' }] },
       { label: 'Study', views: [
-        { id: 'topics', title: 'Topics', badge: '10', children: sections('topics') },
+        { id: 'topics', title: 'Topics', badge: '11', children: sections('topics') },
+        { id: 'terms', title: 'Terms', badge: String(TERMS.length) },
         { id: 'labs', title: 'Labs', badge: '10', children: sections('labs') }
       ] },
+      { label: 'Drill', views: [
+        { id: 'flash', title: 'Flashcards', badge: String(CARDS.length + TERMS.length) },
+        { id: 'quiz', title: 'Quiz', badge: String(QUIZ.length) },
+        { id: 'calc', title: 'Index practice' },
+        { id: 'sessions', title: 'Transaction sessions' },
+        { id: 'refact', title: 'Referential actions' },
+        { id: 'order', title: 'SQL clause order' }
+      ] },
       { label: 'Practice', views: [
-        { id: 'exam', title: 'Past paper', badge: '8', children: sections('exam') },
-        { id: 'drills', title: 'Flashcards & mock exam' }
+        { id: 'exam', title: 'Past paper', badge: '8', children: sections('exam') }
       ] },
       { label: 'Reference', views: [
         { id: 'cheat', title: 'Cheat sheet', children: sections('cheat') },
