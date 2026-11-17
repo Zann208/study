@@ -244,6 +244,20 @@ details.deep>.deep-body{padding:4px 15px 15px}
 a.chip.tlink{text-transform:none;letter-spacing:.2px;font-size:12px;text-decoration:none;cursor:pointer}
 a.chip.tlink:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
 
+/* ---------- labelled controls ---------- */
+.ctlrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:12px}
+.ctl-label{font-family:var(--mono);font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--faint);font-weight:700;min-width:104px}
+.ctl-gap{flex:1}
+#main [hidden]{display:none!important}
+.ctlrow .fld{width:auto;min-width:240px}
+.sc-seg{flex-wrap:wrap}
+.sc-seg>button[aria-pressed="true"]{color:var(--vi);font-weight:700}
+.drilltabs{margin:-6px 0 22px}
+a.sc-tab{text-decoration:none}
+.topic-next{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line2)}
+.topic-next .ctl-label{min-width:0;margin-right:4px}
+@media(max-width:760px){.ctl-label{min-width:100%}.ctlrow .fld{min-width:0;width:100%}.topic-next .ctl-gap{display:none}}
+
 /* ---------- terms ---------- */
 .fld{border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-family:var(--mono);font-size:13.5px;background:var(--panel2);color:var(--ink);width:100%}
 .fld:focus{outline:1px solid var(--cy);border-color:var(--cy)}
@@ -343,7 +357,7 @@ a.chip.tlink:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
 <section class="tab" id="topics"><div class="wrap">
   <h1>Topics</h1>
   <p class="lede">Each topic starts with a plain explanation built on one small library example. The course-specific detail (lab schemas, worked answers, flags) sits in a closed block at the end of each topic.</p>
-  <details class="note" open id="t0">
+  <details class="note" open id="t0" data-short="Start here">
     <summary><span class="num n1">0</span> Start here: the big picture</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>A database is an organised, shared store of facts, and the DBMS is the program that looks after it for you.</div>
@@ -369,11 +383,11 @@ a.chip.tlink:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
 </table></div>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Data">Data</a><a class="chip c2 tlink" href="#/terms" data-term="Database">Database</a><a class="chip c1 tlink" href="#/terms" data-term="DBMS">DBMS</a><a class="chip c2 tlink" href="#/terms" data-term="RDBMS">RDBMS</a><a class="chip c1 tlink" href="#/terms" data-term="Miniworld">Miniworld</a><a class="chip c2 tlink" href="#/terms" data-term="Query">Query</a><a class="chip c1 tlink" href="#/terms" data-term="Transaction">Transaction</a><a class="chip c2 tlink" href="#/terms" data-term="MySQL">MySQL</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>A DBMS stores data, enforces rules, handles many users at once, finds data fast and controls access.</li><li>The ten topics follow one path: understand, design, build, ask, store, plan, change safely, protect.</li></ul></div>
-
+<div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="0">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="0">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t1">Next: T1 Relational model</a></div>
     </div>
   </details>
 
-  <details class="note" id="t1">
+  <details class="note" id="t1" data-short="Relational model">
     <summary><span class="num n1">1</span> Databases and the relational model</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>In a relational database, everything is stored in tables, and tables are linked by matching values.</div>
@@ -439,11 +453,11 @@ a.chip.tlink:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
       <h4>Explaining a referential-action constraint</h4>
       <div class="formula">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)<br>ON DELETE SET DEFAULT ON UPDATE CASCADE;</div>
       <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically. <span class="flag">Past paper Q1 — no worked answer in the materials; see Topic 2 for the referential actions</span></p>
-      <div class="tip t-info"><b>Source</b>Relational model review worksheet (questions and handwritten answers); past paper Q1 and Q2.</div></div></details>
+      <div class="tip t-info"><b>Source</b>Relational model review worksheet (questions and handwritten answers); past paper Q1 and Q2.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 SQL DDL</a></div>
     </div>
   </details>
 
-  <details class="note" id="t2">
+  <details class="note" id="t2" data-short="SQL DDL">
     <summary><span class="num n1">2</span> SQL DDL: tables, constraints and referential actions</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>DDL is the part of SQL that builds the empty tables and writes the rules the data must follow.</div>
@@ -523,11 +537,11 @@ FOREIGN KEY (AdvisorID) REFERENCES Course(Instructor)
 ON UPDATE CASCADE
 ON DELETE SET NULL;</pre>
       <div class="tip t-warn"><b>Will MySQL accept this?</b>Not as written. MySQL rejects <code>SET NULL</code> on a column declared <code>NOT NULL</code>, so the worksheet's <code>AdvisorID … NOT NULL</code> with <code>ON DELETE SET NULL</code> fails; drop the NOT NULL. MySQL also requires the referenced column to be indexed, ideally the parent's primary key. The DDL lab's <code>ON DELETE SET DEFAULT</code> is standard SQL, but MySQL's InnoDB engine rejects it; it runs on systems such as PostgreSQL. These notes come from the MySQL reference manual, not from the course files.</div>
-      <div class="tip t-info"><b>Source</b>School database DDL practice (lab answers and requirements text); relational model review worksheet question 2.</div></div></details>
+      <div class="tip t-info"><b>Source</b>School database DDL practice (lab answers and requirements text); relational model review worksheet question 2.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="2">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="2">Quiz</a><a class="btn" href="#/refact">Drill: Referential actions</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t3">Next: T3 ER modelling</a></div>
     </div>
   </details>
 
-  <details class="note" id="t3">
+  <details class="note" id="t3" data-short="ER modelling">
     <summary><span class="num n1">3</span> ER modelling: entities, cardinality and participation</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>An ER diagram is a drawing of your data, made before you build any tables.</div>
@@ -579,11 +593,11 @@ ON DELETE SET NULL;</pre>
         <li>Enumerated domains appear in the requirements, not the diagram: Region, Party, Passed_or_failed and Vote each have a fixed set of values.</li>
       </ul>
       <div class="tip t-warn"><b>Thin</b>The materials contain two worked diagrams and the cardinality explanations above. Weak entities, specialization and the ER-to-relational mapping steps are not covered anywhere in the attached files.</div>
-      <div class="tip t-info"><b>Source</b>Inventory basic ER worked answer; Vote ER worked answer.</div></div></details>
+      <div class="tip t-info"><b>Source</b>Inventory basic ER worked answer; Vote ER worked answer.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="3">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="3">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t4">Next: T4 Relational algebra</a></div>
     </div>
   </details>
 
-  <details class="note" id="t4">
+  <details class="note" id="t4" data-short="Relational algebra">
     <summary><span class="num n1">4</span> Relational algebra</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>Relational algebra is a small set of operations that take tables in and give a table out, so they can be chained into a question.</div>
@@ -645,11 +659,11 @@ EMPLOYEE ⋈ Dno = Dnumber (π Dnumber, Dname (DEPARTMENT))</pre>
         <tr><td class="ra-sym">π</td><td><code>pi_(...)</code></td><td><code>pi_(name, age)(employee)</code></td></tr>
         <tr><td class="ra-sym">⋈</td><td><code>join_(...)</code></td><td><code>join_(employee, department)</code></td></tr>
       </table></div>
-      <div class="tip t-info"><b>Source</b>Handwritten relational algebra notes; relational algebra answer sheet; relational algebra section of the review worksheet.</div></div></details>
+      <div class="tip t-info"><b>Source</b>Handwritten relational algebra notes; relational algebra answer sheet; relational algebra section of the review worksheet.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="4">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="4">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t5">Next: T5 Intermediate SQL</a></div>
     </div>
   </details>
 
-  <details class="note" id="t5">
+  <details class="note" id="t5" data-short="Intermediate SQL">
     <summary><span class="num n1">5</span> Intermediate SQL</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>SQL is the language you actually type to ask questions; every SELECT is a recipe made of a few clauses.</div>
@@ -735,11 +749,11 @@ GROUP BY parent.ProductCategoryID, parent.Name;</pre>
       <h4>Query semantics</h4>
       <p>Several questions ask for "a short sentence that describes the meaning of the query". The lab answers read as: <i>find the average total due for each customer, highest to lowest</i>; <i>retrieve the most expensive price in each product category</i>. The past paper asks the same for a GROUP BY … HAVING query on EMPLOYEE.</p>
       <div class="tip t-warn"><b>Inconsistent</b>Lab 2 questions 7 and 8 show the same <code>SELECT * FROM Product … LIKE '%Helmet%' …</code> query twice, with answers ("summation of the price", "products ordered at least once") that do not match it. Treat those two answers as unreliable.</div>
-      <div class="tip t-info"><b>Source</b>Intermediate SQL answers, parts 1 and 2; past paper Q3.</div></div></details>
+      <div class="tip t-info"><b>Source</b>Intermediate SQL answers, parts 1 and 2; past paper Q3.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="5">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="5">Quiz</a><a class="btn" href="#/order">Drill: SQL clause order</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t6">Next: T6 Datalog</a></div>
     </div>
   </details>
 
-  <details class="note" id="t6">
+  <details class="note" id="t6" data-short="Datalog">
     <summary><span class="num n2">6</span> Datalog and recursive queries</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>Datalog writes a query as rules of the form "this is true if all of that is true".</div>
@@ -778,11 +792,11 @@ GROUP BY parent.ProductCategoryID, parent.Name;</pre>
   WHERE cat.id = p.parent_id )
 SELECT id, name, relative_depth FROM parents;</pre>
       <p>On the worksheet's category tree (Root A → Child A1 → Grandchild A1b) the query walks from the named node up to the root, decreasing relative_depth by one per step. The worksheet asks for the result rows, the base and recursive cases, the meaning of the query, the purpose of the final SELECT, and a Datalog expression equivalent to it. <span class="flag">Only the sketch of the tree is answered by hand; the written answers are not in the file</span></p>
-      <div class="tip t-info"><b>Source</b>Datalog section of the review worksheet; relational algebra answer sheet Q5; past paper Q4 and Q5.</div></div></details>
+      <div class="tip t-info"><b>Source</b>Datalog section of the review worksheet; relational algebra answer sheet Q5; past paper Q4 and Q5.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="6">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="6">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t7">Next: T7 Indexing</a></div>
     </div>
   </details>
 
-  <details class="note" id="t7">
+  <details class="note" id="t7" data-short="Indexing">
     <summary><span class="num n2">7</span> File organization and indexing calculations</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>Data sits on disk in fixed-size blocks, reading a block is the slow part, and an index exists to read fewer blocks.</div>
@@ -833,11 +847,11 @@ SELECT id, name, relative_depth FROM parents;</pre>
         <tr><td>Secondary on Ssn (30,000 entries)</td><td>883</td><td>26</td><td>1</td><td>910</td><td>3 + 1 = 4</td></tr>
       </table></div>
       <div class="tip t-warn"><b>Pointer size matters</b>The answer sheet builds every index entry with the 6-byte block pointer. The review worksheet and the past paper explicitly say the secondary index points at the <b>record</b> level, so the entry there is key + 7-byte record pointer = 16 bytes. The materials give no worked numbers for that variant; the exam page shows the method applied.</div>
-      <div class="tip t-info"><b>Source</b>Index calculation answer sheet (full); review worksheet question 2; past paper Q6.</div></div></details>
+      <div class="tip t-info"><b>Source</b>Index calculation answer sheet (full); review worksheet question 2; past paper Q6.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="7">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="7">Quiz</a><a class="btn" href="#/calc">Drill: Index practice</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t8">Next: T8 Query optimization</a></div>
     </div>
   </details>
 
-  <details class="note" id="t8">
+  <details class="note" id="t8" data-short="Query optimization">
     <summary><span class="num n2">8</span> Heuristic query optimization</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>You say what answer you want; the DBMS works out the cheapest order of steps to get it.</div>
@@ -869,11 +883,11 @@ SELECT id, name, relative_depth FROM parents;</pre>
       <h4>Worksheet example</h4>
       <pre class="sql ra">π Title (σ Grade = 'A' ∧ Instructor = "…" (Course ⋈ Enrollment))</pre>
       <p>Handwritten answer: start from π Title over σ over the Cartesian product of Course and Enrollment; cascade into σ Grade = 'A' and σ Instructor = "…"; move σ Grade = 'A' down onto Enrollment and σ Instructor = "…" down onto Course; replace the product with a join; keep π Title at the top.</p>
-      <div class="tip t-info"><b>Source</b>Heuristic optimization query-tree slides; review worksheet heuristic question; past paper Q7 and Q8.</div></div></details>
+      <div class="tip t-info"><b>Source</b>Heuristic optimization query-tree slides; review worksheet heuristic question; past paper Q7 and Q8.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="8">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="8">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t9">Next: T9 Transactions</a></div>
     </div>
   </details>
 
-  <details class="note" id="t9">
+  <details class="note" id="t9" data-short="Transactions">
     <summary><span class="num n2">9</span> Transactions, commit and rollback</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>A transaction is a group of changes that must all happen, or none of them.</div>
@@ -911,11 +925,11 @@ COMMIT;          -- make both changes permanent
         <li>A transaction that is begun and neither committed nor rolled back is, in most DBMSs, rolled back automatically; until then other sessions do not see its changes.</li>
       </ul>
       <div class="tip t-warn"><b>Thin</b>Only the answer sheet is in the materials; the lab sheet with the numbered queries is not, so the exact SQL for each step is unknown. Isolation levels, ACID properties and schedules are not covered in the attached files.</div>
-      <div class="tip t-info"><b>Source</b>Transaction lab answers.</div></div></details>
+      <div class="tip t-info"><b>Source</b>Transaction lab answers.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="9">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="9">Quiz</a><a class="btn" href="#/sessions">Drill: Transaction sessions</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t10">Next: T10 Privileges</a></div>
     </div>
   </details>
 
-  <details class="note" id="t10">
+  <details class="note" id="t10" data-short="Privileges">
     <summary><span class="num n2">10</span> Users, privileges and roles (MySQL)</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>Every account gets only the permissions it needs, given with GRANT and taken back with REVOKE.</div>
@@ -965,7 +979,7 @@ FLUSH PRIVILEGES;
 ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password</pre>
       <p><b>Reading a GRANT</b>: <code>GRANT SELECT, INSERT, UPDATE ON hr.employees TO 'myuser'@'localhost' IDENTIFIED BY 'mypassword'</code> allows retrieving, adding and modifying employee records to user myuser connecting from the same host as the server, with that password.</p>
       <div class="tip t-warn"><b>Check</b>The lab's answer to "remove the ability to grant the UPDATE privilege while keeping it" revokes UPDATE itself (<code>REVOKE UPDATE … FROM 'dan'@'localhost'</code>). Whether that satisfies the question as worded is not resolved in the materials.</div>
-      <div class="tip t-info"><b>Source</b>Users, privileges and roles lab answers.</div></div></details>
+      <div class="tip t-info"><b>Source</b>Users, privileges and roles lab answers.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="10">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="10">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/flash">Next: Flashcards</a></div>
     </div>
   </details>
 </div></section>
@@ -974,8 +988,9 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 <section class="tab" id="terms"><div class="wrap">
   <h1>Terms</h1>
   <p class="lede">Every technical word, short form and symbol used in the course, in plain language. Items marked <span class="flag gen">general</span> are standard database vocabulary that the course files use without defining, or do not mention.</p>
-  <input class="fld" id="termF" placeholder="search… e.g. FK, bfr, cascade, σ" style="margin-top:14px" autocomplete="off">
-  <div class="fc-controls" id="termTopics"></div>
+  <div class="ctlrow"><span class="ctl-label">Search</span><input class="fld" id="termF" placeholder="e.g. FK, bfr, cascade, σ" autocomplete="off" style="flex:1;min-width:200px"></div>
+  <div class="ctlrow"><span class="ctl-label">Topic</span><div class="sc-seg" id="termTopics"></div></div>
+  <div class="ctlrow"><span class="ctl-label">Show</span><div class="sc-seg" id="termShow"><button type="button" aria-pressed="true" data-v="all">All terms</button><button type="button" aria-pressed="false" data-v="short">Short forms only</button></div></div>
   <p class="sub2" id="termCount"></p>
   <div class="panel"><div class="tscroll"><table id="termT"></table></div></div>
 </div></section>
@@ -983,7 +998,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
   <h1>Labs</h1>
   <p class="lede">The exercise sets, with the answers condensed from the worked sheets. Open the original PDF from Downloads for screenshots and full working.</p>
 
-  <details class="note" open id="lab1">
+  <details class="note" open id="lab1" data-short="Review worksheet">
     <summary><span class="num n1">1</span> Relational model review worksheet</summary>
     <div class="body">
       <p>A fill-in review on a small school schema: Student(Student_number, fname, lname, Class, Plan), Course(Code, Title, Instructor, Textbook), Enrollment(Student_number, CourseID, Grade).</p>
@@ -1005,7 +1020,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
     </div>
   </details>
 
-  <details class="note" id="lab2">
+  <details class="note" id="lab2" data-short="DDL: school database">
     <summary><span class="num n1">2</span> School database DDL</summary>
     <div class="body">
       <p>Six CREATE statements for a kindergarten system, each driven by a sentence of requirements.</p>
@@ -1038,7 +1053,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
     </div>
   </details>
 
-  <details class="note" id="lab3">
+  <details class="note" id="lab3" data-short="ER: inventory and vote">
     <summary><span class="num n1">3</span> ER design: Inventory and Vote</summary>
     <div class="body">
       <div class="qa"><span class="qn">Inventory requirements</span><p>Record products (code, name, department that sells them, supplier contact); orders with one supplier each and per-product lines; invoices issued to customers with per-product lines; a price history that changes only at the end of the day; editable customer details; remaining stock in total and per purchase.</p>
@@ -1047,7 +1062,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
     </div>
   </details>
 
-  <details class="note" id="lab4">
+  <details class="note" id="lab4" data-short="Relational algebra">
     <summary><span class="num n1">4</span> Relational algebra answer sheet</summary>
     <div class="body">
       <p>Company schema: EMPLOYEE, DEPARTMENT, WORKS_ON(Essn, Pno, Hours).</p>
@@ -1062,7 +1077,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
     </div>
   </details>
 
-  <details class="note" id="lab5">
+  <details class="note" id="lab5" data-short="SQL, part 1">
     <summary><span class="num n1">5</span> Intermediate SQL, part 1</summary>
     <div class="body">
       <div class="qa"><span class="qn">1</span><p>Count of each distinct customer address type: GROUP BY AddressType.</p></div>
@@ -1077,7 +1092,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
     </div>
   </details>
 
-  <details class="note" id="lab6">
+  <details class="note" id="lab6" data-short="SQL, part 2">
     <summary><span class="num n1">6</span> Intermediate SQL, part 2</summary>
     <div class="body">
       <div class="qa"><span class="qn">1</span><p>SUM, AVG, MIN, MAX of TotalDue for customers not living in London: two accepted forms, NOT IN subquery or <code>a.City NOT LIKE 'London'</code>.</p></div>
@@ -1090,7 +1105,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
     </div>
   </details>
 
-  <details class="note" id="lab7">
+  <details class="note" id="lab7" data-short="Index calculation">
     <summary><span class="num n2">7</span> Index calculation</summary>
     <div class="body">
       <p>Eleven questions on the 30,000-record EMPLOYEE file with B = 512, P = 6, P<sub>R</sub> = 7, R = 115.</p>
@@ -1112,14 +1127,14 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
     </div>
   </details>
 
-  <details class="note" id="lab8">
+  <details class="note" id="lab8" data-short="Heuristic optimization">
     <summary><span class="num n2">8</span> Heuristic optimization</summary>
     <div class="body">
       <p>Six slides: the initial query tree for <span class="ra-sym">π<sub>Type</sub>(σ<sub>ProdType = 'Widget'</sub>(σ<sub>Date.Month = July</sub>(Customer ⋈ Invoice ⋈ LineItem ⋈ Product)))</span>, then the task "show the steps in converting a query tree during heuristic optimization into an equivalent one", followed by the four transformed trees: cascade selection, move selection down, Cartesian product with select to join, projection. Steps are listed in Topic 8.</p>
     </div>
   </details>
 
-  <details class="note" id="lab9">
+  <details class="note" id="lab9" data-short="Transactions">
     <summary><span class="num n2">9</span> Transactions</summary>
     <div class="body">
       <div class="tscroll"><table>
@@ -1136,7 +1151,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
     </div>
   </details>
 
-  <details class="note" id="lab10">
+  <details class="note" id="lab10" data-short="Privileges and roles">
     <summary><span class="num n2">10</span> Users, privileges and roles</summary>
     <div class="body">
       <p>Eleven tasks on an HR schema in MySQL: why a host-less CREATE USER is wrong; four localhost accounts with a shared password; an hr role granted in one statement; SELECT on hr.* for the role; ALTER USER to change a password; a salary_app account restricted to a Docker subnet with column-level SELECT; UPDATE on hr.employees for a director; revoking a mistaken grant; a VPN-address developer with INSERT, UPDATE, DELETE on hr.*; revoking everything and dropping a resigned user; reading a GRANT statement. All statements are in Topic 10.</p>
@@ -1146,21 +1161,18 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: FLASHCARDS ============ -->
 <section class="tab" id="flash"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash" aria-selected="true" aria-current="page">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Flashcards</h1>
   <p class="lede">Concept cards from every topic, plus a card for every term in the glossary. Cards you miss come back a few cards later in the same round.</p>
   <div class="panel">
-    <div class="fc-controls" id="fcDeck">
-      <button class="btn primary" data-d="c">Concepts</button>
-      <button class="btn" data-d="t">Terms</button>
-      <button class="btn" data-d="both">Both</button>
-      <button class="btn" id="fcDir">Term first</button>
-    </div>
-    <div class="fc-controls">
-      <select class="fld" id="fcTopic" style="width:auto;min-width:220px"></select>
-      <button class="btn" id="fcSkipKnown">Hide known cards</button>
-      <button class="btn" id="fcShuffle">New round</button>
-      <button class="btn" id="fcReset" style="margin-left:auto">Reset known</button>
-    </div>
+    <div class="ctlrow"><span class="ctl-label">Deck</span>
+      <div class="sc-seg" id="fcDeck"><button type="button" aria-pressed="true" data-v="c">Concepts</button><button type="button" aria-pressed="false" data-v="t">Terms</button><button type="button" aria-pressed="false" data-v="both">Both</button></div></div>
+    <div class="ctlrow" id="fcDirRow" hidden><span class="ctl-label">Show first</span>
+      <div class="sc-seg" id="fcDir"><button type="button" aria-pressed="true" data-v="term">Term</button><button type="button" aria-pressed="false" data-v="meaning">Meaning</button></div></div>
+    <div class="ctlrow"><span class="ctl-label">Topic</span><select class="fld" id="fcTopic"></select></div>
+    <div class="ctlrow"><span class="ctl-label">Cards</span>
+      <div class="sc-seg" id="fcWhich"><button type="button" aria-pressed="true" data-v="all">All</button><button type="button" aria-pressed="false" data-v="unknown">Not yet known</button></div>
+      <span class="ctl-gap"></span><button class="btn" id="fcShuffle">Restart round</button><button class="btn" id="fcReset">Clear known marks</button></div>
     <div class="qbar" style="margin-top:14px"><div id="fcKnownBar" style="width:0"></div></div>
     <p class="sub2" id="fcKnownTxt"></p>
     <div class="fc-stage">
@@ -1183,6 +1195,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: QUIZ ============ -->
 <section class="tab" id="quiz"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz" aria-selected="true" aria-current="page">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Quiz</h1>
   <p class="lede">Single-answer questions tagged by topic. Each answer is graded the moment you click, with the reason shown.</p>
   <div class="panel pc"><div id="quizShell" class="quiz-shell"></div></div>
@@ -1190,12 +1203,12 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: INDEX PRACTICE ============ -->
 <section class="tab" id="calc"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc" aria-selected="true" aria-current="page">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Index practice</h1>
   <p class="lede">The full Topic 7 calculation, step by step. Start with the course scenario, whose answers match the worked answer sheet, then generate new problems with different numbers.</p>
-  <div class="fc-controls">
-    <button class="btn primary" id="ixCourse">Course scenario</button>
-    <button class="btn" id="ixNew">New random problem</button>
-  </div>
+  <div class="ctlrow"><span class="ctl-label">Problem</span>
+    <div class="sc-seg" id="ixMode"><button type="button" aria-pressed="true" data-v="course">Course scenario</button><button type="button" aria-pressed="false" data-v="random">Random numbers</button></div>
+    <button class="btn" id="ixNew" hidden>New numbers</button></div>
   <div class="panel">
     <h3 id="ixTitle"></h3>
     <div id="ixParams"></div>
@@ -1215,22 +1228,23 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: TRANSACTION SESSIONS ============ -->
 <section class="tab" id="sessions"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions" aria-selected="true" aria-current="page">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Transaction sessions</h1>
   <p class="lede">Two connections to the same accounts table. Session A can open a transaction; Session B runs every statement in autocommit mode, like the transaction lab. Run statements in any order and watch what each session sees.</p>
-  <div class="fc-controls">
-    <button class="btn" id="txPredict">Predict mode: off</button>
-    <button class="btn" id="txReset" style="margin-left:auto">Reset</button>
-  </div>
+  <div class="ctlrow"><span class="ctl-label">Predict mode</span>
+    <div class="sc-seg" id="txPredict"><button type="button" aria-pressed="true" data-v="off">Off</button><button type="button" aria-pressed="false" data-v="on">On</button></div>
+    <span class="ctl-gap"></span><button class="btn" id="txReset">Reset both sessions</button></div>
   <div class="panel"><div id="txState"></div><p class="sub2" style="margin-top:8px">Saved on disk (committed): <span class="mono" id="txSaved"></span></p></div>
   <div class="grid2">
     <div class="card">
       <span class="badge b1">Session A</span>
+      <p class="sub2" style="margin-top:8px">Run a statement as Session A</p>
       <div class="fc-controls">
         <button class="btn" data-act="a-start">START TRANSACTION</button>
         <button class="btn" data-act="a-upd-A-101">UPDATE A-101 − 100</button>
         <button class="btn" data-act="a-upd-A-102">UPDATE A-102 + 100</button>
         <button class="btn" data-act="a-sel">SELECT</button>
-        <button class="btn primary" data-act="a-commit">COMMIT</button>
+        <button class="btn" data-act="a-commit">COMMIT</button>
         <button class="btn" data-act="a-rollback">ROLLBACK</button>
       </div>
       <h4>What A sees</h4>
@@ -1238,6 +1252,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
     </div>
     <div class="card">
       <span class="badge b2">Session B</span>
+      <p class="sub2" style="margin-top:8px">Run a statement as Session B</p>
       <div class="fc-controls" id="txBtnsB">
         <button class="btn" data-act="b-sel">SELECT</button>
         <button class="btn" data-act="b-upd-A-101">UPDATE A-101 − 50</button>
@@ -1258,6 +1273,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: REFERENTIAL ACTIONS ============ -->
 <section class="tab" id="refact"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact" aria-selected="true" aria-current="page">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Referential actions</h1>
   <p class="lede">A member row is deleted or its ID changes. Pick what the Loan table looks like afterwards under the given foreign-key rule. <code>Loan.MemberID</code> has <code>DEFAULT 9</code>.</p>
   <div class="grid2">
@@ -1278,13 +1294,12 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: SQL CLAUSE ORDER ============ -->
 <section class="tab" id="order"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order" aria-selected="true" aria-current="page">SQL clause order</a></nav>
   <h1>SQL clause order</h1>
   <p class="lede">Two orders matter: the order you type a SELECT, and the order the DBMS processes it. Knowing the second explains why WHERE cannot use an aggregate and why a SELECT alias is usable in ORDER BY.</p>
   <div class="panel">
-    <div class="fc-controls" id="odMode">
-      <button class="btn primary" data-m="write">Writing order</button>
-      <button class="btn" data-m="run">Processing order</button>
-    </div>
+    <div class="ctlrow"><span class="ctl-label">Order</span>
+      <div class="sc-seg" id="odMode"><button type="button" aria-pressed="true" data-v="write">Writing order</button><button type="button" aria-pressed="false" data-v="run">Processing order</button></div></div>
     <p id="odPrompt">Put the clauses in the order you write them.</p>
     <h4>Your order</h4>
     <div class="fc-controls" id="odLine"></div>
@@ -1849,6 +1864,8 @@ function LSget(k,d){try{var v=localStorage.getItem(k);return v===null?d:v}catch(
 function LSset(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function segBind(id,cb){var el=$(id);el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||!el.contains(b))return;segSet(id,b.dataset.v);cb(b.dataset.v,b)})}
+function segSet(id,v){$(id).querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',String(x.dataset.v===String(v)))})}
 function topicName(t){return TOPIC_NAMES[t]||('Topic '+t)}
 var TOPIC_NAMES={0:'Basics',1:'Relational model',2:'SQL DDL',3:'ER modelling',4:'Relational algebra',5:'Intermediate SQL',6:'Datalog',7:'Indexing',8:'Optimization',9:'Transactions',10:'Privileges'};
 function topicLabel(t){return t===0?'T0 Basics':'T'+t+' '+TOPIC_NAMES[t]}
@@ -1879,8 +1896,8 @@ function anchorsFor(tab){
     document.querySelectorAll('#'+tab+' details.note').forEach(function(d,i){
       if(!d.id) d.id=tab+'_'+i;
       var s=d.querySelector('summary'); var n=s&&s.querySelector('.num');
-      var k=tab==='topics'?(n&&n.textContent.trim()==='0'?'START':'T '+(n?n.textContent.trim():i)):'LAB '+(i+1);
-      out.push({id:d.id,k:k,t:s?s.textContent.replace(/^\s*\d+\s*/,'').trim():'section'});
+      var k=tab==='topics'?'T '+(n?n.textContent.trim():i):'LAB '+(i+1);
+      out.push({id:d.id,k:k,t:d.dataset.short||(s?s.textContent.replace(/^\s*\d+\s*/,'').trim():'section')});
     });
   } else if(tab==='exam'){
     document.querySelectorAll('#exam .panel').forEach(function(p,i){
@@ -1922,20 +1939,14 @@ function renderTerms(){
 (function(){
   var bar=$('termTopics');
   var opts=['all',0,1,2,3,4,5,6,7,8,9,10];
-  bar.innerHTML=opts.map(function(t){return '<button class="btn'+(t==='all'?' primary':'')+'" data-t="'+t+'">'+(t==='all'?'All topics':(t===0?'T0':'T'+t))+'</button>'}).join('')+
-    '<button class="btn" id="termShort" style="margin-left:auto">Short forms only</button>';
-  bar.addEventListener('click',function(e){
-    var b=e.target.closest('button'); if(!b) return;
-    if(b.id==='termShort'){termShortOnly=!termShortOnly;b.classList.toggle('primary',termShortOnly);renderTerms();return}
-    bar.querySelectorAll('[data-t]').forEach(function(x){x.classList.remove('primary')});
-    b.classList.add('primary'); termTopic=b.dataset.t; renderTerms();
-  });
+  bar.innerHTML=opts.map(function(t){return '<button type="button" aria-pressed="'+(t==='all')+'" data-v="'+t+'" title="'+(t==='all'?'All topics':esc(topicLabel(t)))+'">'+(t==='all'?'All':(t===0?'T0':'T'+t))+'</button>'}).join('');
+  segBind('termTopics',function(v){termTopic=v;renderTerms()});
+  segBind('termShow',function(v){termShortOnly=v==='short';renderTerms()});
   $('termF').addEventListener('input',renderTerms);
   document.addEventListener('click',function(e){
     var a=e.target.closest('a.tlink'); if(!a) return;
     e.preventDefault();
-    $('termF').value=a.dataset.term; termTopic='all';
-    bar.querySelectorAll('[data-t]').forEach(function(x){x.classList.toggle('primary',x.dataset.t==='all')});
+    $('termF').value=a.dataset.term; termTopic='all'; termShortOnly=false; segSet('termTopics','all'); segSet('termShow','all');
     location.hash='#/terms'; go('terms'); window.scrollTo({top:0,behavior:'instant'});
   });
 })();
@@ -2009,14 +2020,9 @@ function fcSkip(){ if(fc.queue.length>1){fc.queue.push(fc.queue.shift()); fcShow
   var sel=$('fcTopic');
   sel.innerHTML='<option value="all">All topics</option>'+[0,1,2,3,4,5,6,7,8,9,10].map(function(t){return '<option value="'+t+'">'+topicLabel(t)+'</option>'}).join('');
   sel.addEventListener('change',function(){fc.topic=sel.value;fcStart(false)});
-  document.querySelectorAll('#fcDeck [data-d]').forEach(function(b){
-    b.addEventListener('click',function(){
-      document.querySelectorAll('#fcDeck [data-d]').forEach(function(x){x.classList.remove('primary')});
-      b.classList.add('primary'); fc.deck=b.dataset.d; $('fcDir').style.display=fc.deck==='c'?'none':''; fcStart(false);
-    });
-  });
-  $('fcDir').addEventListener('click',function(){fc.flipDir=!fc.flipDir;this.classList.toggle('primary',fc.flipDir);this.textContent=fc.flipDir?'Meaning first':'Term first';fcShow()});
-  $('fcSkipKnown').addEventListener('click',function(){fc.skipKnown=!fc.skipKnown;this.classList.toggle('primary',fc.skipKnown);fcStart(false)});
+  segBind('fcDeck',function(v){fc.deck=v; $('fcDirRow').hidden=v==='c'; fcStart(false)});
+  segBind('fcDir',function(v){fc.flipDir=v==='meaning'; fcShow()});
+  segBind('fcWhich',function(v){fc.skipKnown=v==='unknown'; fcStart(false)});
   $('fcShuffle').addEventListener('click',function(){fcStart(false)});
   $('fcReset').addEventListener('click',function(){
     fcPool().forEach(function(c){delete known[c.id]}); LSset('dbFcKnown',JSON.stringify(known)); fcStart(false);
@@ -2025,7 +2031,6 @@ function fcSkip(){ if(fc.queue.length>1){fc.queue.push(fc.queue.shift()); fcShow
   $('fcKnow').addEventListener('click',fcGot);
   $('fcAgain').addEventListener('click',fcAgain);
   $('fcNext').addEventListener('click',fcSkip);
-  $('fcDir').style.display='none';
   fcStart(false);
 })();
 
@@ -2036,10 +2041,10 @@ function qzPool(){return QUIZ.filter(function(q){return qz.topics[q.t]})}
 function qzSetup(){
   var counts={}; QUIZ.forEach(function(q){counts[q.t]=(counts[q.t]||0)+1});
   var all=Object.keys(qz.topics).every(function(k){return qz.topics[k]});
-  var html='<div class="qcard"><h3>Build a quiz</h3><p class="sub2">Pick topics and a length. Questions and answer order are shuffled every time.</p>'+
-    '<h4>Topics</h4><div class="fc-controls" id="qzTopics"><button class="btn'+(all?' primary':'')+'" data-t="all">All</button>'+
-    [0,1,2,3,4,5,6,7,8,9,10].map(function(t){return '<button class="btn'+(qz.topics[t]&&!all?' primary':'')+'" data-t="'+t+'" title="'+esc(topicLabel(t))+'">'+(t===0?'T0':'T'+t)+' <span class="sub2">'+(counts[t]||0)+'</span></button>'}).join('')+'</div>'+
-    '<h4>Length</h4><div class="fc-controls" id="qzLen">'+[10,20,40,0].map(function(n){return '<button class="btn'+(qz.len===n?' primary':'')+'" data-n="'+n+'">'+(n?n:'All')+'</button>'}).join('')+'</div>'+
+  var html='<div class="qcard"><h3>Build a quiz</h3><p class="sub2">Pick one or more topics and a length, then start. Questions and answer order are shuffled every time.</p>'+
+    '<div class="ctlrow"><span class="ctl-label">Topics</span><div class="sc-seg" id="qzTopics"><button type="button" aria-pressed="'+all+'" data-t="all">All</button>'+
+    [0,1,2,3,4,5,6,7,8,9,10].map(function(t){return '<button type="button" aria-pressed="'+(qz.topics[t]&&!all)+'" data-t="'+t+'" title="'+esc(topicLabel(t))+' ('+(counts[t]||0)+' questions)">'+(t===0?'T0':'T'+t)+'</button>'}).join('')+'</div></div>'+
+    '<div class="ctlrow"><span class="ctl-label">Length</span><div class="sc-seg" id="qzLen">'+[10,20,40,0].map(function(n){return '<button type="button" aria-pressed="'+(qz.len===n)+'" data-n="'+n+'">'+(n?n+' questions':'All')+'</button>'}).join('')+'</div></div>'+
     '<p class="sub2" id="qzAvail"></p>'+
     '<div class="qactions"><button class="btn primary" id="qzGo">Start quiz</button></div>';
   var last=LSget('dbQuizLast','');
@@ -2183,14 +2188,14 @@ $('ixShow').onclick=function(){
   IX.ans.forEach(function(a,i){$('ixRows').children[i].querySelector('.ixw').style.display=''});
 };
 $('ixNew').onclick=function(){ixLoad(ixRandom())};
-$('ixCourse').onclick=function(){ixLoad(ixCourse())};
+segBind('ixMode',function(v){$('ixNew').hidden=v!=='random'; ixLoad(v==='random'?ixRandom():ixCourse())});
 ixLoad(ixCourse());
 
 /* ================= TRANSACTION SESSIONS ================= */
 var TX;
 var ACCTS=['A-101','A-102'];
 function txReset(){
-  TX={saved:{'A-101':1000,'A-102':500},pend:{},inTx:false,locks:{},wait:null,predict:$('txPredict').classList.contains('primary'),log:[]};
+  TX={saved:{'A-101':1000,'A-102':500},pend:{},inTx:false,locks:{},wait:null,predict:$('txPredict').querySelector('[aria-pressed="true"]').dataset.v==='on',log:[]};
   txLog('sys','Both sessions are connected. Autocommit is on. Saved balances: A-101 = 1000, A-102 = 500.');
   txDraw();
 }
@@ -2272,7 +2277,7 @@ function txSelect(who){
 }
 document.querySelectorAll('#sessions [data-act]').forEach(function(b){b.addEventListener('click',function(){$('txPredictBox').innerHTML='';txDo(b.dataset.act)})});
 $('txReset').onclick=function(){$('txPredictBox').innerHTML='';txReset()};
-$('txPredict').onclick=function(){this.classList.toggle('primary');TX.predict=this.classList.contains('primary');this.textContent=TX.predict?'Predict mode: on':'Predict mode: off'};
+segBind('txPredict',function(v){TX.predict=v==='on'});
 txReset();
 
 /* ================= REFERENTIAL ACTIONS ================= */
@@ -2351,11 +2356,10 @@ $('odCheck').onclick=function(){
     '<div class="tip t-good"><b>Correct</b>'+(OD.mode==='write'?'This is the order you type a SELECT statement.':'This is the logical order the DBMS evaluates the clauses: it needs the rows (FROM, WHERE), the groups (GROUP BY, HAVING) and only then the output columns (SELECT).')+'</div>';
 };
 $('odReset').onclick=function(){OD.picked=[];odSeed={};odDraw()};
-document.querySelectorAll('#odMode [data-m]').forEach(function(b){b.onclick=function(){
-  document.querySelectorAll('#odMode [data-m]').forEach(function(x){x.classList.remove('primary')}); b.classList.add('primary');
-  OD.mode=b.dataset.m; OD.picked=[]; odSeed={}; odDraw();
+segBind('odMode',function(v){
+  OD.mode=v; OD.picked=[]; odSeed={}; odDraw();
   $('odPrompt').textContent=OD.mode==='write'?'Put the clauses in the order you write them.':'Put the clauses in the order the DBMS processes them.';
-}});
+});
 odDraw();
 
 var WH=[["OrderDate >= '2026-01-01'",'WHERE'],['COUNT(*) > 5','HAVING'],['SUM(TotalDue) > 1000','HAVING'],["City = 'London'",'WHERE'],['AVG(UnitPrice) > 300','HAVING'],['TotalDue > 500','WHERE'],['MAX(ListPrice) < 100','HAVING'],["Status <> 'cancelled'",'WHERE'],['COUNT(DISTINCT ProductID) >= 3','HAVING'],['CustomerID NOT IN (SELECT …)','WHERE'],['SellEndDate IS NOT NULL','WHERE'],['MIN(OrderDate) < \'2025-01-01\'','HAVING']];
@@ -2375,6 +2379,13 @@ function whDraw(){
   };
 }
 $('whNew').onclick=whDraw; whDraw();
+
+/* ================= TOPIC → PRACTICE LINKS ================= */
+document.addEventListener('click',function(e){
+  var f=e.target.closest('[data-goflash]'), q=e.target.closest('[data-goquiz]');
+  if(f){e.preventDefault(); fc.topic=f.dataset.goflash; $('fcTopic').value=fc.topic; fc.deck='c'; segSet('fcDeck','c'); $('fcDirRow').hidden=true; fcStart(false); location.hash='#/flash'; go('flash'); window.scrollTo({top:0,behavior:'instant'})}
+  if(q){e.preventDefault(); Object.keys(qz.topics).forEach(function(k){qz.topics[k]=k===q.dataset.goquiz}); qz.len=0; qzSetup(); location.hash='#/quiz'; go('quiz'); window.scrollTo({top:0,behavior:'instant'})}
+});
 
 /* ================= KEYBOARD ================= */
 document.addEventListener('keydown',function(e){
@@ -2427,10 +2438,9 @@ go(LSget('dbTab','home'),true);
     progress: { read: function () { return (parseInt(LSget('dbBest', '0'), 10) || 0) > 0 ? { quiz: 'visited' } : {}; } },
     groups: [
       { label: 'Start', views: [{ id: 'home', title: 'Home' }] },
-      { label: 'Study', views: [
+      { label: 'Learn', views: [
         { id: 'topics', title: 'Topics', badge: '11', children: sections('topics') },
-        { id: 'terms', title: 'Terms', badge: String(TERMS.length) },
-        { id: 'labs', title: 'Labs', badge: '10', children: sections('labs') }
+        { id: 'terms', title: 'Terms', badge: String(TERMS.length) }
       ] },
       { label: 'Drill', views: [
         { id: 'flash', title: 'Flashcards', badge: String(CARDS.length + TERMS.length) },
@@ -2440,7 +2450,8 @@ go(LSget('dbTab','home'),true);
         { id: 'refact', title: 'Referential actions' },
         { id: 'order', title: 'SQL clause order' }
       ] },
-      { label: 'Practice', views: [
+      { label: 'Course work', views: [
+        { id: 'labs', title: 'Labs', badge: '10', children: sections('labs') },
         { id: 'exam', title: 'Past paper', badge: '8', children: sections('exam') }
       ] },
       { label: 'Reference', views: [
