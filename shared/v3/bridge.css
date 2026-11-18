@@ -34,6 +34,10 @@ html.sc-v3 {
 html.sc-v3[data-sc-console="os"] { --vi: var(--sc-dg-6); --vi2: color-mix(in srgb, var(--sc-dg-6) 72%, var(--sc-text)); }
 /* DBS uses "vi" for its blue accent */
 html.sc-v3[data-sc-console="db"] { --vi: var(--sc-dg-5); --vi2: color-mix(in srgb, var(--sc-dg-5) 72%, var(--sc-text)); }
+/* SPM uses "vi" for its plum accent */
+html.sc-v3[data-sc-console="spm"] { --vi: #7a3f6e; --vi2: color-mix(in srgb, #7a3f6e 72%, var(--sc-text)); }
+@media (prefers-color-scheme: dark) { html.sc-v3[data-sc-console="spm"]:not([data-theme="light"]) { --vi: #d3a3c9; --vi2: color-mix(in srgb, #d3a3c9 72%, var(--sc-text)); } }
+html.sc-v3[data-sc-console="spm"][data-theme="dark"] { --vi: #d3a3c9; --vi2: color-mix(in srgb, #d3a3c9 72%, var(--sc-text)); }
 
 /* long unbroken strings (OIDs, file names, URLs) wrap instead of widening the page */
 html.sc-v3 body main { overflow-wrap: break-word; }
