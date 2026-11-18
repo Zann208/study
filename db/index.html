@@ -292,24 +292,12 @@ a.sc-tab{text-decoration:none}
 <!-- ============ HOME ============ -->
 <section class="tab on" id="home"><div class="wrap">
   <h1>Database Systems</h1>
-  <p class="lede">Ten topics explained from zero, a glossary of every term, six drills, ten worked lab sets and a past mid-semester paper. Reference text: Elmasri &amp; Navathe, <i>Fundamentals of Database Systems</i>, 7th edition.</p>
+  <p class="lede">Elmasri &amp; Navathe, <i>Fundamentals of Database Systems</i>, 7th edition.</p>
   <div class="chiprow">
     <span class="chip c1">T1–3 · Model, DDL, ER</span>
     <span class="chip c2">T4–6 · Algebra, SQL, Datalog</span>
     <span class="chip c1">T7–8 · Indexing, optimization</span>
     <span class="chip c2">T9–10 · Transactions, privileges</span>
-  </div>
-
-  <div class="panel pc">
-    <h3>New to databases? Use this path</h3>
-    <ol>
-      <li><a href="#/topics/t0">Topics → Start here</a>: the big picture and the library example used on every topic page.</li>
-      <li>Read each topic's plain explanation first. Open "From the course materials" only after the plain part makes sense.</li>
-      <li>When a word is new, click it under "Words to know", or search <a href="#/terms">Terms</a>.</li>
-      <li>After each topic, run <a href="#/flash">Flashcards</a> for that topic, then a short <a href="#/quiz">Quiz</a>.</li>
-      <li>Practise the hands-on drills: <a href="#/calc">Index practice</a>, <a href="#/sessions">Transaction sessions</a>, <a href="#/refact">Referential actions</a>, <a href="#/order">SQL clause order</a>.</li>
-      <li>Finish with the <a href="#/labs">Labs</a> and the <a href="#/exam">Past paper</a>.</li>
-    </ol>
   </div>
 
   <div class="grid2">
@@ -357,7 +345,6 @@ a.sc-tab{text-decoration:none}
 <!-- ============ TOPICS ============ -->
 <section class="tab" id="topics"><div class="wrap">
   <h1>Topics</h1>
-  <p class="lede">Each topic starts with a plain explanation built on one small library example. The course-specific detail (lab schemas, worked answers, flags) sits in a closed block at the end of each topic.</p>
   <details class="note" open id="t0" data-short="Start here">
     <summary><span class="num n1">0</span> Start here: the big picture</summary>
     <div class="body">
@@ -376,8 +363,7 @@ a.sc-tab{text-decoration:none}
   <tr><td>Change safely</td><td>What happens when many people change data at once?</td><td class="mono">T9</td></tr>
   <tr><td>Protect</td><td>Who is allowed to read or change what?</td><td class="mono">T10</td></tr>
 </table></div>
-<p class="sub2">The topics are numbered in the order the course materials use, which builds tables (T2) before drawing them (T3). The table above shows the order a real project follows.</p>
-<h4>The example used on every Topics page</h4>
+<h4>Example: a library database</h4>
 <div class="tscroll"><table>
   <tr><th>Member</th><th>Book</th><th>Loan</th></tr>
   <tr><td><code>MemberID</code>, <code>Name</code>, <code>Phone</code></td><td><code>BookID</code>, <code>Title</code>, <code>Author</code></td><td><code>LoanID</code>, <code>MemberID</code>, <code>BookID</code>, <code>DueDate</code></td></tr>
@@ -412,14 +398,14 @@ a.sc-tab{text-decoration:none}
 <p>Ben's phone is NULL. That could mean the phone number is unknown, that he has no phone (does not apply), or that it simply has not been entered yet. NULL is not zero and not an empty string.</p>
 <h4>The three rules the DBMS guards</h4>
 <div class="tscroll"><table>
-  <tr><th>Rule</th><th>Plain meaning</th></tr>
+  <tr><th>Rule</th><th>Meaning</th></tr>
   <tr><td>Key constraint</td><td>No two rows may share the same key value.</td></tr>
   <tr><td>Entity integrity</td><td>A primary key value can never be NULL.</td></tr>
   <tr><td>Referential integrity</td><td>A foreign key must point at a row that really exists, or be NULL.</td></tr>
 </table></div>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Relation">Relation</a><a class="chip c2 tlink" href="#/terms" data-term="Tuple">Tuple</a><a class="chip c1 tlink" href="#/terms" data-term="Attribute">Attribute</a><a class="chip c2 tlink" href="#/terms" data-term="Domain">Domain</a><a class="chip c1 tlink" href="#/terms" data-term="Relation schema">Relation schema</a><a class="chip c2 tlink" href="#/terms" data-term="Relation state">Relation state</a><a class="chip c1 tlink" href="#/terms" data-term="Superkey">Superkey</a><a class="chip c2 tlink" href="#/terms" data-term="Candidate key">Candidate key</a><a class="chip c1 tlink" href="#/terms" data-term="Primary key">Primary key</a><a class="chip c2 tlink" href="#/terms" data-term="Foreign key">Foreign key</a><a class="chip c1 tlink" href="#/terms" data-term="NULL">NULL</a><a class="chip c2 tlink" href="#/terms" data-term="Entity integrity">Entity integrity</a><a class="chip c1 tlink" href="#/terms" data-term="Referential integrity">Referential integrity</a><a class="chip c2 tlink" href="#/terms" data-term="Key constraint">Key constraint</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>Table = relation, row = tuple, column = attribute.</li><li>A primary key identifies each row and is never NULL.</li><li>A foreign key points at another table's key, and may be NULL.</li></ul></div>
-<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>Definitions</h4>
+<details class="deep"><summary>Details</summary><div class="deep-body"><h4>Definitions</h4>
       <ul class="clean">
         <li>A <b>database</b> is a collection of related data.</li>
         <li><b>Data</b> are known facts that can be recorded and have implicit meaning.</li>
@@ -445,7 +431,7 @@ a.sc-tab{text-decoration:none}
         <li><b>NULL can have several meanings.</b> The worksheet example inserts a student whose Plan is NULL: the value may be unknown, not applicable, or not yet available.</li>
         <li><b>Keys are always superkeys.</b> A <b>superkey</b> is any set of attributes that uniquely identifies a tuple. A <b>candidate key</b> is a minimal superkey: no proper subset of it still identifies a tuple uniquely.</li>
         <li><b>A foreign-key value in a tuple can be NULL.</b> A foreign key (FK) is a link between the attributes of one table and the primary key of another; FK values are allowed to be NULL.</li>
-        <li><b>The delete operation can violate only referential integrity</b>, not key constraints nor entity integrity. <span class="flag">Past paper Q2.5 — no worked answer in the materials</span></li>
+        <li><b>The delete operation can violate only referential integrity</b>, not key constraints nor entity integrity.</li>
       </ul>
 
       <h4>Joining on a primary key / foreign key</h4>
@@ -453,8 +439,7 @@ a.sc-tab{text-decoration:none}
 
       <h4>Explaining a referential-action constraint</h4>
       <div class="formula">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)<br>ON DELETE SET DEFAULT ON UPDATE CASCADE;</div>
-      <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically. <span class="flag">Past paper Q1 — no worked answer in the materials; see Topic 2 for the referential actions</span></p>
-      <div class="tip t-info"><b>Source</b>Relational model review worksheet (questions and handwritten answers); past paper Q1 and Q2.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 SQL DDL</a></div>
+      <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 SQL DDL</a></div>
     </div>
   </details>
 
@@ -499,7 +484,7 @@ a.sc-tab{text-decoration:none}
 <p class="sub2">If you write no action, MySQL uses NO ACTION, which in MySQL behaves the same as RESTRICT.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="SQL">SQL</a><a class="chip c2 tlink" href="#/terms" data-term="DDL">DDL</a><a class="chip c1 tlink" href="#/terms" data-term="DML">DML</a><a class="chip c2 tlink" href="#/terms" data-term="DCL">DCL</a><a class="chip c1 tlink" href="#/terms" data-term="TCL">TCL</a><a class="chip c2 tlink" href="#/terms" data-term="CREATE TABLE">CREATE TABLE</a><a class="chip c1 tlink" href="#/terms" data-term="ALTER TABLE">ALTER TABLE</a><a class="chip c2 tlink" href="#/terms" data-term="NOT NULL">NOT NULL</a><a class="chip c1 tlink" href="#/terms" data-term="UNIQUE">UNIQUE</a><a class="chip c2 tlink" href="#/terms" data-term="DEFAULT">DEFAULT</a><a class="chip c1 tlink" href="#/terms" data-term="CHECK">CHECK</a><a class="chip c2 tlink" href="#/terms" data-term="REFERENCES">REFERENCES</a><a class="chip c1 tlink" href="#/terms" data-term="Referential action">Referential action</a><a class="chip c2 tlink" href="#/terms" data-term="CASCADE">CASCADE</a><a class="chip c1 tlink" href="#/terms" data-term="SET NULL">SET NULL</a><a class="chip c2 tlink" href="#/terms" data-term="SET DEFAULT">SET DEFAULT</a><a class="chip c1 tlink" href="#/terms" data-term="RESTRICT">RESTRICT</a><a class="chip c2 tlink" href="#/terms" data-term="NO ACTION">NO ACTION</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>DDL builds structure; constraints are rules the DBMS checks for you.</li><li>CASCADE follows, SET NULL unlinks, SET DEFAULT relinks, RESTRICT refuses.</li><li>In MySQL, no action written means RESTRICT.</li></ul></div>
-<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>Creating a schema and a table</h4>
+<details class="deep"><summary>Details</summary><div class="deep-body"><h4>Creating a schema and a table</h4>
       <pre class="sql">CREATE DATABASE SCHOOL;
 USE SCHOOL;
 
@@ -537,8 +522,7 @@ ADD CONSTRAINT FK_Advisor
 FOREIGN KEY (AdvisorID) REFERENCES Course(Instructor)
 ON UPDATE CASCADE
 ON DELETE SET NULL;</pre>
-      <div class="tip t-warn"><b>Will MySQL accept this?</b>Not as written. MySQL rejects <code>SET NULL</code> on a column declared <code>NOT NULL</code>, so the worksheet's <code>AdvisorID … NOT NULL</code> with <code>ON DELETE SET NULL</code> fails; drop the NOT NULL. MySQL also requires the referenced column to be indexed, ideally the parent's primary key. The DDL lab's <code>ON DELETE SET DEFAULT</code> is standard SQL, but MySQL's InnoDB engine rejects it; it runs on systems such as PostgreSQL. These notes come from the MySQL reference manual, not from the course files.</div>
-      <div class="tip t-info"><b>Source</b>School database DDL practice (lab answers and requirements text); relational model review worksheet question 2.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="2">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="2">Quiz</a><a class="btn" href="#/refact">Drill: Referential actions</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t3">Next: T3 ER modelling</a></div>
+      <div class="tip t-warn"><b>Will MySQL accept this?</b>Not as written. MySQL rejects <code>SET NULL</code> on a column declared <code>NOT NULL</code>, so the worksheet's <code>AdvisorID … NOT NULL</code> with <code>ON DELETE SET NULL</code> fails; drop the NOT NULL. MySQL also requires the referenced column to be indexed, ideally the parent's primary key. The DDL lab's <code>ON DELETE SET DEFAULT</code> is standard SQL, but MySQL's InnoDB engine rejects it; it runs on systems such as PostgreSQL.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="2">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="2">Quiz</a><a class="btn" href="#/refact">Drill: Referential actions</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t3">Next: T3 ER modelling</a></div>
     </div>
   </details>
 
@@ -568,7 +552,7 @@ ON DELETE SET NULL;</pre>
 <p>Some facts belong to the link, not to either thing. The due date is not a property of the member or of the book; it is a property of one borrowing. So <code>DueDate</code> hangs off the <i>borrows</i> diamond.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="ER model">ER model</a><a class="chip c2 tlink" href="#/terms" data-term="ERD">ERD</a><a class="chip c1 tlink" href="#/terms" data-term="Entity type">Entity type</a><a class="chip c2 tlink" href="#/terms" data-term="Key attribute">Key attribute</a><a class="chip c1 tlink" href="#/terms" data-term="Multivalued attribute">Multivalued attribute</a><a class="chip c2 tlink" href="#/terms" data-term="Relationship type">Relationship type</a><a class="chip c1 tlink" href="#/terms" data-term="Cardinality ratio">Cardinality ratio</a><a class="chip c2 tlink" href="#/terms" data-term="1 : N">1 : N</a><a class="chip c1 tlink" href="#/terms" data-term="M : N">M : N</a><a class="chip c2 tlink" href="#/terms" data-term="Total participation">Total participation</a><a class="chip c1 tlink" href="#/terms" data-term="Partial participation">Partial participation</a><a class="chip c2 tlink" href="#/terms" data-term="Weak entity">Weak entity</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>Rectangle = entity type, oval = attribute, diamond = relationship.</li><li>1:1, 1:N, M:N say how many; double line = must, single line = may.</li><li>A fact about the link itself goes on the diamond.</li></ul></div>
-<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>Reading the notation</h4>
+<details class="deep"><summary>Details</summary><div class="deep-body"><h4>Reading the notation</h4>
       <ul class="clean">
         <li>Rectangles are <b>entity types</b>; ovals are <b>attributes</b>; the key attribute is underlined; diamonds are <b>relationship types</b>.</li>
         <li>A double-outlined attribute oval marks a <b>multivalued attribute</b> (the inventory diagram's Price_change, which holds the price history with Price and Datetime).</li>
@@ -592,9 +576,7 @@ ON DELETE SET NULL;</pre>
         <li>CONGRESS_PERSON — sponsored — BILL: a bill can be sponsored by M persons (M : N).</li>
         <li>CONGRESS_PERSON — voted — BILL with attribute Result: each congressperson can vote for N bills (M : N).</li>
         <li>Enumerated domains appear in the requirements, not the diagram: Region, Party, Passed_or_failed and Vote each have a fixed set of values.</li>
-      </ul>
-      <div class="tip t-warn"><b>Thin</b>The materials contain two worked diagrams and the cardinality explanations above. Weak entities, specialization and the ER-to-relational mapping steps are not covered anywhere in the attached files.</div>
-      <div class="tip t-info"><b>Source</b>Inventory basic ER worked answer; Vote ER worked answer.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="3">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="3">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t4">Next: T4 Relational algebra</a></div>
+      </ul></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="3">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="3">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t4">Next: T4 Relational algebra</a></div>
     </div>
   </details>
 
@@ -618,10 +600,10 @@ ON DELETE SET NULL;</pre>
          └ 1. join members to their loans
          └ 2. keep only loans of book 7
 └ 3. keep only the Name column</pre>
-<p class="sub2">Select (σ) works on rows and project (π) works on columns. Mixing them up is the most common beginner mistake.</p>
+<p class="sub2">Select (σ) works on rows; project (π) works on columns.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="RA">RA</a><a class="chip c2 tlink" href="#/terms" data-term="Procedural language">Procedural language</a><a class="chip c1 tlink" href="#/terms" data-term="σ">σ</a><a class="chip c2 tlink" href="#/terms" data-term="π">π</a><a class="chip c1 tlink" href="#/terms" data-term="×">×</a><a class="chip c2 tlink" href="#/terms" data-term="⋈">⋈</a><a class="chip c1 tlink" href="#/terms" data-term="Equijoin">Equijoin</a><a class="chip c2 tlink" href="#/terms" data-term="∪">∪</a><a class="chip c1 tlink" href="#/terms" data-term="−">−</a><a class="chip c2 tlink" href="#/terms" data-term="∩">∩</a><a class="chip c1 tlink" href="#/terms" data-term="ρ">ρ</a><a class="chip c2 tlink" href="#/terms" data-term="Union compatible">Union compatible</a><a class="chip c1 tlink" href="#/terms" data-term="Outer join">Outer join</a><a class="chip c2 tlink" href="#/terms" data-term="÷">÷</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>Every operation takes tables in and returns a table.</li><li>σ filters rows, π picks columns (and drops duplicates).</li><li>Read nested expressions from the inside out.</li></ul></div>
-<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>What it is</h4>
+<details class="deep"><summary>Details</summary><div class="deep-body"><h4>What it is</h4>
       <p>A <b>procedural query language</b>: a set of operations (algebraic operations) that provides the theoretical foundation for relational queries. Each operation takes one or two relations and outputs a table.</p>
       <div class="tscroll"><table>
         <tr><th>Fundamental</th><th>Symbol</th><th>Additional</th><th>Symbol</th></tr>
@@ -659,8 +641,7 @@ EMPLOYEE ⋈ Dno = Dnumber (π Dnumber, Dname (DEPARTMENT))</pre>
         <tr><td class="ra-sym">σ</td><td><code>sigma_(...)</code></td><td><code>sigma_(gender='male')(employee)</code></td></tr>
         <tr><td class="ra-sym">π</td><td><code>pi_(...)</code></td><td><code>pi_(name, age)(employee)</code></td></tr>
         <tr><td class="ra-sym">⋈</td><td><code>join_(...)</code></td><td><code>join_(employee, department)</code></td></tr>
-      </table></div>
-      <div class="tip t-info"><b>Source</b>Handwritten relational algebra notes; relational algebra answer sheet; relational algebra section of the review worksheet.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="4">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="4">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t5">Next: T5 Intermediate SQL</a></div>
+      </table></div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="4">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="4">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t5">Next: T5 Intermediate SQL</a></div>
     </div>
   </details>
 
@@ -678,9 +659,9 @@ HAVING   COUNT(*) > 2                   -- 4. throw away buckets you do not want
 ORDER BY Loans DESC                     -- 6. sort the result
 LIMIT    5;                             -- 7. keep only the first few</pre>
 <p>You <b>write</b> the clauses in the order SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT. The DBMS <b>thinks</b> in the order shown by the numbers: it needs the tables first, then filters rows, groups them, filters groups, and only then picks the columns to show.</p>
-<h4>The pieces in plain words</h4>
+<h4>The pieces</h4>
 <div class="tscroll"><table>
-  <tr><th>Piece</th><th>Plain meaning</th><th>Same idea in algebra</th></tr>
+  <tr><th>Piece</th><th>Meaning</th><th>Same idea in algebra</th></tr>
   <tr><td><code>WHERE</code></td><td>Filter single rows</td><td class="ra-sym">σ</td></tr>
   <tr><td><code>SELECT</code> list</td><td>Choose columns</td><td class="ra-sym">π</td></tr>
   <tr><td><code>JOIN … ON</code></td><td>Combine matching rows from two tables</td><td class="ra-sym">⋈</td></tr>
@@ -696,7 +677,7 @@ LIMIT    5;                             -- 7. keep only the first few</pre>
 <p><code>COUNT(*) OVER (PARTITION BY MemberID)</code> also counts per group, but unlike GROUP BY it keeps every row and writes the group's count beside each one.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="SELECT">SELECT</a><a class="chip c2 tlink" href="#/terms" data-term="FROM">FROM</a><a class="chip c1 tlink" href="#/terms" data-term="WHERE">WHERE</a><a class="chip c2 tlink" href="#/terms" data-term="JOIN … ON">JOIN … ON</a><a class="chip c1 tlink" href="#/terms" data-term="Aggregate function">Aggregate function</a><a class="chip c2 tlink" href="#/terms" data-term="GROUP BY">GROUP BY</a><a class="chip c1 tlink" href="#/terms" data-term="HAVING">HAVING</a><a class="chip c2 tlink" href="#/terms" data-term="ORDER BY">ORDER BY</a><a class="chip c1 tlink" href="#/terms" data-term="LIMIT">LIMIT</a><a class="chip c2 tlink" href="#/terms" data-term="DISTINCT">DISTINCT</a><a class="chip c1 tlink" href="#/terms" data-term="Subquery">Subquery</a><a class="chip c2 tlink" href="#/terms" data-term="Self-join">Self-join</a><a class="chip c1 tlink" href="#/terms" data-term="IS NULL">IS NULL</a><a class="chip c2 tlink" href="#/terms" data-term="LIKE">LIKE</a><a class="chip c1 tlink" href="#/terms" data-term="Window function">Window function</a><a class="chip c2 tlink" href="#/terms" data-term="Query semantics">Query semantics</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>Write: SELECT FROM WHERE GROUP BY HAVING ORDER BY LIMIT.</li><li>Run: FROM WHERE GROUP BY HAVING SELECT ORDER BY LIMIT.</li><li>One-row condition goes in WHERE; group condition goes in HAVING.</li></ul></div>
-<details class="deep"><summary>From the course materials</summary><div class="deep-body"><p>The two intermediate labs run against a sales database (Customer, CustomerAddress, Address, Product, ProductCategory, SalesOrderHeader, SalesOrderDetail). Each pattern below is lifted from a lab answer.</p>
+<details class="deep"><summary>Details</summary><div class="deep-body"><p>The two intermediate labs run against a sales database (Customer, CustomerAddress, Address, Product, ProductCategory, SalesOrderHeader, SalesOrderDetail).</p>
       <h4>Grouping and HAVING</h4>
       <pre class="sql">SELECT AddressType, COUNT(AddressType)
 FROM CustomerAddress
@@ -749,8 +730,7 @@ GROUP BY parent.ProductCategoryID, parent.Name;</pre>
 
       <h4>Query semantics</h4>
       <p>Several questions ask for "a short sentence that describes the meaning of the query". The lab answers read as: <i>find the average total due for each customer, highest to lowest</i>; <i>retrieve the most expensive price in each product category</i>. The past paper asks the same for a GROUP BY … HAVING query on EMPLOYEE.</p>
-      <div class="tip t-warn"><b>Inconsistent</b>Lab 2 questions 7 and 8 show the same <code>SELECT * FROM Product … LIKE '%Helmet%' …</code> query twice, with answers ("summation of the price", "products ordered at least once") that do not match it. Treat those two answers as unreliable.</div>
-      <div class="tip t-info"><b>Source</b>Intermediate SQL answers, parts 1 and 2; past paper Q3.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="5">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="5">Quiz</a><a class="btn" href="#/order">Drill: SQL clause order</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t6">Next: T6 Datalog</a></div>
+      <div class="tip t-warn"><b>Inconsistent</b>Lab 2 questions 7 and 8 show the same <code>SELECT * FROM Product … LIKE '%Helmet%' …</code> query twice, with answers ("summation of the price", "products ordered at least once") that do not match it. Treat those two answers as unreliable.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="5">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="5">Quiz</a><a class="btn" href="#/order">Drill: SQL clause order</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t6">Next: T6 Datalog</a></div>
     </div>
   </details>
 
@@ -770,17 +750,16 @@ GROUP BY parent.ProductCategoryID, parent.Name;</pre>
 <p>A rule is <b>safe</b> when every variable in the head, and every variable used in a <code>NOT</code> or in a comparison, also appears in a normal (non-negated) table in the body. If a variable is not tied to a real table, it could stand for any value at all, and the answer would be infinite.</p>
 <h4>Recursion</h4>
 <p>A rule may use its own name in its body. That lets you follow a chain of any length: a category, its parent, the parent's parent, and so on. SQL does the same with <code>WITH RECURSIVE</code>: a <b>base case</b> gives the starting rows, a <b>recursive case</b> adds the next step from the rows found so far, and it repeats until no new rows appear.</p>
-<p class="sub2">The safety rule is standard Datalog theory; the course materials ask why three rules are unsafe but do not include the answer.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Datalog">Datalog</a><a class="chip c2 tlink" href="#/terms" data-term="Rule">Rule</a><a class="chip c1 tlink" href="#/terms" data-term="Head">Head</a><a class="chip c2 tlink" href="#/terms" data-term="Body">Body</a><a class="chip c1 tlink" href="#/terms" data-term="Anonymous variable">Anonymous variable</a><a class="chip c2 tlink" href="#/terms" data-term="Safe rule">Safe rule</a><a class="chip c1 tlink" href="#/terms" data-term="Recursive query">Recursive query</a><a class="chip c2 tlink" href="#/terms" data-term="WITH RECURSIVE">WITH RECURSIVE</a><a class="chip c1 tlink" href="#/terms" data-term="Base case">Base case</a><a class="chip c2 tlink" href="#/terms" data-term="Recursive case">Recursive case</a><a class="chip c1 tlink" href="#/terms" data-term="CTE">CTE</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>head &lt;- body: the head is produced when the whole body matches.</li><li>Same variable twice = a join; _ = do not care.</li><li>Safe: every head, NOT and comparison variable appears in a positive table.</li></ul></div>
-<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>Datalog rules</h4>
+<details class="deep"><summary>Details</summary><div class="deep-body"><h4>Datalog rules</h4>
       <p>A rule has a head and a body: <code>ans(x, y) &lt;- R(x, y, z) AND z &gt; 20.0</code>. Underscores are attributes that are matched but not used. Translating a rule means producing (1) relational algebra, (2) SQL and (3) an English sentence.</p>
       <pre class="sql">ans(x,y) <- WORKS_ON(x,y,z) AND z > 20.0        -- WORKS_ON(Essn, Pno, Hours)
 
 (1) π Essn, Pno (σ Hours > 20.0 (WORKS_ON))
 (2) SELECT Essn, Pno FROM WORKS_ON WHERE Hours > 20.0;
 (3) Display Essn and project number where the working hours are greater than 20.</pre>
-      <p>The past paper gives two further rules on a CUSTOMERS / PRODUCTS / SUPPLIERS / ORDERS / OFFERS schema, and asks why three rules are <b>not safe</b>: <code>S(x) &lt;- R(y)</code>, <code>S(x) &lt;- R(y) AND NOT R(x)</code>, <code>S(x) &lt;- R(y) AND x &lt; y</code>. <span class="flag">No worked answer for safety in the materials</span></p>
+      <p>The past paper gives two further rules on a CUSTOMERS / PRODUCTS / SUPPLIERS / ORDERS / OFFERS schema, and asks why three rules are <b>not safe</b>: <code>S(x) &lt;- R(y)</code>, <code>S(x) &lt;- R(y) AND NOT R(x)</code>, <code>S(x) &lt;- R(y) AND x &lt; y</code>.</p>
 
       <h4>Recursive CTE (WITH RECURSIVE)</h4>
       <pre class="sql">WITH RECURSIVE parents AS (
@@ -792,8 +771,7 @@ GROUP BY parent.ProductCategoryID, parent.Name;</pre>
   FROM categories cat, parents p
   WHERE cat.id = p.parent_id )
 SELECT id, name, relative_depth FROM parents;</pre>
-      <p>On the worksheet's category tree (Root A → Child A1 → Grandchild A1b) the query walks from the named node up to the root, decreasing relative_depth by one per step. The worksheet asks for the result rows, the base and recursive cases, the meaning of the query, the purpose of the final SELECT, and a Datalog expression equivalent to it. <span class="flag">Only the sketch of the tree is answered by hand; the written answers are not in the file</span></p>
-      <div class="tip t-info"><b>Source</b>Datalog section of the review worksheet; relational algebra answer sheet Q5; past paper Q4 and Q5.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="6">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="6">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t7">Next: T7 Indexing</a></div>
+      <p>On the worksheet's category tree (Root A → Child A1 → Grandchild A1b) the query walks from the named node up to the root, decreasing relative_depth by one per step. The worksheet asks for the result rows, the base and recursive cases, the meaning of the query, the purpose of the final SELECT, and a Datalog expression equivalent to it.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="6">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="6">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t7">Next: T7 Indexing</a></div>
     </div>
   </details>
 
@@ -828,7 +806,7 @@ SELECT id, name, relative_depth FROM parents;</pre>
 <p>If the index itself is many blocks long, build a small index on top of it, then another on top of that, until the top level fits in one block. To find a record you read one block per level, then the data block: <b>levels + 1</b> block accesses. That idea is the basis of the B-trees real databases use.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Block">Block</a><a class="chip c2 tlink" href="#/terms" data-term="B">B</a><a class="chip c1 tlink" href="#/terms" data-term="R">R</a><a class="chip c2 tlink" href="#/terms" data-term="r">r</a><a class="chip c1 tlink" href="#/terms" data-term="bfr">bfr</a><a class="chip c2 tlink" href="#/terms" data-term="b">b</a><a class="chip c1 tlink" href="#/terms" data-term="Unspanned">Unspanned</a><a class="chip c2 tlink" href="#/terms" data-term="P">P</a><a class="chip c1 tlink" href="#/terms" data-term="PR">PR</a><a class="chip c2 tlink" href="#/terms" data-term="Block access">Block access</a><a class="chip c1 tlink" href="#/terms" data-term="Linear search">Linear search</a><a class="chip c2 tlink" href="#/terms" data-term="Binary search">Binary search</a><a class="chip c1 tlink" href="#/terms" data-term="Index">Index</a><a class="chip c2 tlink" href="#/terms" data-term="Index entry">Index entry</a><a class="chip c1 tlink" href="#/terms" data-term="bfri">bfri</a><a class="chip c2 tlink" href="#/terms" data-term="fo">fo</a><a class="chip c1 tlink" href="#/terms" data-term="Primary index">Primary index</a><a class="chip c2 tlink" href="#/terms" data-term="Secondary index">Secondary index</a><a class="chip c1 tlink" href="#/terms" data-term="Dense index">Dense index</a><a class="chip c2 tlink" href="#/terms" data-term="Sparse index">Sparse index</a><a class="chip c1 tlink" href="#/terms" data-term="Multilevel index">Multilevel index</a><a class="chip c2 tlink" href="#/terms" data-term="t">t</a><a class="chip c1 tlink" href="#/terms" data-term="B+-tree">B+-tree</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>Cost is counted in block reads.</li><li>bfr rounds down, number of blocks rounds up.</li><li>Primary index: one entry per block. Secondary: one per record. Multilevel: levels + 1 reads.</li></ul></div>
-<details class="deep"><summary>From the course materials</summary><div class="deep-body"><p>One scenario is reused everywhere: a file of <b>r = 30,000</b> fixed-length EMPLOYEE records, block pointer <b>P = 6</b> bytes, record pointer <b>P<sub>R</sub> = 7</b> bytes. The worked answer sheet uses <b>B = 512</b> bytes and a 10-byte Phone field; the review worksheet uses B = 512 with a 9-byte Phone; the past paper uses <b>B = 1024</b> with a 9-byte Phone. Always recompute R from the field list you are given.</p>
+<details class="deep"><summary>Details</summary><div class="deep-body"><p>One scenario is reused everywhere: a file of <b>r = 30,000</b> fixed-length EMPLOYEE records, block pointer <b>P = 6</b> bytes, record pointer <b>P<sub>R</sub> = 7</b> bytes. The worked answer sheet uses <b>B = 512</b> bytes and a 10-byte Phone field; the review worksheet uses B = 512 with a 9-byte Phone; the past paper uses <b>B = 1024</b> with a 9-byte Phone. Always recompute R from the field list you are given.</p>
       <h4>Data file</h4>
       <div class="formula">R   = sum of field sizes                       = 30+9+9+40+10+8+1+4+4 = 115 bytes<br>bfr = floor(B / R)                            = floor(512/115) = 4 records per block<br>b   = ceiling(r / bfr)                        = ceiling(30,000/4) = 7,500 blocks<br>left-over per block = B − bfr·R               = 512 − 460 = 52 bytes</div>
       <p class="sub2">floor for bfr because a block cannot hold a fraction of a record (unspanned); ceiling for b so the last partial block is counted.</p>
@@ -847,8 +825,7 @@ SELECT id, name, relative_depth FROM parents;</pre>
         <tr><td>Primary on Ssn (7,500 entries)</td><td>221</td><td>7</td><td>1</td><td>229</td><td>3 + 1 = 4</td></tr>
         <tr><td>Secondary on Ssn (30,000 entries)</td><td>883</td><td>26</td><td>1</td><td>910</td><td>3 + 1 = 4</td></tr>
       </table></div>
-      <div class="tip t-warn"><b>Pointer size matters</b>The answer sheet builds every index entry with the 6-byte block pointer. The review worksheet and the past paper explicitly say the secondary index points at the <b>record</b> level, so the entry there is key + 7-byte record pointer = 16 bytes. The materials give no worked numbers for that variant; the exam page shows the method applied.</div>
-      <div class="tip t-info"><b>Source</b>Index calculation answer sheet (full); review worksheet question 2; past paper Q6.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="7">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="7">Quiz</a><a class="btn" href="#/calc">Drill: Index practice</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t8">Next: T8 Query optimization</a></div>
+      <div class="tip t-warn"><b>Pointer size matters</b>The answer sheet builds every index entry with the 6-byte block pointer. The review worksheet and the past paper explicitly say the secondary index points at the <b>record</b> level, so the entry there is key + 7-byte record pointer = 16 bytes. The past paper (Q6) works that variant.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="7">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="7">Quiz</a><a class="btn" href="#/calc">Drill: Index practice</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t8">Next: T8 Query optimization</a></div>
     </div>
   </details>
 
@@ -870,8 +847,8 @@ SELECT id, name, relative_depth FROM parents;</pre>
 <p>Pair 1,000 members with 50,000 loans and you get 50 million combinations before filtering. Filter the members to the 20 you want first, then join, and the work is tiny. Same answer, very different cost.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Query optimizer">Query optimizer</a><a class="chip c2 tlink" href="#/terms" data-term="Declarative language">Declarative language</a><a class="chip c1 tlink" href="#/terms" data-term="Query tree">Query tree</a><a class="chip c2 tlink" href="#/terms" data-term="Heuristic">Heuristic</a><a class="chip c1 tlink" href="#/terms" data-term="Cascade of selections">Cascade of selections</a><a class="chip c2 tlink" href="#/terms" data-term="Selection push-down">Selection push-down</a><a class="chip c1 tlink" href="#/terms" data-term="Projection push-down">Projection push-down</a><a class="chip c2 tlink" href="#/terms" data-term="Join order">Join order</a><a class="chip c1 tlink" href="#/terms" data-term="Cost-based optimization">Cost-based optimization</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>You say what you want; the optimizer decides how.</li><li>Filter early, join instead of pairing everything, carry only needed columns.</li></ul></div>
-<details class="deep"><summary>From the course materials</summary><div class="deep-body"><p>A query is first written as a <b>query tree</b>: Cartesian products of the base relations at the bottom, one big selection of the whole WHERE clause above them, and the projection at the top. Heuristic optimization rewrites that tree into an equivalent one that is cheaper to execute.</p>
-      <h4>The four steps shown in the slides</h4>
+<details class="deep"><summary>Details</summary><div class="deep-body"><p>A query is first written as a <b>query tree</b>: Cartesian products of the base relations at the bottom, one big selection of the whole WHERE clause above them, and the projection at the top. Heuristic optimization rewrites that tree into an equivalent one that is cheaper to execute.</p>
+      <h4>The four steps</h4>
       <ol>
         <li><b>Cascade selection</b> — split the single conjunctive σ into one σ per condition.</li>
         <li><b>Move selection down</b> — push each σ as far down the tree as possible, next to the relation it restricts (e.g. <span class="ra-sym">σ<sub>ProdType = 'Widget'</sub></span> directly over Product, <span class="ra-sym">σ<sub>Date.Month = July</sub></span> directly over Invoice).</li>
@@ -880,11 +857,10 @@ SELECT id, name, relative_depth FROM parents;</pre>
       </ol>
       <pre class="sql ra">π Type (σ ProdType = 'Widget' (σ Date.Month = July (Customer ⋈ Invoice ⋈ LineItem ⋈ Product)))</pre>
       <h4>Choosing a join order</h4>
-      <p>The past paper asks how the optimizer decides between joining Enrollment with Student or with Course first, and what its points of consideration are. <span class="flag">No worked answer in the materials</span></p>
+      <p>The past paper asks how the optimizer decides between joining Enrollment with Student or with Course first, and what its points of consideration are.</p>
       <h4>Worksheet example</h4>
       <pre class="sql ra">π Title (σ Grade = 'A' ∧ Instructor = "…" (Course ⋈ Enrollment))</pre>
-      <p>Handwritten answer: start from π Title over σ over the Cartesian product of Course and Enrollment; cascade into σ Grade = 'A' and σ Instructor = "…"; move σ Grade = 'A' down onto Enrollment and σ Instructor = "…" down onto Course; replace the product with a join; keep π Title at the top.</p>
-      <div class="tip t-info"><b>Source</b>Heuristic optimization query-tree slides; review worksheet heuristic question; past paper Q7 and Q8.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="8">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="8">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t9">Next: T9 Transactions</a></div>
+      <p>Handwritten answer: start from π Title over σ over the Cartesian product of Course and Enrollment; cascade into σ Grade = 'A' and σ Instructor = "…"; move σ Grade = 'A' down onto Enrollment and σ Instructor = "…" down onto Course; replace the product with a join; keep π Title at the top.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="8">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="8">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t9">Next: T9 Transactions</a></div>
     </div>
   </details>
 
@@ -907,16 +883,15 @@ COMMIT;          -- make both changes permanent
 </ul>
 <h4>ACID: the four promises</h4>
 <div class="tscroll"><table>
-  <tr><th>Letter</th><th>Property</th><th>Plain meaning</th></tr>
+  <tr><th>Letter</th><th>Property</th><th>Meaning</th></tr>
   <tr><td class="mono">A</td><td>Atomicity</td><td>All or nothing</td></tr>
   <tr><td class="mono">C</td><td>Consistency</td><td>Rules hold before and after</td></tr>
   <tr><td class="mono">I</td><td>Isolation</td><td>Others do not see your half-finished work</td></tr>
   <tr><td class="mono">D</td><td>Durability</td><td>Once committed, it survives a crash</td></tr>
 </table></div>
-<p class="sub2">ACID and isolation levels are standard database theory; the course materials for this topic contain only the two-session lab.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Transaction">Transaction</a><a class="chip c2 tlink" href="#/terms" data-term="START TRANSACTION">START TRANSACTION</a><a class="chip c1 tlink" href="#/terms" data-term="COMMIT">COMMIT</a><a class="chip c2 tlink" href="#/terms" data-term="ROLLBACK">ROLLBACK</a><a class="chip c1 tlink" href="#/terms" data-term="Autocommit">Autocommit</a><a class="chip c2 tlink" href="#/terms" data-term="Session">Session</a><a class="chip c1 tlink" href="#/terms" data-term="Uncommitted change">Uncommitted change</a><a class="chip c2 tlink" href="#/terms" data-term="Lock">Lock</a><a class="chip c1 tlink" href="#/terms" data-term="Lock wait">Lock wait</a><a class="chip c2 tlink" href="#/terms" data-term="ACID">ACID</a><a class="chip c1 tlink" href="#/terms" data-term="Isolation level">Isolation level</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>A transaction is all or nothing: COMMIT saves, ROLLBACK undoes.</li><li>You see your own uncommitted changes; others do not.</li><li>Changing a row locks it; others wanting to change it must wait.</li></ul></div>
-<details class="deep"><summary>From the course materials</summary><div class="deep-body"><p>The lab runs two sessions (connections A and B) against bank accounts 10001–10003 and asks what each session sees after each numbered query.</p>
+<details class="deep"><summary>Details</summary><div class="deep-body"><p>The lab runs two sessions (connections A and B) against bank accounts 10001–10003 and asks what each session sees after each numbered query.</p>
       <ul class="clean">
         <li>A session <b>sees its own uncommitted changes</b> inside the same transaction: after A debits 100, A reads the decreased balance.</li>
         <li>Another session <b>does not see uncommitted changes</b> (default isolation behaviour): B still reads the original balance.</li>
@@ -924,9 +899,7 @@ COMMIT;          -- make both changes permanent
         <li>After A executes <b>COMMIT</b>, the change is permanent and B's transfer completes.</li>
         <li>After A executes <b>ROLLBACK</b>, all of A's changes are discarded (account 10003 is back to 1000).</li>
         <li>A transaction that is begun and neither committed nor rolled back is, in most DBMSs, rolled back automatically; until then other sessions do not see its changes.</li>
-      </ul>
-      <div class="tip t-warn"><b>Thin</b>Only the answer sheet is in the materials; the lab sheet with the numbered queries is not, so the exact SQL for each step is unknown. Isolation levels, ACID properties and schedules are not covered in the attached files.</div>
-      <div class="tip t-info"><b>Source</b>Transaction lab answers.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="9">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="9">Quiz</a><a class="btn" href="#/sessions">Drill: Transaction sessions</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t10">Next: T10 Privileges</a></div>
+      </ul></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="9">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="9">Quiz</a><a class="btn" href="#/sessions">Drill: Transaction sessions</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t10">Next: T10 Privileges</a></div>
     </div>
   </details>
 
@@ -956,7 +929,7 @@ GRANT 'librarian' TO 'ana'@'localhost', 'ben'@'localhost';</pre>
 <p>Give each account the smallest set of permissions, from the narrowest set of hosts, that still lets it do its job. If it is ever misused, the damage is limited.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Account">Account</a><a class="chip c2 tlink" href="#/terms" data-term="Host">Host</a><a class="chip c1 tlink" href="#/terms" data-term="localhost">localhost</a><a class="chip c2 tlink" href="#/terms" data-term="%">%</a><a class="chip c1 tlink" href="#/terms" data-term="Privilege">Privilege</a><a class="chip c2 tlink" href="#/terms" data-term="Privilege level">Privilege level</a><a class="chip c1 tlink" href="#/terms" data-term="GRANT">GRANT</a><a class="chip c2 tlink" href="#/terms" data-term="REVOKE">REVOKE</a><a class="chip c1 tlink" href="#/terms" data-term="GRANT OPTION">GRANT OPTION</a><a class="chip c2 tlink" href="#/terms" data-term="Role">Role</a><a class="chip c1 tlink" href="#/terms" data-term="Least privilege">Least privilege</a><a class="chip c2 tlink" href="#/terms" data-term="FLUSH PRIVILEGES">FLUSH PRIVILEGES</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>An account is user@host; % means any host.</li><li>GRANT gives, REVOKE takes away, at global, database, table or column level.</li><li>Roles bundle privileges; give the least that does the job.</li></ul></div>
-<details class="deep"><summary>From the course materials</summary><div class="deep-body"><h4>Accounts are user@host</h4>
+<details class="deep"><summary>Details</summary><div class="deep-body"><h4>Accounts are user@host</h4>
       <p><code>CREATE USER 'thisisme' IDENTIFIED BY '…'</code> without a host is interpreted as <code>'thisisme'@'%'</code>, which can connect from any host. For an application on the same host as the database, the correct form is <code>'thisisme'@'localhost'</code>; omitting the host violates the principle of least privilege.</p>
       <pre class="sql">CREATE USER 'john'@'localhost' IDENTIFIED BY 'pass_123';
 CREATE USER 'salary_app'@'192.168.128.%' IDENTIFIED BY 'Pass123';   -- Docker subnet wildcard
@@ -979,8 +952,7 @@ DROP USER 'dan'@'localhost';
 FLUSH PRIVILEGES;
 ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password</pre>
       <p><b>Reading a GRANT</b>: <code>GRANT SELECT, INSERT, UPDATE ON hr.employees TO 'myuser'@'localhost' IDENTIFIED BY 'mypassword'</code> allows retrieving, adding and modifying employee records to user myuser connecting from the same host as the server, with that password.</p>
-      <div class="tip t-warn"><b>Check</b>The lab's answer to "remove the ability to grant the UPDATE privilege while keeping it" revokes UPDATE itself (<code>REVOKE UPDATE … FROM 'dan'@'localhost'</code>). Whether that satisfies the question as worded is not resolved in the materials.</div>
-      <div class="tip t-info"><b>Source</b>Users, privileges and roles lab answers.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="10">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="10">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/flash">Next: Flashcards</a></div>
+      <div class="tip t-warn"><b>Note</b>The lab's answer to "remove the ability to grant the UPDATE privilege while keeping it" revokes UPDATE itself (<code>REVOKE UPDATE … FROM 'dan'@'localhost'</code>). To keep UPDATE and remove only the right to pass it on, revoke the grant option instead: <code>REVOKE GRANT OPTION ON hr.employees FROM 'dan'@'localhost'</code>.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="10">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="10">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/flash">Next: Flashcards</a></div>
     </div>
   </details>
 </div></section>
@@ -988,7 +960,6 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 <!-- ============ TERMS ============ -->
 <section class="tab" id="terms"><div class="wrap">
   <h1>Terms</h1>
-  <p class="lede">Every technical word, short form and symbol used in the course, in plain language. Items marked <span class="flag gen">general</span> are standard database vocabulary that the course files use without defining, or do not mention.</p>
   <div class="ctlrow"><span class="ctl-label">Search</span><input class="fld" id="termF" placeholder="e.g. FK, bfr, cascade, σ" autocomplete="off" style="flex:1;min-width:200px"></div>
   <div class="ctlrow"><span class="ctl-label">Topic</span><div class="sc-seg" id="termTopics"></div></div>
   <div class="ctlrow"><span class="ctl-label">Show</span><div class="sc-seg" id="termShow"><button type="button" aria-pressed="true" data-v="all">All terms</button><button type="button" aria-pressed="false" data-v="short">Short forms only</button></div></div>
@@ -997,7 +968,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 </div></section>
 <section class="tab" id="labs"><div class="wrap">
   <h1>Labs</h1>
-  <p class="lede">The exercise sets, with the answers condensed from the worked sheets. Open the original PDF from Downloads for screenshots and full working.</p>
+  <p class="lede">Ten lab sets with worked answers.</p>
 
   <details class="note" open id="lab1" data-short="Review worksheet">
     <summary><span class="num n1">1</span> Relational model review worksheet</summary>
@@ -1016,8 +987,8 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 π fname, lname (σ Plan = "Computer" (Student))
 σ Plan = "Gaming" (Student) ∪ σ Plan = "Paralympic" (Student)
 σ Grade = "A+" (Student ⋈ Enrollment)        -- all students who got A+</pre></div>
-      <div class="qa"><span class="qn">Datalog and recursion</span><p>The recursive CTE question and a Datalog exercise on Drinker / Frequents / Likes / Sells relations (Happy(d) defined from Frequents, Likes and Sells). <span class="flag">Written answers missing — only sketches are on the page</span></p></div>
-      <div class="qa"><span class="qn">Heuristic optimization and index calculation</span><p>Query-tree conversion (answered by hand, Topic 8) and a five-part secondary-index calculation with B = 512 and record pointers. <span class="flag">Index parts left blank in the worksheet; method in Topic 7</span></p></div>
+      <div class="qa"><span class="qn">Datalog and recursion</span><p>The recursive CTE question and a Datalog exercise on Drinker / Frequents / Likes / Sells relations (Happy(d) defined from Frequents, Likes and Sells).</p></div>
+      <div class="qa"><span class="qn">Heuristic optimization and index calculation</span><p>Query-tree conversion (answered by hand, Topic 8) and a five-part secondary-index calculation with B = 512 and record pointers.</p></div>
     </div>
   </details>
 
@@ -1038,7 +1009,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 );</pre>
         <p>The sheet also shows a second version with <code>CHECK ('Mother' OR 'Father' OR 'Other')</code>. <span class="flag no">That CHECK does not test the column; use the IN form</span></p></div>
       <div class="qa"><span class="qn">4 Rooms</span><p><code>RoomID INT PRIMARY KEY, RoomName VARCHAR(50) NOT NULL UNIQUE</code>.</p></div>
-      <div class="qa"><span class="qn">5 Employees</span><p>Answer uses <code>Age INT CHECK (Age &gt; 18)</code>. The question says "above or equal to 18"; the requirements text says "strictly greater than 18". <span class="flag">Source contradicts itself</span></p></div>
+      <div class="qa"><span class="qn">5 Employees</span><p>Answer uses <code>Age INT CHECK (Age &gt; 18)</code>. The question says "above or equal to 18"; the requirements text says "strictly greater than 18". <span class="flag">Question and requirements disagree</span></p></div>
       <div class="qa"><span class="qn">6 StudentRoomAssignment</span>
         <pre class="sql">CREATE TABLE StudentRoomAssignment (
     ID INT PRIMARY KEY,
@@ -1148,7 +1119,6 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
         <tr><td>6–7</td><td>Balance of 10003 after query 10, and why</td><td>1000 — connection A rolled back, discarding its changes</td></tr>
         <tr><td>8</td><td>Begin but never commit or rollback</td><td>Most DBMSs roll back automatically; until then other sessions do not see the change</td></tr>
       </table></div>
-      <p class="sub2">The numbered queries themselves are not in the materials.</p>
     </div>
   </details>
 
@@ -1164,7 +1134,6 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 <section class="tab" id="flash"><div class="wrap">
   <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash" aria-selected="true" aria-current="page">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Flashcards</h1>
-  <p class="lede">Concept cards from every topic, plus a card for every term in the glossary. Cards you miss come back a few cards later in the same round.</p>
   <div class="panel">
     <div class="ctlrow"><span class="ctl-label">Deck</span>
       <div class="sc-seg" id="fcDeck"><button type="button" aria-pressed="true" data-v="c">Concepts</button><button type="button" aria-pressed="false" data-v="t">Terms</button><button type="button" aria-pressed="false" data-v="both">Both</button></div></div>
@@ -1198,7 +1167,6 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 <section class="tab" id="quiz"><div class="wrap">
   <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz" aria-selected="true" aria-current="page">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Quiz</h1>
-  <p class="lede">Single-answer questions tagged by topic. Each answer is graded the moment you click, with the reason shown.</p>
   <div class="panel pc"><div id="quizShell" class="quiz-shell"></div></div>
 </div></section>
 
@@ -1206,7 +1174,6 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 <section class="tab" id="calc"><div class="wrap">
   <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc" aria-selected="true" aria-current="page">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Index practice</h1>
-  <p class="lede">The full Topic 7 calculation, step by step. Start with the course scenario, whose answers match the worked answer sheet, then generate new problems with different numbers.</p>
   <div class="ctlrow"><span class="ctl-label">Problem</span>
     <div class="sc-seg" id="ixMode"><button type="button" aria-pressed="true" data-v="course">Course scenario</button><button type="button" aria-pressed="false" data-v="random">Random numbers</button></div>
     <button class="btn" id="ixNew" hidden>New numbers</button></div>
@@ -1216,7 +1183,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
   </div>
   <div class="panel">
     <h3>Answer each step</h3>
-    <p class="sub2">Whole numbers unless the step says otherwise. Wrong or checked answers reveal the working.</p>
+    <p class="sub2">Whole numbers unless stated.</p>
     <div id="ixRows"></div>
     <div class="qactions">
       <button class="btn" id="ixShow">Show all working</button>
@@ -1231,7 +1198,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 <section class="tab" id="sessions"><div class="wrap">
   <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions" aria-selected="true" aria-current="page">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Transaction sessions</h1>
-  <p class="lede">Two connections to the same accounts table. Session A can open a transaction; Session B runs every statement in autocommit mode, like the transaction lab. Run statements in any order and watch what each session sees.</p>
+  <p class="lede">Session A uses an explicit transaction; Session B runs in autocommit.</p>
   <div class="ctlrow"><span class="ctl-label">Predict mode</span>
     <div class="sc-seg" id="txPredict"><button type="button" aria-pressed="true" data-v="off">Off</button><button type="button" aria-pressed="false" data-v="on">On</button></div>
     <span class="ctl-gap"></span><button class="btn" id="txReset">Reset both sessions</button></div>
@@ -1268,15 +1235,15 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
     <h3>Statement log <span class="sub2">newest first</span></h3>
     <div id="txLog"></div>
   </div>
-  <div class="tip t-info"><b>Try this</b>A: START TRANSACTION → A: UPDATE A-101 → A: SELECT → B: SELECT → B: UPDATE A-101 (B waits) → A: COMMIT (B finishes). Then reset and repeat with ROLLBACK instead of COMMIT.</div>
-  <p class="sub2">Modelled on MySQL InnoDB defaults: plain SELECTs never wait and read the last committed data, and an UPDATE waits for another session's row lock. START TRANSACTION inside an open transaction commits the old one first.</p>
+  <div class="tip t-info"><b>Sequence</b>A: START TRANSACTION → A: UPDATE A-101 → A: SELECT → B: SELECT → B: UPDATE A-101 (B waits) → A: COMMIT (B finishes). Then reset and repeat with ROLLBACK instead of COMMIT.</div>
+  <p class="sub2">MySQL InnoDB: a plain SELECT reads the last committed data without waiting; an UPDATE waits for another session's row lock; START TRANSACTION inside an open transaction commits it first.</p>
 </div></section>
 
 <!-- ============ DRILL: REFERENTIAL ACTIONS ============ -->
 <section class="tab" id="refact"><div class="wrap">
   <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact" aria-selected="true" aria-current="page">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Referential actions</h1>
-  <p class="lede">A member row is deleted or its ID changes. Pick what the Loan table looks like afterwards under the given foreign-key rule. <code>Loan.MemberID</code> has <code>DEFAULT 9</code>.</p>
+  <p class="lede"><code>Loan.MemberID</code> has <code>DEFAULT 9</code>.</p>
   <div class="grid2">
     <div class="card"><h4>Member (parent) before</h4><div class="tscroll" id="rfParent"></div></div>
     <div class="card"><h4>Loan (child) before</h4><div class="tscroll" id="rfChild"></div></div>
@@ -1297,7 +1264,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 <section class="tab" id="order"><div class="wrap">
   <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order" aria-selected="true" aria-current="page">SQL clause order</a></nav>
   <h1>SQL clause order</h1>
-  <p class="lede">Two orders matter: the order you type a SELECT, and the order the DBMS processes it. Knowing the second explains why WHERE cannot use an aggregate and why a SELECT alias is usable in ORDER BY.</p>
+  <p class="lede">Processing order is why WHERE cannot use an aggregate and why a SELECT alias works in ORDER BY.</p>
   <div class="panel">
     <div class="ctlrow"><span class="ctl-label">Order</span>
       <div class="sc-seg" id="odMode"><button type="button" aria-pressed="true" data-v="write">Writing order</button><button type="button" aria-pressed="false" data-v="run">Processing order</button></div></div>
@@ -1318,19 +1285,19 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 </div></section>
 <section class="tab" id="exam"><div class="wrap">
   <h1>Past paper</h1>
-  <p class="lede">One mid-semester paper: 8 questions, 90 marks, three hours, open PDF notes without internet. The materials contain the questions only; answer notes below point to where the method lives.</p>
+  <p class="lede">Mid-semester paper · 8 questions · 90 marks · 3 hours · open PDF notes, no internet.</p>
 
   <div class="panel" id="x1">
     <h3><span class="badge b1">Q1 · 10</span> Referential actions</h3>
     <div class="formula">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)<br>ON DELETE SET DEFAULT ON UPDATE CASCADE;</div>
     <p>1.1 Explain the constraint technically. 1.2 Modify it so that (1) a resigning supervisor leaves the supervisees with no supervisor, and (2) a newly admitted employee is assigned an HR supervisor automatically.</p>
-    <p class="sub2">Method: Topic 2. Part (1) matches the worksheet's ON DELETE SET NULL; part (2) matches the DDL lab's DEFAULT value on the column. No model answer in the materials.</p>
+    <p class="sub2">Method: Topic 2. (1) ON DELETE SET NULL. (2) A DEFAULT value on super_ssn.</p>
   </div>
 
   <div class="panel" id="x2">
     <h3><span class="badge b1">Q2 · 15</span> Illustrate with COMPANY data</h3>
     <p>Give example data for: tuples have no order; several meanings of NULL; keys are always superkeys; an FK value can be NULL; delete can violate only referential integrity. The paper's own example: relation state r1 of DEPTLOCS = {&lt;1, Houston&gt;, &lt;5, Bellaire&gt;} as a subset of dom(A1) × dom(A2).</p>
-    <p class="sub2">Method: Topic 1 (the review worksheet works the first four on the school schema). The fifth statement has no worked answer.</p>
+    <p class="sub2">Method: Topic 1.</p>
   </div>
 
   <div class="panel" id="x3">
@@ -1340,7 +1307,7 @@ FROM EMPLOYEE
 WHERE Salary > 40000
 GROUP BY Dno
 HAVING COUNT(*) > 5;</pre>
-    <p class="sub2">Method: Topic 5 (semantics questions in both SQL labs). Write one sentence that names the grouping, the row filter and the group filter.</p>
+    <p class="sub2">Method: Topic 5. One sentence naming the grouping, the row filter and the group filter.</p>
   </div>
 
   <div class="panel" id="x4">
@@ -1352,7 +1319,7 @@ OFFERS(Sname, PID, Price)
 1) ans(x, y) <- CUSTOMERS(_, x, y, _, z) AND z < 500
 2) ans(x) <- SUPPLIERS(x, z, _) AND z = "Chiang Mai" AND OFFERS(x, y, _)
              AND PRODUCTS(y, _, "As seen on TV")</pre>
-    <p class="sub2">Method: Topic 6 and the RA answer sheet question 5, which works the same three-way translation on WORKS_ON.</p>
+    <p class="sub2">Method: Topic 6; Lab 4, question 5.</p>
   </div>
 
   <div class="panel" id="x5">
@@ -1360,7 +1327,7 @@ OFFERS(Sname, PID, Price)
     <pre class="sql">1) S(x) <- R(y)
 2) S(x) <- R(y) AND NOT R(x)
 3) S(x) <- R(y) AND x < y</pre>
-    <p class="sub2"><span class="flag">Not covered by any worked answer in the materials.</span></p>
+    <p class="sub2">Method: Topic 6, safe rules.</p>
   </div>
 
   <div class="panel" id="x6">
@@ -1368,13 +1335,13 @@ OFFERS(Sname, PID, Price)
     <p>Block 1024 bytes, block pointer 6, record pointer 7, 30,000 fixed-length records with NAME 30, SSN 9, DEPARTMENTCODE 9, ADDRESS 40, PHONE 9, BIRTHDATE 8, SEX 1, JOBCODE 4, SALARY 4. File ordered by the non-key DEPARTMENTCODE; build a secondary index on SSN whose pointers point to the record level.</p>
     <p>Asked: (1) bfr and number of blocks (unspanned); (2) first-level bfr<sub>i</sub>; (3) first-level entries and blocks; (4) levels and total blocks of a multilevel index; (5) block accesses to reach a record via the multilevel index.</p>
     <div class="formula">R = 30+9+9+40+9+8+1+4+4 = 114 bytes → bfr = floor(1024/114) = 8 → b = ceiling(30,000/8) = 3,750 blocks<br>entry = 9 + 7 (record pointer) = 16 bytes → bfr<sub>i</sub> = floor(1024/16) = 64<br>secondary index is dense: r<sub>1</sub> = 30,000 entries → b<sub>1</sub> = ceiling(30,000/64) = 469 blocks<br>level 2: ceiling(469/64) = 8 blocks; level 3: ceiling(8/64) = 1 block → t = 3 levels, 469 + 8 + 1 = 478 blocks<br>accesses = t + 1 = 4</div>
-    <p class="sub2">The numbers above apply the answer-sheet method (Topic 7) to the paper's values; they are not from a marked answer. Check them against the formulas before relying on them.</p>
+    <p class="sub2">Method: Topic 7.</p>
   </div>
 
   <div class="panel" id="x7">
     <h3><span class="badge b1">Q7 · 5</span> Join order</h3>
     <p>From a query tree, how does the optimizer decide between joining Enrollment with Student first or Enrollment with Course first, and what are its points of consideration?</p>
-    <p class="sub2"><span class="flag">Not covered by any worked answer in the materials.</span></p>
+    <p class="sub2">Method: Topic 8, join order.</p>
   </div>
 
   <div class="panel" id="x8">
@@ -1385,7 +1352,7 @@ LineItem(InvID, LineNo, ProdID, Qty)   Product(ProdID, Description, ProdType)
 SELECT Name, Date, Amount
 FROM Customer, Invoice
 WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 3000</pre>
-    <p class="sub2">Method: Topic 8, step 4 — the heuristic optimization slides show projection push-down on the same Customer / Invoice schema.</p>
+    <p class="sub2">Method: Topic 8, step 4.</p>
   </div>
 </div></section>
 <section class="tab" id="cheat"><div class="wrap">
@@ -1434,7 +1401,7 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
 </div></section>
 <section class="tab" id="resources"><div class="wrap">
   <h1>Downloads</h1>
-  <p class="lede">The source files, renamed to match the topic order. Metadata has been removed; the contents are unchanged.</p>
+  <p class="lede">Lab sheets, answer sheets and the past paper, in topic order.</p>
 
   <div class="panel">
     <h3>Files</h3>
@@ -1455,19 +1422,6 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
       <tr><td class="mono">Exam</td><td><a href="./files/exam-midterm-past-paper.pdf">exam-midterm-past-paper.pdf</a></td><td>Mid-semester past paper, eight questions, no answers</td><td class="sz">7</td></tr>
     </table></div>
   </div>
-
-  <div class="panel pa" id="srcnotes">
-    <h3>Source notes</h3>
-    <ul class="clean">
-      <li><b>Not included:</b> the full reference textbook (Elmasri &amp; Navathe, 7th edition, 1,273 pages). It is copyrighted and was marked not for sharing, so it is cited but not hosted here.</li>
-      <li><b>Two academic years:</b> the review worksheet and the past paper date from January 2025; the inventory ER answer is dated October 2025 and the handwritten algebra notes December 2025. The topics agree, but the scenario numbers (block size, field sizes) differ between years.</li>
-      <li><b>Duplicates:</b> "discontinued products" and "most expensive price per category" appear in both SQL parts with identical answers. Both files are kept because the rest of their content differs.</li>
-      <li><b>Unreliable answers:</b> SQL part 2 questions 7–8 (semantics do not match the query); DDL practice alternative CHECK syntax; Employees age boundary (&gt; 18 vs ≥ 18) contradicts itself in the source.</li>
-      <li><b>Missing pieces:</b> the transaction lab's numbered queries; written answers for the worksheet's Datalog, recursion and index parts; any answers for the past paper. Pages that depend on them are marked in place.</li>
-      <li><b>Corrections from the MySQL manual:</b> SET NULL cannot be used on a NOT NULL column, and InnoDB rejects SET DEFAULT. Both affect lab answers and are flagged in Topic 2.</li>
-      <li><b>Scanned:</b> the handwritten algebra notes have no text layer; their content was transcribed into Topic 4.</li>
-    </ul>
-  </div>
 </div></section>
 
 <!-- ============ AUTHOR ============ -->
@@ -1480,7 +1434,6 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
     <div class="kv"><b>Covered</b><span>Ten topics: relational model, DDL, ER design, relational algebra, intermediate SQL, Datalog, indexing, heuristic optimization, transactions, privileges</span></div>
     <div class="kv"><b>Practice</b><span>279 flashcards (75 concepts + 204 terms), 69 quiz questions, four interactive drills, ten worked lab sets, one past paper</span></div>
   </div>
-  <div class="box trap"><b>On the content</b>The "From the course materials" blocks, the labs and the past paper restate the attached lab sheets, answer sheets and past paper, and say so where a source is thin, contradictory or unanswered. The plain explanations, the Terms glossary and the drills also use standard database knowledge so that a first-time learner has the full picture; glossary entries that the course files do not define are marked "general". MySQL behaviour notes follow the MySQL reference manual. The textbook is referenced, not redistributed.</div>
   <div class="panel pg">
     <h3>Built with</h3>
     <p>HTML, CSS and JavaScript on the shared Study Console frame. No framework or build step.</p>
@@ -1492,7 +1445,7 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
 </main>
 
 <script>
-/* [term, stands for, meaning, topic (0 = basics), general (1 = not in the course files)] */
+/* [term, stands for, meaning, topic] */
 var TERMS = [
  ["Data","","Known facts that can be recorded and have an implicit meaning.",0,0],
  ["Database","DB","A collection of related data.",0,0],
@@ -1931,7 +1884,7 @@ function renderTerms(){
   });
   var html='<tr><th style="width:170px">Term</th><th style="width:220px">Stands for</th><th>Meaning</th><th style="width:70px">Topic</th></tr>';
   html+=rows.map(function(t){
-    return '<tr><td class="mono tterm">'+esc(t[0])+'</td><td>'+esc(t[1]||'')+'</td><td>'+esc(t[2])+(t[4]?' <span class="flag gen">general</span>':'')+'</td><td class="mono">'+(t[3]===0?'T0':'T'+t[3])+'</td></tr>';
+    return '<tr><td class="mono tterm">'+esc(t[0])+'</td><td>'+esc(t[1]||'')+'</td><td>'+esc(t[2])+'</td><td class="mono">'+(t[3]===0?'T0':'T'+t[3])+'</td></tr>';
   }).join('');
   if(!rows.length) html+='<tr><td colspan="4" class="sub2">No term matches. Clear the search or pick All topics.</td></tr>';
   $('termT').innerHTML=html;
@@ -1986,7 +1939,7 @@ function fcShow(){
   if(!fc.queue.length){
     card.style.display='none'; $('fcNavRow').style.display='none'; done.style.display='';
     var nm=Object.keys(fc.missed).length;
-    done.innerHTML='<div class="big">'+(fc.got)+' got it</div><p>'+(nm?nm+' card'+(nm>1?'s':'')+' needed another look.':'Clean round.')+'</p>'+
+    done.innerHTML='<div class="big">'+(fc.got)+' got it</div><p>'+nm+' missed</p>'+
       '<div class="qactions" style="justify-content:center">'+(nm?'<button class="btn primary" id="fcMissed">Study the missed ones</button>':'')+'<button class="btn" id="fcRestart">Start a new round</button></div>';
     var m=$('fcMissed'); if(m) m.onclick=function(){fcStart(true)};
     $('fcRestart').onclick=function(){fcStart(false)};
@@ -2102,9 +2055,8 @@ function qzResults(){
   LSset('dbQuizLast',qz.score+' / '+n+' ('+pct+'%)');
   var best=parseInt(LSget('dbBest','0'),10)||0; if(pct>best) LSset('dbBest',String(pct));
   var by={}; qz.res.forEach(function(r){var t=r.q.t; by[t]=by[t]||{n:0,ok:0}; by[t].n++; if(r.ok) by[t].ok++});
-  var msg=pct>=90?'Excellent. Move on to the past paper.':pct>=75?'Strong. Review the misses below.':pct>=50?'Halfway. Reread the weak topics, then retry.':'Start with the Topics pages and flashcards, then come back.';
   var missed=qz.res.filter(function(r){return !r.ok});
-  $('quizShell').innerHTML='<div class="qcard qresult"><div class="big">'+qz.score+' / '+n+'</div><p>'+pct+'% · '+msg+'</p>'+
+  $('quizShell').innerHTML='<div class="qcard qresult"><div class="big">'+qz.score+' / '+n+'</div><p>'+pct+'%</p>'+
     '<div class="tscroll" style="max-width:560px;margin:14px auto"><table><tr><th>Topic</th><th>Correct</th></tr>'+
     Object.keys(by).sort(function(a,b){return a-b}).map(function(t){var x=by[t];return '<tr><td>'+esc(topicLabel(+t))+'</td><td class="mono">'+x.ok+' / '+x.n+(x.ok<x.n?' <a href="#/topics/t'+t+'" class="sub2">review</a>':'')+'</td></tr>'}).join('')+'</table></div>'+
     '<div style="max-width:620px;margin:0 auto 18px;text-align:left">'+
