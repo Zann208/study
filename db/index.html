@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <script src="../shared/v3/boot.js?v=20261118-1" data-console="db"></script>
 <title>Database Systems</title>
-<meta name="description" content="Study console for Database Systems: plain-language topics from the relational model to transactions and privileges, a glossary of every term, flashcards, a topic quiz, index-calculation practice, a two-session transaction simulator, referential-action and SQL-order drills, worked labs and a past paper.">
+<meta name="description" content="Study console for Database Systems: plain-language topics from the relational model to transactions and privileges, a glossary of every term, flashcards, a topic quiz, key and constraint drills, index-calculation practice, a two-session transaction simulator, referential-action and SQL-order drills, worked labs and a past paper.">
 <meta name="theme-color" content="#0f0e0f">
 <style>
 <style>
@@ -272,11 +272,23 @@ a.sc-tab{text-decoration:none}
 .ixrow label{font-size:14.5px}
 .ixrow .ixw{grid-column:2 / -1;margin-top:2px}
 .whrow{grid-template-columns:1fr auto 90px}
+.cnrow{grid-template-columns:1fr 150px}
+.cnrow .cnb{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:6px}
+.cnrow .cnx{grid-column:1 / -1}
+.cnrow .cnx:empty{display:none}
+.cnrow .ixst{text-align:right}
+.cnsql{margin:0;font-size:12.5px;white-space:pre-wrap}
+.cngrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:10px;margin:10px 0 14px}
+.cngrid .card{margin:0}
+.cngrid table{font-size:12px}
+.cngrid .card.wide{grid-column:1 / -1}
+#cnState th,#cnState td{padding:5px 8px;white-space:nowrap}
 .rfgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
 .rfgrid .opt{margin-top:0;align-items:flex-start}
 .rfgrid table{font-size:13px}
 .btn.odbad{border-color:var(--rd);color:var(--rd);background:color-mix(in srgb,var(--rd) 10%,transparent)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
+.ixrow .btn.primary:disabled{opacity:1}
 #txLog .review-item{text-align:left}
 #txLog code{font-size:12.5px}
 @media(max-width:760px){
@@ -284,6 +296,8 @@ a.sc-tab{text-decoration:none}
   .ixrow .fld,.ixrow .ixst{grid-column:2}
   .whrow{grid-template-columns:1fr}
   .whrow .ixst{grid-column:1}
+  .cnrow{grid-template-columns:1fr}
+  .cnrow .ixst{grid-column:1;text-align:left}
   .rfgrid{grid-template-columns:1fr}
 }
 </style></head>
@@ -327,7 +341,7 @@ a.sc-tab{text-decoration:none}
     <h3>Where each topic is practised</h3>
     <div class="tscroll"><table>
       <tr><th>Topic</th><th>Drill</th><th>Worked lab</th><th>Past paper</th></tr>
-      <tr><td class="mono">T1</td><td>Flashcards, quiz</td><td>Relational model review worksheet</td><td>Q1, Q2</td></tr>
+      <tr><td class="mono">T1</td><td>Keys and constraints</td><td>Relational model review worksheet</td><td>Q1, Q2</td></tr>
       <tr><td class="mono">T2</td><td>Referential actions</td><td>School database DDL</td><td>Q1</td></tr>
       <tr><td class="mono">T3</td><td>Flashcards, quiz</td><td>Inventory ER, Vote ER</td><td>—</td></tr>
       <tr><td class="mono">T4</td><td>Flashcards, quiz</td><td>Relational algebra answer sheet</td><td>Q4</td></tr>
@@ -368,7 +382,7 @@ a.sc-tab{text-decoration:none}
   <tr><th>Member</th><th>Book</th><th>Loan</th></tr>
   <tr><td><code>MemberID</code>, <code>Name</code>, <code>Phone</code></td><td><code>BookID</code>, <code>Title</code>, <code>Author</code></td><td><code>LoanID</code>, <code>MemberID</code>, <code>BookID</code>, <code>DueDate</code></td></tr>
 </table></div>
-<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Data">Data</a><a class="chip c2 tlink" href="#/terms" data-term="Database">Database</a><a class="chip c1 tlink" href="#/terms" data-term="DBMS">DBMS</a><a class="chip c2 tlink" href="#/terms" data-term="RDBMS">RDBMS</a><a class="chip c1 tlink" href="#/terms" data-term="Miniworld">Miniworld</a><a class="chip c2 tlink" href="#/terms" data-term="Query">Query</a><a class="chip c1 tlink" href="#/terms" data-term="Transaction">Transaction</a><a class="chip c2 tlink" href="#/terms" data-term="MySQL">MySQL</a></div>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Data">Data</a><a class="chip c2 tlink" href="#/terms" data-term="Database">Database</a><a class="chip c1 tlink" href="#/terms" data-term="DBMS">DBMS</a><a class="chip c2 tlink" href="#/terms" data-term="RDBMS">RDBMS</a><a class="chip c1 tlink" href="#/terms" data-term="Miniworld">Miniworld</a><a class="chip c2 tlink" href="#/terms" data-term="Query">Query</a><a class="chip c1 tlink" href="#/terms" data-term="Transaction">Transaction</a><a class="chip c2 tlink" href="#/terms" data-term="Database schema">Database schema</a><a class="chip c1 tlink" href="#/terms" data-term="MySQL">MySQL</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>A DBMS stores data, enforces rules, handles many users at once, finds data fast and controls access.</li><li>The ten topics follow one path: understand, design, build, ask, store, plan, change safely, protect.</li></ul></div>
 <div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="0">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="0">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t1">Next: T1 Relational model</a></div>
     </div>
@@ -394,17 +408,23 @@ a.sc-tab{text-decoration:none}
   <li>The <b>primary key (PK)</b> is the candidate key you choose as the official ID. It may not be NULL.</li>
   <li>A <b>foreign key (FK)</b> is a column in one table that holds a key value from another table. <code>Loan.MemberID</code> points at <code>Member.MemberID</code>. That pointing is how tables are linked.</li>
 </ul>
+<h4>Unique today is not enough</h4>
+<p>Right now no two members share a name, so <code>{Name}</code> looks unique. It is still not a key: tomorrow a second Ana can join. A key is a rule that must hold for every set of rows the table could ever contain, not only for the rows in it today.</p>
+<h4>A table can have more than one candidate key</h4>
+<p>A motorbike can be identified by its number plate (province, digits and letters together) and also by its engine number. Both are candidate keys. You pick one as the primary key; the other stays unique and is called an alternate key.</p>
 <h4>NULL means "no value here"</h4>
 <p>Ben's phone is NULL. That could mean the phone number is unknown, that he has no phone (does not apply), or that it simply has not been entered yet. NULL is not zero and not an empty string.</p>
-<h4>The three rules the DBMS guards</h4>
+<h4>The four rules written into the schema</h4>
 <div class="tscroll"><table>
-  <tr><th>Rule</th><th>Meaning</th></tr>
-  <tr><td>Key constraint</td><td>No two rows may share the same key value.</td></tr>
-  <tr><td>Entity integrity</td><td>A primary key value can never be NULL.</td></tr>
-  <tr><td>Referential integrity</td><td>A foreign key must point at a row that really exists, or be NULL.</td></tr>
+  <tr><th>Rule</th><th>Meaning</th><th>Broken by</th></tr>
+  <tr><td>Domain constraint</td><td>Each value is a single value of the right type.</td><td>Putting <code>'high'</code> in a number column</td></tr>
+  <tr><td>Key constraint</td><td>No two rows may share the same key value.</td><td>A second member with ID 1</td></tr>
+  <tr><td>Entity integrity</td><td>A primary key value can never be NULL.</td><td>A member with no ID</td></tr>
+  <tr><td>Referential integrity</td><td>A foreign key must point at a row that really exists, or be NULL.</td><td>A loan for member 9 when there is no member 9</td></tr>
 </table></div>
-<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Relation">Relation</a><a class="chip c2 tlink" href="#/terms" data-term="Tuple">Tuple</a><a class="chip c1 tlink" href="#/terms" data-term="Attribute">Attribute</a><a class="chip c2 tlink" href="#/terms" data-term="Domain">Domain</a><a class="chip c1 tlink" href="#/terms" data-term="Relation schema">Relation schema</a><a class="chip c2 tlink" href="#/terms" data-term="Relation state">Relation state</a><a class="chip c1 tlink" href="#/terms" data-term="Superkey">Superkey</a><a class="chip c2 tlink" href="#/terms" data-term="Candidate key">Candidate key</a><a class="chip c1 tlink" href="#/terms" data-term="Primary key">Primary key</a><a class="chip c2 tlink" href="#/terms" data-term="Foreign key">Foreign key</a><a class="chip c1 tlink" href="#/terms" data-term="NULL">NULL</a><a class="chip c2 tlink" href="#/terms" data-term="Entity integrity">Entity integrity</a><a class="chip c1 tlink" href="#/terms" data-term="Referential integrity">Referential integrity</a><a class="chip c2 tlink" href="#/terms" data-term="Key constraint">Key constraint</a></div>
-<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Table = relation, row = tuple, column = attribute.</li><li>A primary key identifies each row and is never NULL.</li><li>A foreign key points at another table's key, and may be NULL.</li></ul></div>
+<p>Two other kinds of rule exist. Some are built into the model itself: a table never holds two identical rows. Others come from the business and cannot be written in the schema, such as "a member may borrow at most five books"; the application has to check those.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Relation">Relation</a><a class="chip c2 tlink" href="#/terms" data-term="Tuple">Tuple</a><a class="chip c1 tlink" href="#/terms" data-term="Attribute">Attribute</a><a class="chip c2 tlink" href="#/terms" data-term="Domain">Domain</a><a class="chip c1 tlink" href="#/terms" data-term="Relation schema">Relation schema</a><a class="chip c2 tlink" href="#/terms" data-term="Relation state">Relation state</a><a class="chip c1 tlink" href="#/terms" data-term="Superkey">Superkey</a><a class="chip c2 tlink" href="#/terms" data-term="Candidate key">Candidate key</a><a class="chip c1 tlink" href="#/terms" data-term="Primary key">Primary key</a><a class="chip c2 tlink" href="#/terms" data-term="Foreign key">Foreign key</a><a class="chip c1 tlink" href="#/terms" data-term="NULL">NULL</a><a class="chip c2 tlink" href="#/terms" data-term="Domain constraint">Domain constraint</a><a class="chip c1 tlink" href="#/terms" data-term="Key constraint">Key constraint</a><a class="chip c2 tlink" href="#/terms" data-term="Entity integrity">Entity integrity</a><a class="chip c1 tlink" href="#/terms" data-term="Referential integrity">Referential integrity</a><a class="chip c2 tlink" href="#/terms" data-term="Database state">Database state</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Table = relation, row = tuple, column = attribute.</li><li>A key is unique in every valid state, and minimal; a superkey only needs to be unique.</li><li>A primary key identifies each row and is never NULL.</li><li>A foreign key points at another table's key, and may be NULL.</li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body"><h4>Definitions</h4>
       <ul class="clean">
         <li>A <b>database</b> is a collection of related data.</li>
@@ -415,17 +435,118 @@ a.sc-tab{text-decoration:none}
         <li>A <b>query</b> typically causes some data to be retrieved; a <b>transaction</b> may cause some data to be read and some data to be written into the database.</li>
       </ul>
 
-      <h4>Relation schema and relation state</h4>
+      
+<h4>What a DBMS lets you do</h4>
+<p>A small university database holds five files of records: STUDENT, COURSE, SECTION, GRADE_REPORT and PREREQUISITE.</p>
+<div class="tscroll"><table>
+  <tr><th>Action</th><th>Meaning</th><th>University example</th></tr>
+  <tr><td>Define</td><td>Specify the structure, data types and constraints</td><td>Student_number is an integer; Name is a string of up to 30 characters</td></tr>
+  <tr><td>Construct</td><td>Store the data on a storage medium the DBMS controls</td><td>Load each student, course and grade as a record</td></tr>
+  <tr><td>Manipulate</td><td>Query and update the data</td><td>Retrieve Smith's transcript; change Smith's class from 1 to 2</td></tr>
+  <tr><td>Share</td><td>Let many users and programs use the data at the same time</td><td>The registrar and lecturers work on the same grades</td></tr>
+</table></div>
+<h4>Characteristics of the database approach</h4>
+<div class="tscroll"><table>
+  <tr><th>Characteristic</th><th>Meaning</th></tr>
+  <tr><td>Self-describing</td><td>The database stores its own definition (in the catalog) next to the data, so one DBMS can serve any database.</td></tr>
+  <tr><td>Insulation between programs and data</td><td>The storage structure can change without rewriting the programs that use it (program-data independence).</td></tr>
+  <tr><td>Multiple views</td><td>Each user can see a different subset or arrangement of the same data.</td></tr>
+  <tr><td>Sharing and transaction processing</td><td>Many users change the data at once, and each transaction still runs correctly and completely or not at all.</td></tr>
+</table></div>
+<h4>Design stages</h4>
+<ol>
+  <li><b>Requirements collection and analysis</b>: write down what the users need, both the data and the operations.</li>
+  <li><b>Conceptual design</b>: a high-level description of the data, usually an ER or UML diagram. It does not depend on any DBMS.</li>
+  <li><b>Logical design</b> (data model mapping): turn the conceptual design into the data model of a real DBMS, for example relation schemas.</li>
+  <li><b>Physical design</b>: choose storage structures, indexes and access paths.</li>
+</ol>
+<p>After design: implement, populate with data, then maintain.</p>
+<h4>Database schema</h4>
+<p>The description of a database is its <b>schema</b>. It is specified during design and is not expected to change often. A <b>schema diagram</b> shows each relation with its attributes, for example STUDENT(Name, Student_number, Class, Major) and COURSE(Course_name, Course_number, Credit_hours, Department).</p>
+<h4>Origin of the relational model</h4>
+<p>Introduced by Edgar F. Codd of IBM Research in 1970 and based on the mathematical relation. Commercial systems followed in the early 1980s (IBM SQL/DS, Oracle); open-source systems such as MySQL, MariaDB and PostgreSQL came later.</p>
+<h4>Relation schema and relation state</h4>
       <p>A relation state <span class="ra-sym">r(R)</span> is a subset of <span class="ra-sym">dom(A<sub>1</sub>) × dom(A<sub>2</sub>) × … × dom(A<sub>n</sub>)</span>, where A<sub>1</sub> … A<sub>n</sub> are the attributes. For an Enrollment relation with attributes Student_number, CourseID and Grade, <span class="ra-sym">r(Enrollment) ⊆ dom(Student_number) × dom(CourseID) × dom(Grade)</span>: each tuple (row) is one possible combination drawn from those domains, and r(Enrollment) is one possible state of the Enrollment relation.</p>
       <div class="tscroll"><table>
         <tr><th>Word</th><th>Means</th></tr>
-        <tr><td>Schema</td><td>The relation name and its attributes (the column headings)</td></tr>
+        <tr><td>Relation</td><td>A table</td></tr>
+  <tr><td>Schema</td><td>The relation name and its attributes (the column headings)</td></tr>
         <tr><td>Attribute</td><td>A column</td></tr>
         <tr><td>Tuple</td><td>A row</td></tr>
         <tr><td>State</td><td>The set of tuples in the relation at one moment</td></tr>
       </table></div>
 
-      <h4>Five statements to be able to illustrate</h4>
+      
+<h4>Domain and data type</h4>
+<p>The domain says what a value means; the data type says how it is written. In STUDENT(Name, Ssn, Home_phone, Address, Office_phone, Age, Gpa), the domain of Ssn is the set of valid nine-digit Social Security numbers, and its data type is a character string of the form <code>ddd-dd-dddd</code>.</p>
+<h4>Characteristics of relations</h4>
+<ul class="clean">
+  <li><b>Degree.</b> A relation with n attributes has degree n. STUDENT above has degree 7.</li>
+  <li><b>Subset of a Cartesian product.</b> With dom(A1) = {1, 2, 3, 4}, dom(A2) = {John, Jack, Jessica} and dom(A3) = {M, F, N/A}, the product holds 4 × 3 × 3 = 36 possible tuples. A relation state is any subset of them, for example {(1, John, M), (2, Jessica, F)}.</li>
+  <li><b>Order of tuples.</b> A relation is a set, so its tuples have no order.</li>
+  <li><b>Order within a tuple.</b> Under the usual definition a tuple is an ordered list of values, so the values follow the attribute order of the schema. If a tuple is defined as a set of (attribute, value) pairs instead, that order no longer matters.</li>
+  <li><b>Atomic values.</b> Each value is a single value; no lists or nested values in one cell.</li>
+  <li><b>NULL.</b> Marks a value that is unknown or does not apply. Some students have NULL Office_phone because they have no office.</li>
+</ul>
+<h4>Three types of constraints</h4>
+<div class="tscroll"><table>
+  <tr><th>Type</th><th>Where it comes from</th><th>Example</th></tr>
+  <tr><td>Inherent model-based (implicit)</td><td>The relational model itself</td><td>No duplicate tuples</td></tr>
+  <tr><td>Schema-based (explicit)</td><td>Written in the schema with DDL</td><td>Domain, key, NOT NULL, entity integrity, referential integrity</td></tr>
+  <tr><td>Semantic (application-based)</td><td>Rules of the miniworld the schema cannot express</td><td>An employee's salary may not exceed the supervisor's</td></tr>
+</table></div>
+<p><b>Domain constraint:</b> every value of attribute A is an atomic value from dom(A) and matches its data type.</p>
+<h4>Superkey and key, worked</h4>
+<p>STUDENT(<u>ID</u>, Fname, Lname, Major, GPA), where ID is unique:</p>
+<div class="tscroll"><table>
+  <tr><th>ID</th><th>Fname</th><th>Lname</th><th>Major</th><th>GPA</th></tr>
+  <tr><td>001</td><td>John</td><td>AB</td><td>CPE</td><td>3.33</td></tr>
+  <tr><td>002</td><td>John</td><td>AG</td><td>ISNE</td><td>2.99</td></tr>
+  <tr><td>003</td><td>John</td><td>AD</td><td>CPE</td><td>2.75</td></tr>
+  <tr><td>004</td><td>Jack</td><td>AD</td><td>ISNE</td><td>3.75</td></tr>
+</table></div>
+<p>A set SK is a <b>superkey</b> if for any two distinct tuples t1 and t2, <span class="ra-sym">t1[SK] ≠ t2[SK]</span>. A <b>key</b> is a superkey that is also minimal: removing any attribute leaves a set that is no longer a superkey.</p>
+<div class="tscroll"><table>
+  <tr><th>Set</th><th>Result</th><th>Why</th></tr>
+  <tr><td><code>{ID, Fname, Lname}</code></td><td>Superkey, not a key</td><td>Unique because it contains ID, but Fname and Lname can be removed</td></tr>
+  <tr><td><code>{ID, Fname}</code></td><td>Superkey, not a key</td><td>Remove Fname and <code>{ID}</code> is still unique</td></tr>
+  <tr><td><code>{Fname}</code></td><td>Not a superkey</td><td>John appears three times</td></tr>
+  <tr><td><code>{Fname, Lname}</code></td><td>Not a superkey</td><td>Unique in this state, but two students can share a full name in another state</td></tr>
+  <tr><td><code>{ID}</code></td><td>Key</td><td>Unique, and nothing can be removed</td></tr>
+</table></div>
+<p>Uniqueness applies to both superkeys and keys; minimality is required only for a key.</p>
+<h4>Candidate keys</h4>
+<p>MOTORBIKE(Province, Digits, Alphabets, Engine_number, Color, cc, Make, Model). The plate <code>{Province, Digits, Alphabets}</code> identifies a motorbike, and so does <code>{Engine_number}</code>. Both are minimal, so both are <b>candidate keys</b>. One is chosen as the primary key; the other is an alternate key. <code>{Digits, Alphabets}</code> alone is not a key: the same plate can be issued in two provinces.</p>
+<h4>Relational database schema and state</h4>
+<p>A relational database schema S is a set of relation schemas S = {R1, R2, …, Rm} plus a set of integrity constraints. A database state is the set of relation states at one moment. The COMPANY schema has six relations:</p>
+<div class="formula">EMPLOYEE(Fname, Minit, Lname, <u>Ssn</u>, Bdate, Address, Sex, Salary, Super_ssn, Dno)<br>DEPARTMENT(Dname, <u>Dnumber</u>, Mgr_ssn, Mgr_start_date)<br>DEPT_LOCATIONS(<u>Dnumber</u>, <u>Dlocation</u>)<br>PROJECT(Pname, <u>Pnumber</u>, Plocation, Dnum)<br>WORKS_ON(<u>Essn</u>, <u>Pno</u>, Hours)<br>DEPENDENT(<u>Essn</u>, <u>Dependent_name</u>, Sex, Bdate, Relationship)</div>
+<p>Questions answered by following key values through one state of COMPANY:</p>
+<div class="tscroll"><table>
+  <tr><th>Question</th><th>Path</th><th>Answer</th></tr>
+  <tr><td>Who is John Smith's supervisor?</td><td>Smith's Super_ssn 333445555 → EMPLOYEE.Ssn</td><td>Franklin Wong</td></tr>
+  <tr><td>Who manages the Research department?</td><td>Research's Mgr_ssn 333445555 → EMPLOYEE.Ssn</td><td>Franklin Wong</td></tr>
+  <tr><td>How many employees have a daughter?</td><td>DEPENDENT rows with Relationship = Daughter: Essn 333445555 and 123456789</td><td>Two (Wong and Smith)</td></tr>
+  <tr><td>Does Alicia work on ProductX?</td><td>Alicia's Ssn 999887777 → WORKS_ON Pno 30 and 10; ProductX is Pnumber 1</td><td>No</td></tr>
+</table></div>
+<h4>Entity integrity and referential integrity</h4>
+<p><b>Entity integrity:</b> no primary key value can be NULL, because the key is what identifies each tuple.</p>
+<p><b>Referential integrity</b> keeps tuples in two relations consistent. A set of attributes FK in R1 is a foreign key that references R2 if:</p>
+<ol>
+  <li>FK has the same domain as the primary key PK of R2, and</li>
+  <li>each FK value in a tuple t1 of r1(R1) either equals the PK value of some tuple t2 in r2(R2), in which case t1[FK] = t2[PK] and t1 refers to t2, or is NULL.</li>
+</ol>
+<div class="tscroll"><table>
+  <tr><th>Foreign key in COMPANY</th><th>References</th></tr>
+  <tr><td>EMPLOYEE.Super_ssn</td><td>EMPLOYEE.Ssn (same relation)</td></tr>
+  <tr><td>EMPLOYEE.Dno</td><td>DEPARTMENT.Dnumber</td></tr>
+  <tr><td>DEPARTMENT.Mgr_ssn</td><td>EMPLOYEE.Ssn</td></tr>
+  <tr><td>DEPT_LOCATIONS.Dnumber</td><td>DEPARTMENT.Dnumber</td></tr>
+  <tr><td>PROJECT.Dnum</td><td>DEPARTMENT.Dnumber</td></tr>
+  <tr><td>WORKS_ON.Essn, WORKS_ON.Pno</td><td>EMPLOYEE.Ssn, PROJECT.Pnumber</td></tr>
+  <tr><td>DEPENDENT.Essn</td><td>EMPLOYEE.Ssn</td></tr>
+</table></div>
+<p>Changing John Smith's Dno to 7 violates referential integrity: departments 1, 4 and 5 exist, but there is no department 7.</p>
+<h4>Five statements to be able to illustrate</h4>
       <ul class="clean">
         <li><b>Tuples in a relation do not have any particular order.</b> Any order of the rows is the same relation.</li>
         <li><b>NULL can have several meanings.</b> The worksheet example inserts a student whose Plan is NULL: the value may be unknown, not applicable, or not yet available.</li>
@@ -439,7 +560,7 @@ a.sc-tab{text-decoration:none}
 
       <h4>Explaining a referential-action constraint</h4>
       <div class="formula">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)<br>ON DELETE SET DEFAULT ON UPDATE CASCADE;</div>
-      <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 SQL DDL</a></div>
+      <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><a class="btn" href="#/keys">Drill: Keys and constraints</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 SQL DDL</a></div>
     </div>
   </details>
 
@@ -1132,7 +1253,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: FLASHCARDS ============ -->
 <section class="tab" id="flash"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash" aria-selected="true" aria-current="page">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash" aria-selected="true" aria-current="page">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Flashcards</h1>
   <div class="panel">
     <div class="ctlrow"><span class="ctl-label">Deck</span>
@@ -1165,14 +1286,36 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: QUIZ ============ -->
 <section class="tab" id="quiz"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz" aria-selected="true" aria-current="page">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz" aria-selected="true" aria-current="page">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Quiz</h1>
   <div class="panel pc"><div id="quizShell" class="quiz-shell"></div></div>
 </div></section>
 
+<!-- ============ DRILL: KEYS AND CONSTRAINTS ============ -->
+<section class="tab" id="keys"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys" aria-selected="true" aria-current="page">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <h1>Keys and constraints</h1>
+  <div class="panel">
+    <h3>Key, superkey or neither?</h3>
+    <div class="grid2">
+      <div class="card"><h4>STUDENT</h4><p class="mono" style="font-size:13px">STUDENT(ID, Fname, Lname, Major, GPA)</p><p class="sub2">Every ID is different. Names, majors and GPAs can repeat.</p><div class="tscroll" id="kyStudent"></div></div>
+      <div class="card"><h4>MOTORBIKE</h4><p class="mono" style="font-size:13px">MOTORBIKE(Province, Digits, Alphabets, Engine_number, Color, cc, Make, Model)</p><p class="sub2">A full plate (province, digits and letters) is unique, and so is the engine number. The same digits and letters can be issued in different provinces.</p></div>
+    </div>
+    <div id="kyList"></div>
+    <div class="qactions"><span class="sub2" id="kyScore" style="margin-right:auto"></span><button class="btn" id="kyNew">Shuffle again</button></div>
+  </div>
+  <div class="panel">
+    <h3>Which rule does it break?</h3>
+    <p class="sub2">Each statement runs alone against the COMPANY state below. Primary keys are underlined.</p>
+    <div class="cngrid" id="cnState"></div>
+    <div id="cnList"></div>
+    <div class="qactions"><span class="sub2" id="cnScore" style="margin-right:auto"></span><button class="btn" id="cnNew">Shuffle again</button></div>
+  </div>
+</div></section>
+
 <!-- ============ DRILL: INDEX PRACTICE ============ -->
 <section class="tab" id="calc"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc" aria-selected="true" aria-current="page">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc" aria-selected="true" aria-current="page">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Index practice</h1>
   <div class="ctlrow"><span class="ctl-label">Problem</span>
     <div class="sc-seg" id="ixMode"><button type="button" aria-pressed="true" data-v="course">Course scenario</button><button type="button" aria-pressed="false" data-v="random">Random numbers</button></div>
@@ -1196,7 +1339,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: TRANSACTION SESSIONS ============ -->
 <section class="tab" id="sessions"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions" aria-selected="true" aria-current="page">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions" aria-selected="true" aria-current="page">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Transaction sessions</h1>
   <p class="lede">Session A uses an explicit transaction; Session B runs in autocommit.</p>
   <div class="ctlrow"><span class="ctl-label">Predict mode</span>
@@ -1241,7 +1384,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: REFERENTIAL ACTIONS ============ -->
 <section class="tab" id="refact"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact" aria-selected="true" aria-current="page">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact" aria-selected="true" aria-current="page">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Referential actions</h1>
   <p class="lede"><code>Loan.MemberID</code> has <code>DEFAULT 9</code>.</p>
   <div class="grid2">
@@ -1262,7 +1405,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: SQL CLAUSE ORDER ============ -->
 <section class="tab" id="order"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order" aria-selected="true" aria-current="page">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order" aria-selected="true" aria-current="page">SQL clause order</a></nav>
   <h1>SQL clause order</h1>
   <p class="lede">Processing order is why WHERE cannot use an aggregate and why a SELECT alias works in ORDER BY.</p>
   <div class="panel">
@@ -1401,12 +1544,13 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
 </div></section>
 <section class="tab" id="resources"><div class="wrap">
   <h1>Downloads</h1>
-  <p class="lede">Lab sheets, answer sheets and the past paper, in topic order.</p>
+  <p class="lede">Slides, lab sheets, answer sheets and the past paper, in topic order.</p>
 
   <div class="panel">
     <h3>Files</h3>
     <div class="tscroll"><table class="files">
       <tr><th>Topic</th><th>File</th><th>What it is</th><th>Pages</th></tr>
+      <tr><td class="mono">T1</td><td><a href="./files/01-relational-model-slides.pdf">01-relational-model-slides.pdf</a></td><td>Relational model slides: database basics, relations, keys, integrity constraints, the COMPANY schema</td><td class="sz">23</td></tr>
       <tr><td class="mono">T1, T4, T6–8</td><td><a href="./files/01-relational-model-review-worksheet.pdf">01-relational-model-review-worksheet.pdf</a></td><td>Review worksheet with handwritten answers: relational model, DDL, relational algebra, Datalog, heuristic optimization, index calculation</td><td class="sz">15</td></tr>
       <tr><td class="mono">T2</td><td><a href="./files/02-ddl-practice-school-database.pdf">02-ddl-practice-school-database.pdf</a></td><td>DDL practice: six CREATE statements plus the requirements text</td><td class="sz">4</td></tr>
       <tr><td class="mono">T3</td><td><a href="./files/03-er-inventory-worked-answer.pdf">03-er-inventory-worked-answer.pdf</a></td><td>Inventory requirements, ER diagram and cardinality/participation justification</td><td class="sz">5</td></tr>
@@ -1432,7 +1576,7 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
     <div class="kv"><b>Title</b><span>Database Systems</span></div>
     <div class="kv"><b>Text</b><span>Elmasri &amp; Navathe — <i>Fundamentals of Database Systems</i>, 7th edition</span></div>
     <div class="kv"><b>Covered</b><span>Ten topics: relational model, DDL, ER design, relational algebra, intermediate SQL, Datalog, indexing, heuristic optimization, transactions, privileges</span></div>
-    <div class="kv"><b>Practice</b><span>279 flashcards (75 concepts + 204 terms), 69 quiz questions, four interactive drills, ten worked lab sets, one past paper</span></div>
+    <div class="kv"><b>Practice</b><span>307 flashcards (85 concepts + 222 terms), 81 quiz questions, five interactive drills, ten worked lab sets, one past paper</span></div>
   </div>
   <div class="panel pg">
     <h3>Built with</h3>
@@ -1458,6 +1602,16 @@ var TERMS = [
  ["Metadata","","Data about data: table names, column types, constraints.",0,1],
  ["Catalog","","Where the DBMS stores the metadata (also called the data dictionary).",0,1],
  ["MySQL","","A widely used open-source RDBMS. The privileges lab is written for it.",0,0],
+ ["Define, construct, manipulate, share","","The four things a DBMS lets you do: specify structure, store data, query and update it, and let many users use it at once.",0,1],
+ ["Self-describing","","The database stores its own definition in the catalog, next to the data.",0,1],
+ ["Program-data independence","Insulation","The storage structure can change without rewriting the programs that use the data.",0,1],
+ ["View","","A subset or arrangement of the data shown to one user or group; different users can have different views.",0,1],
+ ["Database schema","","The description of a database, fixed during design and not expected to change often.",0,0],
+ ["Schema diagram","","A drawing of a schema: each relation with its attributes.",0,1],
+ ["Requirements analysis","","First design step: collect and write down what users need from the database.",0,1],
+ ["Conceptual design","","A high-level, DBMS-independent description of the data, usually an ER or UML diagram.",0,1],
+ ["Logical design","Data model mapping","Turning the conceptual design into the data model of a real DBMS, such as relation schemas.",0,1],
+ ["Physical design","","Choosing storage structures, indexes and access paths for the logical design.",0,1],
 
  ["Relation","","The formal name for a table.",1,0],
  ["Tuple","","The formal name for a row: one thing stored in a table.",1,0],
@@ -1481,6 +1635,14 @@ var TERMS = [
  ["Key constraint","","No two rows may have the same key value.",1,0],
  ["Entity integrity","","A primary key value can never be NULL.",1,0],
  ["Referential integrity","","A foreign key value must match an existing row in the parent table, or be NULL.",1,0],
+ ["Atomic value","","A single, indivisible value: no list or nested value in one cell.",1,1],
+ ["Domain constraint","","Every value of an attribute must be an atomic value from its domain and match its data type.",1,0],
+ ["Inherent model-based constraint","Implicit constraint","A rule built into the relational model itself, such as no duplicate tuples.",1,1],
+ ["Schema-based constraint","Explicit constraint","A rule written in the schema: domain, key, NOT NULL, entity integrity, referential integrity.",1,1],
+ ["Semantic constraint","Application-based constraint","A business rule the schema cannot express, such as a salary limit; checked by programs or triggers.",1,1],
+ ["Relational database schema","S","A set of relation schemas S = {R1, …, Rm} plus a set of integrity constraints.",1,1],
+ ["Database state","","The relation states of all relations in a database at one moment.",1,0],
+ ["Minimal","","Of a key: no attribute can be removed without losing uniqueness.",1,1],
 
  ["SQL","Structured Query Language","The standard language for defining, querying and changing relational databases.",2,0],
  ["DDL","Data Definition Language","SQL commands that create and change structure: CREATE, ALTER, DROP.",2,0],
@@ -1738,7 +1900,17 @@ var CARDS = [
  {"t": 9,"q": "Session B updates a row Session A has changed but not committed","a": "B waits for A's lock. It continues after A commits or rolls back, or fails after the lock-wait timeout."},
  {"t": 10,"q": "'ana'@'localhost' vs 'ana'@'%'","a": "Two different accounts. localhost: only from the server machine. %: from any host."},
  {"t": 10,"q": "Why use a role?","a": "Grant privileges once to the role, then grant the role to many users. Changing the role changes everyone who has it."},
- {"t": 10,"q": "Principle of least privilege","a": "Each account gets only the permissions and hosts it needs, so misuse does limited damage."}
+ {"t": 10,"q": "Principle of least privilege","a": "Each account gets only the permissions and hosts it needs, so misuse does limited damage."},
+ {"t": 0,"q": "Define, construct, manipulate, share","a": "Define: specify structure and types. Construct: store the data. Manipulate: query and update it. Share: many users and programs use it at once."},
+ {"t": 0,"q": "Four characteristics of the database approach","a": "Self-describing (catalog), insulation between programs and data, multiple views, sharing with transaction processing."},
+ {"t": 0,"q": "Database design stages, in order","a": "Requirements analysis → conceptual design (ER/UML) → logical design (data model mapping) → physical design. Then implement, populate, maintain."},
+ {"t": 1,"q": "Three types of constraints","a": "Inherent model-based (no duplicate tuples), schema-based (domain, key, NOT NULL, entity and referential integrity), semantic (business rules the schema cannot express)."},
+ {"t": 1,"q": "Superkey vs key","a": "Superkey: t1[SK] ≠ t2[SK] for any two tuples. Key: a superkey that is minimal, so removing any attribute breaks uniqueness."},
+ {"t": 1,"q": "Domain vs data type (Ssn)","a": "Domain: the set of valid nine-digit Social Security numbers. Data type: a character string of the form ddd-dd-dddd."},
+ {"t": 1,"q": "The two rules for a foreign key FK in R1 referencing R2","a": "1. FK has the same domain as R2's primary key. 2. Each FK value equals some PK value in R2, or is NULL."},
+ {"t": 1,"q": "Order of tuples, order within a tuple","a": "Tuples have no order (a relation is a set). Values inside a tuple follow the schema's attribute order, unless a tuple is defined as a set of (attribute, value) pairs."},
+ {"t": 1,"q": "MOTORBIKE: plate or engine number?","a": "Both {Province, Digits, Alphabets} and {Engine_number} are candidate keys. One becomes the primary key, the other an alternate key."},
+ {"t": 1,"q": "Relational database schema","a": "S = {R1, R2, …, Rm} plus a set of integrity constraints. A database state is the set of relation states at one moment."}
 ];
 var QUIZ = [
  {"t": 0,"q": "A database is best described as","o": ["a query that retrieves data","the universe of discourse","a general-purpose software system","a collection of related data"],"a": 3,"e": "The worksheet answer: a database is a collection of related data. The DBMS is the software; the miniworld is what it represents."},
@@ -1809,7 +1981,19 @@ var QUIZ = [
  {"t": 10,"q": "The account 'ana'@'%' can connect from","o": ["any host","only the server machine","no host until GRANT is run","only hosts named %"],"a": 0,"e": "% is the wildcard for any host."},
  {"t": 10,"q": "GRANT SELECT ON hr.* TO 'hr' means","o": ["the hr role may read every table in the hr database","the hr user may read one table named *","everyone may read hr","the hr role may change hr data"],"a": 0,"e": "db.* is the database level; SELECT is read-only."},
  {"t": 10,"q": "The main benefit of a role is","o": ["privileges are granted once and shared by everyone who holds the role","roles do not need passwords","roles bypass REVOKE","roles are faster than users"],"a": 0,"e": "Change the role once and every holder is updated."},
- {"t": 10,"q": "REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'dan'@'localhost' leaves","o": ["the account existing with no privileges","the account deleted","only SELECT","dan able to grant privileges"],"a": 0,"e": "DROP USER is needed to remove the account itself."}
+ {"t": 10,"q": "REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'dan'@'localhost' leaves","o": ["the account existing with no privileges","the account deleted","only SELECT","dan able to grant privileges"],"a": 0,"e": "DROP USER is needed to remove the account itself."},
+ {"t": 0,"q": "Changing Smith's class from 1 to 2 is an example of","o": ["manipulating the database","defining the database","constructing the database","sharing the database"],"a": 0,"e": "Retrieving and updating data is manipulation."},
+ {"t": 0,"q": "Stating that Student_number is an integer is part of","o": ["defining the database","constructing the database","manipulating the database","physical design"],"a": 0,"e": "Defining means specifying structure, data types and constraints."},
+ {"t": 0,"q": "Which is not one of the four characteristics of the database approach?","o": ["Automatic backups","Self-describing nature","Insulation between programs and data","Multiple views"],"a": 0,"e": "The four are self-describing, insulation, multiple views, and sharing with transaction processing."},
+ {"t": 0,"q": "Which design stage turns an ER diagram into relation schemas?","o": ["Logical design (data model mapping)","Conceptual design","Physical design","Requirements analysis"],"a": 0,"e": "Conceptual design produces the ER diagram; logical design maps it to the DBMS's data model."},
+ {"t": 1,"q": "dom(A1) = {1, 2, 3, 4}, dom(A2) = {John, Jack, Jessica}, dom(A3) = {M, F, N/A}. How many tuples are in dom(A1) × dom(A2) × dom(A3)?","o": ["36","10","12","24"],"a": 0,"e": "4 × 3 × 3 = 36. A relation state is any subset of these."},
+ {"t": 1,"q": "STUDENT(ID, Fname, Lname, Major, GPA) with ID unique. {ID, Fname} is","o": ["a superkey but not a key","a key","not a superkey","a foreign key"],"a": 0,"e": "It is unique because it contains ID, but Fname can be removed, so it is not minimal."},
+ {"t": 1,"q": "No two current students share a full name. Why is {Fname, Lname} still not a key?","o": ["A key must hold in every valid state, and two students can share a name","It has more than one attribute","Names can be NULL","Keys must be numbers"],"a": 0,"e": "Keys come from the rules of the miniworld, not from the rows that happen to be stored today."},
+ {"t": 1,"q": "A motorbike is identified by its plate and also by its engine number. These are","o": ["two candidate keys","one superkey","two foreign keys","a composite foreign key"],"a": 0,"e": "Each is a minimal superkey. One is chosen as primary key; the other is an alternate key."},
+ {"t": 1,"q": "\"An employee's salary may not exceed the supervisor's\" is","o": ["a semantic (application-based) constraint","an inherent model-based constraint","a domain constraint","a key constraint"],"a": 0,"e": "It is a business rule the schema cannot express, so programs or triggers must enforce it."},
+ {"t": 1,"q": "\"No two tuples in a relation may be identical\" is","o": ["an inherent model-based constraint","a semantic constraint","a referential integrity constraint","a domain constraint"],"a": 0,"e": "A relation is a set, so duplicate tuples are ruled out by the model itself."},
+ {"t": 1,"q": "Storing 'high' in the Salary column breaks","o": ["the domain constraint","entity integrity","referential integrity","the key constraint"],"a": 0,"e": "Each value must come from the attribute's domain and match its data type."},
+ {"t": 1,"q": "In COMPANY, John Smith's Dno is changed to 7 and there is no department 7. This violates","o": ["referential integrity","entity integrity","the key constraint","the domain constraint"],"a": 0,"e": "Dno is a foreign key to DEPARTMENT.Dnumber; 7 matches no department."}
 ];
 /* ================= HELPERS ================= */
 var $=function(id){return document.getElementById(id)};
@@ -1825,7 +2009,7 @@ var TOPIC_NAMES={0:'Basics',1:'Relational model',2:'SQL DDL',3:'ER modelling',4:
 function topicLabel(t){return t===0?'T0 Basics':'T'+t+' '+TOPIC_NAMES[t]}
 
 /* ================= TABS ================= */
-var TABS=['home','topics','terms','labs','flash','quiz','calc','sessions','refact','order','exam','cheat','resources','author'];
+var TABS=['home','topics','terms','labs','flash','quiz','keys','calc','sessions','refact','order','exam','cheat','resources','author'];
 var ALIAS={drills:'flash'};
 var scrollMem={};
 function go(tab,noPush){
@@ -1995,7 +2179,7 @@ function qzPool(){return QUIZ.filter(function(q){return qz.topics[q.t]})}
 function qzSetup(){
   var counts={}; QUIZ.forEach(function(q){counts[q.t]=(counts[q.t]||0)+1});
   var all=Object.keys(qz.topics).every(function(k){return qz.topics[k]});
-  var html='<div class="qcard"><h3>Build a quiz</h3><p class="sub2">Pick one or more topics and a length, then start. Questions and answer order are shuffled every time.</p>'+
+  var html='<div class="qcard"><h3>Build a quiz</h3><p class="sub2">Pick topics and a length.</p>'+
     '<div class="ctlrow"><span class="ctl-label">Topics</span><div class="sc-seg" id="qzTopics"><button type="button" aria-pressed="'+all+'" data-t="all">All</button>'+
     [0,1,2,3,4,5,6,7,8,9,10].map(function(t){return '<button type="button" aria-pressed="'+(qz.topics[t]&&!all)+'" data-t="'+t+'" title="'+esc(topicLabel(t))+' ('+(counts[t]||0)+' questions)">'+(t===0?'T0':'T'+t)+'</button>'}).join('')+'</div></div>'+
     '<div class="ctlrow"><span class="ctl-label">Length</span><div class="sc-seg" id="qzLen">'+[10,20,40,0].map(function(n){return '<button type="button" aria-pressed="'+(qz.len===n)+'" data-n="'+n+'">'+(n?n+' questions':'All')+'</button>'}).join('')+'</div></div>'+
@@ -2333,6 +2517,96 @@ function whDraw(){
 }
 $('whNew').onclick=whDraw; whDraw();
 
+
+/* ================= DRILL: KEYS AND CONSTRAINTS ================= */
+var KY_STUDENTS=[['001','John','AB','CPE','3.33'],['002','John','AG','ISNE','2.99'],['003','John','AD','CPE','2.75'],['004','Jack','AD','ISNE','3.75']];
+var KY=[
+ ['STUDENT','{ID}','Key','Every ID is different, and a single attribute cannot be reduced.'],
+ ['STUDENT','{ID, Fname}','Superkey','Unique because it contains ID, but Fname can be removed.'],
+ ['STUDENT','{ID, Fname, Lname}','Superkey','Unique because it contains ID, but not minimal.'],
+ ['STUDENT','{ID, GPA}','Superkey','Unique because it contains ID; GPA can be removed.'],
+ ['STUDENT','{Fname}','Neither','John appears three times.'],
+ ['STUDENT','{Fname, Lname}','Neither','Unique in these four rows, but two students can share a full name.'],
+ ['STUDENT','{Major, GPA}','Neither','Majors and GPAs can both repeat, so two students can match.'],
+ ['MOTORBIKE','{Engine_number}','Key','Every engine number is different, and a single attribute cannot be reduced.'],
+ ['MOTORBIKE','{Province, Digits, Alphabets}','Key','The full plate is unique; drop any part and two motorbikes can match.'],
+ ['MOTORBIKE','{Digits, Alphabets}','Neither','The same digits and letters can be issued in two provinces.'],
+ ['MOTORBIKE','{Engine_number, Color}','Superkey','Unique because it contains Engine_number; Color can be removed.'],
+ ['MOTORBIKE','{Province, Digits, Alphabets, cc}','Superkey','Contains the full plate; cc can be removed.'],
+ ['MOTORBIKE','{Make, Model}','Neither','Many motorbikes share a make and model.']
+];
+var KY_LABEL={Key:'Key',Superkey:'Superkey, not key',Neither:'Neither'};
+function kyDraw(){
+  var items=shuffle(KY.slice()), score={n:0,ok:0};
+  $('kyList').innerHTML=items.map(function(k,i){
+    return '<div class="ixrow cnrow"><span><span class="sub2">'+k[0]+'</span> <code>'+esc(k[1])+'</code></span><span class="ixst"></span><span class="cnb">'+
+      ['Key','Superkey','Neither'].map(function(c){return '<button class="btn" data-i="'+i+'" data-c="'+c+'">'+KY_LABEL[c]+'</button>'}).join('')+'</span><span class="cnx sub2"></span></div>';
+  }).join('');
+  $('kyScore').textContent='';
+  $('kyList').onclick=function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var row=b.closest('.cnrow'); if(row.dataset.done) return; row.dataset.done=1;
+    var k=items[+b.dataset.i], good=b.dataset.c===k[2]; score.n++; if(good) score.ok++;
+    row.querySelectorAll('button').forEach(function(x){x.disabled=true; if(x.dataset.c===k[2]) x.classList.add('primary')});
+    row.querySelector('.ixst').innerHTML=good?'<span class="flag ok">correct</span>':'<span class="flag no">'+esc(KY_LABEL[k[2]])+'</span>';
+    row.querySelector('.cnx').textContent=k[3];
+    $('kyScore').textContent=score.ok+' / '+score.n+' correct';
+  };
+}
+$('kyStudent').innerHTML='<table><tr><th>ID</th><th>Fname</th><th>Lname</th><th>Major</th><th>GPA</th></tr>'+KY_STUDENTS.map(function(r){return '<tr>'+r.map(function(v,i){return '<td'+(i===0||i===4?' class="mono"':'')+'>'+v+'</td>'}).join('')+'</tr>'}).join('')+'</table>';
+$('kyNew').onclick=kyDraw; kyDraw();
+
+var CN_STATE=[
+ ['EMPLOYEE',['Fname','Lname','<u>Ssn</u>','Salary','Super_ssn','Dno'],[['John','Smith','123456789','30000','333445555','5'],['Franklin','Wong','333445555','40000','888665555','5'],['Alicia','Zelaya','999887777','25000','987654321','4'],['Jennifer','Wallace','987654321','43000','888665555','4'],['Ramesh','Narayan','666884444','38000','333445555','5'],['Joyce','English','453453453','25000','333445555','5'],['Ahmad','Jabbar','987987987','25000','987654321','4'],['James','Borg','888665555','55000','NULL','1']]],
+ ['DEPARTMENT',['Dname','<u>Dnumber</u>','Mgr_ssn'],[['Research','5','333445555'],['Administration','4','987654321'],['Headquarters','1','888665555']]],
+ ['DEPT_LOCATIONS',['<u>Dnumber</u>','<u>Dlocation</u>'],[['1','Houston'],['4','Stafford'],['5','Bellaire'],['5','Sugarland'],['5','Houston']]],
+ ['PROJECT',['Pname','<u>Pnumber</u>','Plocation','Dnum'],[['ProductX','1','Bellaire','5'],['ProductY','2','Sugarland','5'],['ProductZ','3','Houston','5'],['Computerization','10','Stafford','4'],['Reorganization','20','Houston','1'],['Newbenefits','30','Stafford','4']]],
+ ['WORKS_ON',['<u>Essn</u>','<u>Pno</u>','Hours'],[['123456789','1','32.5'],['123456789','2','7.5'],['666884444','3','40.0'],['453453453','1','20.0'],['453453453','2','20.0'],['333445555','2','10.0'],['333445555','3','10.0'],['333445555','10','10.0'],['333445555','20','10.0'],['999887777','30','30.0'],['999887777','10','10.0'],['987987987','10','35.0'],['987987987','30','5.0'],['987654321','30','20.0'],['987654321','20','15.0'],['888665555','20','NULL']]],
+ ['DEPENDENT',['<u>Essn</u>','<u>Dependent_name</u>','Relationship'],[['333445555','Alice','Daughter'],['333445555','Theodore','Son'],['333445555','Joy','Spouse'],['987654321','Abner','Spouse'],['123456789','Michael','Son'],['123456789','Alice','Daughter'],['123456789','Elizabeth','Spouse']]]
+];
+var CN_RULES=['Allowed','Domain','Key','Entity integrity','Referential integrity'];
+var CN=[
+ ["UPDATE EMPLOYEE SET Dno = 7 WHERE Ssn = '123456789';",'Referential integrity','Dno references DEPARTMENT.Dnumber, and there is no department 7.'],
+ ["INSERT INTO EMPLOYEE (Fname, Lname, Ssn, Salary, Super_ssn, Dno)\nVALUES ('Cecilia', 'Kolonsky', NULL, 28000, '987654321', 4);",'Entity integrity','Ssn is the primary key, so it cannot be NULL.'],
+ ["INSERT INTO EMPLOYEE (Fname, Lname, Ssn, Salary, Super_ssn, Dno)\nVALUES ('Cecilia', 'Kolonsky', '999887777', 28000, '987654321', 4);",'Key','Alicia Zelaya already has Ssn 999887777.'],
+ ["INSERT INTO EMPLOYEE (Fname, Lname, Ssn, Salary, Super_ssn, Dno)\nVALUES ('Cecilia', 'Kolonsky', '677678989', 28000, '987654321', 4);",'Allowed','A new Ssn, an existing supervisor and an existing department.'],
+ ["UPDATE EMPLOYEE SET Salary = 'high' WHERE Ssn = '123456789';",'Domain','Salary takes numbers; \'high\' is not in its domain.'],
+ ["INSERT INTO WORKS_ON VALUES ('453453453', 3, 'many');",'Domain','Hours takes numbers; \'many\' is not in its domain.'],
+ ["DELETE FROM WORKS_ON WHERE Essn = '999887777' AND Pno = 10;",'Allowed','No other relation references WORKS_ON.'],
+ ["DELETE FROM EMPLOYEE WHERE Ssn = '999887777';",'Referential integrity','Two WORKS_ON rows still reference Alicia (Pno 30 and 10).'],
+ ["DELETE FROM DEPARTMENT WHERE Dnumber = 5;",'Referential integrity','Employees, projects and locations still reference department 5.'],
+ ["UPDATE EMPLOYEE SET Super_ssn = NULL WHERE Ssn = '999887777';",'Allowed','A foreign key may be NULL: Alicia then has no supervisor.'],
+ ["INSERT INTO WORKS_ON VALUES ('123456789', 1, 10.0);",'Key','(Essn, Pno) = (123456789, 1) already exists.'],
+ ["INSERT INTO WORKS_ON VALUES ('123456789', 40, 5.0);",'Referential integrity','Pno references PROJECT.Pnumber, and there is no project 40.'],
+ ["INSERT INTO WORKS_ON VALUES (NULL, 10, 5.0);",'Entity integrity','Essn is part of the primary key, so it cannot be NULL.'],
+ ["INSERT INTO DEPENDENT VALUES ('123456789', 'Alice', 'Daughter');",'Key','(Essn, Dependent_name) = (123456789, Alice) already exists.'],
+ ["INSERT INTO PROJECT VALUES ('ProductA', 4, 'Bellaire', 2);",'Referential integrity','Dnum references DEPARTMENT.Dnumber, and there is no department 2.'],
+ ["UPDATE DEPARTMENT SET Mgr_ssn = '123456789' WHERE Dnumber = 5;",'Allowed','123456789 is an existing employee.'],
+ ["DELETE FROM DEPENDENT WHERE Essn = '333445555' AND Dependent_name = 'Joy';",'Allowed','No other relation references DEPENDENT.']
+];
+function cnDraw(){
+  var items=shuffle(CN.slice()), score={n:0,ok:0};
+  $('cnList').innerHTML=items.map(function(c,i){
+    return '<div class="ixrow cnrow"><pre class="sql cnsql">'+esc(c[0])+'</pre><span class="ixst"></span><span class="cnb">'+
+      CN_RULES.map(function(r){return '<button class="btn" data-i="'+i+'" data-c="'+r+'">'+r+'</button>'}).join('')+'</span><span class="cnx sub2"></span></div>';
+  }).join('');
+  $('cnScore').textContent='';
+  $('cnList').onclick=function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var row=b.closest('.cnrow'); if(row.dataset.done) return; row.dataset.done=1;
+    var c=items[+b.dataset.i], good=b.dataset.c===c[1]; score.n++; if(good) score.ok++;
+    row.querySelectorAll('button').forEach(function(x){x.disabled=true; if(x.dataset.c===c[1]) x.classList.add('primary')});
+    row.querySelector('.ixst').innerHTML=good?'<span class="flag ok">correct</span>':'<span class="flag no">'+esc(c[1])+'</span>';
+    row.querySelector('.cnx').textContent=c[2];
+    $('cnScore').textContent=score.ok+' / '+score.n+' correct';
+  };
+}
+$('cnState').innerHTML=CN_STATE.map(function(t){
+  return '<div class="card'+(t[0]==='EMPLOYEE'?' wide':'')+'"><h4>'+t[0]+'</h4><div class="tscroll"><table><tr>'+t[1].map(function(h){return '<th>'+h+'</th>'}).join('')+'</tr>'+
+    t[2].map(function(r){return '<tr>'+r.map(function(v){return '<td class="mono">'+(v==='NULL'?'<i>NULL</i>':esc(v))+'</td>'}).join('')+'</tr>'}).join('')+'</table></div></div>';
+}).join('');
+$('cnNew').onclick=cnDraw; cnDraw();
+
 /* ================= TOPIC → PRACTICE LINKS ================= */
 document.addEventListener('click',function(e){
   var f=e.target.closest('[data-goflash]'), q=e.target.closest('[data-goquiz]');
@@ -2375,7 +2649,7 @@ go(LSget('dbTab','home'),true);
     document.querySelectorAll('#exam .panel h3').forEach(function (h) { var p = h.closest('.panel'); out.push({ title: h.textContent.trim(), meta: 'Past paper', view: 'exam', anchor: p && p.id || null }); });
     document.querySelectorAll('#cheat .cheat h3').forEach(function (h) { out.push({ title: h.textContent.trim(), meta: 'Cheat sheet', view: 'cheat', anchor: h.id || null }); });
     document.querySelectorAll('#resources .files a').forEach(function (a) { out.push({ title: a.textContent.trim(), meta: 'Download', view: 'resources' }); });
-    [['Index practice','calc'],['Transaction sessions','sessions'],['Referential actions','refact'],['SQL clause order','order'],['Quiz','quiz'],['Flashcards','flash']].forEach(function (d) { out.push({ title: d[0], meta: 'Drill', view: d[1] }); });
+    [['Keys and constraints','keys'],['Index practice','calc'],['Transaction sessions','sessions'],['Referential actions','refact'],['SQL clause order','order'],['Quiz','quiz'],['Flashcards','flash']].forEach(function (d) { out.push({ title: d[0], meta: 'Drill', view: d[1] }); });
     return out;
   }
   (window.StudyConsole = window.StudyConsole || []).push({
@@ -2398,6 +2672,7 @@ go(LSget('dbTab','home'),true);
       { label: 'Drill', views: [
         { id: 'flash', title: 'Flashcards', badge: String(CARDS.length + TERMS.length) },
         { id: 'quiz', title: 'Quiz', badge: String(QUIZ.length) },
+        { id: 'keys', title: 'Keys and constraints' },
         { id: 'calc', title: 'Index practice' },
         { id: 'sessions', title: 'Transaction sessions' },
         { id: 'refact', title: 'Referential actions' },
@@ -2409,7 +2684,7 @@ go(LSget('dbTab','home'),true);
       ] },
       { label: 'Reference', views: [
         { id: 'cheat', title: 'Cheat sheet', children: sections('cheat') },
-        { id: 'resources', title: 'Downloads', badge: '13' },
+        { id: 'resources', title: 'Downloads', badge: '14' },
         { id: 'author', title: 'About' }
       ] }
     ]
