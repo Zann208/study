@@ -63,14 +63,16 @@
     router: { show: function () {} },
     groups: [
       { label: 'Workspace', views: [{ id: 'overview', title: 'Overview', track: false }] },
+      { label: 'This semester', views: [
+        linkOut('db', 'Database Systems', 'DBS'),
+        linkOut('spm', 'Project Management', 'SPM')
+      ] },
       { label: 'Subjects', views: [
         linkOut('netdes', 'Network Design', 'NET'),
         linkOut('wnet', 'Wireless Networks', 'WLN'),
         linkOut('algo', 'Algorithms', 'ALG'),
         linkOut('privacy', 'Privacy & Security', 'PRV'),
-        linkOut('os', 'Operating Systems', 'OS'),
-        linkOut('db', 'Database Systems', 'DBS'),
-        linkOut('spm', 'Project Management', 'SPM')
+        linkOut('os', 'Operating Systems', 'OS')
       ] },
       { label: 'Engineering Lab', views: [linkOut('gdc', 'Data Center Prep', 'GDC')] },
       { label: 'Certification', views: [linkOut('ccna', 'CCNA', 'CCN')] }

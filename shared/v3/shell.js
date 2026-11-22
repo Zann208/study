@@ -35,6 +35,12 @@
   var CONSOLES = [
     { id: 'home', code: 'SC', name: 'Study Console', short: 'Home', group: 'hub', href: HOME, icon: 'home',
       accent: { light: '#7a242c', dark: '#d26a75' } },
+    { id: 'db', code: 'DBS', name: 'Database Systems', short: 'Database Systems', group: 'current',
+      href: HOME + 'db/', icon: 'database', accent: { light: '#1f5f8b', dark: '#8fbfe0' },
+      blurb: 'Relational model, SQL, ER design, indexing, query optimization, transactions.' },
+    { id: 'spm', code: 'SPM', name: 'Software Project Management', short: 'Project Management', group: 'current',
+      href: HOME + 'spm/', icon: 'project', accent: { light: '#7a3f6e', dark: '#d3a3c9' },
+      blurb: 'Estimation, scheduling, critical path, risk, earned value and the project life cycle.' },
     { id: 'netdes', code: 'NET', name: 'Network Design & Management', short: 'Network Design', group: 'subjects',
       href: 'https://zann208.github.io/netdes/', icon: 'network', accent: { light: '#2f6862', dark: '#86b8b0' },
       blurb: 'Switching, VLANs, redundancy, and configuration verification.' },
@@ -50,12 +56,6 @@
     { id: 'os', code: 'OS', name: 'Operating Systems & Scheduling', short: 'Operating Systems', group: 'subjects',
       href: 'https://zann208.github.io/os/', icon: 'system', accent: { light: '#4a6236', dark: '#a8bf8c' },
       blurb: 'Processes, memory, synchronization, and deadlock.' },
-    { id: 'db', code: 'DBS', name: 'Database Systems', short: 'Database Systems', group: 'subjects',
-      href: HOME + 'db/', icon: 'database', accent: { light: '#1f5f8b', dark: '#8fbfe0' },
-      blurb: 'Relational model, SQL, ER design, indexing, query optimization, transactions.' },
-    { id: 'spm', code: 'SPM', name: 'Software Project Management', short: 'Project Management', group: 'subjects',
-      href: HOME + 'spm/', icon: 'project', accent: { light: '#7a3f6e', dark: '#d3a3c9' },
-      blurb: 'Estimation, scheduling, critical path, risk, earned value and the project life cycle.' },
     { id: 'gdc', code: 'GDC', name: 'Google Data Center Hardware Hackathon', short: 'Data Center Prep', group: 'lab',
       href: HOME + 'google-dc-hackathon/', icon: 'server', accent: { light: '#36597a', dark: '#98b5d1' },
       blurb: 'Server hardware, networking, Linux, and troubleshooting.' },
@@ -872,10 +872,12 @@
         '<span class="sc3-switch-copy"><b>' + esc(c.name) + '</b><span>' + esc(c.code) + (c.blurb ? ' · ' + esc(c.blurb) : '') + '</span></span></a>';
     }
     function render() {
+      var current = CONSOLES.filter(function (c) { return c.group === 'current'; });
       var subjects = CONSOLES.filter(function (c) { return c.group === 'subjects'; });
       var lab = CONSOLES.filter(function (c) { return c.group === 'lab'; });
       var cert = CONSOLES.filter(function (c) { return c.group === 'cert'; });
       pop.innerHTML = row(consoleById('home')) +
+        (current.length ? '<p class="sc3-pop-title">This semester</p>' + current.map(row).join('') : '') +
         '<p class="sc3-pop-title">Subjects</p>' + subjects.map(row).join('') +
         '<p class="sc3-pop-title">Engineering Lab</p>' + lab.map(row).join('') +
         (cert.length ? '<p class="sc3-pop-title">Certification</p>' + cert.map(row).join('') : '');

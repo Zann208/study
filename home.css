@@ -166,6 +166,8 @@
 .home-consoles { margin-top: 8px; }
 .home-h2 { margin: 0 0 18px; font-family: var(--sc-display); font-size: 1.5rem; font-weight: 600; letter-spacing: -.02em; }
 .home-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.home-grid-current { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.home-others { margin-top: 44px; }
 
 .home-tile {
   position: relative; display: flex; flex-direction: column; min-height: 228px; padding: 24px 22px 22px; box-sizing: border-box;
@@ -203,13 +205,14 @@
 @media (max-width: 680px) {
   .home { padding: 28px 16px 40px; }
   .home-hero { padding: 16px 0 32px; }
-  .home-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .home-grid, .home-grid-current { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .home-tile { min-height: 0; }
   .home-chat-head { padding: 14px 16px; }
   .home-chat-links { width: 100%; }
   .home-chat-thread { padding: 16px 14px 18px; }
   .home-chat-bubble { font-size: .9688rem; }
   .home-consoles { margin-top: 0; }
+  .home-others { margin-top: 32px; }
   .home-chat { margin-top: 44px; }
   .home-search { flex: 1; justify-content: center; }
   .home-continue { flex: 1 1 100%; }

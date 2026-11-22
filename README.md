@@ -26,13 +26,13 @@ UI v2 (`shared/v2/`) stays live as the frozen rollback: each migrated page keeps
 
 | Console | Focus | Source | Live |
 |---|---|---|---|
+| **DBS** | Database Systems | this repository: `db/` | [open](https://zann208.github.io/study/db/) |
+| **SPM** | Software Project Management | this repository: `spm/` | [open](https://zann208.github.io/study/spm/) |
 | **NET** | Network Design & Management | [netdes](https://github.com/Zann208/netdes) | [open](https://zann208.github.io/netdes/) |
 | **WLN** | Wireless Network Engineering | [wnet](https://github.com/Zann208/wnet) | [open](https://zann208.github.io/wnet/) |
 | **ALG** | Algorithms & Data Structures | [algo](https://github.com/Zann208/algo) | [open](https://zann208.github.io/algo/) |
 | **PRV** | Privacy & Information Security | [privacy](https://github.com/Zann208/privacy) | [open](https://zann208.github.io/privacy/) |
 | **OS** | Operating Systems & Scheduling | [os](https://github.com/Zann208/os) | [open](https://zann208.github.io/os/) |
-| **DBS** | Database Systems | this repository: `db/` | [open](https://zann208.github.io/study/db/) |
-| **SPM** | Software Project Management | this repository: `spm/` | [open](https://zann208.github.io/study/spm/) |
 | **GDC** | Google Data Center Hardware Hackathon 2026 | this repository: `google-dc-hackathon/` | [open](https://zann208.github.io/study/google-dc-hackathon/) |
 | **CCN** | Cisco CCNA 200-301 | this repository: `ccna/` | [open](https://zann208.github.io/study/ccna/) |
 
