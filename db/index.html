@@ -273,6 +273,20 @@ a.sc-tab{text-decoration:none}
 .ixrow .ixw{grid-column:2 / -1;margin-top:2px}
 .whrow{grid-template-columns:1fr auto 90px}
 .cnrow{grid-template-columns:1fr 150px}
+pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
+#exam details.deep,#mock details.deep{margin-top:12px}
+#exam details.deep+details.deep,#mock details.deep+details.deep{margin-top:8px}
+.deep-body ol,.deep-body ul{padding-left:20px}
+.deep-body li{margin:6px 0}
+.mockbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 18px;padding:10px 12px;border:1px solid var(--line2);border-radius:10px;background:var(--panel2);position:sticky;top:calc(var(--sc3-top-h, 56px) + 8px);z-index:5}
+.mocktotal{margin-left:auto;font-family:var(--mono);font-size:13px}
+.mocktotal b{font-size:16px;color:var(--ink)}
+#mockTimer{font-family:var(--mono);min-width:120px}
+#mockTimer.is-low{color:var(--bad, #c0392b)}
+.mkrow{display:flex;align-items:center;gap:10px;margin-top:12px}
+.mkrow .ctl-label,.mocktotal .ctl-label{min-width:0;margin:0}
+.mkin{width:72px;padding:6px 8px;border:1px solid var(--line2);border-radius:8px;background:var(--panel);color:var(--ink);font:inherit;font-family:var(--mono)}
+.mkin:focus-visible{outline:2px solid var(--vi);outline-offset:1px}
 .cnrow .cnb{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:6px}
 .cnrow .cnx{grid-column:1 / -1}
 .cnrow .cnx:empty{display:none}
@@ -297,6 +311,8 @@ a.sc-tab{text-decoration:none}
   .whrow{grid-template-columns:1fr}
   .whrow .ixst{grid-column:1}
   .cnrow{grid-template-columns:1fr}
+  .mocktotal{margin-left:0}
+  .mockbar{position:static}
   .cnrow .ixst{grid-column:1;text-align:left}
   .rfgrid{grid-template-columns:1fr}
 }
@@ -1253,7 +1269,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: FLASHCARDS ============ -->
 <section class="tab" id="flash"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash" aria-selected="true" aria-current="page">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash" aria-selected="true" aria-current="page">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/mock">Mock papers</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Flashcards</h1>
   <div class="panel">
     <div class="ctlrow"><span class="ctl-label">Deck</span>
@@ -1286,14 +1302,434 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: QUIZ ============ -->
 <section class="tab" id="quiz"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz" aria-selected="true" aria-current="page">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz" aria-selected="true" aria-current="page">Quiz</a><a class="sc-tab" href="#/mock">Mock papers</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Quiz</h1>
   <div class="panel pc"><div id="quizShell" class="quiz-shell"></div></div>
 </div></section>
 
+<!-- ============ DRILL: MOCK PAPERS ============ -->
+<section class="tab" id="mock"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/mock" aria-selected="true" aria-current="page">Mock papers</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <h1>Mock papers</h1>
+  <p class="lede">8 questions · 90 marks · 3 hours · same format as the past paper.</p>
+  <div class="mockbar">
+    <div class="sc-seg" id="mockPick"><button type="button" aria-pressed="true" data-v="A">Paper A</button><button type="button" aria-pressed="false" data-v="B">Paper B</button></div>
+    <span class="mocktotal"><span class="ctl-label">Total</span> <b id="mockTotal">0</b> / 90</span>
+    <button class="btn" id="mockTimer" type="button">Start 3:00:00</button>
+    <button class="btn" id="mockReset" type="button">Clear marks</button>
+  </div>
+<div class="mockpaper" id="mockA">
+  <div class="panel" id="ma1">
+    <h3><span class="badge b1">Q1 · 10</span> Referential actions</h3>
+<pre class="sql">CONSTRAINT WORKSONPROJFK FOREIGN KEY (Pno) REFERENCES PROJECT(Pnumber)
+  ON DELETE CASCADE ON UPDATE SET NULL;</pre>
+<p>1.1) Explain the meaning of this constraint technically, using COMPANY data.</p>
+<p>1.2) Modify the constraint so that (1) a project cannot be deleted while employees still work on it, and (2) when a project is renumbered, WORKS_ON follows the new number automatically.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>1.1</b> Pno in WORKS_ON is a foreign key referencing PROJECT.Pnumber: every Pno must be the number of an existing project.</p>
+<ul class="clean">
+<li><b>ON DELETE CASCADE:</b> deleting a project also deletes every WORKS_ON row for it. Deleting project 10 (Computerization) deletes &lt;'333445555', 10, 10.0&gt;, &lt;'999887777', 10, 10.0&gt; and &lt;'987987987', 10, 35.0&gt;.</li>
+<li><b>ON UPDATE SET NULL:</b> changing a project number sets Pno to NULL in the matching WORKS_ON rows. But Pno is part of the primary key (Essn, Pno) of WORKS_ON, so NULL breaks entity integrity: renumbering project 10 to 11 is rejected.</li>
+</ul>
+<p><b>1.2</b></p><pre class="sql">ALTER TABLE WORKS_ON DROP FOREIGN KEY WORKSONPROJFK;
+ALTER TABLE WORKS_ON
+  ADD CONSTRAINT WORKSONPROJFK FOREIGN KEY (Pno) REFERENCES PROJECT(Pnumber)
+  ON DELETE RESTRICT     -- (1) delete refused while WORKS_ON rows exist
+  ON UPDATE CASCADE;     -- (2) new Pnumber copied to WORKS_ON.Pno</pre></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Check whether the foreign key is part of the primary key.</b> Pno is, so SET NULL can never succeed here. Spotting this earns the marks that a plain description misses.</li>
+<li><b>Requirement (1)</b> means "refuse": RESTRICT (or NO ACTION, which also refuses, checked at the end of the statement).</li>
+<li><b>Requirement (2)</b> means "copy the change": CASCADE on update.</li>
+<li><b>Use real tuples</b> from the COMPANY state to show which rows each action touches.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 1"><span class="sub2">/ 10</span></div>
+  </div>
+
+  <div class="panel" id="ma2">
+    <h3><span class="badge b1">Q2 · 15</span> Illustrate with COMPANY data</h3>
+<p>Show example data from the COMPANY database to illustrate each sentence.</p>
+<p>2.1) A relation can have more than one candidate key.<br>2.2) No primary key value can be NULL.<br>2.3) A foreign key can refer to its own relation.<br>2.4) An insert operation can violate any of the four schema-based constraints.<br>2.5) An update of an attribute that is neither a primary key nor a foreign key can violate only the domain constraint.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>2.1</b> In DEPARTMENT both {Dnumber} and {Dname} are unique: &lt;'Research', 5, …&gt;, &lt;'Administration', 4, …&gt;, &lt;'Headquarters', 1, …&gt;. No two departments share a number or a name, so both are candidate keys; Dnumber is chosen as primary key and Dname is declared UNIQUE.</p>
+<p><b>2.2</b> INSERT INTO DEPT_LOCATIONS VALUES (NULL, 'Austin') is rejected: Dnumber is part of the primary key (Dnumber, Dlocation), and a NULL key could not identify the tuple.</p>
+<p><b>2.3</b> EMPLOYEE.Super_ssn references EMPLOYEE.Ssn. In &lt;'John', 'B', 'Smith', '123456789', …, Super_ssn = '333445555', Dno = 5&gt;, 333445555 is the Ssn of Franklin Wong in the same relation.</p>
+<p><b>2.4</b></p>
+<ul class="clean">
+<li>Domain: insert an employee with Salary = 'high'.</li>
+<li>Key: insert an employee with Ssn '999887777' (already Alicia Zelaya's).</li>
+<li>Entity integrity: insert an employee with Ssn NULL.</li>
+<li>Referential integrity: insert an employee with Dno = 7 (no department 7).</li>
+</ul>
+<p><b>2.5</b> UPDATE EMPLOYEE SET Salary = 'high' WHERE Ssn = '123456789' violates the domain of Salary. The same update with Salary = 28000 violates nothing: Salary is not a key, so no duplicate or NULL key can arise, and nothing references it.</p></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>3 marks each:</b> a concrete tuple or statement plus the reason.</li>
+<li><b>2.1</b> A candidate key is any minimal superkey. The textbook COMPANY DDL declares Dname UNIQUE for exactly this reason.</li>
+<li><b>2.4</b> Insert adds a whole new tuple, so all four checks run: domain, key, entity integrity, referential integrity. Give one statement per constraint.</li>
+<li><b>2.5</b> Compare with the past-paper sentence on delete: reason from what the operation changes. An ordinary attribute is not compared for uniqueness, cannot be a NULL key and is not referenced, so only its domain is checked.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="15" step="0.5" data-max="15" inputmode="decimal" aria-label="Your mark for question 2"><span class="sub2">/ 15</span></div>
+  </div>
+
+  <div class="panel" id="ma3">
+    <h3><span class="badge b1">Q3 · 10</span> Query semantics</h3>
+<p>Explain the meaning of the following query, and give its result on the COMPANY state.</p><pre class="sql">SELECT Pno, SUM(Hours)
+FROM WORKS_ON
+WHERE Hours &gt;= 10
+GROUP BY Pno
+HAVING SUM(Hours) &gt; 40;</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p>For each project, show the project number and the total hours from assignments of at least 10 hours each, but only for projects whose total of such hours is greater than 40.</p>
+<div class="tscroll"><table><tr><th>Pno</th><th>Rows kept (Hours ≥ 10)</th><th>SUM(Hours)</th><th>Kept?</th></tr>
+<tr><td>1</td><td>32.5, 20.0</td><td>52.5</td><td>Yes</td></tr>
+<tr><td>2</td><td>20.0, 10.0</td><td>30.0</td><td>No</td></tr>
+<tr><td>3</td><td>40.0, 10.0</td><td>50.0</td><td>Yes</td></tr>
+<tr><td>10</td><td>10.0, 10.0, 35.0</td><td>55.0</td><td>Yes</td></tr>
+<tr><td>20</td><td>10.0, 15.0</td><td>25.0</td><td>No</td></tr>
+<tr><td>30</td><td>30.0, 20.0</td><td>50.0</td><td>Yes</td></tr></table></div>
+<p>Result: (1, 52.5), (3, 50.0), (10, 55.0), (30, 50.0).</p></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>WHERE first:</b> rows under 10 hours are removed before summing: (123456789, 2, 7.5) and (987987987, 30, 5.0).</li>
+<li><b>NULL hours:</b> (888665555, 20, NULL) is also removed, because NULL ≥ 10 is unknown, and WHERE keeps only rows where the condition is true.</li>
+<li><b>GROUP BY Pno, then SUM</b> per project; HAVING keeps groups with a total above 40. Exactly 40 would not qualify.</li>
+<li><b>Write the sentence first</b>, then the computed table if the question asks for a result.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 3"><span class="sub2">/ 10</span></div>
+  </div>
+
+  <div class="panel" id="ma4">
+    <h3><span class="badge b1">Q4 · 10</span> Datalog to RA, SQL and English</h3>
+<p>Using the CUSTOMERS / PRODUCTS / SUPPLIERS / ORDERS / OFFERS schema of the past paper, convert each Datalog query into (1) relational algebra, (2) SQL and (3) English.</p><pre class="sql">1) ans(x, y) &lt;- OFFERS(x, y, z) AND z &gt; 1000
+2) ans(x) &lt;- CUSTOMERS(c, x, _, _, _) AND ORDERS(c, s, _, _) AND SUPPLIERS(s, _, "GreenMart")</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>Query 1</b></p><pre class="sql">(1) π Sname, PID (σ Price &gt; 1000 (OFFERS))
+
+(2) SELECT DISTINCT Sname, PID
+    FROM OFFERS
+    WHERE Price &gt; 1000;
+
+(3) List each supplier name and product ID where the supplier offers that product
+    at a price above 1000.</pre><p><b>Query 2</b></p><pre class="sql">(1) π FName ( CUSTOMERS ⋈ CUSTOMERS.CID = ORDERS.CID ORDERS
+              ⋈ ORDERS.SName = SUPPLIERS.SName σ Chain = 'GreenMart' (SUPPLIERS) )
+
+(2) SELECT DISTINCT C.FName
+    FROM CUSTOMERS C, ORDERS O, SUPPLIERS S
+    WHERE C.CID = O.CID
+      AND O.SName = S.SName
+      AND S.Chain = 'GreenMart';
+
+(3) Find the first names of customers who have ordered from a supplier
+    in the GreenMart chain.</pre></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Positions:</b> OFFERS(Sname = x, PID = y, Price = z). CUSTOMERS(CID = c, FName = x, …). ORDERS(CID = c, SName = s, …). SUPPLIERS(SName = s, SAddress ignored, Chain = "GreenMart").</li>
+<li><b>Shared variables are joins:</b> c links CUSTOMERS and ORDERS; s links ORDERS and SUPPLIERS.</li>
+<li><b>The constant in a subgoal is a selection</b> on that attribute: σ Chain = 'GreenMart'.</li>
+<li><b>The head decides the projection:</b> only x (FName) is returned, even though c and s are used to join.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 4"><span class="sub2">/ 10</span></div>
+  </div>
+
+  <div class="panel" id="ma5">
+    <h3><span class="badge b1">Q5 · 10</span> Safe or not safe</h3>
+<p>State whether each rule is safe. If it is not, explain why.</p><pre class="sql">1) S(x, y) &lt;- R(x) AND T(y)
+2) S(x) &lt;- R(x) AND NOT T(x)
+3) S(x, y) &lt;- R(x) AND x &gt; y
+4) S(x) &lt;- NOT R(x)
+5) S(x) &lt;- R(x, y) AND y &lt; 10</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><ol>
+<li><b>Safe.</b> x is bound by R and y by T. The result is the product of R and T.</li>
+<li><b>Safe.</b> x is bound by the positive subgoal R(x); NOT T(x) only removes values of R.</li>
+<li><b>Not safe.</b> y appears in the head and in the comparison x &gt; y, but in no positive relational subgoal, so for each x there are infinitely many smaller y.</li>
+<li><b>Not safe.</b> x appears only in the head and a negated subgoal: every value not in R qualifies, an infinite set.</li>
+<li><b>Safe.</b> x and y are both bound by R(x, y); y &lt; 10 only filters.</li>
+</ol></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Same test as the past paper:</b> every variable in the head, in a NOT or in a comparison must also appear in a positive relational subgoal.</li>
+<li><b>Go variable by variable</b> and write which subgoal binds it. If none does, name the variable and why its values are unlimited.</li>
+<li><b>Fixes:</b> 3) S(x, y) &lt;- R(x) AND T(y) AND x &gt; y; 4) S(x) &lt;- U(x) AND NOT R(x), where U is a relation of candidate values.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 5"><span class="sub2">/ 10</span></div>
+  </div>
+
+  <div class="panel" id="ma6">
+    <h3><span class="badge b1">Q6 · 20</span> Index calculation, B = 512</h3>
+<p>Block size B = 512 bytes, block pointer P = 6 bytes, record pointer P<sub>R</sub> = 7 bytes. A STAFF file has r = 20,000 fixed-length records with fields ID (10), NAME (30), DEPTCODE (6), EMAIL (40), PHONE (10), SALARY (8), HIREDATE (8). The file is ordered by the key field ID.</p>
+<p>1) Find the blocking factor (unspanned) and the number of blocks.<br>2) A primary index is built on ID. Find bfr<sub>i</sub>.<br>3) Find the number of first-level entries and first-level blocks.<br>4) Find the number of levels and total blocks of a multilevel index.<br>5) Find the block accesses to retrieve a record by ID through the multilevel index, and compare with a binary search on the data file.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql">1) R   = 10 + 30 + 6 + 40 + 10 + 8 + 8 = 112 bytes
+   bfr = ⌊512 / 112⌋ = 4
+   b   = ⌈20,000 / 4⌉ = 5,000 blocks
+
+2) Ri   = V_ID + P = 10 + 6 = 16 bytes
+   bfri = ⌊512 / 16⌋ = 32
+
+3) r1 = b = 5,000 entries (sparse: one per data block)
+   b1 = ⌈5,000 / 32⌉ = 157 blocks
+
+4) b2 = ⌈157 / 32⌉ = 5 blocks
+   b3 = ⌈5 / 32⌉   = 1 block
+   t  = 3 levels; total = 157 + 5 + 1 = 163 blocks
+
+5) multilevel index: t + 1 = 4 block accesses
+   binary search on the data file: ⌈log2 5,000⌉ = 13 block accesses</pre></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Primary index → block pointer.</b> It points to data blocks, so P = 6, not the record pointer.</li>
+<li><b>Primary index → sparse.</b> The file is ordered on the index key, so one entry per data block (the block anchor) is enough: r1 = b = 5,000. Compare with the past paper, where a secondary index on an unordered field needed one entry per record.</li>
+<li><b>Rounding:</b> 512 / 112 = 4.57 → 4 (down); 5,000 / 32 = 156.25 → 157 (up); 157 / 32 = 4.9 → 5 (up).</li>
+<li><b>Binary search:</b> 2<sup>12</sup> = 4,096 &lt; 5,000 ≤ 8,192 = 2<sup>13</sup>, so 13 accesses. The index needs only 4.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="20" step="0.5" data-max="20" inputmode="decimal" aria-label="Your mark for question 6"><span class="sub2">/ 20</span></div>
+  </div>
+
+  <div class="panel" id="ma7">
+    <h3><span class="badge b1">Q7 · 5</span> Selection placement</h3>
+<p>From the query tree below, why does the optimizer apply σ Dno = 5 before the joins rather than after them? What information does it use to estimate the benefit?</p><pre class="sql tree">π Fname, Pname
+└── ⋈ Pno = Pnumber
+    ├── ⋈ Ssn = Essn
+    │   ├── σ Dno = 5
+    │   │   └── EMPLOYEE
+    │   └── WORKS_ON
+    └── PROJECT</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p>Applying the selection first reduces the number of EMPLOYEE tuples that enter the join, so every later operation reads and produces fewer tuples and fewer blocks; the result is the same, because the selection uses only EMPLOYEE attributes. This is the heuristic "perform selections as early as possible".</p>
+<p>To estimate the benefit the optimizer uses catalog statistics: the number of EMPLOYEE tuples r and blocks b, the number of distinct values of Dno (selectivity ≈ 1 / NDV(Dno), so about r / NDV(Dno) tuples remain), whether an index on Dno exists to retrieve those tuples directly, and the sizes of WORKS_ON and PROJECT.</p></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Two parts, two answers:</b> "why early" is the reduction of intermediate results; "what information" is the catalog statistics.</li>
+<li><b>Selectivity:</b> with a uniform distribution, an equality condition keeps about 1 / (number of distinct values) of the rows.</li>
+<li><b>Validity:</b> a selection may move below a join only if all its attributes come from one input.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="5" step="0.5" data-max="5" inputmode="decimal" aria-label="Your mark for question 7"><span class="sub2">/ 5</span></div>
+  </div>
+
+  <div class="panel" id="ma8">
+    <h3><span class="badge b1">Q8 · 10</span> Push-down projection</h3>
+<p>Demonstrate push-down projection on the query tree below.</p><pre class="sql">Student(StID, Name, Major, Year)
+Enrolment(StID, CrsID, Grade)
+Course(Code, Title, Credits)
+
+SELECT Name, Title
+FROM   Student, Enrolment, Course
+WHERE  Student.StID = Enrolment.StID AND Enrolment.CrsID = Course.Code
+       AND Grade = 'A' AND Year = 3</pre><pre class="sql tree">π Name, Title
+└── ⋈ Enrolment.CrsID = Course.Code
+    ├── ⋈ Student.StID = Enrolment.StID
+    │   ├── σ Year = 3
+    │   │   └── STUDENT
+    │   └── σ Grade = 'A'
+    │       └── ENROLMENT
+    └── COURSE</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql tree">π Name, Title
+└── ⋈ Enrolment.CrsID = Course.Code
+    ├── π Name, CrsID
+    │   └── ⋈ Student.StID = Enrolment.StID
+    │       ├── π StID, Name
+    │       │   └── σ Year = 3
+    │       │       └── STUDENT
+    │       └── π StID, CrsID
+    │           └── σ Grade = 'A'
+    │               └── ENROLMENT
+    └── π Code, Title
+        └── COURSE</pre></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Leaves:</b> STUDENT needs StID (join) and Name (output); Major and Year are dropped after the selection on Year. ENROLMENT needs StID and CrsID (joins); Grade is dropped after its selection. COURSE needs Code (join) and Title (output); Credits is dropped.</li>
+<li><b>Between the joins:</b> after the first join only Name (output) and CrsID (next join) are still needed, so a π Name, CrsID is added.</li>
+<li><b>Each π sits above its σ</b>, because the selection still needs Year or Grade.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 8"><span class="sub2">/ 10</span></div>
+  </div>
+</div>
+<div class="mockpaper" id="mockB" hidden>
+  <div class="panel" id="mb1">
+    <h3><span class="badge b1">Q1 · 10</span> Referential actions</h3>
+<pre class="sql">CONSTRAINT DEPTMGRSSN FOREIGN KEY (Mgr_ssn) REFERENCES EMPLOYEE(Ssn)
+  ON DELETE SET NULL ON UPDATE CASCADE;</pre>
+<p>1.1) Explain the meaning of this constraint technically, using COMPANY data.</p>
+<p>1.2) Modify it so that (1) when a manager leaves, the CEO becomes acting manager of that department automatically, and (2) a change to a manager's Ssn is refused.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>1.1</b> Mgr_ssn in DEPARTMENT is a foreign key referencing EMPLOYEE.Ssn: every manager must be an existing employee.</p>
+<ul class="clean">
+<li><b>ON DELETE SET NULL:</b> deleting a manager sets Mgr_ssn of the department to NULL. Deleting Franklin Wong (333445555) leaves Research &lt;'Research', 5, NULL, …&gt; without a manager. If Mgr_ssn is declared NOT NULL, as in the textbook DDL, the delete is rejected instead.</li>
+<li><b>ON UPDATE CASCADE:</b> changing a manager's Ssn copies the new value to Mgr_ssn. Changing Wong's Ssn to 333445599 changes Research's Mgr_ssn to 333445599.</li>
+</ul>
+<p><b>1.2</b> The CEO, James Borg, has Ssn 888665555.</p><pre class="sql">ALTER TABLE DEPARTMENT ALTER Mgr_ssn SET DEFAULT '888665555';
+
+ALTER TABLE DEPARTMENT DROP FOREIGN KEY DEPTMGRSSN;
+ALTER TABLE DEPARTMENT
+  ADD CONSTRAINT DEPTMGRSSN FOREIGN KEY (Mgr_ssn) REFERENCES EMPLOYEE(Ssn)
+  ON DELETE SET DEFAULT   -- (1) the CEO becomes acting manager
+  ON UPDATE RESTRICT;     -- (2) changing a manager's Ssn is refused</pre></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Requirement (1)</b> needs both parts: SET DEFAULT on delete and a DEFAULT value that is an existing Ssn. Without the DEFAULT clause there is nothing to set.</li>
+<li><b>Requirement (2)</b> means refuse: RESTRICT or NO ACTION on update.</li>
+<li><b>Edge case:</b> if the CEO himself is deleted, the default would point to a missing row, so that delete is rejected.</li>
+<li><b>Mention NOT NULL</b> when the action is SET NULL; it decides whether the action can run.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 1"><span class="sub2">/ 10</span></div>
+  </div>
+
+  <div class="panel" id="mb2">
+    <h3><span class="badge b1">Q2 · 15</span> Illustrate with COMPANY data</h3>
+<p>Show example data from the COMPANY database to illustrate each sentence.</p>
+<p>2.1) A superkey is not necessarily a key.<br>2.2) Values within a tuple are ordered.<br>2.3) A database state that breaks a constraint is not a valid state.<br>2.4) Every relation has at least one key.<br>2.5) An insert can violate referential integrity even when its key value is unique.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>2.1</b> In EMPLOYEE, {Ssn, Lname} is a superkey, because no two tuples share it (Ssn alone is already unique). It is not a key: removing Lname leaves {Ssn}, which is still unique, so it is not minimal.</p>
+<p><b>2.2</b> DEPARTMENT(Dname, Dnumber, Mgr_ssn, Mgr_start_date): &lt;'Research', 5, '333445555', '1988-05-22'&gt; is read by position. The tuple &lt;5, 'Research', '1988-05-22', '333445555'&gt; is a different, invalid tuple under this schema: 5 would be read as a name and a date as a manager Ssn.</p>
+<p><b>2.3</b> Adding WORKS_ON &lt;'123456789', 40, 5.0&gt; to the COMPANY state gives an invalid state: there is no project 40, so referential integrity is broken. The state without that tuple satisfies every constraint and is valid.</p>
+<p><b>2.4</b> DEPT_LOCATIONS has no smaller key, so its key is all its attributes: {Dnumber, Dlocation}, as in &lt;5, 'Bellaire'&gt; and &lt;5, 'Houston'&gt;. Because a relation cannot contain duplicate tuples, the set of all attributes is always a superkey, and some minimal subset of it is a key.</p>
+<p><b>2.5</b> INSERT INTO EMPLOYEE (Fname, Lname, Ssn, Dno) VALUES ('Cecilia', 'Kolonsky', '677678989', 7): Ssn 677678989 is new, so the key constraint holds, but Dno 7 matches no department, so referential integrity is violated.</p></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>2.1</b> is the converse of the past paper's "keys are always superkeys". Show a superkey with one removable attribute.</li>
+<li><b>2.2</b> Under the usual definition a tuple is an ordered list of values, matched to attributes by position; under the alternative definition (a set of attribute–value pairs) order would not matter. Mention the schema order.</li>
+<li><b>2.3</b> A valid state satisfies all integrity constraints; any one broken constraint makes it invalid.</li>
+<li><b>2.4</b> The argument is the set definition: no duplicate tuples means all attributes together are unique.</li>
+<li><b>2.5</b> Insert checks all four constraints separately, so passing one does not mean passing the others.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="15" step="0.5" data-max="15" inputmode="decimal" aria-label="Your mark for question 2"><span class="sub2">/ 15</span></div>
+  </div>
+
+  <div class="panel" id="mb3">
+    <h3><span class="badge b1">Q3 · 10</span> Query semantics</h3>
+<p>Explain the meaning of the following query, and give its result on the COMPANY state.</p><pre class="sql">SELECT E.Lname, COUNT(*)
+FROM EMPLOYEE E, DEPENDENT D
+WHERE E.Ssn = D.Essn
+GROUP BY E.Ssn, E.Lname
+HAVING COUNT(*) &gt;= 2;</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p>For each employee who has at least two dependents, show the employee's last name and the number of dependents.</p>
+<p>Result: (Wong, 3) and (Smith, 3). Wallace has one dependent and is removed by HAVING; employees with no dependents never join with DEPENDENT, so they never form a group.</p></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>WHERE E.Ssn = D.Essn</b> is the join: one row per (employee, dependent) pair.</li>
+<li><b>GROUP BY E.Ssn</b> makes one group per employee, so two employees with the same last name are not merged. E.Lname is added to GROUP BY so it can appear in SELECT.</li>
+<li><b>COUNT(*)</b> counts the joined rows of each group, which is the number of dependents.</li>
+<li><b>Data:</b> 333445555 (Wong): Alice, Theodore, Joy = 3. 123456789 (Smith): Michael, Alice, Elizabeth = 3. 987654321 (Wallace): Abner = 1.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 3"><span class="sub2">/ 10</span></div>
+  </div>
+
+  <div class="panel" id="mb4">
+    <h3><span class="badge b1">Q4 · 10</span> Datalog to RA, SQL and English</h3>
+<p>Using the CUSTOMERS / PRODUCTS / SUPPLIERS / ORDERS / OFFERS schema of the past paper, convert each Datalog query into (1) relational algebra, (2) SQL and (3) English.</p><pre class="sql">1) ans(x) &lt;- PRODUCTS(x, _, "Snack") AND NOT OFFERS(_, x, _)
+2) ans(n, q) &lt;- CUSTOMERS(c, n, _, _, _) AND ORDERS(c, "Sunrise", _, q) AND q &gt; 10</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>Query 1</b></p><pre class="sql">(1) π PID (σ Category = 'Snack' (PRODUCTS)) − π PID (OFFERS)
+
+(2) SELECT PID
+    FROM PRODUCTS
+    WHERE Category = 'Snack'
+      AND PID NOT IN (SELECT PID FROM OFFERS);
+
+(3) List the IDs of snack products that no supplier offers.</pre><p><b>Query 2</b></p><pre class="sql">(1) π FName, Quantity ( CUSTOMERS ⋈ CUSTOMERS.CID = ORDERS.CID
+                       σ SName = 'Sunrise' AND Quantity &gt; 10 (ORDERS) )
+
+(2) SELECT DISTINCT C.FName, O.Quantity
+    FROM CUSTOMERS C, ORDERS O
+    WHERE C.CID = O.CID
+      AND O.SName = 'Sunrise'
+      AND O.Quantity &gt; 10;
+
+(3) List the first name of each customer and the quantity for orders of more than
+    10 units placed with the supplier Sunrise.</pre></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>NOT becomes set difference</b> in relational algebra and NOT IN (or NOT EXISTS) in SQL. Both sides of the difference must have the same attributes, so project PID on each side first.</li>
+<li><b>Rule 1 is safe:</b> x is bound by the positive subgoal PRODUCTS.</li>
+<li><b>Constants inside a subgoal</b> ("Snack", "Sunrise") become selections on that position's attribute.</li>
+<li><b>Comparisons</b> (q &gt; 10) are selections on the bound attribute.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 4"><span class="sub2">/ 10</span></div>
+  </div>
+
+  <div class="panel" id="mb5">
+    <h3><span class="badge b1">Q5 · 10</span> Why these rules are not safe</h3>
+<p>Explain why the following rules are not safe, and rewrite each so that it is safe.</p><pre class="sql">1) S(x, y) &lt;- R(x)
+2) S(x) &lt;- R(x) AND NOT T(y)
+3) S(x) &lt;- R(x) AND y &gt; x</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><ol>
+<li><b>S(x, y) &lt;- R(x):</b> y appears in the head but in no relational subgoal, so it can be any value. Safe version: S(x, y) &lt;- R(x) AND T(y).</li>
+<li><b>S(x) &lt;- R(x) AND NOT T(y):</b> y appears only in a negated subgoal. NOT T(y) does not bind y, so the body ranges over infinitely many y. Safe version: S(x) &lt;- R(x, y) AND NOT T(y).</li>
+<li><b>S(x) &lt;- R(x) AND y &gt; x:</b> y appears only in a comparison. Safe version: S(x) &lt;- R(x) AND U(y) AND y &gt; x.</li>
+</ol></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>The variable does not have to be in the head</b> to make a rule unsafe: in 2 and 3 the head is S(x), and x is safe, but y is the problem.</li>
+<li><b>Fixing</b> means binding the problem variable with a positive relational subgoal. Any relation that supplies sensible values works; say which one you assume.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 5"><span class="sub2">/ 10</span></div>
+  </div>
+
+  <div class="panel" id="mb6">
+    <h3><span class="badge b1">Q6 · 20</span> Index calculation, B = 2048</h3>
+<p>Block size B = 2048 bytes, block pointer P = 8 bytes, record pointer P<sub>R</sub> = 9 bytes. A MEMBER file has r = 50,000 fixed-length records with fields ID (8), NAME (40), EMAIL (32), DEPT (4), ADDRESS (80), PHONE (12), SALARY (8), HIREDATE (8), STATUS (1), JOBCODE (7). The file is ordered by ID. A secondary index is built on the key field EMAIL with record pointers.</p>
+<p>1) Find bfr (unspanned) and the number of blocks.<br>2) Find bfr<sub>i</sub>.<br>3) Find the number of first-level entries and blocks.<br>4) Find the number of levels and total blocks of a multilevel index.<br>5) Find the block accesses to retrieve a record by EMAIL with the multilevel index, and the average for a linear search without an index.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql">1) R   = 8 + 40 + 32 + 4 + 80 + 12 + 8 + 8 + 1 + 7 = 200 bytes
+   bfr = ⌊2048 / 200⌋ = 10
+   b   = ⌈50,000 / 10⌉ = 5,000 blocks
+
+2) Ri   = V_EMAIL + P_R = 32 + 9 = 41 bytes
+   bfri = ⌊2048 / 41⌋ = 49
+
+3) r1 = 50,000 entries (dense: one per record)
+   b1 = ⌈50,000 / 49⌉ = 1,021 blocks
+
+4) b2 = ⌈1,021 / 49⌉ = 21 blocks
+   b3 = ⌈21 / 49⌉    = 1 block
+   t  = 3 levels; total = 1,021 + 21 + 1 = 1,043 blocks
+
+5) multilevel index: t + 1 = 4 block accesses
+   linear search (EMAIL is a key, file not ordered on it): b / 2 = 2,500 on average</pre></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Secondary index on a key:</b> the file is ordered on ID, so EMAIL values are scattered; one entry per record (dense).</li>
+<li><b>Record pointer</b> (9 bytes) because the question says so; with a block pointer the entry would be 40 bytes and bfri = 51.</li>
+<li><b>Careful rounding:</b> 2048 / 41 = 49.95 → 49 (50 × 41 = 2,050 is too big). 50,000 / 49 = 1,020.4 → 1,021. 1,021 / 49 = 20.8 → 21.</li>
+<li><b>Linear search on a key</b> stops when the record is found, so on average half the blocks: 2,500. On a non-key field it would read all 5,000.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="20" step="0.5" data-max="20" inputmode="decimal" aria-label="Your mark for question 6"><span class="sub2">/ 20</span></div>
+  </div>
+
+  <div class="panel" id="mb7">
+    <h3><span class="badge b1">Q7 · 5</span> Heuristic optimization</h3>
+<p>The query tree below is the canonical tree for “last names of employees born after 1957 who work on the project 'Aquarius'”. Describe the heuristic steps the optimizer applies to it, and explain why the final tree joins PROJECT first.</p><pre class="sql tree">π Lname
+└── σ Pname = 'Aquarius' AND Pnumber = Pno AND Essn = Ssn AND Bdate &gt; '1957-12-31'
+    └── ×
+        ├── ×
+        │   ├── EMPLOYEE
+        │   └── WORKS_ON
+        └── PROJECT</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><ol>
+<li>Break the conjunctive selection into a cascade of single conditions.</li>
+<li>Push each selection as far down as possible: σ Pname = 'Aquarius' onto PROJECT, σ Bdate &gt; '1957-12-31' onto EMPLOYEE.</li>
+<li>Reorder the leaves so the most restrictive selection is applied first: σ Pname = 'Aquarius' returns a single project, so PROJECT is joined with WORKS_ON first, and EMPLOYEE last.</li>
+<li>Replace each Cartesian product followed by a join condition with a join: PROJECT ⋈ Pnumber = Pno WORKS_ON, then ⋈ Essn = Ssn EMPLOYEE.</li>
+<li>Push projections down so only the needed attributes move up the tree.</li>
+</ol>
+<p>PROJECT goes first because its selection is the most selective (one tuple), so the first join produces only the WORKS_ON rows of that one project, the smallest possible intermediate result.</p></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Five steps, in order:</b> cascade σ, push σ down, most restrictive first, × + σ → ⋈, push π down.</li>
+<li><b>“Why PROJECT first”</b> is answered with selectivity: Pname is unique, so one tuple. Starting from the smallest relation keeps every later join small.</li>
+<li><b>Avoid Cartesian products</b>: reorder only so that each join still has a join condition.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="5" step="0.5" data-max="5" inputmode="decimal" aria-label="Your mark for question 7"><span class="sub2">/ 5</span></div>
+  </div>
+
+  <div class="panel" id="mb8">
+    <h3><span class="badge b1">Q8 · 10</span> Push-down projection</h3>
+<p>Demonstrate push-down projection on the query tree below (COMPANY schema).</p><pre class="sql">SELECT E.Lname, D.Dname
+FROM   EMPLOYEE E, DEPARTMENT D
+WHERE  E.Dno = D.Dnumber AND E.Salary &gt; 30000
+       AND D.Mgr_start_date &gt; '1990-01-01'</pre><pre class="sql tree">π Lname, Dname
+└── ⋈ Dno = Dnumber
+    ├── σ Salary &gt; 30000
+    │   └── EMPLOYEE
+    └── σ Mgr_start_date &gt; '1990-01-01'
+        └── DEPARTMENT</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql tree">π Lname, Dname
+└── ⋈ Dno = Dnumber
+    ├── π Lname, Dno
+    │   └── σ Salary &gt; 30000
+    │       └── EMPLOYEE
+    └── π Dnumber, Dname
+        └── σ Mgr_start_date &gt; '1990-01-01'
+            └── DEPARTMENT</pre><p>EMPLOYEE keeps only Lname (output) and Dno (join) after its selection; the other eight attributes are dropped. DEPARTMENT keeps only Dnumber (join) and Dname (output); Mgr_ssn and Mgr_start_date are dropped after the selection.</p></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>List what is needed above each leaf:</b> output attributes plus join attributes.</li>
+<li><b>Selections still need their attribute</b> (Salary, Mgr_start_date), so each π goes above its σ.</li>
+<li><b>EMPLOYEE is wide</b> (ten attributes), so projecting it to two attributes gives the biggest saving.</li>
+</ol></div></details>
+    <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 8"><span class="sub2">/ 10</span></div>
+  </div>
+</div>
+</div></section>
+
 <!-- ============ DRILL: KEYS AND CONSTRAINTS ============ -->
 <section class="tab" id="keys"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys" aria-selected="true" aria-current="page">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/mock">Mock papers</a><a class="sc-tab" href="#/keys" aria-selected="true" aria-current="page">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Keys and constraints</h1>
   <div class="panel">
     <h3>Key, superkey or neither?</h3>
@@ -1315,7 +1751,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: INDEX PRACTICE ============ -->
 <section class="tab" id="calc"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc" aria-selected="true" aria-current="page">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/mock">Mock papers</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc" aria-selected="true" aria-current="page">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Index practice</h1>
   <div class="ctlrow"><span class="ctl-label">Problem</span>
     <div class="sc-seg" id="ixMode"><button type="button" aria-pressed="true" data-v="course">Course scenario</button><button type="button" aria-pressed="false" data-v="random">Random numbers</button></div>
@@ -1339,7 +1775,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: TRANSACTION SESSIONS ============ -->
 <section class="tab" id="sessions"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions" aria-selected="true" aria-current="page">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/mock">Mock papers</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions" aria-selected="true" aria-current="page">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Transaction sessions</h1>
   <p class="lede">Session A uses an explicit transaction; Session B runs in autocommit.</p>
   <div class="ctlrow"><span class="ctl-label">Predict mode</span>
@@ -1384,7 +1820,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: REFERENTIAL ACTIONS ============ -->
 <section class="tab" id="refact"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact" aria-selected="true" aria-current="page">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/mock">Mock papers</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact" aria-selected="true" aria-current="page">Referential actions</a><a class="sc-tab" href="#/order">SQL clause order</a></nav>
   <h1>Referential actions</h1>
   <p class="lede"><code>Loan.MemberID</code> has <code>DEFAULT 9</code>.</p>
   <div class="grid2">
@@ -1405,7 +1841,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 
 <!-- ============ DRILL: SQL CLAUSE ORDER ============ -->
 <section class="tab" id="order"><div class="wrap">
-  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order" aria-selected="true" aria-current="page">SQL clause order</a></nav>
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/mock">Mock papers</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order" aria-selected="true" aria-current="page">SQL clause order</a></nav>
   <h1>SQL clause order</h1>
   <p class="lede">Processing order is why WHERE cannot use an aggregate and why a SELECT alias works in ORDER BY.</p>
   <div class="panel">
@@ -1429,73 +1865,230 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 <section class="tab" id="exam"><div class="wrap">
   <h1>Past paper</h1>
   <p class="lede">Mid-semester paper · 8 questions · 90 marks · 3 hours · open PDF notes, no internet.</p>
-
   <div class="panel" id="x1">
     <h3><span class="badge b1">Q1 · 10</span> Referential actions</h3>
-    <div class="formula">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)<br>ON DELETE SET DEFAULT ON UPDATE CASCADE;</div>
-    <p>1.1 Explain the constraint technically. 1.2 Modify it so that (1) a resigning supervisor leaves the supervisees with no supervisor, and (2) a newly admitted employee is assigned an HR supervisor automatically.</p>
-    <p class="sub2">Method: Topic 2. (1) ON DELETE SET NULL. (2) A DEFAULT value on super_ssn.</p>
+<pre class="sql">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)
+  ON DELETE SET DEFAULT ON UPDATE CASCADE;</pre>
+<p>1.1) Explain the meaning of this constraint technically, e.g. if there is any update at … then … will happen.</p>
+<p>1.2) Modify the constraint so that (1) when a supervisor resigns, the supervisees have no supervisor, and (2) when a new employee is admitted, an HR staff member is assigned as supervisor automatically. You may assume codes, names or other data.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>1.1</b> DEPTMGRFK makes <code>super_ssn</code> in EMPLOYEE a foreign key that references <code>Ssn</code> in the same table (a self-referencing foreign key for the supervision relationship). Every non-NULL super_ssn must equal the Ssn of an existing employee.</p>
+<ul class="clean">
+<li><b>ON DELETE SET DEFAULT:</b> if a supervisor's tuple is deleted from EMPLOYEE, the super_ssn of every employee he or she supervised is set to the default value of super_ssn. For example, deleting Franklin Wong (Ssn 333445555) changes super_ssn of Smith, Narayan and English from 333445555 to the default. The default must itself be an existing Ssn, otherwise the delete is rejected.</li>
+<li><b>ON UPDATE CASCADE:</b> if a supervisor's Ssn is changed, the new value is copied to the super_ssn of every supervisee. For example, changing Wong's Ssn from 333445555 to 333445599 changes super_ssn of Smith, Narayan and English to 333445599.</li>
+</ul>
+<p><b>1.2</b> Assume the HR officer has Ssn <code>111111111</code> and already exists in EMPLOYEE.</p><pre class="sql">ALTER TABLE EMPLOYEE
+  ALTER super_ssn SET DEFAULT '111111111';      -- (2) new employees get the HR supervisor
+
+ALTER TABLE EMPLOYEE DROP FOREIGN KEY DEPTMGRFK;
+ALTER TABLE EMPLOYEE
+  ADD CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)
+  ON DELETE SET NULL                             -- (1) supervisees are left with no supervisor
+  ON UPDATE CASCADE;</pre></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Read the clause from left to right.</b> FOREIGN KEY (super_ssn) is the child column; REFERENCES EMPLOYEE(Ssn) is the parent key. Both are in EMPLOYEE, so one employee row points at another.</li>
+<li><b>Each referential action answers one event on the parent row.</b> ON DELETE says what happens to the children when the parent row disappears; ON UPDATE says what happens when the parent key value changes. A good answer names the event, the rows affected and the new value, using real tuples.</li>
+<li><b>Requirement (1)</b>, "no supervisor", means the child value becomes NULL, so the delete action changes from SET DEFAULT to SET NULL. super_ssn must therefore allow NULL (it is not part of the primary key, so entity integrity does not apply).</li>
+<li><b>Requirement (2)</b> is about INSERT, not about the foreign key actions. Referential actions fire only on delete and update of the parent, so the automatic HR supervisor comes from a DEFAULT on the column: when INSERT omits super_ssn, the default is stored. The HR employee must exist first, or the foreign key rejects the insert.</li>
+<li><b>Keep what was not asked to change.</b> ON UPDATE CASCADE stays.</li>
+<li><b>Name check.</b> The constraint is named DEPTMGRFK, but it is the supervisor key, not the department manager key; the name does not change its meaning.</li>
+</ol>
+<p class="sub2">In MySQL (InnoDB) SET DEFAULT is parsed but rejected, and a column is changed with <code>ALTER TABLE … ALTER super_ssn SET DEFAULT …</code>. In standard SQL the drop is <code>DROP CONSTRAINT DEPTMGRFK</code>.</p></div></details>
   </div>
 
   <div class="panel" id="x2">
     <h3><span class="badge b1">Q2 · 15</span> Illustrate with COMPANY data</h3>
-    <p>Give example data for: tuples have no order; several meanings of NULL; keys are always superkeys; an FK value can be NULL; delete can violate only referential integrity. The paper's own example: relation state r1 of DEPTLOCS = {&lt;1, Houston&gt;, &lt;5, Bellaire&gt;} as a subset of dom(A1) × dom(A2).</p>
-    <p class="sub2">Method: Topic 1.</p>
+<p>Show example data to illustrate each sentence, using the COMPANY database.</p>
+<p class="sub2">Example given: a relation state r(R) is a subset of dom(A1) × dom(A2) × … × dom(An). Answer: relation state r1 of DEPT_LOCATIONS, r1 = {&lt;1, Houston&gt;, &lt;5, Bellaire&gt;}, when A1 = {1, 4, 5} and A2 = {Houston, Bellaire, Stafford}.</p>
+<p>2.1) Tuples in a relation do not have any particular order.<br>2.2) We can have several meanings for NULL values.<br>2.3) Keys are always superkeys.<br>2.4) A value of FK in a tuple t1 of the current state r1(R1) can be NULL.<br>2.5) The delete operation can violate only referential integrity, not the key constraint nor entity integrity.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>2.1</b> r1(DEPT_LOCATIONS) = {&lt;1, Houston&gt;, &lt;4, Stafford&gt;, &lt;5, Bellaire&gt;} and r2(DEPT_LOCATIONS) = {&lt;5, Bellaire&gt;, &lt;1, Houston&gt;, &lt;4, Stafford&gt;} are the same relation state. A relation is a set of tuples, so listing them in a different order does not create a different relation.</p>
+<p><b>2.2</b></p>
+<ul class="clean">
+<li><b>Not applicable:</b> James Borg, &lt;'James', 'E', 'Borg', '888665555', …, Super_ssn = NULL, Dno = 1&gt;. He is at the top of the company, so he has no supervisor.</li>
+<li><b>Unknown:</b> WORKS_ON &lt;'888665555', 20, NULL&gt;. Borg works on project 20, but his hours are not known.</li>
+<li><b>Exists but not recorded:</b> a new employee &lt;'Cecilia', 'F', 'Kolonsky', '677678989', Bdate = NULL, …&gt;. She has a birth date, but it has not been entered yet.</li>
+</ul>
+<p><b>2.3</b> In EMPLOYEE, {Ssn} is a key: no two tuples share an Ssn (123456789, 333445555, 999887777, …), so t1[Ssn] ≠ t2[Ssn] for any two tuples, which is exactly the superkey condition. A key is a superkey that is also minimal. The reverse is not true: {Ssn, Lname} is a superkey but not a key, because Lname can be removed.</p>
+<p><b>2.4</b> Super_ssn in EMPLOYEE is a foreign key referencing EMPLOYEE.Ssn. In the tuple t1 = &lt;'James', 'E', 'Borg', '888665555', …, Super_ssn = NULL, Dno = 1&gt; the foreign key value is NULL, and the state is still valid, because a foreign key value must either match an existing primary key or be NULL.</p>
+<p><b>2.5</b> Deleting Alicia Zelaya, <code>DELETE FROM EMPLOYEE WHERE Ssn = '999887777'</code>, leaves WORKS_ON &lt;'999887777', 30, 30.0&gt; and &lt;'999887777', 10, 10.0&gt; referring to an employee who no longer exists, which violates referential integrity. The delete cannot create a duplicate key or a NULL primary key, because it adds no values; it only removes a tuple.</p></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Each sentence is worth 3 marks:</b> one correct example tuple or state from COMPANY plus one line saying why it shows the sentence. Write tuples in angle brackets in schema order, like the given example.</li>
+<li><b>2.1</b> is about the set definition of a relation. Showing the same tuples in two orders and calling them one state is the cleanest proof.</li>
+<li><b>2.2</b> The three meanings are value unknown, value exists but not available, and attribute does not apply. Two of them can be taken straight from the COMPANY state (Borg's Super_ssn and his Hours on project 20).</li>
+<li><b>2.3</b> Start from the definitions: superkey = uniqueness; key = uniqueness + minimality. A key satisfies the first condition by definition, so it is always a superkey. Adding the counterexample {Ssn, Lname} shows you know the converse fails.</li>
+<li><b>2.4</b> Choose a foreign key that is not part of a primary key. Super_ssn or Dno in EMPLOYEE works; Essn in WORKS_ON does not, because there NULL would break entity integrity.</li>
+<li><b>2.5</b> Reason about what each operation changes. Insert and update add values, so they can break domain, key, entity integrity and referential integrity. Delete only removes a tuple, so the only damage possible is a dangling reference. Whether the DBMS then rejects, cascades or sets NULL depends on the referential action.</li>
+</ol></div></details>
   </div>
 
   <div class="panel" id="x3">
     <h3><span class="badge b1">Q3 · 10</span> Query semantics</h3>
-    <pre class="sql">SELECT Dno, COUNT(*)
+<p>Explain the meaning (semantics) of the following query.</p><pre class="sql">SELECT Dno, COUNT(*)
 FROM EMPLOYEE
-WHERE Salary > 40000
+WHERE Salary &gt; 40000
 GROUP BY Dno
-HAVING COUNT(*) > 5;</pre>
-    <p class="sub2">Method: Topic 5. One sentence naming the grouping, the row filter and the group filter.</p>
+HAVING COUNT(*) &gt; 5;</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p>For each department, show the department number and the number of its employees who earn more than 40,000, but only for departments that have more than five such employees.</p>
+<p>Processing order: FROM EMPLOYEE takes all employees; WHERE Salary &gt; 40000 keeps only employees earning over 40,000; GROUP BY Dno puts the remaining employees into one group per department; HAVING COUNT(*) &gt; 5 keeps only groups with more than five employees; SELECT outputs the department number and the count of each kept group.</p></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Read it in processing order</b>, not writing order: FROM → WHERE → GROUP BY → HAVING → SELECT.</li>
+<li><b>WHERE filters rows before grouping</b>, so COUNT(*) counts only employees earning over 40,000, not every employee in the department. This is the point most answers miss.</li>
+<li><b>HAVING filters whole groups</b> after counting. A department with no high earners never forms a group, so it does not appear even with 0.</li>
+<li><b>Boundary:</b> &gt; 40000 excludes a salary of exactly 40,000 (Franklin Wong).</li>
+<li><b>On the COMPANY state</b> only Wallace (43,000, Dno 4) and Borg (55,000, Dno 1) earn more than 40,000, so every group has one employee and the result is empty. The query is correct; the sample data just has no such department.</li>
+<li><b>One sentence first, then the steps.</b> The sentence earns most of the marks; the steps show you understand why.</li>
+</ol></div></details>
   </div>
 
   <div class="panel" id="x4">
     <h3><span class="badge b1">Q4 · 10</span> Datalog to RA, SQL and English</h3>
-    <pre class="sql">CUSTOMERS(CID, FName, LName, CAddress, Account)   PRODUCTS(PID, Prodname, Category)
-SUPPLIERS(SName, SAddress, Chain)                  ORDERS(CID, SName, PID, Quantity)
+<p>Convert the two Datalog queries into (1) relational algebra, (2) SQL and (3) an English query.</p><pre class="sql">CUSTOMERS(CID, FName, LName, CAddress, Account)
+PRODUCTS(PID, Prodname, Category)
+SUPPLIERS(SName, SAddress, Chain)
+ORDERS(CID, SName, PID, Quantity)
 OFFERS(Sname, PID, Price)
 
-1) ans(x, y) <- CUSTOMERS(_, x, y, _, z) AND z < 500
-2) ans(x) <- SUPPLIERS(x, z, _) AND z = "Chiang Mai" AND OFFERS(x, y, _)
+1) ans(x, y) &lt;- CUSTOMERS(_, x, y, _, z) AND z &lt; 500
+2) ans(x) &lt;- SUPPLIERS(x, z, _) AND z = "Chiang Mai" AND OFFERS(x, y, _)
              AND PRODUCTS(y, _, "As seen on TV")</pre>
-    <p class="sub2">Method: Topic 6; Lab 4, question 5.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>Query 1</b></p><pre class="sql">(1) π FName, LName (σ Account &lt; 500 (CUSTOMERS))
+
+(2) SELECT DISTINCT FName, LName
+    FROM CUSTOMERS
+    WHERE Account &lt; 500;
+
+(3) List the first and last names of customers whose account balance is less than 500.</pre><p><b>Query 2</b></p><pre class="sql">(1) π SName ( σ SAddress = 'Chiang Mai' (SUPPLIERS)
+              ⋈ SUPPLIERS.SName = OFFERS.Sname OFFERS
+              ⋈ OFFERS.PID = PRODUCTS.PID σ Category = 'As seen on TV' (PRODUCTS) )
+
+(2) SELECT DISTINCT S.SName
+    FROM SUPPLIERS S, OFFERS O, PRODUCTS P
+    WHERE S.SName = O.Sname
+      AND O.PID = P.PID
+      AND S.SAddress = 'Chiang Mai'
+      AND P.Category = 'As seen on TV';
+
+(3) Find the names of suppliers located in Chiang Mai that offer at least one product
+    in the "As seen on TV" category.</pre></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Map every argument to its attribute by position.</b> CUSTOMERS(_, x, y, _, z) means CID is ignored, x = FName, y = LName, CAddress is ignored, z = Account.</li>
+<li><b>Variables in the head become the projection.</b> ans(x, y) → π FName, LName. ans(x) → π SName.</li>
+<li><b>Comparisons and constants become selections.</b> z &lt; 500 → σ Account &lt; 500. z = "Chiang Mai" → σ SAddress = 'Chiang Mai'. The constant "As seen on TV" in the third position of PRODUCTS → σ Category = 'As seen on TV'.</li>
+<li><b>A variable shared by two subgoals becomes a join condition.</b> x appears in SUPPLIERS and OFFERS → SUPPLIERS.SName = OFFERS.Sname. y appears in OFFERS and PRODUCTS → OFFERS.PID = PRODUCTS.PID.</li>
+<li><b>Underscores</b> are attributes that are matched but not used, so they appear nowhere in the answer.</li>
+<li><b>DISTINCT</b> in SQL matches the set result of Datalog and relational algebra; plain SELECT could return a supplier once per matching product.</li>
+<li><b>The English sentence</b> describes the result, not the steps: what is listed, and which condition it satisfies.</li>
+</ol></div></details>
   </div>
 
   <div class="panel" id="x5">
     <h3><span class="badge b1">Q5 · 10</span> Why these rules are not safe</h3>
-    <pre class="sql">1) S(x) <- R(y)
-2) S(x) <- R(y) AND NOT R(x)
-3) S(x) <- R(y) AND x < y</pre>
-    <p class="sub2">Method: Topic 6, safe rules.</p>
+<p>Explain why the following rules are not safe.</p><pre class="sql">1) S(x) &lt;- R(y)
+2) S(x) &lt;- R(y) AND NOT R(x)
+3) S(x) &lt;- R(y) AND x &lt; y</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p>A rule is safe only if every variable that appears in the head, in a negated subgoal or in an arithmetic comparison also appears in at least one positive (non-negated) relational subgoal of the body. Otherwise the variable is not limited to values stored in the database, and the answer can be infinite.</p>
+<ol>
+<li><b>S(x) &lt;- R(y):</b> x appears in the head but in no relational subgoal; only y is bound by R. x can therefore be any value, so S is infinite whenever R is not empty.</li>
+<li><b>S(x) &lt;- R(y) AND NOT R(x):</b> x appears only in the head and in the negated subgoal NOT R(x). Negation does not bind a variable: every value that is not in R qualifies, and there are infinitely many such values.</li>
+<li><b>S(x) &lt;- R(y) AND x &lt; y:</b> x appears only in the head and in the comparison x &lt; y. For any y in R there are infinitely many values smaller than y.</li>
+</ol></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>State the rule of safety first</b>; each part is then one application of it.</li>
+<li><b>Check variable by variable.</b> For every variable in the head, in a NOT, or in a comparison, ask: is it inside a positive relation in the body? If not, the rule is unsafe.</li>
+<li><b>Use a tiny instance to prove it.</b> With R = {1, 5}: rule 1 returns every possible value; rule 2 returns every value except 1 and 5; rule 3 returns every value less than 5 (…, 2, 3, 4, including negatives and fractions).</li>
+<li><b>How to fix (shows understanding):</b> bind x in a positive subgoal, for example S(x) &lt;- R(x), S(x) &lt;- T(x) AND NOT R(x), S(x) &lt;- R(x) AND R(y) AND x &lt; y.</li>
+</ol></div></details>
   </div>
 
   <div class="panel" id="x6">
     <h3><span class="badge b1">Q6 · 20</span> Index calculation, B = 1024</h3>
-    <p>Block 1024 bytes, block pointer 6, record pointer 7, 30,000 fixed-length records with NAME 30, SSN 9, DEPARTMENTCODE 9, ADDRESS 40, PHONE 9, BIRTHDATE 8, SEX 1, JOBCODE 4, SALARY 4. File ordered by the non-key DEPARTMENTCODE; build a secondary index on SSN whose pointers point to the record level.</p>
-    <p>Asked: (1) bfr and number of blocks (unspanned); (2) first-level bfr<sub>i</sub>; (3) first-level entries and blocks; (4) levels and total blocks of a multilevel index; (5) block accesses to reach a record via the multilevel index.</p>
-    <div class="formula">R = 30+9+9+40+9+8+1+4+4 = 114 bytes → bfr = floor(1024/114) = 8 → b = ceiling(30,000/8) = 3,750 blocks<br>entry = 9 + 7 (record pointer) = 16 bytes → bfr<sub>i</sub> = floor(1024/16) = 64<br>secondary index is dense: r<sub>1</sub> = 30,000 entries → b<sub>1</sub> = ceiling(30,000/64) = 469 blocks<br>level 2: ceiling(469/64) = 8 blocks; level 3: ceiling(8/64) = 1 block → t = 3 levels, 469 + 8 + 1 = 478 blocks<br>accesses = t + 1 = 4</div>
-    <p class="sub2">Method: Topic 7.</p>
+<p>Block size B = 1024 bytes, block pointer P = 6 bytes, record pointer P<sub>R</sub> = 7 bytes. The EMPLOYEE file has r = 30,000 fixed-length records with fields NAME (30), SSN (9), DEPARTMENTCODE (9), ADDRESS (40), PHONE (9), BIRTHDATE (8), SEX (1), JOBCODE (4), SALARY (4).</p>
+<p>1) Find the blocking factor of the data file (unspanned) and the number of blocks.</p>
+<p>The file is ordered by the non-key field DEPARTMENTCODE. A secondary index is built on SSN, and each pointer points to the record level.</p>
+<p>2) Find the first-level index blocking factor bfr<sub>i</sub>.<br>3) Find the number of first-level index entries and the number of first-level blocks.<br>4) Find the number of levels and the total number of blocks of a multilevel index built on it.<br>5) For a given SSN, find the number of block accesses to reach the record through the multilevel index.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql">1) R   = 30 + 9 + 9 + 40 + 9 + 8 + 1 + 4 + 4 = 114 bytes
+   bfr = ⌊B / R⌋ = ⌊1024 / 114⌋ = 8 records per block
+   b   = ⌈r / bfr⌉ = ⌈30,000 / 8⌉ = 3,750 blocks
+
+2) Ri   = V_SSN + P_R = 9 + 7 = 16 bytes
+   bfri = ⌊1024 / 16⌋ = 64 entries per block
+
+3) r1 = 30,000 entries (dense: one entry per record)
+   b1 = ⌈30,000 / 64⌉ = 469 blocks
+
+4) fo = bfri = 64
+   b2 = ⌈469 / 64⌉ = 8 blocks
+   b3 = ⌈8 / 64⌉   = 1 block  → top level
+   t  = 3 levels;  total = 469 + 8 + 1 = 478 blocks
+
+5) accesses = t + 1 = 3 + 1 = 4 blocks</pre></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Record size:</b> add every field. 1024 / 114 = 8.98, and an unspanned file cannot split a record across blocks, so round down: bfr = 8. Then 30,000 / 8 = 3,750 exactly.</li>
+<li><b>Index entry = key field + pointer.</b> The pointer type is decided by the question: "point to the record level" means a record pointer (7 bytes), not a block pointer (6 bytes). 9 + 7 = 16, and 1024 / 16 = 64 exactly.</li>
+<li><b>Dense or sparse?</b> The file is ordered on DEPARTMENTCODE, not SSN, so SSN values are scattered across blocks. A secondary index must then have one entry for every record: 30,000 entries. 30,000 / 64 = 468.75, round up to 469 blocks.</li>
+<li><b>Multilevel index:</b> each higher level has one entry per block of the level below, and the standard method uses the same fan-out fo = bfr<sub>i</sub> = 64 at every level. Divide and round up until one block remains: 469 → 8 → 1. Count the levels (3) and add the blocks (478).</li>
+<li><b>Accesses:</b> read one block per index level (3), then one data block (1). Total 4, compared with about 3,750 / 2 = 1,875 for a linear search on an unordered field.</li>
+<li><b>Marks are for each step.</b> Write the formula, the substituted numbers and the rounding direction every time; a correct method with an arithmetic slip still earns most of the marks.</li>
+</ol></div></details>
   </div>
 
   <div class="panel" id="x7">
     <h3><span class="badge b1">Q7 · 5</span> Join order</h3>
-    <p>From a query tree, how does the optimizer decide between joining Enrollment with Student first or Enrollment with Course first, and what are its points of consideration?</p>
-    <p class="sub2">Method: Topic 8, join order.</p>
+<p>From the query tree below, between joining ENROLMENT with STUDENT first and joining ENROLMENT with COURSE first, how does the optimizer determine the answer? What are its points of consideration?</p><pre class="sql tree">π Title, Major
+└── ⋈ CrsID = Code
+    ├── ⋈ ID = StID
+    │   ├── σ Grade = A
+    │   │   └── ENROLMENT
+    │   └── STUDENT
+    └── COURSE</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p>The optimizer lists the alternative join orders, (σ(ENROLMENT) ⋈ STUDENT) ⋈ COURSE and (σ(ENROLMENT) ⋈ COURSE) ⋈ STUDENT, estimates the cost of each from the statistics in the catalog, and executes the cheaper plan.</p>
+<p>Points of consideration:</p>
+<ul class="clean">
+<li><b>Size of the inputs:</b> number of tuples and blocks of STUDENT and COURSE, and how many ENROLMENT tuples remain after σ Grade = A (its selectivity).</li>
+<li><b>Size of the intermediate result:</b> join selectivity, estimated from the number of distinct values of StID/ID and CrsID/Code. The join that produces fewer or narrower tuples is done first, so the next join reads less.</li>
+<li><b>Access paths and join algorithm:</b> whether an index exists on STUDENT.ID or COURSE.Code (index nested-loop), whether the inputs are sorted (sort-merge) or a hash join fits in memory.</li>
+<li><b>Available memory buffers</b>, and whether the intermediate result can be pipelined instead of written to disk.</li>
+<li><b>Cost measure:</b> mainly the number of block accesses, plus CPU and memory cost.</li>
+</ul></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>The question asks "how", then "what".</b> Answer "how" in one sentence: enumerate the orders, estimate the cost of each, choose the lowest.</li>
+<li><b>Here both joins follow a foreign key to a primary key</b>, so each produces at most one row per selected enrolment. The difference is therefore in cost: which table is smaller, which key has an index, and how wide the intermediate tuples are.</li>
+<li><b>Heuristics the optimizer applies first:</b> perform selections early (σ Grade = A is already pushed down), project away unused columns (only Title and Major are needed), and avoid Cartesian products.</li>
+<li><b>5 marks</b> means the decision method plus three or four named considerations, each with a short reason.</li>
+</ol></div></details>
   </div>
 
   <div class="panel" id="x8">
     <h3><span class="badge b1">Q8 · 10</span> Push-down projection</h3>
-    <pre class="sql">Customer(ID, Name, Type)   Invoice(InvID, CustID, Date, Amount)
-LineItem(InvID, LineNo, ProdID, Qty)   Product(ProdID, Description, ProdType)
+<p>From the database and query below, demonstrate push-down projection on the given query tree for further optimization.</p><pre class="sql">Customer(ID, Name, Type)
+Invoice(InvID, CustID, Date, Amount)
+LineItem(InvID, LineNo, ProdID, Qty)
+Product(ProdID, Description, ProdType)
 
 SELECT Name, Date, Amount
-FROM Customer, Invoice
-WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 3000</pre>
-    <p class="sub2">Method: Topic 8, step 4.</p>
+FROM   Customer, Invoice
+WHERE  Invoice.CustID = Customer.ID AND
+       Invoice.Date.Month = July AND
+       Amount &gt; 3000</pre><pre class="sql tree">π Name, Date, Amount
+└── ⋈ Invoice.CustID = Customer.ID
+    ├── CUSTOMER
+    └── σ Date.Month = July AND Amount &gt; 3000
+        └── INVOICE</pre>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql tree">π Name, Date, Amount
+└── ⋈ Invoice.CustID = Customer.ID
+    ├── π ID, Name
+    │   └── CUSTOMER
+    └── π CustID, Date, Amount
+        └── σ Date.Month = July
+            └── σ Amount &gt; 3000
+                └── INVOICE</pre><p>Attributes kept on each branch: from CUSTOMER only ID (join) and Name (output); Type is dropped. From INVOICE only CustID (join), Date and Amount (selection and output); InvID is dropped. LineItem and Product are not used by the query.</p></div></details>
+    <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>Work from the top down.</b> Write the attributes each operator needs: the final π needs Name, Date, Amount; the join needs Customer.ID and Invoice.CustID.</li>
+<li><b>Above each leaf, insert a π</b> keeping only the attributes needed higher in the tree: CUSTOMER → ID, Name; INVOICE → CustID, Date, Amount.</li>
+<li><b>Place the π above the selection</b> on INVOICE, or make sure it still contains Date and Amount, because the selection needs them.</li>
+<li><b>Split the conjunctive selection</b> into a cascade (σ Date.Month = July (σ Amount &gt; 3000 (INVOICE))) so each condition can be moved and ordered separately. Put the more selective condition at the bottom.</li>
+<li><b>Keep the top π.</b> The join output still carries ID and CustID, which the result does not show.</li>
+<li><b>Why it helps:</b> narrower tuples mean more tuples per block, so the intermediate results take fewer blocks to write and read, and the join processes less data. The answer is not changed.</li>
+</ol></div></details>
   </div>
 </div></section>
 <section class="tab" id="cheat"><div class="wrap">
@@ -1576,7 +2169,7 @@ WHERE Invoice.CustID = Customer.ID AND Invoice.Date.Month = July AND Amount > 30
     <div class="kv"><b>Title</b><span>Database Systems</span></div>
     <div class="kv"><b>Text</b><span>Elmasri &amp; Navathe — <i>Fundamentals of Database Systems</i>, 7th edition</span></div>
     <div class="kv"><b>Covered</b><span>Ten topics: relational model, DDL, ER design, relational algebra, intermediate SQL, Datalog, indexing, heuristic optimization, transactions, privileges</span></div>
-    <div class="kv"><b>Practice</b><span>307 flashcards (85 concepts + 222 terms), 81 quiz questions, five interactive drills, ten worked lab sets, one past paper</span></div>
+    <div class="kv"><b>Practice</b><span>307 flashcards (85 concepts + 222 terms), 81 quiz questions, two mock papers, five interactive drills, ten worked lab sets, one past paper with model answers</span></div>
   </div>
   <div class="panel pg">
     <h3>Built with</h3>
@@ -2009,7 +2602,7 @@ var TOPIC_NAMES={0:'Basics',1:'Relational model',2:'SQL DDL',3:'ER modelling',4:
 function topicLabel(t){return t===0?'T0 Basics':'T'+t+' '+TOPIC_NAMES[t]}
 
 /* ================= TABS ================= */
-var TABS=['home','topics','terms','labs','flash','quiz','keys','calc','sessions','refact','order','exam','cheat','resources','author'];
+var TABS=['home','topics','terms','labs','flash','quiz','mock','keys','calc','sessions','refact','order','exam','cheat','resources','author'];
 var ALIAS={drills:'flash'};
 var scrollMem={};
 function go(tab,noPush){
@@ -2040,6 +2633,11 @@ function anchorsFor(tab){
   } else if(tab==='exam'){
     document.querySelectorAll('#exam .panel').forEach(function(p,i){
       if(!p.id) p.id='x_'+i;
+      var h=p.querySelector('h3'); var b=h&&h.querySelector('.badge');
+      out.push({id:p.id,k:b?b.textContent.split('·')[0].trim():'Q',t:h?h.textContent.replace(/^Q\d+\s*·\s*\d+\s*/,'').trim():'question'});
+    });
+  } else if(tab==='mock'){
+    document.querySelectorAll('#mock'+mockPaper+' .panel').forEach(function(p){
       var h=p.querySelector('h3'); var b=h&&h.querySelector('.badge');
       out.push({id:p.id,k:b?b.textContent.split('·')[0].trim():'Q',t:h?h.textContent.replace(/^Q\d+\s*·\s*\d+\s*/,'').trim():'question'});
     });
@@ -2518,6 +3116,39 @@ function whDraw(){
 $('whNew').onclick=whDraw; whDraw();
 
 
+
+/* ================= DRILL: MOCK PAPERS ================= */
+var MOCK_KEY='db-mock-marks', mockPaper='A', mockMarks={};
+try{ mockMarks=JSON.parse(localStorage.getItem(MOCK_KEY)||'{}')||{}; }catch(e){ mockMarks={}; }
+function mockSave(){ try{ localStorage.setItem(MOCK_KEY,JSON.stringify(mockMarks)); }catch(e){} }
+function mockTotal(){
+  var t=0; $('mock'+mockPaper).querySelectorAll('.mkin').forEach(function(i){ var v=parseFloat(i.value); if(!isNaN(v)) t+=v; });
+  $('mockTotal').textContent=String(Math.round(t*10)/10);
+}
+document.querySelectorAll('#mock .mkin').forEach(function(i){
+  var p=i.closest('.panel').id; if(mockMarks[p]!=null) i.value=mockMarks[p];
+  i.addEventListener('change',function(){
+    var v=parseFloat(i.value), mx=+i.dataset.max;
+    if(isNaN(v)){ i.value=''; delete mockMarks[p]; }
+    else { v=Math.max(0,Math.min(mx,Math.round(v*2)/2)); i.value=v; mockMarks[p]=v; }
+    mockSave(); mockTotal();
+  });
+});
+segBind('mockPick',function(v){ mockPaper=v; $('mockA').hidden=v!=='A'; $('mockB').hidden=v!=='B'; mockTotal(); buildRail(); });
+$('mockReset').onclick=function(){
+  $('mock'+mockPaper).querySelectorAll('.mkin').forEach(function(i){ i.value=''; delete mockMarks[i.closest('.panel').id]; });
+  mockSave(); mockTotal();
+};
+var mockT={left:3*3600,id:null};
+function mockFmt(s){ var h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60; return h+':'+(m<10?'0':'')+m+':'+(x<10?'0':'')+x; }
+function mockTick(){ mockT.left=Math.max(0,mockT.left-1); $('mockTimer').textContent='Pause '+mockFmt(mockT.left); $('mockTimer').classList.toggle('is-low',mockT.left<=600); if(!mockT.left){ clearInterval(mockT.id); mockT.id=null; $('mockTimer').textContent='Time up'; } }
+$('mockTimer').onclick=function(){
+  if(mockT.id){ clearInterval(mockT.id); mockT.id=null; $('mockTimer').textContent='Resume '+mockFmt(mockT.left); return; }
+  if(!mockT.left) mockT.left=3*3600;
+  mockT.id=setInterval(mockTick,1000); $('mockTimer').textContent='Pause '+mockFmt(mockT.left);
+};
+mockTotal();
+
 /* ================= DRILL: KEYS AND CONSTRAINTS ================= */
 var KY_STUDENTS=[['001','John','AB','CPE','3.33'],['002','John','AG','ISNE','2.99'],['003','John','AD','CPE','2.75'],['004','Jack','AD','ISNE','3.75']];
 var KY=[
@@ -2649,7 +3280,7 @@ go(LSget('dbTab','home'),true);
     document.querySelectorAll('#exam .panel h3').forEach(function (h) { var p = h.closest('.panel'); out.push({ title: h.textContent.trim(), meta: 'Past paper', view: 'exam', anchor: p && p.id || null }); });
     document.querySelectorAll('#cheat .cheat h3').forEach(function (h) { out.push({ title: h.textContent.trim(), meta: 'Cheat sheet', view: 'cheat', anchor: h.id || null }); });
     document.querySelectorAll('#resources .files a').forEach(function (a) { out.push({ title: a.textContent.trim(), meta: 'Download', view: 'resources' }); });
-    [['Keys and constraints','keys'],['Index practice','calc'],['Transaction sessions','sessions'],['Referential actions','refact'],['SQL clause order','order'],['Quiz','quiz'],['Flashcards','flash']].forEach(function (d) { out.push({ title: d[0], meta: 'Drill', view: d[1] }); });
+    [['Mock papers','mock'],['Keys and constraints','keys'],['Index practice','calc'],['Transaction sessions','sessions'],['Referential actions','refact'],['SQL clause order','order'],['Quiz','quiz'],['Flashcards','flash']].forEach(function (d) { out.push({ title: d[0], meta: 'Drill', view: d[1] }); });
     return out;
   }
   (window.StudyConsole = window.StudyConsole || []).push({
@@ -2672,6 +3303,7 @@ go(LSget('dbTab','home'),true);
       { label: 'Drill', views: [
         { id: 'flash', title: 'Flashcards', badge: String(CARDS.length + TERMS.length) },
         { id: 'quiz', title: 'Quiz', badge: String(QUIZ.length) },
+        { id: 'mock', title: 'Mock papers', badge: '2' },
         { id: 'keys', title: 'Keys and constraints' },
         { id: 'calc', title: 'Index practice' },
         { id: 'sessions', title: 'Transaction sessions' },
