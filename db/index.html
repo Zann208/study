@@ -316,6 +316,25 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
   .cnrow .ixst{grid-column:1;text-align:left}
   .rfgrid{grid-template-columns:1fr}
 }
+.figs{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:12px 0 4px}
+.fig{margin:0;border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:var(--panel);display:flex;flex-direction:column}
+.fig-open{display:block;width:100%;padding:0;border:0;background:#fff;cursor:zoom-in;line-height:0}
+.fig-open:focus-visible{outline:2px solid var(--vi);outline-offset:-2px}
+.fig img{display:block;width:100%;height:auto}
+.fig figcaption{padding:8px 11px;font-size:12.5px;line-height:1.4;color:var(--muted);border-top:1px solid var(--line2)}
+.fig figcaption .fig-n{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-right:6px}
+.lb{position:fixed;inset:0;z-index:2000;background:rgba(8,8,10,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 64px 24px}
+.lb[hidden]{display:none}
+.lb img{max-width:100%;max-height:calc(100vh - 140px);object-fit:contain;background:#fff;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.lb p{color:#e8e8ea;font-size:14px;margin:14px 0 0;text-align:center;max-width:900px}
+.lb-btn{position:absolute;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;border-radius:8px;font:600 13px/1 var(--mono, monospace);padding:10px 12px;cursor:pointer}
+.lb-btn:hover{background:rgba(255,255,255,.18)}
+.lb-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.lb-close{top:14px;right:14px}
+.lb-prev{left:12px;top:50%;transform:translateY(-50%)}
+.lb-next{right:12px;top:50%;transform:translateY(-50%)}
+.lb-count{position:absolute;top:20px;left:18px;color:#bbb;font:12px var(--mono, monospace)}
+@media (max-width:760px){.figs{grid-template-columns:minmax(0,1fr)}.lb{padding:52px 8px 16px}.lb-prev,.lb-next{top:auto;bottom:14px;transform:none}.lb img{max-height:calc(100vh - 170px)}}
 </style></head>
 <body data-study-console="db" data-console-id="db" data-console-name="Database Systems">
 <main id="main">
@@ -576,7 +595,17 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
 
       <h4>Explaining a referential-action constraint</h4>
       <div class="formula">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)<br>ON DELETE SET DEFAULT ON UPDATE CASCADE;</div>
-      <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><a class="btn" href="#/keys">Drill: Keys and constraints</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 SQL DDL</a></div>
+      <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically.</p><h4>Figures</h4>
+<div class="figs">
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm03a.webp" data-cap="Figure 1.2: a database that stores student and course information" aria-label="Enlarge: Figure 1.2: a database that stores student and course information"><img src="./img/rm03a.webp" width="1176" height="1060" loading="lazy" decoding="async" alt="Figure 1.2: a database that stores student and course information"></button><figcaption><span class="fig-n">1</span>Figure 1.2: a database that stores student and course information</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm03b.webp" data-cap="Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE" aria-label="Enlarge: Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE"><img src="./img/rm03b.webp" width="1172" height="708" loading="lazy" decoding="async" alt="Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE"></button><figcaption><span class="fig-n">2</span>Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm04.webp" data-cap="Figure 3.1: main phases of database design" aria-label="Enlarge: Figure 3.1: main phases of database design"><img src="./img/rm04.webp" width="1292" height="1516" loading="lazy" decoding="async" alt="Figure 3.1: main phases of database design"></button><figcaption><span class="fig-n">3</span>Figure 3.1: main phases of database design</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm06.webp" data-cap="Figure 2.1: schema diagram for the university database" aria-label="Enlarge: Figure 2.1: schema diagram for the university database"><img src="./img/rm06.webp" width="1400" height="850" loading="lazy" decoding="async" alt="Figure 2.1: schema diagram for the university database"></button><figcaption><span class="fig-n">4</span>Figure 2.1: schema diagram for the university database</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm09.webp" data-cap="Figure 5.1: attributes and tuples of the relation STUDENT" aria-label="Enlarge: Figure 5.1: attributes and tuples of the relation STUDENT"><img src="./img/rm09.webp" width="1400" height="546" loading="lazy" decoding="async" alt="Figure 5.1: attributes and tuples of the relation STUDENT"></button><figcaption><span class="fig-n">5</span>Figure 5.1: attributes and tuples of the relation STUDENT</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm18.webp" data-cap="Figure 5.5: schema diagram of the COMPANY database" aria-label="Enlarge: Figure 5.5: schema diagram of the COMPANY database"><img src="./img/rm18.webp" width="1400" height="786" loading="lazy" decoding="async" alt="Figure 5.5: schema diagram of the COMPANY database"></button><figcaption><span class="fig-n">6</span>Figure 5.5: schema diagram of the COMPANY database</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm19.webp" data-cap="Figure 5.6: one possible database state of COMPANY" aria-label="Enlarge: Figure 5.6: one possible database state of COMPANY"><img src="./img/rm19.webp" width="1256" height="1556" loading="lazy" decoding="async" alt="Figure 5.6: one possible database state of COMPANY"></button><figcaption><span class="fig-n">7</span>Figure 5.6: one possible database state of COMPANY</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm21.webp" data-cap="Figure 5.7: referential integrity constraints in COMPANY" aria-label="Enlarge: Figure 5.7: referential integrity constraints in COMPANY"><img src="./img/rm21.webp" width="1400" height="1051" loading="lazy" decoding="async" alt="Figure 5.7: referential integrity constraints in COMPANY"></button><figcaption><span class="fig-n">8</span>Figure 5.7: referential integrity constraints in COMPANY</figcaption></figure>
+</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><a class="btn" href="#/keys">Drill: Keys and constraints</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 SQL DDL</a></div>
     </div>
   </details>
 
@@ -713,7 +742,12 @@ ON DELETE SET NULL;</pre>
         <li>CONGRESS_PERSON — sponsored — BILL: a bill can be sponsored by M persons (M : N).</li>
         <li>CONGRESS_PERSON — voted — BILL with attribute Result: each congressperson can vote for N bills (M : N).</li>
         <li>Enumerated domains appear in the requirements, not the diagram: Region, Party, Passed_or_failed and Vote each have a fixed set of values.</li>
-      </ul></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="3">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="3">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t4">Next: T4 Relational algebra</a></div>
+      </ul><h4>Figures</h4>
+<div class="figs">
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/er-inv.webp" data-cap="Inventory database: ER diagram" aria-label="Enlarge: Inventory database: ER diagram"><img src="./img/er-inv.webp" width="1400" height="774" loading="lazy" decoding="async" alt="Inventory database: ER diagram"></button><figcaption><span class="fig-n">1</span>Inventory database: ER diagram</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/er-inv-map.webp" data-cap="Inventory database: ER-to-relational mapping, steps 1 to 6" aria-label="Enlarge: Inventory database: ER-to-relational mapping, steps 1 to 6"><img src="./img/er-inv-map.webp" width="1400" height="785" loading="lazy" decoding="async" alt="Inventory database: ER-to-relational mapping, steps 1 to 6"></button><figcaption><span class="fig-n">2</span>Inventory database: ER-to-relational mapping, steps 1 to 6</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/er-vote.webp" data-cap="Congress voting database: ER diagram" aria-label="Enlarge: Congress voting database: ER diagram"><img src="./img/er-vote.webp" width="1400" height="628" loading="lazy" decoding="async" alt="Congress voting database: ER diagram"></button><figcaption><span class="fig-n">3</span>Congress voting database: ER diagram</figcaption></figure>
+</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="3">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="3">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t4">Next: T4 Relational algebra</a></div>
     </div>
   </details>
 
@@ -778,7 +812,10 @@ EMPLOYEE ⋈ Dno = Dnumber (π Dnumber, Dname (DEPARTMENT))</pre>
         <tr><td class="ra-sym">σ</td><td><code>sigma_(...)</code></td><td><code>sigma_(gender='male')(employee)</code></td></tr>
         <tr><td class="ra-sym">π</td><td><code>pi_(...)</code></td><td><code>pi_(name, age)(employee)</code></td></tr>
         <tr><td class="ra-sym">⋈</td><td><code>join_(...)</code></td><td><code>join_(employee, department)</code></td></tr>
-      </table></div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="4">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="4">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t5">Next: T5 Intermediate SQL</a></div>
+      </table></div><h4>Figures</h4>
+<div class="figs">
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/ra-schema.webp" data-cap="COMPANY sample database used in the relational algebra exercises" aria-label="Enlarge: COMPANY sample database used in the relational algebra exercises"><img src="./img/ra-schema.webp" width="1400" height="832" loading="lazy" decoding="async" alt="COMPANY sample database used in the relational algebra exercises"></button><figcaption><span class="fig-n">1</span>COMPANY sample database used in the relational algebra exercises</figcaption></figure>
+</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="4">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="4">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t5">Next: T5 Intermediate SQL</a></div>
     </div>
   </details>
 
@@ -997,7 +1034,14 @@ SELECT id, name, relative_depth FROM parents;</pre>
       <p>The past paper asks how the optimizer decides between joining Enrollment with Student or with Course first, and what its points of consideration are.</p>
       <h4>Worksheet example</h4>
       <pre class="sql ra">π Title (σ Grade = 'A' ∧ Instructor = "…" (Course ⋈ Enrollment))</pre>
-      <p>Handwritten answer: start from π Title over σ over the Cartesian product of Course and Enrollment; cascade into σ Grade = 'A' and σ Instructor = "…"; move σ Grade = 'A' down onto Enrollment and σ Instructor = "…" down onto Course; replace the product with a join; keep π Title at the top.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="8">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="8">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t9">Next: T9 Transactions</a></div>
+      <p>Handwritten answer: start from π Title over σ over the Cartesian product of Course and Enrollment; cascade into σ Grade = 'A' and σ Instructor = "…"; move σ Grade = 'A' down onto Enrollment and σ Instructor = "…" down onto Course; replace the product with a join; keep π Title at the top.</p><h4>Figures</h4>
+<div class="figs">
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/ho2.webp" data-cap="Widget query and its initial query tree" aria-label="Enlarge: Widget query and its initial query tree"><img src="./img/ho2.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Widget query and its initial query tree"></button><figcaption><span class="fig-n">1</span>Widget query and its initial query tree</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/ho3.webp" data-cap="Step 1: cascade the selection" aria-label="Enlarge: Step 1: cascade the selection"><img src="./img/ho3.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 1: cascade the selection"></button><figcaption><span class="fig-n">2</span>Step 1: cascade the selection</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/ho4.webp" data-cap="Step 2: move selections down" aria-label="Enlarge: Step 2: move selections down"><img src="./img/ho4.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 2: move selections down"></button><figcaption><span class="fig-n">3</span>Step 2: move selections down</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/ho5.webp" data-cap="Step 3: Cartesian product and selection become joins" aria-label="Enlarge: Step 3: Cartesian product and selection become joins"><img src="./img/ho5.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 3: Cartesian product and selection become joins"></button><figcaption><span class="fig-n">4</span>Step 3: Cartesian product and selection become joins</figcaption></figure>
+<figure class="fig"><button class="fig-open" type="button" data-full="./img/ho6.webp" data-cap="Step 4: push projections down" aria-label="Enlarge: Step 4: push projections down"><img src="./img/ho6.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 4: push projections down"></button><figcaption><span class="fig-n">5</span>Step 4: push projections down</figcaption></figure>
+</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="8">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="8">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t9">Next: T9 Transactions</a></div>
     </div>
   </details>
 
@@ -3258,6 +3302,30 @@ document.addEventListener('keydown',function(e){
 /* ================= BOOT ================= */
 go(LSget('dbTab','home'),true);
 
+/* ================= SLIDE FIGURES: LIGHTBOX ================= */
+(function(){
+  var lb=document.createElement('div'); lb.className='lb'; lb.hidden=true; lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true'); lb.setAttribute('aria-label','Figure');
+  lb.innerHTML='<span class="lb-count"></span><button class="lb-btn lb-close" type="button">Close</button><button class="lb-btn lb-prev" type="button" aria-label="Previous figure">Prev</button><button class="lb-btn lb-next" type="button" aria-label="Next figure">Next</button><img alt=""><p></p>';
+  document.body.appendChild(lb);
+  var img=lb.querySelector('img'), cap=lb.querySelector('p'), cnt=lb.querySelector('.lb-count'), list=[], idx=0, back=null;
+  function show(i){ idx=(i+list.length)%list.length; var b=list[idx]; img.src=b.dataset.full; img.alt=b.dataset.cap; cap.textContent=b.dataset.cap; cnt.textContent=(idx+1)+' / '+list.length; var one=list.length<2; lb.querySelector('.lb-prev').hidden=one; lb.querySelector('.lb-next').hidden=one; }
+  function close(){ lb.hidden=true; img.removeAttribute('src'); document.documentElement.style.overflow=''; if(back) back.focus(); }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.fig-open'); if(!b) return;
+    list=[].slice.call(b.closest('.figs').querySelectorAll('.fig-open')); back=b;
+    show(list.indexOf(b)); lb.hidden=false; document.documentElement.style.overflow='hidden'; lb.querySelector('.lb-close').focus();
+  });
+  lb.addEventListener('click',function(e){
+    if(e.target.closest('.lb-close')||e.target===lb) close();
+    else if(e.target.closest('.lb-prev')) show(idx-1);
+    else if(e.target.closest('.lb-next')) show(idx+1);
+  });
+  document.addEventListener('keydown',function(e){
+    if(lb.hidden) return;
+    if(e.key==='Escape') close(); else if(e.key==='ArrowLeft') show(idx-1); else if(e.key==='ArrowRight') show(idx+1);
+  });
+})();
+
 </script>
 <script>
 /* Study Console v3: this console's manifest. The frame (header, menu, sections, search,
@@ -3275,6 +3343,7 @@ go(LSget('dbTab','home'),true);
     document.querySelectorAll('#topics details.note').forEach(function (d) {
       var tag = d.querySelector('summary').textContent.replace(/^\s*\d+\s*/, '').trim();
       out.push({ title: tag, meta: 'Topic', view: 'topics', anchor: d.id });
+      d.querySelectorAll('figcaption').forEach(function (f) { out.push({ title: f.lastChild.textContent.trim(), meta: 'Figure · ' + tag, view: 'topics', anchor: d.id }); });
       d.querySelectorAll('h4').forEach(function (h) { var t = h.textContent.trim(); if (t.length > 2 && t.length < 80 && t !== 'Words to know') out.push({ title: t, meta: tag, view: 'topics', anchor: d.id }); });
     });
     document.querySelectorAll('#exam .panel h3').forEach(function (h) { var p = h.closest('.panel'); out.push({ title: h.textContent.trim(), meta: 'Past paper', view: 'exam', anchor: p && p.id || null }); });
