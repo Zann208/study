@@ -336,6 +336,13 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
 .lb-next{right:12px;top:50%;transform:translateY(-50%)}
 .lb-count{position:absolute;top:20px;left:18px;color:#bbb;font:12px var(--mono, monospace)}
 @media (max-width:760px){.figs{grid-template-columns:minmax(0,1fr)}.lb{padding:52px 8px 16px}.lb-prev,.lb-next{top:auto;bottom:14px;transform:none}.lb img{max-height:calc(100vh - 170px)}}
+
+code.sym{font-weight:700;color:var(--vi);background:color-mix(in srgb,var(--vi) 16%,transparent);border:1px solid color-mix(in srgb,var(--vi) 40%,transparent);padding:0 .38em;border-radius:4px;font-size:.95em}
+code.kw{font-weight:600}
+.sym.ra{color:var(--vi);font-weight:700;font-family:var(--mono);padding:0 1px}
+mark.hl{background:color-mix(in srgb,var(--vi) 20%,transparent);color:var(--ink);border-bottom:2px solid color-mix(in srgb,var(--vi) 70%,transparent);padding:1px 3px;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+html[data-theme="light"] mark.hl{background:color-mix(in srgb,#ffd84d 45%,transparent);border-bottom-color:color-mix(in srgb,var(--vi) 55%,transparent)}
+@media print{mark.hl{background:#fff3a0}}
 </style></head>
 <body data-study-console="db" data-console-id="db" data-console-name="Database Systems">
 <main id="main">
@@ -354,7 +361,7 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
     <div class="card">
       <span class="badge b1">Part 1</span>
       <h3 style="margin-bottom:8px">Model and design</h3>
-      <p style="font-size:14.5px">Topics 1–3. What a database is, tables, keys and NULL, building tables with rules, and drawing ER diagrams.</p>
+      <p style="font-size:14.5px">Topics 1–3. What a database is, tables, keys and <code class="kw">NULL</code>, building tables with rules, and drawing ER diagrams.</p>
     </div>
     <div class="card">
       <span class="badge b2">Part 2</span>
@@ -432,7 +439,7 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
 <div class="tscroll"><table>
   <tr><th>MemberID</th><th>Name</th><th>Phone</th></tr>
   <tr><td>1</td><td>Ana</td><td>081-111</td></tr>
-  <tr><td>2</td><td>Ben</td><td><i>NULL</i></td></tr>
+  <tr><td>2</td><td>Ben</td><td><i><code class="kw">NULL</code></i></td></tr>
   <tr><td>3</td><td>Chai</td><td>089-333</td></tr>
 </table></div>
 <h4>Blueprint vs contents</h4>
@@ -441,26 +448,26 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
 <ul class="clean">
   <li>A <b>superkey</b> is any set of columns whose values are never repeated, so it always picks out exactly one row. <code>{MemberID, Name}</code> is a superkey.</li>
   <li>A <b>candidate key</b> is a superkey with nothing extra in it: remove any column and it stops being unique. <code>{MemberID}</code> is one.</li>
-  <li>The <b>primary key (PK)</b> is the candidate key you choose as the official ID. It may not be NULL.</li>
+  <li>The <b>primary key (PK)</b> is the candidate key you choose as the official ID. It may not be <code class="kw">NULL</code>.</li>
   <li>A <b>foreign key (FK)</b> is a column in one table that holds a key value from another table. <code>Loan.MemberID</code> points at <code>Member.MemberID</code>. That pointing is how tables are linked.</li>
 </ul>
 <h4>Unique today is not enough</h4>
-<p>Right now no two members share a name, so <code>{Name}</code> looks unique. It is still not a key: tomorrow a second Ana can join. A key is a rule that must hold for every set of rows the table could ever contain, not only for the rows in it today.</p>
+<p>Right now no two members share a name, so <code>{Name}</code> looks unique. It is still not a key: tomorrow a second Ana can join. <mark class="hl">A key is a rule that must hold for every set of rows the table could ever contain, not only for the rows in it today.</mark></p>
 <h4>A table can have more than one candidate key</h4>
 <p>A motorbike can be identified by its number plate (province, digits and letters together) and also by its engine number. Both are candidate keys. You pick one as the primary key; the other stays unique and is called an alternate key.</p>
 <h4>NULL means "no value here"</h4>
-<p>Ben's phone is NULL. That could mean the phone number is unknown, that he has no phone (does not apply), or that it simply has not been entered yet. NULL is not zero and not an empty string.</p>
+<p>Ben's phone is <code class="kw">NULL</code>. That could mean the phone number is unknown, that he has no phone (does not apply), or that it simply has not been entered yet. <mark class="hl"><code class="kw">NULL</code> is not zero and not an empty string.</mark></p>
 <h4>The four rules written into the schema</h4>
 <div class="tscroll"><table>
   <tr><th>Rule</th><th>Meaning</th><th>Broken by</th></tr>
   <tr><td>Domain constraint</td><td>Each value is a single value of the right type.</td><td>Putting <code>'high'</code> in a number column</td></tr>
   <tr><td>Key constraint</td><td>No two rows may share the same key value.</td><td>A second member with ID 1</td></tr>
-  <tr><td>Entity integrity</td><td>A primary key value can never be NULL.</td><td>A member with no ID</td></tr>
-  <tr><td>Referential integrity</td><td>A foreign key must point at a row that really exists, or be NULL.</td><td>A loan for member 9 when there is no member 9</td></tr>
+  <tr><td>Entity integrity</td><td>A primary key value can never be <code class="kw">NULL</code>.</td><td>A member with no ID</td></tr>
+  <tr><td>Referential integrity</td><td>A foreign key must point at a row that really exists, or be <code class="kw">NULL</code>.</td><td>A loan for member 9 when there is no member 9</td></tr>
 </table></div>
 <p>Two other kinds of rule exist. Some are built into the model itself: a table never holds two identical rows. Others come from the business and cannot be written in the schema, such as "a member may borrow at most five books"; the application has to check those.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Relation">Relation</a><a class="chip c2 tlink" href="#/terms" data-term="Tuple">Tuple</a><a class="chip c1 tlink" href="#/terms" data-term="Attribute">Attribute</a><a class="chip c2 tlink" href="#/terms" data-term="Domain">Domain</a><a class="chip c1 tlink" href="#/terms" data-term="Relation schema">Relation schema</a><a class="chip c2 tlink" href="#/terms" data-term="Relation state">Relation state</a><a class="chip c1 tlink" href="#/terms" data-term="Superkey">Superkey</a><a class="chip c2 tlink" href="#/terms" data-term="Candidate key">Candidate key</a><a class="chip c1 tlink" href="#/terms" data-term="Primary key">Primary key</a><a class="chip c2 tlink" href="#/terms" data-term="Foreign key">Foreign key</a><a class="chip c1 tlink" href="#/terms" data-term="NULL">NULL</a><a class="chip c2 tlink" href="#/terms" data-term="Domain constraint">Domain constraint</a><a class="chip c1 tlink" href="#/terms" data-term="Key constraint">Key constraint</a><a class="chip c2 tlink" href="#/terms" data-term="Entity integrity">Entity integrity</a><a class="chip c1 tlink" href="#/terms" data-term="Referential integrity">Referential integrity</a><a class="chip c2 tlink" href="#/terms" data-term="Database state">Database state</a></div>
-<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Table = relation, row = tuple, column = attribute.</li><li>A key is unique in every valid state, and minimal; a superkey only needs to be unique.</li><li>A primary key identifies each row and is never NULL.</li><li>A foreign key points at another table's key, and may be NULL.</li></ul></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Table = relation, row = tuple, column = attribute.</li><li>A key is unique in every valid state, and minimal; a superkey only needs to be unique.</li><li>A primary key identifies each row and is never <code class="kw">NULL</code>.</li><li>A foreign key points at another table's key, and may be <code class="kw">NULL</code>.</li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body"><h4>Definitions</h4>
       <ul class="clean">
         <li>A <b>database</b> is a collection of related data.</li>
@@ -522,7 +529,7 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
 
 <div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rm09.webp" data-cap="Figure 5.1: attributes and tuples of the relation STUDENT" aria-label="Enlarge: Figure 5.1: attributes and tuples of the relation STUDENT"><img src="./img/rm09.webp" width="1400" height="546" loading="lazy" decoding="async" alt="Figure 5.1: attributes and tuples of the relation STUDENT"></button><figcaption><span class="fig-n">5</span>Figure 5.1: attributes and tuples of the relation STUDENT</figcaption></figure></div>
 <h4>Domain and data type</h4>
-<p>The domain says what a value means; the data type says how it is written. In STUDENT(Name, Ssn, Home_phone, Address, Office_phone, Age, Gpa), the domain of Ssn is the set of valid nine-digit Social Security numbers, and its data type is a character string of the form <code>ddd-dd-dddd</code>.</p>
+<p><mark class="hl">The domain says what a value means; the data type says how it is written.</mark> In STUDENT(Name, Ssn, Home_phone, Address, Office_phone, Age, Gpa), the domain of Ssn is the set of valid nine-digit Social Security numbers, and its data type is a character string of the form <code>ddd-dd-dddd</code>.</p>
 <h4>Characteristics of relations</h4>
 <ul class="clean">
   <li><b>Degree.</b> A relation with n attributes has degree n. STUDENT above has degree 7.</li>
@@ -530,13 +537,13 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
   <li><b>Order of tuples.</b> A relation is a set, so its tuples have no order.</li>
   <li><b>Order within a tuple.</b> Under the usual definition a tuple is an ordered list of values, so the values follow the attribute order of the schema. If a tuple is defined as a set of (attribute, value) pairs instead, that order no longer matters.</li>
   <li><b>Atomic values.</b> Each value is a single value; no lists or nested values in one cell.</li>
-  <li><b>NULL.</b> Marks a value that is unknown or does not apply. Some students have NULL Office_phone because they have no office.</li>
+  <li><b><code class="kw">NULL</code>.</b> Marks a value that is unknown or does not apply. Some students have <code class="kw">NULL</code> Office_phone because they have no office.</li>
 </ul>
 <h4>Three types of constraints</h4>
 <div class="tscroll"><table>
   <tr><th>Type</th><th>Where it comes from</th><th>Example</th></tr>
   <tr><td>Inherent model-based (implicit)</td><td>The relational model itself</td><td>No duplicate tuples</td></tr>
-  <tr><td>Schema-based (explicit)</td><td>Written in the schema with DDL</td><td>Domain, key, NOT NULL, entity integrity, referential integrity</td></tr>
+  <tr><td>Schema-based (explicit)</td><td>Written in the schema with DDL</td><td>Domain, key, <code class="kw">NOT NULL</code>, entity integrity, referential integrity</td></tr>
   <tr><td>Semantic (application-based)</td><td>Rules of the miniworld the schema cannot express</td><td>An employee's salary may not exceed the supervisor's</td></tr>
 </table></div>
 <p><b>Domain constraint:</b> every value of attribute A is an atomic value from dom(A) and matches its data type.</p>
@@ -549,7 +556,7 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
   <tr><td>003</td><td>John</td><td>AD</td><td>CPE</td><td>2.75</td></tr>
   <tr><td>004</td><td>Jack</td><td>AD</td><td>ISNE</td><td>3.75</td></tr>
 </table></div>
-<p>A set SK is a <b>superkey</b> if for any two distinct tuples t1 and t2, <span class="ra-sym">t1[SK] ≠ t2[SK]</span>. A <b>key</b> is a superkey that is also minimal: removing any attribute leaves a set that is no longer a superkey.</p>
+<p>A set SK is a <b>superkey</b> if for any two distinct tuples t1 and t2, <span class="ra-sym">t1[SK] ≠ t2[SK]</span>. <mark class="hl">A <b>key</b> is a superkey that is also minimal: removing any attribute leaves a set that is no longer a superkey.</mark></p>
 <div class="tscroll"><table>
   <tr><th>Set</th><th>Result</th><th>Why</th></tr>
   <tr><td><code>{ID, Fname, Lname}</code></td><td>Superkey, not a key</td><td>Unique because it contains ID, but Fname and Lname can be removed</td></tr>
@@ -558,7 +565,7 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
   <tr><td><code>{Fname, Lname}</code></td><td>Not a superkey</td><td>Unique in this state, but two students can share a full name in another state</td></tr>
   <tr><td><code>{ID}</code></td><td>Key</td><td>Unique, and nothing can be removed</td></tr>
 </table></div>
-<p>Uniqueness applies to both superkeys and keys; minimality is required only for a key.</p>
+<p><mark class="hl">Uniqueness applies to both superkeys and keys; minimality is required only for a key.</mark></p>
 <h4>Candidate keys</h4>
 <p>MOTORBIKE(Province, Digits, Alphabets, Engine_number, Color, cc, Make, Model). The plate <code>{Province, Digits, Alphabets}</code> identifies a motorbike, and so does <code>{Engine_number}</code>. Both are minimal, so both are <b>candidate keys</b>. One is chosen as the primary key; the other is an alternate key. <code>{Digits, Alphabets}</code> alone is not a key: the same plate can be issued in two provinces.</p>
 <h4>Relational database schema and state</h4>
@@ -575,11 +582,11 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
 
 <div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rm18.webp" data-cap="Figure 5.5: schema diagram of the COMPANY database" aria-label="Enlarge: Figure 5.5: schema diagram of the COMPANY database"><img src="./img/rm18.webp" width="1400" height="786" loading="lazy" decoding="async" alt="Figure 5.5: schema diagram of the COMPANY database"></button><figcaption><span class="fig-n">6</span>Figure 5.5: schema diagram of the COMPANY database</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/rm19.webp" data-cap="Figure 5.6: one possible database state of COMPANY" aria-label="Enlarge: Figure 5.6: one possible database state of COMPANY"><img src="./img/rm19.webp" width="1256" height="1556" loading="lazy" decoding="async" alt="Figure 5.6: one possible database state of COMPANY"></button><figcaption><span class="fig-n">7</span>Figure 5.6: one possible database state of COMPANY</figcaption></figure></div>
 <h4>Entity integrity and referential integrity</h4>
-<p><b>Entity integrity:</b> no primary key value can be NULL, because the key is what identifies each tuple.</p>
+<p><b>Entity integrity:</b> <mark class="hl">no primary key value can be <code class="kw">NULL</code>, because the key is what identifies each tuple.</mark></p>
 <p><b>Referential integrity</b> keeps tuples in two relations consistent. A set of attributes FK in R1 is a foreign key that references R2 if:</p>
 <ol>
   <li>FK has the same domain as the primary key PK of R2, and</li>
-  <li>each FK value in a tuple t1 of r1(R1) either equals the PK value of some tuple t2 in r2(R2), in which case t1[FK] = t2[PK] and t1 refers to t2, or is NULL.</li>
+  <li>each FK value in a tuple t1 of r1(R1) either equals the PK value of some tuple t2 in r2(R2), in which case t1[FK] = t2[PK] and t1 refers to t2, or is <code class="kw">NULL</code>.</li>
 </ol>
 <div class="tscroll"><table>
   <tr><th>Foreign key in COMPANY</th><th>References</th></tr>
@@ -597,9 +604,9 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
 <h4>Five statements to be able to illustrate</h4>
       <ul class="clean">
         <li><b>Tuples in a relation do not have any particular order.</b> Any order of the rows is the same relation.</li>
-        <li><b>NULL can have several meanings.</b> The worksheet example inserts a student whose Plan is NULL: the value may be unknown, not applicable, or not yet available.</li>
+        <li><b><code class="kw">NULL</code> can have several meanings.</b> The worksheet example inserts a student whose Plan is <code class="kw">NULL</code>: the value may be unknown, not applicable, or not yet available.</li>
         <li><b>Keys are always superkeys.</b> A <b>superkey</b> is any set of attributes that uniquely identifies a tuple. A <b>candidate key</b> is a minimal superkey: no proper subset of it still identifies a tuple uniquely.</li>
-        <li><b>A foreign-key value in a tuple can be NULL.</b> A foreign key (FK) is a link between the attributes of one table and the primary key of another; FK values are allowed to be NULL.</li>
+        <li><b>A foreign-key value in a tuple can be <code class="kw">NULL</code>.</b> A foreign key (FK) is a link between the attributes of one table and the primary key of another; FK values are allowed to be <code class="kw">NULL</code>.</li>
         <li><b>The delete operation can violate only referential integrity</b>, not key constraints nor entity integrity.</li>
       </ul>
 
@@ -646,17 +653,17 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
 <div class="tscroll"><table>
   <tr><th>Action</th><th>Think of it as</th><th>Result for the loan rows</th></tr>
   <tr><td class="mono">CASCADE</td><td>Follow the parent</td><td>Deleted too, or their MemberID changes to the new value</td></tr>
-  <tr><td class="mono">SET NULL</td><td>Unlink</td><td>MemberID becomes NULL</td></tr>
-  <tr><td class="mono">SET DEFAULT</td><td>Re-link to a fallback</td><td>MemberID becomes the column's DEFAULT value</td></tr>
+  <tr><td class="mono">SET NULL</td><td>Unlink</td><td>MemberID becomes <code class="kw">NULL</code></td></tr>
+  <tr><td class="mono">SET DEFAULT</td><td>Re-link to a fallback</td><td>MemberID becomes the column's <code class="kw">DEFAULT</code> value</td></tr>
   <tr><td class="mono">RESTRICT / NO ACTION</td><td>Refuse</td><td>The delete or update of the member is rejected; nothing changes</td></tr>
 </table></div>
-<p class="sub2">If you write no action, MySQL uses NO ACTION, which in MySQL behaves the same as RESTRICT.</p>
+<p class="sub2">If you write no action, MySQL uses <code class="kw">NO ACTION</code>, which in MySQL behaves the same as <code class="kw">RESTRICT</code>.</p>
 <h4>Choosing a type for each column</h4>
 <p>Every column gets a data type. The common ones: <code>INT</code> for whole numbers, <code>DECIMAL(10,2)</code> for money, <code>VARCHAR(n)</code> for text of varying length, <code>CHAR(n)</code> for codes that always have the same length, and <code>DATE</code> for dates written YYYY-MM-DD.</p>
 <h4>A rule can compare two columns</h4>
-<p>A CHECK at the end of CREATE TABLE is tested on every row and may compare columns of that row, for example "a loan cannot be returned before it was borrowed": <code>CHECK (ReturnDate &gt;= LoanDate)</code>.</p>
+<p>A <code class="kw">CHECK</code> at the end of <code class="kw">CREATE TABLE</code> is tested on every row and may compare columns of that row, for example "a loan cannot be returned before it was borrowed": <code>CHECK (ReturnDate &gt;= LoanDate)</code>.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="SQL">SQL</a><a class="chip c2 tlink" href="#/terms" data-term="DDL">DDL</a><a class="chip c1 tlink" href="#/terms" data-term="DML">DML</a><a class="chip c2 tlink" href="#/terms" data-term="DQL">DQL</a><a class="chip c1 tlink" href="#/terms" data-term="DCL">DCL</a><a class="chip c2 tlink" href="#/terms" data-term="TCL">TCL</a><a class="chip c1 tlink" href="#/terms" data-term="CREATE TABLE">CREATE TABLE</a><a class="chip c2 tlink" href="#/terms" data-term="ALTER TABLE">ALTER TABLE</a><a class="chip c1 tlink" href="#/terms" data-term="NOT NULL">NOT NULL</a><a class="chip c2 tlink" href="#/terms" data-term="UNIQUE">UNIQUE</a><a class="chip c1 tlink" href="#/terms" data-term="DEFAULT">DEFAULT</a><a class="chip c2 tlink" href="#/terms" data-term="CHECK">CHECK</a><a class="chip c1 tlink" href="#/terms" data-term="REFERENCES">REFERENCES</a><a class="chip c2 tlink" href="#/terms" data-term="Referential action">Referential action</a><a class="chip c1 tlink" href="#/terms" data-term="CASCADE">CASCADE</a><a class="chip c2 tlink" href="#/terms" data-term="SET NULL">SET NULL</a><a class="chip c1 tlink" href="#/terms" data-term="SET DEFAULT">SET DEFAULT</a><a class="chip c2 tlink" href="#/terms" data-term="RESTRICT">RESTRICT</a><a class="chip c1 tlink" href="#/terms" data-term="NO ACTION">NO ACTION</a></div>
-<div class="tip t-good"><b>Remember</b><ul class="clean"><li>DDL builds structure; constraints are rules the DBMS checks for you.</li><li>CASCADE follows, SET NULL unlinks, SET DEFAULT relinks, RESTRICT refuses.</li><li>In MySQL, no action written means RESTRICT.</li></ul></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>DDL builds structure; constraints are rules the DBMS checks for you.</li><li><code class="kw">CASCADE</code> follows, <code class="kw">SET NULL</code> unlinks, <code class="kw">SET DEFAULT</code> relinks, <code class="kw">RESTRICT</code> refuses.</li><li><mark class="hl">In MySQL, no action written means <code class="kw">RESTRICT</code>.</mark></li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body"><h4>SQL and its command groups</h4>
 <p>SQL (Structured Query Language) is the standard language for working with relational databases. IBM first called it Structured English Query Language, SEQUEL. MySQL, PostgreSQL, SQL Server, Oracle and SQLite all support it, each with small variations.</p>
 <div class="tscroll"><table>
@@ -676,14 +683,14 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
 <h4>Schema and catalog</h4>
 <ul class="clean">
   <li><b>SQL schema</b> (a database): identified by a schema name, with an authorization identifier and descriptors for each element. Its elements are tables, constraints, views, domains and other constructs such as authorization grants.</li>
-  <li>Every SQL statement ends with a semicolon.</li>
+  <li><mark class="hl">Every SQL statement ends with a semicolon <code class="sym">;</code>.</mark></li>
   <li><b>Catalog:</b> a named collection of schemas. It always contains the special schema <code>INFORMATION_SCHEMA</code>, which holds data about the databases themselves. Catalogs can in turn be grouped into a cluster.</li>
-  <li>PostgreSQL and SQL Server: create a database (catalog) first, then organise its tables into several schemas such as HR, SALES and COMPANY. MySQL: DATABASE and SCHEMA are the same level.</li>
+  <li>PostgreSQL and SQL Server: create a database (catalog) first, then organise its tables into several schemas such as HR, SALES and COMPANY. MySQL: <code class="kw">DATABASE</code> and <code class="kw">SCHEMA</code> are the same level.</li>
 </ul>
 <pre class="sql">CREATE SCHEMA COMPANY AUTHORIZATION 'Jsmith';
 CREATE DATABASE COMPANY;</pre>
 <h4>CREATE TABLE</h4>
-<p>A CREATE TABLE statement gives (1) the table name, (2) the attributes and their types, and (3) the constraints. The schema can be named in front of the table: <code>CREATE TABLE COMPANY.EMPLOYEE …</code> or simply <code>CREATE TABLE EMPLOYEE …</code>.</p>
+<p>A <code class="kw">CREATE TABLE</code> statement gives (1) the table name, (2) the attributes and their types, and (3) the constraints. The schema can be named in front of the table: <code>CREATE TABLE COMPANY.EMPLOYEE …</code> or simply <code>CREATE TABLE EMPLOYEE …</code>.</p>
 <div class="grid2">
 <pre class="sql">CREATE TABLE relation_name
   ( A1 Att_type1,
@@ -711,7 +718,7 @@ CREATE DATABASE COMPANY;</pre>
 
 <div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-keys.webp" data-cap="Primary key and foreign key: student, course and enrolment tables" aria-label="Enlarge: Primary key and foreign key: student, course and enrolment tables"><img src="./img/ddl-keys.webp" width="1400" height="614" loading="lazy" decoding="async" alt="Primary key and foreign key: student, course and enrolment tables"></button><figcaption><span class="fig-n">3</span>Primary key and foreign key: student, course and enrolment tables</figcaption></figure></div>
 <h4>The COMPANY schema in SQL</h4>
-<p>Figure 6.1 defines all six COMPANY tables with CREATE TABLE, including NOT NULL columns, primary keys, the UNIQUE department name and every foreign key.</p>
+<p>Figure 6.1 defines all six COMPANY tables with <code class="kw">CREATE TABLE</code>, including <code class="kw">NOT NULL</code> columns, primary keys, the <code class="kw">UNIQUE</code> department name and every foreign key.</p>
 
 <div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-company-a.webp" data-cap="Figure 6.1: CREATE TABLE for EMPLOYEE, DEPARTMENT and DEPT_LOCATIONS" aria-label="Enlarge: Figure 6.1: CREATE TABLE for EMPLOYEE, DEPARTMENT and DEPT_LOCATIONS"><img src="./img/ddl-company-a.webp" width="1153" height="711" loading="lazy" decoding="async" alt="Figure 6.1: CREATE TABLE for EMPLOYEE, DEPARTMENT and DEPT_LOCATIONS"></button><figcaption><span class="fig-n">4</span>Figure 6.1: CREATE TABLE for EMPLOYEE, DEPARTMENT and DEPT_LOCATIONS</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-company-b.webp" data-cap="Figure 6.1 (contd.): CREATE TABLE for PROJECT, WORKS_ON and DEPENDENT" aria-label="Enlarge: Figure 6.1 (contd.): CREATE TABLE for PROJECT, WORKS_ON and DEPENDENT"><img src="./img/ddl-company-b.webp" width="1028" height="731" loading="lazy" decoding="async" alt="Figure 6.1 (contd.): CREATE TABLE for PROJECT, WORKS_ON and DEPENDENT"></button><figcaption><span class="fig-n">5</span>Figure 6.1 (contd.): CREATE TABLE for PROJECT, WORKS_ON and DEPENDENT</figcaption></figure></div>
 <h4>Data types</h4>
@@ -728,20 +735,20 @@ CREATE DATABASE COMPANY;</pre>
   <tr><td class="mono">BIGINT</td><td>8</td><td>−2<sup>63</sup> to 2<sup>63</sup> − 1</td><td>0 to 2<sup>64</sup> − 1</td></tr>
 </table></div>
 <ul class="clean">
-  <li><b>Character string:</b> fixed length <code>CHAR(n)</code> / <code>CHARACTER(n)</code>; varying length <code>VARCHAR(n)</code> / <code>CHAR VARYING(n)</code> / <code>CHARACTER VARYING(n)</code>. <code>CHAR(10)</code> always reserves 10 characters, so 'Cat' is padded with 7 spaces; <code>VARCHAR(10)</code> stores only 'Cat' plus a small length field.</li>
-  <li><b>DATE:</b> ten positions, YYYY-MM-DD. <b>TIME:</b> HH:MM:SS. RDBMSs provide functions to change date formats.</li>
-  <li><b>TIMESTAMP:</b> DATE and TIME plus at least six positions for fractions of a second, with an optional <code>WITH TIME ZONE</code> qualifier.</li>
-  <li><b>INTERVAL:</b> a relative value used to increase or decrease a date, time or timestamp, e.g. <code>order_date + INTERVAL '14' DAY</code>. MySQL has no INTERVAL column type; INTERVAL is only a keyword in date expressions such as <code>SELECT order_date + INTERVAL '1' MONTH FROM ORDERS;</code>. DATE, TIME, TIMESTAMP and INTERVAL values can be cast to strings for comparison.</li>
-  <li><b>Bit string:</b> <code>BIT(n)</code>, <code>BIT VARYING(n)</code>. <b>Boolean:</b> TRUE, FALSE or NULL.</li>
+  <li><b>Character string:</b> fixed length <code>CHAR(n)</code> / <code>CHARACTER(n)</code>; varying length <code>VARCHAR(n)</code> / <code>CHAR VARYING(n)</code> / <code>CHARACTER VARYING(n)</code>. <code>CHAR(10)</code> <mark class="hl">always reserves 10 characters, so 'Cat' is padded with 7 spaces;</mark> <code>VARCHAR(10)</code> stores only 'Cat' plus a small length field.</li>
+  <li><b><code class="kw">DATE</code>:</b> ten positions, YYYY-MM-DD. <b><code class="kw">TIME</code>:</b> HH:MM:SS. RDBMSs provide functions to change date formats.</li>
+  <li><b><code class="kw">TIMESTAMP</code>:</b> <code class="kw">DATE</code> and <code class="kw">TIME</code> plus at least six positions for fractions of a second, with an optional <code>WITH TIME ZONE</code> qualifier.</li>
+  <li><b><code class="kw">INTERVAL</code>:</b> a relative value used to increase or decrease a date, time or timestamp, e.g. <code>order_date + INTERVAL '14' DAY</code>. MySQL has no <code class="kw">INTERVAL</code> column type; <code class="kw">INTERVAL</code> is only a keyword in date expressions such as <code>SELECT order_date + INTERVAL '1' MONTH FROM ORDERS;</code>. <code class="kw">DATE</code>, <code class="kw">TIME</code>, <code class="kw">TIMESTAMP</code> and <code class="kw">INTERVAL</code> values can be cast to strings for comparison.</li>
+  <li><b>Bit string:</b> <code>BIT(n)</code>, <code>BIT VARYING(n)</code>. <b>Boolean:</b> TRUE, FALSE or <code class="kw">NULL</code>.</li>
 </ul>
 <h4>Domains</h4>
-<p>A domain is a named type used in attribute definitions. Changing the domain changes every attribute that uses it, and the schema is easier to read: <code>CREATE DOMAIN SSN_TYPE AS CHAR(9);</code>. MySQL does not support CREATE DOMAIN.</p>
+<p>A domain is a named type used in attribute definitions. Changing the domain changes every attribute that uses it, and the schema is easier to read: <code>CREATE DOMAIN SSN_TYPE AS CHAR(9);</code>. <mark class="hl">MySQL does not support <code class="kw">CREATE DOMAIN</code>.</mark></p>
 <h4>Constraints in SQL</h4>
-<p>SQL supports the three basic constraints of the relational model: the <b>key constraint</b> (a primary key value cannot be duplicated), <b>entity integrity</b> (a primary key value cannot be NULL) and <b>referential integrity</b> (a foreign key value must already exist as a primary key value, or be NULL).</p>
+<p>SQL supports the three basic constraints of the relational model: the <b>key constraint</b> (a primary key value cannot be duplicated), <b>entity integrity</b> (a primary key value cannot be <code class="kw">NULL</code>) and <b>referential integrity</b> (a foreign key value must already exist as a primary key value, or be <code class="kw">NULL</code>).</p>
 <div class="tscroll"><table>
   <tr><th>Clause</th><th>What it does</th><th>Example</th></tr>
-  <tr><td class="mono">NOT NULL</td><td>NULL is not allowed for the attribute</td><td><code>Fname VARCHAR(15) NOT NULL</code></td></tr>
-  <tr><td class="mono">DEFAULT</td><td>Value stored when none is given. Without a DEFAULT clause the default is NULL for any attribute that is not NOT NULL.</td><td><code>Dno INT NOT NULL DEFAULT 1</code></td></tr>
+  <tr><td class="mono">NOT NULL</td><td><code class="kw">NULL</code> is not allowed for the attribute</td><td><code>Fname VARCHAR(15) NOT NULL</code></td></tr>
+  <tr><td class="mono">DEFAULT</td><td>Value stored when none is given. Without a <code class="kw">DEFAULT</code> clause the default is <code class="kw">NULL</code> for any attribute that is not <code class="kw">NOT NULL</code>.</td><td><code>Dno INT NOT NULL DEFAULT 1</code></td></tr>
   <tr><td class="mono">CHECK</td><td>Restricts attribute or domain values (a value validator)</td><td><code>Dnumber INT NOT NULL CHECK (Dnumber &gt; 0 AND Dnumber &lt; 21)</code></td></tr>
   <tr><td class="mono">PRIMARY KEY</td><td>One or more attributes that form the primary key</td><td><code>Dnumber INT PRIMARY KEY</code> or <code>PRIMARY KEY (Dnumber)</code></td></tr>
   <tr><td class="mono">UNIQUE</td><td>Alternate (secondary) keys, the candidate keys of the relational model</td><td><code>UNIQUE (Dname)</code></td></tr>
@@ -753,10 +760,10 @@ CREATE DATABASE COMPANY;</pre>
 <div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-notnull.webp" data-cap="NOT NULL on EMPLOYEE attributes" aria-label="Enlarge: NOT NULL on EMPLOYEE attributes"><img src="./img/ddl-notnull.webp" width="1400" height="563" loading="lazy" decoding="async" alt="NOT NULL on EMPLOYEE attributes"></button><figcaption><span class="fig-n">6</span>NOT NULL on EMPLOYEE attributes</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-default.webp" data-cap="DEFAULT 1 on Dno" aria-label="Enlarge: DEFAULT 1 on Dno"><img src="./img/ddl-default.webp" width="1400" height="556" loading="lazy" decoding="async" alt="DEFAULT 1 on Dno"></button><figcaption><span class="fig-n">7</span>DEFAULT 1 on Dno</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-check.webp" data-cap="CHECK on an attribute and on a domain" aria-label="Enlarge: CHECK on an attribute and on a domain"><img src="./img/ddl-check.webp" width="1400" height="353" loading="lazy" decoding="async" alt="CHECK on an attribute and on a domain"></button><figcaption><span class="fig-n">8</span>CHECK on an attribute and on a domain</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-pk.webp" data-cap="PRIMARY KEY on Dnumber" aria-label="Enlarge: PRIMARY KEY on Dnumber"><img src="./img/ddl-pk.webp" width="1400" height="240" loading="lazy" decoding="async" alt="PRIMARY KEY on Dnumber"></button><figcaption><span class="fig-n">9</span>PRIMARY KEY on Dnumber</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-unique.webp" data-cap="UNIQUE on Dname" aria-label="Enlarge: UNIQUE on Dname"><img src="./img/ddl-unique.webp" width="1400" height="384" loading="lazy" decoding="async" alt="UNIQUE on Dname"></button><figcaption><span class="fig-n">10</span>UNIQUE on Dname</figcaption></figure></div>
 <h4>Referential triggered actions</h4>
 <ul class="clean">
-  <li>The default action on a foreign key violation is to reject the change.</li>
+  <li><mark class="hl">The default action on a foreign key violation is to reject the change.</mark></li>
   <li>A referential triggered action clause can be attached instead: <code>SET NULL</code>, <code>CASCADE</code> or <code>SET DEFAULT</code>, after <code>ON DELETE</code> and/or <code>ON UPDATE</code>.</li>
-  <li>SET NULL and SET DEFAULT do the same thing for ON DELETE and ON UPDATE: the referencing value becomes NULL or the default.</li>
-  <li>CASCADE suits "relationship" relations such as WORKS_ON, whose rows only make sense while both related rows exist.</li>
+  <li><code class="kw">SET NULL</code> and <code class="kw">SET DEFAULT</code> do the same thing for <code class="kw">ON DELETE</code> and <code class="kw">ON UPDATE</code>: the referencing value becomes <code class="kw">NULL</code> or the default.</li>
+  <li><code class="kw">CASCADE</code> suits "relationship" relations such as WORKS_ON, whose rows only make sense while both related rows exist.</li>
 </ul>
 <h4>Naming constraints</h4>
 <p>The keyword <code>CONSTRAINT</code> gives a constraint a name, so it can be dropped or changed later.</p>
@@ -764,7 +771,7 @@ CREATE DATABASE COMPANY;</pre>
 
 <div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-names.webp" data-cap="Named constraints: EMPPK, EMPSUPERFK, EMPDEPTFK" aria-label="Enlarge: Named constraints: EMPPK, EMPSUPERFK, EMPDEPTFK"><img src="./img/ddl-names.webp" width="1400" height="581" loading="lazy" decoding="async" alt="Named constraints: EMPPK, EMPSUPERFK, EMPDEPTFK"></button><figcaption><span class="fig-n">11</span>Named constraints: EMPPK, EMPSUPERFK, EMPDEPTFK</figcaption></figure></div>
 <h4>CHECK on tuples</h4>
-<p>A CHECK clause at the end of CREATE TABLE is a row-based constraint: it is checked for each tuple and can compare attributes of the same row.</p>
+<p>A <code class="kw">CHECK</code> clause at the end of <code class="kw">CREATE TABLE</code> is a row-based constraint: <mark class="hl">it is checked for each tuple and can compare attributes of the same row.</mark></p>
 <pre class="sql">CHECK (Dept_create_date &lt;= Mgr_start_date);</pre>
 <div class="tscroll"><table>
   <tr><th>Dname</th><th>Mgr_start_date</th><th>Dept_create_date</th><th>Result</th></tr>
@@ -801,9 +808,9 @@ CREATE TABLE Students (
       <h4>Lab: referential actions</h4>
       <p>The action after <code>ON DELETE</code> or <code>ON UPDATE</code> says what happens to the referencing rows when the referenced row is deleted or its key changes.</p>
       <ul class="clean">
-        <li><b>SET DEFAULT</b> — the lab's assignment table keeps its row and falls back to the reserved teacher: <code>TeacherID INT DEFAULT 1 … ON DELETE SET DEFAULT</code>.</li>
-        <li><b>SET NULL</b> — the worksheet's answer for "when a course instructor is removed, the corresponding AdvisorID should be set to NULL".</li>
-        <li><b>CASCADE</b> — the worksheet's answer for "if the instructor's name is updated, the change should cascade to the Student table".</li>
+        <li><b><code class="kw">SET DEFAULT</code></b> — the lab's assignment table keeps its row and falls back to the reserved teacher: <code>TeacherID INT DEFAULT 1 … ON DELETE SET DEFAULT</code>.</li>
+        <li><b><code class="kw">SET NULL</code></b> — the worksheet's answer for "when a course instructor is removed, the corresponding AdvisorID should be set to NULL".</li>
+        <li><b><code class="kw">CASCADE</code></b> — the worksheet's answer for "if the instructor's name is updated, the change should cascade to the Student table".</li>
       </ul>
       <pre class="sql">ALTER TABLE Student
 ADD AdvisorID VARCHAR(255) NOT NULL;
@@ -813,7 +820,7 @@ ADD CONSTRAINT FK_Advisor
 FOREIGN KEY (AdvisorID) REFERENCES Course(Instructor)
 ON UPDATE CASCADE
 ON DELETE SET NULL;</pre>
-      <div class="tip t-warn"><b>Will MySQL accept this?</b>Not as written. MySQL rejects <code>SET NULL</code> on a column declared <code>NOT NULL</code>, so the worksheet's <code>AdvisorID … NOT NULL</code> with <code>ON DELETE SET NULL</code> fails; drop the NOT NULL. MySQL also requires the referenced column to be indexed, ideally the parent's primary key. The DDL lab's <code>ON DELETE SET DEFAULT</code> is standard SQL, but MySQL's InnoDB engine rejects it; it runs on systems such as PostgreSQL.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="2">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="2">Quiz</a><a class="btn" href="#/refact">Drill: Referential actions</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t3">Next: T3 ER modelling</a></div>
+      <div class="tip t-warn"><b>Will MySQL accept this?</b>Not as written. MySQL rejects <code>SET NULL</code> on a column declared <code>NOT NULL</code>, so the worksheet's <code>AdvisorID … NOT NULL</code> with <code>ON DELETE SET NULL</code> fails; drop the <code class="kw">NOT NULL</code>. MySQL also requires the referenced column to be indexed, ideally the parent's primary key. The DDL lab's <code>ON DELETE SET DEFAULT</code> is standard SQL, but MySQL's InnoDB engine rejects it; it runs on systems such as PostgreSQL.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="2">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="2">Quiz</a><a class="btn" href="#/refact">Drill: Referential actions</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t3">Next: T3 ER modelling</a></div>
     </div>
   </details>
 
@@ -842,7 +849,7 @@ ON DELETE SET NULL;</pre>
 <h4>Attributes on a relationship</h4>
 <p>Some facts belong to the link, not to either thing. The due date is not a property of the member or of the book; it is a property of one borrowing. So <code>DueDate</code> hangs off the <i>borrows</i> diamond.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="ER model">ER model</a><a class="chip c2 tlink" href="#/terms" data-term="ERD">ERD</a><a class="chip c1 tlink" href="#/terms" data-term="Entity type">Entity type</a><a class="chip c2 tlink" href="#/terms" data-term="Key attribute">Key attribute</a><a class="chip c1 tlink" href="#/terms" data-term="Multivalued attribute">Multivalued attribute</a><a class="chip c2 tlink" href="#/terms" data-term="Relationship type">Relationship type</a><a class="chip c1 tlink" href="#/terms" data-term="Cardinality ratio">Cardinality ratio</a><a class="chip c2 tlink" href="#/terms" data-term="1 : N">1 : N</a><a class="chip c1 tlink" href="#/terms" data-term="M : N">M : N</a><a class="chip c2 tlink" href="#/terms" data-term="Total participation">Total participation</a><a class="chip c1 tlink" href="#/terms" data-term="Partial participation">Partial participation</a><a class="chip c2 tlink" href="#/terms" data-term="Weak entity">Weak entity</a></div>
-<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Rectangle = entity type, oval = attribute, diamond = relationship.</li><li>1:1, 1:N, M:N say how many; double line = must, single line = may.</li><li>A fact about the link itself goes on the diamond.</li></ul></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Rectangle = entity type, oval = attribute, diamond = relationship.</li><li><mark class="hl">1:1, 1:N, M:N say how many; double line = must, single line = may.</mark></li><li>A fact about the link itself goes on the diamond.</li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body"><h4>Reading the notation</h4>
       <ul class="clean">
         <li>Rectangles are <b>entity types</b>; ovals are <b>attributes</b>; the key attribute is underlined; diamonds are <b>relationship types</b>.</li>
@@ -879,7 +886,7 @@ ON DELETE SET NULL;</pre>
     <summary><span class="num n1">4</span> Relational algebra</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>Relational algebra is a small set of operations that take tables in and give a table out, so they can be chained into a question.</div>
-<p>Before learning SQL syntax, it helps to see the handful of moves every query is built from. Because each move returns a table, the result of one can be fed straight into the next, like steps in a recipe. It is called <b>procedural</b> because you spell out the steps.</p>
+<p>Before learning SQL syntax, it helps to see the handful of moves every query is built from. <mark class="hl">Because each move returns a table, the result of one can be fed straight into the next</mark>, like steps in a recipe. It is called <b>procedural</b> because you spell out the steps.</p>
 <div class="tscroll"><table>
   <tr><th>Symbol</th><th>Name</th><th>What it does</th><th>Library example</th></tr>
   <tr><td class="ra-sym">σ</td><td>Select</td><td>Keeps only the <b>rows</b> that pass a test (a filter)</td><td><span class="ra-sym">σ<sub>Age &gt; 18</sub>(Member)</span></td></tr>
@@ -895,9 +902,9 @@ ON DELETE SET NULL;</pre>
          └ 1. join members to their loans
          └ 2. keep only loans of book 7
 └ 3. keep only the Name column</pre>
-<p class="sub2">Select (σ) works on rows; project (π) works on columns.</p>
+<p class="sub2">Select (<span class="sym ra">σ</span>) works on rows; project (<span class="sym ra">π</span>) works on columns.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="RA">RA</a><a class="chip c2 tlink" href="#/terms" data-term="Procedural language">Procedural language</a><a class="chip c1 tlink" href="#/terms" data-term="σ">σ</a><a class="chip c2 tlink" href="#/terms" data-term="π">π</a><a class="chip c1 tlink" href="#/terms" data-term="×">×</a><a class="chip c2 tlink" href="#/terms" data-term="⋈">⋈</a><a class="chip c1 tlink" href="#/terms" data-term="Equijoin">Equijoin</a><a class="chip c2 tlink" href="#/terms" data-term="∪">∪</a><a class="chip c1 tlink" href="#/terms" data-term="−">−</a><a class="chip c2 tlink" href="#/terms" data-term="∩">∩</a><a class="chip c1 tlink" href="#/terms" data-term="ρ">ρ</a><a class="chip c2 tlink" href="#/terms" data-term="Union compatible">Union compatible</a><a class="chip c1 tlink" href="#/terms" data-term="Outer join">Outer join</a><a class="chip c2 tlink" href="#/terms" data-term="÷">÷</a></div>
-<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Every operation takes tables in and returns a table.</li><li>σ filters rows, π picks columns (and drops duplicates).</li><li>Read nested expressions from the inside out.</li></ul></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Every operation takes tables in and returns a table.</li><li><span class="sym ra">σ</span> filters rows, <span class="sym ra">π</span> picks columns (and drops duplicates).</li><li>Read nested expressions from the inside out.</li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body">
 <div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ra-schema.webp" data-cap="COMPANY sample database used in the relational algebra exercises" aria-label="Enlarge: COMPANY sample database used in the relational algebra exercises"><img src="./img/ra-schema.webp" width="1400" height="832" loading="lazy" decoding="async" alt="COMPANY sample database used in the relational algebra exercises"></button><figcaption><span class="fig-n">1</span>COMPANY sample database used in the relational algebra exercises</figcaption></figure></div>
 <h4>What it is</h4>
@@ -945,7 +952,7 @@ EMPLOYEE ⋈ Dno = Dnumber (π Dnumber, Dname (DEPARTMENT))</pre>
   <details class="note" id="t5" data-short="Intermediate SQL">
     <summary><span class="num n1">5</span> Intermediate SQL</summary>
     <div class="body">
-<div class="lesson"><b>In one line</b>SQL is the language you actually type to ask questions; every SELECT is a recipe made of a few clauses.</div>
+<div class="lesson"><b>In one line</b>SQL is the language you actually type to ask questions; every <code class="kw">SELECT</code> is a recipe made of a few clauses.</div>
 <h4>The shape of a question</h4>
 <pre class="sql">SELECT   m.Name, COUNT(*) AS Loans     -- 5. which columns to show
 FROM     Member m                       -- 1. start from these tables
@@ -955,7 +962,7 @@ GROUP BY m.Name                         -- 3. put the remaining rows into bucket
 HAVING   COUNT(*) > 2                   -- 4. throw away buckets you do not want
 ORDER BY Loans DESC                     -- 6. sort the result
 LIMIT    5;                             -- 7. keep only the first few</pre>
-<p>You <b>write</b> the clauses in the order SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT. The DBMS <b>thinks</b> in the order shown by the numbers: it needs the tables first, then filters rows, groups them, filters groups, and only then picks the columns to show.</p>
+<p>You <b>write</b> the clauses in the order <code class="kw">SELECT</code>, <code class="kw">FROM</code>, <code class="kw">WHERE</code>, <code class="kw">GROUP BY</code>, <code class="kw">HAVING</code>, <code class="kw">ORDER BY</code>, <code class="kw">LIMIT</code>. The DBMS <b>thinks</b> in the order shown by the numbers: <mark class="hl">it needs the tables first, then filters rows, groups them, filters groups, and only then picks the columns to show.</mark></p>
 <h4>The pieces</h4>
 <div class="tscroll"><table>
   <tr><th>Piece</th><th>Meaning</th><th>Same idea in algebra</th></tr>
@@ -966,14 +973,14 @@ LIMIT    5;                             -- 7. keep only the first few</pre>
   <tr><td><code>GROUP BY</code></td><td>Make one bucket per distinct value; aggregates run per bucket</td><td>—</td></tr>
   <tr><td><code>HAVING</code></td><td>Filter whole buckets, usually by an aggregate</td><td>—</td></tr>
   <tr><td><code>DISTINCT</code></td><td>Remove repeated result rows</td><td>—</td></tr>
-  <tr><td>Subquery</td><td>A whole SELECT used inside another one</td><td>—</td></tr>
+  <tr><td>Subquery</td><td>A whole <code class="kw">SELECT</code> used inside another one</td><td>—</td></tr>
 </table></div>
 <h4>WHERE or HAVING?</h4>
-<p>Ask: "can I test this on one row by itself?" If yes, it goes in <code>WHERE</code> (<code>DueDate &gt;= …</code>). If it needs a whole group to answer (<code>COUNT(*) &gt; 2</code>), it goes in <code>HAVING</code>.</p>
+<p>Ask: "<mark class="hl">can I test this on one row by itself?</mark>" If yes, it goes in <code>WHERE</code> (<code>DueDate &gt;= …</code>). If it needs a whole group to answer (<code>COUNT(*) &gt; 2</code>), it goes in <code>HAVING</code>.</p>
 <h4>Window functions</h4>
-<p><code>COUNT(*) OVER (PARTITION BY MemberID)</code> also counts per group, but unlike GROUP BY it keeps every row and writes the group's count beside each one.</p>
+<p><code>COUNT(*) OVER (PARTITION BY MemberID)</code> also counts per group, but <mark class="hl">unlike <code class="kw">GROUP BY</code> it keeps every row</mark> and writes the group's count beside each one.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="SELECT">SELECT</a><a class="chip c2 tlink" href="#/terms" data-term="FROM">FROM</a><a class="chip c1 tlink" href="#/terms" data-term="WHERE">WHERE</a><a class="chip c2 tlink" href="#/terms" data-term="JOIN … ON">JOIN … ON</a><a class="chip c1 tlink" href="#/terms" data-term="Aggregate function">Aggregate function</a><a class="chip c2 tlink" href="#/terms" data-term="GROUP BY">GROUP BY</a><a class="chip c1 tlink" href="#/terms" data-term="HAVING">HAVING</a><a class="chip c2 tlink" href="#/terms" data-term="ORDER BY">ORDER BY</a><a class="chip c1 tlink" href="#/terms" data-term="LIMIT">LIMIT</a><a class="chip c2 tlink" href="#/terms" data-term="DISTINCT">DISTINCT</a><a class="chip c1 tlink" href="#/terms" data-term="Subquery">Subquery</a><a class="chip c2 tlink" href="#/terms" data-term="Self-join">Self-join</a><a class="chip c1 tlink" href="#/terms" data-term="IS NULL">IS NULL</a><a class="chip c2 tlink" href="#/terms" data-term="LIKE">LIKE</a><a class="chip c1 tlink" href="#/terms" data-term="Window function">Window function</a><a class="chip c2 tlink" href="#/terms" data-term="Query semantics">Query semantics</a></div>
-<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Write: SELECT FROM WHERE GROUP BY HAVING ORDER BY LIMIT.</li><li>Run: FROM WHERE GROUP BY HAVING SELECT ORDER BY LIMIT.</li><li>One-row condition goes in WHERE; group condition goes in HAVING.</li></ul></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Write: <code class="kw">SELECT</code> <code class="kw">FROM</code> <code class="kw">WHERE</code> <code class="kw">GROUP BY</code> <code class="kw">HAVING</code> <code class="kw">ORDER BY</code> <code class="kw">LIMIT</code>.</li><li>Run: <code class="kw">FROM</code> <code class="kw">WHERE</code> <code class="kw">GROUP BY</code> <code class="kw">HAVING</code> <code class="kw">SELECT</code> <code class="kw">ORDER BY</code> <code class="kw">LIMIT</code>.</li><li>One-row condition goes in <code class="kw">WHERE</code>; group condition goes in <code class="kw">HAVING</code>.</li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body"><p>The two intermediate labs run against a sales database (Customer, CustomerAddress, Address, Product, ProductCategory, SalesOrderHeader, SalesOrderDetail).</p>
       <h4>Grouping and HAVING</h4>
       <pre class="sql">SELECT AddressType, COUNT(AddressType)
@@ -985,7 +992,7 @@ FROM SalesOrderHeader SOH
 JOIN SalesOrderDetail SOD ON SOH.SalesOrderID = SOD.SalesOrderID
 GROUP BY SOD.SalesOrderID, SOH.SalesOrderNumber
 HAVING AVG(UnitPrice) > 300;</pre>
-      <p class="sub2">Standard SQL requires every non-aggregated column in SELECT to appear in GROUP BY.</p>
+      <p class="sub2">Standard SQL requires every non-aggregated column in <code class="kw">SELECT</code> to appear in <code class="kw">GROUP BY</code>.</p>
 
       <h4>Subquery in FROM</h4>
       <pre class="sql">SELECT COUNT(*) AS Total_Customers_With_Multiple_Addresses
@@ -1026,7 +1033,7 @@ GROUP BY parent.ProductCategoryID, parent.Name;</pre>
      THEN 'Y' ELSE 'N' END AS HasMultipleAddresses</pre>
 
       <h4>Query semantics</h4>
-      <p>Several questions ask for "a short sentence that describes the meaning of the query". The lab answers read as: <i>find the average total due for each customer, highest to lowest</i>; <i>retrieve the most expensive price in each product category</i>. The past paper asks the same for a GROUP BY … HAVING query on EMPLOYEE.</p>
+      <p>Several questions ask for "a short sentence that describes the meaning of the query". The lab answers read as: <i>find the average total due for each customer, highest to lowest</i>; <i>retrieve the most expensive price in each product category</i>. The past paper asks the same for a <code class="kw">GROUP BY</code> … <code class="kw">HAVING</code> query on EMPLOYEE.</p>
       <div class="tip t-warn"><b>Inconsistent</b>Lab 2 questions 7 and 8 show the same <code>SELECT * FROM Product … LIKE '%Helmet%' …</code> query twice, with answers ("summation of the price", "products ordered at least once") that do not match it. Treat those two answers as unreliable.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="5">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="5">Quiz</a><a class="btn" href="#/order">Drill: SQL clause order</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t6">Next: T6 Datalog</a></div>
     </div>
   </details>
@@ -1039,12 +1046,12 @@ GROUP BY parent.ProductCategoryID, parent.Name;</pre>
 <pre class="sql">late(n) <- Member(m, n, _) AND Loan(_, m, _, d) AND d < '2026-01-01'</pre>
 <ul class="clean">
   <li>Read it as: "<i>n</i> is in <b>late</b> if there is a member with ID <i>m</i> and name <i>n</i>, and a loan for member <i>m</i> with due date <i>d</i>, and <i>d</i> is before 1 January 2026."</li>
-  <li>Columns are matched by <b>position</b>, not by name. <code>Member(m, n, _)</code> means first column m, second column n.</li>
+  <li><mark class="hl">Columns are matched by <b>position</b>, not by name.</mark> <code>Member(m, n, _)</code> means first column m, second column n.</li>
   <li><code>_</code> means "there is a value here but I do not care what it is".</li>
-  <li>Using the same letter twice (<i>m</i> in Member and in Loan) means the values must be equal. That is how Datalog joins.</li>
+  <li>Using the same letter twice (<i>m</i> in Member and in Loan) <mark class="hl">means the values must be equal.</mark> That is how Datalog joins.</li>
 </ul>
 <h4>Safe rules</h4>
-<p>A rule is <b>safe</b> when every variable in the head, and every variable used in a <code>NOT</code> or in a comparison, also appears in a normal (non-negated) table in the body. If a variable is not tied to a real table, it could stand for any value at all, and the answer would be infinite.</p>
+<p>A rule is <b>safe</b> when every variable in the head, and every variable used in a <code>NOT</code> or in a comparison, <mark class="hl">also appears in a normal (non-negated) table in the body.</mark> If a variable is not tied to a real table, it could stand for any value at all, and the answer would be infinite.</p>
 <h4>Recursion</h4>
 <p>A rule may use its own name in its body. That lets you follow a chain of any length: a category, its parent, the parent's parent, and so on. SQL does the same with <code>WITH RECURSIVE</code>: a <b>base case</b> gives the starting rows, a <b>recursive case</b> adds the next step from the rows found so far, and it repeats until no new rows appear.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Datalog">Datalog</a><a class="chip c2 tlink" href="#/terms" data-term="Rule">Rule</a><a class="chip c1 tlink" href="#/terms" data-term="Head">Head</a><a class="chip c2 tlink" href="#/terms" data-term="Body">Body</a><a class="chip c1 tlink" href="#/terms" data-term="Anonymous variable">Anonymous variable</a><a class="chip c2 tlink" href="#/terms" data-term="Safe rule">Safe rule</a><a class="chip c1 tlink" href="#/terms" data-term="Recursive query">Recursive query</a><a class="chip c2 tlink" href="#/terms" data-term="WITH RECURSIVE">WITH RECURSIVE</a><a class="chip c1 tlink" href="#/terms" data-term="Base case">Base case</a><a class="chip c2 tlink" href="#/terms" data-term="Recursive case">Recursive case</a><a class="chip c1 tlink" href="#/terms" data-term="CTE">CTE</a></div>
@@ -1086,11 +1093,11 @@ SELECT id, name, relative_depth FROM parents;</pre>
   <tr><td class="mono">r</td><td>Number of records</td><td>5,000</td></tr>
   <tr><td class="mono">b</td><td>Number of blocks = ceiling(r / bfr)</td><td>ceiling(5000/10) = 500</td></tr>
 </table></div>
-<p>Round <b>down</b> for bfr because half a record does not fit. Round <b>up</b> for b because a half-full last block is still a block.</p>
+<p><mark class="hl">Round <b>down</b> for bfr because half a record does not fit. Round <b>up</b> for b because a half-full last block is still a block.</mark></p>
 <h4>Finding a record without an index</h4>
 <ul class="clean">
   <li><b>Linear search</b>: read blocks one by one. On average you read half of them (250 here).</li>
-  <li><b>Binary search</b>: only possible if the file is sorted on what you are looking for. Halve the range each time: about log<sub>2</sub>(500) ≈ 9 reads.</li>
+  <li><b>Binary search</b>: <mark class="hl">only possible if the file is sorted on what you are looking for.</mark> Halve the range each time: about log<sub>2</sub>(500) ≈ 9 reads.</li>
 </ul>
 <h4>What an index is</h4>
 <p>It works like the index at the back of a textbook: a short, sorted list of (key, page number). In a database each <b>index entry</b> is (key value, pointer), and the pointer says where the block or record is. Entries are much smaller than full records, so the index fits in far fewer blocks and is quick to search.</p>
@@ -1103,7 +1110,7 @@ SELECT id, name, relative_depth FROM parents;</pre>
 <p>If the index itself is many blocks long, build a small index on top of it, then another on top of that, until the top level fits in one block. To find a record you read one block per level, then the data block: <b>levels + 1</b> block accesses. That idea is the basis of the B-trees real databases use.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Block">Block</a><a class="chip c2 tlink" href="#/terms" data-term="B">B</a><a class="chip c1 tlink" href="#/terms" data-term="R">R</a><a class="chip c2 tlink" href="#/terms" data-term="r">r</a><a class="chip c1 tlink" href="#/terms" data-term="bfr">bfr</a><a class="chip c2 tlink" href="#/terms" data-term="b">b</a><a class="chip c1 tlink" href="#/terms" data-term="Unspanned">Unspanned</a><a class="chip c2 tlink" href="#/terms" data-term="P">P</a><a class="chip c1 tlink" href="#/terms" data-term="PR">PR</a><a class="chip c2 tlink" href="#/terms" data-term="Block access">Block access</a><a class="chip c1 tlink" href="#/terms" data-term="Linear search">Linear search</a><a class="chip c2 tlink" href="#/terms" data-term="Binary search">Binary search</a><a class="chip c1 tlink" href="#/terms" data-term="Index">Index</a><a class="chip c2 tlink" href="#/terms" data-term="Index entry">Index entry</a><a class="chip c1 tlink" href="#/terms" data-term="bfri">bfri</a><a class="chip c2 tlink" href="#/terms" data-term="fo">fo</a><a class="chip c1 tlink" href="#/terms" data-term="Primary index">Primary index</a><a class="chip c2 tlink" href="#/terms" data-term="Secondary index">Secondary index</a><a class="chip c1 tlink" href="#/terms" data-term="Dense index">Dense index</a><a class="chip c2 tlink" href="#/terms" data-term="Sparse index">Sparse index</a><a class="chip c1 tlink" href="#/terms" data-term="Multilevel index">Multilevel index</a><a class="chip c2 tlink" href="#/terms" data-term="t">t</a><a class="chip c1 tlink" href="#/terms" data-term="B+-tree">B+-tree</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>Cost is counted in block reads.</li><li>bfr rounds down, number of blocks rounds up.</li><li>Primary index: one entry per block. Secondary: one per record. Multilevel: levels + 1 reads.</li></ul></div>
-<details class="deep"><summary>Details</summary><div class="deep-body"><p>One scenario is reused everywhere: a file of <b>r = 30,000</b> fixed-length EMPLOYEE records, block pointer <b>P = 6</b> bytes, record pointer <b>P<sub>R</sub> = 7</b> bytes. The worked answer sheet uses <b>B = 512</b> bytes and a 10-byte Phone field; the review worksheet uses B = 512 with a 9-byte Phone; the past paper uses <b>B = 1024</b> with a 9-byte Phone. Always recompute R from the field list you are given.</p>
+<details class="deep"><summary>Details</summary><div class="deep-body"><p>One scenario is reused everywhere: a file of <b>r = 30,000</b> fixed-length EMPLOYEE records, block pointer <b>P = 6</b> bytes, record pointer <b>P<sub>R</sub> = 7</b> bytes. The worked answer sheet uses <b>B = 512</b> bytes and a 10-byte Phone field; the review worksheet uses B = 512 with a 9-byte Phone; the past paper uses <b>B = 1024</b> with a 9-byte Phone. <mark class="hl">Always recompute R from the field list you are given.</mark></p>
       <h4>Data file</h4>
       <div class="formula">R   = sum of field sizes                       = 30+9+9+40+10+8+1+4+4 = 115 bytes<br>bfr = floor(B / R)                            = floor(512/115) = 4 records per block<br>b   = ceiling(r / bfr)                        = ceiling(30,000/4) = 7,500 blocks<br>left-over per block = B − bfr·R               = 512 − 460 = 52 bytes</div>
       <p class="sub2">floor for bfr because a block cannot hold a fraction of a record (unspanned); ceiling for b so the last partial block is counted.</p>
@@ -1132,7 +1139,7 @@ SELECT id, name, relative_depth FROM parents;</pre>
 <div class="lesson"><b>In one line</b>You say what answer you want; the DBMS works out the cheapest order of steps to get it.</div>
 <p>SQL is <b>declarative</b>: it describes the result, not the method. The same question can be computed in many orders, and some orders are thousands of times slower. The part of the DBMS that picks the order is the <b>query optimizer</b>.</p>
 <h4>Query trees</h4>
-<p>A query can be drawn as a tree. The tables are the leaves at the bottom, each operation (σ, π, ⋈, ×) is a node, and data flows upward to the answer at the top. Rewriting the tree changes the steps without changing the answer.</p>
+<p>A query can be drawn as a tree. The tables are the leaves at the bottom, each operation (<span class="sym ra">σ</span>, <span class="sym ra">π</span>, <span class="sym ra">⋈</span>, ×) is a node, and data flows upward to the answer at the top. Rewriting the tree changes the steps without changing the answer.</p>
 <h4>The rules of thumb (heuristics)</h4>
 <ol>
   <li><b>Split</b> a filter with many ANDs into separate small filters, so each can move on its own.</li>
@@ -1143,14 +1150,14 @@ SELECT id, name, relative_depth FROM parents;</pre>
 <h4>Why it matters</h4>
 <p>Pair 1,000 members with 50,000 loans and you get 50 million combinations before filtering. Filter the members to the 20 you want first, then join, and the work is tiny. Same answer, very different cost.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Query optimizer">Query optimizer</a><a class="chip c2 tlink" href="#/terms" data-term="Declarative language">Declarative language</a><a class="chip c1 tlink" href="#/terms" data-term="Query tree">Query tree</a><a class="chip c2 tlink" href="#/terms" data-term="Heuristic">Heuristic</a><a class="chip c1 tlink" href="#/terms" data-term="Cascade of selections">Cascade of selections</a><a class="chip c2 tlink" href="#/terms" data-term="Selection push-down">Selection push-down</a><a class="chip c1 tlink" href="#/terms" data-term="Projection push-down">Projection push-down</a><a class="chip c2 tlink" href="#/terms" data-term="Join order">Join order</a><a class="chip c1 tlink" href="#/terms" data-term="Cost-based optimization">Cost-based optimization</a></div>
-<div class="tip t-good"><b>Remember</b><ul class="clean"><li>You say what you want; the optimizer decides how.</li><li>Filter early, join instead of pairing everything, carry only needed columns.</li></ul></div>
-<details class="deep"><summary>Details</summary><div class="deep-body"><p>A query is first written as a <b>query tree</b>: Cartesian products of the base relations at the bottom, one big selection of the whole WHERE clause above them, and the projection at the top. Heuristic optimization rewrites that tree into an equivalent one that is cheaper to execute.</p>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>You say what you want; the optimizer decides how.</li><li><mark class="hl">Filter early, join instead of pairing everything, carry only needed columns.</mark></li></ul></div>
+<details class="deep"><summary>Details</summary><div class="deep-body"><p>A query is first written as a <b>query tree</b>: Cartesian products of the base relations at the bottom, one big selection of the whole <code class="kw">WHERE</code> clause above them, and the projection at the top. Heuristic optimization rewrites that tree into an equivalent one that is cheaper to execute.</p>
       <h4>The four steps</h4>
       <ol>
-        <li><b>Cascade selection</b> — split the single conjunctive σ into one σ per condition.</li>
-        <li><b>Move selection down</b> — push each σ as far down the tree as possible, next to the relation it restricts (e.g. <span class="ra-sym">σ<sub>ProdType = 'Widget'</sub></span> directly over Product, <span class="ra-sym">σ<sub>Date.Month = July</sub></span> directly over Invoice).</li>
-        <li><b>Cartesian product with select becomes join</b> — a × followed by a σ on a join condition is replaced by ⋈ with that condition.</li>
-        <li><b>Projection push-down</b> — add π nodes low in the tree so that only the attributes needed later (join keys and output columns) travel upward; e.g. <span class="ra-sym">π<sub>InvID, CustID</sub></span> over Invoice, <span class="ra-sym">π<sub>ID, Type</sub></span> over Customer.</li>
+        <li><b>Cascade selection</b> — split the single conjunctive <span class="sym ra">σ</span> into one <span class="sym ra">σ</span> per condition.</li>
+        <li><b>Move selection down</b> — push each <span class="sym ra">σ</span> as far down the tree as possible, next to the relation it restricts (e.g. <span class="ra-sym">σ<sub>ProdType = 'Widget'</sub></span> directly over Product, <span class="ra-sym">σ<sub>Date.Month = July</sub></span> directly over Invoice).</li>
+        <li><b>Cartesian product with select becomes join</b> — a × followed by a <span class="sym ra">σ</span> on a join condition is replaced by <span class="sym ra">⋈</span> with that condition.</li>
+        <li><b>Projection push-down</b> — add <span class="sym ra">π</span> nodes low in the tree so that only the attributes needed later (join keys and output columns) travel upward; e.g. <span class="ra-sym">π<sub>InvID, CustID</sub></span> over Invoice, <span class="ra-sym">π<sub>ID, Type</sub></span> over Customer.</li>
       </ol>
       <pre class="sql ra">π Type (σ ProdType = 'Widget' (σ Date.Month = July (Customer ⋈ Invoice ⋈ LineItem ⋈ Product)))</pre>
       
@@ -1159,7 +1166,7 @@ SELECT id, name, relative_depth FROM parents;</pre>
       <p>The past paper asks how the optimizer decides between joining Enrollment with Student or with Course first, and what its points of consideration are.</p>
       <h4>Worksheet example</h4>
       <pre class="sql ra">π Title (σ Grade = 'A' ∧ Instructor = "…" (Course ⋈ Enrollment))</pre>
-      <p>Handwritten answer: start from π Title over σ over the Cartesian product of Course and Enrollment; cascade into σ Grade = 'A' and σ Instructor = "…"; move σ Grade = 'A' down onto Enrollment and σ Instructor = "…" down onto Course; replace the product with a join; keep π Title at the top.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="8">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="8">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t9">Next: T9 Transactions</a></div>
+      <p>Handwritten answer: start from <span class="sym ra">π</span> Title over <span class="sym ra">σ</span> over the Cartesian product of Course and Enrollment; cascade into <span class="sym ra">σ</span> Grade = 'A' and <span class="sym ra">σ</span> Instructor = "…"; move <span class="sym ra">σ</span> Grade = 'A' down onto Enrollment and <span class="sym ra">σ</span> Instructor = "…" down onto Course; replace the product with a join; keep <span class="sym ra">π</span> Title at the top.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="8">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="8">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t9">Next: T9 Transactions</a></div>
     </div>
   </details>
 
@@ -1175,10 +1182,10 @@ COMMIT;          -- make both changes permanent
 -- or ROLLBACK;  -- undo both as if nothing happened</pre>
 <h4>Two people at once</h4>
 <ul class="clean">
-  <li>Inside your transaction you <b>see your own changes</b> straight away, even before COMMIT.</li>
-  <li>Other sessions <b>do not see them</b> until you COMMIT. They keep seeing the last saved value.</li>
-  <li>While you are changing a row you hold a <b>lock</b> on it. Anyone else who tries to change that same row has to <b>wait</b> until you COMMIT or ROLLBACK.</li>
-  <li>If a transaction is never finished, the DBMS normally rolls it back (for example when the connection closes).</li>
+  <li><mark class="hl">Inside your transaction you <b>see your own changes</b> straight away, even before <code class="kw">COMMIT</code>.</mark></li>
+  <li>Other sessions <b>do not see them</b> until you <code class="kw">COMMIT</code>. They keep seeing the last saved value.</li>
+  <li>While you are changing a row you hold a <b>lock</b> on it. Anyone else who tries to change that same row has to <b>wait</b> until you <code class="kw">COMMIT</code> or <code class="kw">ROLLBACK</code>.</li>
+  <li><mark class="hl">If a transaction is never finished, the DBMS normally rolls it back</mark> (for example when the connection closes).</li>
 </ul>
 <h4>ACID: the four promises</h4>
 <div class="tscroll"><table>
@@ -1189,14 +1196,14 @@ COMMIT;          -- make both changes permanent
   <tr><td class="mono">D</td><td>Durability</td><td>Once committed, it survives a crash</td></tr>
 </table></div>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Transaction">Transaction</a><a class="chip c2 tlink" href="#/terms" data-term="START TRANSACTION">START TRANSACTION</a><a class="chip c1 tlink" href="#/terms" data-term="COMMIT">COMMIT</a><a class="chip c2 tlink" href="#/terms" data-term="ROLLBACK">ROLLBACK</a><a class="chip c1 tlink" href="#/terms" data-term="Autocommit">Autocommit</a><a class="chip c2 tlink" href="#/terms" data-term="Session">Session</a><a class="chip c1 tlink" href="#/terms" data-term="Uncommitted change">Uncommitted change</a><a class="chip c2 tlink" href="#/terms" data-term="Lock">Lock</a><a class="chip c1 tlink" href="#/terms" data-term="Lock wait">Lock wait</a><a class="chip c2 tlink" href="#/terms" data-term="ACID">ACID</a><a class="chip c1 tlink" href="#/terms" data-term="Isolation level">Isolation level</a></div>
-<div class="tip t-good"><b>Remember</b><ul class="clean"><li>A transaction is all or nothing: COMMIT saves, ROLLBACK undoes.</li><li>You see your own uncommitted changes; others do not.</li><li>Changing a row locks it; others wanting to change it must wait.</li></ul></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>A transaction is all or nothing: <code class="kw">COMMIT</code> saves, <code class="kw">ROLLBACK</code> undoes.</li><li>You see your own uncommitted changes; others do not.</li><li><mark class="hl">Changing a row locks it; others wanting to change it must wait.</mark></li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body"><p>The lab runs two sessions (connections A and B) against bank accounts 10001–10003 and asks what each session sees after each numbered query.</p>
       <ul class="clean">
         <li>A session <b>sees its own uncommitted changes</b> inside the same transaction: after A debits 100, A reads the decreased balance.</li>
         <li>Another session <b>does not see uncommitted changes</b> (default isolation behaviour): B still reads the original balance.</li>
         <li>While A holds a lock on the row, B's withdrawal and transfer <b>cannot complete</b>; they wait on A's uncommitted transaction.</li>
-        <li>After A executes <b>COMMIT</b>, the change is permanent and B's transfer completes.</li>
-        <li>After A executes <b>ROLLBACK</b>, all of A's changes are discarded (account 10003 is back to 1000).</li>
+        <li>After A executes <b><code class="kw">COMMIT</code></b>, the change is permanent and B's transfer completes.</li>
+        <li>After A executes <b><code class="kw">ROLLBACK</code></b>, all of A's changes are discarded (account 10003 is back to 1000).</li>
         <li>A transaction that is begun and neither committed nor rolled back is, in most DBMSs, rolled back automatically; until then other sessions do not see its changes.</li>
       </ul></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="9">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="9">Quiz</a><a class="btn" href="#/sessions">Drill: Transaction sessions</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t10">Next: T10 Privileges</a></div>
     </div>
@@ -1205,8 +1212,8 @@ COMMIT;          -- make both changes permanent
   <details class="note" id="t10" data-short="Privileges">
     <summary><span class="num n2">10</span> Users, privileges and roles (MySQL)</summary>
     <div class="body">
-<div class="lesson"><b>In one line</b>Every account gets only the permissions it needs, given with GRANT and taken back with REVOKE.</div>
-<p>A database is shared, so it must decide who can read and who can change. In MySQL an account is a <b>user name plus the host</b> it connects from: <code>'ana'@'localhost'</code> is a different account from <code>'ana'@'%'</code>, where <code>%</code> means any host.</p>
+<div class="lesson"><b>In one line</b>Every account gets only the permissions it needs, given with <code class="kw">GRANT</code> and taken back with <code class="kw">REVOKE</code>.</div>
+<p>A database is shared, so it must decide who can read and who can change. <mark class="hl">In MySQL an account is a <b>user name plus the host</b> it connects from:</mark> <code>'ana'@'localhost'</code> is a different account from <code>'ana'@'%'</code>, where <code>%</code> means any host.</p>
 <h4>Privileges and where they apply</h4>
 <div class="tscroll"><table>
   <tr><th>Level</th><th>Written as</th><th>Covers</th></tr>
@@ -1227,7 +1234,7 @@ GRANT 'librarian' TO 'ana'@'localhost', 'ben'@'localhost';</pre>
 <h4>Least privilege</h4>
 <p>Give each account the smallest set of permissions, from the narrowest set of hosts, that still lets it do its job. If it is ever misused, the damage is limited.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Account">Account</a><a class="chip c2 tlink" href="#/terms" data-term="Host">Host</a><a class="chip c1 tlink" href="#/terms" data-term="localhost">localhost</a><a class="chip c2 tlink" href="#/terms" data-term="%">%</a><a class="chip c1 tlink" href="#/terms" data-term="Privilege">Privilege</a><a class="chip c2 tlink" href="#/terms" data-term="Privilege level">Privilege level</a><a class="chip c1 tlink" href="#/terms" data-term="GRANT">GRANT</a><a class="chip c2 tlink" href="#/terms" data-term="REVOKE">REVOKE</a><a class="chip c1 tlink" href="#/terms" data-term="GRANT OPTION">GRANT OPTION</a><a class="chip c2 tlink" href="#/terms" data-term="Role">Role</a><a class="chip c1 tlink" href="#/terms" data-term="Least privilege">Least privilege</a><a class="chip c2 tlink" href="#/terms" data-term="FLUSH PRIVILEGES">FLUSH PRIVILEGES</a></div>
-<div class="tip t-good"><b>Remember</b><ul class="clean"><li>An account is user@host; % means any host.</li><li>GRANT gives, REVOKE takes away, at global, database, table or column level.</li><li>Roles bundle privileges; give the least that does the job.</li></ul></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>An account is user@host; % means any host.</li><li><code class="kw">GRANT</code> gives, <code class="kw">REVOKE</code> takes away, at global, database, table or column level.</li><li>Roles bundle privileges; give the least that does the job.</li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body"><h4>Accounts are user@host</h4>
       <p><code>CREATE USER 'thisisme' IDENTIFIED BY '…'</code> without a host is interpreted as <code>'thisisme'@'%'</code>, which can connect from any host. For an application on the same host as the database, the correct form is <code>'thisisme'@'localhost'</code>; omitting the host violates the principle of least privilege.</p>
       <pre class="sql">CREATE USER 'john'@'localhost' IDENTIFIED BY 'pass_123';
@@ -1250,8 +1257,8 @@ REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'dan'@'localhost';
 DROP USER 'dan'@'localhost';
 FLUSH PRIVILEGES;
 ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password</pre>
-      <p><b>Reading a GRANT</b>: <code>GRANT SELECT, INSERT, UPDATE ON hr.employees TO 'myuser'@'localhost' IDENTIFIED BY 'mypassword'</code> allows retrieving, adding and modifying employee records to user myuser connecting from the same host as the server, with that password.</p>
-      <div class="tip t-warn"><b>Note</b>The lab's answer to "remove the ability to grant the UPDATE privilege while keeping it" revokes UPDATE itself (<code>REVOKE UPDATE … FROM 'dan'@'localhost'</code>). To keep UPDATE and remove only the right to pass it on, revoke the grant option instead: <code>REVOKE GRANT OPTION ON hr.employees FROM 'dan'@'localhost'</code>.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="10">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="10">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/flash">Next: Flashcards</a></div>
+      <p><b>Reading a <code class="kw">GRANT</code></b>: <code>GRANT SELECT, INSERT, UPDATE ON hr.employees TO 'myuser'@'localhost' IDENTIFIED BY 'mypassword'</code> allows retrieving, adding and modifying employee records to user myuser connecting from the same host as the server, with that password.</p>
+      <div class="tip t-warn"><b>Note</b>The lab's answer to "remove the ability to grant the <code class="kw">UPDATE</code> privilege while keeping it" revokes <code class="kw">UPDATE</code> itself (<code>REVOKE UPDATE … FROM 'dan'@'localhost'</code>). To keep <code class="kw">UPDATE</code> and remove only the right to pass it on, revoke the grant option instead: <code>REVOKE GRANT OPTION ON hr.employees FROM 'dan'@'localhost'</code>.</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="10">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="10">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/flash">Next: Flashcards</a></div>
     </div>
   </details>
 </div></section>
@@ -1276,8 +1283,8 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
       <div class="qa"><span class="qn">Definitions</span><p>Database, data, miniworld / universe of discourse, DBMS, application program, query vs transaction. Answers are in Topic 1.</p></div>
       <div class="qa"><span class="qn">Keys</span><p>Mark the primary keys of the three tables and the foreign keys of Enrollment. The handwritten answer counts the key attributes as 2 + 2 + 2 + 1 + 1 = 8.</p></div>
       <div class="qa"><span class="qn">Adding a constraint</span><p>What happens when a referential constraint is added to Enrollment: the Enrollment table is updated when there is an update or delete of the referenced Student foreign key.</p></div>
-      <div class="qa"><span class="qn">ALTER TABLE</span><p>Add AdvisorID VARCHAR(255) NOT NULL to Student, then a foreign key with ON UPDATE CASCADE and ON DELETE SET NULL. SQL in Topic 2.</p></div>
-      <div class="qa"><span class="qn">Relation statements</span><p>Illustrate relation state, unordered tuples, meanings of NULL, keys as superkeys, nullable FK on the school data. Covered in Topic 1.</p></div>
+      <div class="qa"><span class="qn"><code class="kw">ALTER TABLE</code></span><p>Add AdvisorID <code class="kw">VARCHAR(255) NOT NULL</code> to Student, then a foreign key with <code class="kw">ON UPDATE CASCADE</code> and <code class="kw">ON DELETE SET NULL</code>. SQL in Topic 2.</p></div>
+      <div class="qa"><span class="qn">Relation statements</span><p>Illustrate relation state, unordered tuples, meanings of <code class="kw">NULL</code>, keys as superkeys, nullable FK on the school data. Covered in Topic 1.</p></div>
       <div class="qa"><span class="qn">Join count</span><p>Joining Course and Enrollment on Code = CourseID gives 8 rows, one per foreign-key value.</p></div>
       <div class="qa"><span class="qn">Relational algebra</span>
         <pre class="sql ra">σ Plan = "Paralympic" (Student)
@@ -1294,8 +1301,8 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
   <details class="note" id="lab2" data-short="DDL: school database">
     <summary><span class="num n1">2</span> School database DDL</summary>
     <div class="body">
-      <p>Six CREATE statements for a kindergarten system, each driven by a sentence of requirements.</p>
-      <div class="qa"><span class="qn">1–2</span><p><code>CREATE DATABASE SCHOOL; USE SCHOOL;</code> then Students with Age restricted to 3–5 by CHECK (Topic 2).</p></div>
+      <p>Six <code class="kw">CREATE</code> statements for a kindergarten system, each driven by a sentence of requirements.</p>
+      <div class="qa"><span class="qn">1–2</span><p><code>CREATE DATABASE SCHOOL; USE SCHOOL;</code> then Students with Age restricted to 3–5 by <code class="kw">CHECK</code> (Topic 2).</p></div>
       <div class="qa"><span class="qn">3 Parents</span>
         <pre class="sql">CREATE TABLE Parents (
     ParentID INT PRIMARY KEY,
@@ -1306,7 +1313,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
     StudentID INT,
     FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
 );</pre>
-        <p>The sheet also shows a second version with <code>CHECK ('Mother' OR 'Father' OR 'Other')</code>. <span class="flag no">That CHECK does not test the column; use the IN form</span></p></div>
+        <p>The sheet also shows a second version with <code>CHECK ('Mother' OR 'Father' OR 'Other')</code>. <span class="flag no">That <code class="kw">CHECK</code> does not test the column; use the IN form</span></p></div>
       <div class="qa"><span class="qn">4 Rooms</span><p><code>RoomID INT PRIMARY KEY, RoomName VARCHAR(50) NOT NULL UNIQUE</code>.</p></div>
       <div class="qa"><span class="qn">5 Employees</span><p>Answer uses <code>Age INT CHECK (Age &gt; 18)</code>. The question says "above or equal to 18"; the requirements text says "strictly greater than 18". <span class="flag">Question and requirements disagree</span></p></div>
       <div class="qa"><span class="qn">6 StudentRoomAssignment</span>
@@ -1351,12 +1358,12 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
   <details class="note" id="lab5" data-short="SQL, part 1">
     <summary><span class="num n1">5</span> Intermediate SQL, part 1</summary>
     <div class="body">
-      <div class="qa"><span class="qn">1</span><p>Count of each distinct customer address type: GROUP BY AddressType.</p></div>
-      <div class="qa"><span class="qn">2</span><p>How many customers have more than one address: subquery in FROM with HAVING COUNT &gt; 1, then COUNT(*) outside.</p></div>
-      <div class="qa"><span class="qn">3</span><p>CustomerID, first and last name of customers with more than one address: GROUP BY the three columns, HAVING COUNT(c.CustomerID) &gt; 1.</p></div>
-      <div class="qa"><span class="qn">4</span><p>ProductID, Name and total revenue per product: SUM(sod.LineTotal) with GROUP BY p.ProductID, p.Name, ORDER BY TotalRevenue DESC.</p></div>
-      <div class="qa"><span class="qn">5</span><p>Customers who ordered products with StandardCost &gt; 800: four-table join with DISTINCT.</p></div>
-      <div class="qa"><span class="qn">6</span><p>Top four cities by customer count with country: GROUP BY City, CountryRegion, ORDER BY count DESC LIMIT 4.</p></div>
+      <div class="qa"><span class="qn">1</span><p>Count of each distinct customer address type: <code class="kw">GROUP BY</code> AddressType.</p></div>
+      <div class="qa"><span class="qn">2</span><p>How many customers have more than one address: subquery in <code class="kw">FROM</code> with <code class="kw">HAVING</code> <code class="kw">COUNT</code> &gt; 1, then <code class="kw">COUNT(*)</code> outside.</p></div>
+      <div class="qa"><span class="qn">3</span><p>CustomerID, first and last name of customers with more than one address: <code class="kw">GROUP BY</code> the three columns, <code class="kw">HAVING</code> COUNT(c.CustomerID) &gt; 1.</p></div>
+      <div class="qa"><span class="qn">4</span><p>ProductID, Name and total revenue per product: SUM(sod.LineTotal) with <code class="kw">GROUP BY</code> p.ProductID, p.Name, <code class="kw">ORDER BY</code> TotalRevenue DESC.</p></div>
+      <div class="qa"><span class="qn">5</span><p>Customers who ordered products with StandardCost &gt; 800: four-table join with <code class="kw">DISTINCT</code>.</p></div>
+      <div class="qa"><span class="qn">6</span><p>Top four cities by customer count with country: <code class="kw">GROUP BY</code> City, CountryRegion, <code class="kw">ORDER BY</code> count DESC <code class="kw">LIMIT</code> 4.</p></div>
       <div class="qa"><span class="qn">7</span><p>Per sales order, number of products, only where AVG(UnitPrice) &gt; 300: 19 rows.</p></div>
       <div class="qa"><span class="qn">8</span><p>Discontinued products: <code>WHERE p.SellEndDate IS NOT NULL</code>, 98 rows.</p></div>
       <div class="qa"><span class="qn">9–10 semantics</span><p>"Find the average total due for each customer and display their name and average total due from the highest to smallest." "Retrieve the most expensive price in each product category" (MAX(ListPrice) grouped by category name).</p></div>
@@ -1366,12 +1373,12 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
   <details class="note" id="lab6" data-short="SQL, part 2">
     <summary><span class="num n1">6</span> Intermediate SQL, part 2</summary>
     <div class="body">
-      <div class="qa"><span class="qn">1</span><p>SUM, AVG, MIN, MAX of TotalDue for customers not living in London: two accepted forms, NOT IN subquery or <code>a.City NOT LIKE 'London'</code>.</p></div>
+      <div class="qa"><span class="qn">1</span><p><code class="kw">SUM</code>, <code class="kw">AVG</code>, <code class="kw">MIN</code>, <code class="kw">MAX</code> of TotalDue for customers not living in London: two accepted forms, <code class="kw">NOT IN</code> subquery or <code>a.City NOT LIKE 'London'</code>.</p></div>
       <div class="qa"><span class="qn">2</span><p>Orders shipped to the main office: join SalesOrderHeader.ShipToAddressID to CustomerAddress.AddressID where AddressType = 'Main Office'.</p></div>
       <div class="qa"><span class="qn">3</span><p>Discontinued products — same query as part 1 question 8. <span class="flag">Duplicate</span></p></div>
-      <div class="qa"><span class="qn">4</span><p>Name, colour, list price and category of black and blue products in the Bike parent category, ordered by list price descending: two accepted forms (ParentProductCategoryID IN subquery, or category Name LIKE '%Bikes%'); 43 rows.</p></div>
+      <div class="qa"><span class="qn">4</span><p>Name, colour, list price and category of black and blue products in the Bike parent category, ordered by list price descending: two accepted forms (ParentProductCategoryID IN subquery, or category Name <code class="kw">LIKE</code> '%Bikes%'); 43 rows.</p></div>
       <div class="qa"><span class="qn">5</span><p>Direct sub-categories per parent category: self-join of ProductCategory (Topic 5).</p></div>
-      <div class="qa"><span class="qn">6</span><p>Customers and addresses ordered by CountryRegion, LastName, FirstName with a Y/N flag for multiple addresses: CASE over COUNT(…) OVER (PARTITION BY CustomerID).</p></div>
+      <div class="qa"><span class="qn">6</span><p>Customers and addresses ordered by CountryRegion, LastName, FirstName with a Y/N flag for multiple addresses: CASE over COUNT(…) <code class="kw">OVER</code> (<code class="kw">PARTITION BY</code> CustomerID).</p></div>
       <div class="qa"><span class="qn">7–9 semantics</span><p>Question 9 repeats "retrieve the most expensive price in each product category". Questions 7 and 8 are unreliable in the source (see Topic 5). <span class="flag">Inconsistent</span></p></div>
     </div>
   </details>
@@ -1414,7 +1421,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
         <tr><td>2</td><td>Balance Session B sees</td><td>Original — uncommitted changes are invisible to other sessions</td></tr>
         <tr><td>3</td><td>Does query 4 withdraw 500 from 10001?</td><td>No — connection A holds a lock</td></tr>
         <tr><td>4</td><td>Does query 5 transfer 100 from 10001 to 10002?</td><td>No — A's transaction is not committed</td></tr>
-        <tr><td>5</td><td>What happens at query 7?</td><td>The transfer completes, because COMMIT made the change permanent</td></tr>
+        <tr><td>5</td><td>What happens at query 7?</td><td>The transfer completes, because <code class="kw">COMMIT</code> made the change permanent</td></tr>
         <tr><td>6–7</td><td>Balance of 10003 after query 10, and why</td><td>1000 — connection A rolled back, discarding its changes</td></tr>
         <tr><td>8</td><td>Begin but never commit or rollback</td><td>Most DBMSs roll back automatically; until then other sessions do not see the change</td></tr>
       </table></div>
@@ -1424,7 +1431,7 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
   <details class="note" id="lab10" data-short="Privileges and roles">
     <summary><span class="num n2">10</span> Users, privileges and roles</summary>
     <div class="body">
-      <p>Eleven tasks on an HR schema in MySQL: why a host-less CREATE USER is wrong; four localhost accounts with a shared password; an hr role granted in one statement; SELECT on hr.* for the role; ALTER USER to change a password; a salary_app account restricted to a Docker subnet with column-level SELECT; UPDATE on hr.employees for a director; revoking a mistaken grant; a VPN-address developer with INSERT, UPDATE, DELETE on hr.*; revoking everything and dropping a resigned user; reading a GRANT statement. All statements are in Topic 10.</p>
+      <p>Eleven tasks on an HR schema in MySQL: why a host-less <code class="kw">CREATE USER</code> is wrong; four localhost accounts with a shared password; an hr role granted in one statement; <code class="kw">SELECT</code> on hr.* for the role; <code class="kw">ALTER</code> USER to change a password; a salary_app account restricted to a Docker subnet with column-level <code class="kw">SELECT</code>; <code class="kw">UPDATE</code> on hr.employees for a director; revoking a mistaken grant; a VPN-address developer with <code class="kw">INSERT</code>, <code class="kw">UPDATE</code>, <code class="kw">DELETE</code> on hr.*; revoking everything and dropping a resigned user; reading a <code class="kw">GRANT</code> statement. All statements are in Topic 10.</p>
     </div>
   </details>
 </div></section>
@@ -1489,8 +1496,8 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 <p>1.2) Modify the constraint so that (1) a project cannot be deleted while employees still work on it, and (2) when a project is renumbered, WORKS_ON follows the new number automatically.</p>
     <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>1.1</b> Pno in WORKS_ON is a foreign key referencing PROJECT.Pnumber: every Pno must be the number of an existing project.</p>
 <ul class="clean">
-<li><b>ON DELETE CASCADE:</b> deleting a project also deletes every WORKS_ON row for it. Deleting project 10 (Computerization) deletes &lt;'333445555', 10, 10.0&gt;, &lt;'999887777', 10, 10.0&gt; and &lt;'987987987', 10, 35.0&gt;.</li>
-<li><b>ON UPDATE SET NULL:</b> changing a project number sets Pno to NULL in the matching WORKS_ON rows. But Pno is part of the primary key (Essn, Pno) of WORKS_ON, so NULL breaks entity integrity: renumbering project 10 to 11 is rejected.</li>
+<li><b><code class="kw">ON DELETE CASCADE</code>:</b> deleting a project also deletes every WORKS_ON row for it. Deleting project 10 (Computerization) deletes &lt;'333445555', 10, 10.0&gt;, &lt;'999887777', 10, 10.0&gt; and &lt;'987987987', 10, 35.0&gt;.</li>
+<li><b><code class="kw">ON UPDATE SET NULL</code>:</b> changing a project number sets Pno to <code class="kw">NULL</code> in the matching WORKS_ON rows. But Pno is part of the primary key (Essn, Pno) of WORKS_ON, so <code class="kw">NULL</code> breaks entity integrity: renumbering project 10 to 11 is rejected.</li>
 </ul>
 <p><b>1.2</b></p><pre class="sql">ALTER TABLE WORKS_ON DROP FOREIGN KEY WORKSONPROJFK;
 ALTER TABLE WORKS_ON
@@ -1498,9 +1505,9 @@ ALTER TABLE WORKS_ON
   ON DELETE RESTRICT     -- (1) delete refused while WORKS_ON rows exist
   ON UPDATE CASCADE;     -- (2) new Pnumber copied to WORKS_ON.Pno</pre></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
-<li><b>Check whether the foreign key is part of the primary key.</b> Pno is, so SET NULL can never succeed here. Spotting this earns the marks that a plain description misses.</li>
-<li><b>Requirement (1)</b> means "refuse": RESTRICT (or NO ACTION, which also refuses, checked at the end of the statement).</li>
-<li><b>Requirement (2)</b> means "copy the change": CASCADE on update.</li>
+<li><b>Check whether the foreign key is part of the primary key.</b> Pno is, so <code class="kw">SET NULL</code> can never succeed here. Spotting this earns the marks that a plain description misses.</li>
+<li><b>Requirement (1)</b> means "refuse": <code class="kw">RESTRICT</code> (or <code class="kw">NO ACTION</code>, which also refuses, checked at the end of the statement).</li>
+<li><b>Requirement (2)</b> means "copy the change": <code class="kw">CASCADE</code> on update.</li>
 <li><b>Use real tuples</b> from the COMPANY state to show which rows each action touches.</li>
 </ol></div></details>
     <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 1"><span class="sub2">/ 10</span></div>
@@ -1509,23 +1516,23 @@ ALTER TABLE WORKS_ON
   <div class="panel" id="ma2">
     <h3><span class="badge b1">Q2 · 15</span> Illustrate with COMPANY data</h3>
 <p>Show example data from the COMPANY database to illustrate each sentence.</p>
-<p>2.1) A relation can have more than one candidate key.<br>2.2) No primary key value can be NULL.<br>2.3) A foreign key can refer to its own relation.<br>2.4) An insert operation can violate any of the four schema-based constraints.<br>2.5) An update of an attribute that is neither a primary key nor a foreign key can violate only the domain constraint.</p>
-    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>2.1</b> In DEPARTMENT both {Dnumber} and {Dname} are unique: &lt;'Research', 5, …&gt;, &lt;'Administration', 4, …&gt;, &lt;'Headquarters', 1, …&gt;. No two departments share a number or a name, so both are candidate keys; Dnumber is chosen as primary key and Dname is declared UNIQUE.</p>
-<p><b>2.2</b> INSERT INTO DEPT_LOCATIONS VALUES (NULL, 'Austin') is rejected: Dnumber is part of the primary key (Dnumber, Dlocation), and a NULL key could not identify the tuple.</p>
+<p>2.1) A relation can have more than one candidate key.<br>2.2) No primary key value can be <code class="kw">NULL</code>.<br>2.3) A foreign key can refer to its own relation.<br>2.4) An insert operation can violate any of the four schema-based constraints.<br>2.5) An update of an attribute that is neither a primary key nor a foreign key can violate only the domain constraint.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>2.1</b> In DEPARTMENT both {Dnumber} and {Dname} are unique: &lt;'Research', 5, …&gt;, &lt;'Administration', 4, …&gt;, &lt;'Headquarters', 1, …&gt;. No two departments share a number or a name, so both are candidate keys; Dnumber is chosen as primary key and Dname is declared <code class="kw">UNIQUE</code>.</p>
+<p><b>2.2</b> <code class="kw">INSERT INTO</code> DEPT_LOCATIONS VALUES (<code class="kw">NULL</code>, 'Austin') is rejected: Dnumber is part of the primary key (Dnumber, Dlocation), and a <code class="kw">NULL</code> key could not identify the tuple.</p>
 <p><b>2.3</b> EMPLOYEE.Super_ssn references EMPLOYEE.Ssn. In &lt;'John', 'B', 'Smith', '123456789', …, Super_ssn = '333445555', Dno = 5&gt;, 333445555 is the Ssn of Franklin Wong in the same relation.</p>
 <p><b>2.4</b></p>
 <ul class="clean">
 <li>Domain: insert an employee with Salary = 'high'.</li>
 <li>Key: insert an employee with Ssn '999887777' (already Alicia Zelaya's).</li>
-<li>Entity integrity: insert an employee with Ssn NULL.</li>
+<li>Entity integrity: insert an employee with Ssn <code class="kw">NULL</code>.</li>
 <li>Referential integrity: insert an employee with Dno = 7 (no department 7).</li>
 </ul>
-<p><b>2.5</b> UPDATE EMPLOYEE SET Salary = 'high' WHERE Ssn = '123456789' violates the domain of Salary. The same update with Salary = 28000 violates nothing: Salary is not a key, so no duplicate or NULL key can arise, and nothing references it.</p></div></details>
+<p><b>2.5</b> <code class="kw">UPDATE</code> EMPLOYEE SET Salary = 'high' <code class="kw">WHERE</code> Ssn = '123456789' violates the domain of Salary. The same update with Salary = 28000 violates nothing: Salary is not a key, so no duplicate or <code class="kw">NULL</code> key can arise, and nothing references it.</p></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
 <li><b>3 marks each:</b> a concrete tuple or statement plus the reason.</li>
-<li><b>2.1</b> A candidate key is any minimal superkey. The textbook COMPANY DDL declares Dname UNIQUE for exactly this reason.</li>
+<li><b>2.1</b> A candidate key is any minimal superkey. The textbook COMPANY DDL declares Dname <code class="kw">UNIQUE</code> for exactly this reason.</li>
 <li><b>2.4</b> Insert adds a whole new tuple, so all four checks run: domain, key, entity integrity, referential integrity. Give one statement per constraint.</li>
-<li><b>2.5</b> Compare with the past-paper sentence on delete: reason from what the operation changes. An ordinary attribute is not compared for uniqueness, cannot be a NULL key and is not referenced, so only its domain is checked.</li>
+<li><b>2.5</b> Compare with the past-paper sentence on delete: reason from what the operation changes. An ordinary attribute is not compared for uniqueness, cannot be a <code class="kw">NULL</code> key and is not referenced, so only its domain is checked.</li>
 </ol></div></details>
     <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="15" step="0.5" data-max="15" inputmode="decimal" aria-label="Your mark for question 2"><span class="sub2">/ 15</span></div>
   </div>
@@ -1547,9 +1554,9 @@ HAVING SUM(Hours) &gt; 40;</pre>
 <tr><td>30</td><td>30.0, 20.0</td><td>50.0</td><td>Yes</td></tr></table></div>
 <p>Result: (1, 52.5), (3, 50.0), (10, 55.0), (30, 50.0).</p></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
-<li><b>WHERE first:</b> rows under 10 hours are removed before summing: (123456789, 2, 7.5) and (987987987, 30, 5.0).</li>
-<li><b>NULL hours:</b> (888665555, 20, NULL) is also removed, because NULL ≥ 10 is unknown, and WHERE keeps only rows where the condition is true.</li>
-<li><b>GROUP BY Pno, then SUM</b> per project; HAVING keeps groups with a total above 40. Exactly 40 would not qualify.</li>
+<li><b><code class="kw">WHERE</code> first:</b> rows under 10 hours are removed before summing: (123456789, 2, 7.5) and (987987987, 30, 5.0).</li>
+<li><b><code class="kw">NULL</code> hours:</b> (888665555, 20, <code class="kw">NULL</code>) is also removed, because <code class="kw">NULL</code> ≥ 10 is unknown, and <code class="kw">WHERE</code> keeps only rows where the condition is true.</li>
+<li><b><code class="kw">GROUP BY</code> Pno, then <code class="kw">SUM</code></b> per project; <code class="kw">HAVING</code> keeps groups with a total above 40. Exactly 40 would not qualify.</li>
 <li><b>Write the sentence first</b>, then the computed table if the question asks for a result.</li>
 </ol></div></details>
     <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 3"><span class="sub2">/ 10</span></div>
@@ -1580,7 +1587,7 @@ HAVING SUM(Hours) &gt; 40;</pre>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
 <li><b>Positions:</b> OFFERS(Sname = x, PID = y, Price = z). CUSTOMERS(CID = c, FName = x, …). ORDERS(CID = c, SName = s, …). SUPPLIERS(SName = s, SAddress ignored, Chain = "GreenMart").</li>
 <li><b>Shared variables are joins:</b> c links CUSTOMERS and ORDERS; s links ORDERS and SUPPLIERS.</li>
-<li><b>The constant in a subgoal is a selection</b> on that attribute: σ Chain = 'GreenMart'.</li>
+<li><b>The constant in a subgoal is a selection</b> on that attribute: <span class="sym ra">σ</span> Chain = 'GreenMart'.</li>
 <li><b>The head decides the projection:</b> only x (FName) is returned, even though c and s are used to join.</li>
 </ol></div></details>
     <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 4"><span class="sub2">/ 10</span></div>
@@ -1639,7 +1646,7 @@ HAVING SUM(Hours) &gt; 40;</pre>
 
   <div class="panel" id="ma7">
     <h3><span class="badge b1">Q7 · 5</span> Selection placement</h3>
-<p>From the query tree below, why does the optimizer apply σ Dno = 5 before the joins rather than after them? What information does it use to estimate the benefit?</p><pre class="sql tree">π Fname, Pname
+<p>From the query tree below, why does the optimizer apply <span class="sym ra">σ</span> Dno = 5 before the joins rather than after them? What information does it use to estimate the benefit?</p><pre class="sql tree">π Fname, Pname
 └── ⋈ Pno = Pnumber
     ├── ⋈ Ssn = Essn
     │   ├── σ Dno = 5
@@ -1687,8 +1694,8 @@ WHERE  Student.StID = Enrolment.StID AND Enrolment.CrsID = Course.Code
         └── COURSE</pre></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
 <li><b>Leaves:</b> STUDENT needs StID (join) and Name (output); Major and Year are dropped after the selection on Year. ENROLMENT needs StID and CrsID (joins); Grade is dropped after its selection. COURSE needs Code (join) and Title (output); Credits is dropped.</li>
-<li><b>Between the joins:</b> after the first join only Name (output) and CrsID (next join) are still needed, so a π Name, CrsID is added.</li>
-<li><b>Each π sits above its σ</b>, because the selection still needs Year or Grade.</li>
+<li><b>Between the joins:</b> after the first join only Name (output) and CrsID (next join) are still needed, so a <span class="sym ra">π</span> Name, CrsID is added.</li>
+<li><b>Each <span class="sym ra">π</span> sits above its <span class="sym ra">σ</span></b>, because the selection still needs Year or Grade.</li>
 </ol></div></details>
     <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 8"><span class="sub2">/ 10</span></div>
   </div>
@@ -1702,8 +1709,8 @@ WHERE  Student.StID = Enrolment.StID AND Enrolment.CrsID = Course.Code
 <p>1.2) Modify it so that (1) when a manager leaves, the CEO becomes acting manager of that department automatically, and (2) a change to a manager's Ssn is refused.</p>
     <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>1.1</b> Mgr_ssn in DEPARTMENT is a foreign key referencing EMPLOYEE.Ssn: every manager must be an existing employee.</p>
 <ul class="clean">
-<li><b>ON DELETE SET NULL:</b> deleting a manager sets Mgr_ssn of the department to NULL. Deleting Franklin Wong (333445555) leaves Research &lt;'Research', 5, NULL, …&gt; without a manager. If Mgr_ssn is declared NOT NULL, as in the textbook DDL, the delete is rejected instead.</li>
-<li><b>ON UPDATE CASCADE:</b> changing a manager's Ssn copies the new value to Mgr_ssn. Changing Wong's Ssn to 333445599 changes Research's Mgr_ssn to 333445599.</li>
+<li><b><code class="kw">ON DELETE SET NULL</code>:</b> deleting a manager sets Mgr_ssn of the department to <code class="kw">NULL</code>. Deleting Franklin Wong (333445555) leaves Research &lt;'Research', 5, <code class="kw">NULL</code>, …&gt; without a manager. If Mgr_ssn is declared <code class="kw">NOT NULL</code>, as in the textbook DDL, the delete is rejected instead.</li>
+<li><b><code class="kw">ON UPDATE CASCADE</code>:</b> changing a manager's Ssn copies the new value to Mgr_ssn. Changing Wong's Ssn to 333445599 changes Research's Mgr_ssn to 333445599.</li>
 </ul>
 <p><b>1.2</b> The CEO, James Borg, has Ssn 888665555.</p><pre class="sql">ALTER TABLE DEPARTMENT ALTER Mgr_ssn SET DEFAULT '888665555';
 
@@ -1713,10 +1720,10 @@ ALTER TABLE DEPARTMENT
   ON DELETE SET DEFAULT   -- (1) the CEO becomes acting manager
   ON UPDATE RESTRICT;     -- (2) changing a manager's Ssn is refused</pre></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
-<li><b>Requirement (1)</b> needs both parts: SET DEFAULT on delete and a DEFAULT value that is an existing Ssn. Without the DEFAULT clause there is nothing to set.</li>
-<li><b>Requirement (2)</b> means refuse: RESTRICT or NO ACTION on update.</li>
+<li><b>Requirement (1)</b> needs both parts: <code class="kw">SET DEFAULT</code> on delete and a <code class="kw">DEFAULT</code> value that is an existing Ssn. Without the <code class="kw">DEFAULT</code> clause there is nothing to set.</li>
+<li><b>Requirement (2)</b> means refuse: <code class="kw">RESTRICT</code> or <code class="kw">NO ACTION</code> on update.</li>
 <li><b>Edge case:</b> if the CEO himself is deleted, the default would point to a missing row, so that delete is rejected.</li>
-<li><b>Mention NOT NULL</b> when the action is SET NULL; it decides whether the action can run.</li>
+<li><b>Mention <code class="kw">NOT NULL</code></b> when the action is <code class="kw">SET NULL</code>; it decides whether the action can run.</li>
 </ol></div></details>
     <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 1"><span class="sub2">/ 10</span></div>
   </div>
@@ -1729,7 +1736,7 @@ ALTER TABLE DEPARTMENT
 <p><b>2.2</b> DEPARTMENT(Dname, Dnumber, Mgr_ssn, Mgr_start_date): &lt;'Research', 5, '333445555', '1988-05-22'&gt; is read by position. The tuple &lt;5, 'Research', '1988-05-22', '333445555'&gt; is a different, invalid tuple under this schema: 5 would be read as a name and a date as a manager Ssn.</p>
 <p><b>2.3</b> Adding WORKS_ON &lt;'123456789', 40, 5.0&gt; to the COMPANY state gives an invalid state: there is no project 40, so referential integrity is broken. The state without that tuple satisfies every constraint and is valid.</p>
 <p><b>2.4</b> DEPT_LOCATIONS has no smaller key, so its key is all its attributes: {Dnumber, Dlocation}, as in &lt;5, 'Bellaire'&gt; and &lt;5, 'Houston'&gt;. Because a relation cannot contain duplicate tuples, the set of all attributes is always a superkey, and some minimal subset of it is a key.</p>
-<p><b>2.5</b> INSERT INTO EMPLOYEE (Fname, Lname, Ssn, Dno) VALUES ('Cecilia', 'Kolonsky', '677678989', 7): Ssn 677678989 is new, so the key constraint holds, but Dno 7 matches no department, so referential integrity is violated.</p></div></details>
+<p><b>2.5</b> <code class="kw">INSERT INTO</code> EMPLOYEE (Fname, Lname, Ssn, Dno) VALUES ('Cecilia', 'Kolonsky', '677678989', 7): Ssn 677678989 is new, so the key constraint holds, but Dno 7 matches no department, so referential integrity is violated.</p></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
 <li><b>2.1</b> is the converse of the past paper's "keys are always superkeys". Show a superkey with one removable attribute.</li>
 <li><b>2.2</b> Under the usual definition a tuple is an ordered list of values, matched to attributes by position; under the alternative definition (a set of attribute–value pairs) order would not matter. Mention the schema order.</li>
@@ -1748,11 +1755,11 @@ WHERE E.Ssn = D.Essn
 GROUP BY E.Ssn, E.Lname
 HAVING COUNT(*) &gt;= 2;</pre>
     <details class="deep"><summary>Model answer</summary><div class="deep-body"><p>For each employee who has at least two dependents, show the employee's last name and the number of dependents.</p>
-<p>Result: (Wong, 3) and (Smith, 3). Wallace has one dependent and is removed by HAVING; employees with no dependents never join with DEPENDENT, so they never form a group.</p></div></details>
+<p>Result: (Wong, 3) and (Smith, 3). Wallace has one dependent and is removed by <code class="kw">HAVING</code>; employees with no dependents never join with DEPENDENT, so they never form a group.</p></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
-<li><b>WHERE E.Ssn = D.Essn</b> is the join: one row per (employee, dependent) pair.</li>
-<li><b>GROUP BY E.Ssn</b> makes one group per employee, so two employees with the same last name are not merged. E.Lname is added to GROUP BY so it can appear in SELECT.</li>
-<li><b>COUNT(*)</b> counts the joined rows of each group, which is the number of dependents.</li>
+<li><b><code class="kw">WHERE</code> E.Ssn = D.Essn</b> is the join: one row per (employee, dependent) pair.</li>
+<li><b><code class="kw">GROUP BY</code> E.Ssn</b> makes one group per employee, so two employees with the same last name are not merged. E.Lname is added to <code class="kw">GROUP BY</code> so it can appear in <code class="kw">SELECT</code>.</li>
+<li><b><code class="kw">COUNT(*)</code></b> counts the joined rows of each group, which is the number of dependents.</li>
 <li><b>Data:</b> 333445555 (Wong): Alice, Theodore, Joy = 3. 123456789 (Smith): Michael, Alice, Elizabeth = 3. 987654321 (Wallace): Abner = 1.</li>
 </ol></div></details>
     <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 3"><span class="sub2">/ 10</span></div>
@@ -1781,7 +1788,7 @@ HAVING COUNT(*) &gt;= 2;</pre>
 (3) List the first name of each customer and the quantity for orders of more than
     10 units placed with the supplier Sunrise.</pre></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
-<li><b>NOT becomes set difference</b> in relational algebra and NOT IN (or NOT EXISTS) in SQL. Both sides of the difference must have the same attributes, so project PID on each side first.</li>
+<li><b>NOT becomes set difference</b> in relational algebra and <code class="kw">NOT IN</code> (or <code class="kw">NOT EXISTS</code>) in SQL. Both sides of the difference must have the same attributes, so project PID on each side first.</li>
 <li><b>Rule 1 is safe:</b> x is bound by the positive subgoal PRODUCTS.</li>
 <li><b>Constants inside a subgoal</b> ("Snack", "Sunrise") become selections on that position's attribute.</li>
 <li><b>Comparisons</b> (q &gt; 10) are selections on the bound attribute.</li>
@@ -1846,14 +1853,14 @@ HAVING COUNT(*) &gt;= 2;</pre>
         └── PROJECT</pre>
     <details class="deep"><summary>Model answer</summary><div class="deep-body"><ol>
 <li>Break the conjunctive selection into a cascade of single conditions.</li>
-<li>Push each selection as far down as possible: σ Pname = 'Aquarius' onto PROJECT, σ Bdate &gt; '1957-12-31' onto EMPLOYEE.</li>
-<li>Reorder the leaves so the most restrictive selection is applied first: σ Pname = 'Aquarius' returns a single project, so PROJECT is joined with WORKS_ON first, and EMPLOYEE last.</li>
-<li>Replace each Cartesian product followed by a join condition with a join: PROJECT ⋈ Pnumber = Pno WORKS_ON, then ⋈ Essn = Ssn EMPLOYEE.</li>
+<li>Push each selection as far down as possible: <span class="sym ra">σ</span> Pname = 'Aquarius' onto PROJECT, <span class="sym ra">σ</span> Bdate &gt; '1957-12-31' onto EMPLOYEE.</li>
+<li>Reorder the leaves so the most restrictive selection is applied first: <span class="sym ra">σ</span> Pname = 'Aquarius' returns a single project, so PROJECT is joined with WORKS_ON first, and EMPLOYEE last.</li>
+<li>Replace each Cartesian product followed by a join condition with a join: PROJECT <span class="sym ra">⋈</span> Pnumber = Pno WORKS_ON, then <span class="sym ra">⋈</span> Essn = Ssn EMPLOYEE.</li>
 <li>Push projections down so only the needed attributes move up the tree.</li>
 </ol>
 <p>PROJECT goes first because its selection is the most selective (one tuple), so the first join produces only the WORKS_ON rows of that one project, the smallest possible intermediate result.</p></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
-<li><b>Five steps, in order:</b> cascade σ, push σ down, most restrictive first, × + σ → ⋈, push π down.</li>
+<li><b>Five steps, in order:</b> cascade <span class="sym ra">σ</span>, push <span class="sym ra">σ</span> down, most restrictive first, × + <span class="sym ra">σ</span> → <span class="sym ra">⋈</span>, push <span class="sym ra">π</span> down.</li>
 <li><b>“Why PROJECT first”</b> is answered with selectivity: Pname is unique, so one tuple. Starting from the smallest relation keeps every later join small.</li>
 <li><b>Avoid Cartesian products</b>: reorder only so that each join still has a join condition.</li>
 </ol></div></details>
@@ -1881,7 +1888,7 @@ WHERE  E.Dno = D.Dnumber AND E.Salary &gt; 30000
             └── DEPARTMENT</pre><p>EMPLOYEE keeps only Lname (output) and Dno (join) after its selection; the other eight attributes are dropped. DEPARTMENT keeps only Dnumber (join) and Dname (output); Mgr_ssn and Mgr_start_date are dropped after the selection.</p></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
 <li><b>List what is needed above each leaf:</b> output attributes plus join attributes.</li>
-<li><b>Selections still need their attribute</b> (Salary, Mgr_start_date), so each π goes above its σ.</li>
+<li><b>Selections still need their attribute</b> (Salary, Mgr_start_date), so each <span class="sym ra">π</span> goes above its <span class="sym ra">σ</span>.</li>
 <li><b>EMPLOYEE is wide</b> (ten attributes), so projecting it to two attributes gives the biggest saving.</li>
 </ol></div></details>
     <div class="mkrow"><span class="ctl-label">Your mark</span><input type="number" class="mkin" min="0" max="10" step="0.5" data-max="10" inputmode="decimal" aria-label="Your mark for question 8"><span class="sub2">/ 10</span></div>
@@ -1976,8 +1983,8 @@ WHERE  E.Dno = D.Dnumber AND E.Salary &gt; 30000
     <h3>Statement log <span class="sub2">newest first</span></h3>
     <div id="txLog"></div>
   </div>
-  <div class="tip t-info"><b>Sequence</b>A: START TRANSACTION → A: UPDATE A-101 → A: SELECT → B: SELECT → B: UPDATE A-101 (B waits) → A: COMMIT (B finishes). Then reset and repeat with ROLLBACK instead of COMMIT.</div>
-  <p class="sub2">MySQL InnoDB: a plain SELECT reads the last committed data without waiting; an UPDATE waits for another session's row lock; START TRANSACTION inside an open transaction commits it first.</p>
+  <div class="tip t-info"><b>Sequence</b>A: <code class="kw">START TRANSACTION</code> → A: <code class="kw">UPDATE</code> A-101 → A: <code class="kw">SELECT</code> → B: <code class="kw">SELECT</code> → B: <code class="kw">UPDATE</code> A-101 (B waits) → A: <code class="kw">COMMIT</code> (B finishes). Then reset and repeat with <code class="kw">ROLLBACK</code> instead of <code class="kw">COMMIT</code>.</div>
+  <p class="sub2">MySQL InnoDB: a plain <code class="kw">SELECT</code> reads the last committed data without waiting; an <code class="kw">UPDATE</code> waits for another session's row lock; <code class="kw">START TRANSACTION</code> inside an open transaction commits it first.</p>
 </div></section>
 
 <!-- ============ DRILL: REFERENTIAL ACTIONS ============ -->
@@ -2005,7 +2012,7 @@ WHERE  E.Dno = D.Dnumber AND E.Salary &gt; 30000
 <section class="tab" id="order"><div class="wrap">
   <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/mock">Mock papers</a><a class="sc-tab" href="#/keys">Keys and constraints</a><a class="sc-tab" href="#/calc">Index practice</a><a class="sc-tab" href="#/sessions">Transaction sessions</a><a class="sc-tab" href="#/refact">Referential actions</a><a class="sc-tab" href="#/order" aria-selected="true" aria-current="page">SQL clause order</a></nav>
   <h1>SQL clause order</h1>
-  <p class="lede">Processing order is why WHERE cannot use an aggregate and why a SELECT alias works in ORDER BY.</p>
+  <p class="lede">Processing order is why <code class="kw">WHERE</code> cannot use an aggregate and why a <code class="kw">SELECT</code> alias works in <code class="kw">ORDER BY</code>.</p>
   <div class="panel">
     <div class="ctlrow"><span class="ctl-label">Order</span>
       <div class="sc-seg" id="odMode"><button type="button" aria-pressed="true" data-v="write">Writing order</button><button type="button" aria-pressed="false" data-v="run">Processing order</button></div></div>
@@ -2035,8 +2042,8 @@ WHERE  E.Dno = D.Dnumber AND E.Salary &gt; 30000
 <p>1.2) Modify the constraint so that (1) when a supervisor resigns, the supervisees have no supervisor, and (2) when a new employee is admitted, an HR staff member is assigned as supervisor automatically. You may assume codes, names or other data.</p>
     <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>1.1</b> DEPTMGRFK makes <code>super_ssn</code> in EMPLOYEE a foreign key that references <code>Ssn</code> in the same table (a self-referencing foreign key for the supervision relationship). Every non-NULL super_ssn must equal the Ssn of an existing employee.</p>
 <ul class="clean">
-<li><b>ON DELETE SET DEFAULT:</b> if a supervisor's tuple is deleted from EMPLOYEE, the super_ssn of every employee he or she supervised is set to the default value of super_ssn. For example, deleting Franklin Wong (Ssn 333445555) changes super_ssn of Smith, Narayan and English from 333445555 to the default. The default must itself be an existing Ssn, otherwise the delete is rejected.</li>
-<li><b>ON UPDATE CASCADE:</b> if a supervisor's Ssn is changed, the new value is copied to the super_ssn of every supervisee. For example, changing Wong's Ssn from 333445555 to 333445599 changes super_ssn of Smith, Narayan and English to 333445599.</li>
+<li><b><code class="kw">ON DELETE SET DEFAULT</code>:</b> if a supervisor's tuple is deleted from EMPLOYEE, the super_ssn of every employee he or she supervised is set to the default value of super_ssn. For example, deleting Franklin Wong (Ssn 333445555) changes super_ssn of Smith, Narayan and English from 333445555 to the default. The default must itself be an existing Ssn, otherwise the delete is rejected.</li>
+<li><b><code class="kw">ON UPDATE CASCADE</code>:</b> if a supervisor's Ssn is changed, the new value is copied to the super_ssn of every supervisee. For example, changing Wong's Ssn from 333445555 to 333445599 changes super_ssn of Smith, Narayan and English to 333445599.</li>
 </ul>
 <p><b>1.2</b> Assume the HR officer has Ssn <code>111111111</code> and already exists in EMPLOYEE.</p><pre class="sql">ALTER TABLE EMPLOYEE
   ALTER super_ssn SET DEFAULT '111111111';      -- (2) new employees get the HR supervisor
@@ -2047,38 +2054,38 @@ ALTER TABLE EMPLOYEE
   ON DELETE SET NULL                             -- (1) supervisees are left with no supervisor
   ON UPDATE CASCADE;</pre></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
-<li><b>Read the clause from left to right.</b> FOREIGN KEY (super_ssn) is the child column; REFERENCES EMPLOYEE(Ssn) is the parent key. Both are in EMPLOYEE, so one employee row points at another.</li>
-<li><b>Each referential action answers one event on the parent row.</b> ON DELETE says what happens to the children when the parent row disappears; ON UPDATE says what happens when the parent key value changes. A good answer names the event, the rows affected and the new value, using real tuples.</li>
-<li><b>Requirement (1)</b>, "no supervisor", means the child value becomes NULL, so the delete action changes from SET DEFAULT to SET NULL. super_ssn must therefore allow NULL (it is not part of the primary key, so entity integrity does not apply).</li>
-<li><b>Requirement (2)</b> is about INSERT, not about the foreign key actions. Referential actions fire only on delete and update of the parent, so the automatic HR supervisor comes from a DEFAULT on the column: when INSERT omits super_ssn, the default is stored. The HR employee must exist first, or the foreign key rejects the insert.</li>
-<li><b>Keep what was not asked to change.</b> ON UPDATE CASCADE stays.</li>
+<li><b>Read the clause from left to right.</b> <code class="kw">FOREIGN KEY</code> (super_ssn) is the child column; <code class="kw">REFERENCES</code> EMPLOYEE(Ssn) is the parent key. Both are in EMPLOYEE, so one employee row points at another.</li>
+<li><b>Each referential action answers one event on the parent row.</b> <code class="kw">ON DELETE</code> says what happens to the children when the parent row disappears; <code class="kw">ON UPDATE</code> says what happens when the parent key value changes. A good answer names the event, the rows affected and the new value, using real tuples.</li>
+<li><b>Requirement (1)</b>, "no supervisor", means the child value becomes <code class="kw">NULL</code>, so the delete action changes from <code class="kw">SET DEFAULT</code> to <code class="kw">SET NULL</code>. super_ssn must therefore allow <code class="kw">NULL</code> (it is not part of the primary key, so entity integrity does not apply).</li>
+<li><b>Requirement (2)</b> is about <code class="kw">INSERT</code>, not about the foreign key actions. Referential actions fire only on delete and update of the parent, so the automatic HR supervisor comes from a <code class="kw">DEFAULT</code> on the column: when <code class="kw">INSERT</code> omits super_ssn, the default is stored. The HR employee must exist first, or the foreign key rejects the insert.</li>
+<li><b>Keep what was not asked to change.</b> <code class="kw">ON UPDATE CASCADE</code> stays.</li>
 <li><b>Name check.</b> The constraint is named DEPTMGRFK, but it is the supervisor key, not the department manager key; the name does not change its meaning.</li>
 </ol>
-<p class="sub2">In MySQL (InnoDB) SET DEFAULT is parsed but rejected, and a column is changed with <code>ALTER TABLE … ALTER super_ssn SET DEFAULT …</code>. In standard SQL the drop is <code>DROP CONSTRAINT DEPTMGRFK</code>.</p></div></details>
+<p class="sub2">In MySQL (InnoDB) <code class="kw">SET DEFAULT</code> is parsed but rejected, and a column is changed with <code>ALTER TABLE … ALTER super_ssn SET DEFAULT …</code>. In standard SQL the drop is <code>DROP CONSTRAINT DEPTMGRFK</code>.</p></div></details>
   </div>
 
   <div class="panel" id="x2">
     <h3><span class="badge b1">Q2 · 15</span> Illustrate with COMPANY data</h3>
 <p>Show example data to illustrate each sentence, using the COMPANY database.</p>
 <p class="sub2">Example given: a relation state r(R) is a subset of dom(A1) × dom(A2) × … × dom(An). Answer: relation state r1 of DEPT_LOCATIONS, r1 = {&lt;1, Houston&gt;, &lt;5, Bellaire&gt;}, when A1 = {1, 4, 5} and A2 = {Houston, Bellaire, Stafford}.</p>
-<p>2.1) Tuples in a relation do not have any particular order.<br>2.2) We can have several meanings for NULL values.<br>2.3) Keys are always superkeys.<br>2.4) A value of FK in a tuple t1 of the current state r1(R1) can be NULL.<br>2.5) The delete operation can violate only referential integrity, not the key constraint nor entity integrity.</p>
+<p>2.1) Tuples in a relation do not have any particular order.<br>2.2) We can have several meanings for <code class="kw">NULL</code> values.<br>2.3) Keys are always superkeys.<br>2.4) A value of FK in a tuple t1 of the current state r1(R1) can be <code class="kw">NULL</code>.<br>2.5) The delete operation can violate only referential integrity, not the key constraint nor entity integrity.</p>
     <details class="deep"><summary>Model answer</summary><div class="deep-body"><p><b>2.1</b> r1(DEPT_LOCATIONS) = {&lt;1, Houston&gt;, &lt;4, Stafford&gt;, &lt;5, Bellaire&gt;} and r2(DEPT_LOCATIONS) = {&lt;5, Bellaire&gt;, &lt;1, Houston&gt;, &lt;4, Stafford&gt;} are the same relation state. A relation is a set of tuples, so listing them in a different order does not create a different relation.</p>
 <p><b>2.2</b></p>
 <ul class="clean">
-<li><b>Not applicable:</b> James Borg, &lt;'James', 'E', 'Borg', '888665555', …, Super_ssn = NULL, Dno = 1&gt;. He is at the top of the company, so he has no supervisor.</li>
-<li><b>Unknown:</b> WORKS_ON &lt;'888665555', 20, NULL&gt;. Borg works on project 20, but his hours are not known.</li>
-<li><b>Exists but not recorded:</b> a new employee &lt;'Cecilia', 'F', 'Kolonsky', '677678989', Bdate = NULL, …&gt;. She has a birth date, but it has not been entered yet.</li>
+<li><b>Not applicable:</b> James Borg, &lt;'James', 'E', 'Borg', '888665555', …, Super_ssn = <code class="kw">NULL</code>, Dno = 1&gt;. He is at the top of the company, so he has no supervisor.</li>
+<li><b>Unknown:</b> WORKS_ON &lt;'888665555', 20, <code class="kw">NULL</code>&gt;. Borg works on project 20, but his hours are not known.</li>
+<li><b>Exists but not recorded:</b> a new employee &lt;'Cecilia', 'F', 'Kolonsky', '677678989', Bdate = <code class="kw">NULL</code>, …&gt;. She has a birth date, but it has not been entered yet.</li>
 </ul>
 <p><b>2.3</b> In EMPLOYEE, {Ssn} is a key: no two tuples share an Ssn (123456789, 333445555, 999887777, …), so t1[Ssn] ≠ t2[Ssn] for any two tuples, which is exactly the superkey condition. A key is a superkey that is also minimal. The reverse is not true: {Ssn, Lname} is a superkey but not a key, because Lname can be removed.</p>
-<p><b>2.4</b> Super_ssn in EMPLOYEE is a foreign key referencing EMPLOYEE.Ssn. In the tuple t1 = &lt;'James', 'E', 'Borg', '888665555', …, Super_ssn = NULL, Dno = 1&gt; the foreign key value is NULL, and the state is still valid, because a foreign key value must either match an existing primary key or be NULL.</p>
-<p><b>2.5</b> Deleting Alicia Zelaya, <code>DELETE FROM EMPLOYEE WHERE Ssn = '999887777'</code>, leaves WORKS_ON &lt;'999887777', 30, 30.0&gt; and &lt;'999887777', 10, 10.0&gt; referring to an employee who no longer exists, which violates referential integrity. The delete cannot create a duplicate key or a NULL primary key, because it adds no values; it only removes a tuple.</p></div></details>
+<p><b>2.4</b> Super_ssn in EMPLOYEE is a foreign key referencing EMPLOYEE.Ssn. In the tuple t1 = &lt;'James', 'E', 'Borg', '888665555', …, Super_ssn = <code class="kw">NULL</code>, Dno = 1&gt; the foreign key value is <code class="kw">NULL</code>, and the state is still valid, because a foreign key value must either match an existing primary key or be <code class="kw">NULL</code>.</p>
+<p><b>2.5</b> Deleting Alicia Zelaya, <code>DELETE FROM EMPLOYEE WHERE Ssn = '999887777'</code>, leaves WORKS_ON &lt;'999887777', 30, 30.0&gt; and &lt;'999887777', 10, 10.0&gt; referring to an employee who no longer exists, which violates referential integrity. The delete cannot create a duplicate key or a <code class="kw">NULL</code> primary key, because it adds no values; it only removes a tuple.</p></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
-<li><b>Each sentence is worth 3 marks:</b> one correct example tuple or state from COMPANY plus one line saying why it shows the sentence. Write tuples in angle brackets in schema order, like the given example.</li>
+<li><b>Each sentence is worth 3 marks:</b> one correct example tuple or state from COMPANY plus one line saying why it shows the sentence. Write tuples in angle brackets <code class="sym">&lt; &gt;</code> in schema order, like the given example.</li>
 <li><b>2.1</b> is about the set definition of a relation. Showing the same tuples in two orders and calling them one state is the cleanest proof.</li>
 <li><b>2.2</b> The three meanings are value unknown, value exists but not available, and attribute does not apply. Two of them can be taken straight from the COMPANY state (Borg's Super_ssn and his Hours on project 20).</li>
 <li><b>2.3</b> Start from the definitions: superkey = uniqueness; key = uniqueness + minimality. A key satisfies the first condition by definition, so it is always a superkey. Adding the counterexample {Ssn, Lname} shows you know the converse fails.</li>
-<li><b>2.4</b> Choose a foreign key that is not part of a primary key. Super_ssn or Dno in EMPLOYEE works; Essn in WORKS_ON does not, because there NULL would break entity integrity.</li>
-<li><b>2.5</b> Reason about what each operation changes. Insert and update add values, so they can break domain, key, entity integrity and referential integrity. Delete only removes a tuple, so the only damage possible is a dangling reference. Whether the DBMS then rejects, cascades or sets NULL depends on the referential action.</li>
+<li><b>2.4</b> Choose a foreign key that is not part of a primary key. Super_ssn or Dno in EMPLOYEE works; Essn in WORKS_ON does not, because there <code class="kw">NULL</code> would break entity integrity.</li>
+<li><b>2.5</b> Reason about what each operation changes. Insert and update add values, so they can break domain, key, entity integrity and referential integrity. Delete only removes a tuple, so the only damage possible is a dangling reference. Whether the DBMS then rejects, cascades or sets <code class="kw">NULL</code> depends on the referential action.</li>
 </ol></div></details>
   </div>
 
@@ -2090,11 +2097,11 @@ WHERE Salary &gt; 40000
 GROUP BY Dno
 HAVING COUNT(*) &gt; 5;</pre>
     <details class="deep"><summary>Model answer</summary><div class="deep-body"><p>For each department, show the department number and the number of its employees who earn more than 40,000, but only for departments that have more than five such employees.</p>
-<p>Processing order: FROM EMPLOYEE takes all employees; WHERE Salary &gt; 40000 keeps only employees earning over 40,000; GROUP BY Dno puts the remaining employees into one group per department; HAVING COUNT(*) &gt; 5 keeps only groups with more than five employees; SELECT outputs the department number and the count of each kept group.</p></div></details>
+<p>Processing order: <code class="kw">FROM</code> EMPLOYEE takes all employees; <code class="kw">WHERE</code> Salary &gt; 40000 keeps only employees earning over 40,000; <code class="kw">GROUP BY</code> Dno puts the remaining employees into one group per department; <code class="kw">HAVING</code> <code class="kw">COUNT(*)</code> &gt; 5 keeps only groups with more than five employees; <code class="kw">SELECT</code> outputs the department number and the count of each kept group.</p></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
-<li><b>Read it in processing order</b>, not writing order: FROM → WHERE → GROUP BY → HAVING → SELECT.</li>
-<li><b>WHERE filters rows before grouping</b>, so COUNT(*) counts only employees earning over 40,000, not every employee in the department. This is the point most answers miss.</li>
-<li><b>HAVING filters whole groups</b> after counting. A department with no high earners never forms a group, so it does not appear even with 0.</li>
+<li><b>Read it in processing order</b>, not writing order: <code class="kw">FROM</code> → <code class="kw">WHERE</code> → <code class="kw">GROUP BY</code> → <code class="kw">HAVING</code> → <code class="kw">SELECT</code>.</li>
+<li><b><code class="kw">WHERE</code> filters rows before grouping</b>, so <code class="kw">COUNT(*)</code> counts only employees earning over 40,000, not every employee in the department. This is the point most answers miss.</li>
+<li><b><code class="kw">HAVING</code> filters whole groups</b> after counting. A department with no high earners never forms a group, so it does not appear even with 0.</li>
 <li><b>Boundary:</b> &gt; 40000 excludes a salary of exactly 40,000 (Franklin Wong).</li>
 <li><b>On the COMPANY state</b> only Wallace (43,000, Dno 4) and Borg (55,000, Dno 1) earn more than 40,000, so every group has one employee and the result is empty. The query is correct; the sample data just has no such department.</li>
 <li><b>One sentence first, then the steps.</b> The sentence earns most of the marks; the steps show you understand why.</li>
@@ -2133,11 +2140,11 @@ OFFERS(Sname, PID, Price)
     in the "As seen on TV" category.</pre></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
 <li><b>Map every argument to its attribute by position.</b> CUSTOMERS(_, x, y, _, z) means CID is ignored, x = FName, y = LName, CAddress is ignored, z = Account.</li>
-<li><b>Variables in the head become the projection.</b> ans(x, y) → π FName, LName. ans(x) → π SName.</li>
-<li><b>Comparisons and constants become selections.</b> z &lt; 500 → σ Account &lt; 500. z = "Chiang Mai" → σ SAddress = 'Chiang Mai'. The constant "As seen on TV" in the third position of PRODUCTS → σ Category = 'As seen on TV'.</li>
+<li><b>Variables in the head become the projection.</b> ans(x, y) → <span class="sym ra">π</span> FName, LName. ans(x) → <span class="sym ra">π</span> SName.</li>
+<li><b>Comparisons and constants become selections.</b> z &lt; 500 → <span class="sym ra">σ</span> Account &lt; 500. z = "Chiang Mai" → <span class="sym ra">σ</span> SAddress = 'Chiang Mai'. The constant "As seen on TV" in the third position of PRODUCTS → <span class="sym ra">σ</span> Category = 'As seen on TV'.</li>
 <li><b>A variable shared by two subgoals becomes a join condition.</b> x appears in SUPPLIERS and OFFERS → SUPPLIERS.SName = OFFERS.Sname. y appears in OFFERS and PRODUCTS → OFFERS.PID = PRODUCTS.PID.</li>
 <li><b>Underscores</b> are attributes that are matched but not used, so they appear nowhere in the answer.</li>
-<li><b>DISTINCT</b> in SQL matches the set result of Datalog and relational algebra; plain SELECT could return a supplier once per matching product.</li>
+<li><b><code class="kw">DISTINCT</code></b> in SQL matches the set result of Datalog and relational algebra; plain <code class="kw">SELECT</code> could return a supplier once per matching product.</li>
 <li><b>The English sentence</b> describes the result, not the steps: what is listed, and which condition it satisfies.</li>
 </ol></div></details>
   </div>
@@ -2202,10 +2209,10 @@ OFFERS(Sname, PID, Price)
     │   │   └── ENROLMENT
     │   └── STUDENT
     └── COURSE</pre>
-    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p>The optimizer lists the alternative join orders, (σ(ENROLMENT) ⋈ STUDENT) ⋈ COURSE and (σ(ENROLMENT) ⋈ COURSE) ⋈ STUDENT, estimates the cost of each from the statistics in the catalog, and executes the cheaper plan.</p>
+    <details class="deep"><summary>Model answer</summary><div class="deep-body"><p>The optimizer lists the alternative join orders, (<span class="sym ra">σ</span>(ENROLMENT) <span class="sym ra">⋈</span> STUDENT) <span class="sym ra">⋈</span> COURSE and (<span class="sym ra">σ</span>(ENROLMENT) <span class="sym ra">⋈</span> COURSE) <span class="sym ra">⋈</span> STUDENT, estimates the cost of each from the statistics in the catalog, and executes the cheaper plan.</p>
 <p>Points of consideration:</p>
 <ul class="clean">
-<li><b>Size of the inputs:</b> number of tuples and blocks of STUDENT and COURSE, and how many ENROLMENT tuples remain after σ Grade = A (its selectivity).</li>
+<li><b>Size of the inputs:</b> number of tuples and blocks of STUDENT and COURSE, and how many ENROLMENT tuples remain after <span class="sym ra">σ</span> Grade = A (its selectivity).</li>
 <li><b>Size of the intermediate result:</b> join selectivity, estimated from the number of distinct values of StID/ID and CrsID/Code. The join that produces fewer or narrower tuples is done first, so the next join reads less.</li>
 <li><b>Access paths and join algorithm:</b> whether an index exists on STUDENT.ID or COURSE.Code (index nested-loop), whether the inputs are sorted (sort-merge) or a hash join fits in memory.</li>
 <li><b>Available memory buffers</b>, and whether the intermediate result can be pipelined instead of written to disk.</li>
@@ -2214,7 +2221,7 @@ OFFERS(Sname, PID, Price)
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
 <li><b>The question asks "how", then "what".</b> Answer "how" in one sentence: enumerate the orders, estimate the cost of each, choose the lowest.</li>
 <li><b>Here both joins follow a foreign key to a primary key</b>, so each produces at most one row per selected enrolment. The difference is therefore in cost: which table is smaller, which key has an index, and how wide the intermediate tuples are.</li>
-<li><b>Heuristics the optimizer applies first:</b> perform selections early (σ Grade = A is already pushed down), project away unused columns (only Title and Major are needed), and avoid Cartesian products.</li>
+<li><b>Heuristics the optimizer applies first:</b> perform selections early (<span class="sym ra">σ</span> Grade = A is already pushed down), project away unused columns (only Title and Major are needed), and avoid Cartesian products.</li>
 <li><b>5 marks</b> means the decision method plus three or four named considerations, each with a short reason.</li>
 </ol></div></details>
   </div>
@@ -2244,11 +2251,11 @@ WHERE  Invoice.CustID = Customer.ID AND
             └── σ Amount &gt; 3000
                 └── INVOICE</pre><p>Attributes kept on each branch: from CUSTOMER only ID (join) and Name (output); Type is dropped. From INVOICE only CustID (join), Date and Amount (selection and output); InvID is dropped. LineItem and Product are not used by the query.</p></div></details>
     <details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
-<li><b>Work from the top down.</b> Write the attributes each operator needs: the final π needs Name, Date, Amount; the join needs Customer.ID and Invoice.CustID.</li>
-<li><b>Above each leaf, insert a π</b> keeping only the attributes needed higher in the tree: CUSTOMER → ID, Name; INVOICE → CustID, Date, Amount.</li>
-<li><b>Place the π above the selection</b> on INVOICE, or make sure it still contains Date and Amount, because the selection needs them.</li>
-<li><b>Split the conjunctive selection</b> into a cascade (σ Date.Month = July (σ Amount &gt; 3000 (INVOICE))) so each condition can be moved and ordered separately. Put the more selective condition at the bottom.</li>
-<li><b>Keep the top π.</b> The join output still carries ID and CustID, which the result does not show.</li>
+<li><b>Work from the top down.</b> Write the attributes each operator needs: the final <span class="sym ra">π</span> needs Name, Date, Amount; the join needs Customer.ID and Invoice.CustID.</li>
+<li><b>Above each leaf, insert a <span class="sym ra">π</span></b> keeping only the attributes needed higher in the tree: CUSTOMER → ID, Name; INVOICE → CustID, Date, Amount.</li>
+<li><b>Place the <span class="sym ra">π</span> above the selection</b> on INVOICE, or make sure it still contains Date and Amount, because the selection needs them.</li>
+<li><b>Split the conjunctive selection</b> into a cascade (<span class="sym ra">σ</span> Date.Month = July (<span class="sym ra">σ</span> Amount &gt; 3000 (INVOICE))) so each condition can be moved and ordered separately. Put the more selective condition at the bottom.</li>
+<li><b>Keep the top <span class="sym ra">π</span>.</b> The join output still carries ID and CustID, which the result does not show.</li>
 <li><b>Why it helps:</b> narrower tuples mean more tuples per block, so the intermediate results take fewer blocks to write and read, and the join processes less data. The answer is not changed.</li>
 </ol></div></details>
   </div>
@@ -2267,19 +2274,19 @@ WHERE  Invoice.CustID = Customer.ID AND
     <div class="card"><div class="tscroll"><table>
       <tr><th>Action</th><th>When the referenced row is deleted / its key updated</th></tr>
       <tr><td class="mono">CASCADE</td><td>referencing rows are deleted / updated to match</td></tr>
-      <tr><td class="mono">SET NULL</td><td>referencing FK becomes NULL</td></tr>
-      <tr><td class="mono">SET DEFAULT</td><td>referencing FK takes the column's DEFAULT</td></tr>
+      <tr><td class="mono">SET NULL</td><td>referencing FK becomes <code class="kw">NULL</code></td></tr>
+      <tr><td class="mono">SET DEFAULT</td><td>referencing FK takes the column's <code class="kw">DEFAULT</code></td></tr>
     </table></div></div>
 
     <h3><span class="badge b2">T4</span> Relational algebra symbols</h3>
     <div class="card"><div class="tscroll"><table>
-      <tr><td><b>σ</b> select rows</td><td><b>π</b> project columns, no duplicates</td><td><b>∪ − ∩</b> set ops</td></tr>
-      <tr><td><b>×</b> Cartesian product</td><td><b>⋈</b> join (equijoin on =)</td><td><b>ρ</b> rename · <b>÷</b> division · <b>←</b> assignment</td></tr>
+      <tr><td><b><span class="sym ra">σ</span></b> select rows</td><td><b><span class="sym ra">π</span></b> project columns, no duplicates</td><td><b><span class="sym ra">∪</span> − <span class="sym ra">∩</span></b> set ops</td></tr>
+      <tr><td><b>×</b> Cartesian product</td><td><b><span class="sym ra">⋈</span></b> join (equijoin on =)</td><td><b><span class="sym ra">ρ</span></b> rename · <b><span class="sym ra">÷</span></b> division · <b>←</b> assignment</td></tr>
       <tr><td colspan="3">Text form: <code>sigma_(cond)(R)</code> · <code>pi_(a,b)(R)</code> · <code>join_(R,S)</code></td></tr>
     </table></div></div>
 
     <h3><span class="badge b2">T8</span> Heuristic optimization order</h3>
-    <div class="card"><p><b>Cascade σ</b> → <b>move σ down</b> → <b>× + σ ⇒ ⋈</b> → <b>push π down</b>. Projections low in the tree carry only join keys and output columns.</p></div>
+    <div class="card"><p><b>Cascade <span class="sym ra">σ</span></b> → <b>move <span class="sym ra">σ</span> down</b> → <b>× + <span class="sym ra">σ</span> ⇒ <span class="sym ra">⋈</span></b> → <b>push <span class="sym ra">π</span> down</b>. Projections low in the tree carry only join keys and output columns.</p></div>
 
     <h3><span class="badge gr">T10</span> MySQL privileges</h3>
     <div class="card">
@@ -2289,10 +2296,10 @@ WHERE  Invoice.CustID = Customer.ID AND
     <h3><span class="badge gr">T1 · T9</span> Fast facts</h3>
     <div class="card"><div class="tscroll"><table>
       <tr><td><b>Superkey</b></td><td>any attribute set that identifies a tuple; <b>candidate key</b> = minimal superkey</td></tr>
-      <tr><td><b>FK</b></td><td>links to another table's primary key; may be NULL</td></tr>
+      <tr><td><b>FK</b></td><td>links to another table's primary key; may be <code class="kw">NULL</code></td></tr>
       <tr><td><b>Delete</b></td><td>can violate only referential integrity</td></tr>
       <tr><td><b>Uncommitted change</b></td><td>visible to its own session, invisible to others; blocks others on the locked row</td></tr>
-      <tr><td><b>COMMIT / ROLLBACK</b></td><td>make permanent / discard; an open transaction is usually rolled back automatically</td></tr>
+      <tr><td><b><code class="kw">COMMIT</code> / <code class="kw">ROLLBACK</code></b></td><td>make permanent / discard; an open transaction is usually rolled back automatically</td></tr>
       <tr><td><b>Participation</b></td><td>double line = total, single line = partial</td></tr>
     </table></div></div>
   </div>

@@ -326,6 +326,13 @@ a.sc-tab{text-decoration:none}
 .lb-next{right:12px;top:50%;transform:translateY(-50%)}
 .lb-count{position:absolute;top:20px;left:18px;color:#bbb;font:12px var(--mono, monospace)}
 @media (max-width:760px){.figs{grid-template-columns:minmax(0,1fr)}.lb{padding:52px 8px 16px}.lb-prev,.lb-next{top:auto;bottom:14px;transform:none}.lb img{max-height:calc(100vh - 170px)}}
+
+code.sym{font-weight:700;color:var(--vi);background:color-mix(in srgb,var(--vi) 16%,transparent);border:1px solid color-mix(in srgb,var(--vi) 40%,transparent);padding:0 .38em;border-radius:4px;font-size:.95em}
+code.kw{font-weight:600}
+.sym.ra{color:var(--vi);font-weight:700;font-family:var(--mono);padding:0 1px}
+mark.hl{background:color-mix(in srgb,var(--vi) 20%,transparent);color:var(--ink);border-bottom:2px solid color-mix(in srgb,var(--vi) 70%,transparent);padding:1px 3px;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+html[data-theme="light"] mark.hl{background:color-mix(in srgb,#ffd84d 45%,transparent);border-bottom-color:color-mix(in srgb,var(--vi) 55%,transparent)}
+@media print{mark.hl{background:#fff3a0}}
 </style></head>
 <body data-study-console="spm" data-console-id="spm" data-console-name="Software Project Management">
 <main id="main">
@@ -388,7 +395,7 @@ a.sc-tab{text-decoration:none}
     <summary><span class="num n1">0</span> Start here: the life of a project</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>A project is temporary work with a goal and limits; project management is getting a team to reach that goal inside the limits.</div>
-<p>A <b>project</b> has a start, an end and something unique to deliver. Running a canteen every day is operations; building an app that lets students pre-order canteen food is a project. Every project lives inside three limits that pull against each other: <b>scope</b> (what it must do), <b>time</b> (when it must be done) and <b>cost</b> (how much it may spend). Add features and it takes longer or costs more; cut the budget and something else gives.</p>
+<p>A <b>project</b> has a start, an end and something unique to deliver. Running a canteen every day is operations; building an app that lets students pre-order canteen food is a project. <mark class="hl">Every project lives inside three limits that pull against each other:</mark> <b>scope</b> (what it must do), <b>time</b> (when it must be done) and <b>cost</b> (how much it may spend). Add features and it takes longer or costs more; cut the budget and something else gives.</p>
 <p>A project <b>succeeds</b> when it is on scope, on time and on budget. It is <b>challenged</b> when it misses any one of those. It <b>fails</b> when it is cancelled or never delivered.</p>
 <h4>The life of a project</h4>
 <div class="tscroll"><table>
@@ -496,7 +503,7 @@ a.sc-tab{text-decoration:none}
 <p class="sub2">Effort rises through definition and planning, peaks in implementation, and falls in decommissioning.</p>
 <h4>Proverbs worth remembering</h4>
 <ul class="clean">
-  <li>One woman takes nine months to have a baby; nine women cannot do it in one month. Adding people does not always shorten work.</li>
+  <li>One woman takes nine months to have a baby; nine women cannot do it in one month. <mark class="hl">Adding people does not always shorten work.</mark></li>
   <li>Any project can be estimated accurately, once it is completed.</li>
   <li>The sooner you begin coding, the later you finish.</li>
   <li>What is not on paper has not been said.</li>
@@ -531,7 +538,7 @@ a.sc-tab{text-decoration:none}
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="CHAOS report">CHAOS report</a><a class="chip c2 tlink" href="#/terms" data-term="Scope creep">Scope creep</a><a class="chip c1 tlink" href="#/terms" data-term="Cost overrun">Cost overrun</a><a class="chip c2 tlink" href="#/terms" data-term="SDLC">SDLC</a><a class="chip c1 tlink" href="#/terms" data-term="Software project cycle">Software project cycle</a><a class="chip c2 tlink" href="#/terms" data-term="Abstractness">Abstractness</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>Software is abstract, creative and unpredictable.</li><li>About 30% succeed, 50% are challenged, 20% fail.</li><li>The project cycle manages; the SDLC builds.</li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body"><h4>The 2023 CHAOS figures</h4>
-<p>50% of IT projects were late, over budget, or delivered fewer functions than promised; 20% were considered failed; only 30% were judged successful. Project size and the software process both affect success.</p>
+<p>50% of IT projects were late, over budget, or delivered fewer functions than promised; 20% were considered failed; <mark class="hl">only 30% were judged successful.</mark> Project size and the software process both affect success.</p>
 <h4>Seven laws of IT projects (summary)</h4>
 <ul class="clean">
   <li>A major project is never finished on time, on budget, with the original team, doing exactly what was intended.</li>
@@ -563,7 +570,7 @@ a.sc-tab{text-decoration:none}
   <tr><td>4. Compliance with the Code</td><td>Uphold the Code; violations are inconsistent with ACM membership</td><td>—</td></tr>
 </table></div>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="ACM">ACM</a><a class="chip c2 tlink" href="#/terms" data-term="Code of ethics">Code of ethics</a><a class="chip c1 tlink" href="#/terms" data-term="ACM Code of Ethics and Professional Conduct">ACM Code of Ethics and Professional Conduct</a><a class="chip c2 tlink" href="#/terms" data-term="Confidentiality">Confidentiality</a><a class="chip c1 tlink" href="#/terms" data-term="Competence">Competence</a></div>
-<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Four parts: general, professional, leadership, compliance.</li><li>Work only within your competence; respect privacy and confidentiality.</li></ul></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Four parts: general, professional, leadership, compliance.</li><li><mark class="hl">Work only within your competence; respect privacy and confidentiality.</mark></li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body"><h4>The four parts of the ACM Code</h4>
 <div class="tscroll"><table>
   <tr><th>Part</th><th>Principles</th></tr>
@@ -593,7 +600,7 @@ a.sc-tab{text-decoration:none}
 <h4>PDCA: the improvement loop</h4>
 <p><b>Plan</b> a change, <b>Do</b> it on a small scale, <b>Check</b> the result, <b>Act</b> on what you learned, then repeat. Also called the Deming cycle.</p>
 <h4>BCG growth-share matrix</h4>
-<p>Places each product by market growth and market share, to decide where to invest.</p>
+<p><mark class="hl">Places each product by market growth and market share, to decide where to invest.</mark></p>
 <div class="tscroll"><table>
   <tr><th></th><th>High market share</th><th>Low market share</th></tr>
   <tr><th>High market growth</th><td><b>Star</b>: invest to keep leading</td><td><b>Problem child</b> (question mark): invest or drop</td></tr>
@@ -651,7 +658,7 @@ a.sc-tab{text-decoration:none}
     <summary><span class="num n1">5</span> Project initiation</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>Initiation answers two questions: is there a real need, and who will fund it?</div>
-<p>Before anyone plans, someone must show the project is worth starting. For CanteenGo that means proving students really waste time in queues, and finding who would pay to fix it.</p>
+<p><mark class="hl">Before anyone plans, someone must show the project is worth starting.</mark> For CanteenGo that means proving students really waste time in queues, and finding who would pay to fix it.</p>
 <h4>Finding the need</h4>
 <p>Four ways to learn what is needed: <b>brainstorming</b> inside the team, a <b>stakeholder meeting</b>, a <b>survey</b> (interviews for depth, questionnaires for numbers), and other methods such as observation, workshops and prototypes.</p>
 <h4>Brainstorming tools</h4>
@@ -728,7 +735,7 @@ a.sc-tab{text-decoration:none}
 </table></div>
 <p>Each level is judged by a different kind of result: an <b>activity</b> by its <b>output</b>, an <b>objective</b> by its <b>outcome</b>, a <b>goal</b> by its <b>impact</b>. For CanteenGo: activity "build the order screen" → output "a working screen"; objective "students can pre-order" → outcome "300 orders a week"; goal "less time lost at lunch" → impact "average queue time halves".</p>
 <h4>Scope</h4>
-<p>The shared agreement on what is included and what is not. Writing down "no delivery, pick-up only" early stops arguments later. A scope statement usually lists objectives, acceptance criteria, boundaries, assumptions, deliverables, early risks, milestones, the work breakdown and a budget summary.</p>
+<p>The shared agreement on what is included and what is not. Writing down "no delivery, pick-up only" <mark class="hl">early stops arguments later.</mark> A scope statement usually lists objectives, acceptance criteria, boundaries, assumptions, deliverables, early risks, milestones, the work breakdown and a budget summary.</p>
 <h4>Authority and structure</h4>
 <p>Agree at the start who decides what. How much power the project manager has depends on how the organisation is structured:</p>
 <div class="tscroll"><table>
@@ -798,7 +805,7 @@ a.sc-tab{text-decoration:none}
   <tr><td>External Interface File</td><td class="mono">EIF</td><td>The university's student list, owned by another system</td></tr>
 </table></div>
 <h4>From effort to cost</h4>
-<p>Effort is counted in <b>person-days</b>: one person working one day. Cost = person-days × the cost of one person-day. Twenty person-days at 2,000 baht is 40,000 baht.</p>
+<p><mark class="hl">Effort is counted in <b>person-days</b>: one person working one day.</mark> Cost = person-days × the cost of one person-day. Twenty person-days at 2,000 baht is 40,000 baht.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Engineering judgment">Engineering judgment</a><a class="chip c2 tlink" href="#/terms" data-term="COCOMO II">COCOMO II</a><a class="chip c1 tlink" href="#/terms" data-term="LoC">LoC</a><a class="chip c2 tlink" href="#/terms" data-term="EAF">EAF</a><a class="chip c1 tlink" href="#/terms" data-term="FPA">FPA</a><a class="chip c2 tlink" href="#/terms" data-term="EI">EI</a><a class="chip c1 tlink" href="#/terms" data-term="EO">EO</a><a class="chip c2 tlink" href="#/terms" data-term="EQ">EQ</a><a class="chip c1 tlink" href="#/terms" data-term="ILF">ILF</a><a class="chip c2 tlink" href="#/terms" data-term="EIF">EIF</a><a class="chip c1 tlink" href="#/terms" data-term="UFP">UFP</a><a class="chip c2 tlink" href="#/terms" data-term="VAF">VAF</a><a class="chip c1 tlink" href="#/terms" data-term="FP">FP</a><a class="chip c2 tlink" href="#/terms" data-term="Person-day">Person-day</a><a class="chip c1 tlink" href="#/terms" data-term="PSP">PSP</a><a class="chip c2 tlink" href="#/terms" data-term="COSMIC">COSMIC</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>Avoid pure engineering judgment.</li><li>FP = UFP × VAF; VAF = 0.65 + Σ ratings ÷ 100.</li><li>Cost = person-days × person-day cost.</li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body">
@@ -906,7 +913,7 @@ a.sc-tab{text-decoration:none}
   <tr><td>ROI</td><td>Average yearly profit as a share of the cost</td><td>(average profit per year ÷ total cost) × 100</td></tr>
   <tr><td>NPV</td><td>Net profit with future money discounted to today's value</td><td>Σ cash in year t ÷ (1 + r)<sup>t</sup></td></tr>
 </table></div>
-<p>Money in five years is worth less than the same money today, so NPV shrinks later income. A project that looks profitable on raw totals can lose money once discounted.</p>
+<p>Money in five years is worth less than the same money today, so NPV shrinks later income. <mark class="hl">A project that looks profitable on raw totals can lose money once discounted.</mark></p>
 <p>The study ends in a <b>feasibility report</b>: executive summary, each dimension, the options with pros and cons, and a recommendation.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Feasibility analysis">Feasibility analysis</a><a class="chip c2 tlink" href="#/terms" data-term="Strategic feasibility">Strategic feasibility</a><a class="chip c1 tlink" href="#/terms" data-term="Technical feasibility">Technical feasibility</a><a class="chip c2 tlink" href="#/terms" data-term="Economic feasibility">Economic feasibility</a><a class="chip c1 tlink" href="#/terms" data-term="Cost-benefit analysis">Cost-benefit analysis</a><a class="chip c2 tlink" href="#/terms" data-term="Payback period">Payback period</a><a class="chip c1 tlink" href="#/terms" data-term="ROI">ROI</a><a class="chip c2 tlink" href="#/terms" data-term="NPV">NPV</a><a class="chip c1 tlink" href="#/terms" data-term="Discount rate">Discount rate</a><a class="chip c2 tlink" href="#/terms" data-term="Feasibility report">Feasibility report</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>Strategic, technical, economic, other.</li><li>ROI = average yearly profit ÷ total cost.</li><li>NPV discounts future money; late income counts for less.</li></ul></div>
@@ -957,7 +964,7 @@ a.sc-tab{text-decoration:none}
   <li>Break the work down (WBS) into tasks small enough to estimate and assign.</li>
   <li>Lay the tasks out on a Gantt chart: one bar per task across the calendar.</li>
 </ol>
-<p>A WBS that lists only "Requirements, Database, System, Testing" is too coarse. Break each into concrete tasks: "interview canteen owner", "design orders table", "test payment".</p>
+<p>A WBS that lists only "Requirements, Database, System, Testing" <mark class="hl">is too coarse.</mark> Break each into concrete tasks: "interview canteen owner", "design orders table", "test payment".</p>
 <h4>Three-point estimate</h4>
 <p>Instead of one guess, give three: best case, most likely, worst case. The estimate weights the most likely four times:</p>
 <div class="formula">estimate = (best + 4 × most likely + worst) ÷ 6<br>best 4, most likely 6, worst 20 days → (4 + 24 + 20) ÷ 6 = 8 days</div>
@@ -993,7 +1000,7 @@ a.sc-tab{text-decoration:none}
     <summary><span class="num n2">10</span> Critical path analysis and PERT</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>The critical path is the longest chain of dependent tasks; it sets the earliest the project can finish.</div>
-<p>Some tasks must wait for others; some can run in parallel. Draw the tasks as a <b>network diagram</b> with arrows for "must follow". Every route from Start to Finish is a path. Add up the durations on each path: the <b>longest</b> one is the critical path, because the project cannot finish before its slowest chain does.</p>
+<p>Some tasks must wait for others; some can run in parallel. Draw the tasks as a <b>network diagram</b> with arrows for "must follow". Every route from Start to Finish is a path. Add up the durations on each path: <mark class="hl">the <b>longest</b> one is the critical path, because the project cannot finish before its slowest chain does.</mark></p>
 <h4>A small example</h4>
 <div class="tscroll"><table>
   <tr><th>Task</th><th>Days</th><th>Must follow</th></tr>
@@ -1071,7 +1078,7 @@ a.sc-tab{text-decoration:none}
   <tr><td>I</td><td>2</td><td>2</td><td>5</td><td>2.5</td><td>3</td><td>32</td><td>35</td><td>32</td><td>35</td><td>0</td></tr>
   <tr><td>J</td><td>2</td><td>3</td><td>6</td><td>3.3</td><td>4</td><td>35</td><td>39</td><td>35</td><td>39</td><td>0</td></tr>
 </table></div>
-<p>Expected times are rounded up to whole days before scheduling. The project takes 39 days; the critical path is A–E–D–F–I–J.</p>
+<p><mark class="hl">Expected times are rounded up to whole days before scheduling.</mark> The project takes 39 days; the critical path is A–E–D–F–I–J.</p>
 <p class="sub2">The O, M, P step is stated as not required in the exam.</p>
 <h4>Six PERT steps</h4>
 <ol>
@@ -1091,7 +1098,7 @@ a.sc-tab{text-decoration:none}
     <summary><span class="num n2">11</span> Risk management</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>Find what could go wrong, rate how likely and how bad it is, and plan for the worst ones before they happen.</div>
-<p>Four questions frame every risk: What can go wrong? How likely is it? How much damage would it do? What can we do about it? Acting before the problem appears is <b>proactive</b>; reacting after it does is <b>reactive</b>.</p>
+<p>Four questions frame every risk: What can go wrong? How likely is it? How much damage would it do? What can we do about it? <mark class="hl">Acting before the problem appears is <b>proactive</b></mark>; reacting after it does is <b>reactive</b>.</p>
 <h4>Rating a risk</h4>
 <div class="formula">risk exposure = probability × consequence</div>
 <p>On CanteenGo, "canteen refuses to test" has probability 0.2 and would cost 20 days: exposure 4 days. "Payment gateway approval is slow" at 0.6 and 15 days: exposure 9. Handle the higher exposure first.</p>
@@ -1190,7 +1197,7 @@ a.sc-tab{text-decoration:none}
 </table></div>
 <p>Agile values individuals and interactions, working software, customer collaboration and responding to change, over processes and tools, documentation, contract negotiation and following a plan. The items on the right still matter; the left matter more.</p>
 <h4>Monitoring progress (earned value)</h4>
-<p>Give every task a <b>planned value</b>: its share of total project time. When a task is finished, the project has <b>earned</b> that share. Divide earned value by the days spent to get a speed, then project the finish date.</p>
+<p><mark class="hl">Give every task a <b>planned value</b>: its share of total project time.</mark> When a task is finished, the project has <b>earned</b> that share. Divide earned value by the days spent to get a speed, then project the finish date.</p>
 <div class="formula">CanteenGo: tasks worth 60% finished after 40 days → 1.5% per day<br>remaining 40% ÷ 1.5 = 26.7 more days → finish around day 67, not day 50</div>
 <h4>Re-planning</h4>
 <p><b>Change management</b> prepares for and handles changes from inside (staff, goals, technology) and outside (competitors, economy, law). <b>Conflict management</b> handles disagreements. The five ways to handle a conflict depend on how much you care about your own agenda and about the other side's:</p>
@@ -1274,7 +1281,7 @@ a.sc-tab{text-decoration:none}
   <tr><td>Manage knowledge</td><td>Store selected reference data and lessons as a report</td><td>Save estimates vs actuals for the next project</td></tr>
 </table></div>
 <h4>Review vs evaluate</h4>
-<p><b>Reviewing</b> is concrete: the problem, the solution, the method, the evidence. <b>Evaluating</b> is more abstract: effectiveness, efficiency, potential, feasibility.</p>
+<p><mark class="hl"><b>Reviewing</b> is concrete</mark>: the problem, the solution, the method, the evidence. <mark class="hl"><b>Evaluating</b> is more abstract</mark>: effectiveness, efficiency, potential, feasibility.</p>
 <h4>Rewards that work</h4>
 <p>A good reward is valuable, justified, obtainable and flexible. It does not have to be money: praise in person, a certificate, an announcement, training, representing the company, a promotion or more freedom at work. Rewarding good work motivates more than punishing poor work.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Decommissioning">Decommissioning</a><a class="chip c2 tlink" href="#/terms" data-term="5 Whys">5 Whys</a><a class="chip c1 tlink" href="#/terms" data-term="Reward">Reward</a><a class="chip c2 tlink" href="#/terms" data-term="Review">Review</a><a class="chip c1 tlink" href="#/terms" data-term="Evaluate">Evaluate</a><a class="chip c2 tlink" href="#/terms" data-term="PIR">PIR</a><a class="chip c1 tlink" href="#/terms" data-term="Knowledge management">Knowledge management</a></div>
