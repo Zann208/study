@@ -651,9 +651,131 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
   <tr><td class="mono">RESTRICT / NO ACTION</td><td>Refuse</td><td>The delete or update of the member is rejected; nothing changes</td></tr>
 </table></div>
 <p class="sub2">If you write no action, MySQL uses NO ACTION, which in MySQL behaves the same as RESTRICT.</p>
-<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="SQL">SQL</a><a class="chip c2 tlink" href="#/terms" data-term="DDL">DDL</a><a class="chip c1 tlink" href="#/terms" data-term="DML">DML</a><a class="chip c2 tlink" href="#/terms" data-term="DCL">DCL</a><a class="chip c1 tlink" href="#/terms" data-term="TCL">TCL</a><a class="chip c2 tlink" href="#/terms" data-term="CREATE TABLE">CREATE TABLE</a><a class="chip c1 tlink" href="#/terms" data-term="ALTER TABLE">ALTER TABLE</a><a class="chip c2 tlink" href="#/terms" data-term="NOT NULL">NOT NULL</a><a class="chip c1 tlink" href="#/terms" data-term="UNIQUE">UNIQUE</a><a class="chip c2 tlink" href="#/terms" data-term="DEFAULT">DEFAULT</a><a class="chip c1 tlink" href="#/terms" data-term="CHECK">CHECK</a><a class="chip c2 tlink" href="#/terms" data-term="REFERENCES">REFERENCES</a><a class="chip c1 tlink" href="#/terms" data-term="Referential action">Referential action</a><a class="chip c2 tlink" href="#/terms" data-term="CASCADE">CASCADE</a><a class="chip c1 tlink" href="#/terms" data-term="SET NULL">SET NULL</a><a class="chip c2 tlink" href="#/terms" data-term="SET DEFAULT">SET DEFAULT</a><a class="chip c1 tlink" href="#/terms" data-term="RESTRICT">RESTRICT</a><a class="chip c2 tlink" href="#/terms" data-term="NO ACTION">NO ACTION</a></div>
+<h4>Choosing a type for each column</h4>
+<p>Every column gets a data type. The common ones: <code>INT</code> for whole numbers, <code>DECIMAL(10,2)</code> for money, <code>VARCHAR(n)</code> for text of varying length, <code>CHAR(n)</code> for codes that always have the same length, and <code>DATE</code> for dates written YYYY-MM-DD.</p>
+<h4>A rule can compare two columns</h4>
+<p>A CHECK at the end of CREATE TABLE is tested on every row and may compare columns of that row, for example "a loan cannot be returned before it was borrowed": <code>CHECK (ReturnDate &gt;= LoanDate)</code>.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="SQL">SQL</a><a class="chip c2 tlink" href="#/terms" data-term="DDL">DDL</a><a class="chip c1 tlink" href="#/terms" data-term="DML">DML</a><a class="chip c2 tlink" href="#/terms" data-term="DQL">DQL</a><a class="chip c1 tlink" href="#/terms" data-term="DCL">DCL</a><a class="chip c2 tlink" href="#/terms" data-term="TCL">TCL</a><a class="chip c1 tlink" href="#/terms" data-term="CREATE TABLE">CREATE TABLE</a><a class="chip c2 tlink" href="#/terms" data-term="ALTER TABLE">ALTER TABLE</a><a class="chip c1 tlink" href="#/terms" data-term="NOT NULL">NOT NULL</a><a class="chip c2 tlink" href="#/terms" data-term="UNIQUE">UNIQUE</a><a class="chip c1 tlink" href="#/terms" data-term="DEFAULT">DEFAULT</a><a class="chip c2 tlink" href="#/terms" data-term="CHECK">CHECK</a><a class="chip c1 tlink" href="#/terms" data-term="REFERENCES">REFERENCES</a><a class="chip c2 tlink" href="#/terms" data-term="Referential action">Referential action</a><a class="chip c1 tlink" href="#/terms" data-term="CASCADE">CASCADE</a><a class="chip c2 tlink" href="#/terms" data-term="SET NULL">SET NULL</a><a class="chip c1 tlink" href="#/terms" data-term="SET DEFAULT">SET DEFAULT</a><a class="chip c2 tlink" href="#/terms" data-term="RESTRICT">RESTRICT</a><a class="chip c1 tlink" href="#/terms" data-term="NO ACTION">NO ACTION</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>DDL builds structure; constraints are rules the DBMS checks for you.</li><li>CASCADE follows, SET NULL unlinks, SET DEFAULT relinks, RESTRICT refuses.</li><li>In MySQL, no action written means RESTRICT.</li></ul></div>
-<details class="deep"><summary>Details</summary><div class="deep-body"><h4>Creating a schema and a table</h4>
+<details class="deep"><summary>Details</summary><div class="deep-body"><h4>SQL and its command groups</h4>
+<p>SQL (Structured Query Language) is the standard language for working with relational databases. IBM first called it Structured English Query Language, SEQUEL. MySQL, PostgreSQL, SQL Server, Oracle and SQLite all support it, each with small variations.</p>
+<div class="tscroll"><table>
+  <tr><th>Group</th><th>Stands for</th><th>Commands</th></tr>
+  <tr><td class="mono">DDL</td><td>Data Definition Language</td><td><code>CREATE</code>, <code>DROP</code>, <code>ALTER</code>, <code>TRUNCATE</code>, <code>RENAME</code></td></tr>
+  <tr><td class="mono">DML</td><td>Data Manipulation Language</td><td><code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>CALL</code>, <code>LOCK</code></td></tr>
+  <tr><td class="mono">TCL</td><td>Transaction Control Language</td><td><code>COMMIT</code>, <code>SAVEPOINT</code>, <code>ROLLBACK</code>, <code>SET TRANSACTION</code>, <code>SET CONSTRAINT</code></td></tr>
+  <tr><td class="mono">DQL</td><td>Data Query Language</td><td><code>SELECT</code></td></tr>
+  <tr><td class="mono">DCL</td><td>Data Control Language</td><td><code>GRANT</code>, <code>REVOKE</code></td></tr>
+</table></div>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-cmds.webp" data-cap="SQL command groups and their commands" aria-label="Enlarge: SQL command groups and their commands"><img src="./img/ddl-cmds.webp" width="1400" height="884" loading="lazy" decoding="async" alt="SQL command groups and their commands"></button><figcaption><span class="fig-n">1</span>SQL command groups and their commands</figcaption></figure></div>
+<h4>Terminology</h4>
+<p>SQL says <b>table</b>, <b>row</b> and <b>column</b> for the relational terms relation, tuple and attribute. The main data definition command is <code>CREATE</code>.</p>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-terms.webp" data-cap="DEPARTMENT as a table: rows, columns and a CREATE statement" aria-label="Enlarge: DEPARTMENT as a table: rows, columns and a CREATE statement"><img src="./img/ddl-terms.webp" width="1400" height="424" loading="lazy" decoding="async" alt="DEPARTMENT as a table: rows, columns and a CREATE statement"></button><figcaption><span class="fig-n">2</span>DEPARTMENT as a table: rows, columns and a CREATE statement</figcaption></figure></div>
+<h4>Schema and catalog</h4>
+<ul class="clean">
+  <li><b>SQL schema</b> (a database): identified by a schema name, with an authorization identifier and descriptors for each element. Its elements are tables, constraints, views, domains and other constructs such as authorization grants.</li>
+  <li>Every SQL statement ends with a semicolon.</li>
+  <li><b>Catalog:</b> a named collection of schemas. It always contains the special schema <code>INFORMATION_SCHEMA</code>, which holds data about the databases themselves. Catalogs can in turn be grouped into a cluster.</li>
+  <li>PostgreSQL and SQL Server: create a database (catalog) first, then organise its tables into several schemas such as HR, SALES and COMPANY. MySQL: DATABASE and SCHEMA are the same level.</li>
+</ul>
+<pre class="sql">CREATE SCHEMA COMPANY AUTHORIZATION 'Jsmith';
+CREATE DATABASE COMPANY;</pre>
+<h4>CREATE TABLE</h4>
+<p>A CREATE TABLE statement gives (1) the table name, (2) the attributes and their types, and (3) the constraints. The schema can be named in front of the table: <code>CREATE TABLE COMPANY.EMPLOYEE …</code> or simply <code>CREATE TABLE EMPLOYEE …</code>.</p>
+<div class="grid2">
+<pre class="sql">CREATE TABLE relation_name
+  ( A1 Att_type1,
+    A2 Att_type2,
+    …,
+    An Att_type_n,
+    &lt;integrity-constraint1&gt;,
+    …,
+    &lt;integrity-constraintk&gt; );</pre>
+<pre class="sql">CREATE TABLE Orders (
+  Order_ID    INT PRIMARY KEY,
+  Order_Date  DATE NOT NULL,
+  Customer_ID INT,
+  FOREIGN KEY (Customer_ID)
+    REFERENCES Customers(Customer_ID)
+);</pre>
+</div>
+<div class="tscroll"><table>
+  <tr><th></th><th>Base table (base relation)</th><th>Virtual relation (view)</th></tr>
+  <tr><td>Created by</td><td><code>CREATE TABLE</code></td><td><code>CREATE VIEW</code></td></tr>
+  <tr><td>Stored</td><td>The relation and its tuples are stored as a file by the DBMS</td><td>No physical file</td></tr>
+</table></div>
+<h4>Primary key and foreign key, by example</h4>
+<p>A list of names cannot tell two students called John Smith apart. A primary key gives every row its own identifier (StudentID 101 and 103), and a foreign key in another table refers back to it: the enrolment table stores CourseID and StudentID, both foreign keys.</p>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-keys.webp" data-cap="Primary key and foreign key: student, course and enrolment tables" aria-label="Enlarge: Primary key and foreign key: student, course and enrolment tables"><img src="./img/ddl-keys.webp" width="1400" height="614" loading="lazy" decoding="async" alt="Primary key and foreign key: student, course and enrolment tables"></button><figcaption><span class="fig-n">3</span>Primary key and foreign key: student, course and enrolment tables</figcaption></figure></div>
+<h4>The COMPANY schema in SQL</h4>
+<p>Figure 6.1 defines all six COMPANY tables with CREATE TABLE, including NOT NULL columns, primary keys, the UNIQUE department name and every foreign key.</p>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-company-a.webp" data-cap="Figure 6.1: CREATE TABLE for EMPLOYEE, DEPARTMENT and DEPT_LOCATIONS" aria-label="Enlarge: Figure 6.1: CREATE TABLE for EMPLOYEE, DEPARTMENT and DEPT_LOCATIONS"><img src="./img/ddl-company-a.webp" width="1153" height="711" loading="lazy" decoding="async" alt="Figure 6.1: CREATE TABLE for EMPLOYEE, DEPARTMENT and DEPT_LOCATIONS"></button><figcaption><span class="fig-n">4</span>Figure 6.1: CREATE TABLE for EMPLOYEE, DEPARTMENT and DEPT_LOCATIONS</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-company-b.webp" data-cap="Figure 6.1 (contd.): CREATE TABLE for PROJECT, WORKS_ON and DEPENDENT" aria-label="Enlarge: Figure 6.1 (contd.): CREATE TABLE for PROJECT, WORKS_ON and DEPENDENT"><img src="./img/ddl-company-b.webp" width="1028" height="731" loading="lazy" decoding="async" alt="Figure 6.1 (contd.): CREATE TABLE for PROJECT, WORKS_ON and DEPENDENT"></button><figcaption><span class="fig-n">5</span>Figure 6.1 (contd.): CREATE TABLE for PROJECT, WORKS_ON and DEPENDENT</figcaption></figure></div>
+<h4>Data types</h4>
+<p>Four main categories: numeric, character string, date and time, and boolean and bit.</p>
+<ul class="clean">
+  <li><b>Numeric:</b> integers <code>INTEGER</code> / <code>INT</code>, <code>SMALLINT</code>; floating point <code>FLOAT</code> or <code>REAL</code>, and <code>DOUBLE PRECISION</code>.</li>
+</ul>
+<div class="tscroll"><table>
+  <tr><th>MySQL type</th><th>Bytes</th><th>Signed range</th><th>Unsigned range</th></tr>
+  <tr><td class="mono">TINYINT</td><td>1</td><td>−128 to 127</td><td>0 to 255</td></tr>
+  <tr><td class="mono">SMALLINT</td><td>2</td><td>−32,768 to 32,767</td><td>0 to 65,535</td></tr>
+  <tr><td class="mono">MEDIUMINT</td><td>3</td><td>−8,388,608 to 8,388,607</td><td>0 to 16,777,215</td></tr>
+  <tr><td class="mono">INT</td><td>4</td><td>−2,147,483,648 to 2,147,483,647</td><td>0 to 4,294,967,295</td></tr>
+  <tr><td class="mono">BIGINT</td><td>8</td><td>−2<sup>63</sup> to 2<sup>63</sup> − 1</td><td>0 to 2<sup>64</sup> − 1</td></tr>
+</table></div>
+<ul class="clean">
+  <li><b>Character string:</b> fixed length <code>CHAR(n)</code> / <code>CHARACTER(n)</code>; varying length <code>VARCHAR(n)</code> / <code>CHAR VARYING(n)</code> / <code>CHARACTER VARYING(n)</code>. <code>CHAR(10)</code> always reserves 10 characters, so 'Cat' is padded with 7 spaces; <code>VARCHAR(10)</code> stores only 'Cat' plus a small length field.</li>
+  <li><b>DATE:</b> ten positions, YYYY-MM-DD. <b>TIME:</b> HH:MM:SS. RDBMSs provide functions to change date formats.</li>
+  <li><b>TIMESTAMP:</b> DATE and TIME plus at least six positions for fractions of a second, with an optional <code>WITH TIME ZONE</code> qualifier.</li>
+  <li><b>INTERVAL:</b> a relative value used to increase or decrease a date, time or timestamp, e.g. <code>order_date + INTERVAL '14' DAY</code>. MySQL has no INTERVAL column type; INTERVAL is only a keyword in date expressions such as <code>SELECT order_date + INTERVAL '1' MONTH FROM ORDERS;</code>. DATE, TIME, TIMESTAMP and INTERVAL values can be cast to strings for comparison.</li>
+  <li><b>Bit string:</b> <code>BIT(n)</code>, <code>BIT VARYING(n)</code>. <b>Boolean:</b> TRUE, FALSE or NULL.</li>
+</ul>
+<h4>Domains</h4>
+<p>A domain is a named type used in attribute definitions. Changing the domain changes every attribute that uses it, and the schema is easier to read: <code>CREATE DOMAIN SSN_TYPE AS CHAR(9);</code>. MySQL does not support CREATE DOMAIN.</p>
+<h4>Constraints in SQL</h4>
+<p>SQL supports the three basic constraints of the relational model: the <b>key constraint</b> (a primary key value cannot be duplicated), <b>entity integrity</b> (a primary key value cannot be NULL) and <b>referential integrity</b> (a foreign key value must already exist as a primary key value, or be NULL).</p>
+<div class="tscroll"><table>
+  <tr><th>Clause</th><th>What it does</th><th>Example</th></tr>
+  <tr><td class="mono">NOT NULL</td><td>NULL is not allowed for the attribute</td><td><code>Fname VARCHAR(15) NOT NULL</code></td></tr>
+  <tr><td class="mono">DEFAULT</td><td>Value stored when none is given. Without a DEFAULT clause the default is NULL for any attribute that is not NOT NULL.</td><td><code>Dno INT NOT NULL DEFAULT 1</code></td></tr>
+  <tr><td class="mono">CHECK</td><td>Restricts attribute or domain values (a value validator)</td><td><code>Dnumber INT NOT NULL CHECK (Dnumber &gt; 0 AND Dnumber &lt; 21)</code></td></tr>
+  <tr><td class="mono">PRIMARY KEY</td><td>One or more attributes that form the primary key</td><td><code>Dnumber INT PRIMARY KEY</code> or <code>PRIMARY KEY (Dnumber)</code></td></tr>
+  <tr><td class="mono">UNIQUE</td><td>Alternate (secondary) keys, the candidate keys of the relational model</td><td><code>UNIQUE (Dname)</code></td></tr>
+  <tr><td class="mono">FOREIGN KEY</td><td>Referential integrity; rejects a violating change by default</td><td><code>FOREIGN KEY (Mgr_ssn) REFERENCES EMPLOYEE(Ssn)</code></td></tr>
+</table></div>
+<pre class="sql">CREATE DOMAIN D_NUM AS INTEGER
+  CHECK (D_NUM &gt; 0 AND D_NUM &lt; 21);</pre>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-notnull.webp" data-cap="NOT NULL on EMPLOYEE attributes" aria-label="Enlarge: NOT NULL on EMPLOYEE attributes"><img src="./img/ddl-notnull.webp" width="1400" height="563" loading="lazy" decoding="async" alt="NOT NULL on EMPLOYEE attributes"></button><figcaption><span class="fig-n">6</span>NOT NULL on EMPLOYEE attributes</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-default.webp" data-cap="DEFAULT 1 on Dno" aria-label="Enlarge: DEFAULT 1 on Dno"><img src="./img/ddl-default.webp" width="1400" height="556" loading="lazy" decoding="async" alt="DEFAULT 1 on Dno"></button><figcaption><span class="fig-n">7</span>DEFAULT 1 on Dno</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-check.webp" data-cap="CHECK on an attribute and on a domain" aria-label="Enlarge: CHECK on an attribute and on a domain"><img src="./img/ddl-check.webp" width="1400" height="353" loading="lazy" decoding="async" alt="CHECK on an attribute and on a domain"></button><figcaption><span class="fig-n">8</span>CHECK on an attribute and on a domain</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-pk.webp" data-cap="PRIMARY KEY on Dnumber" aria-label="Enlarge: PRIMARY KEY on Dnumber"><img src="./img/ddl-pk.webp" width="1400" height="240" loading="lazy" decoding="async" alt="PRIMARY KEY on Dnumber"></button><figcaption><span class="fig-n">9</span>PRIMARY KEY on Dnumber</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-unique.webp" data-cap="UNIQUE on Dname" aria-label="Enlarge: UNIQUE on Dname"><img src="./img/ddl-unique.webp" width="1400" height="384" loading="lazy" decoding="async" alt="UNIQUE on Dname"></button><figcaption><span class="fig-n">10</span>UNIQUE on Dname</figcaption></figure></div>
+<h4>Referential triggered actions</h4>
+<ul class="clean">
+  <li>The default action on a foreign key violation is to reject the change.</li>
+  <li>A referential triggered action clause can be attached instead: <code>SET NULL</code>, <code>CASCADE</code> or <code>SET DEFAULT</code>, after <code>ON DELETE</code> and/or <code>ON UPDATE</code>.</li>
+  <li>SET NULL and SET DEFAULT do the same thing for ON DELETE and ON UPDATE: the referencing value becomes NULL or the default.</li>
+  <li>CASCADE suits "relationship" relations such as WORKS_ON, whose rows only make sense while both related rows exist.</li>
+</ul>
+<h4>Naming constraints</h4>
+<p>The keyword <code>CONSTRAINT</code> gives a constraint a name, so it can be dropped or changed later.</p>
+
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-names.webp" data-cap="Named constraints: EMPPK, EMPSUPERFK, EMPDEPTFK" aria-label="Enlarge: Named constraints: EMPPK, EMPSUPERFK, EMPDEPTFK"><img src="./img/ddl-names.webp" width="1400" height="581" loading="lazy" decoding="async" alt="Named constraints: EMPPK, EMPSUPERFK, EMPDEPTFK"></button><figcaption><span class="fig-n">11</span>Named constraints: EMPPK, EMPSUPERFK, EMPDEPTFK</figcaption></figure></div>
+<h4>CHECK on tuples</h4>
+<p>A CHECK clause at the end of CREATE TABLE is a row-based constraint: it is checked for each tuple and can compare attributes of the same row.</p>
+<pre class="sql">CHECK (Dept_create_date &lt;= Mgr_start_date);</pre>
+<div class="tscroll"><table>
+  <tr><th>Dname</th><th>Mgr_start_date</th><th>Dept_create_date</th><th>Result</th></tr>
+  <tr><td>Research</td><td>1988-05-22</td><td>1988-05-23</td><td>Violates (created after the manager started)</td></tr>
+  <tr><td>Administration</td><td>1995-01-01</td><td>1995-01-02</td><td>Violates</td></tr>
+  <tr><td>Headquarters</td><td>1981-06-19</td><td>1981-05-05</td><td>Satisfies</td></tr>
+</table></div>
+
+      
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-rowcheck.webp" data-cap="A tuple-based CHECK and the rows that violate it" aria-label="Enlarge: A tuple-based CHECK and the rows that violate it"><img src="./img/ddl-rowcheck.webp" width="1400" height="347" loading="lazy" decoding="async" alt="A tuple-based CHECK and the rows that violate it"></button><figcaption><span class="fig-n">12</span>A tuple-based CHECK and the rows that violate it</figcaption></figure></div>
+<h4>Lab: creating a schema and a table</h4>
       <pre class="sql">CREATE DATABASE SCHOOL;
 USE SCHOOL;
 
@@ -664,7 +786,7 @@ CREATE TABLE Students (
     NickName  VARCHAR(50),
     Age INTEGER CHECK (Age BETWEEN 3 AND 5)
 );</pre>
-      <h4>Constraint vocabulary used in the labs</h4>
+      <h4>Lab: constraint vocabulary</h4>
       <div class="tscroll"><table>
         <tr><th>Clause</th><th>Effect</th><th>Lab example</th></tr>
         <tr><td class="mono">PRIMARY KEY</td><td>Unique identifier of each row</td><td><code>StudentID INT PRIMARY KEY</code></td></tr>
@@ -676,7 +798,7 @@ CREATE TABLE Students (
         <tr><td class="mono">CONSTRAINT name</td><td>Names the constraint so it can be referred to</td><td><code>CONSTRAINT fk_sra_teacher FOREIGN KEY (TeacherID) …</code></td></tr>
       </table></div>
 
-      <h4>Referential actions</h4>
+      <h4>Lab: referential actions</h4>
       <p>The action after <code>ON DELETE</code> or <code>ON UPDATE</code> says what happens to the referencing rows when the referenced row is deleted or its key changes.</p>
       <ul class="clean">
         <li><b>SET DEFAULT</b> — the lab's assignment table keeps its row and falls back to the reserved teacher: <code>TeacherID INT DEFAULT 1 … ON DELETE SET DEFAULT</code>.</li>
@@ -2184,6 +2306,7 @@ WHERE  Invoice.CustID = Customer.ID AND
     <div class="tscroll"><table class="files">
       <tr><th>Topic</th><th>File</th><th>What it is</th><th>Pages</th></tr>
       <tr><td class="mono">T1</td><td><a href="./files/01-relational-model-slides.pdf">01-relational-model-slides.pdf</a></td><td>Relational model slides: database basics, relations, keys, integrity constraints, the COMPANY schema</td><td class="sz">23</td></tr>
+      <tr><td class="mono">T2</td><td><a href="./files/02-sql-ddl-slides.pdf">02-sql-ddl-slides.pdf</a></td><td>SQL DDL slides: SQL command groups, CREATE TABLE, data types, domains and constraints</td><td class="sz">33</td></tr>
       <tr><td class="mono">T1, T4, T6–8</td><td><a href="./files/01-relational-model-review-worksheet.pdf">01-relational-model-review-worksheet.pdf</a></td><td>Review worksheet with handwritten answers: relational model, DDL, relational algebra, Datalog, heuristic optimization, index calculation</td><td class="sz">15</td></tr>
       <tr><td class="mono">T2</td><td><a href="./files/02-ddl-practice-school-database.pdf">02-ddl-practice-school-database.pdf</a></td><td>DDL practice: six CREATE statements plus the requirements text</td><td class="sz">4</td></tr>
       <tr><td class="mono">T3</td><td><a href="./files/03-er-inventory-worked-answer.pdf">03-er-inventory-worked-answer.pdf</a></td><td>Inventory requirements, ER diagram and cardinality/participation justification</td><td class="sz">5</td></tr>
@@ -2209,7 +2332,7 @@ WHERE  Invoice.CustID = Customer.ID AND
     <div class="kv"><b>Title</b><span>Database Systems</span></div>
     <div class="kv"><b>Text</b><span>Elmasri &amp; Navathe — <i>Fundamentals of Database Systems</i>, 7th edition</span></div>
     <div class="kv"><b>Covered</b><span>Ten topics: relational model, DDL, ER design, relational algebra, intermediate SQL, Datalog, indexing, heuristic optimization, transactions, privileges</span></div>
-    <div class="kv"><b>Practice</b><span>307 flashcards (85 concepts + 222 terms), 81 quiz questions, two mock papers, five interactive drills, ten worked lab sets, one past paper with model answers</span></div>
+    <div class="kv"><b>Practice</b><span>326 flashcards (92 concepts + 234 terms), 90 quiz questions, two mock papers, five interactive drills, ten worked lab sets, one past paper with model answers</span></div>
   </div>
   <div class="panel pg">
     <h3>Built with</h3>
@@ -2300,6 +2423,18 @@ var TERMS = [
  ["SET DEFAULT","","Referential action: the child's foreign key becomes the column's DEFAULT. Standard SQL; MySQL's InnoDB engine rejects it.",2,0],
  ["RESTRICT","","Referential action: refuse to delete or update the parent while child rows point to it.",2,1],
  ["NO ACTION","","Standard SQL default action. In MySQL it behaves the same as RESTRICT.",2,1],
+ ["SEQUEL","Structured English Query Language","The original IBM name of SQL.",2,1],
+ ["DQL","Data Query Language","The SQL group for reading data: SELECT.",2,0],
+ ["CREATE SCHEMA","","Creates a named schema, optionally with an owner: CREATE SCHEMA COMPANY AUTHORIZATION 'Jsmith';",2,1],
+ ["INFORMATION_SCHEMA","","The special schema in every catalog that holds data about the databases themselves.",2,1],
+ ["Base table","Base relation","A table created with CREATE TABLE whose rows are stored in a file.",2,1],
+ ["CHAR(n)","","Fixed-length text: always n characters, padded with spaces.",2,0],
+ ["DATE","","A date in the form YYYY-MM-DD (ten positions).",2,0],
+ ["TIMESTAMP","","A date and time with fractions of a second, optionally WITH TIME ZONE.",2,1],
+ ["INTERVAL","","A relative amount of time added to or subtracted from a date, e.g. + INTERVAL '14' DAY. In MySQL only a keyword, not a column type.",2,1],
+ ["BOOLEAN","","A type with the values TRUE, FALSE or NULL.",2,1],
+ ["CREATE DOMAIN","","Defines a named data type with optional CHECK; not supported in MySQL.",2,1],
+ ["Tuple-based CHECK","Row-based constraint","A CHECK at the end of CREATE TABLE, tested on each row; it can compare columns of the same row.",2,1],
  ["InnoDB","","MySQL's default storage engine; it enforces foreign keys and supports transactions.",2,1],
 
  ["ER model","Entity–Relationship model","A way of describing data as entities, attributes and relationships before building tables.",3,0],
@@ -2543,7 +2678,14 @@ var CARDS = [
  {"t": 1,"q": "The two rules for a foreign key FK in R1 referencing R2","a": "1. FK has the same domain as R2's primary key. 2. Each FK value equals some PK value in R2, or is NULL."},
  {"t": 1,"q": "Order of tuples, order within a tuple","a": "Tuples have no order (a relation is a set). Values inside a tuple follow the schema's attribute order, unless a tuple is defined as a set of (attribute, value) pairs."},
  {"t": 1,"q": "MOTORBIKE: plate or engine number?","a": "Both {Province, Digits, Alphabets} and {Engine_number} are candidate keys. One becomes the primary key, the other an alternate key."},
- {"t": 1,"q": "Relational database schema","a": "S = {R1, R2, …, Rm} plus a set of integrity constraints. A database state is the set of relation states at one moment."}
+ {"t": 1,"q": "Relational database schema","a": "S = {R1, R2, …, Rm} plus a set of integrity constraints. A database state is the set of relation states at one moment."},
+ {"t": 2,"q": "The five SQL command groups","a": "DDL (CREATE, DROP, ALTER, TRUNCATE, RENAME), DML (INSERT, UPDATE, DELETE), TCL (COMMIT, ROLLBACK, SAVEPOINT), DQL (SELECT), DCL (GRANT, REVOKE)."},
+ {"t": 2,"q": "CHAR(10) vs VARCHAR(10) storing 'Cat'","a": "CHAR(10) reserves all 10 characters and pads 'Cat' with 7 spaces. VARCHAR(10) stores only 'Cat' plus a small length field."},
+ {"t": 2,"q": "Base table vs view","a": "A base table is created with CREATE TABLE and stored as a file. A view is created with CREATE VIEW and has no physical file."},
+ {"t": 2,"q": "Default value of a column with no DEFAULT clause","a": "NULL, unless the column is NOT NULL."},
+ {"t": 2,"q": "Default action on a foreign key violation","a": "Reject the change. A triggered action (SET NULL, CASCADE, SET DEFAULT) can be attached with ON DELETE / ON UPDATE."},
+ {"t": 2,"q": "Why name a constraint with CONSTRAINT?","a": "So it can be referred to later, for example to drop or change it: ALTER TABLE … DROP FOREIGN KEY EMPSUPERFK."},
+ {"t": 2,"q": "Tuple-based CHECK example","a": "CHECK (Dept_create_date <= Mgr_start_date) at the end of CREATE TABLE DEPARTMENT; it is tested on every row."}
 ];
 var QUIZ = [
  {"t": 0,"q": "A database is best described as","o": ["a query that retrieves data","the universe of discourse","a general-purpose software system","a collection of related data"],"a": 3,"e": "The worksheet answer: a database is a collection of related data. The DBMS is the software; the miniworld is what it represents."},
@@ -2626,7 +2768,16 @@ var QUIZ = [
  {"t": 1,"q": "\"An employee's salary may not exceed the supervisor's\" is","o": ["a semantic (application-based) constraint","an inherent model-based constraint","a domain constraint","a key constraint"],"a": 0,"e": "It is a business rule the schema cannot express, so programs or triggers must enforce it."},
  {"t": 1,"q": "\"No two tuples in a relation may be identical\" is","o": ["an inherent model-based constraint","a semantic constraint","a referential integrity constraint","a domain constraint"],"a": 0,"e": "A relation is a set, so duplicate tuples are ruled out by the model itself."},
  {"t": 1,"q": "Storing 'high' in the Salary column breaks","o": ["the domain constraint","entity integrity","referential integrity","the key constraint"],"a": 0,"e": "Each value must come from the attribute's domain and match its data type."},
- {"t": 1,"q": "In COMPANY, John Smith's Dno is changed to 7 and there is no department 7. This violates","o": ["referential integrity","entity integrity","the key constraint","the domain constraint"],"a": 0,"e": "Dno is a foreign key to DEPARTMENT.Dnumber; 7 matches no department."}
+ {"t": 1,"q": "In COMPANY, John Smith's Dno is changed to 7 and there is no department 7. This violates","o": ["referential integrity","entity integrity","the key constraint","the domain constraint"],"a": 0,"e": "Dno is a foreign key to DEPARTMENT.Dnumber; 7 matches no department."},
+ {"t": 2,"q": "Which group does SELECT belong to?","o": ["DQL","DDL","DML","DCL"],"a": 0,"e": "SELECT reads data: Data Query Language."},
+ {"t": 2,"q": "Which group do COMMIT and ROLLBACK belong to?","o": ["TCL","DCL","DML","DDL"],"a": 0,"e": "Transaction Control Language."},
+ {"t": 2,"q": "A CHAR(10) column stores 'Cat'. How many characters does it reserve?","o": ["10","3","4","11"],"a": 0,"e": "CHAR is fixed length, so 'Cat' is padded with 7 spaces."},
+ {"t": 2,"q": "Which statement is not supported by MySQL?","o": ["CREATE DOMAIN SSN_TYPE AS CHAR(9);","CREATE DATABASE COMPANY;","CREATE TABLE EMPLOYEE (…);","ALTER TABLE EMPLOYEE ADD Bdate DATE;"],"a": 0,"e": "MySQL has no CREATE DOMAIN."},
+ {"t": 2,"q": "Which clause declares an alternate (candidate) key?","o": ["UNIQUE","PRIMARY KEY","CHECK","DEFAULT"],"a": 0,"e": "UNIQUE specifies secondary keys, the candidate keys that are not the primary key."},
+ {"t": 2,"q": "Which clause is a value validator, e.g. Dnumber > 0 AND Dnumber < 21?","o": ["CHECK","DEFAULT","UNIQUE","NOT NULL"],"a": 0,"e": "CHECK restricts attribute or domain values."},
+ {"t": 2,"q": "Without any referential triggered action, an update that breaks a foreign key is","o": ["rejected","cascaded","set to NULL","set to the default"],"a": 0,"e": "Rejecting the change is the default action."},
+ {"t": 2,"q": "CHECK (Dept_create_date <= Mgr_start_date). Research: Mgr_start_date 1988-05-22, Dept_create_date 1988-05-23. The row","o": ["violates the constraint","satisfies the constraint","is rejected only on UPDATE","makes the CHECK ignored"],"a": 0,"e": "1988-05-23 is later than 1988-05-22, so the condition is false."},
+ {"t": 2,"q": "In MySQL, CREATE DATABASE and CREATE SCHEMA","o": ["create the same thing","create a catalog and a schema inside it","are both unsupported","differ only in permissions"],"a": 0,"e": "In MySQL a database and a schema are the same level."}
 ];
 /* ================= HELPERS ================= */
 var $=function(id){return document.getElementById(id)};
@@ -3381,7 +3532,7 @@ go(LSget('dbTab','home'),true);
       ] },
       { label: 'Reference', views: [
         { id: 'cheat', title: 'Cheat sheet', children: sections('cheat') },
-        { id: 'resources', title: 'Downloads', badge: '14' },
+        { id: 'resources', title: 'Downloads', badge: '15' },
         { id: 'author', title: 'About' }
       ] }
     ]
