@@ -177,3 +177,57 @@
   :root[data-sc-console="algo"] main .page > .card > h2 { margin: -20px -18px 16px; padding: 16px 18px 14px; font-size: 1.1875rem; }
   :root:is([data-sc-console="os"], [data-sc-console="privacy"]) main details.note > .body { padding: 4px 16px 18px; }
 }
+
+/* ======================================================================
+   DBS and SPM: topics are <details class="note">, each with a Details block (details.deep)
+   ====================================================================== */
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main details.note {
+  border-radius: 16px; box-shadow: var(--sc-shadow-card); border-color: var(--sc-line); overflow: hidden;
+}
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main details.note > summary {
+  font: 600 1.125rem/1.35 var(--read-head); letter-spacing: -.015em; padding: 16px 20px;
+}
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main details.note[open] > summary {
+  background: linear-gradient(115deg, color-mix(in srgb, var(--read-accent) 9%, var(--sc-surface)), var(--sc-surface) 72%);
+  border-bottom: 1px solid var(--sc-line);
+}
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main details.note > .body,
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main details.deep > .deep-body {
+  font-size: var(--read-size); line-height: var(--read-lh); color: var(--sc-text-body);
+}
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main details.note > .body { padding: 6px 26px 26px; }
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main details.deep > .deep-body { padding: 6px 22px 22px; }
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(.body, .deep-body) :is(p:not([class]), ul.clean > li, ul:not([class]) > li, ol > li) {
+  font-size: var(--read-size); line-height: var(--read-lh); max-width: var(--read-measure);
+}
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(.body, .deep-body) p:not([class]) + p:not([class]) { margin-top: .8em; }
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(.body, .deep-body) :is(ul.clean, ol) > li + li { margin-top: .45em; }
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(.body, .deep-body) ul.clean > li::before { top: .35em; }
+
+/* Subheads: real headings, clearly larger than body text, with an accent bar and a hairline above */
+:root:root:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(details.note > .body, details.deep > .deep-body) > h4 {
+  display: flex; align-items: center; gap: 10px;
+  margin: 36px 0 12px; padding-top: 24px; border-top: 1px solid var(--sc-line);
+  font: 650 1.25rem/1.3 var(--read-head); letter-spacing: -.015em; text-transform: none; color: var(--sc-text);
+}
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(details.note > .body, details.deep > .deep-body) > h4::before {
+  content: ""; flex: none; width: 4px; height: 1.1em; border-radius: 2px; background: var(--read-accent);
+}
+:root:root:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(details.note > .body, details.deep > .deep-body) > h4:first-child {
+  margin-top: 18px; padding-top: 0; border-top: 0;
+}
+/* the In one line / Remember / Watch callouts and tables stay one step smaller than prose */
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(.body, .deep-body) :is(.tip, .formula) { font-size: 1rem; line-height: 1.65; border-radius: 12px; padding: 14px 18px; }
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(.body, .deep-body) .tip ul.clean > li { font-size: 1rem; }
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(.body, .deep-body) table { font-size: var(--read-small); }
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(.body, .deep-body) :is(pre, .tscroll, .figs, .grid2) { margin-top: 14px; margin-bottom: 14px; }
+/* Details block: its label reads as a section divider, its body as a continuation of the topic */
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main details.deep { margin-top: 28px; }
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main details.deep > summary { font-size: .8125rem; padding: 13px 18px; }
+
+/* Labs, past paper and mock papers: the same body rhythm */
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(#labs, #exam, #mock) :is(.body, .panel) > :is(p:not([class]), ul > li, ol > li) {
+  font-size: var(--read-size); line-height: var(--read-lh); max-width: var(--read-measure);
+}
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(#exam, #mock) .panel > h3 { font: 650 1.1875rem/1.35 var(--read-head); letter-spacing: -.012em; }
+:root:is([data-sc-console="db"], [data-sc-console="spm"]) main :is(.panel, .card) { box-shadow: var(--sc-shadow-card); border-radius: 16px; }
