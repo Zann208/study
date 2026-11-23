@@ -316,7 +316,8 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
   .cnrow .ixst{grid-column:1;text-align:left}
   .rfgrid{grid-template-columns:1fr}
 }
-.figs{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:12px 0 4px}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:14px 0 18px}
+.figs:has(> .fig:only-child){grid-template-columns:minmax(0,640px)}
 .fig{margin:0;border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:var(--panel);display:flex;flex-direction:column}
 .fig-open{display:block;width:100%;padding:0;border:0;background:#fff;cursor:zoom-in;line-height:0}
 .fig-open:focus-visible{outline:2px solid var(--vi);outline-offset:-2px}
@@ -480,6 +481,8 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
   <tr><td>Manipulate</td><td>Query and update the data</td><td>Retrieve Smith's transcript; change Smith's class from 1 to 2</td></tr>
   <tr><td>Share</td><td>Let many users and programs use the data at the same time</td><td>The registrar and lecturers work on the same grades</td></tr>
 </table></div>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rm03a.webp" data-cap="Figure 1.2: a database that stores student and course information" aria-label="Enlarge: Figure 1.2: a database that stores student and course information"><img src="./img/rm03a.webp" width="1176" height="1060" loading="lazy" decoding="async" alt="Figure 1.2: a database that stores student and course information"></button><figcaption><span class="fig-n">1</span>Figure 1.2: a database that stores student and course information</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/rm03b.webp" data-cap="Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE" aria-label="Enlarge: Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE"><img src="./img/rm03b.webp" width="1172" height="708" loading="lazy" decoding="async" alt="Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE"></button><figcaption><span class="fig-n">2</span>Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE</figcaption></figure></div>
 <h4>Characteristics of the database approach</h4>
 <div class="tscroll"><table>
   <tr><th>Characteristic</th><th>Meaning</th></tr>
@@ -496,8 +499,12 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
   <li><b>Physical design</b>: choose storage structures, indexes and access paths.</li>
 </ol>
 <p>After design: implement, populate with data, then maintain.</p>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rm04.webp" data-cap="Figure 3.1: main phases of database design" aria-label="Enlarge: Figure 3.1: main phases of database design"><img src="./img/rm04.webp" width="1292" height="1516" loading="lazy" decoding="async" alt="Figure 3.1: main phases of database design"></button><figcaption><span class="fig-n">3</span>Figure 3.1: main phases of database design</figcaption></figure></div>
 <h4>Database schema</h4>
 <p>The description of a database is its <b>schema</b>. It is specified during design and is not expected to change often. A <b>schema diagram</b> shows each relation with its attributes, for example STUDENT(Name, Student_number, Class, Major) and COURSE(Course_name, Course_number, Credit_hours, Department).</p>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rm06.webp" data-cap="Figure 2.1: schema diagram for the university database" aria-label="Enlarge: Figure 2.1: schema diagram for the university database"><img src="./img/rm06.webp" width="1400" height="850" loading="lazy" decoding="async" alt="Figure 2.1: schema diagram for the university database"></button><figcaption><span class="fig-n">4</span>Figure 2.1: schema diagram for the university database</figcaption></figure></div>
 <h4>Origin of the relational model</h4>
 <p>Introduced by Edgar F. Codd of IBM Research in 1970 and based on the mathematical relation. Commercial systems followed in the early 1980s (IBM SQL/DS, Oracle); open-source systems such as MySQL, MariaDB and PostgreSQL came later.</p>
 <h4>Relation schema and relation state</h4>
@@ -512,6 +519,8 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
       </table></div>
 
       
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rm09.webp" data-cap="Figure 5.1: attributes and tuples of the relation STUDENT" aria-label="Enlarge: Figure 5.1: attributes and tuples of the relation STUDENT"><img src="./img/rm09.webp" width="1400" height="546" loading="lazy" decoding="async" alt="Figure 5.1: attributes and tuples of the relation STUDENT"></button><figcaption><span class="fig-n">5</span>Figure 5.1: attributes and tuples of the relation STUDENT</figcaption></figure></div>
 <h4>Domain and data type</h4>
 <p>The domain says what a value means; the data type says how it is written. In STUDENT(Name, Ssn, Home_phone, Address, Office_phone, Age, Gpa), the domain of Ssn is the set of valid nine-digit Social Security numbers, and its data type is a character string of the form <code>ddd-dd-dddd</code>.</p>
 <h4>Characteristics of relations</h4>
@@ -563,6 +572,8 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
   <tr><td>How many employees have a daughter?</td><td>DEPENDENT rows with Relationship = Daughter: Essn 333445555 and 123456789</td><td>Two (Wong and Smith)</td></tr>
   <tr><td>Does Alicia work on ProductX?</td><td>Alicia's Ssn 999887777 → WORKS_ON Pno 30 and 10; ProductX is Pnumber 1</td><td>No</td></tr>
 </table></div>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rm18.webp" data-cap="Figure 5.5: schema diagram of the COMPANY database" aria-label="Enlarge: Figure 5.5: schema diagram of the COMPANY database"><img src="./img/rm18.webp" width="1400" height="786" loading="lazy" decoding="async" alt="Figure 5.5: schema diagram of the COMPANY database"></button><figcaption><span class="fig-n">6</span>Figure 5.5: schema diagram of the COMPANY database</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/rm19.webp" data-cap="Figure 5.6: one possible database state of COMPANY" aria-label="Enlarge: Figure 5.6: one possible database state of COMPANY"><img src="./img/rm19.webp" width="1256" height="1556" loading="lazy" decoding="async" alt="Figure 5.6: one possible database state of COMPANY"></button><figcaption><span class="fig-n">7</span>Figure 5.6: one possible database state of COMPANY</figcaption></figure></div>
 <h4>Entity integrity and referential integrity</h4>
 <p><b>Entity integrity:</b> no primary key value can be NULL, because the key is what identifies each tuple.</p>
 <p><b>Referential integrity</b> keeps tuples in two relations consistent. A set of attributes FK in R1 is a foreign key that references R2 if:</p>
@@ -581,6 +592,8 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
   <tr><td>DEPENDENT.Essn</td><td>EMPLOYEE.Ssn</td></tr>
 </table></div>
 <p>Changing John Smith's Dno to 7 violates referential integrity: departments 1, 4 and 5 exist, but there is no department 7.</p>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rm21.webp" data-cap="Figure 5.7: referential integrity constraints in COMPANY" aria-label="Enlarge: Figure 5.7: referential integrity constraints in COMPANY"><img src="./img/rm21.webp" width="1400" height="1051" loading="lazy" decoding="async" alt="Figure 5.7: referential integrity constraints in COMPANY"></button><figcaption><span class="fig-n">8</span>Figure 5.7: referential integrity constraints in COMPANY</figcaption></figure></div>
 <h4>Five statements to be able to illustrate</h4>
       <ul class="clean">
         <li><b>Tuples in a relation do not have any particular order.</b> Any order of the rows is the same relation.</li>
@@ -595,17 +608,7 @@ pre.tree{white-space:pre;line-height:1.45;overflow-x:auto}
 
       <h4>Explaining a referential-action constraint</h4>
       <div class="formula">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)<br>ON DELETE SET DEFAULT ON UPDATE CASCADE;</div>
-      <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically.</p><h4>Figures</h4>
-<div class="figs">
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm03a.webp" data-cap="Figure 1.2: a database that stores student and course information" aria-label="Enlarge: Figure 1.2: a database that stores student and course information"><img src="./img/rm03a.webp" width="1176" height="1060" loading="lazy" decoding="async" alt="Figure 1.2: a database that stores student and course information"></button><figcaption><span class="fig-n">1</span>Figure 1.2: a database that stores student and course information</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm03b.webp" data-cap="Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE" aria-label="Enlarge: Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE"><img src="./img/rm03b.webp" width="1172" height="708" loading="lazy" decoding="async" alt="Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE"></button><figcaption><span class="fig-n">2</span>Figure 1.2 (contd.): GRADE_REPORT and PREREQUISITE</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm04.webp" data-cap="Figure 3.1: main phases of database design" aria-label="Enlarge: Figure 3.1: main phases of database design"><img src="./img/rm04.webp" width="1292" height="1516" loading="lazy" decoding="async" alt="Figure 3.1: main phases of database design"></button><figcaption><span class="fig-n">3</span>Figure 3.1: main phases of database design</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm06.webp" data-cap="Figure 2.1: schema diagram for the university database" aria-label="Enlarge: Figure 2.1: schema diagram for the university database"><img src="./img/rm06.webp" width="1400" height="850" loading="lazy" decoding="async" alt="Figure 2.1: schema diagram for the university database"></button><figcaption><span class="fig-n">4</span>Figure 2.1: schema diagram for the university database</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm09.webp" data-cap="Figure 5.1: attributes and tuples of the relation STUDENT" aria-label="Enlarge: Figure 5.1: attributes and tuples of the relation STUDENT"><img src="./img/rm09.webp" width="1400" height="546" loading="lazy" decoding="async" alt="Figure 5.1: attributes and tuples of the relation STUDENT"></button><figcaption><span class="fig-n">5</span>Figure 5.1: attributes and tuples of the relation STUDENT</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm18.webp" data-cap="Figure 5.5: schema diagram of the COMPANY database" aria-label="Enlarge: Figure 5.5: schema diagram of the COMPANY database"><img src="./img/rm18.webp" width="1400" height="786" loading="lazy" decoding="async" alt="Figure 5.5: schema diagram of the COMPANY database"></button><figcaption><span class="fig-n">6</span>Figure 5.5: schema diagram of the COMPANY database</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm19.webp" data-cap="Figure 5.6: one possible database state of COMPANY" aria-label="Enlarge: Figure 5.6: one possible database state of COMPANY"><img src="./img/rm19.webp" width="1256" height="1556" loading="lazy" decoding="async" alt="Figure 5.6: one possible database state of COMPANY"></button><figcaption><span class="fig-n">7</span>Figure 5.6: one possible database state of COMPANY</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/rm21.webp" data-cap="Figure 5.7: referential integrity constraints in COMPANY" aria-label="Enlarge: Figure 5.7: referential integrity constraints in COMPANY"><img src="./img/rm21.webp" width="1400" height="1051" loading="lazy" decoding="async" alt="Figure 5.7: referential integrity constraints in COMPANY"></button><figcaption><span class="fig-n">8</span>Figure 5.7: referential integrity constraints in COMPANY</figcaption></figure>
-</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><a class="btn" href="#/keys">Drill: Keys and constraints</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 SQL DDL</a></div>
+      <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><a class="btn" href="#/keys">Drill: Keys and constraints</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 SQL DDL</a></div>
     </div>
   </details>
 
@@ -736,18 +739,17 @@ ON DELETE SET NULL;</pre>
         <tr><td>Product — in — Invoice (M : N)</td><td>A product can be in many invoices; an invoice can list many products</td><td>Every invoice must list at least one product (total). Not every product appears in an invoice (partial)</td></tr>
       </table></div>
 
-      <h4>Vote: the same ideas on a legislative database</h4>
+      
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/er-inv.webp" data-cap="Inventory database: ER diagram" aria-label="Enlarge: Inventory database: ER diagram"><img src="./img/er-inv.webp" width="1400" height="774" loading="lazy" decoding="async" alt="Inventory database: ER diagram"></button><figcaption><span class="fig-n">1</span>Inventory database: ER diagram</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/er-inv-map.webp" data-cap="Inventory database: ER-to-relational mapping, steps 1 to 6" aria-label="Enlarge: Inventory database: ER-to-relational mapping, steps 1 to 6"><img src="./img/er-inv-map.webp" width="1400" height="785" loading="lazy" decoding="async" alt="Inventory database: ER-to-relational mapping, steps 1 to 6"></button><figcaption><span class="fig-n">2</span>Inventory database: ER-to-relational mapping, steps 1 to 6</figcaption></figure></div>
+<h4>Vote: the same ideas on a legislative database</h4>
       <ul class="clean">
         <li>STATE (Name, Region) — have — CONGRESS_PERSON: a congressperson must represent exactly one state (1 : N, total on the congressperson side); a state can have many congresspersons.</li>
         <li>CONGRESS_PERSON — sponsored — BILL: a bill can be sponsored by M persons (M : N).</li>
         <li>CONGRESS_PERSON — voted — BILL with attribute Result: each congressperson can vote for N bills (M : N).</li>
         <li>Enumerated domains appear in the requirements, not the diagram: Region, Party, Passed_or_failed and Vote each have a fixed set of values.</li>
-      </ul><h4>Figures</h4>
-<div class="figs">
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/er-inv.webp" data-cap="Inventory database: ER diagram" aria-label="Enlarge: Inventory database: ER diagram"><img src="./img/er-inv.webp" width="1400" height="774" loading="lazy" decoding="async" alt="Inventory database: ER diagram"></button><figcaption><span class="fig-n">1</span>Inventory database: ER diagram</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/er-inv-map.webp" data-cap="Inventory database: ER-to-relational mapping, steps 1 to 6" aria-label="Enlarge: Inventory database: ER-to-relational mapping, steps 1 to 6"><img src="./img/er-inv-map.webp" width="1400" height="785" loading="lazy" decoding="async" alt="Inventory database: ER-to-relational mapping, steps 1 to 6"></button><figcaption><span class="fig-n">2</span>Inventory database: ER-to-relational mapping, steps 1 to 6</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/er-vote.webp" data-cap="Congress voting database: ER diagram" aria-label="Enlarge: Congress voting database: ER diagram"><img src="./img/er-vote.webp" width="1400" height="628" loading="lazy" decoding="async" alt="Congress voting database: ER diagram"></button><figcaption><span class="fig-n">3</span>Congress voting database: ER diagram</figcaption></figure>
-</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="3">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="3">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t4">Next: T4 Relational algebra</a></div>
+      </ul>
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/er-vote.webp" data-cap="Congress voting database: ER diagram" aria-label="Enlarge: Congress voting database: ER diagram"><img src="./img/er-vote.webp" width="1400" height="628" loading="lazy" decoding="async" alt="Congress voting database: ER diagram"></button><figcaption><span class="fig-n">3</span>Congress voting database: ER diagram</figcaption></figure></div>
+</div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="3">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="3">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t4">Next: T4 Relational algebra</a></div>
     </div>
   </details>
 
@@ -774,7 +776,9 @@ ON DELETE SET NULL;</pre>
 <p class="sub2">Select (σ) works on rows; project (π) works on columns.</p>
 <h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="RA">RA</a><a class="chip c2 tlink" href="#/terms" data-term="Procedural language">Procedural language</a><a class="chip c1 tlink" href="#/terms" data-term="σ">σ</a><a class="chip c2 tlink" href="#/terms" data-term="π">π</a><a class="chip c1 tlink" href="#/terms" data-term="×">×</a><a class="chip c2 tlink" href="#/terms" data-term="⋈">⋈</a><a class="chip c1 tlink" href="#/terms" data-term="Equijoin">Equijoin</a><a class="chip c2 tlink" href="#/terms" data-term="∪">∪</a><a class="chip c1 tlink" href="#/terms" data-term="−">−</a><a class="chip c2 tlink" href="#/terms" data-term="∩">∩</a><a class="chip c1 tlink" href="#/terms" data-term="ρ">ρ</a><a class="chip c2 tlink" href="#/terms" data-term="Union compatible">Union compatible</a><a class="chip c1 tlink" href="#/terms" data-term="Outer join">Outer join</a><a class="chip c2 tlink" href="#/terms" data-term="÷">÷</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>Every operation takes tables in and returns a table.</li><li>σ filters rows, π picks columns (and drops duplicates).</li><li>Read nested expressions from the inside out.</li></ul></div>
-<details class="deep"><summary>Details</summary><div class="deep-body"><h4>What it is</h4>
+<details class="deep"><summary>Details</summary><div class="deep-body">
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ra-schema.webp" data-cap="COMPANY sample database used in the relational algebra exercises" aria-label="Enlarge: COMPANY sample database used in the relational algebra exercises"><img src="./img/ra-schema.webp" width="1400" height="832" loading="lazy" decoding="async" alt="COMPANY sample database used in the relational algebra exercises"></button><figcaption><span class="fig-n">1</span>COMPANY sample database used in the relational algebra exercises</figcaption></figure></div>
+<h4>What it is</h4>
       <p>A <b>procedural query language</b>: a set of operations (algebraic operations) that provides the theoretical foundation for relational queries. Each operation takes one or two relations and outputs a table.</p>
       <div class="tscroll"><table>
         <tr><th>Fundamental</th><th>Symbol</th><th>Additional</th><th>Symbol</th></tr>
@@ -812,10 +816,7 @@ EMPLOYEE ⋈ Dno = Dnumber (π Dnumber, Dname (DEPARTMENT))</pre>
         <tr><td class="ra-sym">σ</td><td><code>sigma_(...)</code></td><td><code>sigma_(gender='male')(employee)</code></td></tr>
         <tr><td class="ra-sym">π</td><td><code>pi_(...)</code></td><td><code>pi_(name, age)(employee)</code></td></tr>
         <tr><td class="ra-sym">⋈</td><td><code>join_(...)</code></td><td><code>join_(employee, department)</code></td></tr>
-      </table></div><h4>Figures</h4>
-<div class="figs">
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/ra-schema.webp" data-cap="COMPANY sample database used in the relational algebra exercises" aria-label="Enlarge: COMPANY sample database used in the relational algebra exercises"><img src="./img/ra-schema.webp" width="1400" height="832" loading="lazy" decoding="async" alt="COMPANY sample database used in the relational algebra exercises"></button><figcaption><span class="fig-n">1</span>COMPANY sample database used in the relational algebra exercises</figcaption></figure>
-</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="4">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="4">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t5">Next: T5 Intermediate SQL</a></div>
+      </table></div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="4">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="4">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t5">Next: T5 Intermediate SQL</a></div>
     </div>
   </details>
 
@@ -1030,18 +1031,13 @@ SELECT id, name, relative_depth FROM parents;</pre>
         <li><b>Projection push-down</b> — add π nodes low in the tree so that only the attributes needed later (join keys and output columns) travel upward; e.g. <span class="ra-sym">π<sub>InvID, CustID</sub></span> over Invoice, <span class="ra-sym">π<sub>ID, Type</sub></span> over Customer.</li>
       </ol>
       <pre class="sql ra">π Type (σ ProdType = 'Widget' (σ Date.Month = July (Customer ⋈ Invoice ⋈ LineItem ⋈ Product)))</pre>
-      <h4>Choosing a join order</h4>
+      
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ho2.webp" data-cap="Widget query and its initial query tree" aria-label="Enlarge: Widget query and its initial query tree"><img src="./img/ho2.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Widget query and its initial query tree"></button><figcaption><span class="fig-n">1</span>Widget query and its initial query tree</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ho3.webp" data-cap="Step 1: cascade the selection" aria-label="Enlarge: Step 1: cascade the selection"><img src="./img/ho3.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 1: cascade the selection"></button><figcaption><span class="fig-n">2</span>Step 1: cascade the selection</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ho4.webp" data-cap="Step 2: move selections down" aria-label="Enlarge: Step 2: move selections down"><img src="./img/ho4.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 2: move selections down"></button><figcaption><span class="fig-n">3</span>Step 2: move selections down</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ho5.webp" data-cap="Step 3: Cartesian product and selection become joins" aria-label="Enlarge: Step 3: Cartesian product and selection become joins"><img src="./img/ho5.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 3: Cartesian product and selection become joins"></button><figcaption><span class="fig-n">4</span>Step 3: Cartesian product and selection become joins</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/ho6.webp" data-cap="Step 4: push projections down" aria-label="Enlarge: Step 4: push projections down"><img src="./img/ho6.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 4: push projections down"></button><figcaption><span class="fig-n">5</span>Step 4: push projections down</figcaption></figure></div>
+<h4>Choosing a join order</h4>
       <p>The past paper asks how the optimizer decides between joining Enrollment with Student or with Course first, and what its points of consideration are.</p>
       <h4>Worksheet example</h4>
       <pre class="sql ra">π Title (σ Grade = 'A' ∧ Instructor = "…" (Course ⋈ Enrollment))</pre>
-      <p>Handwritten answer: start from π Title over σ over the Cartesian product of Course and Enrollment; cascade into σ Grade = 'A' and σ Instructor = "…"; move σ Grade = 'A' down onto Enrollment and σ Instructor = "…" down onto Course; replace the product with a join; keep π Title at the top.</p><h4>Figures</h4>
-<div class="figs">
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/ho2.webp" data-cap="Widget query and its initial query tree" aria-label="Enlarge: Widget query and its initial query tree"><img src="./img/ho2.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Widget query and its initial query tree"></button><figcaption><span class="fig-n">1</span>Widget query and its initial query tree</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/ho3.webp" data-cap="Step 1: cascade the selection" aria-label="Enlarge: Step 1: cascade the selection"><img src="./img/ho3.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 1: cascade the selection"></button><figcaption><span class="fig-n">2</span>Step 1: cascade the selection</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/ho4.webp" data-cap="Step 2: move selections down" aria-label="Enlarge: Step 2: move selections down"><img src="./img/ho4.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 2: move selections down"></button><figcaption><span class="fig-n">3</span>Step 2: move selections down</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/ho5.webp" data-cap="Step 3: Cartesian product and selection become joins" aria-label="Enlarge: Step 3: Cartesian product and selection become joins"><img src="./img/ho5.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 3: Cartesian product and selection become joins"></button><figcaption><span class="fig-n">4</span>Step 3: Cartesian product and selection become joins</figcaption></figure>
-<figure class="fig"><button class="fig-open" type="button" data-full="./img/ho6.webp" data-cap="Step 4: push projections down" aria-label="Enlarge: Step 4: push projections down"><img src="./img/ho6.webp" width="1400" height="793" loading="lazy" decoding="async" alt="Step 4: push projections down"></button><figcaption><span class="fig-n">5</span>Step 4: push projections down</figcaption></figure>
-</div></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="8">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="8">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t9">Next: T9 Transactions</a></div>
+      <p>Handwritten answer: start from π Title over σ over the Cartesian product of Course and Enrollment; cascade into σ Grade = 'A' and σ Instructor = "…"; move σ Grade = 'A' down onto Enrollment and σ Instructor = "…" down onto Course; replace the product with a join; keep π Title at the top.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="8">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="8">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t9">Next: T9 Transactions</a></div>
     </div>
   </details>
 
@@ -3312,7 +3308,7 @@ go(LSget('dbTab','home'),true);
   function close(){ lb.hidden=true; img.removeAttribute('src'); document.documentElement.style.overflow=''; if(back) back.focus(); }
   document.addEventListener('click',function(e){
     var b=e.target.closest('.fig-open'); if(!b) return;
-    list=[].slice.call(b.closest('.figs').querySelectorAll('.fig-open')); back=b;
+    var scope=b.closest('.deep-body')||b.closest('.figs'); list=[].slice.call(scope.querySelectorAll('.fig-open')); back=b;
     show(list.indexOf(b)); lb.hidden=false; document.documentElement.style.overflow='hidden'; lb.querySelector('.lb-close').focus();
   });
   lb.addEventListener('click',function(e){
