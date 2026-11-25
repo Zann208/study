@@ -343,6 +343,27 @@ code.kw{font-weight:600}
 mark.hl{background:color-mix(in srgb,var(--vi) 20%,transparent);color:var(--ink);border-bottom:2px solid color-mix(in srgb,var(--vi) 70%,transparent);padding:1px 3px;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 html[data-theme="light"] mark.hl{background:color-mix(in srgb,#ffd84d 45%,transparent);border-bottom-color:color-mix(in srgb,var(--vi) 55%,transparent)}
 @media print{mark.hl{background:#fff3a0}}
+
+.brief{margin:14px 0;padding:14px 18px;border:1px solid var(--line2);border-left:3px solid var(--vi);border-radius:12px;background:var(--panel2)}
+.brief>b{display:block;font-size:.875rem;letter-spacing:.02em;margin-bottom:6px;color:var(--ink)}
+.brief p{margin:0;max-width:none!important}
+.schema{display:inline-block;vertical-align:top;margin:12px 14px 6px 0;border:1px solid color-mix(in srgb,var(--vi) 45%,var(--line2));border-radius:10px;overflow:hidden;background:var(--panel);min-width:min(300px,100%);max-width:100%;overflow-x:auto}
+.schema .sc-name{padding:8px 12px;font-weight:700;font-size:14px;background:color-mix(in srgb,var(--vi) 14%,var(--panel));border-bottom:1px solid color-mix(in srgb,var(--vi) 35%,var(--line2))}
+.schema table{width:100%;border-collapse:collapse;font-size:13.5px;margin:0}
+.schema td{padding:6px 12px;border-top:1px solid var(--line);white-space:nowrap}
+.schema tr:first-child td{border-top:0}
+.schema .sc-type{color:var(--muted)}
+.schema .sc-flags{text-align:right}
+.schema tr.is-pk .sc-col{font-weight:700}
+.schema tr.is-fk td{background:color-mix(in srgb,var(--vi) 6%,transparent)}
+.schema .sc-k{display:inline-block;margin-left:4px;padding:1px 6px;border-radius:4px;font:600 10.5px/1.5 var(--mono);border:1px solid var(--line2);color:var(--muted)}
+.schema .sc-k.pk{color:var(--vi);border-color:color-mix(in srgb,var(--vi) 55%,transparent)}
+.schema .sc-k.fk{color:var(--am, #b7791f);border-color:color-mix(in srgb,var(--am, #b7791f) 55%,transparent)}
+.schema .sc-link{padding:6px 12px;font-size:12px;color:var(--muted);border-top:1px dashed var(--line2)}
+.schema-row{display:flex;flex-wrap:wrap;gap:0 4px;align-items:flex-start}
+.lab-full details.deep{margin-top:10px}
+@media (max-width:760px){.schema{display:block;margin-right:0}.schema td{padding:6px 9px}.schema .sc-k.nn{display:none}}
+.lab-full details.deep+details.deep{margin-top:8px}
 </style></head>
 <body data-study-console="db" data-console-id="db" data-console-name="Database Systems">
 <main id="main">
@@ -1299,35 +1320,162 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
   </details>
 
   <details class="note" id="lab2" data-short="DDL: school database">
-    <summary><span class="num n1">2</span> School database DDL</summary>
-    <div class="body">
-      <p>Six <code class="kw">CREATE</code> statements for a kindergarten system, each driven by a sentence of requirements.</p>
-      <div class="qa"><span class="qn">1–2</span><p><code>CREATE DATABASE SCHOOL; USE SCHOOL;</code> then Students with Age restricted to 3–5 by <code class="kw">CHECK</code> (Topic 2).</p></div>
-      <div class="qa"><span class="qn">3 Parents</span>
-        <pre class="sql">CREATE TABLE Parents (
-    ParentID INT PRIMARY KEY,
-    FirstName VARCHAR(50) NOT NULL,
-    LastName  VARCHAR(50) NOT NULL,
-    PhoneNumber VARCHAR(15) DEFAULT 'N/A',
-    RelationToStudent VARCHAR(10) CHECK (RelationToStudent IN ('Mother','Father','Other')),
-    StudentID INT,
-    FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
-);</pre>
-        <p>The sheet also shows a second version with <code>CHECK ('Mother' OR 'Father' OR 'Other')</code>. <span class="flag no">That <code class="kw">CHECK</code> does not test the column; use the IN form</span></p></div>
-      <div class="qa"><span class="qn">4 Rooms</span><p><code>RoomID INT PRIMARY KEY, RoomName VARCHAR(50) NOT NULL UNIQUE</code>.</p></div>
-      <div class="qa"><span class="qn">5 Employees</span><p>Answer uses <code>Age INT CHECK (Age &gt; 18)</code>. The question says "above or equal to 18"; the requirements text says "strictly greater than 18". <span class="flag">Question and requirements disagree</span></p></div>
-      <div class="qa"><span class="qn">6 StudentRoomAssignment</span>
-        <pre class="sql">CREATE TABLE StudentRoomAssignment (
-    ID INT PRIMARY KEY,
-    StudentID INT NOT NULL,
-    RoomID INT NOT NULL,
-    TeacherID INT DEFAULT 1,
-    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
-    FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID),
-    CONSTRAINT fk_sra_teacher FOREIGN KEY (TeacherID)
-        REFERENCES Employees(EmployeeID) ON DELETE SET DEFAULT
-);</pre>
-        <p>If an assigned teacher's record is deleted, TeacherID falls back to 1 (the director) and the assignment row survives.</p></div>
+    <summary><span class="num n1">2</span> School database: DDL practice</summary>
+    <div class="body lab-full">
+<p>Six <code class="kw">CREATE</code> statements for a kindergarten system. Each column type and each constraint comes from a sentence in the requirements, so read the requirements first and mark every rule word: <i>unique</i>, <i>optional</i>, <i>must</i>, <i>only</i>, <i>between</i>, <i>linked to</i>, <i>automatically</i>.</p>
+<div class="brief"><b>Requirements for the Kindergarten School System</b>
+<p>Our goal is to create a system that accurately tracks our students, their contacts, and our staff. For every Student, we must capture their unique ID, full name, and optional nickname, with a strict rule that their recorded age must fall exactly between 3 and 5 years old. Each contact (Parent/Guardian) must also be uniquely identifiable and linked to their specific student, and we need to validate that the recorded relationship is only 'Mother,' 'Father,' or 'Other.' To avoid missing information, if a phone number isn't supplied for a contact, it should automatically be marked as 'N/A.' Turning to our physical resources, every classroom must have a unique identifier and a unique name. For staff, every employee must be uniquely identified, and we must enforce a business rule that all staff are adults, meaning their age must be strictly greater than 18. Finally, we must link a student to a specific classroom and an assigned staff member (teacher). This link must be complete, meaning a student and a classroom must always be specified. Most importantly, if an assigned teacher leaves the school and their staff record is deleted, the corresponding assignment must be protected from deletion. Instead, the staff identifier on the assignment record must automatically default to Staff ID 1, which is reserved for our director, ensuring continuous data integrity.</p></div>
+<h4>From words to SQL</h4>
+<div class="tscroll"><table>
+<tr><th>Requirement words</th><th>SQL</th></tr>
+<tr><td>unique ID, uniquely identified</td><td><code>PRIMARY KEY</code></td></tr>
+<tr><td>a unique name (a second unique column)</td><td><code>UNIQUE</code></td></tr>
+<tr><td>must have, must always be specified</td><td><code>NOT NULL</code></td></tr>
+<tr><td>optional</td><td>nothing: <code class="kw">NULL</code> is allowed by default</td></tr>
+<tr><td>between 3 and 5, only 'Mother', 'Father' or 'Other', at least 18</td><td><code>CHECK (…)</code></td></tr>
+<tr><td>if not supplied, automatically …</td><td><code>DEFAULT …</code></td></tr>
+<tr><td>linked to</td><td><code>FOREIGN KEY … REFERENCES …</code></td></tr>
+<tr><td>when the parent row is deleted, set to …</td><td><code>ON DELETE SET DEFAULT</code> / <code>SET NULL</code> / <code>CASCADE</code></td></tr>
+</table></div>
+<p>Every <code class="kw">CREATE TABLE</code> has the same shape: the name, then the column list in brackets <code class="sym">( )</code>, items separated by commas <code class="sym">,</code> with no comma after the last item, and a semicolon <code class="sym">;</code> <code class="sym">;</code> at the end. A table must have at least one column.</p>
+<h4>Q1 · Create the schema · 1 point</h4>
+<p>Write the SQL statement required to create a schema named “SCHOOL”.</p>
+<details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql">CREATE SCHEMA SCHOOL;
+USE SCHOOL;</pre></div></details>
+<details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li>A schema is a named container for related tables. In MySQL, <code>CREATE SCHEMA SCHOOL</code> and <code>CREATE DATABASE SCHOOL</code> do exactly the same thing.</li>
+<li>The question asks only for the first line. <code>USE SCHOOL</code> makes it the current database, so the following <code class="kw">CREATE TABLE</code> statements go into SCHOOL instead of whichever database was selected before (or fail with "No database selected").</li>
+<li>In DBeaver the left panel does not refresh by itself: select <b>Databases</b> and press F5 to see the new schema, and choose it in the toolbar's database selector so the editor checks names against it.</li>
+</ol></div></details>
+<h4>Q2 · Students · 2 points</h4>
+<p>Write the SQL statement required to create a table named “Students” that includes the columns and constraints below. Make sure that the Age attribute must be restricted to values between 3 and 5.</p><div class="schema"><div class="sc-name mono">Students</div><table><tr class="is-pk"><td class="mono sc-col">StudentID</td><td class="mono sc-type">int</td><td class="sc-flags"><span class="sc-k pk">PK</span><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">FirstName</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">LastName</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">NickName</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"></td></tr><tr><td class="mono sc-col">Age</td><td class="mono sc-type">int</td><td class="sc-flags"></td></tr></table></div>
+<details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql">CREATE TABLE Students (
+  StudentID  INT          NOT NULL PRIMARY KEY,
+  FirstName  VARCHAR(50)  NOT NULL,
+  LastName   VARCHAR(50)  NOT NULL,
+  NickName   VARCHAR(50),
+  Age        INT          CHECK (Age BETWEEN 3 AND 5)
+);</pre></div></details>
+<details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>StudentID.</b> "unique ID" identifies each student, so it is the primary key. <code class="kw">PRIMARY KEY</code> already implies unique and not <code class="kw">NULL</code>; <code class="kw">NOT NULL</code> is written to match the diagram and does no harm. In the diagram the key is the bold column.</li>
+<li><b>FirstName, LastName.</b> <code>VARCHAR(50)</code> stores text up to 50 characters and uses only the space needed. <code class="kw">NOT NULL</code> because the full name is required.</li>
+<li><b>NickName.</b> The requirements say "optional nickname". Optional means <code class="kw">NULL</code> is allowed, which is the default, so nothing is added. Leaving <code class="kw">NOT NULL</code> out is the answer.</li>
+<li><b>Age.</b> <code>CHECK</code> is a validator: an <code class="kw">INSERT</code> or <code class="kw">UPDATE</code> that makes the condition false is rejected. <code>BETWEEN 3 AND 5</code> includes both ends; it equals <code>Age &gt;= 3 AND Age &lt;= 5</code>. Ages 3, 4 and 5 pass; 2 and 6 are rejected.</li>
+<li><b>Order of words in a column line:</b> name, type, then the rules. Commas separate columns; the last column has no comma before <code>)</code>.</li>
+</ol></div></details>
+<h4>Q3 · Parents · 2 points</h4>
+<p>Write the SQL statement required to create a table named <b>Parents</b> which will store the parents information corresponding to the students in the Students table. The table must meet the column and constraint requirements detailed below. Make sure that RelationToStudent values must be restricted to only 'Mother', 'Father', or 'Other'.</p><div class="schema-row"><div class="schema"><div class="sc-name mono">Parents</div><table><tr class="is-pk"><td class="mono sc-col">ParentID</td><td class="mono sc-type">int</td><td class="sc-flags"><span class="sc-k pk">PK</span><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">FirstName</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">LastName</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">PhoneNumber</td><td class="mono sc-type">varchar(15)</td><td class="sc-flags"></td></tr><tr><td class="mono sc-col">RelationToStudent</td><td class="mono sc-type">varchar(10)</td><td class="sc-flags"></td></tr><tr class="is-fk"><td class="mono sc-col">StudentID</td><td class="mono sc-type">int</td><td class="sc-flags"><span class="sc-k fk">FK</span></td></tr></table><div class="sc-link mono">Parents.StudentID → Students.StudentID</div></div><div class="schema"><div class="sc-name mono">Students</div><table><tr class="is-pk"><td class="mono sc-col">StudentID</td><td class="mono sc-type">int</td><td class="sc-flags"><span class="sc-k pk">PK</span><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">FirstName</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">LastName</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">NickName</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"></td></tr><tr><td class="mono sc-col">Age</td><td class="mono sc-type">int</td><td class="sc-flags"></td></tr></table></div></div>
+<details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql">CREATE TABLE Parents (
+  ParentID           INT          NOT NULL PRIMARY KEY,
+  FirstName          VARCHAR(50)  NOT NULL,
+  LastName           VARCHAR(50)  NOT NULL,
+  PhoneNumber        VARCHAR(15)  DEFAULT 'N/A',
+  RelationToStudent  VARCHAR(10)  CHECK (RelationToStudent IN ('Mother', 'Father', 'Other')),
+  StudentID          INT,
+  FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+);</pre></div></details>
+<details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>PhoneNumber is text, not a number.</b> Phone numbers can start with 0, contain + or -, and are never used in arithmetic. Rule of thumb: if you will not calculate with it, store it as text.</li>
+<li><b><code>DEFAULT 'N/A'</code></b> comes from "if a phone number isn't supplied… automatically marked as 'N/A'". The default is used only when the <code class="kw">INSERT</code> leaves the column out. Writing <code class="kw">NULL</code> explicitly stores <code class="kw">NULL</code>, because <code class="kw">DEFAULT</code> does not make the column required. <code>NOT NULL DEFAULT 'N/A'</code> would also block an explicit <code class="kw">NULL</code>; the diagram does not show <code class="kw">NOT NULL</code> here.</li>
+<li><b>Text values go in single quotes</b> <code class="sym">' '</code>: <code>'N/A'</code>, <code>'Mother'</code>. Numbers do not.</li>
+<li><b>RelationToStudent.</b> <code>IN (list)</code> means "must be one of these values"; 'Uncle' is rejected. <code>VARCHAR(10)</code> fits the longest value (6 characters). The form <code>CHECK ('Mother' OR 'Father' OR 'Other')</code> does not test the column at all; it must name the column.</li>
+<li><b>The foreign key.</b> "linked to their specific student" (the dotted line in the diagram) becomes <code>FOREIGN KEY (StudentID) REFERENCES Students(StudentID)</code>: a StudentID stored here must already exist in Students. Read it as: this table's StudentID → refers to → Students, column StudentID.</li>
+<li><b>Same type on both sides.</b> Parents.StudentID and Students.StudentID are both <code class="kw">INT</code>.</li>
+<li><b>Order of creation.</b> Students must exist before Parents, because a foreign key cannot point at a table that is not there yet.</li>
+<li><b>No <code class="kw">NOT NULL</code> on Parents.StudentID</b>: the diagram shows plain <code>int</code>, so a contact without a linked student is allowed.</li>
+</ol></div></details>
+<h4>Q4 · Rooms · 2 points</h4>
+<p>Write an SQL statement to create <b>Rooms</b> table.</p><div class="schema"><div class="sc-name mono">Rooms</div><table><tr class="is-pk"><td class="mono sc-col">RoomID</td><td class="mono sc-type">int</td><td class="sc-flags"><span class="sc-k pk">PK</span><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">RoomName</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"><span class="sc-k nn">NOT NULL</span></td></tr></table></div>
+<details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql">CREATE TABLE Rooms (
+  RoomID    INT          NOT NULL PRIMARY KEY,
+  RoomName  VARCHAR(50)  NOT NULL UNIQUE
+);</pre></div></details>
+<details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li><b>RoomID</b>: "a unique identifier" → primary key.</li>
+<li><b>RoomName</b>: "a unique name" → <code>UNIQUE</code>. The diagram shows only <code class="kw">NOT NULL</code>; the <code class="kw">UNIQUE</code> comes from the requirements text. The diagram gives structure, the paragraph gives rules.</li>
+<li><b><code class="kw">PRIMARY KEY</code> vs <code class="kw">UNIQUE</code>.</b> Both forbid duplicates. A table has one primary key: the official identifier, never <code class="kw">NULL</code>, the one other tables reference. It can have several <code class="kw">UNIQUE</code> columns: the alternate (candidate) keys of Topic 1.</li>
+</ol></div></details>
+<h4>Q5 · Employees · 2 points</h4>
+<p>Write an SQL statement to create <b>Employees</b> table. Make sure that the Age attribute must be restricted to values above or equal to 18.</p><div class="schema"><div class="sc-name mono">Employees</div><table><tr class="is-pk"><td class="mono sc-col">EmployeeID</td><td class="mono sc-type">int</td><td class="sc-flags"><span class="sc-k pk">PK</span><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">FirstName</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">LastName</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"><span class="sc-k nn">NOT NULL</span></td></tr><tr><td class="mono sc-col">JobTitle</td><td class="mono sc-type">varchar(50)</td><td class="sc-flags"></td></tr><tr><td class="mono sc-col">Age</td><td class="mono sc-type">int</td><td class="sc-flags"></td></tr></table></div>
+<details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql">CREATE TABLE Employees (
+  EmployeeID  INT          NOT NULL PRIMARY KEY,
+  FirstName   VARCHAR(50)  NOT NULL,
+  LastName    VARCHAR(50)  NOT NULL,
+  JobTitle    VARCHAR(50),
+  Age         INT          CHECK (Age &gt;= 18)
+);</pre></div></details>
+<details class="deep"><summary>Explanation</summary><div class="deep-body"><ol>
+<li>Same pattern as Students. JobTitle has no <code class="kw">NOT NULL</code> in the diagram, so it is optional.</li>
+<li><b>Comparison words to operators:</b> "above or equal to 18", "at least 18" → <code>&gt;= 18</code> (18 allowed). "strictly greater than 18", "above 18" → <code>&gt; 18</code> (18 rejected).</li>
+<li><b>The question and the requirements disagree.</b> The question says "above or equal to 18"; the requirements paragraph says "strictly greater than 18", and the answer sheet uses <code>Age &gt; 18</code>. Answer the question as asked and note the difference.</li>
+</ol></div></details>
+<h4>Q6 · StudentRoomAssignment · 5 points</h4>
+<p>Write an SQL statement that defines the <b>StudentRoomAssignment</b> table. The table requires four columns: <b>ID</b> serves as the <b>Primary Key (PK)</b>, uniquely identifying each assignment record. Both <b>StudentID</b> and <b>RoomID</b> are designated <b><code class="kw">NOT NULL</code></b>, meaning every assignment must be linked to an existing student and an existing room. The <b>TeacherID</b> column is defined with a <b><code class="kw">DEFAULT</code> 1</b> value, ensuring that if no teacher is explicitly assigned, the system automatically uses employee ID 1 as the default contact. The table enforces <b>referential integrity</b> through three <b>Foreign Key (FK)</b> constraints: two simple links for StudentID and RoomID, and the third, explicitly named <b>fk_sra_teacher</b>, linking <b>TeacherID</b> to the Employees table. Critically, this final FK includes the action which automatically changes the TeacherID to 1 in the event that the assigned teacher's record is deleted (e.g., they resign), thereby maintaining data consistency without losing the assignment record.</p><div class="schema"><div class="sc-name mono">StudentRoomAssignment</div><table><tr class="is-pk"><td class="mono sc-col">ID</td><td class="mono sc-type">int</td><td class="sc-flags"><span class="sc-k pk">PK</span><span class="sc-k nn">NOT NULL</span></td></tr><tr class="is-fk"><td class="mono sc-col">StudentID</td><td class="mono sc-type">int</td><td class="sc-flags"><span class="sc-k fk">FK</span><span class="sc-k nn">NOT NULL</span></td></tr><tr class="is-fk"><td class="mono sc-col">RoomID</td><td class="mono sc-type">int</td><td class="sc-flags"><span class="sc-k fk">FK</span><span class="sc-k nn">NOT NULL</span></td></tr><tr class="is-fk"><td class="mono sc-col">TeacherID</td><td class="mono sc-type">int</td><td class="sc-flags"><span class="sc-k fk">FK</span></td></tr></table><div class="sc-link mono">StudentID → Students · RoomID → Rooms · TeacherID → Employees</div></div>
+<details class="deep"><summary>Model answer</summary><div class="deep-body"><pre class="sql">CREATE TABLE StudentRoomAssignment (
+  ID         INT  NOT NULL PRIMARY KEY,
+  StudentID  INT  NOT NULL,
+  RoomID     INT  NOT NULL,
+  TeacherID  INT  DEFAULT 1,
+  FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+  FOREIGN KEY (RoomID)    REFERENCES Rooms(RoomID),
+  CONSTRAINT fk_sra_teacher
+    FOREIGN KEY (TeacherID) REFERENCES Employees(EmployeeID)
+    ON DELETE SET DEFAULT
+);</pre></div></details>
+<details class="deep"><summary>Explanation</summary><div class="deep-body"><p>Each row means "this student is in this room with this teacher". Take the question sentence by sentence:</p>
+<div class="tscroll"><table>
+<tr><th>Sentence</th><th>SQL</th></tr>
+<tr><td>ID serves as the Primary Key</td><td><code>ID INT NOT NULL PRIMARY KEY</code></td></tr>
+<tr><td>StudentID and RoomID are <code class="kw">NOT NULL</code></td><td><code>NOT NULL</code> on both: no assignment without a student and a room</td></tr>
+<tr><td>TeacherID … <code class="kw">DEFAULT</code> 1</td><td><code>TeacherID INT DEFAULT 1</code></td></tr>
+<tr><td>two simple links for StudentID and RoomID</td><td>two plain <code>FOREIGN KEY … REFERENCES …</code>, no name, no action</td></tr>
+<tr><td>the third, explicitly named fk_sra_teacher</td><td><code>CONSTRAINT fk_sra_teacher</code> before that <code class="kw">FOREIGN KEY</code></td></tr>
+<tr><td>changes TeacherID to 1 when the teacher's record is deleted</td><td><code>ON DELETE SET DEFAULT</code></td></tr>
+</table></div>
+<p><b>Why name a constraint.</b> Every constraint has a name; without one MySQL generates something like <code>studentroomassignment_ibfk_3</code>. A chosen name can be used later: <code>ALTER TABLE StudentRoomAssignment DROP FOREIGN KEY fk_sra_teacher;</code></p>
+<p><b>What <code class="kw">ON DELETE SET DEFAULT</code> does.</b></p>
+<ol>
+<li>Assignment 12 has <code>TeacherID = 7</code>.</li>
+<li>Employee 7 resigns: <code>DELETE FROM Employees WHERE EmployeeID = 7;</code></li>
+<li>With no action written, the delete would be refused, because assignment 12 still refers to 7 (the default is to reject).</li>
+<li>With <code class="kw">SET DEFAULT</code>, assignment 12's TeacherID becomes its default, 1. The assignment survives and now points at the director.</li>
+</ol>
+<div class="tscroll"><table>
+<tr><th>Action</th><th>Assignment 12 after the delete</th><th>Fits?</th></tr>
+<tr><td><code>CASCADE</code></td><td>deleted too</td><td>No: the record must not be lost</td></tr>
+<tr><td><code>SET NULL</code></td><td>TeacherID becomes <code class="kw">NULL</code></td><td>No: it must become 1</td></tr>
+<tr><td><code>RESTRICT</code> / none</td><td>the teacher's delete is refused</td><td>No: the teacher must be deletable</td></tr>
+<tr><td><code>SET DEFAULT</code></td><td>TeacherID becomes 1</td><td>Yes</td></tr>
+</table></div>
+<p><b>Two conditions.</b> The column needs a <code class="kw">DEFAULT</code> (here 1), and employee 1 must exist, otherwise the new value would point at nothing. Students, Rooms and Employees must all be created before this table.</p>
+<div class="tip t-warn"><b>MySQL</b>InnoDB, MySQL's default storage engine, rejects <code>ON DELETE SET DEFAULT</code> in a table definition. It is valid standard SQL and the answer to submit. To run the table in MySQL for practice, use <code>ON DELETE SET NULL</code> and watch TeacherID become <code class="kw">NULL</code> instead of 1.</div></div></details>
+<h4>Run and test it</h4>
+<p>Run the statements in order, one at a time (cursor inside the statement, Ctrl+Enter). Then try these inserts; each comment says what should happen. <code class="kw">CHECK</code> constraints are enforced from MySQL 8.0.16.</p><pre class="sql">INSERT INTO Students VALUES (1, 'Ana', 'Lee', NULL, 4);          -- accepted
+INSERT INTO Students VALUES (2, 'Ben', 'Ko', 'Benny', 7);        -- rejected: Age fails CHECK
+
+INSERT INTO Parents (ParentID, FirstName, LastName, RelationToStudent, StudentID)
+VALUES (1, 'Mai', 'Lee', 'Mother', 1);                          -- accepted, PhoneNumber = 'N/A'
+INSERT INTO Parents VALUES (2, 'Tom', 'Lee', '0812345678', 'Uncle', 1);   -- rejected: CHECK
+INSERT INTO Parents VALUES (3, 'Joe', 'Ko', '0899999999', 'Father', 99);  -- rejected: no student 99
+
+INSERT INTO Rooms VALUES (1, 'Sunflower');                     -- accepted
+INSERT INTO Rooms VALUES (2, 'Sunflower');                     -- rejected: RoomName is UNIQUE
+
+INSERT INTO Employees VALUES (1, 'Somchai', 'Dee', 'Director', 45);  -- accepted
+INSERT INTO Employees VALUES (2, 'Nok', 'Sri', 'Teacher', 17);       -- rejected: Age fails CHECK
+
+SELECT * FROM Parents;                                         -- see the 'N/A' default</pre>
+<h4>Common errors</h4>
+<div class="tscroll"><table>
+<tr><th>Message</th><th>Cause</th><th>Fix</th></tr>
+<tr><td class="mono">4028 A table must have at least one visible column</td><td><code>CREATE TABLE name;</code> with no column list</td><td>Add the columns in brackets</td></tr>
+<tr><td class="mono">1064 error in your SQL syntax … near 'X'</td><td>A typo or missing comma at or just before X (for example <code>VRRCHAR</code>)</td><td>Fix the word at the quoted spot; the line number counts from the start of the statement</td></tr>
+<tr><td class="mono">1050 Table 'X' already exists</td><td>The statement was run before</td><td>Run only the new statement, or <code>DROP TABLE X;</code> first (child tables before parents)</td></tr>
+<tr><td class="mono">1046 No database selected</td><td>No <code>USE SCHOOL;</code></td><td>Run <code>USE SCHOOL;</code> or pick it in the toolbar</td></tr>
+<tr><td class="mono">3819 Check constraint … is violated</td><td>An inserted value breaks a <code class="kw">CHECK</code></td><td>Expected when testing the rule</td></tr>
+<tr><td class="mono">1452 Cannot add or update a child row</td><td>A foreign key value with no matching parent row</td><td>Insert the parent row first</td></tr>
+<tr><td>DBeaver red dotted lines, "Table … not found"</td><td>The editor's database shows &lt; N/A &gt; or the panel was not refreshed</td><td>Pick the database in the toolbar and press F5 on Databases; these are editor warnings, not MySQL errors</td></tr>
+</table></div>
     </div>
   </details>
 
