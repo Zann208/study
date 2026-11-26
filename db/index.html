@@ -636,12 +636,12 @@ html[data-theme="light"] mark.hl{background:color-mix(in srgb,#ffd84d 45%,transp
 
       <h4>Explaining a referential-action constraint</h4>
       <div class="formula">CONSTRAINT DEPTMGRFK FOREIGN KEY (super_ssn) REFERENCES EMPLOYEE(Ssn)<br>ON DELETE SET DEFAULT ON UPDATE CASCADE;</div>
-      <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><a class="btn" href="#/keys">Drill: Keys and constraints</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 SQL DDL</a></div>
+      <p>The past paper asks for a technical reading of this constraint ("if there is any updating at … then … will happen") and a modification so that a resigning supervisor leaves the supervisees with no supervisor, and a newly admitted employee is assigned an HR supervisor automatically.</p></div></details><div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><a class="btn" href="#/keys">Drill: Keys and constraints</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 SQL DDL/DML</a></div>
     </div>
   </details>
 
-  <details class="note" id="t2" data-short="SQL DDL">
-    <summary><span class="num n1">2</span> SQL DDL: tables, constraints and referential actions</summary>
+  <details class="note" id="t2" data-short="SQL DDL/DML">
+    <summary><span class="num n1">2</span> SQL DDL and DML: tables, constraints and data changes</summary>
     <div class="body">
 <div class="lesson"><b>In one line</b>DDL is the part of SQL that builds the empty tables and writes the rules the data must follow.</div>
 <p>SQL is the language you type to talk to a relational DBMS. Its commands fall into families:</p>
@@ -683,7 +683,16 @@ html[data-theme="light"] mark.hl{background:color-mix(in srgb,#ffd84d 45%,transp
 <p>Every column gets a data type. The common ones: <code>INT</code> for whole numbers, <code>DECIMAL(10,2)</code> for money, <code>VARCHAR(n)</code> for text of varying length, <code>CHAR(n)</code> for codes that always have the same length, and <code>DATE</code> for dates written YYYY-MM-DD.</p>
 <h4>A rule can compare two columns</h4>
 <p>A <code class="kw">CHECK</code> at the end of <code class="kw">CREATE TABLE</code> is tested on every row and may compare columns of that row, for example "a loan cannot be returned before it was borrowed": <code>CHECK (ReturnDate &gt;= LoanDate)</code>.</p>
-<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="SQL">SQL</a><a class="chip c2 tlink" href="#/terms" data-term="DDL">DDL</a><a class="chip c1 tlink" href="#/terms" data-term="DML">DML</a><a class="chip c2 tlink" href="#/terms" data-term="DQL">DQL</a><a class="chip c1 tlink" href="#/terms" data-term="DCL">DCL</a><a class="chip c2 tlink" href="#/terms" data-term="TCL">TCL</a><a class="chip c1 tlink" href="#/terms" data-term="CREATE TABLE">CREATE TABLE</a><a class="chip c2 tlink" href="#/terms" data-term="ALTER TABLE">ALTER TABLE</a><a class="chip c1 tlink" href="#/terms" data-term="NOT NULL">NOT NULL</a><a class="chip c2 tlink" href="#/terms" data-term="UNIQUE">UNIQUE</a><a class="chip c1 tlink" href="#/terms" data-term="DEFAULT">DEFAULT</a><a class="chip c2 tlink" href="#/terms" data-term="CHECK">CHECK</a><a class="chip c1 tlink" href="#/terms" data-term="REFERENCES">REFERENCES</a><a class="chip c2 tlink" href="#/terms" data-term="Referential action">Referential action</a><a class="chip c1 tlink" href="#/terms" data-term="CASCADE">CASCADE</a><a class="chip c2 tlink" href="#/terms" data-term="SET NULL">SET NULL</a><a class="chip c1 tlink" href="#/terms" data-term="SET DEFAULT">SET DEFAULT</a><a class="chip c2 tlink" href="#/terms" data-term="RESTRICT">RESTRICT</a><a class="chip c1 tlink" href="#/terms" data-term="NO ACTION">NO ACTION</a></div>
+<h4>Changing the data: INSERT, UPDATE, DELETE</h4>
+<ul class="clean">
+  <li><code>INSERT</code> adds a row: <code>INSERT INTO Member VALUES (3, 'Ana', 'ana@mail.com');</code></li>
+  <li><code>UPDATE</code> changes rows: <code>UPDATE Member SET Email = 'new@mail.com' WHERE MemberID = 3;</code></li>
+  <li><code>DELETE</code> removes rows: <code>DELETE FROM Loan WHERE MemberID = 3;</code></li>
+</ul>
+<p>The <code class="kw">WHERE</code> clause decides which rows are changed. Forget it, and <code class="kw">UPDATE</code> changes every row and <code class="kw">DELETE</code> empties the table.</p>
+<h4>Changing the table itself: ALTER and DROP</h4>
+<p><code>ALTER TABLE</code> changes the structure of a table that already holds data: add a column, remove one, change a default, add or remove a constraint. <code>DROP TABLE</code> removes the whole table with its rows. <code class="kw">DELETE</code> empties a table; <code class="kw">DROP</code> makes it disappear.</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="SQL">SQL</a><a class="chip c2 tlink" href="#/terms" data-term="DDL">DDL</a><a class="chip c1 tlink" href="#/terms" data-term="DML">DML</a><a class="chip c2 tlink" href="#/terms" data-term="DQL">DQL</a><a class="chip c1 tlink" href="#/terms" data-term="UPDATE … SET">UPDATE … SET</a><a class="chip c2 tlink" href="#/terms" data-term="DELETE FROM">DELETE FROM</a><a class="chip c1 tlink" href="#/terms" data-term="DCL">DCL</a><a class="chip c2 tlink" href="#/terms" data-term="TCL">TCL</a><a class="chip c1 tlink" href="#/terms" data-term="CREATE TABLE">CREATE TABLE</a><a class="chip c2 tlink" href="#/terms" data-term="ALTER TABLE">ALTER TABLE</a><a class="chip c1 tlink" href="#/terms" data-term="NOT NULL">NOT NULL</a><a class="chip c2 tlink" href="#/terms" data-term="UNIQUE">UNIQUE</a><a class="chip c1 tlink" href="#/terms" data-term="DEFAULT">DEFAULT</a><a class="chip c2 tlink" href="#/terms" data-term="CHECK">CHECK</a><a class="chip c1 tlink" href="#/terms" data-term="REFERENCES">REFERENCES</a><a class="chip c2 tlink" href="#/terms" data-term="Referential action">Referential action</a><a class="chip c1 tlink" href="#/terms" data-term="CASCADE">CASCADE</a><a class="chip c2 tlink" href="#/terms" data-term="SET NULL">SET NULL</a><a class="chip c1 tlink" href="#/terms" data-term="SET DEFAULT">SET DEFAULT</a><a class="chip c2 tlink" href="#/terms" data-term="RESTRICT">RESTRICT</a><a class="chip c1 tlink" href="#/terms" data-term="NO ACTION">NO ACTION</a></div>
 <div class="tip t-good"><b>Remember</b><ul class="clean"><li>DDL builds structure; constraints are rules the DBMS checks for you.</li><li><code class="kw">CASCADE</code> follows, <code class="kw">SET NULL</code> unlinks, <code class="kw">SET DEFAULT</code> relinks, <code class="kw">RESTRICT</code> refuses.</li><li><mark class="hl">In MySQL, no action written means <code class="kw">RESTRICT</code>.</mark></li></ul></div>
 <details class="deep"><summary>Details</summary><div class="deep-body"><h4>SQL and its command groups</h4>
 <p>SQL (Structured Query Language) is the standard language for working with relational databases. IBM first called it Structured English Query Language, SEQUEL. MySQL, PostgreSQL, SQL Server, Oracle and SQLite all support it, each with small variations.</p>
@@ -802,7 +811,103 @@ CREATE DATABASE COMPANY;</pre>
 </table></div>
 
       
+
 <div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/ddl-rowcheck.webp" data-cap="A tuple-based CHECK and the rows that violate it" aria-label="Enlarge: A tuple-based CHECK and the rows that violate it"><img src="./img/ddl-rowcheck.webp" width="1400" height="347" loading="lazy" decoding="async" alt="A tuple-based CHECK and the rows that violate it"></button><figcaption><span class="fig-n">12</span>A tuple-based CHECK and the rows that violate it</figcaption></figure></div>
+<h4>INSERT, DELETE and UPDATE</h4>
+<p>These three commands change the data, not the structure. <code>INSERT</code> adds one or more tuples to a table. <code>UPDATE</code> and <code>DELETE</code> change or remove every tuple that satisfies the <code class="kw">WHERE</code> condition, so one statement can touch many rows.</p>
+<h4>INSERT: values in table order</h4>
+<p>List the table name and one value for every attribute, in the same order as the attributes in <code class="kw">CREATE TABLE</code>, including NULLs. Types and every constraint in the DDL (<code class="kw">NOT NULL</code>, keys, <code class="kw">CHECK</code>, foreign keys) are checked automatically.</p>
+<pre class="sql">INSERT INTO EMPLOYEE
+VALUES ('Richard', 'K', 'Marini', '653298653', '1962-12-30',
+        '98 Oak Forest, Katy, TX', 'M', 37000, '653298653', 4);</pre>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/dml-05.webp" data-cap="INSERT with values in the order of CREATE TABLE" aria-label="Enlarge: INSERT with values in the order of CREATE TABLE"><img src="./img/dml-05.webp" width="1400" height="804" loading="lazy" decoding="async" alt="INSERT with values in the order of CREATE TABLE"></button><figcaption><span class="fig-n">13</span>INSERT with values in the order of CREATE TABLE</figcaption></figure></div>
+<h4>INSERT: named attributes</h4>
+<p>Name the attributes, then give values in that order. Every attribute that is <code class="kw">NOT NULL</code> and has no <code class="kw">DEFAULT</code> must be listed; the ones left out get their <code class="kw">DEFAULT</code>, or <code class="kw">NULL</code>.</p>
+<pre class="sql">INSERT INTO EMPLOYEE (Fname, Lname, Dno, Ssn)
+VALUES ('Sam', 'Mark', 4, '653295555');      -- Minit, Bdate, Salary, … become NULL</pre>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/dml-06.webp" data-cap="INSERT with named attributes; the others become NULL" aria-label="Enlarge: INSERT with named attributes; the others become NULL"><img src="./img/dml-06.webp" width="1400" height="658" loading="lazy" decoding="async" alt="INSERT with named attributes; the others become NULL"></button><figcaption><span class="fig-n">14</span>INSERT with named attributes; the others become NULL</figcaption></figure></div>
+<h4>INSERT: several rows at once</h4>
+<pre class="sql">INSERT INTO EMPLOYEE (Fname, Minit, Lname, Ssn, Bdate, Address, Sex, Salary, Super_ssn, Dno)
+VALUES
+  ('Mary',  'H', 'Jones',  '888665123', '1970-05-15', '45 North St, Houston, TX', 'F', 55000, '123456789', 5),
+  ('Daman', 'L', 'Savole', '999776789', '1985-01-20', '77 South Ave, Dallas, TX', 'M', 45000, '123456789', 4);</pre>
+<p>Tuples are separated by commas <code class="sym">,</code> inside one <code class="kw">INSERT</code>.</p>
+<h4>INSERT: rows from a query</h4>
+<p>Instead of VALUES, a <code class="kw">SELECT</code> supplies the rows. Its columns must match the listed attributes in number, order and type.</p>
+<pre class="sql">CREATE TABLE WORKS_ON_INFO (
+  Emp_name        VARCHAR(15),
+  Proj_name       VARCHAR(15),
+  Hours_per_week  DECIMAL(3,1) );
+
+INSERT INTO WORKS_ON_INFO (Emp_name, Proj_name, Hours_per_week)
+SELECT E.Lname, P.Pname, W.Hours
+FROM   PROJECT P, WORKS_ON W, EMPLOYEE E
+WHERE  P.Pnumber = W.Pno AND W.Essn = E.Ssn;</pre>
+<p>WORKS_ON_INFO is a snapshot: later changes to WORKS_ON do not reach it.</p>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/dml-08.webp" data-cap="INSERT … SELECT fills WORKS_ON_INFO from a query" aria-label="Enlarge: INSERT … SELECT fills WORKS_ON_INFO from a query"><img src="./img/dml-08.webp" width="1400" height="824" loading="lazy" decoding="async" alt="INSERT … SELECT fills WORKS_ON_INFO from a query"></button><figcaption><span class="fig-n">15</span>INSERT … SELECT fills WORKS_ON_INFO from a query</figcaption></figure></div>
+<h4>Copying a table</h4>
+<div class="tscroll"><table>
+  <tr><th>Statement</th><th>Copies</th><th>Rows</th></tr>
+  <tr><td><code>CREATE TABLE EMPLOYEE_COPY LIKE EMPLOYEE;</code></td><td>Columns, types, <code class="kw">NOT NULL</code>, defaults, primary key and indexes (in MySQL, not foreign keys)</td><td>None: the table is empty</td></tr>
+  <tr><td><code>CREATE TABLE D5EMPS AS SELECT E.* FROM EMPLOYEE AS E WHERE E.Dno = 5;</code></td><td>Columns and types of the <code class="kw">SELECT</code> result; no primary key or other constraints</td><td>The rows the <code class="kw">SELECT</code> returns</td></tr>
+</table></div>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/dml-09.webp" data-cap="CREATE TABLE … LIKE: same columns, no rows" aria-label="Enlarge: CREATE TABLE … LIKE: same columns, no rows"><img src="./img/dml-09.webp" width="1400" height="764" loading="lazy" decoding="async" alt="CREATE TABLE … LIKE: same columns, no rows"></button><figcaption><span class="fig-n">16</span>CREATE TABLE … LIKE: same columns, no rows</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/dml-10.webp" data-cap="CREATE TABLE … AS SELECT: structure and rows of department 5" aria-label="Enlarge: CREATE TABLE … AS SELECT: structure and rows of department 5"><img src="./img/dml-10.webp" width="1400" height="821" loading="lazy" decoding="async" alt="CREATE TABLE … AS SELECT: structure and rows of department 5"></button><figcaption><span class="fig-n">17</span>CREATE TABLE … AS SELECT: structure and rows of department 5</figcaption></figure></div>
+<h4>DELETE</h4>
+<ul class="clean">
+  <li>Removes tuples from one table; the <code class="kw">WHERE</code> clause selects which.</li>
+  <li><b>No <code class="kw">WHERE</code> clause deletes every row</b>: <code>DELETE FROM EMPLOYEE;</code> leaves an empty table (the table itself remains).</li>
+  <li>Referential integrity is enforced. Rows in other tables are affected only through a referential action such as <code class="kw">ON DELETE CASCADE</code>.</li>
+  <li>The number of rows deleted is the number that satisfy the <code class="kw">WHERE</code> clause.</li>
+</ul>
+<pre class="sql">DELETE FROM EMPLOYEE
+WHERE Dno = 5;</pre>
+<div class="tip t-warn"><b>On the COMPANY database</b>This <code class="kw">DELETE</code> is refused with error 1451 (cannot delete a parent row): WORKS_ON, DEPENDENT, DEPARTMENT.Mgr_ssn and other employees' Super_ssn still refer to the employees of department 5, and none of those foreign keys has an <code class="kw">ON DELETE</code> action. Delete the referencing rows first, or practise on a copy made with <code class="kw">CREATE TABLE</code> … AS.</div>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/dml-12.webp" data-cap="DELETE FROM EMPLOYEE WHERE Dno = 5" aria-label="Enlarge: DELETE FROM EMPLOYEE WHERE Dno = 5"><img src="./img/dml-12.webp" width="1400" height="783" loading="lazy" decoding="async" alt="DELETE FROM EMPLOYEE WHERE Dno = 5"></button><figcaption><span class="fig-n">18</span>DELETE FROM EMPLOYEE WHERE Dno = 5</figcaption></figure></div>
+<h4>UPDATE</h4>
+<p><code>SET</code> lists the attributes to change and their new values; <code>WHERE</code> selects the tuples. One <code class="kw">UPDATE</code> changes rows of one table only, and referential integrity is enforced.</p>
+<pre class="sql">UPDATE PROJECT
+SET    Plocation = 'Bellaire', Dnum = 5
+WHERE  Pnumber = 10;                 -- one row: project 10 moves to department 5
+
+UPDATE EMPLOYEE
+SET    Salary = Salary * 1.1
+WHERE  Dno = 5;                      -- every Research employee gets a 10% raise</pre>
+<p>On the right of SET, an attribute name means its current value, so <code>Salary * 1.1</code> is computed per row. Without <code class="kw">WHERE</code>, every row is updated.</p>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/dml-14.webp" data-cap="UPDATE PROJECT: before and after" aria-label="Enlarge: UPDATE PROJECT: before and after"><img src="./img/dml-14.webp" width="1400" height="728" loading="lazy" decoding="async" alt="UPDATE PROJECT: before and after"></button><figcaption><span class="fig-n">19</span>UPDATE PROJECT: before and after</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/dml-15.webp" data-cap="UPDATE EMPLOYEE: a 10% raise for department 5" aria-label="Enlarge: UPDATE EMPLOYEE: a 10% raise for department 5"><img src="./img/dml-15.webp" width="1400" height="708" loading="lazy" decoding="async" alt="UPDATE EMPLOYEE: a 10% raise for department 5"></button><figcaption><span class="fig-n">20</span>UPDATE EMPLOYEE: a 10% raise for department 5</figcaption></figure></div>
+<h4>DROP</h4>
+<p>Removes a named schema element: a schema, table, domain or constraint, together with its data.</p>
+<ul class="clean">
+  <li><b><code class="kw">CASCADE</code></b>: drop the element and everything that depends on it. <code>DROP SCHEMA COMPANY CASCADE;</code> removes the schema with all its tables, views and constraints.</li>
+  <li><b><code class="kw">RESTRICT</code></b>: drop only if nothing depends on it (for a schema: only if it is empty); otherwise the <code class="kw">DROP</code> is not executed.</li>
+  <li>MySQL: <code>DROP DATABASE company;</code> (or <code>DROP SCHEMA company;</code>) always removes everything and takes no <code class="kw">CASCADE</code> / <code class="kw">RESTRICT</code>. <code>DROP TABLE</code> accepts the two words but ignores them; a table still referenced by a foreign key cannot be dropped.</li>
+  <li><code class="kw">DROP</code> removes the table; <code class="kw">DELETE</code> removes rows and keeps the table.</li>
+</ul>
+<h4>ALTER</h4>
+<p>Changes the structure of an existing table: add or drop a column, change a column definition, add or drop a constraint.</p>
+<pre class="sql">ALTER TABLE COMPANY.EMPLOYEE ADD COLUMN Job VARCHAR(12);
+-- no DEFAULT: Job is NULL in every existing row
+
+ALTER TABLE COMPANY.EMPLOYEE ADD COLUMN Job VARCHAR(12) DEFAULT 'not specify';
+-- existing rows get 'not specify'</pre>
+<p><b>Dropping a column.</b> <code>CASCADE</code> drops the column and every constraint, view or index that refers to it; <code>RESTRICT</code> fails if anything refers to it, so the dependencies must be removed first. In MySQL write <code>ALTER TABLE EMPLOYEE DROP COLUMN Address;</code>; it fails if a foreign key uses the column.</p>
+<p><b>Changing a column definition.</b></p>
+<pre class="sql">ALTER TABLE COMPANY.DEPARTMENT ALTER COLUMN Mgr_ssn DROP DEFAULT;
+ALTER TABLE COMPANY.DEPARTMENT ALTER COLUMN Mgr_ssn SET DEFAULT '333445555';</pre>
+<p><b>Changing constraints.</b> Only a named constraint can be dropped by name. A new constraint, named or not, is added with ADD <code class="kw">CONSTRAINT</code>.</p>
+<pre class="sql">ALTER TABLE EMPLOYEE DROP CONSTRAINT EMPSUPERFK CASCADE;      -- standard SQL
+ALTER TABLE EMPLOYEE DROP FOREIGN KEY fk_super_ssn;            -- MySQL
+
+ALTER TABLE EMPLOYEE ADD CONSTRAINT new_fk
+  FOREIGN KEY (Dno) REFERENCES DEPARTMENT(Dnumber);</pre>
+<div class="tip t-info"><b>Names and case</b><code>COMPANY.EMPLOYEE</code> means table EMPLOYEE in schema COMPANY. On MySQL running in Docker (Linux), database and table names are case-sensitive: if the database was created as <code>company</code> and the script created <code>EMPLOYEE</code>, write <code>company.EMPLOYEE</code>, or <code>USE company;</code> and then <code>EMPLOYEE</code>. Column names are never case-sensitive.</div>
+
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/dml-18.webp" data-cap="ADD COLUMN without DEFAULT: NULL in every row" aria-label="Enlarge: ADD COLUMN without DEFAULT: NULL in every row"><img src="./img/dml-18.webp" width="1400" height="706" loading="lazy" decoding="async" alt="ADD COLUMN without DEFAULT: NULL in every row"></button><figcaption><span class="fig-n">21</span>ADD COLUMN without DEFAULT: NULL in every row</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/dml-19.webp" data-cap="ADD COLUMN with DEFAULT &#x27;not specify&#x27;" aria-label="Enlarge: ADD COLUMN with DEFAULT &#x27;not specify&#x27;"><img src="./img/dml-19.webp" width="1400" height="715" loading="lazy" decoding="async" alt="ADD COLUMN with DEFAULT &#x27;not specify&#x27;"></button><figcaption><span class="fig-n">22</span>ADD COLUMN with DEFAULT &#x27;not specify&#x27;</figcaption></figure></div>
 <h4>Lab: creating a schema and a table</h4>
       <pre class="sql">CREATE DATABASE SCHOOL;
 USE SCHOOL;
@@ -1295,7 +1400,60 @@ ALTER USER 'jane'@'localhost' IDENTIFIED BY 'janeluvluv';  -- change a password<
 </div></section>
 <section class="tab" id="labs"><div class="wrap">
   <h1>Labs</h1>
-  <p class="lede">Ten lab sets with worked answers.</p>
+  <p class="lede">A setup guide and ten lab sets with worked answers.</p>
+
+  <details class="note" id="labsetup" data-short="COMPANY database">
+    <summary><span class="num n1">S</span> Setup: restore the COMPANY database</summary>
+    <div class="body lab-full">
+<p>Later labs run <code class="kw">INSERT</code>, <code class="kw">UPDATE</code>, <code class="kw">DELETE</code> and queries on the COMPANY database from the textbook: six tables with the same rows as Figure 5.6 and every foreign key in place. One script creates and fills all of it.</p>
+<p><a class="btn" href="./files/company_sql_gen_script_with_FK.sql" download>Download company_sql_gen_script_with_FK.sql</a></p>
+<h4>Method 1: Restore database</h4>
+<ol>
+<li>In DBeaver's left panel, right-click <b>Databases</b> under your MySQL connection and choose <b>Create New Database</b>.</li>
+<li>Name it <code>company</code> (charset utf8mb4) and click OK.</li>
+<li>Right-click the new <b>company</b> database, then <b>Tools → Restore database</b>.</li>
+<li>In <b>Input</b>, select <code>company_sql_gen_script_with_FK.sql</code> and click <b>Start</b>.</li>
+<li>Confirm with <b>Yes</b>. The warning says the restore may overwrite data in that database, which is expected for a new one.</li>
+</ol><div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rst-1.webp" data-cap="Steps 1 to 3: create the database, then Tools → Restore database" aria-label="Enlarge: Steps 1 to 3: create the database, then Tools → Restore database"><img src="./img/rst-1.webp" width="1401" height="817" loading="lazy" decoding="async" alt="Steps 1 to 3: create the database, then Tools → Restore database"></button><figcaption>Steps 1 to 3: create the database, then Tools → Restore database</figcaption></figure></div><div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rst-2.webp" data-cap="Step 4: select the script and click Start" aria-label="Enlarge: Step 4: select the script and click Start"><img src="./img/rst-2.webp" width="1401" height="817" loading="lazy" decoding="async" alt="Step 4: select the script and click Start"></button><figcaption>Step 4: select the script and click Start</figcaption></figure></div>
+<h4>Method 2: run the script in the SQL editor</h4>
+<p>Use this when Restore database fails, for example when DBeaver asks for a local MySQL client that is not installed (common when MySQL runs in Docker).</p>
+<ol>
+<li>Right-click the <b>company</b> database → <b>SQL Editor</b> → <b>Open SQL script</b> (or <b>New SQL script</b>).</li>
+<li>Copy the whole script into the editor.</li>
+<li>Check that the toolbar shows <b>company</b> as the active database, not &lt; N/A &gt;.</li>
+<li>Click <b>Execute SQL Script</b> (Alt+X), not Execute statement (Ctrl+Enter): the script has many statements and all of them must run, top to bottom.</li>
+</ol><div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rst-4.webp" data-cap="Method 2: open an SQL editor on the company database" aria-label="Enlarge: Method 2: open an SQL editor on the company database"><img src="./img/rst-4.webp" width="1401" height="817" loading="lazy" decoding="async" alt="Method 2: open an SQL editor on the company database"></button><figcaption>Method 2: open an SQL editor on the company database</figcaption></figure></div><div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/rst-5.webp" data-cap="Paste the whole script and run it with Execute SQL Script" aria-label="Enlarge: Paste the whole script and run it with Execute SQL Script"><img src="./img/rst-5.webp" width="1401" height="817" loading="lazy" decoding="async" alt="Paste the whole script and run it with Execute SQL Script"></button><figcaption>Paste the whole script and run it with Execute SQL Script</figcaption></figure></div>
+<h4>Check the result</h4>
+<p>Select <b>Databases</b> and press F5 to refresh the panel, then run:</p>
+<pre class="sql">USE company;
+SHOW TABLES;
+SELECT COUNT(*) FROM EMPLOYEE;</pre>
+<div class="tscroll"><table>
+<tr><th>Table</th><th>Rows</th><th>Primary key</th><th>Foreign keys</th></tr>
+<tr><td class="mono">DEPARTMENT</td><td>3</td><td>dnumber</td><td>mgr_ssn → EMPLOYEE (added later as fk_mgr_ssn)</td></tr>
+<tr><td class="mono">DEPT_LOCATIONS</td><td>5</td><td>(dnumber, dlocation)</td><td>dnumber → DEPARTMENT</td></tr>
+<tr><td class="mono">EMPLOYEE</td><td>8</td><td>ssn</td><td>dno → DEPARTMENT; super_ssn → EMPLOYEE (fk_super_ssn)</td></tr>
+<tr><td class="mono">PROJECT</td><td>6</td><td>pnumber</td><td>dnum → DEPARTMENT</td></tr>
+<tr><td class="mono">WORKS_ON</td><td>16</td><td>(essn, pno)</td><td>essn → EMPLOYEE; pno → PROJECT</td></tr>
+<tr><td class="mono">DEPENDENT</td><td>7</td><td>(essn, DEPENDENT_name)</td><td>essn → EMPLOYEE</td></tr>
+</table></div>
+<h4>Reading the script</h4>
+<ul class="clean">
+<li><b>Order matters.</b> Each table is created before any table whose foreign key points at it: DEPARTMENT, DEPT_LOCATIONS, EMPLOYEE, PROJECT, WORKS_ON, DEPENDENT. Each <code class="kw">CREATE TABLE</code> is followed by its INSERTs.</li>
+<li><b>Two foreign keys are added at the end with <code class="kw">ALTER TABLE</code>.</b> DEPARTMENT.mgr_ssn points at EMPLOYEE, but EMPLOYEE.dno points at DEPARTMENT: each table needs the other to exist first. The script creates DEPARTMENT without the manager key, loads both tables, then adds <code>fk_mgr_ssn</code>. EMPLOYEE.super_ssn points at EMPLOYEE itself, so <code>fk_super_ssn</code> is also added after every employee is in, which means no insert can fail because its supervisor has not been inserted yet.</li>
+<li><b>No referential actions.</b> None of the foreign keys has <code class="kw">ON DELETE</code> or <code class="kw">ON UPDATE</code>, so the default applies: a delete or key change that would leave a dangling reference is rejected.</li>
+<li><b>Relationship values are lower case</b> ('daughter', 'son', 'spouse'). MySQL's default comparison ignores case, so <code>WHERE relationship = 'Daughter'</code> still matches.</li>
+<li><b>Table names are upper case.</b> MySQL in Docker (Linux) treats table names as case-sensitive: write <code>EMPLOYEE</code>, not <code>employee</code>.</li>
+<li><b><code class="kw">COMMIT</code> at the end</b> makes the inserts permanent if auto-commit is off; in DBeaver's default Auto mode each statement is already committed.</li>
+</ul>
+<h4>Start again</h4>
+<p>Running the script a second time stops at the first <code class="kw">CREATE TABLE</code> with error 1050 (table already exists). To rebuild from scratch, remove the database and restore it again. This deletes every table and row in it.</p>
+<pre class="sql">DROP DATABASE company;
+CREATE DATABASE company;
+-- then Method 1 or Method 2 again</pre>
+
+    </div>
+  </details>
 
   <details class="note" open id="lab1" data-short="Review worksheet">
     <summary><span class="num n1">1</span> Relational model review worksheet</summary>
@@ -2462,6 +2620,8 @@ WHERE  Invoice.CustID = Customer.ID AND
       <tr><th>Topic</th><th>File</th><th>What it is</th><th>Pages</th></tr>
       <tr><td class="mono">T1</td><td><a href="./files/01-relational-model-slides.pdf">01-relational-model-slides.pdf</a></td><td>Relational model slides: database basics, relations, keys, integrity constraints, the COMPANY schema</td><td class="sz">23</td></tr>
       <tr><td class="mono">T2</td><td><a href="./files/02-sql-ddl-slides.pdf">02-sql-ddl-slides.pdf</a></td><td>SQL DDL slides: SQL command groups, CREATE TABLE, data types, domains and constraints</td><td class="sz">33</td></tr>
+      <tr><td class="mono">T2</td><td><a href="./files/02b-sql-dml-alter-drop-slides.pdf">02b-sql-dml-alter-drop-slides.pdf</a></td><td>INSERT, DELETE, UPDATE, DROP and ALTER slides</td><td class="sz">22</td></tr>
+      <tr><td class="mono">Setup</td><td><a href="./files/company_sql_gen_script_with_FK.sql" download>company_sql_gen_script_with_FK.sql</a></td><td>Script that creates and fills the COMPANY database (six tables, foreign keys); steps under Labs → Setup</td><td class="sz">SQL</td></tr>
       <tr><td class="mono">T1, T4, T6–8</td><td><a href="./files/01-relational-model-review-worksheet.pdf">01-relational-model-review-worksheet.pdf</a></td><td>Review worksheet with handwritten answers: relational model, DDL, relational algebra, Datalog, heuristic optimization, index calculation</td><td class="sz">15</td></tr>
       <tr><td class="mono">T2</td><td><a href="./files/02-ddl-practice-school-database.pdf">02-ddl-practice-school-database.pdf</a></td><td>DDL practice: six CREATE statements plus the requirements text</td><td class="sz">4</td></tr>
       <tr><td class="mono">T3</td><td><a href="./files/03-er-inventory-worked-answer.pdf">03-er-inventory-worked-answer.pdf</a></td><td>Inventory requirements, ER diagram and cardinality/participation justification</td><td class="sz">5</td></tr>
@@ -2487,7 +2647,7 @@ WHERE  Invoice.CustID = Customer.ID AND
     <div class="kv"><b>Title</b><span>Database Systems</span></div>
     <div class="kv"><b>Text</b><span>Elmasri &amp; Navathe — <i>Fundamentals of Database Systems</i>, 7th edition</span></div>
     <div class="kv"><b>Covered</b><span>Ten topics: relational model, DDL, ER design, relational algebra, intermediate SQL, Datalog, indexing, heuristic optimization, transactions, privileges</span></div>
-    <div class="kv"><b>Practice</b><span>326 flashcards (92 concepts + 234 terms), 90 quiz questions, two mock papers, five interactive drills, ten worked lab sets, one past paper with model answers</span></div>
+    <div class="kv"><b>Practice</b><span>341 flashcards (98 concepts + 243 terms), 98 quiz questions, two mock papers, five interactive drills, ten worked lab sets, one past paper with model answers</span></div>
   </div>
   <div class="panel pg">
     <h3>Built with</h3>
@@ -2590,6 +2750,15 @@ var TERMS = [
  ["BOOLEAN","","A type with the values TRUE, FALSE or NULL.",2,1],
  ["CREATE DOMAIN","","Defines a named data type with optional CHECK; not supported in MySQL.",2,1],
  ["Tuple-based CHECK","Row-based constraint","A CHECK at the end of CREATE TABLE, tested on each row; it can compare columns of the same row.",2,1],
+ ["INSERT INTO … VALUES","","Adds one or more rows; values follow the table's column order unless the columns are named.",2,0],
+ ["INSERT … SELECT","","Adds the rows returned by a query instead of literal values.",2,1],
+ ["UPDATE … SET","","Changes attribute values in every row that matches WHERE; without WHERE, every row.",2,0],
+ ["DELETE FROM","","Removes every row that matches WHERE; without WHERE, the table becomes empty but still exists.",2,0],
+ ["CREATE TABLE … LIKE","","Creates an empty table with the same columns, keys and indexes as another table.",2,1],
+ ["CREATE TABLE … AS SELECT","CTAS","Creates a table from a query's columns and fills it with the query's rows; constraints are not copied.",2,1],
+ ["DROP behaviour","CASCADE / RESTRICT","CASCADE also drops everything that depends on the element; RESTRICT refuses if anything depends on it.",2,1],
+ ["ADD COLUMN","","ALTER TABLE action that adds an attribute; existing rows get its DEFAULT, or NULL.",2,1],
+ ["DROP COLUMN","","ALTER TABLE action that removes an attribute and its values.",2,1],
  ["InnoDB","","MySQL's default storage engine; it enforces foreign keys and supports transactions.",2,1],
 
  ["ER model","Entity–Relationship model","A way of describing data as entities, attributes and relationships before building tables.",3,0],
@@ -2840,7 +3009,13 @@ var CARDS = [
  {"t": 2,"q": "Default value of a column with no DEFAULT clause","a": "NULL, unless the column is NOT NULL."},
  {"t": 2,"q": "Default action on a foreign key violation","a": "Reject the change. A triggered action (SET NULL, CASCADE, SET DEFAULT) can be attached with ON DELETE / ON UPDATE."},
  {"t": 2,"q": "Why name a constraint with CONSTRAINT?","a": "So it can be referred to later, for example to drop or change it: ALTER TABLE … DROP FOREIGN KEY EMPSUPERFK."},
- {"t": 2,"q": "Tuple-based CHECK example","a": "CHECK (Dept_create_date <= Mgr_start_date) at the end of CREATE TABLE DEPARTMENT; it is tested on every row."}
+ {"t": 2,"q": "Tuple-based CHECK example","a": "CHECK (Dept_create_date <= Mgr_start_date) at the end of CREATE TABLE DEPARTMENT; it is tested on every row."},
+ {"t": 2,"q": "INSERT with and without a column list","a": "Without: one value for every column, in CREATE TABLE order. With: only the named columns; every NOT NULL column without a DEFAULT must be named, the rest get DEFAULT or NULL."},
+ {"t": 2,"q": "DELETE FROM EMPLOYEE; (no WHERE)","a": "Deletes every row. The table still exists, empty. DROP TABLE would remove the table itself."},
+ {"t": 2,"q": "UPDATE EMPLOYEE SET Salary = Salary * 1.1 WHERE Dno = 5;","a": "Gives every employee of department 5 a 10% raise. Salary on the right means each row's current value."},
+ {"t": 2,"q": "CREATE TABLE … LIKE vs CREATE TABLE … AS SELECT","a": "LIKE: same structure, keys and indexes, no rows. AS SELECT: columns of the query plus its rows, no constraints."},
+ {"t": 2,"q": "DROP … CASCADE vs RESTRICT","a": "CASCADE drops the element and everything that depends on it. RESTRICT drops it only if nothing depends on it."},
+ {"t": 2,"q": "ADD COLUMN on a table with rows","a": "Existing rows get the column's DEFAULT, or NULL if no DEFAULT is given."}
 ];
 var QUIZ = [
  {"t": 0,"q": "A database is best described as","o": ["a query that retrieves data","the universe of discourse","a general-purpose software system","a collection of related data"],"a": 3,"e": "The worksheet answer: a database is a collection of related data. The DBMS is the software; the miniworld is what it represents."},
@@ -2932,7 +3107,15 @@ var QUIZ = [
  {"t": 2,"q": "Which clause is a value validator, e.g. Dnumber > 0 AND Dnumber < 21?","o": ["CHECK","DEFAULT","UNIQUE","NOT NULL"],"a": 0,"e": "CHECK restricts attribute or domain values."},
  {"t": 2,"q": "Without any referential triggered action, an update that breaks a foreign key is","o": ["rejected","cascaded","set to NULL","set to the default"],"a": 0,"e": "Rejecting the change is the default action."},
  {"t": 2,"q": "CHECK (Dept_create_date <= Mgr_start_date). Research: Mgr_start_date 1988-05-22, Dept_create_date 1988-05-23. The row","o": ["violates the constraint","satisfies the constraint","is rejected only on UPDATE","makes the CHECK ignored"],"a": 0,"e": "1988-05-23 is later than 1988-05-22, so the condition is false."},
- {"t": 2,"q": "In MySQL, CREATE DATABASE and CREATE SCHEMA","o": ["create the same thing","create a catalog and a schema inside it","are both unsupported","differ only in permissions"],"a": 0,"e": "In MySQL a database and a schema are the same level."}
+ {"t": 2,"q": "In MySQL, CREATE DATABASE and CREATE SCHEMA","o": ["create the same thing","create a catalog and a schema inside it","are both unsupported","differ only in permissions"],"a": 0,"e": "In MySQL a database and a schema are the same level."},
+ {"t": 2,"q": "Which statement removes every row of EMPLOYEE but keeps the table?","o": ["DELETE FROM EMPLOYEE;","DROP TABLE EMPLOYEE;","ALTER TABLE EMPLOYEE DROP COLUMN Ssn;","UPDATE EMPLOYEE SET Ssn = NULL;"],"a": 0,"e": "DELETE without WHERE empties the table; DROP removes the table itself."},
+ {"t": 2,"q": "INSERT INTO EMPLOYEE (Fname, Lname, Dno, Ssn) VALUES ('Sam', 'Mark', 4, '653295555'); What is Salary in the new row?","o": ["NULL (no DEFAULT)","0","The average salary","The statement is rejected"],"a": 0,"e": "Unlisted columns get their DEFAULT, or NULL when none is defined."},
+ {"t": 2,"q": "UPDATE EMPLOYEE SET Salary = Salary * 1.1 WHERE Dno = 5; changes","o": ["every employee in department 5","only the first employee in department 5","every employee","nothing: Salary cannot refer to itself"],"a": 0,"e": "UPDATE changes every row that matches WHERE; Salary on the right is the row's current value."},
+ {"t": 2,"q": "CREATE TABLE EMPLOYEE_COPY LIKE EMPLOYEE; produces","o": ["an empty table with EMPLOYEE's structure","a full copy with all rows","a view of EMPLOYEE","an error: LIKE is only for strings"],"a": 0,"e": "LIKE copies the definition, not the data."},
+ {"t": 2,"q": "ALTER TABLE EMPLOYEE ADD COLUMN Job VARCHAR(12); What does Job hold in existing rows?","o": ["NULL","an empty string","'not specify'","the statement fails because rows exist"],"a": 0,"e": "Without a DEFAULT clause the new attribute is NULL in every existing row."},
+ {"t": 2,"q": "DROP SCHEMA COMPANY RESTRICT;","o": ["drops the schema only if it has no elements","drops the schema and all its tables","drops only the tables, keeps the schema","is the same as CASCADE"],"a": 0,"e": "RESTRICT refuses when anything still depends on the element."},
+ {"t": 2,"q": "To drop a constraint by name, the constraint must","o": ["have been named when it was created","be a primary key","have no rows","be a CHECK"],"a": 0,"e": "DROP CONSTRAINT needs a name; name constraints with CONSTRAINT name when you create them."},
+ {"t": 2,"q": "On the COMPANY database, DELETE FROM EMPLOYEE WHERE Dno = 5 fails because","o": ["other rows still reference those employees through foreign keys","DELETE needs a primary key in WHERE","Dno is not a key","department 5 does not exist"],"a": 0,"e": "WORKS_ON, DEPENDENT, DEPARTMENT and Super_ssn reference them, with no ON DELETE action."}
 ];
 /* ================= HELPERS ================= */
 var $=function(id){return document.getElementById(id)};
@@ -2973,7 +3156,7 @@ function anchorsFor(tab){
     document.querySelectorAll('#'+tab+' details.note').forEach(function(d,i){
       if(!d.id) d.id=tab+'_'+i;
       var s=d.querySelector('summary'); var n=s&&s.querySelector('.num');
-      var k=tab==='topics'?'T '+(n?n.textContent.trim():i):'LAB '+(i+1);
+      var k=tab==='topics'?'T '+(n?n.textContent.trim():i):(n&&isNaN(+n.textContent.trim())?'SETUP':'LAB '+(n?n.textContent.trim():i+1));
       out.push({id:d.id,k:k,t:d.dataset.short||(s?s.textContent.replace(/^\s*\d+\s*/,'').trim():'section')});
     });
   } else if(tab==='exam'){
@@ -3687,7 +3870,7 @@ go(LSget('dbTab','home'),true);
       ] },
       { label: 'Reference', views: [
         { id: 'cheat', title: 'Cheat sheet', children: sections('cheat') },
-        { id: 'resources', title: 'Downloads', badge: '15' },
+        { id: 'resources', title: 'Downloads', badge: '17' },
         { id: 'author', title: 'About' }
       ] }
     ]
