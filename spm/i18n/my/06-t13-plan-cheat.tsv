@@ -1,0 +1,120 @@
+# SPM: T13, plan, cheat sheet
+t13.001	<span class="num n2">13</span> Project decommissioning
+t13.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Project ပိတ်သိမ်းတာ ဆိုတာ user တွေကို ထောက်ပံ့, team ကို ဂရုစိုက်, ရလဒ်တွေ ပြန်သုံးသပ်, သင်ခန်းစာတွေ သိမ်းထားခြင်း။
+t13.003	အဆုံးမှာ အလုပ် လေးခု
+t13.004	အလုပ်
+t13.005	အဓိပ္ပာယ်
+t13.006	CanteenGo မှာ
+t13.007	လည်ပတ်မှု ပြဿနာ ဖြေရှင်း
+t13.008	User training, documentation, consultancy နဲ့ troubleshooting; root cause ရှာဖို့ "5 Whys"
+t13.009	Canteen ဝန်ထမ်းကို train; တစ်မျက်နှာ လမ်းညွှန် ရေး
+t13.010	ဝန်ထမ်း စီမံ
+t13.011	Team ကို ဆုချပြီး role ဒါမှမဟုတ် team အသစ်ဆီ တာဝန်ပြန်ချ
+t13.012	Certificate, ကျေးဇူးတင်ကြောင်း ကြေညာ
+t13.013	ပြန်သုံးသပ်ပြီး အကဲဖြတ်
+t13.014	ဘာလုပ်ခဲ့လဲ, ဘယ်လောက်ကောင်းကောင်း အလုပ်ဖြစ်ခဲ့လဲ ပြန်ကြည့်
+t13.015	တန်းစီချိန် တကယ် တစ်ဝက်ကျခဲ့လား?
+t13.016	Knowledge စီမံ
+t13.017	ရွေးထားတဲ့ reference data နဲ့ သင်ခန်းစာတွေကို report အဖြစ် သိမ်း
+t13.018	နောက် project အတွက် ခန့်မှန်းချက် vs တကယ့်ကို သိမ်း
+t13.019	Review vs evaluate
+t13.020	<mark class="hl"><b>Review</b> က လက်တွေ့ကျ</mark>: ပြဿနာ, ဖြေရှင်းချက်, နည်းလမ်း, အထောက်အထား။ <mark class="hl"><b>Evaluate</b> က ပို abstract</mark>: ထိရောက်မှု (effectiveness), ထိရောက်စွာသုံးမှု (efficiency), အလားအလာ, ဖြစ်နိုင်ခြေ။
+t13.021	အလုပ်ဖြစ်တဲ့ ဆုလာဘ်များ
+t13.022	ဆုကောင်းက တန်ဖိုးရှိ, အကြောင်းပြနိုင်, ရနိုင်, ပြောင်းလွယ်တယ်။ ငွေ ဖြစ်စရာ မလို: မျက်နှာချင်းဆိုင် ချီးကျူး, certificate, ကြေညာချက်, training, ကုမ္ပဏီကို ကိုယ်စားပြု, ရာထူးတိုး ဒါမှမဟုတ် အလုပ်မှာ လွတ်လပ်ခွင့် ပိုပေး။ ကောင်းတဲ့အလုပ်ကို ဆုချတာက ညံ့တဲ့အလုပ်ကို အပြစ်ပေးတာထက် ပိုလှုံ့ဆော်တယ်။
+t13.023	သိထားရမယ့် စကားလုံးများ
+t13.031	မှတ်ထားပါ
+t13.032	User ကို ထောက်ပံ့, team ကို ဂရုစိုက်, review, knowledge ကို သိမ်း။
+t13.033	Review က လက်တွေ့ကျ; evaluation က abstract။
+t13.034	အသေးစိတ်
+t13.035	<span class="fig-n">1</span>Project decommissioning
+t13.036	<span class="fig-n">2</span>လည်ပတ်မှု ပြဿနာ ဖြေရှင်းခြင်း
+t13.037	User training ပုံစံများ
+t13.038	တစ်ဦးချင်း လက်တွေ့ သင်ကြားမှု; လက်တွေ့ စာသင်ခန်း training; seminar ပုံစံ သရုပ်ပြ; computer-based ဒါမှမဟုတ် online ကိုယ်ပိုင်အရှိန် training; စာအုပ်အခြေခံ ကိုယ်ပိုင်အရှိန် training။
+t13.039	အသိအမှတ်ပြုမှု "box"
+t13.040	မျက်နှာချင်းဆိုင် ချီးကျူး; certificate ထုတ်ပေး; ကြေညာ; ကျေးဇူးတင်စာ ပို့; ကုမ္ပဏီသတင်းမှာ ချီးကျူး; training course ပို့; ကုမ္ပဏီကိုယ်စားလှယ် ခန့်; ရာထူးတိုး; လက်အောက်ငယ်သား ပိုပေး; အလုပ်နေရာ ပိုကောင်း ဒါမှမဟုတ် လွတ်လပ်ခွင့် ပိုပေး။
+t13.041	တာဝန်ပြန်ချခြင်း
+t13.042	Role: role တူ ဆက်လုပ် ဒါမှမဟုတ် အသစ်စမ်း။ Team: member တူ ထား ဒါမှမဟုတ် ပေါင်းစပ်မှု အသစ်စမ်း။
+t13.043	<span class="fig-n">3</span>ဝန်ထမ်း စီမံခြင်း
+t13.044	Post-implementation review (PIR)
+t13.045	ရောက်ခဲ့တဲ့ ပန်းတိုင်နဲ့ activity, budget, timeline, deliverable ရဲ့ အရည်အသွေးနဲ့ functionality, client ကျေနပ်မှုကို အကဲဖြတ်တယ်။
+t13.046	ပြန်သုံးသပ်တာ
+t13.051	အလုံးစုံ အောင်မြင်မှု
+t13.056	Scope နဲ့ objective
+t13.059	Planning နဲ့ timeline
+t13.064	Budget နဲ့ ကုန်ကျစရိတ်
+t13.067	အရည်အသွေး
+t13.075	အရင်းအမြစ်
+t13.080	ဆက်သွယ်ရေး
+t13.094	Deliverable များ
+t13.098	<span class="fig-n">4</span>Review နဲ့ evaluation: ဘယ်သူ ဘာကို review လုပ်လဲ
+t13.099	Knowledge management
+t13.100	သက်ဆိုင်တဲ့ reference data ကို ရွေး, သိမ်း, report အဖြစ် အကျဉ်းချုပ်ပြီး အနာဂတ် project တွေအတွက် knowledge ဖြစ်လာအောင်။
+t13.101	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t13.102	Flashcard များ
+t13.103	Quiz
+t13.104	နောက်တစ်ခု: Flashcard များ
+plan.001	သင်ခန်းစာ အစီအစဉ်
+plan.002	ရက်သတ္တပတ် 15 · တစ်ပတ်လျှင် activity တစ်ခု။
+plan.003	ရက်သတ္တပတ်
+plan.004	ခေါင်းစဉ်
+plan.005	Activity
+plan.006	<a href="#/topics/t1">Project management ရဲ့ အယူအဆများ</a>
+plan.007	Belbin team roles survey
+plan.008	<a href="#/topics/t2">Software project management ရဲ့ အခြေခံ</a>
+plan.009	Capstone project 1: project အခြေခံ
+plan.010	<a href="#/topics/t3">Software engineering code of ethics</a>
+plan.011	Software business ပြဇာတ် case study
+plan.012	<a href="#/topics/t4">Business အယူအဆများ</a>
+plan.013	Console wars (Platform Wars simulation)
+plan.014	<a href="#/topics/t5">Project initiation</a>
+plan.015	SWOT analysis workshop
+plan.016	<a href="#/topics/t5">Project initiation (ဆက်)</a>
+plan.017	TOWS analysis workshop
+plan.018	<a href="#/topics/t6">Project definition</a>
+plan.019	အုပ်စု mind mapping workshop
+plan.020	<a href="#/topics/t7">Project definition (ဆက်)</a>
+plan.021	အုပ်စု mind mapping workshop (ဆက်)
+plan.022	<a href="#/topics/t9">Project planning</a>
+plan.023	Critical path analysis
+plan.024	<a href="#/topics/t11">Project planning (ဆက်)</a>
+plan.025	ARMI: risk management incorporation
+plan.026	<a href="#/topics/t12">Project implementation</a>
+plan.028	<a href="#/topics/t12">Project implementation (ဆက်)</a>
+plan.029	Test-driven development simulation
+plan.030	<a href="#/topics/t13">Project decommissioning</a>
+plan.031	Capstone project 2: career path နဲ့ life cycle
+plan.032	<a href="#/topics/t13">Project decommissioning (ဆက်)</a>
+plan.033	ECSE: software engineer တွေအတွက် engineering construction
+plan.034	Assignment နေ့
+plan.035	Project management simulation
+plan.036	အမှတ်ပေးပုံ
+plan.037	Midterm စာမေးပွဲ
+plan.038	Final စာမေးပွဲ
+plan.039	Assignment
+plan.040	Report
+plan.041	ထပ်ဖတ်ရန်
+plan.044	Project management simulation game များ
+plan.045	Final assignment: ကစားလို့ရတဲ့ project management game။
+cheat.001	အနှစ်ချုပ်
+cheat.002	<span class="badge b1">T10</span> Critical path နဲ့ PERT
+cheat.003	<span class="badge b1">T7</span> ခန့်မှန်းခြင်း
+cheat.012	<span class="badge b2">T8</span> Feasibility ငွေကြေး
+cheat.013	<span class="badge b2">T11</span> Risk
+cheat.014	<b>Process:</b> identify → analyse → plan → track → resolve → learn။ <b>Strategy:</b> avoidance, protection, reduction, research, reserve, transfer။
+cheat.015	<span class="badge gr">T12</span> Earned value
+cheat.016	<span class="badge b1">T1</span> People
+cheat.018	People (အရေးအကြီးဆုံး), Product, Process, Project
+cheat.020	Executive, project manager, practitioner, customer, end-user, sponsor
+cheat.022	စဉ်းစားမှု: Plant, Monitor Evaluator, Specialist · လူ: Coordinator, Teamworker, Resource Investigator · လုပ်ဆောင်မှု: Shaper, Implementer, Completer Finisher
+cheat.023	<span class="badge b2">T4–T6</span> Framework များ
+cheat.027	Star (ကြီးထွားမှု မြင့်, ဝေစု မြင့်) · Cash cow (နိမ့်, မြင့်) · Problem child (မြင့်, နိမ့်) · Dog (နိမ့်, နိမ့်)
+cheat.029	အတွင်း: strength, weakness · အပြင်: opportunity, threat
+cheat.031	SO, WO, ST, WT: SWOT item တစ်ခုကို နောက်တစ်ခုနဲ့ တွဲပြီး strategy ဖွဲ့
+cheat.032	<b>ရလဒ်များ</b>
+cheat.034	<b>ဖွဲ့စည်းပုံများ</b>
+cheat.035	Functional (PM အချိန်ပိုင်း, အာဏာ နိမ့်) · Matrix (အလယ်) · Project (အာဏာ မြင့်, စိတ်ဓာတ် နိမ့်)
+cheat.036	<span class="badge gr">T12–T13</span> Implementation နဲ့ ပိတ်သိမ်းခြင်း
+cheat.038	Competing (ကိုယ် မြင့်, တစ်ဖက် နိမ့်) · Collaborating (နှစ်ခုလုံး မြင့်) · Compromising (အလယ်) · Avoiding (နှစ်ခုလုံး နိမ့်) · Accommodating (ကိုယ် နိမ့်, တစ်ဖက် မြင့်)
+cheat.041	<b>ပိတ်သိမ်းခြင်း</b>
+cheat.042	လည်ပတ်မှု ပြဿနာ ဖြေရှင်း · ဝန်ထမ်း စီမံ · review နဲ့ evaluate · knowledge စီမံ
+cheat.044	Review: ပြဿနာ, ဖြေရှင်းချက်, နည်းလမ်း, အထောက်အထား · Evaluate: effectiveness, efficiency, အလားအလာ, ဖြစ်နိုင်ခြေ

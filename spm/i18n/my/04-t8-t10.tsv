@@ -1,0 +1,206 @@
+# SPM: T8-T10
+t8.001	<span class="num n2">8</span> Feasibility analysis
+t8.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Feasibility study က ကတိမပေးခင် project က strategy နဲ့ ကိုက်လား, ဆောက်နိုင်လား, တန်လား စစ်တယ်။
+t8.003	အတိုင်းအတာ
+t8.004	မေးခွန်း
+t8.005	CanteenGo မှာ
+t8.007	အဖွဲ့အစည်းရဲ့ ရည်မှန်းချက်, plan နဲ့ ဖွဲ့စည်းပုံနဲ့ ကိုက်လား? အချိန်ကိုက်လား?
+t8.008	Faculty ရဲ့ digital-campus plan နဲ့ ကိုက်
+t8.010	ရှိပြီးသား hardware, software နဲ့ skill က ထောက်ပံ့နိုင်လား?
+t8.011	Campus Wi-Fi လုံလောက်; payment gateway လို
+t8.013	အမြတ်ကို တိုးစေမလား? ကုန်ကျစရိတ် vs အကျိုး, ငွေစီးဆင်းမှု, risk
+t8.014	အခကြေးငွေက နှစ်နှစ်အတွင်း hosting ကို ဖုံး
+t8.015	တခြား
+t8.016	ဥပဒေ, schedule, ဈေးကွက်, အရင်းအမြစ်, ယဉ်ကျေးမှု, ပတ်ဝန်းကျင်
+t8.017	ကျောင်းသား account အတွက် ကိုယ်ရေး data ဥပဒေ
+t8.018	ငွေကြေး မေးခွန်းများ
+t8.019	တိုင်းတာမှု
+t8.020	အဓိပ္ပာယ်
+t8.021	ပုံသေနည်း
+t8.022	အသားတင် အမြတ်
+t8.023	ဝင်ငွေအားလုံး နုတ် ကုန်ကျစရိတ်အားလုံး
+t8.024	ဝင်ငွေ − ကုန်ကျစရိတ်
+t8.026	ဝင်ငွေက ရင်းနှီးမြှုပ်နှံမှုကို ဖုံးဖို့ ဘယ်လောက်ကြာလဲ
+t8.027	စုပေါင်း ငွေသား ≥ 0 ဖြစ်တဲ့ ပထမနှစ်
+t8.029	ကုန်ကျစရိတ်ရဲ့ အချိုးအဖြစ် ပျမ်းမျှ နှစ်စဉ် အမြတ်
+t8.030	(နှစ်စဉ် ပျမ်းမျှ အမြတ် ÷ စုစုပေါင်း ကုန်ကျစရိတ်) × 100
+t8.032	အနာဂတ် ငွေကို ယနေ့တန်ဖိုးဆီ discount လုပ်ထားတဲ့ အသားတင် အမြတ်
+t8.033	နှစ် t ရဲ့ ငွေသား ÷ (1 + r)<sup>t</sup> ရဲ့ Σ
+t8.034	ငါးနှစ်နောက်က ငွေက ယနေ့ ငွေတူထက် တန်ဖိုးနည်းလို့ NPV က နောက်ကျ ဝင်ငွေကို ကျုံ့စေတယ်။ <mark class="hl">စုစုပေါင်း သက်သက်မှာ အမြတ်ရပုံပေါ်တဲ့ project က discount လုပ်ပြီးရင် ရှုံးနိုင်တယ်။</mark>
+t8.035	Study က <b>feasibility report</b> နဲ့ အဆုံးသတ်တယ်: executive summary, အတိုင်းအတာ တစ်ခုစီ, အားသာ/အားနည်းချက်ပါ ရွေးစရာများ, အကြံပြုချက်။
+t8.036	သိထားရမယ့် စကားလုံးများ
+t8.047	မှတ်ထားပါ
+t8.048	Strategic, technical, economic, တခြား။
+t8.049	ROI = ပျမ်းမျှ နှစ်စဉ် အမြတ် ÷ စုစုပေါင်း ကုန်ကျစရိတ်။
+t8.050	NPV က အနာဂတ်ငွေကို discount; နောက်ကျ ဝင်ငွေက နည်းနည်းပဲ တွက်တယ်။
+t8.051	အသေးစိတ်
+t8.052	<span class="fig-n">1</span>Feasibility analysis
+t8.053	Strategic assessment မေးခွန်းများ
+t8.054	<b>ရည်မှန်းချက်</b>: product က အဖွဲ့အစည်းရဲ့ ရည်မှန်းချက်, customer ဆွဲဆောင်ခြင်း, ဈေးကွက်ဝေစု တိုးခြင်းကို ဘယ်လို အထောက်အကူပြုမလဲ?
+t8.055	<b>Project plan</b>: business plan နဲ့ ဘယ်လို ကိုက်, လက်ရှိနဲ့ စီစဉ်ထားတဲ့ လုပ်ဆောင်ချက်တွေကို ဘယ်လို ထိခိုက်မလဲ?
+t8.056	<b>ဖွဲ့စည်းပုံ</b>: အဖွဲ့အစည်း ဖွဲ့စည်းပုံကို ဘာသက်ရောက်မလဲ, လက်ရှိ ဌာနဖွဲ့စည်းပုံ လုံလောက်လား?
+t8.057	Technical မေးခွန်းများ
+t8.058	ရှိပြီးသား infrastructure က အကောင်အထည်ဖော်မှုကို ထောက်ပံ့မလား? ဘယ် technical infrastructure လိုလဲ? Solution strategy တွေ strategic IS plan နဲ့ ကိုက်လား?
+t8.059	ကုန်ကျစရိတ်နဲ့ အကျိုး
+t8.060	ကုန်ကျစရိတ်မှာ development နဲ့ set-up ကုန်ကျစရိတ် (training, data ပြောင်း, တပ်ဆင်) ပါတယ်။ အကျိုးတွေက <b>တိုက်ရိုက်</b> (ရောင်းအား, service နဲ့ consulting fee), <b>အကဲဖြတ်နိုင်တဲ့ သွယ်ဝိုက်</b> (customer ကျေနပ်မှုကနေ တခြားရောင်းအား, နှုတ်ကနေ ပြန့်ပွား) နဲ့ <b>မမြင်ရ</b> (ရေရှည် သစ္စာ, ဂုဏ်သတင်း)။ ကုန်ကျစရိတ်က အကျိုးထက် ခန့်မှန်းရ ပိုလွယ်လေ့ရှိတယ်။
+t8.061	Project နှစ်ခု တွက်ယှဉ်ချက် (ဘတ်)
+t8.062	နှစ်
+t8.064	Project 1 at 10% (NPV)
+t8.066	Project 2 at 10% (NPV)
+t8.067	အသားတင်
+t8.068	နှစ်ခုလုံး နှစ် 5 မှာ payback။ Project 2 က အသားတင်အမြတ် နှစ်ဆ ရပေမဲ့ Project 1 က ROI 10% (100,000 ပေါ် တစ်နှစ် 10,000) vs 2% (1,000,000 ပေါ် 20,000)။ တစ်နှစ် 10% discount လုပ်ရင် Project 1 က break even တိုက်ရုံ (+618) ဖြစ်ပြီး Project 2 က 179,770 ရှုံး။ Project 1 က ပိုကောင်းတဲ့ ရင်းနှီးမြှုပ်နှံမှု။
+t8.069	တွက်ပြထားတဲ့ ဥပမာက discount rate ကို inflation rate လို့ ခေါ်တယ်။
+t8.070	တခြား feasibility အတိုင်းအတာများ
+t8.071	ဥပဒေ (တရားမဝင် ဒါမှမဟုတ် risk ရှိတဲ့ product တွေက အဖွဲ့အစည်း ပုံရိပ်ကို ထိခိုက်ပြီး တရားစွဲခံရ), schedule (အဖွဲ့အစည်းက အခု လုပ်နိုင်လား?), ယဉ်ကျေးမှု (ဘာသာစကား, ဆက်သွယ်ရေး, ဘာသာ, အပြုအမူ), ဈေးကွက် (4P နဲ့ ပြိုင်ဆိုင်မှု), အရင်းအမြစ်, ပတ်ဝန်းကျင် (စက္ကူနဲ့ စွမ်းအင်သုံးမှု လျှော့)။
+t8.072	Feasibility report ပါဝင်ချက်
+t8.073	Executive summary; feasibility အတိုင်းအတာများ (အနည်းဆုံး strategic, technical နဲ့ economic); အားသာ/အားနည်းချက်ပါ ရွေးစရာများ; အကြံပြုချက်။ Project ကို စျေးပေါပေါ ဖျက်သိမ်းနိုင်တဲ့ နောက်ဆုံးအချက်။
+t8.074	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t8.075	Flashcard များ
+t8.076	Quiz
+t8.077	လေ့ကျင့်ခန်း: Cash flow
+t8.078	နောက်တစ်ခု: T9 Planning နဲ့ scheduling
+t9.001	<span class="num n2">9</span> ဝန်ထမ်းရှာခြင်း, budgeting နဲ့ scheduling
+t9.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Planning က definition ကို လူ, ငွေ နဲ့ schedule အဖြစ် ပြောင်းတယ်။
+t9.003	ဝန်ထမ်းရှာခြင်း
+t9.004	အမှတ်ထက် ပိုပြီး လူကို ရွေး: အတွေ့အကြုံ, technical knowledge, သဘောထား, problem solving, emotional intelligence။ Interview က နှစ်ဖက်သွား; ပြင်ဆင်, အချိန်မှန်, ရိုးသား, လစာသက်သက် မဟုတ်ဘဲ ကြီးထွားမှုအကြောင်း မေး။
+t9.005	ကုန်ကျစရိတ်က budget မဟုတ်ဘူး
+t9.006	<b>ကုန်ကျစရိတ်</b>က အလုပ်လိုအပ်တာ: လုပ်အား, hardware, software, networking, ရုံးပစ္စည်း, ပို့ဆောင်ခ, utility, အခွန်နဲ့ overhead။ <b>Budget</b> က ကုန်ကျစရိတ် + သူတို့နဲ့ ဆက်စပ်တဲ့ risk အတွက် ချန်ထားငွေ။
+t9.007	အဆင့် လေးဆင့်နဲ့ scheduling
+t9.008	Deliverable တွေကို စာရင်းပြု။
+t9.009	Milestone သတ်မှတ် ("ordering က အစအဆုံး အလုပ်လုပ်" လို checkpoint)။
+t9.010	အလုပ်ကို ခန့်မှန်း တာဝန်ချနိုင်လောက် သေးတဲ့ task တွေအဖြစ် ခွဲ (WBS)။
+t9.011	Task တွေကို Gantt chart ပေါ် ချ: calendar တစ်လျှောက် task တစ်ခုလျှင် bar တစ်ခု။
+t9.012	"Requirements, Database, System, Testing" ပဲ စာရင်းပြုတဲ့ WBS က <mark class="hl">ကြမ်းလွန်းတယ်။</mark> တစ်ခုစီကို တိကျတဲ့ task တွေအဖြစ် ခွဲ: "canteen ပိုင်ရှင်ကို interview", "orders table ဒီဇိုင်း", "payment test"။
+t9.013	Three-point estimate
+t9.014	ခန့်မှန်းချက် တစ်ခုအစား သုံးခုပေး: အကောင်းဆုံး, ဖြစ်နိုင်ခြေအများဆုံး, အဆိုးဆုံး။ ခန့်မှန်းချက်က ဖြစ်နိုင်ခြေအများဆုံးကို လေးဆ weight ပေးတယ်:
+t9.015	သိထားရမယ့် စကားလုံးများ
+t9.022	မှတ်ထားပါ
+t9.023	Budget = ကုန်ကျစရိတ် + risk ချန်ထားငွေ။
+t9.024	Deliverable → milestone → WBS → Gantt။
+t9.025	Three-point estimate: (အကောင်း + 4 × ဖြစ်နိုင်ဆုံး + အဆိုး) ÷ 6။
+t9.026	အသေးစိတ်
+t9.027	<span class="fig-n">1</span>Project planning
+t9.028	ဝန်ထမ်းရွေးချယ်ရေး စံနှုန်းများ
+t9.029	CV, résumé ဒါမှမဟုတ် portfolio; GPA; အတွေ့အကြုံ; technical knowledge; ဆုနဲ့ certificate; ကိုယ်ရည်ကိုယ်သွေးနဲ့ အသွင်အပြင်; သဘောထား; ဉာဏ်ရည်နဲ့ emotional intelligence; problem solving; လူမှုလုပ်ဆောင်ချက်။
+t9.030	Interview: လုပ်ရမှာနဲ့ မလုပ်ရမှာ
+t9.032	မလုပ်ရ
+t9.033	ကုမ္ပဏီကို လေ့လာ, document ပြင်ဆင်, ယဉ်ကျေးစွာ ဝတ်, အချိန်မှန်, ပြုံးပြီး နှုတ်ဆက်, ယုံကြည်မှုရှိပေမဲ့ ရန်လို မဖြစ်, မျက်လုံးချင်း ဆုံ, အပြုသဘောနဲ့ ယုတ္တိရှိရှိ ဖြေ, ရန်စတာကို လျစ်လျူရှု
+t9.034	Interview ဖုန်းကို လျစ်လျူရှု, ပြင်ဆင်မှုနည်း, အလွန်အကျွံ ဒါမှမဟုတ် နည်းလွန်း ပြော, လုပ်ဖော်ကိုင်ဖက်ဟောင်းကို အပြစ်တင်, အောင်မြင်မှုကို ချဲ့ကား, မရိုးသား, စိတ်မပါကြောင်း ပြ, ငွေကို အလွန်အာရုံစိုက်
+t9.035	မေးသင့်တဲ့ အပြုသဘော မေးခွန်းများ: ဆက်ပညာသင်ခွင့်, ကုမ္ပဏီရဲ့ mission နဲ့ ရေရှည် ရည်မှန်းချက်, career path, ပေါ်ထွက်လာတဲ့ နည်းပညာအပေါ် အမြင်။ စိတ်အနှောင့်အယှက်ဖြစ်စေတဲ့ မေးခွန်းများ: လစာ, overtime နှုန်း, စနေ/တနင်္ဂနွေ အလုပ်, ရာထူးတိုးရက်, ခံစားခွင့်, အခမဲ့ နေထိုင်ခွင့် ဒါမှမဟုတ် သယ်ယူပို့ဆောင်ရေး။
+t9.036	Planning အခြေခံ principle ခုနစ်ခု
+t9.037	Principle
+t9.038	အဓိပ္ပာယ်
+t9.040	Project ကို စီမံနိုင်တဲ့ activity နဲ့ task တွေ ခွဲ (ဥပမာ WBS)
+t9.042	Task တွေ အချင်းချင်း ဘယ်လို မှီခိုလဲ ဆုံးဖြတ်
+t9.044	Task တစ်ခုစီကို work unit (ဥပမာ person-day) အရေအတွက် ပေး
+t9.046	ကာလတစ်ခုစီအတွက် သတ်မှတ်ထားတဲ့ ဝန်ထမ်းအရေအတွက် ခွဲဝေ
+t9.048	Task တိုင်းကို team member တစ်ယောက်ဆီ တာဝန်ချ
+t9.050	Task တစ်ခုစီက work product ဒါမှမဟုတ် သူ့အစိတ်အပိုင်း ထုတ်
+t9.052	Task ဒါမှမဟုတ် task အုပ်စုတိုင်းကို milestone နဲ့ ချိတ်
+t9.053	<span class="fig-n">2</span>Planning အခြေခံ principle ခုနစ်ခု
+t9.054	<span class="fig-n">3</span>Scheduling အဆင့်များ
+t9.055	<span class="fig-n">4</span>Work breakdown structure
+t9.056	<span class="fig-n">5</span>Gantt chart ဥပမာ
+t9.057	<span class="fig-n">6</span>Gantt chart ထဲက "ကောင်းလား?" WBS (1)
+t9.058	<span class="fig-n">7</span>Gantt chart ထဲက "ကောင်းလား?" WBS (2)
+t9.059	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t9.060	Flashcard များ
+t9.061	Quiz
+t9.062	နောက်တစ်ခု: T10 Critical path
+t10.001	<span class="num n2">10</span> Critical path analysis နဲ့ PERT
+t10.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Critical path က မှီခိုနေတဲ့ task တွေရဲ့ အရှည်ဆုံး ကွင်းဆက်; project အစောဆုံး ပြီးနိုင်ချိန်ကို သတ်မှတ်တယ်။
+t10.003	Task တချို့ တခြားဟာကို စောင့်ရ; တချို့ parallel run နိုင်။ Task တွေကို "နောက်က လိုက်ရမယ်" မြှားတွေနဲ့ <b>network diagram</b> အဖြစ် ဆွဲပါ။ Start ကနေ Finish အထိ လမ်းကြောင်းတိုင်းက path တစ်ခု။ Path တစ်ခုစီပေါ်က ကြာချိန်တွေ ပေါင်း: <mark class="hl"><b>အရှည်ဆုံး</b>က critical path, project က အနှေးဆုံး ကွင်းဆက်မတိုင်ခင် မပြီးနိုင်လို့။</mark>
+t10.004	ဥပမာ သေးသေး
+t10.005	Task
+t10.006	ရက်
+t10.007	နောက်က လိုက်ရမယ်
+t10.008	A Screen ဒီဇိုင်း
+t10.009	B Server setup
+t10.010	C App ဆောက်
+t10.011	D API ဆောက်
+t10.012	E အတူ test
+t10.013	Path များ: A–C–E = 10 ရက်, B–D–E = 8 ရက်။ Critical path က A–C–E, ဒါကြောင့် project က 10 ရက် ကြာတယ်။ B နဲ့ D က အဆုံးကို မနှောင့်နှေးစေဘဲ 2 ရက် နောက်ကျနိုင်: အဲ့ အပိုအချိန်က သူတို့ရဲ့ <b>float</b> (slack လို့လည်း ခေါ်)။
+t10.014	Task တစ်ခုလျှင် ဂဏန်း လေးခု
+t10.015	ဂဏန်း
+t10.016	အဓိပ္ပာယ်
+t10.017	ဘယ်လို
+t10.019	အစောဆုံး စနိုင်ချိန်
+t10.020	အရင် task တွေရဲ့ အကြီးဆုံး EF
+t10.022	အစောဆုံး ပြီးနိုင်ချိန်
+t10.023	ES + ကြာချိန်
+t10.025	Project ကို မနှောင့်နှေးစေဘဲ အနောက်ဆုံး ပြီးနိုင်ချိန်
+t10.026	နောက် task တွေရဲ့ အငယ်ဆုံး LS
+t10.028	အနောက်ဆုံး စနိုင်ချိန်
+t10.029	LF − ကြာချိန်
+t10.030	ES နဲ့ EF အတွက် Start ကနေ ရှေ့ကို, ပြီးရင် LF နဲ့ LS အတွက် Finish ကနေ နောက်ပြန်။ Slack = LS − ES (LF − EF နဲ့လည်း တူ)။ Slack 0 ရှိတဲ့ task တွေ critical။
+t10.031	သိထားရမယ့် စကားလုံးများ
+t10.044	မှတ်ထားပါ
+t10.045	Critical path = အရှည်ဆုံး path = project ကြာချိန်။
+t10.046	ES/EF အတွက် forward pass, LS/LF အတွက် backward pass။
+t10.047	Slack = LS − ES; slack သုည က critical။
+t10.048	အသေးစိတ်
+t10.049	<span class="fig-n">1</span>Critical path analysis
+t10.050	<span class="fig-n">2</span>Task ရဲ့ critical ဖြစ်မှုကို သတ်မှတ်ခြင်း
+t10.051	<span class="fig-n">3</span>Cooking Mama project
+t10.052	အိမ်ဆောက်ခြင်း ဥပမာ
+t10.053	Code
+t10.054	Activity
+t10.055	ရက်
+t10.056	နောက်က လိုက်ရမယ်
+t10.057	ကြမ်းခင်း
+t10.058	တံခါး နေရာချ
+t10.059	ရေပိုက်
+t10.060	လျှပ်စစ်ဆက်
+t10.061	နံရံဆောက်
+t10.062	မျက်နှာကြက်ဆောက်
+t10.063	ခေါင်မိုးဆောက်
+t10.064	တံခါးနဲ့ ပြတင်းတပ်
+t10.065	ရေပိုက်ဆက်
+t10.066	ဆေးသုတ်
+t10.067	<span class="fig-n">4</span>CPA ဥပမာ: activity နဲ့ အလုပ်အစဉ်
+t10.068	<span class="fig-n">5</span>CPA ဥပမာ: network diagram ဆောက်ခြင်း (1)
+t10.069	<span class="fig-n">6</span>CPA ဥပမာ: network diagram ဆောက်ခြင်း (2)
+t10.070	<span class="fig-n">7</span>CPA ဥပမာ: network diagram ဆောက်ခြင်း (3)
+t10.071	<span class="fig-n">8</span>CPA ဥပမာ: network diagram ဆောက်ခြင်း (4)
+t10.072	<span class="fig-n">9</span>CPA ဥပမာ: network diagram ဆောက်ခြင်း (5)
+t10.073	<span class="fig-n">10</span>CPA ဥပမာ: network diagram ဆောက်ခြင်း (6)
+t10.074	<span class="fig-n">11</span>CPA ဥပမာ: ကြာချိန်ပါ ပြီးပြည့်စုံ network
+t10.075	Path အားလုံး
+t10.076	Path
+t10.077	အရှည်
+t10.078	<b>32 (critical)</b>
+t10.079	<span class="fig-n">12</span>CPA ဥပမာ: ဖြစ်နိုင်တဲ့ path များနဲ့ critical path
+t10.080	PERT ဝေါဟာရများ
+t10.081	<b>PERT</b>: Program (Project) Evaluation and Review Technique, 1950s နှောင်းပိုင်းမှာ contractor ထောင်နဲ့ချီပါ US Navy project အတွက် ဖန်တီးခဲ့။
+t10.082	<b>Activity</b>: အချိန်, ကြိုးပမ်းမှုနဲ့ အရင်းအမြစ် ကုန်တဲ့ task။ <b>Predecessor / successor event</b>: တခြား event ရဲ့ ချက်ချင်း ရှေ့ ဒါမှမဟုတ် နောက်က event။
+t10.083	<b>O, M, P</b>: optimistic, most likely နဲ့ pessimistic အချိန်။ <b>TE = (O + 4M + P) ÷ 6</b>။
+t10.084	<b>Float / slack</b>: project ကို မနှောင့်နှေးစေဘဲ task ကို ဘယ်လောက် နောက်ကျနိုင်လဲ။
+t10.085	<b>Critical path</b>: အစကနေ အဆုံးအထိ ဆက်တိုက် အရှည်ဆုံး path; စုစုပေါင်း အချိန်ကို သတ်မှတ်ပြီး သူ့ပေါ် နောက်ကျမှု ဘာမဆို အဆုံးကို နှောင့်နှေးစေ။
+t10.086	<b>Critical activity</b>: total float သုည ရှိတဲ့ activity။
+t10.087	<span class="fig-n">13</span>Network diagram
+t10.088	<span class="fig-n">14</span>PERT network diagram: node layout
+t10.089	<span class="fig-n">15</span>PERT network diagram: node တန်ဖိုးများ
+t10.090	အိမ်တူပေါ် PERT
+t10.091	Code
+t10.093	သုံးတာ
+t10.099	<mark class="hl">Schedule မလုပ်ခင် မျှော်လင့်ချိန်တွေကို ရက်အပြည့်အထိ အပေါ်ကို ပတ်တယ်။</mark> Project က 39 ရက် ကြာ; critical path က A–E–D–F–I–J။
+t10.100	O, M, P အဆင့်ကို စာမေးပွဲမှာ မလိုဘူးလို့ ဖော်ပြထားတယ်။
+t10.101	PERT အဆင့် ခြောက်ဆင့်
+t10.102	Activity နဲ့ milestone တွေ ဖော်ထုတ်။
+t10.103	သူတို့ အစဉ်ကို ဆုံးဖြတ်။
+t10.104	Network diagram ဆောက်။
+t10.105	Activity တစ်ခုစီရဲ့ အချိန် ခန့်မှန်း။
+t10.106	Critical path ဆုံးဖြတ်။
+t10.107	Project တိုးတက်လာတာနဲ့ chart ကို update။
+t10.108	<span class="fig-n">16</span>PERT ဥပမာ, အဆင့် 1: activity နဲ့ milestone
+t10.109	<span class="fig-n">17</span>PERT ဥပမာ, အဆင့် 2–3: အစဉ်နဲ့ network
+t10.110	<span class="fig-n">18</span>PERT ဥပမာ, အဆင့် 4.1: မျှော်လင့်ချိန်
+t10.111	<span class="fig-n">19</span>PERT ဥပမာ, အဆင့် 4.2: Te ခွဲဝေ
+t10.112	<span class="fig-n">20</span>PERT ဥပမာ, အဆင့် 4.3: ES နဲ့ EF
+t10.113	<span class="fig-n">21</span>PERT ဥပမာ, အဆင့် 4.4: LF နဲ့ LS
+t10.114	<span class="fig-n">22</span>PERT ဥပမာ, အဆင့် 4.5: slack နဲ့ critical path
+t10.115	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t10.116	Flashcard များ
+t10.117	Quiz
+t10.118	လေ့ကျင့်ခန်း: Critical path
+t10.119	နောက်တစ်ခု: T11 Risk

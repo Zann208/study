@@ -1,0 +1,194 @@
+# SPM: T11-T12
+t11.001	<span class="num n2">11</span> Risk management
+t11.002	<b>တစ်ကြောင်းတည်းနဲ့</b>ဘာမှားနိုင်လဲ ရှာ, ဘယ်လောက် ဖြစ်နိုင်ပြီး ဘယ်လောက် ဆိုးလဲ အဆင့်သတ်မှတ်, အဆိုးဆုံးတွေအတွက် မဖြစ်ခင် စီစဉ်ပါ။
+t11.003	Risk တိုင်းကို မေးခွန်း လေးခုနဲ့ ချဉ်းကပ်တယ်: ဘာမှားနိုင်လဲ? ဘယ်လောက် ဖြစ်နိုင်လဲ? ပျက်စီးမှု ဘယ်လောက်လဲ? ဘာလုပ်နိုင်လဲ? <mark class="hl">ပြဿနာ မပေါ်ခင် လုပ်ဆောင်တာက <b>proactive</b></mark>; ပေါ်ပြီးမှ တုံ့ပြန်တာက <b>reactive</b>။
+t11.004	Risk ကို အဆင့်သတ်မှတ်ခြင်း
+t11.005	CanteenGo မှာ "canteen က test လုပ်ဖို့ ငြင်း" က probability 0.2 နဲ့ 20 ရက် ကုန်မယ်: exposure 4 ရက်။ "Payment gateway ခွင့်ပြုချက် နှေး" က 0.6 နဲ့ 15 ရက်: exposure 9။ Exposure မြင့်တာကို အရင် ကိုင်တွယ်ပါ။
+t11.006	အဆင့် ခြောက်ဆင့် process
+t11.007	Risk တွေကို <b>Identify</b> (checklist, brainstorming, အတိတ် project)။
+t11.008	ဖြစ်နိုင်ခြေနဲ့ အကျိုးဆက်ကို <b>Analyse</b>, ပြီးရင် ဦးစားပေးစီ။
+t11.009	Strategy နဲ့ လုပ်ဆောင်ချက်ကို <b>Plan</b>။
+t11.010	သတိပေး လက္ခဏာတွေကို <b>Track</b>။
+t11.011	<b>Resolve</b>: risk ဖြစ်လာရင် plan ကို လုပ်ဆောင်။
+t11.012	<b>Learn</b>: ဖြစ်ခဲ့တာကို risk knowledge base ထဲ မှတ်။
+t11.013	Strategy ခြောက်ခု
+t11.014	Strategy
+t11.015	အဓိပ္ပာယ်
+t11.016	CanteenGo မှာ
+t11.018	Risk မဖြစ်နိုင်အောင် plan ကို ပြောင်း
+t11.019	Version 1 မှာ online payment ကျော်
+t11.021	ပျက်စီးမှုကို ကာကွယ်
+t11.022	Orders database ကို နေ့စဉ် backup
+t11.024	ဖြစ်နိုင်ခြေ ဒါမှမဟုတ် ထိခိုက်မှု လျှော့
+t11.025	Payment code မှာ unit test အပို
+t11.027	မဆုံးဖြတ်ခင် ပိုသိအောင် ရှာ
+t11.028	ခွင့်ပြုချက် ဘယ်လောက်ကြာလဲ gateway ကို မေး
+t11.030	အပိုအချိန် ဒါမှမဟုတ် ငွေ ချန်ထား
+t11.031	Launch မတိုင်ခင် buffer တစ်ပတ်
+t11.033	Risk ကို တခြားသူဆီ လွှဲ
+t11.034	Hosted payment service သုံး
+t11.035	ကိုယ်တိုင်ဆောက်မလား ဝယ်မလား
+t11.036	အစိတ်အပိုင်းတစ်ခုစီအတွက် ဆောက်မလား အသင့်လုပ်ထားတာ ဝယ်မလား ဆုံးဖြတ်။ Payment service ဝယ်တာက risk ကို လွှဲပြီး အချိန်သက်သာပေမဲ့ fee နဲ့ ထိန်းချုပ်မှု ကုန်တယ်။
+t11.037	သိထားရမယ့် စကားလုံးများ
+t11.050	မှတ်ထားပါ
+t11.051	RE = probability × consequence။
+t11.052	Identify, analyse, plan, track, resolve, learn။
+t11.053	Avoid, protect, reduce, research, reserve, transfer။
+t11.054	အသေးစိတ်
+t11.055	<span class="fig-n">1</span>Risk management process
+t11.056	Risk အမျိုးအစားများ
+t11.057	ဘာနဲ့ အုပ်စုဖွဲ့
+t11.058	အမျိုးအစားများ
+t11.060	Project risk · technical risk · business risk
+t11.062	Known · predictable · unpredictable
+t11.063	ပြင်းထန်မှု
+t11.064	Catastrophic · critical · marginal · negligible
+t11.065	<span class="fig-n">2</span>Risk အမျိုးအစားများ
+t11.066	Risk exposure ဥပမာ
+t11.067	အချက်
+t11.068	C (ရက်)
+t11.070	ဝန်ထမ်းတွေ ကူးစက်ရောဂါ ဖြစ်
+t11.071	Unit testing အပို လို
+t11.072	Customer ရဲ့ system နဲ့ မကိုက်
+t11.073	User တွေ test ကူညီဖို့ ငြင်း
+t11.074	အတွင်း ဝန်ထမ်းကြား conflict
+t11.075	Scope creep
+t11.076	စုစုပေါင်း risk exposure
+t11.077	တန်ဖိုးတွေ ပတ်ထား; တိကျတဲ့ စုစုပေါင်း 49.1။
+t11.078	<span class="fig-n">3</span>Risk exposure
+t11.079	Risk matrix
+t11.080	ဖြစ်နိုင်ခြေ (1–5) × ထိခိုက်မှု (1–5) က 1 ကနေ 25 အထိ score ပေး; ညာအပေါ် cell တွေ အရေးတကြီး အဖြစ်ဆုံး။
+t11.081	<span class="fig-n">4</span>Risk matrix
+t11.082	ဖော်ထုတ်ရေး ရင်းမြစ်များ
+t11.083	Checklist (ဥပမာ system requirement, software requirement, design, implementation, testing နဲ့ release ကို ဖုံးတဲ့ NASA ရဲ့ software checklist), risk knowledge base နဲ့ brainstorming။
+t11.084	<span class="fig-n">5</span>အဆင့် 1: risk identification
+t11.085	<span class="fig-n">6</span>Risk checklist နမူနာ (1)
+t11.086	<span class="fig-n">7</span>Risk checklist နမူနာ (2)
+t11.087	<span class="fig-n">8</span>Risk checklist နမူနာ (3)
+t11.088	<span class="fig-n">9</span>Risk checklist နမူနာ (4)
+t11.089	<span class="fig-n">10</span>Risk checklist နမူနာ (5)
+t11.090	<span class="fig-n">11</span>Risk checklist နမူနာ (6)
+t11.091	Software project တွေမှာ အကိုးကားအများဆုံး risk များ
+t11.092	IT အတွေ့အကြုံ မရှိ; scope creep; technical စွမ်းရည်ကို ဆွဲဆန့်; top management ထောက်ခံမှု မရှိ; user ထောက်ခံမှုနဲ့ ပါဝင်မှု မရှိ; ပန်းတိုင် မရှင်း; requirement ကို နားလည်မှုလွဲ; လက်တွေ့မကျတဲ့ schedule နဲ့ budget; မသင့်တော်တဲ့ methodology; ပြင်ပ component နဲ့ task တွေ မပြည့်မီ; user နဲ့ အဖွဲ့အစည်း အများ ပါဝင်။
+t11.093	<span class="fig-n">12</span>Software project တွေမှာ အကိုးကားအများဆုံး risk များ
+t11.094	Offshore outsourcing လုပ်ရင် risk အပို
+t11.095	ယဉ်ကျေးမှု ကွာခြားမှု, ဆက်သွယ်ရေး ကွာဟမှု, ဘာသာစကား အတားအဆီး, IP ကာကွယ်မှု အားနည်း, နိုင်ငံရေး မတည်ငြိမ်, information security, ဥပဒေ အားနည်း, ဝှက်ထားတဲ့ ကုန်ကျစရိတ်, ပထဝီ အကွာအဝေး, contract management, time zone, မျက်နှာချင်းဆိုင် ဆက်သွယ်မှု နည်း, ကျွမ်းကျင်မှု မရှိ, အရည်အသွေးနိမ့် product ဒါမှမဟုတ် service။
+t11.096	<span class="fig-n">13</span>Offshore outsourcing မှာ အကိုးကားအများဆုံး risk များ
+t11.097	အဆင့်တွေ အသေးစိတ်
+t11.098	အဆင့်
+t11.099	လုပ်ဆောင်ချက်များ
+t11.101	ဖြစ်နိုင်ခြေနဲ့ အကျိုးဆက်ကို ခွဲခြမ်းစိတ်ဖြာ, ဦးစားပေးစီ; အကြောင်းရင်း, driver, တူညီချက်နဲ့ မှီခိုမှု ဖော်ထုတ်
+t11.103	Scenario သတ်မှတ်, early-warning threshold ထား, အစားထိုး solution ဖန်တီး, risk plan သတ်မှတ်
+t11.105	Scenario နဲ့ risk indicator စောင့်ကြည့်, stakeholder တွေကို အသိပေး, statistics စု
+t11.107	Action plan လုပ်ဆောင်, update ပေး, statistics စု, အသိအမှတ်ပြု
+t11.109	Record header (project, risk, type, phase), assessment (probability, impact), action plan (strategy, owner), tracking (indicator, checkpoint), resolution (သင်ခန်းစာ, best practice)
+t11.110	<span class="fig-n">14</span>အဆင့် 2: risk analysis
+t11.111	<span class="fig-n">15</span>အဆင့် 3: risk planning
+t11.112	<span class="fig-n">16</span>Risk strategy များ
+t11.113	<span class="fig-n">17</span>Risk action များ
+t11.114	<span class="fig-n">18</span>အဆင့် 4: risk tracking
+t11.115	<span class="fig-n">19</span>အဆင့် 5: risk resolving
+t11.116	<span class="fig-n">20</span>နောက်ဆုံးအဆင့်: risk ကို သင်ယူခြင်း
+t11.117	ယဉ်ကျေးမှုနဲ့ risk
+t11.118	ယဉ်ကျေးမှု မတူတဲ့ လူတွေ risk ကို မတူအောင် အဆင့်စီတယ်။ တရုတ်, US နဲ့ ဖင်လန်က project manager တွေကို 2001 လေ့လာမှုမှာ ဥပမာ top-management ကတိကဝတ် မရှိခြင်းက တရုတ်နဲ့ US မှာ ပထမ, ဖင်လန်မှာ ဒုတိယ; user ပါဝင်မှု မရှိခြင်းက တရုတ်မှာ ဒုတိယ, US မှာ ခြောက်ခုမြောက် ဖြစ်ခဲ့တယ်။
+t11.119	<span class="fig-n">21</span>ယဉ်ကျေးမှုနဲ့ risk: case study
+t11.120	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t11.121	Flashcard များ
+t11.122	Quiz
+t11.123	လေ့ကျင့်ခန်း: Risk exposure
+t11.124	နောက်တစ်ခု: T12 Implementation
+t12.001	<span class="num n2">12</span> Project implementation
+t12.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Implementation က product ကို ဆောက်, plan နဲ့ယှဉ်ပြီး တိုးတက်မှုကို စောင့်ကြည့်, အခြေအနေ ပြောင်းရင် ပြန်စီစဉ်ခြင်း။
+t12.003	Develop လုပ်နည်း သုံးမျိုး
+t12.004	ချဉ်းကပ်ပုံ
+t12.005	အယူအဆ
+t12.006	သင့်တော်တာ
+t12.007	Traditional (waterfall, spiral, component-based)
+t12.008	အရင် စီစဉ်, ပြီးမှ အဆင့်လိုက် ဆောက်
+t12.009	Requirement စောစော သိပြီး တည်ငြိမ်
+t12.010	Agile (Scrum, XP, RAD)
+t12.011	Cycle တို, အလုပ်လုပ်တဲ့ software ခဏခဏ, ပြောင်းလဲမှုကို ကြိုဆို
+t12.012	ပေါ်လာပြီး မြန်မြန်ပြောင်းတဲ့ requirement
+t12.013	Open source
+t12.014	Source code public; ဘယ်သူမဆို သုံး ပြင်နိုင်
+t12.015	စိန်ခေါ်မှုရှိတဲ့ ပြဿနာကို ဖြေရှင်းနေတဲ့ ပြန့်ကျဲ team များ
+t12.016	Agile က process နဲ့ tool, documentation, contract ညှိနှိုင်းမှု, plan လိုက်နာမှုထက် လူတစ်ဦးချင်းနဲ့ အပြန်အလှန်ဆက်ဆံမှု, အလုပ်လုပ်တဲ့ software, customer ပူးပေါင်းမှု, ပြောင်းလဲမှုကို တုံ့ပြန်ခြင်းကို တန်ဖိုးထားတယ်။ ညာဘက်က အရာတွေ အရေးကြီးဆဲ; ဘယ်ဘက်က ပိုအရေးကြီးတယ်။
+t12.017	တိုးတက်မှု စောင့်ကြည့်ခြင်း (earned value)
+t12.018	<mark class="hl">Task တိုင်းကို <b>planned value</b> ပေး: project စုစုပေါင်း အချိန်ထဲက သူ့ဝေစု။</mark> Task ပြီးရင် project က အဲ့ဝေစုကို <b>earn</b> လုပ်ပြီ။ Earned value ကို သုံးခဲ့တဲ့ ရက်နဲ့ စားပြီး အမြန်နှုန်းရ, ပြီးရင် ပြီးမယ့်ရက်ကို ခန့်မှန်း။
+t12.019	ပြန်စီစဉ်ခြင်း
+t12.020	<b>Change management</b> က အတွင်း (ဝန်ထမ်း, ပန်းတိုင်, နည်းပညာ) နဲ့ အပြင် (ပြိုင်ဘက်, စီးပွားရေး, ဥပဒေ) ကလာတဲ့ ပြောင်းလဲမှုတွေကို ပြင်ဆင် ကိုင်တွယ်တယ်။ <b>Conflict management</b> က သဘောထားကွဲမှုကို ကိုင်တွယ်တယ်။ Conflict ကိုင်တွယ်နည်း ငါးမျိုးက ကိုယ့် agenda နဲ့ တစ်ဖက်လူ agenda ကို ဘယ်လောက် ဂရုစိုက်လဲ ပေါ် မူတည်တယ်:
+t12.021	တစ်ဖက်လူကို ဂရုစိုက်မှု နိမ့်
+t12.022	တစ်ဖက်လူကို ဂရုစိုက်မှု မြင့်
+t12.023	ကိုယ့် agenda ကို ဂရုစိုက်မှု မြင့်
+t12.026	ကိုယ့် agenda ကို ဂရုစိုက်မှု နိမ့်
+t12.029	<b>Compromising</b> က အလယ်မှာ: တစ်ဖက်စီ တစ်စိတ်တစ်ပိုင်း လျှော့ပေးတယ်။
+t12.030	သိထားရမယ့် စကားလုံးများ
+t12.044	မှတ်ထားပါ
+t12.045	တည်ငြိမ်တဲ့ requirement အတွက် traditional; ပြောင်းနေတာအတွက် agile။
+t12.046	ခန့်မှန်း ပြီးရက် = အခုထိ ရက် + (100 − EV) ÷ (EV ÷ ရက်)။
+t12.047	ကိုယ့် vs တခြားသူရဲ့ ဂရုစိုက်မှုကနေ conflict mode ငါးမျိုး။
+t12.048	အသေးစိတ်
+t12.049	<span class="fig-n">1</span>Project implementation
+t12.050	<span class="fig-n">2</span>Software development ချဉ်းကပ်ပုံများ
+t12.051	Traditional model များ
+t12.052	<b>Waterfall</b>: requirements definition → system နဲ့ software design → implementation နဲ့ unit testing → integration နဲ့ system testing → operation နဲ့ maintenance။
+t12.053	<b>Spiral</b>: ရည်မှန်းချက်ဆုံးဖြတ်, ရွေးစရာ အကဲဖြတ်ပြီး risk စီမံ, develop နဲ့ test, နောက်အဆင့် စီစဉ်ခြင်းတို့ရဲ့ ထပ်ခါထပ်ခါ loop, loop တိုင်းမှာ prototype နဲ့။
+t12.054	<b>Component-based</b>: သီးခြားဆောက်ထားတဲ့ component တွေကနေ product ကို တပ်ဆင်။
+t12.055	<span class="fig-n">3</span>Waterfall model
+t12.056	<span class="fig-n">4</span>Spiral model
+t12.057	<span class="fig-n">5</span>Component based development
+t12.058	Agile နည်းလမ်းများ
+t12.059	<b>RAD</b> (Rapid Application Development): 2–6 လအတွင်း 1–21 ရက် cycle တိုတိုများ, developer နဲ့ customer နားလည်မှု ကွာဟချက်ကို ပိတ်ဖို့ Joint Application Development (JAD) session နဲ့ focus group သုံး။
+t12.060	<b>Extreme Programming</b>: whole team, small release, customer test, planning game, collective ownership, coding standard, continuous integration, sustainable pace, test-driven development, pair programming, refactoring, simple design။
+t12.061	<b>Scrum</b>: product backlog → sprint backlog → 24 နာရီတိုင်း daily scrum ပါ ~30 ရက် sprint → အလုပ်လုပ်တဲ့ software။ Role များ: Scrum Master, Product Owner, Scrum Team။
+t12.062	<span class="fig-n">6</span>Agile manifesto
+t12.063	<span class="fig-n">7</span>Rapid application development (RAD)
+t12.064	<span class="fig-n">8</span>Extreme programming
+t12.065	<span class="fig-n">9</span>Scrum
+t12.066	Open source
+t12.067	Source code ကို public က အခမဲ့ သုံး ပြင်နိုင်အောင် ရနိုင်။ စံနှုန်း: လွတ်လပ်စွာ ပြန်ဖြန့်, source code ပါ, ပြင်ခွင့်, ခွဲခြားမှုမရှိ, licence ဖြန့်ဝေ; Open Source Initiative (OSI) က certify လုပ်။
+t12.068	<span class="fig-n">10</span>Open-source licence များ
+t12.069	ယှဉ်ချက်
+t12.073	Requirement
+t12.074	စောစောသိ, အများစု တည်ငြိမ်
+t12.075	ပေါ်လာ, မြန်မြန်ပြောင်း
+t12.076	ပေါ်လာ, မြန်မြန်ပြောင်း, အများပိုင်
+t12.077	Architecture
+t12.078	လက်ရှိနဲ့ မြင်နိုင်တဲ့ အနာဂတ် လိုအပ်ချက်
+t12.079	လက်ရှိ လိုအပ်ချက်
+t12.080	ပွင့်လင်း, လက်ရှိ လိုအပ်ချက်
+t12.081	Refactoring
+t12.082	စျေးကြီး
+t12.083	စျေးပေါ
+t12.084	စျေးပေါ
+t12.085	အရွယ်
+t12.086	Team နဲ့ product ပိုကြီး
+t12.087	Team နဲ့ product ပိုသေး
+t12.088	ပြန့်ကျဲ team ကြီး, product ပိုသေး
+t12.089	အဓိက ရည်မှန်းချက်
+t12.090	High assurance
+t12.091	တန်ဖိုး မြန်မြန်
+t12.092	စိန်ခေါ်မှုရှိတဲ့ ပြဿနာ
+t12.093	<span class="fig-n">11</span>Development ချဉ်းကပ်ပုံ ယှဉ်ချက်
+t12.094	Monitoring
+t12.095	ကာလအလိုက် project manager က ပြောင်းလဲမှု, risk နဲ့ လက္ခဏာ, conflict နဲ့ လက္ခဏာ, WBS တိုးတက်မှုနဲ့ အလုံးစုံ status ကို စစ်ပြီး progress report ထဲ ထည့်တယ်။
+t12.096	<span class="fig-n">12</span>Project ကို monitoring
+t12.097	Earned value ဥပမာ
+t12.098	Task
+t12.099	စီစဉ်ထားတဲ့ ရက်
+t12.101	တကယ့် ရက်
+t12.103	စုစုပေါင်း
+t12.104	<span class="fig-n">13</span>PV တွက်ခြင်း
+t12.105	<span class="fig-n">14</span>Tracking
+t12.106	<span class="fig-n">15</span>Tracking (ဆက်)
+t12.107	Change management
+t12.108	အတွင်း ပြောင်းလဲမှု အချက်များ: အဖွဲ့အစည်း ဖွဲ့စည်းပုံ, strategy နဲ့ requirement, culture, နည်းပညာ, ဝန်ထမ်း။ အပြင်: requirement အပို, စီးပွားရေး, ပြိုင်ဘက်, နည်းပညာ, နိုင်ငံရေးနဲ့ ဥပဒေ။ Strategy တွေက proactive (ကြိုပြင်ဆင်) ဒါမှမဟုတ် reactive။ Technique ခြောက်ခု: communication, participation, facilitation, negotiation, manipulation, intimidation။ အကြံ: မတွန်းလှန်နဲ့, အကောင်းဘက် ရှာ, မြန်မြန် ရင်းနှီးအောင်လုပ်, တခြားသူကို ထည့်စဉ်းစား, တစ်ကြိမ်လျှင် ပြောင်းလဲမှု တစ်ခု, ကိုယ့်ကိုယ်ကို စိတ်ရှည်, အကျိုးရှိတဲ့ မေးခွန်းမေး, ထိန်းချုပ်မှု ယူ။
+t12.109	<span class="fig-n">16</span>ပြန်စီစဉ်ခြင်း
+t12.110	<span class="fig-n">17</span>Change management technique များ
+t12.111	Conflict management
+t12.112	တန်ဖိုး, ရှုထောင့် ဒါမှမဟုတ် အမြင်တွေ ဆန့်ကျင်ပြီး သဘောမတူရသေးရင် conflict ဖြစ်တယ်။ ပြဿနာတွေကို ဖော်ပြ, အလုပ်ကို အားဖြည့်, ကွာခြားချက်ကနေ သင်ယူဖို့ ကူညီနိုင်; productivity နဲ့ စိတ်ဓာတ်ကို ထိခိုက်ပြီး conflict ပိုဖြစ်စေနိုင်လည်း တယ်။ Manager တွေက ဆန့်ကျင်တဲ့ role တွေ ရှောင်, ဆက်ဆံရေးနဲ့ ဆက်သွယ်ရေး တည်ဆောက်, conflict ကို မျှော်လင့် ပြင်ဆင်, အမည်မသိ အကြံပြုချက်ကို ထည့်စဉ်းစားသင့်တယ်။ ဖြေရှင်းနည်း ငါးမျိုးက Thomas-Kilmann model ကို လိုက်တယ်။
+t12.113	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t12.114	Flashcard များ
+t12.115	Quiz
+t12.116	လေ့ကျင့်ခန်း: Earned value
+t12.117	နောက်တစ်ခု: T13 Decommissioning

@@ -1,0 +1,144 @@
+# SPM: Home, T0, T1
+home.001	Software Project Management
+home.002	Project life cycle: initiation, definition, planning, implementation, decommissioning။
+home.003	T1–4 · အခြေခံ
+home.004	T5–8 · Initiation နဲ့ definition
+home.005	T9–11 · Planning
+home.006	T12–13 · Implementation နဲ့ ပိတ်သိမ်းခြင်း
+home.007	အခြေခံ
+home.008	ခေါင်းစဉ် 1–4။ Project management ဆိုတာ ဘာလဲ, team role, software project တွေ ဘာကြောင့် ကျရှုံးလဲ, professional ethics နဲ့ software business။
+home.009	Initiation နဲ့ definition
+home.010	ခေါင်းစဉ် 5–8။ Needs assessment နဲ့ SWOT, ပန်းတိုင်နဲ့ scope, အဖွဲ့အစည်း ဖွဲ့စည်းပုံ, cost estimation နဲ့ feasibility။
+home.011	Planning
+home.012	ခေါင်းစဉ် 9–11။ ဝန်ထမ်းခန့်, budgeting, WBS နဲ့ Gantt chart, critical path နဲ့ PERT, risk management။
+home.013	Implementation နဲ့ ပိတ်သိမ်းခြင်း
+home.014	ခေါင်းစဉ် 12–13။ Development ချဉ်းကပ်ပုံ, earned value, change နဲ့ conflict management, review နဲ့ handover။
+home.015	ခေါင်းစဉ်တစ်ခုစီကို ဘယ်မှာ လေ့ကျင့်လဲ
+home.016	ခေါင်းစဉ်
+home.017	လေ့ကျင့်ခန်း
+home.018	<a href="#/roles">Team roles</a>, flashcard, quiz
+home.019	Flashcard, quiz
+home.021	Flashcard, quiz
+home.027	Flashcard, quiz
+topics.001	ခေါင်းစဉ်များ
+t0.001	<span class="num n1">0</span> ဒီကစပါ: project တစ်ခုရဲ့ ဘဝ
+t0.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Project ဆိုတာ ပန်းတိုင်နဲ့ ကန့်သတ်ချက်ရှိတဲ့ ယာယီအလုပ်; project management က team ကို ကန့်သတ်ချက်အတွင်း အဲ့ပန်းတိုင်ဆီ ရောက်အောင် လုပ်ခြင်း။
+t0.003	<b>Project</b> မှာ အစ, အဆုံးနဲ့ ပို့ဆောင်ရမယ့် ထူးခြားတဲ့ တစ်ခုခု ရှိတယ်။ Canteen ကို နေ့တိုင်း run တာက operations; ကျောင်းသားတွေ canteen အစားအစာ ကြိုမှာနိုင်တဲ့ app ဆောက်တာက project။ <mark class="hl">Project တိုင်း အချင်းချင်း ဆွဲနေတဲ့ ကန့်သတ်ချက် သုံးခုအတွင်း ရှိတယ်:</mark> <b>scope</b> (ဘာလုပ်ရမလဲ), <b>time</b> (ဘယ်အချိန် ပြီးရမလဲ) နဲ့ <b>cost</b> (ဘယ်လောက် သုံးခွင့်ရှိလဲ)။ Feature ထည့်ရင် ပိုကြာ ဒါမှမဟုတ် ပိုကုန်; budget ဖြတ်ရင် တခြားတစ်ခုခု လျှော့ရတယ်။
+t0.004	Scope, time, budget အတိုင်း ဖြစ်ရင် project <b>အောင်မြင်</b>တယ်။ တစ်ခုခု လွဲရင် <b>challenged</b>။ ဖျက်သိမ်းခံရ ဒါမှမဟုတ် ဘယ်တော့မှ မပို့ရင် <b>ကျရှုံး</b>တယ်။
+t0.005	Project တစ်ခုရဲ့ ဘဝ
+t0.006	အဆင့်
+t0.007	ဖြေတဲ့ မေးခွန်း
+t0.008	ခေါင်းစဉ်များ
+t0.010	တကယ့် လိုအပ်ချက် ရှိလား, ဘယ်သူ ငွေပေးမလဲ?
+t0.012	အတိအကျ ဘာဆောက်နေလဲ, ဘယ်သူ ဆုံးဖြတ်လဲ, ဘယ်လောက်ကုန်မလဲ, တန်လား?
+t0.014	ဘယ်သူ ဘာလုပ်, ဘယ်အစဉ်, ဘယ်အချိန်အထိ, ဘာမှားနိုင်လဲ?
+t0.016	ဘယ်လို ဆောက်, ခြေရာခံ, ပြောင်းလဲမှုကို ကိုင်တွယ်မလဲ?
+t0.018	ဘယ်လို လွှဲပြောင်း, team ကို ဆုချ, သင်ခန်းစာ ယူမလဲ?
+t0.019	ဥပမာ: CanteenGo
+t0.020	ငါးယောက်ပါ ကျောင်းသား team တစ်ခုကို ကျောင်းသားတွေ canteen အစားအစာ ကြိုမှာပြီး တန်းမစီရအောင် လုပ်ပေးတဲ့ app <b>CanteenGo</b> ဆောက်ခိုင်းတယ်။
+t0.021	သိထားရမယ့် စကားလုံးများ
+t0.031	မှတ်ထားပါ
+t0.032	Project က ယာယီ, ထူးခြား, scope, time နဲ့ cost နဲ့ ကန့်သတ်ထားတယ်။
+t0.033	အဆင့်ငါးဆင့်: initiation, definition, planning, implementation, decommissioning။
+t0.034	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t0.035	Flashcard များ
+t0.036	Quiz
+t0.037	နောက်တစ်ခု: T1 အယူအဆများ
+t1.001	<span class="num n1">1</span> Project management ရဲ့ အယူအဆများ
+t1.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Project management က လေးခုကို ချိန်ညှိတယ်: လူ, product, process နဲ့ project ကိုယ်တိုင်။
+t1.003	အဓိပ္ပာယ်ဖွင့်ဆိုချက်တွေ စကားလုံးကွာပေမဲ့ အယူအဆ တူတယ်: team ရဲ့ အလုပ်ကို ကန့်သတ်ချက်အတွင်း ပန်းတိုင်ရောက်အောင် စီစဉ်, စုစည်း, ထိန်းချုပ်။
+t1.004	Project လား program လား?
+t1.005	<b>Project</b> က ယာယီအလုပ် တစ်ခု။ <b>Program</b> က အဖွဲ့အစည်းအတွင်း အတူ run တဲ့ ဆက်စပ် project အုပ်စု။ CanteenGo က project; CanteenGo, library app နဲ့ parking app ပါတဲ့ တက္ကသိုလ်ရဲ့ "digital campus" ကြိုးပမ်းမှု တစ်ခုလုံးက program။
+t1.006	Project management ရဲ့ 4P
+t1.007	အဓိပ္ပာယ်
+t1.008	CanteenGo မှာ
+t1.009	<b>People</b>
+t1.010	Team နဲ့ စိတ်ဝင်စားမှုရှိသူ အားလုံး။ အရေးအကြီးဆုံး အစိတ်အပိုင်း။
+t1.011	ဘယ်သူ code ရေး, ဘယ်သူ canteen နဲ့ ပြော, ဘယ်သူ test
+t1.012	<b>Product</b>
+t1.013	ပို့ဆောင်မယ့် software ဒါမှမဟုတ် service
+t1.014	မှာယူခြင်း, ငွေပေးချေခြင်း, လာယူဖို့ အသိပေးခြင်း
+t1.015	<b>Process</b>
+t1.016	ဆောက်ဖို့ သုံးတဲ့ framework
+t1.017	နှစ်ပတ် sprint, တစ်ခါစီ demo
+t1.018	<b>Project</b>
+t1.019	အလုံးစုံ management နဲ့ monitoring
+t1.020	Plan နဲ့ ယှဉ်ပြီး အပတ်စဉ် တိုးတက်မှု စစ်ဆေး
+t1.021	Stakeholder များ
+t1.022	Project ကြောင့် ထိခိုက်သူ မည်သူမဆို။ Sponsor က ငွေပေး, customer က လိုအပ်ချက် ပြော, end-user က တကယ်သုံး, executive က business ဦးတည်ချက် သတ်မှတ်, project manager က စီစဉ် ထိန်းချုပ်, practitioner က ဆောက်။ CanteenGo မှာ faculty က sponsor, canteen ပိုင်ရှင်က customer, ကျောင်းသားတွေက end-user။
+t1.023	Team role (Belbin)
+t1.024	လူတွေ team ထဲမှာ သဘာဝအတိုင်း role မတူတာ ယူကြတယ်။ Belbin ရဲ့ model က ကိုးခု နာမည်ပေးတယ်။ Team ကောင်းမှာ ချိန်ခွင်လျှာ ရှိတယ်: idea ထုတ်သူ, စစ်သူ, အသေးစိတ် ပြီးအောင်လုပ်သူ။
+t1.025	Role
+t1.026	အတို
+t1.027	ပုံမှန် အားသာချက်
+t1.030	တော်, ဖန်တီးနိုင်, idea ထုတ်
+t1.033	တက်ကြွ, team အပြင်က အဆက်အသွယ်နဲ့ idea ရှာ
+t1.036	တည်ငြိမ် ရင့်ကျက်တဲ့ ဥက္ကဋ္ဌ, ပန်းတိုင်ကို ရှင်းပြီး တာဝန်ခွဲ
+t1.039	မောင်းနှင်, စိန်ခေါ်, အောင်မြင်လိုစိတ် မြင့်
+t1.042	လေးနက်, ရွေးစရာတွေကို အကဲဖြတ်တဲ့ critical thinker
+t1.045	ပေါင်းသင်းဆက်ဆံရေးကောင်း, ယုံကြည်, team ကို စုစည်းထား
+t1.048	စည်းကမ်းရှိ; idea တွေကို လက်တွေ့ လုပ်ဆောင်ချက်အဖြစ် ပြောင်း
+t1.051	အမှားတွေ ဖမ်းပြီး အချိန်မီ ပြီးအောင်လုပ်တဲ့ perfectionist
+t1.054	ဘာသာရပ်တစ်ခုမှာ နက်နက်နဲနဲ ကျွမ်းကျင်သူ
+t1.055	အောင်မြင်မှု ဘယ်လိုပုံလဲ
+t1.056	Project က scope, time နဲ့ cost ပန်းတိုင်ကို ပြည့်မီ, customer ဒါမှမဟုတ် sponsor ကို ကျေနပ်စေ, အဓိက ရည်မှန်းချက်ကို ပို့ဆောင် (ဥပမာ ငွေသက်သာ ဒါမှမဟုတ် return ကောင်း) ခဲ့တယ်။ အောင်မြင်မှုနဲ့ အဆက်စပ်ဆုံး အချက်များ: executive ထောက်ခံမှု, user ပါဝင်မှု, အတွေ့အကြုံရှိ project manager, ရှင်းလင်းတဲ့ business ရည်မှန်းချက်, scope အနည်းဆုံး, standard ချဉ်းကပ်ပုံနဲ့ ယုံကြည်ရတဲ့ ခန့်မှန်းချက်။
+t1.057	သိထားရမယ့် စကားလုံးများ
+t1.071	မှတ်ထားပါ
+t1.072	4P: people, product, process, project။ People က အရေးအကြီးဆုံး။
+t1.073	Sponsor က ငွေထောက်; customer က လိုအပ်ချက်ပြော; end-user က သုံး။
+t1.074	Belbin: ချိန်ခွင်လျှာညီ team က စဉ်းစားမှု, လူ နဲ့ လုပ်ဆောင်မှု role တွေ ရောနှောတယ်။
+t1.075	အသေးစိတ်
+t1.076	<span class="fig-n">1</span>အဖွဲ့အစည်း, programme နဲ့ project
+t1.077	Project management ရဲ့ အဓိပ္ပာယ်ဖွင့်ဆိုချက် သုံးခု
+t1.078	ပေးထားတဲ့ ကန့်သတ်ချက်အတွင်း project ပန်းတိုင်အားလုံး ရောက်ဖို့ team ရဲ့ အလုပ်ကို ကြီးကြပ်ခြင်း။
+t1.079	System တစ်ခု ထုတ်လုပ်မှုကို စီစဉ်, စုစည်း, ဝန်ထမ်းချ, ညွှန်ကြား, ထိန်းချုပ်ခြင်း။
+t1.080	Project လိုအပ်ချက်ကို ပြည့်မီဖို့ project လုပ်ငန်းတွေမှာ knowledge, skill, tool နဲ့ technique တွေကို အသုံးချခြင်း (Project Management Institute)။
+t1.081	P တစ်ခုစီရဲ့ အဓိက ပြဿနာများ
+t1.082	အဓိက ပြဿနာများ
+t1.084	ရေတို: ဝန်ထမ်းရှာ, ရွေးချယ်, performance management။ ရေရှည်: training, လစာ, career ဖွံ့ဖြိုးမှု, အဖွဲ့အစည်းနဲ့ အလုပ်ဒီဇိုင်း, team နဲ့ culture ဖွံ့ဖြိုးမှု။
+t1.086	ရှင်းလင်းတဲ့ ရည်မှန်းချက်နဲ့ scope, အစားထိုး solution, technical နဲ့ management ကန့်သတ်ချက်, ကုန်ကျစရိတ်, အကျိုးနဲ့ break-even point ခန့်မှန်းချက်။ အရေးကြီး ပြဿနာ: information ရည်မှန်းချက်, function နဲ့ performance, မရှုပ်ထွေးတဲ့ scope။
+t1.088	Task set (task, milestone, work product, QA point) နဲ့ umbrella activity (quality assurance, configuration management, measurement)။ Customer, product နဲ့ ပတ်ဝန်းကျင်နဲ့ ကိုက်အောင် development model ကို ရွေး။
+t1.090	ရှုပ်ထွေးမှုကို စီမံ, ကျရှုံးမှုကို ရှောင်, planning, monitoring နဲ့ control မှာ common-sense ချဉ်းကပ်ပုံ သုံး။
+t1.091	<span class="fig-n">2</span>Project management spectrum: 4P
+t1.092	<span class="fig-n">3</span>Software product life cycle
+t1.093	Stakeholder များ
+t1.094	Stakeholder
+t1.095	Role
+t1.097	Business ပြဿနာများ သတ်မှတ်
+t1.098	Project (technical) manager များ
+t1.099	Practitioner တွေကို စီစဉ်, လှုံ့ဆော်, စုစည်း, ထိန်းချုပ်
+t1.101	Technical skill တွေ ပို့ဆောင်
+t1.103	လိုအပ်ချက်တွေ သတ်မှတ်
+t1.105	ထုတ်ပြီးနောက် software ကို သုံး
+t1.107	ငွေထောက်ပံ့ပြီး အလုံးစုံ အောင်မြင်မှုကို အကဲဖြတ်
+t1.108	မရှိမဖြစ် project-manager skill များ
+t1.109	People skill, leadership, နားထောင်ခြင်း, သမာဓိနဲ့ တသမတ်တည်း ethical အပြုအမူ, ယုံကြည်မှု တည်ဆောက်ခြင်း, နှုတ်ဖြင့် ဆက်သွယ်ခြင်း, team building, conflict ဖြေရှင်းခြင်း, critical thinking နဲ့ problem solving, ဦးစားပေးမှုများ ချိန်ညှိခြင်း။
+t1.110	Belbin role များ: အခြားနာမည်များ
+t1.111	Implementer ကို Company Worker ဒါမှမဟုတ် Executive လို့လည်း ခေါ်; Coordinator, Chairperson; Plant, Innovator; Resource Investigator, Explorer; Shaper, Driver; Monitor Evaluator, Analyst; Teamworker, Team Player; Completer Finisher, Finisher; Specialist, Expert။ ပထမပတ် activity က လေး-ငါးယောက်ပါ company တွေ ဖွဲ့ပြီး team-roles test ဖြေတယ်။
+t1.112	<span class="fig-n">4</span>Belbin ရဲ့ team role များ
+t1.113	အဓိက ချဉ်းကပ်ပုံများ
+t1.114	ကောင်းကောင်း စ: ပြဿနာကို နားလည်ဖို့ ကြိုးစား။
+t1.115	အရှိန်ထိန်း: မက်လုံးပေး။
+t1.116	တိုးတက်မှု ခြေရာခံ: work product တွေကို ခြေရာခံ။
+t1.117	ဉာဏ်ရှိရှိ ဆုံးဖြတ်: ရိုးရှင်းအောင်ထား။
+t1.118	Postmortem လုပ်: သင်ခန်းစာနဲ့ အကဲဖြတ်ချက်။
+t1.119	အဆင့်များနဲ့ သူတို့ရဲ့ task များ
+t1.120	အဆင့်
+t1.121	Task များ
+t1.123	Needs assessment; customer နဲ့ ငွေထောက်ပံ့သူ ဖော်ထုတ်
+t1.125	ပန်းတိုင်, အာဏာ, ခန့်မှန်း, feasibility analysis
+t1.127	ဝန်ထမ်းရှာ, budgeting, work breakdown, target, make-or-buy, scheduling, plan, proposal နဲ့ bidding
+t1.129	Contract စီမံ, monitoring, ပြဿနာရှာ, ပြန်စီစဉ်, target ညှိ
+t1.131	လည်ပတ်မှု ပြဿနာ ဖြေရှင်း, ဝန်ထမ်းကို ဆုချ တာဝန်ပြန်ချ, review, evaluation, reference data သိမ်း
+t1.132	ကြိုးပမ်းမှုက definition နဲ့ planning တစ်လျှောက် တက်, implementation မှာ အမြင့်ဆုံး, decommissioning မှာ ကျ။
+t1.133	မှတ်ထားသင့်တဲ့ စကားပုံများ
+t1.134	အမျိုးသမီးတစ်ယောက် ကလေးမွေးဖို့ ကိုးလကြာ; အမျိုးသမီး ကိုးယောက်က တစ်လနဲ့ မလုပ်နိုင်ဘူး။ <mark class="hl">လူထပ်ထည့်တိုင်း အလုပ် အမြဲ မတိုဘူး။</mark>
+t1.135	Project ဘာမဆိုကို တိတိကျကျ ခန့်မှန်းနိုင်တယ်, ပြီးသွားမှပဲ။
+t1.136	Code ရေးတာ စောစောစလေ နောက်ကျမှ ပြီးလေ။
+t1.137	စာရွက်ပေါ် မရှိတာ မပြောခဲ့သလိုပဲ။
+t1.138	မစီစဉ်ရင် ကျရှုံးဖို့ စီစဉ်နေတာပဲ။
+t1.139	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t1.140	Flashcard များ
+t1.141	Quiz
+t1.142	လေ့ကျင့်ခန်း: Team roles
+t1.143	နောက်တစ်ခု: T2 Software project များ

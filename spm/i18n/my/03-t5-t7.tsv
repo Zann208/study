@@ -1,0 +1,235 @@
+# SPM: T5-T7
+t5.001	<span class="num n1">5</span> Project initiation
+t5.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Initiation က မေးခွန်း နှစ်ခု ဖြေတယ်: တကယ့် လိုအပ်ချက် ရှိလား, ဘယ်သူ ငွေထောက်မလဲ?
+t5.003	<mark class="hl">ဘယ်သူမှ မစီစဉ်ခင် တစ်ယောက်ယောက်က project စတန်ကြောင်း ပြရမယ်။</mark> CanteenGo အတွက် ဆိုလိုတာ ကျောင်းသားတွေ တန်းစီရင်း အချိန်တကယ် ဖြုန်းကြောင်း သက်သေပြ, ပြင်ဖို့ ဘယ်သူ ငွေပေးမလဲ ရှာ။
+t5.004	လိုအပ်ချက်ကို ရှာခြင်း
+t5.005	ဘာလိုလဲ သိဖို့ နည်းလေးမျိုး: team အတွင်း <b>brainstorming</b>, <b>stakeholder meeting</b>, <b>survey</b> (အနက်အတွက် interview, ဂဏန်းအတွက် questionnaire), observation, workshop နဲ့ prototype လို တခြားနည်းများ။
+t5.006	Brainstorming tool များ
+t5.007	Tool
+t5.008	ဘာလုပ်လဲ
+t5.009	CanteenGo မှာ
+t5.011	ပြဿနာတစ်ခုရဲ့ အကြောင်းရင်းတွေကို အမျိုးအစားအလိုက် (လူ, နည်းလမ်း, စက်, ပစ္စည်း, တိုင်းတာမှု, ပတ်ဝန်းကျင်) စာရင်းပြု
+t5.012	တန်းရှည်ရတဲ့ အကြောင်း: ငွေကိုင် တစ်ယောက်, ငွေသားသာ, လူတိုင်း 12:00 မှာ ရောက်
+t5.014	ပြောင်းလဲမှုကို ထောက်ခံတဲ့ အင်အားနဲ့ ဆန့်ကျင်တဲ့ အင်အားကို ချိန်ဆ
+t5.015	ထောက်ခံ: အချိန်သက်သာ။ ဆန့်ကျင်: canteen ဝန်ထမ်းတွေ system အသစ် သင်ရ
+t5.017	Strength, Weakness (အတွင်း), Opportunity, Threat (အပြင်) စာရင်းပြု
+t5.018	S: team က Flutter တတ်။ T: delivery app က campus pick-up ထည့်နိုင်
+t5.020	Strategy ထုတ်ဖို့ SWOT item တွေကို တွဲ
+t5.021	Delivery app မဝင်ခင် (T) Flutter skill (S) သုံးပြီး launch
+t5.023	အလယ် idea တစ်ခုကနေ idea တွေကို ကိုင်းခွဲ
+t5.024	အလယ်မှာ "CanteenGo"; ပတ်ပတ်လည်မှာ menu, ငွေပေးချေမှု, pick-up
+t5.025	SWOT ကို ပုံတစ်ပုံထဲမှာ
+t5.026	ပန်းတိုင်အတွက် အထောက်အကူ
+t5.027	ပန်းတိုင်ကို ထိခိုက်
+t5.028	အတွင်း (team ဒါမှမဟုတ် အဖွဲ့အစည်း)
+t5.031	အပြင် (ပတ်ဝန်းကျင်)
+t5.034	ငွေကို ရှာခြင်း
+t5.035	Customer ဒါမှမဟုတ် ငွေထောက်ပံ့သူ ရှာ, ပြီးရင် idea ကို ရောင်း: ပရိသတ်ကို သိ, ဘာက ထူးခြားလဲ ပြော, ယုံကြည်မှုရှိ, jargon ရှောင်, မသိသူတစ်ယောက်ပေါ် အရင် လေ့ကျင့်။ အဆက်အသွယ်တွေ အရေးကြီးတယ်။
+t5.036	သိထားရမယ့် စကားလုံးများ
+t5.046	မှတ်ထားပါ
+t5.047	Initiation = needs assessment + ငွေထောက်ပံ့သူ။
+t5.048	SWOT: S နဲ့ W အတွင်း, O နဲ့ T အပြင်။
+t5.049	TOWS က SWOT ကို SO, WO, ST နဲ့ WT strategy အဖြစ် ပြောင်း။
+t5.050	အသေးစိတ်
+t5.051	<span class="fig-n">1</span>Project initiation
+t5.052	<span class="fig-n">2</span>Need assessment နည်းလမ်းများ
+t5.053	<span class="fig-n">3</span>Brainstorming tool များ
+t5.054	Fishbone (Ishikawa, cause-and-effect) diagram
+t5.055	ရလဒ်က ခေါင်းမှာ ထိုင်; အကြောင်းရင်းတွေ ကျောရိုးကနေ အမျိုးအစားအောက် ကိုင်းခွဲ။ ဥပမာ: "ကျောင်းသားတွေ project ကို အချိန်မီ မပြီးနိုင်" အကြောင်းရင်းတွေ လူ (အချိန်စီမံမှု ညံ့, skill မရှိ), နည်းလမ်း (team ဆက်သွယ်ရေး ညံ့), ပတ်ဝန်းကျင် (deadline က စာမေးပွဲနဲ့ နီးလွန်း) နဲ့ ပစ္စည်း အောက်မှာ။
+t5.056	<span class="fig-n">4</span>Fishbone diagram ဥပမာ
+t5.057	Force field analysis ဥပမာများ
+t5.058	ပြောင်းလဲမှု
+t5.059	ထောက်ခံတဲ့ အင်အား
+t5.060	ဆန့်ကျင်တဲ့ အင်အား
+t5.061	Laptop အသစ် ဝယ်ခြင်း
+t5.062	Processing ပိုမြန်, storage ပိုများ, program လေးလေး run နိုင်, ကြွားချင်
+t5.063	စျေး, subscription ကုန်ကျစရိတ်, နေရာမရှိ, သင်ယူရ, အလေးချိန်
+t5.064	စက်ရုံ စက်ကိရိယာ upgrade
+t5.065	တက်နေတဲ့ ကုန်ကျစရိတ် ထိန်း, output ပိုများ, ထုတ်လုပ်မှု ပိုမြန်, product အသစ်
+t5.066	ဝန်ထမ်း overtime ဆုံးရှုံး, နည်းပညာအသစ် ကြောက်, ပတ်ဝန်းကျင် ထိခိုက်မှု, ကုန်ကျစရိတ်, နှောင့်ယှက်မှု
+t5.067	<span class="fig-n">5</span>Force field analysis ဥပမာ (1)
+t5.068	<span class="fig-n">6</span>Force field analysis ဥပမာ (2)
+t5.069	SWOT နဲ့ TOWS
+t5.070	SWOT အတွက် ထိုင်း မှတ်ဉာဏ်အကူ: <b>เจ๋ง-ห่วย-เฮง-ซวย</b> (တော်, ညံ့, ကံကောင်း, ကံဆိုး)။ TOWS matrix က စာရင်းတွေကို ဖြတ်တယ်:
+t5.071	Cell
+t5.072	Label
+t5.073	ပုံမှန် ဖတ်ပုံ
+t5.075	ဒါတွေကို အကောင်းဆုံး အသုံးချ
+t5.076	Opportunity တွေ ဖမ်းဖို့ strength သုံး
+t5.078	ပြိုင်ဆိုင်မှုကို နီးကပ်စွာ စောင့်ကြည့်
+t5.079	Opportunity ယူပြီး weakness ပြင်
+t5.081	Strength ပြန်ထူ
+t5.082	Threat တွေကို ဆန့်ကျင်ဖို့ strength သုံး
+t5.084	Strategic turnaround လို
+t5.085	Weakness လျှော့ပြီး threat ရှောင်
+t5.086	TOWS worksheet က S1–S4 ကို ကန့်လန့်, O1–O4 ကို ဒေါင်လိုက် စာရင်းပြုပြီး အသုံးဝင်တဲ့ cell တိုင်းမှာ လုပ်ဆောင်ချက် ရေးတယ် (ဥပမာ action S1O2)။
+t5.087	<span class="fig-n">7</span>SWOT analysis
+t5.088	<span class="fig-n">8</span>TOWS strategic alternatives matrix
+t5.089	<span class="fig-n">9</span>TOWS worksheet
+t5.090	စိတ်ကို map ဆွဲနည်း
+t5.091	အလယ်ကနေ စ, လေးလေးနက်နက် မလုပ်နဲ့, လွတ်လွတ်လပ်လပ် ဆက်စပ်, မြန်မြန် စဉ်းစား, နယ်နိမိတ်ချိုး, မဆုံးဖြတ်နဲ့, ဆက်ရွေ့, ဆက်နွယ်မှုနဲ့ ချိတ်ဆက်မှု ထည့်။ အသုံး: problem solving, outline ဆွဲ, အမည်မသိ collaboration, အကြောင်းအရာ ချုံ့, team building။
+t5.092	Stakeholder meeting နဲ့ survey များ
+t5.093	တက်ရောက်သူတွေမှာ project leader, team member, executive, customer, user, tester, consultant, auditor နဲ့ sponsor ပါနိုင်တယ်။ Qualitative survey က in-depth interview သုံး; quantitative survey က questionnaire သုံး, အထွေထွေ လူဦးရေကို ဖော်ပြဖို့ အဖြေ 400 လောက်ကို လုံလောက်တယ်လို့ ယူဆလေ့ရှိတယ်။
+t5.094	ထိုင်းမှာ ငွေထောက်ပံ့သူများ
+t5.095	NECTEC; Thailand Science Research and Innovation (TSRI); DEPA; Energy Policy and Planning Office (EPPO); National Science and Technology Development Agency ရဲ့ မြောက်ပိုင်း network (NN-NSTDA)။
+t5.096	<span class="fig-n">10</span>ငွေထောက်ပံ့သူ ဥပမာများ
+t5.097	IT project ကို ရောင်းဖို့ အကြံ ဆယ်ခု
+t5.098	ပရိသတ်ကို အာရုံစိုက်; unique selling proposition ပြော; တိုပြီး ယုတ္တိရှိတဲ့ အချက်ခွဲ; ယုံကြည်မှုနဲ့ စိတ်အားထက်သန်; အသံကျယ်ကျယ်; မျက်လုံးချင်း ဆုံ; လှည့်ကွက်မသုံး; jargon ဒါမှမဟုတ် acronym မသုံး; လေ့ကျင့်; မသိသူပေါ် စမ်း။
+t5.099	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t5.100	Flashcard များ
+t5.101	Quiz
+t5.102	လေ့ကျင့်ခန်း: SWOT sorter
+t5.103	နောက်တစ်ခု: T6 ပန်းတိုင်နဲ့ အာဏာ
+t6.001	<span class="num n1">6</span> ပန်းတိုင်, scope နဲ့ အာဏာ
+t6.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Definition က project ဘာအတွက်လဲ, scope အတွင်း/အပြင် ဘာရှိလဲ, ဘယ်သူ ဆုံးဖြတ်ခွင့်ရှိလဲ သတ်မှတ်တယ်။
+t6.003	Vision ကနေ activity အထိ
+t6.004	အဖွဲ့အစည်းတွေက ကိုယ့်ဦးတည်ချက်ကို အဆင့်အမျိုးမျိုးနဲ့ ဖော်ပြတယ်။ အဆင့်မြင့်လေ ရေရှည်ဖြစ်ပြီး တိုင်းရခက်လေ။
+t6.005	ဝေါဟာရ
+t6.006	အဓိပ္ပာယ်
+t6.008	အဖွဲ့အစည်း ကြိုးပမ်းတဲ့ ရေရှည် စံပြ
+t6.010	ရည်ရွယ်ချက်နဲ့ ရေတိုမှာ ရောက်ချင်တာ
+t6.012	Vision နဲ့ mission ကို ဝန်ဆောင်တဲ့ တိကျ, တိုင်းတာနိုင်တဲ့ ပစ်မှတ်
+t6.014	Goal ဆီ တိကျ, တိုင်းတာနိုင်တဲ့ ခြေလှမ်း
+t6.016	Objective ရောက်ဖို့ တကယ်လုပ်တဲ့ အလုပ်
+t6.017	အဆင့်တစ်ခုစီကို ရလဒ် အမျိုးအစား မတူနဲ့ အကဲဖြတ်တယ်: <b>activity</b> ကို <b>output</b> နဲ့, <b>objective</b> ကို <b>outcome</b> နဲ့, <b>goal</b> ကို <b>impact</b> နဲ့။ CanteenGo အတွက်: activity "order screen ဆောက်" → output "အလုပ်လုပ်တဲ့ screen"; objective "ကျောင်းသားတွေ ကြိုမှာနိုင်" → outcome "တစ်ပတ် order 300"; goal "နေ့လယ်စာမှာ အချိန်ဆုံးရှုံးမှု နည်း" → impact "ပျမ်းမျှ တန်းစီချိန် တစ်ဝက်ကျ"။
+t6.018	Scope
+t6.019	ဘာပါလဲ, ဘာမပါလဲ ဆိုတဲ့ မျှဝေ သဘောတူညီချက်။ "Delivery မရှိ, pick-up သာ" လို့ ရေးထားတာက <mark class="hl">စောစော လုပ်ရင် နောက်ပိုင်း ငြင်းခုံမှုကို ရပ်စေတယ်။</mark> Scope statement မှာ ပုံမှန် objective, acceptance criteria, နယ်နိမိတ်, ယူဆချက်, deliverable, အစောပိုင်း risk, milestone, work breakdown နဲ့ budget အကျဉ်း ပါတယ်။
+t6.020	အာဏာနဲ့ ဖွဲ့စည်းပုံ
+t6.021	ဘယ်သူ ဘာဆုံးဖြတ်လဲ အစကတည်းက သဘောတူပါ။ Project manager မှာ အာဏာ ဘယ်လောက်ရှိလဲက အဖွဲ့အစည်း ဖွဲ့စည်းပုံပေါ် မူတည်တယ်:
+t6.022	ဖွဲ့စည်းပုံ
+t6.023	ဝန်ထမ်းကို ဘယ်လို အုပ်စုဖွဲ့လဲ
+t6.024	Project manager ရဲ့ အာဏာ
+t6.026	ဌာနအလိုက် (developer, customer service, marketing)
+t6.027	နိမ့်; အချိန်ပိုင်း
+t6.029	ဌာနအလိုက်, project manager (မကြာခဏ PMO) က ဖြတ်ကျော်
+t6.030	အလယ်အလတ်; အချိန်ပြည့်
+t6.032	Project team အလိုက်
+t6.033	မြင့်; အချိန်ပြည့်
+t6.034	သိထားရမယ့် စကားလုံးများ
+t6.049	မှတ်ထားပါ
+t6.050	Activity → output, objective → outcome, goal → impact။
+t6.051	Scope က အတွင်း/အပြင် ဘာရှိလဲ ပြော။
+t6.052	PM အာဏာ: functional နိမ့်, matrix အလယ်, project မြင့်။
+t6.053	အသေးစိတ်
+t6.054	<span class="fig-n">1</span>Project definition
+t6.055	ဦးတည်ချက် ဝေါဟာရ ဆယ်ခုလုံး
+t6.056	ဝေါဟာရ
+t6.057	ထိုင်း
+t6.058	အဓိပ္ပာယ်
+t6.060	အခြေခံ ချဉ်းကပ်ပုံနဲ့ လမ်းပြ ယုံကြည်ချက်
+t6.062	ရေရှည် ရည်မှန်းချက် စံပြ
+t6.064	ရည်ရွယ်ချက်နဲ့ ရေတို ရည်မှန်းချက်
+t6.066	Vision နဲ့ mission ကို ဝန်ဆောင်တဲ့ တိကျ, တိုင်းတာနိုင်တဲ့ ပစ်မှတ်
+t6.068	Goal ဆီ တိကျ, တိုင်းတာနိုင်တဲ့ ခြေလှမ်း
+t6.070	လုပ်ငန်းထဲက လမ်းပြ principle, ဥပမာ integrity, accountability, transparency
+t6.072	လုပ်ရပ်နဲ့ ဆုံးဖြတ်ချက်ကို ပုံဖော်တဲ့ အခြေခံ ယုံကြည်ချက်
+t6.074	မျှဝေ တန်ဖိုး, ယုံကြည်ချက်နဲ့ အလေ့အထ
+t6.076	ရည်ရွယ်ချက် ဒါမှမဟုတ် ဆုံးဖြတ်ချက်ရဲ့ တရားဝင် ကြေညာချက်
+t6.078	လုပ်ဆောင်တဲ့ အလုပ်
+t6.079	Logical Framework Analysis (LFA)
+t6.080	Goal, objective နဲ့ activity တစ်ခုစီအတွက် row တစ်ခု, column လေးခုပါ ဇယား: narrative summary, မျှော်လင့်ရလဒ် (impact, outcome, output), performance indicator နဲ့ risk။ Goal တစ်ခုစီက objective တွေအဖြစ်, objective တစ်ခုစီက activity တွေအဖြစ် ခွဲတယ်။
+t6.081	<span class="fig-n">2</span>Logical framework analysis
+t6.082	ဖွဲ့စည်းပုံ ယှဉ်ချက်
+t6.086	PM ရဲ့ အာဏာ
+t6.087	နိမ့် (1/5)
+t6.088	အလယ် (3/5)
+t6.089	မြင့် (5/5)
+t6.090	PM ရဲ့ role
+t6.091	အချိန်ပိုင်း
+t6.092	အချိန်ပြည့်
+t6.093	အချိန်ပြည့်
+t6.094	အောင်မြင်နိုင်ခြေ
+t6.095	နိမ့် (1/5)
+t6.096	အလယ် (3/5)
+t6.097	မြင့် (5/5)
+t6.098	Team စိတ်ဓာတ်
+t6.099	မြင့် (4/5)
+t6.100	မြင့် (4/5)
+t6.101	နိမ့် (2/5)
+t6.102	Chain of command မှာ conflict ဖြစ်နိုင်ခြေ
+t6.103	မြင့် (4/5)
+t6.104	မြင့် (4/5)
+t6.105	နိမ့် (2/5)
+t6.106	ဖွင့်ထားတဲ့ မေးခွန်း: တာဝန်ရှိ manager နှစ်ယောက် (dual manager) က idea ကောင်းလား? ဝန်ထမ်းတွေကို project တွေကြား မျှသုံးနိုင်တယ်။
+t6.107	<span class="fig-n">3</span>အဖွဲ့အစည်း ဖွဲ့စည်းပုံများ
+t6.108	<span class="fig-n">4</span>Functional organisation
+t6.109	<span class="fig-n">5</span>Project organisation
+t6.110	<span class="fig-n">6</span>Matrix organisation
+t6.111	<span class="fig-n">7</span>အဖွဲ့အစည်း ဖွဲ့စည်းပုံ ယှဉ်ချက်
+t6.112	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t6.113	Flashcard များ
+t6.114	Quiz
+t6.115	နောက်တစ်ခု: T7 ခန့်မှန်းခြင်း
+t7.001	<span class="num n2">7</span> အရင်းအမြစ် ခန့်မှန်းခြင်း
+t7.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Software ဘယ်လောက်ကြီးလဲ ခန့်မှန်း, အရွယ်ကို effort အဖြစ်, ပြီးရင် effort ကို ငွေအဖြစ် ပြောင်း။
+t7.003	"သုံးလလောက်" က ခန့်မှန်းတာ။ ခန့်မှန်းနည်းတွေက ခန့်မှန်းချက်ကို ထပ်လုပ်နိုင်တဲ့ တွက်ချက်မှုနဲ့ အစားထိုးလို့ လူနှစ်ယောက် အဖြေ ဆင်တူရပြီး ခန့်မှန်းချက်ကို ရှင်းပြနိုင်တယ်။
+t7.004	နည်းလမ်း
+t7.005	အရွယ်ကို ဘာနဲ့ တိုင်းလဲ
+t7.006	ပြီးရင်
+t7.008	အတွေ့အကြုံ သက်သက်
+t7.009	Subjective အလွန်ဖြစ်; ရှောင်
+t7.011	ခန့်မှန်းထားတဲ့ lines of code
+t7.012	ပုံသေနည်းက effort, အချိန်နဲ့ team အရွယ် ပေး
+t7.014	System က user တွေအတွက် ဘာလုပ်လဲ ရေတွက်
+t7.015	Function point ÷ person-day တစ်ခုလျှင် point
+t7.017	ကိုယ်ပိုင် သမိုင်း သုံးပြီး function တွေကို အမျိုးအစားနဲ့ အရွယ်အလိုက် ရေတွက်
+t7.018	Lines of code ÷ ကိုယ့်အမြန်နှုန်း
+t7.020	COSMIC function point (data movement)
+t7.021	Complexity factor နဲ့ ညှိ
+t7.022	Function point များ
+t7.023	Function တိုင်းကို အမျိုးအစားအလိုက် စာရင်းပြု, တစ်ခုစီကို Low, Average ဒါမှမဟုတ် High အဆင့်သတ်မှတ်, အသေ weight နဲ့ မြှောက်ပြီး ပေါင်း။ စုစုပေါင်းက <b>unadjusted function points</b>။ ပြီးရင် system ရဲ့ အထွေထွေ လက္ခဏာ 14 ခုကို 0 ကနေ 5 အထိ အဆင့်သတ်မှတ်ပြီး adjustment factor ရ, မြှောက်, လူတစ်ယောက် တစ်ရက် point ဘယ်လောက် ပြီးလဲနဲ့ စား။
+t7.024	အမျိုးအစား
+t7.025	အတို
+t7.026	CanteenGo မှာ
+t7.029	Place-order screen
+t7.032	စုစုပေါင်း တွက်ထားတဲ့ နေ့စဉ် ရောင်းအား report
+t7.035	"ငါ့ အရင် order တွေ ပြ"
+t7.038	App ပိုင်တဲ့ Orders table
+t7.041	တခြား system ပိုင်တဲ့ တက္ကသိုလ် ကျောင်းသားစာရင်း
+t7.042	Effort ကနေ cost အထိ
+t7.043	<mark class="hl">Effort ကို <b>person-day</b> နဲ့ ရေတွက်တယ်: လူတစ်ယောက် တစ်ရက် အလုပ်လုပ်တာ။</mark> Cost = person-day × person-day တစ်ခုရဲ့ ကုန်ကျစရိတ်။ Person-day 20 ကို 2,000 ဘတ်နဲ့ဆို 40,000 ဘတ်။
+t7.044	သိထားရမယ့် စကားလုံးများ
+t7.061	မှတ်ထားပါ
+t7.062	Engineering judgment သက်သက်ကို ရှောင်။
+t7.063	FP = UFP × VAF; VAF = 0.65 + Σ rating ÷ 100။
+t7.064	Cost = person-day × person-day ကုန်ကျစရိတ်။
+t7.065	အသေးစိတ်
+t7.066	<span class="fig-n">1</span>အရင်းအမြစ် ခန့်မှန်းနည်းများ
+t7.068	1995 မှာ USC က ဖန်တီး; scale, product, platform, personnel နဲ့ project factor တွေကို အလေးပေးတယ်။
+t7.069	Standard COCOMO II model မှာ EA က person-month, DT က month နဲ့။ Cost worksheet က DT ကို person-day အဖြစ် သဘောထားတယ်။
+t7.070	Function Point Analysis: အဆင့် ခုနစ်ဆင့်
+t7.071	Function အားလုံးကို ဖော်ထုတ်။
+t7.072	တစ်ခုစီရဲ့ complexity (Low, Average, High) ကို ဆုံးဖြတ်။
+t7.073	Function တွေကို complexity အလိုက် အုပ်စုဖွဲ့။
+t7.074	Unadjusted function point (UFP) ကို ရေတွက်။
+t7.075	Value adjustment factor (VAF) ကို ဆုံးဖြတ်။
+t7.076	Function point တွက်: FP = UFP × VAF။
+t7.077	Workload နဲ့ cost တွက်။
+t7.078	Complexity weight များ
+t7.087	<span class="fig-n">2</span>FPA အဆင့် 2: complexity constant များ
+t7.088	Complexity အဆင့်သတ်မှတ်ခြင်း
+t7.089	EI: ကိုးကားတဲ့ file \ data element
+t7.099	EO, EQ: ကိုးကားတဲ့ file \ data element
+t7.109	ILF, EIF: record group \ data element
+t7.119	<span class="fig-n">3</span>FPA အဆင့် 2: complexity ဆုံးဖြတ်
+t7.120	<span class="fig-n">4</span>FPA အဆင့် 2: complexity ဆုံးဖြတ် (ဆက်)
+t7.121	အထွေထွေ system လက္ခဏာ 14 ခု (တစ်ခုစီ 0–5)
+t7.122	Data communication · distributed data processing · performance · heavily used configuration · transaction rate · online data entry · end-user efficiency · online update · complex processing · reusability · ease of installation · ease of operation · multiple sites · facilitate change။
+t7.123	<span class="fig-n">5</span>FPA အဆင့် 5: value adjustment factor
+t7.124	တွက်ပြထားတဲ့ ဥပမာ
+t7.128	စုစုပေါင်း
+t7.134	Unadjusted function points
+t7.135	Rating 0, 0, 4, 0, 3, 2, 2, 3, 0, 0, 1, 1, 3, 2 ပေါင်းလဒ် 21, ဒါကြောင့် VAF = 0.65 + 0.21 = 0.86, FP = 0.86 × 107 = 92.02။ Person-day တစ်ခုလျှင် function point 3 နဲ့ဆို workload က person-day 31 လောက်။
+t7.136	92.02 ÷ 3 = 30.67, person-day 31 အဖြစ် အပေါ်ကို ပတ်။
+t7.137	<span class="fig-n">6</span>FPA အဆင့် 3: function တွေကို အုပ်စုဖွဲ့
+t7.138	<span class="fig-n">7</span>FPA အဆင့် 4: unadjusted function point ရေတွက်
+t7.140	Function တစ်ခုစီကို Calculation, Data, I/O, Logic, Set-up ဒါမှမဟုတ် Text အဖြစ် ခွဲ; Very small ကနေ Very large အထိ အရွယ်သတ်မှတ်; အဲ့ cell ရဲ့ lines-of-code တန်ဖိုးနဲ့ မြှောက်; ပေါင်း; ကိုယ်ပိုင် သမိုင်း (average, linear ဒါမှမဟုတ် parabolic regression) နဲ့ ညှိ။ Effort = LoC ÷ ကိုယ့် သမိုင်းဝင် LoC per hour။
+t7.141	Function တစ်ခုလျှင် LoC
+t7.151	COSMIC function point (CFP) ကို ခန့်မှန်း, complexity တန်ဖိုး (ပုံမှန် 0.5–2; ပုံမှန် project အတွက် 1, ရှုပ်ထွေးတာအတွက် 2 နဲ့အထက်) နဲ့ မြှောက်ပြီး person-day ရ, ပြီးရင် person-day ကုန်ကျစရိတ်နဲ့ မြှောက်။
+t7.152	Cost အတွက် ညှိထားတဲ့ တန်ဖိုး (CFP × complexity) ကို သုံး။
+t7.154	စီမံခန့်ခွဲရေး ကုန်ကျစရိတ်က စုစုပေါင်း ကုန်ကျစရိတ်ရဲ့ 30% မကျော်သင့်ဘူး။ တက္ကသိုလ် ဥပမာမှာ overhead က hardware မပါတဲ့ စုစုပေါင်းရဲ့ 10%: တက္ကသိုလ်ကို 3%, faculty ဒါမှမဟုတ် institute ကို 7%။ VAT လည်း သက်ဆိုင်နိုင်တယ်။
+t7.155	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t7.156	Flashcard များ
+t7.157	Quiz
+t7.158	လေ့ကျင့်ခန်း: Cost estimation
+t7.159	နောက်တစ်ခု: T8 Feasibility
