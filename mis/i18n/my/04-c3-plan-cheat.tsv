@@ -1,0 +1,138 @@
+# MIS: C3, plan, cheat sheet
+c3.001	<span class="num n2">C3</span> System တည်ဆောက်ခြင်း: process mining နဲ့ business process management
+c3.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Process mining က ကုမ္ပဏီ system တွေ ထားပြီးသား event log တွေကို ဖတ်ပြီး process တွေ တကယ် ဘယ်လို run လဲ ပြလို့ ထိရောက်မှုမရှိတာတွေကို လ မဟုတ်ဘဲ ရက်သတ္တပတ်အတွင်း ရှာပြီး ပြင်နိုင်တယ်။
+c3.003	Case အကျဉ်း
+c3.004	Celonis (Munich နဲ့ New York, ဝန်ထမ်း 3,000+, customer ကုမ္ပဏီ 1,400+) က SAP နဲ့ Salesforce လို ရှိပြီးသား system တွေပေါ်မှာ ထိုင်တဲ့ <b>process mining</b> software ထုတ်တယ်။
+c3.005	Process တွေ အချိန်ကြာလာတာနဲ့ ဒီဇိုင်းထားတဲ့ လမ်းကြောင်းကနေ လွဲသွားပြီး product အသစ်, ဝယ်ယူမှု, customer မျှော်လင့်ချက်တွေက ဖိအားပေးတယ်။ Consultant တွေ ယခင်က ပြဿနာတွေကို နှေးနှေး စျေးကြီးကြီး ရှာခဲ့; software က ရက်သတ္တပတ် လေး-ရှစ် အတွင်း ရှာတယ်။
+c3.006	Accounts payable နဲ့ receivable, procurement, order management, inventory နဲ့ opportunity management ကို on-premises ဒါမှမဟုတ် SaaS အဖြစ် ဖုံးတယ်။
+c3.007	Deutsche Telekom Services Europe က <b>procure-to-pay</b> process (တစ်နှစ် order item 2 သန်းနဲ့ invoice 9 သန်း) မှာ ထပ်နေတဲ့ ငွေပေးချေမှုနဲ့ လွတ်သွားတဲ့ cash discount တွေ ရှာပြီး €66 million ကျော် သက်သာခဲ့တယ်။
+c3.008	Avnet က supplier စောစော ပို့တာတွေကို ဖမ်းပြီး working capital €6 million ကျော် လွတ်စေခဲ့; Kraft Heinz က cash discount ကို ပြန်စဉ်းစားပြီး နောက်ကျ ငွေပေးချေမှုကို 30% လျှော့ခဲ့တယ်။
+c3.009	<b>Execution management</b> က ပြဿနာရှာတာထက် ကျော်ပြီး လုပ်ဆောင်ချက်တွေကို အကြံပြု, လုပ်ဆောင်တယ်။ Tool အသစ်တွေက machine learning workbench, process query language ပေါ် တည်ဆောက်ထားတဲ့ natural-language process assistant (Process Copilot) နဲ့ AI နဲ့ partner app တွေအတွက် business process ရဲ့ "digital twin" ထည့်တယ်။
+c3.010	အသုံးချရမယ့် အယူအဆများ
+c3.011	System အသစ် တည်ဆောက်တာက <b>planned organisational change</b>။ Risk နဲ့ ဆုလာဘ် အနည်းဆုံးကနေ အများဆုံးအထိ လေးမျိုး:
+c3.012	ပြောင်းလဲမှု
+c3.013	ဘာလုပ်လဲ
+c3.014	ဥပမာ
+c3.015	<b>Automation</b>
+c3.016	ရှိပြီးသား task တွေကို လူတွေ ပိုမြန်မြန်လုပ်အောင် ကူညီ
+c3.017	စာရွက် slip အစား roast-order screen
+c3.018	<b>Rationalisation of procedures</b>
+c3.019	Standard operating procedure တွေကို ချောမွေ့အောင်လုပ်ပြီး bottleneck ဖယ်
+c3.020	Sales နဲ့ roastery သုံးတဲ့ product code စာရင်း တစ်ခုတည်း
+c3.021	<b>Business process redesign</b>
+c3.022	Process တစ်ခုလုံးကို ခွဲခြမ်းစိတ်ဖြာ, ရိုးရှင်းအောင်, ပြန်ဒီဇိုင်း
+c3.023	Café တွေ stock နည်းလာရင် အလိုအလျောက် ပြန်မှာ
+c3.024	<b>Paradigm shift</b>
+c3.025	Business ရဲ့ သဘောသဘာဝကိုယ်တိုင် ပြန်စဉ်းစား
+c3.026	ကော်ဖီကို subscription service အဖြစ် ရောင်း
+c3.027	<b>Business process management (BPM)</b> က အဆင့်ငါးဆင့်နဲ့ ဆက်တိုက် တိုးတက်မှု:
+c3.028	ပြောင်းဖို့ process တွေကို ဖော်ထုတ်။
+c3.029	ရှိပြီးသား process တွေကို ခွဲခြမ်းစိတ်ဖြာ။
+c3.030	Process အသစ်ကို ဒီဇိုင်း။
+c3.031	Process အသစ်ကို အကောင်အထည်ဖော်။
+c3.032	ဆက်တိုက် တိုင်းတာ။
+c3.033	Process mining က interview နဲ့ diagram အစား တကယ့် event data ကနေ အလုပ်လုပ်ပြီး အဆင့် 2 နဲ့ 5 ကို မြန်စေတယ်။
+c3.034	မေးခွန်းများ
+c3.035	<b>Process mining က business ကို ပြိုင်ဆိုင်မှု အားသာချက် ဘယ်လို ပေးနိုင်လဲ?</b>
+c3.036	Operational excellence (ကုန်ကျစရိတ် နည်း, ထပ်နေတဲ့ ငွေပေးချေမှု နည်း, working capital လွတ်), order ကိုင်တွယ်မှု ချောမွေ့လို့ customer service ပိုကောင်း, data အခြေခံ ဆုံးဖြတ်ချက် ပိုမြန်။ Consultant review နှေးနှေးကို အားကိုးနေဆဲ ပြိုင်ဘက်တွေ ပိုနှေးနှေး တိုးတက်တယ်။
+c3.037	<b>ဘယ်ကုမ္ပဏီတွေ အကျိုးရလဲ, မသုံးခင် ဘာတွေ ထည့်စဉ်းစားသင့်လဲ?</b>
+c3.038	Volume များပြီး ထပ်ခါထပ်ခါ process ရှိ, event log ထားတဲ့ ERP ဒါမှမဟုတ် CRM system ရှိတဲ့ ကုမ္ပဏီကြီးများ: manufacturing, distribution, telecom, retail, finance။ Management: ရှင်းလင်းတဲ့ ပန်းတိုင်, executive ထောက်ခံမှု, budget, return on investment။ Organisation: process နဲ့ role တွေ ပြောင်းလိုစိတ်, ဝန်ထမ်း training, process ownership။ Technology: data quality နဲ့ log ရယူနိုင်မှု, ရှိပြီးသား system တွေနဲ့ ပေါင်းစပ်မှု, cloud ဒါမှမဟုတ် on-premises, data ရဲ့ security နဲ့ privacy။
+c3.039	<b>AI ထည့်တာ ဘယ်လို ကူညီလဲ?</b>
+c3.040	AI က process data အများကြီးကို ကိုင်တွယ်, pattern နဲ့ anomaly တွေ ရှာ, ပြဿနာကို ခန့်မှန်း, ပြင်နည်း အကြံပြု, technical မဟုတ်တဲ့ ဝန်ထမ်းတွေကို ရိုးရိုးစကားနဲ့ မေးခွင့်ပေးတယ်။ ပြန်အနေနဲ့ process data က AI အသုံးဝင်ဖို့ လိုတဲ့ business context ကို ပေးတယ်။
+c3.041	သိထားရမယ့် စကားလုံးများ
+c3.052	မှတ်ထားပါ
+c3.053	ပြောင်းလဲမှု: automation → rationalisation → redesign → paradigm shift, risk နဲ့ ဆုလာဘ် တက်။
+c3.054	BPM: identify, analyse, design, implement, measure။
+c3.055	Process mining = system event log တွေကနေ တကယ့် process တွေကို ပြန်တည်ဆောက်ခြင်း။
+c3.056	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+c3.057	Flashcard များ
+c3.058	Quiz
+c3.059	နောက်တစ်ခု: Flashcard များ
+plan.001	သင်ခန်းစာ အစီအစဉ်
+plan.002	Module လေးခုထဲ ရက်သတ္တပတ် 15။
+plan.003	ရက်သတ္တပတ်
+plan.004	ခေါင်းစဉ်
+plan.005	ပါဝင်တာ
+plan.006	ဒီမှာ
+plan.007	<a href="#/topics/t1">ယနေ့ ကမ္ဘာ့ business ထဲက information system များ</a>
+plan.008	Business ထဲက IS ရဲ့ အခန်းကဏ္ဍ, IS အပေါ် ရှုထောင့်များ, ခေတ်ပြိုင် ချဉ်းကပ်ပုံများ
+plan.009	<a href="#/topics/t2">Global e-business နဲ့ collaboration</a>
+plan.010	Business process နဲ့ IS, IS အမျိုးအစားများ, collaboration နဲ့ social business အတွက် system များ, IS function
+plan.011	Information system, အဖွဲ့အစည်းနဲ့ strategy
+plan.012	အဖွဲ့အစည်းနဲ့ IS, IS က ကုမ္ပဏီတွေကို ဘယ်လို ထိခိုက်လဲ, competitive advantage အတွက် IS ကို သုံးခြင်း, management ပြဿနာများ
+plan.013	Information system ထဲက ethical နဲ့ social ပြဿနာများ
+plan.014	Ethical နဲ့ social ပြဿနာ, information လူ့အဖွဲ့အစည်းထဲက ethics, IS ရဲ့ moral အတိုင်းအတာများ
+plan.015	IT infrastructure နဲ့ ပေါ်ထွက်လာတဲ့ နည်းပညာ
+plan.016	Infrastructure နဲ့ သူ့အစိတ်အပိုင်း, hardware နဲ့ software platform လမ်းကြောင်း, management ပြဿနာများ
+plan.017	Business intelligence ရဲ့ အခြေခံ: database နဲ့ information management
+plan.018	ရိုးရာ file, database ချဉ်းကပ်ပုံ, performance နဲ့ ဆုံးဖြတ်ချက်အတွက် database, data အရင်းအမြစ် စီမံခြင်း
+plan.019	Telecommunications, internet နဲ့ wireless နည်းပညာ
+plan.020	Business ထဲက networking, ဆက်သွယ်ရေး network, ကမ္ဘာ့ internet, wireless တော်လှန်ရေး
+plan.021	Information system ကို လုံခြုံအောင်လုပ်ခြင်း
+plan.022	အားနည်းချက်နဲ့ အလွဲသုံးမှု, security ရဲ့ business တန်ဖိုး, security နဲ့ control framework, ကာကွယ်ရေး tool များ
+plan.023	Enterprise application များ
+plan.024	Enterprise system, supply chain management, customer relationship management, အခွင့်အလမ်းနဲ့ စိန်ခေါ်မှု အသစ်များ
+plan.025	E-commerce: digital ဈေးကွက်, digital ကုန်ပစ္စည်း
+plan.026	E-commerce နဲ့ internet, business နဲ့ နည်းပညာ, mobile commerce, e-commerce တည်ရှိမှု တည်ဆောက်ခြင်း
+plan.027	Knowledge စီမံခြင်း
+plan.028	Knowledge management အခင်းအကျင်း, enterprise-wide KM system, knowledge work system, intelligent technique များ
+plan.029	ဆုံးဖြတ်ချက်ချခြင်းကို မြှင့်တင်ခြင်း
+plan.030	ဆုံးဖြတ်ချက်ချခြင်းနဲ့ IS, enterprise ထဲက business intelligence, BI အသုံးပြုသူ အုပ်စုများ
+plan.031	Information system တည်ဆောက်ခြင်း
+plan.032	Planned organisational change အဖြစ် system, systems development, အစားထိုး ချဉ်းကပ်ပုံများ, digital firm အတွက် development
+plan.033	Project စီမံခြင်း
+plan.034	Project management ဘာကြောင့် အရေးကြီးလဲ, project ရွေးချယ်ခြင်း, IS ရဲ့ business တန်ဖိုး, project risk စီမံခြင်း
+plan.035	Global system စီမံခြင်း
+plan.036	နိုင်ငံတကာ IS ကြီးထွားမှု, global system ကို ဖွဲ့စည်း စီမံခြင်း, global value chain
+plan.037	အမှတ်ပေးပုံ
+plan.038	Case study တင်ပြချက်များ
+plan.039	Assignment
+plan.040	Midterm စာမေးပွဲ
+plan.041	Final စာမေးပွဲ
+plan.042	ထပ်ဖတ်ရန်
+cheat.001	အနှစ်ချုပ်
+cheat.002	<span class="badge b1">T1</span> Strategy နဲ့ digital firm
+cheat.003	<b>ရည်မှန်းချက် ခြောက်ခု</b>
+cheat.004	Operational excellence · product, service နဲ့ business model အသစ် · customer နဲ့ supplier ရင်းနှီးမှု · ဆုံးဖြတ်ချက် ပိုကောင်း · competitive advantage · ရှင်သန်ရေး
+cheat.005	<b>ဘာအသစ်လဲ</b>
+cheat.006	Technology: cloud, big data, mobile, AI · Management: online collaboration, BI, virtual meeting · Organisation: social business, teleworking, အတူဖန်တီးတဲ့ တန်ဖိုး
+cheat.007	<b>Digital firm</b>
+cheat.008	ဆက်ဆံရေးနဲ့ core process တွေ digital နဲ့ ဖြစ် · sense and respond · ပြောင်းလွယ် · time shifting နဲ့ space shifting
+cheat.009	<span class="badge b1">T1</span> IS ဆိုတာ ဘာလဲ
+cheat.010	<b>အတိုင်းအတာ</b>
+cheat.011	Organisation (လူ, ဖွဲ့စည်းပုံ, process, နိုင်ငံရေး, culture) · Management · Technology
+cheat.012	<b>အဆင့်များ</b>
+cheat.013	Senior (strategic, ရေရှည်) · Middle (program နဲ့ plan) · Operational (နေ့စဉ်)
+cheat.014	<b>ရှုထောင့်များ</b>
+cheat.015	Technical (computer science) · Behavioural (sociology, psychology, economics) · Sociotechnical (နှစ်ခုလုံး)
+cheat.016	<span class="badge b2">T2</span> System မြေပုံ
+cheat.018	Interactive marketing · targeted marketing (community, content, context, online behaviour) · SFA (inquiry → customise → commit → order)
+cheat.020	CIM: ရိုးရှင်း, automate, ပေါင်းစပ်, ပြောင်းလွယ် · ERP/MRP, execution system, engineering system · CAM · အရင်းအမြစ် ငါးခု: ပစ္စည်း, စက်ကိရိယာ, ဝန်ထမ်း, ညွှန်ကြားချက်, facility
+cheat.022	Strategic, tactical, operational · ဝန်ထမ်းခန့်ထား, training နဲ့ ဖွံ့ဖြိုးမှု, လစာ
+cheat.028	TPS: ပုံမှန်, ကြိုသတ်မှတ်ထားတဲ့ မေးခွန်း · BI: ပုံမှန်မဟုတ်တဲ့ ဆုံးဖြတ်ချက်
+cheat.030	ERP အတွင်း · SCM supplier · CRM customer · PRM partner · KMS ဝန်ထမ်း
+cheat.031	<span class="badge b2">T2</span> Collaboration
+cheat.032	<b>ဘာကြောင့် အခု</b>
+cheat.033	အလုပ်သဘောသဘာဝ · professional အလုပ် · ကုမ္ပဏီ ဖွဲ့စည်းပုံ · ကုမ္ပဏီ နယ်ပယ် · innovation · အလုပ်ယဉ်ကျေးမှု
+cheat.034	<b>အချိန်တူ, နေရာတူ</b>
+cheat.035	Decision room, shared display
+cheat.036	<b>အချိန်တူ, နေရာမတူ</b>
+cheat.037	Video conferencing, instant messaging, shared screen
+cheat.038	<b>အချိန်မတူ, နေရာတူ</b>
+cheat.039	Team room, public display, shift-work groupware
+cheat.040	<b>အချိန်မတူ, နေရာမတူ</b>
+cheat.041	Email, blog, wiki, group calendar, version control
+cheat.044	<span class="badge b1">C1</span> Ethics
+cheat.045	<b>Analysis</b>
+cheat.046	အချက်အလက် → အကျပ်အတည်းနဲ့ တန်ဖိုး → stakeholder → ရွေးစရာ → အကျိုးဆက်
+cheat.049	<b>Moral အတိုင်းအတာ</b>
+cheat.050	Information rights · property rights · accountability and control · system quality · quality of life
+cheat.051	<b>အယူအဆ</b>
+cheat.053	<span class="badge b2">C2</span> Security
+cheat.055	Risk assessment · security နဲ့ acceptable use policy · identity management · disaster recovery နဲ့ business continuity · IS audit
+cheat.056	<b>Tool များ</b>
+cheat.057	MFA · firewall · intrusion detection · anti-malware · encryption · segmentation · စမ်းပြီးသား backup · incident response plan
+cheat.058	<span class="badge gr">C3</span> System တည်ဆောက်ခြင်း
+cheat.059	<b>ပြောင်းလဲမှု</b>
+cheat.060	Automation → rationalisation of procedures → business process redesign → paradigm shift (risk နဲ့ ဆုလာဘ် တက်)
+cheat.062	Identify → analyse → design → implement → ဆက်တိုက် တိုင်းတာ

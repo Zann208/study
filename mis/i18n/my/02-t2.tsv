@@ -1,0 +1,136 @@
+# MIS: T2
+t2.001	<span class="num n1">2</span> Global e-business နဲ့ collaboration
+t2.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Business process က အလုပ်ကို ညှိပုံ; business function တစ်ခုစီမှာ ကိုယ်ပိုင် system ရှိ, enterprise application တွေက ချိတ်ပေး, collaboration tool တွေက လူတွေကို ဆက်သွယ်ပေးတယ်။
+t2.003	Business process များ
+t2.004	<b>Business process</b> ဆိုတာ ကုန်ပစ္စည်း ဒါမှမဟုတ် service ထုတ်ဖို့ လိုတဲ့ လုပ်ဆောင်ချက်အစု, ပစ္စည်း, information နဲ့ knowledge စီးဆင်းမှုတွေက ထောက်ပံ့တယ်။ အလုပ်ကို ညှိပုံပဲ။ <mark class="hl">Process တွေ ဘယ်လောက်ကောင်းကောင်း ဒီဇိုင်းနဲ့ ညှိထားလဲက business ဘယ်လောက်ကောင်းလဲကို မကြာခဏ ဆုံးဖြတ်တယ်</mark>, ဒါကြောင့် process က ပြိုင်ဆိုင်မှု အားသာချက် ဒါမှမဟုတ် အားနည်းချက် ဖြစ်နိုင်တယ်။
+t2.005	Function
+t2.006	Process ဥပမာ
+t2.007	<b>Manufacturing နဲ့ production</b>
+t2.008	Product ကို တပ်ဆင်, quality စစ်, bill of materials ထုတ်
+t2.009	<b>Sales နဲ့ marketing</b>
+t2.010	Customer ရှာ, product ကို customer သိအောင်လုပ်, ရောင်း
+t2.011	<b>Finance နဲ့ accounting</b>
+t2.012	ကြွေးရှင်တွေကို ပေး, financial statement ဖန်တီး, ငွေသား စီမံ
+t2.013	<b>Human resources</b>
+t2.014	ဝန်ထမ်းခန့်, performance အကဲဖြတ်, ခံစားခွင့် စီမံ, training
+t2.015	Process အများစု <b>cross-functional</b>။ Doi Roast မှာ order တစ်ခု ဖြည့်ခြင်း:
+t2.016	Sales က café ရဲ့ order ကို လက်ခံ။
+t2.017	Accounting က café ရဲ့ credit ကို စစ်။
+t2.018	Production က ကော်ဖီစေ့ လှော်ပြီး ထုပ်ပိုး။
+t2.019	Order ကို ပို့, logistics ကုမ္ပဏီကနေ ဖြစ်နိုင်။
+t2.020	Sales က ရောင်းပြီးနောက် service ကို ကိုင်တွယ်။
+t2.021	Order ဖြည့်တာလောက် ရိုးရှင်းတာတောင် function အများကြား ညှိနှိုင်းမှု လိုတယ်။
+t2.022	Business process re-engineering
+t2.023	Process တွေကို လေ့လာပြီး တိုးတက်အောင်လုပ်ရင် အကျိုးကြီးကြီး ရနိုင်တယ်။ နည်းပညာ အသစ်က process ကိုယ်တိုင်ကို ပြောင်းတယ်:
+t2.024	လက်နဲ့လုပ်တဲ့ အဆင့်တွေ automate ဖြစ်လာ။
+t2.025	အစဉ်လိုက် အဆင့်တွေ တပြိုင်နက် ဖြစ်လာ။
+t2.026	လူအများ information တူကို ရယူ မျှဝေ။
+t2.027	ရုပ်ပိုင်း မိတ္တူ ဝယ်မယ့်အစား e-book ဒါမှမဟုတ် သီချင်း download လုပ်တာလို process အသစ်လုံးလုံး ပေါ်လာ။
+t2.028	AI က အဆင့်တွေကို ထောက်ပံ့ ဒါမှမဟုတ် လုပ်ဆောင်။
+t2.029	Function တစ်ခုစီအတွက် system များ
+t2.030	System တစ်ခုတည်းက အားလုံးကို မဖုံးဘူး။ Function တစ်ခုစီမှာ ကိုယ်ပိုင် system ရှိပြီး cross-functional enterprise system တွေက အပေါ်မှာ ထိုင်တယ်။
+t2.031	Function
+t2.032	System များ
+t2.033	<b>Marketing</b>
+t2.034	Interactive marketing, sales force automation, CRM, sales management, market research နဲ့ forecasting, ကြော်ငြာနဲ့ promotion, product management
+t2.035	<b>Manufacturing</b>
+t2.036	Manufacturing resource planning (ERP), manufacturing execution system, engineering system: အတူတူ computer-integrated manufacturing
+t2.037	<b>Human resources</b>
+t2.038	Strategic (workforce planning, succession), tactical (labour cost analysis, training ထိရောက်မှု), operational (recruiting, payroll, benefits)
+t2.039	<b>Accounting</b>
+t2.040	Order processing, inventory control, accounts receivable, accounts payable, payroll, general ledger
+t2.041	<b>Finance</b>
+t2.042	Cash management, investment management, capital budgeting, financial planning
+t2.043	<b>Marketing။</b> Marketing က ရှိပြီးသား ဈေးကွက်မှာ ရှိပြီးသား product တွေကို စီစဉ်, promote, ရောင်းပြီး product နဲ့ ဈေးကွက် အသစ်တွေ ဖန်တီးတယ်။ <b>Interactive marketing</b> က customer တွေနဲ့ နှစ်လမ်းသွား ဖလှယ်မှုအတွက် internet သုံးတယ် (chat, discussion group, web form, email, အခုတော့ အများစု social media)။ <b>Targeted marketing</b> က online ကြိုးပမ်းမှုကို လမ်းလေးခု ချိန်တယ်: <b>community</b> (virtual community တွေအတွက် ညှိထားတဲ့ ကြော်ငြာ), <b>content</b> (ဆက်စပ်တဲ့ page ပေါ် banner), <b>context</b> (user လုပ်နေတာနဲ့ ကိုက်တဲ့ ကြော်ငြာ, Google smart ad လို) နဲ့ <b>online behaviour</b> (cookie, link tracking)။ <b>Sales force automation (SFA)</b> က အရောင်းဝန်ထမ်းတွေကို field မှာ အလုပ်လုပ်ခွင့်ပေးတယ်: ရောင်းအား မှတ်, client ကို email, တိုးတက်မှု ခြေရာခံ။ ပေါင်းစပ်ထားတဲ့ SFA solution က အရောင်းကို inquiry ကနေ customise, commit, order အထိ လိုက်တယ်။
+t2.044	<b>Manufacturing။</b> ထုတ်လုပ်သူတွေ ယခင်က stock အတွက် ထုတ်ပြီး inventory က threshold အောက်ကျရင် ပြန်မှာတယ်။ Just-in-time inventory, build-to-order, end-to-end supply chain မြင်နိုင်မှု, contract manufacturing နဲ့ web-based collaboration တွေက စက်ရုံ စီမံမှုကို ပြောင်းခဲ့တယ်။ <b>Computer-integrated manufacturing (CIM)</b> က ထုတ်လုပ်မှု process နဲ့ product ဒီဇိုင်းကို ရိုးရှင်းအောင်, ထုတ်လုပ်မှုနဲ့ business function ကို automate, ထုတ်လုပ်မှုနဲ့ ထောက်ပံ့မှု process အားလုံးကို ပေါင်းစပ်, ပြောင်းလွယ်ပြီး လှုပ်ရှားမြန်တဲ့ ထုတ်လုပ်မှု ဖန်တီးဖို့ ရည်ရွယ်တယ်။ <b>Computer-aided manufacturing (CAM)</b> က manufacturing execution system, process control, machine control နဲ့ robot control တွေနဲ့ ထုတ်လုပ်မှုကို automate လုပ်တယ်။ Manufacturing system က အရင်းအမြစ် ငါးခု ပေါင်းတယ်: ပစ္စည်း, စက်ကိရိယာ, ဝန်ထမ်း, ညွှန်ကြားချက်နဲ့ ထုတ်လုပ်ရေး facility။
+t2.045	<b>Human resources။</b> ဝန်ထမ်းရှာတာ online မှာ ဖြစ်, ဝန်ထမ်း record တွေ database ထဲမှာ ရှိ, HR management system (HRMS) က ခန့်အပ်မှု, အလုပ်ပြောင်းမှု, လစာပြောင်းမှုနဲ့ အလုပ်ထုတ်မှုကို ခြေရာခံတယ်။ Skills inventory က လူတွေကို ကောင်းကောင်း တာဝန်ချဖို့ ကူညီ; data တူက training plan, computer-based appraisal နဲ့ succession planning ကို ထောက်ပံ့တယ်။
+t2.046	<b>Accounting နဲ့ finance။</b> Order processing က customer order တွေကို ဖမ်းပြီး inventory နဲ့ receivable ကို ကျွေးတယ်။ Inventory control က stock ပြောင်းလဲမှုကို မှတ်ပြီး shipping နဲ့ reorder information ထုတ်တယ်။ Accounts receivable က customer ပေးရမှာကို မှတ်ပြီး invoice နဲ့ statement ထုတ်တယ်။ Accounts payable က supplier ဆီက ဝယ်ယူမှုနဲ့ ပေးချေမှုကို မှတ်တယ်။ Payroll က အလုပ်နဲ့ လစာကို မှတ်တယ်။ General ledger က ကျန်တာတွေကို financial statement အဖြစ် ပေါင်းစည်းတယ်။ Finance system တွေက ငွေသားကို ခန့်မှန်းစီမံ, investment portfolio စီမံ, capital အသုံးစရိတ်ရဲ့ risk နဲ့ return ကို အကဲဖြတ်, ငွေကြေးလိုအပ်ချက်ကို ခန့်မှန်းတယ်။
+t2.047	မေးခွန်းအမျိုးအစားအလိုက် system များ
+t2.048	System
+t2.049	ထောက်ပံ့တာ
+t2.050	Doi Roast
+t2.051	<b>Transaction processing system (TPS)</b>
+t2.052	Business ရဲ့ ပုံမှန် transaction တွေကို မှတ်: ရောင်းအား, ငွေလက်ခံ, အပ်ငွေ, payroll, credit ဆုံးဖြတ်ချက်, ပစ္စည်းစီးဆင်းမှု။ ပုံမှန်မေးခွန်းတွေ ဖြေ: stock ထဲ ဘာရှိလဲ, ဒီ customer ပေးပြီးပြီလား?
+t2.053	Café order နဲ့ online ရောင်းအား တိုင်း
+t2.054	<b>Business intelligence system</b>
+t2.055	အဖြေရှာနည်းကို ကြိုမသတ်မှတ်ထားတဲ့ ပုံမှန်မဟုတ်သော ဆုံးဖြတ်ချက်များ
+t2.056	ဘန်ကောက်မှာ ကိုယ်ပိုင် café ဖွင့်သင့်လား?
+t2.057	TPS က ကုမ္ပဏီရဲ့ ပြင်ပကမ္ဘာနဲ့ interface ဖြစ်လေ့ရှိပြီး သူ့ data က တခြား system နဲ့ process အများကြီးကို ကျွေးတယ်။
+t2.058	Enterprise application များ
+t2.059	Enterprise application တွေက function အများကို ဖြတ်ပြီး customer, supplier, partner နဲ့ ဝန်ထမ်းတွေနဲ့ လုပ်ဆောင်တဲ့ business process တစ်ခုလုံးကို အာရုံစိုက်တယ်။
+t2.060	Application
+t2.061	ရည်မှန်းချက်
+t2.062	မျက်နှာမူတာ
+t2.063	<b>ERP</b> enterprise resource planning
+t2.064	ထိရောက်တဲ့ အတွင်းပိုင်း ထုတ်လုပ်မှုနဲ့ ဖြန့်ဖြူးမှု; function တွေကြား ခွဲနေခဲ့တဲ့ information အတွက် ဗဟို store တစ်ခု
+t2.065	အတွင်းပိုင်း process များ
+t2.066	<b>SCM</b> supply chain management
+t2.067	ထိရောက်တဲ့ sourcing နဲ့ procurement; stock နည်းနည်းထားဖို့ supplier တွေနဲ့ information မျှဝေ (inter-organisational system)
+t2.068	Supplier များ
+t2.069	<b>CRM</b> customer relationship management
+t2.070	Marketing, sales နဲ့ service ကနေ အမြတ်ရတဲ့ customer တွေကို ရယူ ထိန်းထား
+t2.071	Customer များ
+t2.072	<b>PRM</b> partner relationship management
+t2.073	ကုမ္ပဏီရဲ့ product ကို ရောင်းဖို့ ကူညီတဲ့ partner တွေကို ရယူ ထိန်းထား
+t2.074	Partner နဲ့ distributor များ
+t2.075	<b>KMS</b> knowledge management system
+t2.076	အဖွဲ့အစည်းအတွင်းက knowledge ကို ဖမ်း; collaboration နဲ့ ဆုံးဖြတ်ချက်ကို ထောက်ပံ့
+t2.077	ဝန်ထမ်းများ
+t2.078	SCM နဲ့ CRM ချိတ်ဆက်ထားတယ်: customer တွေ လိုချင်တာ (CRM) က ဘာကို ရှာ, ထုတ်ရမလဲ (SCM) ကို မောင်းနှင်တယ်။
+t2.079	Collaboration
+t2.080	<b>Collaboration</b> ဆိုတာ မျှဝေထားတဲ့ ရှင်းလင်းတဲ့ ပန်းတိုင်ဆီ အခြားသူတွေနဲ့ အတူ အလုပ်လုပ်ခြင်း။ ယခင်ကထက် ပိုအရေးကြီးတယ်, အကြောင်းက:
+t2.081	<b>အလုပ်သဘောသဘာဝ ပြောင်းခဲ့တယ်။</b> ထုတ်လုပ်မှု အဆင့်တွေ ယခင်က သီးခြားဖြစ်ပြီး အလုပ်ကို လွှဲပေးခဲ့; အခု အမြဲ အပြန်အလှန် ဆက်သွယ်နေတယ်။
+t2.082	<b>Professional အလုပ် ကြီးထွားခဲ့တယ်။</b> အလုပ်ပိုများများ, service မှာ မကြာခဏ, ပညာ, မျှဝေ information နဲ့ အမြင်ဖလှယ်မှု လို; လူတစ်ယောက်စီမှာ ကျွမ်းကျင်မှု ရှိပေမဲ့ တခြားသူတွေနဲ့ အလုပ်လုပ်ရမယ်။
+t2.083	<b>ကုမ္ပဏီကို မတူအောင် ဖွဲ့စည်းထားတယ်။</b> တင်းကျပ်တဲ့ hierarchy က ကိုယ်ပိုင်နည်းလမ်း သတ်မှတ်တဲ့ team တွေဆီ နေရာပေးပြီး senior manager တွေ ရလဒ်တိုင်း; အာဏာနဲ့ ဆုံးဖြတ်ချက် ဗဟိုချုပ်ကိုင်မှု လျော့။
+t2.084	<b>ကုမ္ပဏီရဲ့ နယ်ပယ် ကျယ်လာတယ်။</b> ထုတ်လုပ်မှုနဲ့ ဖွံ့ဖြိုးမှုက ကမ္ဘာအနှံ့ ပျံ့နှံ့။
+t2.085	<b>Innovation ကို အလေးပေးတယ်။</b> Idea အသစ်တွေ တစ်ယောက်တည်း ပါရမီရှင်ထက် အချင်းချင်း idea ပေါ် တည်ဆောက်တဲ့ အုပ်စုတွေကနေ ပိုလာတယ်။
+t2.086	<b>အလုပ်ယဉ်ကျေးမှု ပြောင်းခဲ့တယ်။</b> ကွဲပြားတဲ့ team တွေ ရလဒ်ပိုကောင်း ပိုမြန်, လူတွေ teamwork ကို ပိုကြိုက်, ကုမ္ပဏီတွေ လူအုပ် (crowdsourcing) ကို အသုံးချ။
+t2.087	Social media က စကားဝိုင်း, ပွင့်လင်းမြင်သာမှု နဲ့ ချက်ချင်း အကောင်း/အဆိုး feedback ထည့်ပြီး ကုမ္ပဏီတွေကို ဒီဇိုင်းကနေ ပို့ဆောင်မှုအထိ sense and respond လုပ်ခွင့်ပေးတယ်။ Tool တွေ: email နဲ့ messaging, wiki, virtual world, virtual meeting system နဲ့ telepresence, Google Workspace လို shared storage ပါ cloud suite။
+t2.088	အချိန်တူ (synchronous)
+t2.089	အချိန်မတူ (asynchronous)
+t2.090	<b>နေရာတူ</b> (co-located)
+t2.091	မျက်နှာချင်းဆိုင် ဆက်သွယ်မှု: decision room, shared display နဲ့ စားပွဲ, wall display
+t2.092	ဆက်တိုက် task: team room, public display ကြီး, shift-work groupware, project management
+t2.093	<b>နေရာမတူ</b> (remote)
+t2.094	အဝေးက ဆက်သွယ်မှု: video conferencing, instant messaging, virtual world, shared screen, multi-user editor
+t2.095	ဆက်သွယ်ရေးနဲ့ ညှိနှိုင်းရေး: email, bulletin board, blog, group calendar, workflow, version control, wiki
+t2.096	IS function
+t2.097	IS ဌာနမှာ <b>programmer</b>, <b>systems analyst</b> (IS အုပ်စုကို business ရဲ့ ကျန်အပိုင်းနဲ့ ချိတ်) နဲ့ <b>IS manager</b> တွေ ပါပြီး <b>CIO</b> (chief information officer) က ဦးဆောင်တယ်။ ကုမ္ပဏီအများမှာ <b>CSO</b> (security), <b>CPO</b> (privacy) နဲ့ <b>CKO</b> (knowledge) လည်း ရှိတယ်။
+t2.098	သိထားရမယ့် စကားလုံးများ
+t2.119	မှတ်ထားပါ
+t2.120	Function လေးခု: sales နဲ့ marketing, manufacturing နဲ့ production, finance နဲ့ accounting, human resources။
+t2.121	TPS က ပုံမှန်, ကြိုသတ်မှတ်ထားတဲ့ မေးခွန်းတွေ ဖြေ; BI က ပုံမှန်မဟုတ်တဲ့ ဆုံးဖြတ်ချက်ကို ထောက်ပံ့။
+t2.122	Enterprise application: ERP (အတွင်း), SCM (supplier), CRM (customer), PRM (partner), KMS (ဝန်ထမ်း)။
+t2.123	Collaboration matrix: အချိန်တူ/မတူ × နေရာတူ/မတူ။
+t2.124	အသေးစိတ်
+t2.125	<span class="fig-n">1</span>Marketing information system များ
+t2.126	<span class="fig-n">2</span>ပေါင်းစပ်ထားတဲ့ sales force automation
+t2.127	Targeted marketing ဇယားတစ်ခုတည်းမှာ
+t2.128	Tool
+t2.129	ဘယ်လို ချိန်လဲ
+t2.131	Web ကြော်ငြာကို virtual community အလိုက် ညှိ
+t2.133	Content ကိုက်တဲ့ page တွေပေါ် banner နဲ့ billboard တင်
+t2.135	ကြော်ငြာကို user ရဲ့ လက်ရှိလုပ်ဆောင်ချက်နဲ့ ကိုက် (Google smart ad)
+t2.137	Cookie နဲ့ tracked link သုံး
+t2.138	<span class="fig-n">3</span>Computer-integrated manufacturing အတွင်းက manufacturing information system များ
+t2.139	<span class="fig-n">4</span>အဆင့်အလိုက် human resource system များ
+t2.140	အဆင့်အလိုက် human resource system များ
+t2.141	အဆင့်
+t2.142	ဝန်ထမ်းခန့်ထား
+t2.143	Training နဲ့ ဖွံ့ဖြိုးမှု
+t2.144	လစာ
+t2.146	HR planning, လုပ်သားအင်အား ခြေရာခံ
+t2.148	Contract costing, လစာ ခန့်မှန်း
+t2.150	Labour cost analysis နဲ့ budgeting, turnover analysis
+t2.151	Training ထိရောက်မှု, career matching
+t2.152	လစာ ထိရောက်မှုနဲ့ တရားမျှတမှု analysis, ခံစားခွင့် ဦးစားပေးမှု analysis
+t2.154	Recruiting, workforce planning နဲ့ scheduling
+t2.155	Skills assessment, performance evaluation
+t2.156	Payroll control, benefits administration
+t2.157	<span class="fig-n">5</span>Enterprise application architecture: system တစ်ခုစီ ဘယ်သူ့ကို မျက်နှာမူလဲ
+t2.158	<span class="fig-n">6</span>Functional area တွေကို ဖြတ်တဲ့ enterprise application များ
+t2.159	<span class="fig-n">7</span>Time/space collaboration နဲ့ social tool matrix
+t2.160	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t2.161	Flashcard များ
+t2.162	Quiz
+t2.163	နောက်တစ်ခု: Case file များ

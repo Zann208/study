@@ -1,0 +1,100 @@
+# MIS: Cases intro, C1, C2
+cases.001	Case file များ
+cases.002	Ethics, security နဲ့ system တည်ဆောက်ခြင်းအကြောင်း case သုံးခု, တစ်ခုစီမှာ ခွဲခြမ်းစိတ်ဖြာဖို့ လိုတဲ့ အယူအဆနဲ့ အဖြေ outline ပါ။
+c1.001	<span class="num n2">C1</span> Ethics: social network တစ်ခုရဲ့ privacy မှတ်တမ်း
+c1.002	<b>တစ်ကြောင်းတည်းနဲ့</b>User တွေရဲ့ ကိုယ်ရေး data ပေါ် တည်ဆောက်ထားတဲ့ business model က privacy, ဘေးကင်းရေး, ပြိုင်ဆိုင်မှုနဲ့ copyright တွေနဲ့ အမြဲ တိုက်မိနေပြီး ethical analysis က အဲ့ဒါကို စနစ်တကျ အကဲဖြတ်နည်း ပေးတယ်။
+c1.003	Case အကျဉ်း
+c1.004	Meta (Facebook, Instagram, WhatsApp) က ငွေအများစုကို ကိုယ်ရေး data ပေါ် တည်ဆောက်ထားတဲ့ ကြော်ငြာကနေ ရလို့ user privacy နဲ့ ဝင်ငွေက ဆန့်ကျင်ဘက် ဆွဲနေတယ်။
+c1.005	<b>Beacon</b> (2007) က user တွေ တခြား site မှာ ဝယ်တာကို ခွင့်မတောင်းဘဲ သူငယ်ချင်းတွေရဲ့ feed ပေါ် တင်ခဲ့တယ်; user 50,000+ ရဲ့ petition ပြီးနောက် ရုပ်သိမ်းခဲ့တယ်။
+c1.006	FTC က နှစ်ခါ အရေးယူခဲ့: privacy control အကြောင်း user တွေကို လှည့်စားတာ ရပ်ဖို့ 2012 order, ပြီးရင် အဲ့ order ကို ချိုးဖောက်လို့ 2019 မှာ စံချိန်တင် $5 billion ဒဏ်ငွေ။
+c1.007	<b>Cambridge Analytica</b>: quiz app တစ်ခုက သူ့ user တွေနဲ့ သူတို့ရဲ့ သူငယ်ချင်းတွေရဲ့ data ကို စုပြီး လူ 87 သန်းကျော် database ဆောက်ခဲ့, 2016 US ရွေးကောက်ပွဲမှာ နိုင်ငံရေး message ချိန်ဖို့ သုံးခဲ့တယ်။
+c1.008	Device ထုတ်လုပ်သူ အနည်းဆုံး 60 နဲ့ data-sharing သဘောတူညီချက်တွေက user ရဲ့ သူငယ်ချင်းတွေ data ကို သဘောတူညီချက်မပါဘဲ ရယူခွင့်ပေးခဲ့တယ်။ ဖြေရှင်းငွေတွေမှာ $650 million (မျက်နှာမှတ်သားမှု, Illinois) နဲ့ $725 million (class action) ပါတယ်။
+c1.009	EU ရဲ့ <b>GDPR</b> အောက်မှာ: EU data ကို US ဆီ ရွှေ့လို့ 2023 မှာ စံချိန်တင် €1.2 billion ဒဏ်ငွေ, ကလေး data, personalised ad အတွက် အတင်း consent ယူမှု နဲ့ user 530 သန်း ထိခိုက်တဲ့ breach အတွက် အရင်က ဒဏ်ငွေများ။
+c1.010	Instagram က ဆယ်ကျော်သက် မိန်းကလေးတွေရဲ့ စိတ်ကျန်းမာရေးကို ထိခိုက်နိုင်ကြောင်း, feed ပြောင်းလဲမှုက ဒေါသကို ဆုချကြောင်း ကုမ္ပဏီ သိခဲ့တာကို အတွင်း document တွေက ပြခဲ့ပေမဲ့ နည်းနည်းပဲ လုပ်ခဲ့တယ်။
+c1.011	FTC က Instagram နဲ့ WhatsApp ဝယ်ယူမှုတွေကို ပြိုင်ဆိုင်မှုကို ချေမှုန်းဖို့ ခြေလှမ်းလို့ ခေါ်ခဲ့; EU က Digital Markets Act အောက်မှာ စုံစမ်းနေတယ်။
+c1.012	သူ့ AI assistant ကို app အားလုံးမှာ ပိတ်နည်းမရှိဘဲ ဖြန့်ခဲ့, လုပ်ကြံထားတဲ့ အဖြေတွေ ပေးခဲ့, opt-out လွယ်လွယ်မရှိဘဲ public user post တွေနဲ့ train ခဲ့, ခွင့်မပြုဘဲ သုံးထားတဲ့ copyright စာအုပ်တွေနဲ့လည်း train ခဲ့တယ်လို့ သတင်းရှိတယ်။
+c1.013	ကုမ္ပဏီက သူ့ ESG reporting ကို ညွှန်ပြပေမဲ့ model က ကိုယ်ရေး data ကို အကန့်အသတ်မဲ့နီးပါး သုံးတာကို မှီခိုနေဆဲ။
+c1.014	အသုံးချရမယ့် အယူအဆများ
+c1.015	Information ခေတ်ရဲ့ <b>moral အတိုင်းအတာ ငါးခု</b>: <b>information rights and obligations</b> (privacy), <b>property rights and obligations</b> (intellectual property), <b>accountability and control</b>, <b>system quality</b> (data နဲ့ system error) နဲ့ <b>quality of life</b> (လူမှုရေးနဲ့ စိတ်ပိုင်း သက်ရောက်မှု)။
+c1.016	<b>အခြေခံ အယူအဆများ။</b> <b>Responsibility</b>: ကိုယ်ချတဲ့ ဆုံးဖြတ်ချက်ရဲ့ ကုန်ကျစရိတ်, တာဝန်နဲ့ ဝတ္တရားကို လက်ခံခြင်း။ <b>Accountability</b>: လုပ်ရပ်ကို ဘယ်သူလုပ်လဲ ရှာနိုင်တဲ့ mechanism ရှိခြင်း။ <b>Liability</b>: ကိုယ့်အပေါ် ပျက်စီးမှုအတွက် လျော်ကြေး ပြန်ရနိုင်အောင် ဥပဒေရှိခြင်း။ <b>Due process</b>: ဥပဒေတွေ လူသိရှင်ကြား, တရားမျှတစွာ ကျင့်သုံးပြီး အယူခံခွင့် ရှိခြင်း။
+c1.017	<b>အဆင့်ငါးဆင့် ethical analysis</b>:
+c1.018	အချက်အလက်တွေကို ရှင်းရှင်းလင်းလင်း ဖော်ထုတ် ဖော်ပြ။
+c1.019	ပဋိပက္ခ ဒါမှမဟုတ် အကျပ်အတည်းနဲ့ ပါဝင်တဲ့ အမြင့်ဆုံး တန်ဖိုးများ (privacy, လွတ်လပ်ခွင့်, ပိုင်ဆိုင်မှု ကာကွယ်ခြင်း) ကို သတ်မှတ်။
+c1.020	Stakeholder တွေကို ဖော်ထုတ်။
+c1.021	အကြောင်းအရ ယူနိုင်တဲ့ ရွေးစရာတွေ ဖော်ထုတ်။
+c1.022	ရွေးစရာတစ်ခုစီရဲ့ ဖြစ်နိုင်တဲ့ အကျိုးဆက်တွေ ဖော်ထုတ်။
+c1.023	ရွေးချယ်နိုင်တဲ့ principle
+c1.024	စစ်ဆေးချက်
+c1.025	<b>Golden Rule</b>
+c1.026	ကိုယ့်ကို တခြားသူ ဆက်ဆံစေချင်သလို တခြားသူကို ဆက်ဆံ။
+c1.027	<b>Kant's categorical imperative</b>
+c1.028	လူတိုင်း လုပ်ဖို့ မမှန်တဲ့ လုပ်ရပ်ဆိုရင် ဘယ်သူ့အတွက်မှ မမှန်ဘူး။
+c1.029	<b>Slippery slope</b> (Descartes' rule of change)
+c1.030	ထပ်ခါထပ်ခါ မလုပ်နိုင်တဲ့ လုပ်ရပ်ဆိုရင် လုံးဝ လုပ်ဖို့ မမှန်ဘူး။
+c1.031	<b>Utilitarian principle</b>
+c1.032	ပိုမြင့် ဒါမှမဟုတ် ပိုကြီးတဲ့ တန်ဖိုးရတဲ့ လုပ်ရပ်ကို ယူ။
+c1.033	<b>Risk aversion principle</b>
+c1.034	အနည်းဆုံး ထိခိုက်မှု ဒါမှမဟုတ် အနည်းဆုံး ဖြစ်နိုင်တဲ့ ကုန်ကျစရိတ် ဖြစ်စေတဲ့ လုပ်ရပ်ကို ယူ။
+c1.035	<b>No free lunch</b>
+c1.036	တခြားကြေညာမထားရင် ရုပ်ပိုင်း/မရုပ်ပိုင်း အရာအားလုံးနီးပါး တစ်ယောက်ယောက် ပိုင်တယ်လို့ ယူဆ; တစ်ယောက်က သင့်အတွက် အသုံးဝင်တာ ဖန်တီးထားရင် လျော်ကြေး လိုချင်လိမ့်မယ်။
+c1.037	<b>Fair information practices</b> (GDPR အပါအဝင် privacy ဥပဒေအများစုရဲ့ အခြေခံ): ဘာစုလဲ အသိပေးခြင်း, ရွေးချယ်ခွင့်နဲ့ consent, ကိုယ့် data ကို ရယူခွင့်, data လုံခြုံရေး, enforcement။ GDPR က ရှင်းလင်းတဲ့ opt-in consent, မေ့ပစ်ခံရခွင့် (right to be forgotten) နဲ့ EU အပြင် data ရွှေ့တာ ကန့်သတ်ချက် ထည့်တယ်။ <b>ESG</b> (environmental, social and governance) က ကုမ္ပဏီကို အမြတ်အရှုံးထက် ပိုပြီး အကဲဖြတ်တယ်။
+c1.038	မေးခွန်းများ
+c1.039	<b>Case ထဲက ethical အကျပ်အတည်း တစ်ခုရွေးပြီး ခွဲခြမ်းစိတ်ဖြာပါ။</b>
+c1.040	ဥပမာ: Cambridge Analytica။ အချက်အလက်: quiz app က user တွေနဲ့ သူတို့ သူငယ်ချင်းတွေရဲ့ data ကို သူငယ်ချင်းတွေ မသိဘဲ ယူ, data ကို နိုင်ငံရေး targeting အတွက် ရောင်းခဲ့။ အကျပ်အတည်း: user တွေရဲ့ information rights vs ပွင့်လင်းတဲ့ developer platform ကရတဲ့ ကုမ္ပဏီဝင်ငွေ။ Stakeholder: user, သူတို့ သူငယ်ချင်း, app developer, ကြော်ငြာရှင်, မဲဆန္ဒရှင်, regulator, shareholder။ ရွေးစရာ: developer access ကျယ်ကျယ်ပေး; consent ပေးတဲ့ user တွေပဲ ကန့်သတ်; app တွေကို audit လုပ်ပြီး အလွဲသုံးမှု တား။ အကျိုးဆက်: ပွင့်လင်း access က ဝင်ငွေ တိုးစေပေမဲ့ ဒဏ်ငွေနဲ့ ယုံကြည်မှု ဆုံးရှုံးမှုဆီ ဦးတည်ခဲ့; ကန့်သတ်ရင် ကြော်ငြာနဲ့ developer တန်ဖိုး တချို့ ကုန်ပေမဲ့ user တွေကို ကာကွယ်။ Principle: Golden Rule နဲ့ Kant ရဲ့ imperative ကို မအောင် (ဘယ်သူမှ ကိုယ့် data ကို ဒီလိုယူတာ လက်မခံ), risk aversion က ကန့်သတ်ခြင်းကို ဦးစားပေး။
+c1.041	<b>Meta က privacy ကို မကျူးကျော်ဘဲ အောင်မြင်တဲ့ business run နိုင်လား?</b>
+c1.042	ထောက်ခံချက်: ကိုယ်ရေး profile အစား page content ပေါ် အခြေခံတဲ့ contextual ad, opt-in personalisation, subscription (Meta က EU မှာ ကြော်ငြာမပါ subscription ရောင်းနေပြီ), ယုံကြည်မှုကို ပြိုင်ဆိုင်မှု အားသာချက်အဖြစ်။ ဆန့်ကျင်ချက်: ဝင်ငွေက တိကျတဲ့ targeting ပေါ် မူတည်, data နည်းရင် ကြော်ငြာစျေး ကျ။ ကာကွယ်နိုင်တဲ့ အဖြေ: ရတယ်, ဒါပေမဲ့ margin နည်းနည်းနဲ့, consent အခြေခံ data သုံးမှုနဲ့ default အနေနဲ့ privacy။
+c1.043	<b>သူ့ AI ကို ဖန်တီးသုံးစွဲရာမှာ ဘယ် ethical ပြဿနာတွေ ပေါ်လာလဲ?</b>
+c1.044	Property rights (copyright စာအုပ်တွေနဲ့ user post တွေနဲ့ ခွင့်မပြု ငွေမပေးဘဲ train: no-free-lunch စည်းမျဉ်း), information rights (data ခြစ်ယူမှုကနေ opt-out လွယ်လွယ်မရှိ), system quality (ကလေးရှိတယ်လို့ ပြောတာလို hallucinate အဖြေ), quality of life (misinformation, assistant ကို ပိတ်ခွင့်မရှိ) နဲ့ accountability (AI က လမ်းလွဲပို့ရင် ဘယ်သူ တာဝန်ရှိလဲ)။
+c1.045	<b>ESG လှုပ်ရှားမှုဆိုတာ ဘာလဲ, Meta ရဲ့ အနာဂတ်ကို ဘယ်လို ထိခိုက်နိုင်လဲ?</b>
+c1.046	ESG က ကုမ္ပဏီတွေကို environmental, social နဲ့ governance performance နဲ့ အဆင့်သတ်မှတ်တယ်။ ရင်းနှီးမြှုပ်နှံသူတွေ ပိုပိုပြီး screen လုပ်, regulator တွေ အားကိုး, ဝန်ထမ်းနဲ့ user တွေ ဂရုစိုက်တယ်။ Privacy, ဆယ်ကျော်သက် ဘေးကင်းရေးနဲ့ misinformation မှာ social score ညံ့ရင် Meta ရဲ့ capital ကုန်ကျစရိတ် တက်, ပိုတင်းကျပ်တဲ့ စည်းမျဉ်း ဖိတ်ခေါ်, data အလေ့အထ ပြောင်းဖို့ တွန်းနိုင်တယ်။
+c1.047	သိထားရမယ့် စကားလုံးများ
+c1.062	မှတ်ထားပါ
+c1.063	Analysis: အချက်အလက် → အကျပ်အတည်းနဲ့ တန်ဖိုး → stakeholder → ရွေးစရာ → အကျိုးဆက်။
+c1.064	Principle ခြောက်ခု: Golden Rule, Kant, slippery slope, utilitarian, risk aversion, no free lunch။
+c1.065	Moral အတိုင်းအတာ ငါးခု: information rights, property rights, accountability and control, system quality, quality of life။
+c1.066	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+c1.067	Flashcard များ
+c1.068	Quiz
+c1.069	နောက်တစ်ခု: C2 Security
+c2.001	<span class="num n2">C2</span> Security: ransomware က health payment network ကို ရပ်တန့်
+c2.002	<b>တစ်ကြောင်းတည်းနဲ့</b>ပျောက်နေတဲ့ control တစ်ခု (remote access tool ပေါ် multifactor authentication) က ransomware အဖွဲ့ကို US ကျန်းမာရေး ကဏ္ဍတစ်ခုလုံး မှီခိုတဲ့ system ကို ပိတ်ချခွင့် ပေးခဲ့တယ်။
+c2.003	Case အကျဉ်း
+c2.004	<b>Ransomware</b> က file တွေကို encrypt ဒါမှမဟုတ် system ကို lock လုပ်ပြီး decryption key အတွက် ငွေ, များသောအားဖြင့် cryptocurrency နဲ့ တောင်းတယ်။
+c2.005	2022 ကစပြီး UnitedHealth Group ($8 billion) ပိုင်တဲ့ Change Healthcare က pharmacy 67,000 ကျော်အတွက် claim, payment နဲ့ ဆေးညွှန်းတွေ process လုပ်ပြီး တစ်နှစ် claim 15 billion ($1.5 trillion) လောက်, US လူနာ record အားလုံးရဲ့ သုံးပုံတစ်ပုံလောက် ကိုင်တွယ်တယ်။
+c2.006	2024 February: ransomware as a service ရောင်းတဲ့ <b>BlackCat/ALPHV</b> အဖွဲ့ရဲ့ affiliate တစ်ခုက <b>multifactor authentication</b> မပါတဲ့ remote access application ကနေ ဝင်, data 6 TB ခိုးပြီး system တွေကို encrypt လုပ်ခဲ့တယ်လို့ သတင်းရှိတယ်။
+c2.007	ကုမ္ပဏီက service 110 ကျော်ကို ဖြတ်တောက်ခဲ့တယ်။ Eligibility စစ်ဆေးမှု, prior authorisation, claim နဲ့ ဆေးညွှန်းတွေ ဆေးရုံ, ဆရာဝန်, pharmacy နဲ့ လူနာတွေတစ်လျှောက် ရပ်တန့်ပြီး provider တွေရဲ့ ငွေစီးဆင်းမှု ခန်းခြောက်ခဲ့တယ်။
+c2.008	Bitcoin နဲ့ $22 million ပေးခဲ့တယ်လို့ သတင်းရှိတယ်။ Affiliate က ငွေဘယ်တော့မှ မရဘူးလို့ ပြော, data ကို ထိန်းထား, နောက်ပိုင်း တခြားအဖွဲ့ (RansomHub) က ဒုတိယ ransom တောင်းခဲ့တယ်။
+c2.009	UnitedHealth က provider တွေကို $3 billion ကျော် ကြိုပေးခဲ့, နည်းလွန်းတယ်လို့ ဝေဖန်ခံရ။ ပြန်ကောင်းဖို့ တစ်လကျော် ကြာ; class action နဲ့ federal စုံစမ်းမှု လိုက်ခဲ့တယ်။
+c2.010	ကျန်းမာရေးက အတိုက်ခံရဆုံး critical infrastructure ထဲမှာ ပါတယ်: ransomware က 2023 မှာ ဆေးရုံ system 46 ကို ထိခဲ့, 2022 မှာ 25 ကနေ တက်။
+c2.011	အသုံးချရမယ့် အယူအဆများ
+c2.012	အတိုင်းအတာ
+c2.013	ဒီ case မှာ
+c2.014	<b>People</b>
+c2.015	Security standard နဲ့ လမ်းညွှန်ချက် သတ်မှတ်
+c2.016	<b>Organisation</b>
+c2.017	Standard တွေကို လက်တွေ့ကျင့်သုံး; best practice မြှင့်တင်
+c2.018	<b>Technology</b>
+c2.019	Ransomware, cryptocurrency, decryption key
+c2.020	<b>Business စိန်ခေါ်မှု</b>
+c2.021	ကြီးမား ရှုပ်ထွေးတဲ့ infrastructure; access point အများ; security မညီမျှ
+c2.022	<b>ဖြေရှင်းချက်</b>
+c2.023	ခွင့်မပြုထားတဲ့ ဝင်ရောက်မှုကို တား; system တွေကို backup ပြီး ပြန်ထူ; critical infrastructure ကို ကာကွယ်
+c2.024	<b>Security</b> ဆိုတာ ခွင့်မပြုထားတဲ့ ဝင်ရောက်မှု, ပြောင်းလဲမှု, ခိုးယူမှု ဒါမှမဟုတ် ပျက်စီးမှုကို တားဆီးတဲ့ policy, procedure နဲ့ technical measure များ။ <b>Controls</b> က asset ကို ကာကွယ်, record ကို တိကျအောင်ထား, management ရဲ့ standard တွေကို လိုက်နာကြောင်း သေချာစေတဲ့ နည်းလမ်းနဲ့ standard များ။
+c2.025	<b>Framework</b>: risk assessment, security policy နဲ့ acceptable use policy, identity management, disaster recovery နဲ့ business continuity planning, ပုံမှန် IS audit။
+c2.026	<b>Tool များ</b>: multifactor authentication, firewall, intrusion detection, anti-malware, encryption, patching, network segmentation, စမ်းပြီးသား offline backup, incident response plan။
+c2.027	မေးခွန်းများ
+c2.028	<b>Attack ရဲ့ သက်ရောက်မှုက Change Healthcare ရဲ့ ကိုယ်ပိုင် client တွေထက် ဘယ်လို ကျော်လွန်ခဲ့လဲ?</b>
+c2.029	System ရဲ့ အလယ်မှာ ထိုင်နေလို့ ပြတ်တောက်မှုက သူနဲ့ တိုက်ရိုက်ချိတ်ဆက်မှုမရှိတဲ့ ဆေးရုံ, ဆရာဝန်, pharmacy တွေအတွက် claim နဲ့ ဆေးညွှန်းတွေကို ရပ်, provider တွေရဲ့ ဝင်ငွေကို ဖြတ်, လူနာတွေရဲ့ ကုသမှုနဲ့ ဆေးဝါးကို နှောင့်နှေး, လူသန်းနဲ့ချီရဲ့ ကျန်းမာရေးနဲ့ identity data ကို ပေါက်ကြားစေပြီး အားနည်းချက်တစ်ခုက နိုင်ငံအဆင့် critical infrastructure ကို ဘယ်လို နှောင့်ယှက်နိုင်လဲ ပြခဲ့တယ်။
+c2.030	<b>ဘယ်လို ကာကွယ်နိုင်ခဲ့မလဲ?</b>
+c2.031	Remote access point တိုင်းမှာ multifactor authentication; ဝယ်ယူပြီးနောက် ပုံမှန် risk assessment နဲ့ audit; entry တစ်ခုက အားလုံးကို မရောက်အောင် least-privilege access နဲ့ network segmentation; data ကူးထုတ်နေတာကို ဖမ်းဖို့ monitoring နဲ့ intrusion detection; downtime ကန့်သတ်ဖို့ စမ်းပြီးသား offline backup နဲ့ လေ့ကျင့်ထားတဲ့ incident response plan။
+c2.032	<b>Ransom ပေးတာ ထိရောက်တဲ့ ဖြေရှင်းချက်လား?</b>
+c2.033	အများအားဖြင့် မဟုတ်ဘူး။ Data ကို ဖျက်မယ်လို့ အာမခံချက်မရှိ (ဒီမှာ မဖျက်ခဲ့), ငွေပေးရင် attack ပိုများအောင် ငွေထောက်ပံ့ အားပေး, data တူကို ထပ် ransom တောင်းနိုင်, ငွေပေးချေမှု တချို့က sanctions ဥပဒေကို ချိုးဖောက်တယ်။ Backup မရှိရင် ငွေပေးတာက ပြတ်တောက်ချိန်ကို တိုစေနိုင်တယ်, အဲ့ဒါက backup ကောင်းကောင်း ထားဖို့ အကြောင်းပြချက်ပဲ။
+c2.034	သိထားရမယ့် စကားလုံးများ
+c2.046	မှတ်ထားပါ
+c2.047	ဝင်ပေါက်က သာမန်: MFA မပါတဲ့ remote access။
+c2.048	ကာကွယ်, ရှာဖွေ, ပြန်ထူ: MFA နဲ့ segmentation, monitoring, စမ်းပြီးသား backup နဲ့ response plan။
+c2.049	ငွေပေးတာက ပြန်ကောင်းမှု ဒါမှမဟုတ် ခိုးထားတဲ့ data ဖျက်မှုကို အာမမခံဘူး။
+c2.050	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+c2.051	Flashcard များ
+c2.052	Quiz
+c2.053	နောက်တစ်ခု: C3 Process mining

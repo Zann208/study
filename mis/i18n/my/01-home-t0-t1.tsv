@@ -1,0 +1,164 @@
+# MIS: Home, T0, T1
+home.001	Information Systems
+home.002	အဖွဲ့အစည်းတွေ information system ကို ဘယ်လိုသုံးလဲ: strategy, business process, enterprise application, collaboration, ethics, security နဲ့ system အသစ် တည်ဆောက်ခြင်း။
+home.003	T1–4 · အဖွဲ့အစည်းနဲ့ networked enterprise
+home.004	T5–8 · IT infrastructure
+home.005	T9–12 · အဓိက system application များ
+home.006	T13–15 · System တည်ဆောက်ခြင်းနဲ့ စီမံခြင်း
+home.007	အဖွဲ့အစည်း, management နဲ့ networked enterprise
+home.008	ခေါင်းစဉ် 1–4။ ယနေ့ business မှာ IS ရဲ့ အခန်းကဏ္ဍ, business process နဲ့ system အမျိုးအစား, IS နဲ့ strategy, ethical နဲ့ social ပြဿနာများ။
+home.009	ဒီမှာ: <a href="#/topics/t1">T1</a> · <a href="#/topics/t2">T2</a> · <a href="#/cases/c1">C1 Ethics case</a>
+home.010	Information technology infrastructure
+home.011	ခေါင်းစဉ် 5–8။ Infrastructure နဲ့ ပေါ်ထွက်လာတဲ့ နည်းပညာ, database နဲ့ business intelligence, network နဲ့ wireless, information system ကို လုံခြုံအောင်လုပ်ခြင်း။
+home.012	ဒီမှာ: <a href="#/cases/c2">C2 Security case</a>
+home.013	အဓိက system application များ
+home.014	ခေါင်းစဉ် 9–12။ Enterprise application, e-commerce, knowledge management, ဆုံးဖြတ်ချက်ချခြင်း။
+home.015	System တည်ဆောက်ခြင်းနဲ့ စီမံခြင်း
+home.016	ခေါင်းစဉ် 13–15။ Information system တည်ဆောက်ခြင်း, project စီမံခြင်း, global system စီမံခြင်း။
+home.017	ဒီမှာ: <a href="#/cases/c3">C3 Process mining case</a>
+home.018	ခေါင်းစဉ်တစ်ခုစီကို ဘယ်မှာ လေ့ကျင့်လဲ
+home.019	ခေါင်းစဉ်
+home.020	လေ့ကျင့်ခန်း
+home.021	Flashcard, quiz
+home.022	<a href="#/obj">Strategy sorter</a>, flashcard, quiz
+home.023	<a href="#/sys">Which system?</a>, <a href="#/fn">Business functions</a>, <a href="#/collab">Time and place</a>, flashcard, quiz
+home.024	<a href="#/eth">Ethical principles</a>, flashcard, quiz
+home.021	Flashcard, quiz
+topics.001	ခေါင်းစဉ်များ
+t0.001	<span class="num n1">0</span> ဒီကစပါ: information system ဆိုတာ ဘာလဲ
+t0.003	Business တိုင်း information ပေါ် မူတည်တယ်: ဘာရောင်းခဲ့လဲ, stock ထဲ ဘာရှိလဲ, ဘယ်သူ ငွေကျန်လဲ, ဘယ် customer မကျေနပ်လဲ။ <b>Information system (IS)</b> ဆိုတာ raw fact တွေကို အဲ့ information အဖြစ် ပြောင်းပြီး သင့်တော်တဲ့ လူတွေရှေ့ ချပေးတဲ့ အစိတ်အပိုင်းအစု။ <mark class="hl">IS က computer သက်သက် ဘယ်တော့မှ မဟုတ်ဘူး။</mark> အတိုင်းအတာ သုံးခု အမြဲရှိတယ်: သုံးတဲ့ <b>organisation</b>, အဲ့ဒါနဲ့ ဆုံးဖြတ်တဲ့ <b>management</b>, run တဲ့ <b>technology</b>။
+t0.004	Information technology (IT) က hardware, software, data နဲ့ network။ Platform ပဲ။ IS က အဖွဲ့အစည်းက အလုပ်လုပ်ဖို့ အဲ့ platform ပေါ်မှာ တည်ဆောက်တာ။
+t0.005	ဥပမာ: Doi Roast
+t0.006	အယူအဆတွေ လက်တွေ့ကျအောင် ခေါင်းစဉ်တွေက ဝန်ထမ်း 40 လောက်ရှိတဲ့ ချင်းမိုင် ကော်ဖီကုမ္ပဏီ <b>Doi Roast</b> ကို လိုက်တယ်။ တောင်ပေါ်လူမျိုးစု လယ်ယာတွေဆီက ကော်ဖီစိမ်း ဝယ်, လှော်, မြောက်ပိုင်း ထိုင်းက café တွေကို ရောင်း, online မှာ မှာတဲ့ customer တွေဆီ အိတ်တွေ ပို့တယ်။
+t0.007	ဘာသာရပ်ကို ဘယ်လို ဖွဲ့စည်းထားလဲ
+t0.008	အပိုင်း
+t0.009	ဖြေတဲ့ မေးခွန်း
+t0.010	ခေါင်းစဉ်များ
+t0.011	အဖွဲ့အစည်း, management နဲ့ networked enterprise
+t0.012	ကုမ္ပဏီတွေ IS ကို ဘာကြောင့်သုံးလဲ, ဘယ်လိုအမျိုးအစားတွေ ရှိလဲ, advantage ကို ဘယ်လိုဖန်တီးလဲ, ဘယ် ethical ပြဿနာတွေ ပါလာလဲ?
+t0.013	IT infrastructure
+t0.014	IS က ဘယ် hardware, software, data, network နဲ့ security ပေါ် ရပ်တည်လဲ?
+t0.015	အဓိက system application များ
+t0.016	ERP, SCM, CRM, e-commerce, knowledge နဲ့ decision system တွေ တန်ဖိုးကို ဘယ်လို ဖန်တီးလဲ?
+t0.017	System တည်ဆောက်ခြင်းနဲ့ စီမံခြင်း
+t0.018	System အသစ်တွေကို ဘယ်လိုဆောက်, project အဖြစ် ဘယ်လို run, နိုင်ငံတွေဖြတ်ပြီး ဘယ်လို စီမံလဲ?
+t0.019	သိထားရမယ့် စကားလုံးများ
+t0.026	မှတ်ထားပါ
+t0.027	IT က platform; IS က အဲ့ပေါ်မှာ တည်ဆောက်တာ။
+t0.028	IS တိုင်းရဲ့ အတိုင်းအတာ သုံးခု: organisation, management, technology။
+t0.029	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t0.030	Flashcard များ
+t0.031	Quiz
+t0.032	နောက်တစ်ခု: T1 ယနေ့ business ထဲက IS
+t1.001	<span class="num n1">1</span> ယနေ့ ကမ္ဘာ့ business ထဲက information system များ
+t1.003	Information system ဘာကြောင့် အရေးကြီးလဲ
+t1.004	IT က ဘယ်လောက် ဗဟိုကျလာပြီလဲ အသုံးစရိတ်က ပြတယ်။ 2019 မှာ business တွေ ကမ္ဘာတစ်ဝှမ်း IT အတွက် <b>$4 trillion</b> လောက် သုံးခဲ့တယ်။ 1999 မှာ ပုဂ္ဂလိက ကုမ္ပဏီတွေ ရင်းနှီးမြှုပ်နှံထားတဲ့ capital ရဲ့ 14% ကို IT ထဲ ထည့်ခဲ့; 2013 မှာ 33%။ Gartner က 2026 အတွက် <b>$6.37 trillion</b> (2025 ရဲ့ $5.57 trillion ထက် 14.2% တက်) နဲ့ 2027 မှာ <b>$7.35 trillion</b> ကျော် ခန့်မှန်းတယ်, အဓိကအားဖြင့် AI infrastructure, data centre, software နဲ့ cloud ကြောင့်။
+t1.005	ကုမ္ပဏီတွေ IS ကို customer demand ပြောင်းလဲတာကို <b>sense and respond</b> (သတိထားမိပြီး တုံ့ပြန်) ဖို့, inventory နည်းနည်းထားဖို့, ပိုထိရောက်စွာ အလုပ်လုပ်ဖို့ သုံးတယ်။ Supply chain တွေ just-in-time inventory နဲ့ မြန်မြန် run တယ်။ ဈေးကွက်တွေလည်း ပြောင်းနေတယ်: သတင်းစာဖတ်သူ ကျ, online video နဲ့ blog တွေ ကြီးထွား, social network က customer တွေကို အများမြင်တဲ့ အသံ ပေး, AI က အလုပ်ပုံစံကို ပြောင်းနေတယ်။
+t1.006	IS မှာ ဘာအသစ်လဲ
+t1.007	ပြောင်းလဲမှု
+t1.008	ဥပမာ
+t1.009	အဓိပ္ပာယ်
+t1.010	<b>နည်းပညာ အသစ်</b>
+t1.011	Cloud computing, big data, mobile digital platform, AI
+t1.012	Computing က service (SaaS) အဖြစ် online ကို ရွှေ့; ကုမ္ပဏီတွေ web, email နဲ့ social data အများကြီးကို mine လုပ်; smartphone နဲ့ tablet က အဓိက platform ဖြစ်; intelligent automation ပျံ့နှံ့။
+t1.013	<b>Management အသုံး အသစ်</b>
+t1.014	Online collaboration, business intelligence, virtual meeting
+t1.015	Social tool နဲ့ shared document က အဖွဲ့တွေကို ညှိ; dashboard က manager တွေကို real-time performance ပေး; video call က ခရီးသွားချိန်နဲ့ ကုန်ကျစရိတ် လျှော့။
+t1.016	<b>ပြောင်းလဲနေတဲ့ အဖွဲ့အစည်း</b>
+t1.017	Social business, teleworking, business value ကို အတူဖန်တီးခြင်း
+t1.018	ကုမ္ပဏီတွေ ဝန်ထမ်း, customer နဲ့ supplier တွေနဲ့ social platform သုံး; အလုပ်က ရုံးအပြင်မှာ ဖြစ် (US business 55% မှာ remote work program ရှိ); တန်ဖိုးက product ကနေ partner network နဲ့ တည်ဆောက်ထားတဲ့ solution နဲ့ experience ဆီ ရွှေ့။
+t1.019	ဘာသာရပ်တစ်လျှောက် ပြန်လာနေတဲ့ theme နှစ်ခု: <b>collaboration နဲ့ community</b>, နဲ့ <b>ဆုံးဖြတ်ချက်ကို ထောက်ပံ့တဲ့ data analysis</b>။
+t1.020	Digital firm
+t1.021	<b>Digital firm</b> ဆိုတာ customer, supplier နဲ့ ဝန်ထမ်းတွေနဲ့ အရေးကြီး ဆက်ဆံရေး အားလုံးနီးပါး digital နဲ့ ဖြစ်တဲ့ ကုမ္ပဏီ။ သူ့ core business process (ဝန်ထမ်းခန့်, product ဖန်တီး, order ဖြည့်, marketing စီစဉ်) တွေ digital network ပေါ် run ပြီး အဓိက asset (intellectual property, core competency, ငွေကြေးနဲ့ လူ့ asset) တွေကို digital နဲ့ စီမံတယ်။
+t1.022	အဓိက ဆုံးဖြတ်ချက်အတွက် information ကို ဘယ်အချိန် ဘယ်နေရာမှာမဆို ရနိုင်။
+t1.023	ထုတ်လုပ်ပြီး ရောင်းရုံ မဟုတ်ဘဲ ပတ်ဝန်းကျင်ကို sense ပြီး respond လုပ်။
+t1.024	ပြောင်းလွယ်ပြီး လှုပ်ရှားမြန်။
+t1.025	<b>Time shifting</b>: business က 9-to-5 နေ့နဲ့ မကန့်သတ်တော့ဘူး။ <b>Space shifting</b>: physical နေရာ တစ်ခုနဲ့ မချည်တော့ဘူး။
+t1.026	IS က အခု corporate strategy ကို ဆုံးဖြတ်ပြီး မောင်းနှင်ဖို့ ကူညီတယ်။ Strategy နဲ့ system က အပြန်အလှန် မှီခိုတယ်: strategy ပြောင်းရင် hardware, software, database နဲ့ network ပြောင်းဖို့ လိုပြီး <mark class="hl">ကုမ္ပဏီက ငါးနှစ်အတွင်း လုပ်ချင်တာကို သူ့ system တွေ ခွင့်ပြုတာက မကြာခဏ ကန့်သတ်တယ်။</mark>
+t1.027	Strategic business objective ခြောက်ခု
+t1.028	ရည်မှန်းချက်
+t1.029	အဓိပ္ပာယ်
+t1.030	ဥပမာ
+t1.031	<b>Operational excellence</b>
+t1.032	ပိုထိရောက်တဲ့ လုပ်ငန်း, ဒါကြောင့် အမြတ်ပိုများ
+t1.033	Walmart ရဲ့ Retail Link က supplier တွေကို ဆိုင်တိုင်းနဲ့ ချိတ်တယ်: customer က ပစ္စည်းတစ်ခု ဝယ်တာနဲ့ supplier က အစားထိုး ပို့ရမယ်ဆိုတာ သိတယ်။ Walmart က square foot တစ်ခုလျှင် ရောင်းအား $28 လောက် ရပြီး Target က $23, တခြားသူတွေ $12 အောက်။
+t1.034	<b>Product, service နဲ့ business model အသစ်</b>
+t1.035	Digital offering အသစ်နဲ့ ထုတ်လုပ်, ပို့ဆောင်, ရောင်းချ နည်းလမ်း အသစ်
+t1.036	ဂီတနဲ့ ရုပ်ရှင်က record, tape နဲ့ CD ကနေ iTunes, Netflix နဲ့ တရားဝင် online ဖြန့်ဝေမှုဆီ ရွှေ့ခဲ့တယ်။
+t1.037	<b>Customer နဲ့ supplier ရင်းနှီးမှု</b>
+t1.038	Customer ကို ကောင်းကောင်း သိခြင်း: transactional မဟုတ်ဘဲ relational marketing
+t1.039	အဆင့်မြင့် hotel တွေက ဧည့်သည်ရဲ့ check-in အချိန်, အခန်းအပူချိန်, ကြိုက်တဲ့ TV channel တွေ မှတ်ပြီး မရောက်ခင် အခန်းကို ပြင်ထားတယ်။
+t1.040	<b>ဆုံးဖြတ်ချက် ပိုကောင်း</b>
+t1.041	ကောင်းပြီး real-time ဖြစ်တဲ့ information က ချက်ချင်း ပိုကောင်းတဲ့ ဆုံးဖြတ်ချက်ဆီ ဦးတည်
+t1.042	Telecom ကုမ္ပဏီတစ်ခုက complaint နဲ့ network performance ရဲ့ live data သုံးပြီး ပြုပြင်ရေးအဖွဲ့တွေကို အရေးကြီးဆုံးနေရာ ပို့တယ်။
+t1.043	<b>Competitive advantage</b>
+t1.044	ပြိုင်ဘက်တွေထက် ပိုကောင်းအောင် လုပ်ခြင်း
+t1.045	ပိုကောင်းတဲ့ product ကို ပိုစျေးပေါပေါ ရောင်း; customer ကို real-time တုံ့ပြန်။
+t1.046	<b>ရှင်သန်ရေး</b>
+t1.047	IS ရင်းနှီးမြှုပ်နှံမှု တချို့က business ဆက်လုပ်နိုင်ဖို့ ကုန်ကျစရိတ် သက်သက်
+t1.048	ATM မရှိတဲ့ ဘဏ်; digital record ထားဖို့ ဥပဒေက တောင်းဆိုတဲ့ လုပ်ငန်းများ (အဆိပ်ပစ္စည်း, public accounting)။
+t1.049	Doi Roast မှာ café stock level ကို လှော်တဲ့ အချိန်ဇယားနဲ့ ချိတ်တာက operational excellence; ကော်ဖီ subscription box က business model အသစ်; café တစ်ခုစီ ကြိုက်တဲ့ roast ကို မှတ်ထားတာက customer intimacy။
+t1.050	IT လား IS လား? Data လား information လား?
+t1.051	<b>Information technology</b> က ကုမ္ပဏီ လိုအပ်တဲ့ hardware နဲ့ software အားလုံး။ <b>Information system</b> က ဆုံးဖြတ်ချက်နဲ့ ထိန်းချုပ်မှုကို ထောက်ပံ့ဖို့ information ကို စု, process, သိမ်း, ဖြန့်ဝေတဲ့ ဆက်စပ်နေတဲ့ အစိတ်အပိုင်းအစု။
+t1.052	<b>Data</b> က raw fact တွေ။ <b>Information</b> က လူတွေအတွက် အဓိပ္ပာယ်ရှိပြီး အသုံးဝင်တဲ့ ပုံစံအဖြစ် ပြုပြင်ထားတဲ့ data။ Supermarket checkout က barcode သန်းနဲ့ချီ scan လုပ်တယ် (data); ခွဲခြမ်းစိတ်ဖြာရင် ရောင်းအား စုစုပေါင်းနဲ့ stock level ဖြစ်လာတယ် (information)။
+t1.053	လုပ်ဆောင်ချက်
+t1.054	ဘာဖြစ်လဲ
+t1.055	Doi Roast
+t1.056	<b>Input</b>
+t1.057	Data ကို စု ဒါမှမဟုတ် ဖမ်း
+t1.058	Café order တွေကို order screen ထဲ ရိုက်ထည့်
+t1.059	<b>Processing</b>
+t1.060	Data ကို အဓိပ္ပာယ်ရှိတဲ့ ပုံစံ ပြောင်း
+t1.061	Order တွေကို roast အလိုက်, နေ့အလိုက် ပေါင်း
+t1.062	<b>Output</b>
+t1.063	Information ကို လိုတဲ့ လူတွေဆီ တင်ပြ
+t1.064	Roastery အတွက် မနက်ဖြန် လှော်ရမယ့် စာရင်း
+t1.065	<b>Feedback</b>
+t1.066	System ကို အကဲဖြတ် ဒါမှမဟုတ် ပြင်ဖို့ output ကို ပြန်ပေး
+t1.067	Roast တစ်မျိုး ကုန်ကုန်သွားတယ်လို့ လှော်သူက အချက်ပြ
+t1.068	IS ရဲ့ အတိုင်းအတာ သုံးခု
+t1.069	<b>Organisation။</b> လူ, ဖွဲ့စည်းပုံ, business process, နိုင်ငံရေးနဲ့ culture။ ဖွဲ့စည်းပုံက အလုပ်ခွဲဝေမှု, အာဏာနဲ့ တာဝန်ကို ပြတယ်: <b>senior management</b> က ရေရှည် strategic ဆုံးဖြတ်ချက်ချ, <b>middle management</b> က program နဲ့ plan တွေကို အကောင်အထည်ဖော်, <b>operational management</b> က နေ့စဉ်အလုပ်ကို စောင့်ကြည့်။ အလုပ်ကို <b>business function</b> (sales နဲ့ marketing, manufacturing နဲ့ production, finance နဲ့ accounting, human resources) တွေ ခွဲထားပြီး တစ်ခုစီမှာ တရားဝင် စည်းမျဉ်းရှိတယ်။ <b>Culture</b> က လူအများစု လက်ခံတဲ့ ယူဆချက်နဲ့ တန်ဖိုးအစု ("customer service", "quality"); လူတိုင်း သဘောမတူလို့ နိုင်ငံရေး ဖြစ်လာပြီး နှစ်ခုလုံး IS ဘာမဆိုကို ထိခိုက်တယ်။
+t1.070	<b>Management။</b> Manager တွေက business ပတ်ဝန်းကျင်ကို နားလည်အောင်လုပ်, ဆုံးဖြတ်ချက်ချ, ပြဿနာဖြေရှင်းဖို့ action plan ဆွဲတယ်။ လူနဲ့ ငွေကြေး အရင်းအမြစ်ကို ခွဲဝေ, ဦးဆောင်, knowledge နဲ့ information အသစ်ကြောင့် အဓိကမောင်းနှင်တဲ့ product နဲ့ idea အသစ်တွေ ဖန်တီးတယ်။
+t1.071	<b>Technology။</b> Hardware, software, data management, networking နဲ့ telecommunications။ <mark class="hl">IT က IS ကို တည်ဆောက်တဲ့ platform: enabler ပဲ။</mark>
+t1.072	IS အပေါ် ရှုထောင့်များ
+t1.073	ချဉ်းကပ်ပုံ
+t1.074	ပညာရပ်များ
+t1.075	အာရုံစိုက်ချက်
+t1.076	<b>Technical</b>
+t1.077	Computer science, management science, operations research
+t1.078	Physical technology, computation ရဲ့ သင်္ချာ model, system တွေ ဘာလုပ်နိုင်လဲ ဆိုတဲ့ formal သက်သေ
+t1.079	<b>Behavioural</b>
+t1.080	Sociology, psychology, economics
+t1.081	နည်းပညာက တစ်ဦးချင်း, အုပ်စုနဲ့ လူ့အဖွဲ့အစည်းအပေါ် သက်ရောက်မှု
+t1.082	<b>Sociotechnical</b>
+t1.083	နှစ်ခုလုံး
+t1.084	Technology, business, manager နဲ့ ဝန်ထမ်း, ပတ်ဝန်းကျင်ကို အတူတကွ ထည့်စဉ်းစား
+t1.085	သိထားရမယ့် စကားလုံးများ
+t1.101	မှတ်ထားပါ
+t1.102	ရည်မှန်းချက် ခြောက်ခု: operational excellence, product/service/model အသစ်, customer နဲ့ supplier ရင်းနှီးမှု, ဆုံးဖြတ်ချက် ပိုကောင်း, competitive advantage, ရှင်သန်ရေး။
+t1.103	Data က raw fact; information က အဓိပ္ပာယ်ရှိအောင် လုပ်ထားတဲ့ data။
+t1.104	IS လုပ်ဆောင်ချက်: input, processing, output နဲ့ feedback။
+t1.105	အတိုင်းအတာ သုံးခု: organisation, management, technology။ ရှုထောင့် သုံးခု: technical, behavioural, sociotechnical။
+t1.106	အသေးစိတ်
+t1.107	<span class="fig-n">1</span>Segment အလိုက် ကမ္ဘာ့ IT အသုံးစရိတ်, 2012 မှ 2024
+t1.108	<span class="fig-n">2</span>IT အသုံးစရိတ် လမ်းကြောင်း
+t1.109	Segment အလိုက် Gartner IT အသုံးစရိတ် ခန့်မှန်းချက်
+t1.122	~$1.37 trillion (AI compute demand)
+t1.129	Memory နဲ့ဆိုင်တဲ့ စျေးတက်မှု ("memflation") က hardware နဲ့ data centre ကုန်ကျစရိတ်ကို မြှင့်ခဲ့တယ်။ နှိုင်းယှဉ်ဖို့ ယခင်ဂဏန်းများ: US business က 2014 မှာ IS hardware, software နဲ့ telecom အတွက် $817 billion သုံး; Gartner က 2022 အတွက် $4.5 trillion (enterprise software က 11.5% နဲ့ အမြန်ဆုံးကြီးထွား) နဲ့ 2024 အတွက် $5.1 trillion (2023 ထက် 8% တက်) ခန့်မှန်း။ Statista က 2020 မှာ $3.61 trillion လောက်, COVID-19 ကြောင့် 5.4% ကျမယ်လို့ မျှော်လင့်ခဲ့တယ်။
+t1.130	<span class="fig-n">3</span>IS ကို နားလည်ခြင်း: organisation, management နဲ့ technology
+t1.131	<span class="fig-n">4</span>အဖွဲ့အစည်းထဲက management အဆင့်များ
+t1.132	ပြန်လှန်မေးခွန်းများ
+t1.133	<b>Information system တွေ business ကို ဘယ်လို ပြောင်းလဲနေလဲ, globalisation နဲ့ ဘယ်လို ဆက်စပ်လဲ?</b>
+t1.134	Cloud, mobile, big data နဲ့ AI က ကုမ္ပဏီတွေ အလုပ်လုပ်ပုံကို ပြောင်းတယ်: collaboration က online ရောက်, manager တွေ real-time dashboard မြင်, အလုပ်က ရုံးအပြင်ရောက်, တန်ဖိုးကို supplier နဲ့ customer network နဲ့ ဖန်တီး။ Network တူတွေက ကုမ္ပဏီတွေကို နိုင်ငံတွေဖြတ်ပြီး ထုတ်လုပ်မှု, supplier နဲ့ customer တွေကို ညှိခွင့်ပေးလို့ supply chain တွေ global ဖြစ်ပြီး ပူးပေါင်းဆောင်ရွက်လာတယ်။
+t1.135	<b>ယနေ့ business management အတွက် information system တွေ ဘာကြောင့် အရေးကြီးလဲ?</b>
+t1.136	ကုမ္ပဏီတွေ strategic objective ခြောက်ခုဆီ ရောက်ပုံ ဒါပဲ။ Strategy နဲ့ system က အပြန်အလှန် မှီခိုပြီး system တချို့က ရှင်သန်ဖို့သက်သက် လိုတယ်။
+t1.137	<b>Information system ဆိုတာ ဘာလဲ, အစိတ်အပိုင်းတွေက ဘာလဲ?</b>
+t1.138	ဆုံးဖြတ်ချက်နဲ့ ထိန်းချုပ်မှုအတွက် information ကို စု (input), process, သိမ်း, ဖြန့်ဝေ (output) တဲ့ ဆက်စပ် အစိတ်အပိုင်းများ, feedback နဲ့။ အတိုင်းအတာတွေက organisation, management နဲ့ technology; technology အပိုင်းက hardware, software, data management နဲ့ networking။
+t1.139	<b>ဘယ် ပညာရပ်တွေ information system ကို လေ့လာလဲ?</b>
+t1.140	Technical: computer science, management science, operations research။ Behavioural: sociology, psychology, economics။ Sociotechnical အမြင်က နှစ်ခုလုံးကို ပေါင်းတယ်။
+t1.141	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t1.142	Flashcard များ
+t1.143	Quiz
+t1.144	နောက်တစ်ခု: T2 E-business နဲ့ collaboration
+t0.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Information system က အဖွဲ့အစည်းထဲက လူတွေ run, ထိန်းချုပ်, ဆုံးဖြတ်နိုင်အောင် information ကို စု, process, သိမ်း, ဖြန့်ဝေတယ်။
+t1.002	<b>တစ်ကြောင်းတည်းနဲ့</b>ကုမ္ပဏီတွေ strategic objective ခြောက်ခုဆီရောက်ဖို့ information system မှာ ရင်းနှီးမြှုပ်နှံပြီး IS ဘာမဆိုကို နားလည်ဖို့ organisation, management နဲ့ technology ကို တွဲကြည့်ရမယ်။
