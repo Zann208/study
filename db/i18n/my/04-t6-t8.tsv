@@ -1,0 +1,115 @@
+# DBS: T6, T7, T8
+t6.001	<span class="num n2">6</span> Datalog နဲ့ recursive query များ
+t6.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Datalog က query ကို "ဟိုဟာအားလုံး မှန်ရင် ဒါမှန်တယ်" ပုံစံ rule တွေအဖြစ် ရေးတယ်။
+t6.003	Rule မှာ မြှားရဲ့ ဘယ်ဘက်မှာ <b>head</b>, ညာဘက်မှာ <b>body</b> ရှိ။ Head က ရလဒ် row; body ထဲက condition တိုင်း ကိုက်ညီနိုင်တိုင်း ထုတ်ပေးတယ်။
+t6.004	ဒီလိုဖတ်ပါ: "ID <i>m</i> နဲ့ နာမည် <i>n</i> ပါ member ရှိ, member <i>m</i> အတွက် ပြန်ပေးရက် <i>d</i> ပါ loan ရှိ, <i>d</i> က 2026 ဇန်နဝါရီ 1 မတိုင်ခင် ဖြစ်ရင် <i>n</i> က <b>late</b> ထဲ ပါတယ်။"
+t6.005	<mark class="hl">Column တွေကို နာမည်နဲ့ မဟုတ်ဘဲ <b>နေရာ</b>နဲ့ ကိုက်တယ်။</mark> <code>Member(m, n, _)</code> ဆိုတာ ပထမ column m, ဒုတိယ column n။
+t6.006	<code>_</code> ဆိုတာ "ဒီမှာ တန်ဖိုးရှိတယ်, ဒါပေမဲ့ ဘာလဲ ဂရုမစိုက်ဘူး"။
+t6.007	စာလုံးတူကို နှစ်ခါသုံးရင် (Member ထဲရော Loan ထဲရော <i>m</i>) <mark class="hl">တန်ဖိုးတွေ တူရမယ်လို့ ဆိုလိုတယ်။</mark> Datalog က join လုပ်ပုံ ဒါပဲ။
+t6.008	Safe rule များ
+t6.009	Head ထဲက variable တိုင်းနဲ့ <code>NOT</code> ဒါမှမဟုတ် comparison ထဲ သုံးတဲ့ variable တိုင်းက <mark class="hl">body ထဲက ရိုးရိုး (negate မလုပ်ထား) table တစ်ခုထဲမှာလည်း ပေါ်ရင်</mark> rule က <b>safe</b>။ Variable က တကယ့် table နဲ့ မချိတ်ရင် ဘယ်တန်ဖိုးမဆို ဖြစ်နိုင်ပြီး အဖြေက အဆုံးမရှိ ဖြစ်သွားမယ်။
+t6.010	Recursion
+t6.011	Rule က သူ့ body ထဲမှာ ကိုယ့်နာမည်ကို သုံးနိုင်တယ်။ ဒါက ဘယ်အရှည်မဆို ကွင်းဆက်ကို လိုက်ခွင့်ပေး: category, သူ့ parent, parent ရဲ့ parent, စသဖြင့်။ SQL က <code>WITH RECURSIVE</code> နဲ့ အတူတူ လုပ်တယ်: <b>base case</b> က အစ row တွေ ပေး, <b>recursive case</b> က အခုထိ တွေ့တဲ့ row တွေကနေ နောက်တစ်ဆင့် ထည့်, row အသစ် မပေါ်တော့တဲ့အထိ ထပ်လုပ်။
+t6.012	သိထားရမယ့် စကားလုံးများ
+t6.024	မှတ်ထားပါ
+t6.025	head &lt;- body: body တစ်ခုလုံး ကိုက်ရင် head ထုတ်ပေးတယ်။
+t6.026	Variable တူ နှစ်ခါ = join; _ = ဂရုမစိုက်။
+t6.027	Safe: head, NOT နဲ့ comparison variable တိုင်းက positive table ထဲ ပေါ်ရမယ်။
+t6.028	အသေးစိတ်
+t6.029	Datalog rule များ
+t6.030	Rule မှာ head နဲ့ body ရှိ: <code>ans(x, y) &lt;- R(x, y, z) AND z &gt; 20.0</code>။ Underscore တွေက ကိုက်ပေမဲ့ မသုံးတဲ့ attribute များ။ Rule ကို ဘာသာပြန်တာက (1) relational algebra, (2) SQL, (3) အင်္ဂလိပ် စာကြောင်း ထုတ်တာ။
+t6.031	ယခင်မေးခွန်းက CUSTOMERS / PRODUCTS / SUPPLIERS / ORDERS / OFFERS schema ပေါ် rule နှစ်ခု ထပ်ပေးပြီး rule သုံးခု ဘာကြောင့် <b>safe မဖြစ်</b>လဲ မေးတယ်: <code>S(x) &lt;- R(y)</code>, <code>S(x) &lt;- R(y) AND NOT R(x)</code>, <code>S(x) &lt;- R(y) AND x &lt; y</code>။
+t6.032	Recursive CTE (WITH RECURSIVE)
+t6.033	Worksheet ရဲ့ category tree (Root A → Child A1 → Grandchild A1b) ပေါ်မှာ query က နာမည်ပေးထားတဲ့ node ကနေ root အထိ တက်ပြီး တစ်ဆင့်စီ relative_depth ကို တစ်လျှော့တယ်။ Worksheet က ရလဒ် row, base နဲ့ recursive case, query ရဲ့ အဓိပ္ပာယ်, နောက်ဆုံး SELECT ရဲ့ ရည်ရွယ်ချက်, ညီမျှတဲ့ Datalog expression တို့ကို မေးတယ်။
+t6.034	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t6.035	Flashcard များ
+t6.036	Quiz
+t6.037	နောက်တစ်ခု: T7 Indexing
+t7.001	<span class="num n2">7</span> File organization နဲ့ indexing တွက်ချက်မှုများ
+t7.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Data က disk ပေါ်မှာ အရွယ်ပုံသေ block တွေနဲ့ ရှိ, block ဖတ်တာက နှေးတဲ့အပိုင်း, index က block နည်းနည်း ဖတ်ဖို့ ရှိတယ်။
+t7.003	Disk က row တစ်ခုချင်း မပေးဘူး။ <b>Block</b> (page လို့လည်း ခေါ်) တစ်ခုလုံးကို ဖတ်တယ်, ဥပမာ 512 ဒါမှမဟုတ် 4096 byte။ Block ဖတ်တာက အဲ့ပေါ် တွက်ချက်မှု ဘာမဆိုထက် အများကြီး ကြာလို့ ရှာဖွေမှုရဲ့ ကုန်ကျစရိတ်ကို <b>block access</b> နဲ့ တိုင်းတယ်။
+t7.004	Row တွေကို block ထဲ ထည့်ခြင်း
+t7.005	သင်္ကေတ
+t7.006	အဓိပ္ပာယ်
+t7.007	ဥပမာ
+t7.008	Record size: field တိုင်းရဲ့ အရွယ်ကို ပေါင်း
+t7.010	Block size
+t7.013	Blocking factor: block တစ်ခုထဲ record အပြည့် = floor(B / R)
+t7.015	Record အရေအတွက်
+t7.016	Block အရေအတွက် = ceiling(r / bfr)
+t7.018	<mark class="hl">bfr အတွက် <b>အောက်</b>ချ, record တစ်ဝက် မဆံ့လို့။ b အတွက် <b>အပေါ်</b>တင်, တစ်ဝက်ပြည့် နောက်ဆုံး block လည်း block ပဲမို့။</mark>
+t7.019	Index မပါဘဲ record ရှာခြင်း
+t7.020	<b>Linear search</b>: block တွေကို တစ်ခုချင်း ဖတ်။ ပျမ်းမျှ တစ်ဝက် ဖတ်ရ (ဒီမှာ 250)။
+t7.021	<b>Binary search</b>: <mark class="hl">ရှာနေတဲ့ field ပေါ် file ကို sort လုပ်ထားမှသာ ဖြစ်နိုင်။</mark> အကြိမ်တိုင်း range ကို တစ်ဝက်ခွဲ: log<sub>2</sub>(500) ≈ 9 ခါ ဖတ်ရုံ။
+t7.022	Index ဆိုတာ ဘာလဲ
+t7.023	စာအုပ်နောက်ကျောက index လို အလုပ်လုပ်တယ်: (key, စာမျက်နှာနံပါတ်) ရဲ့ sort လုပ်ထားတဲ့ စာရင်းတို။ Database မှာ <b>index entry</b> တစ်ခုစီက (key value, pointer), pointer က block ဒါမှမဟုတ် record ဘယ်မှာလဲ ပြောတယ်။ Entry တွေက record အပြည့်ထက် အများကြီး သေးလို့ index က block အနည်းငယ်ထဲ ဆံ့ပြီး မြန်မြန် ရှာနိုင်တယ်။
+t7.025	အခြေခံ field
+t7.026	Entry များ
+t7.028	File ကို sort လုပ်ထားတဲ့ field (key)
+t7.029	<b>Block</b> တစ်ခုစီ တစ်ခု (sparse)
+t7.031	တခြား field ဘာမဆို
+t7.032	<b>Record</b> တစ်ခုစီ တစ်ခု (dense)
+t7.033	Multilevel index: index ရဲ့ index
+t7.034	Index ကိုယ်တိုင် block အများ ရှည်ရင် အပေါ်မှာ index အသေးတစ်ခု ဆောက်, အဲ့အပေါ် နောက်တစ်ခု, ထိပ်ဆုံးအဆင့် block တစ်ခုထဲ ဆံ့တဲ့အထိ။ Record ရှာဖို့ အဆင့်တစ်ခုစီ block တစ်ခု ဖတ်, ပြီးရင် data block: <b>levels + 1</b> block access။ ဒီအတွေးက တကယ့် database တွေ သုံးတဲ့ B-tree ရဲ့ အခြေခံ။
+t7.035	သိထားရမယ့် စကားလုံးများ
+t7.053	မှတ်ထားပါ
+t7.054	ကုန်ကျစရိတ်ကို block ဖတ်တာနဲ့ ရေတွက်တယ်။
+t7.055	bfr ကို အောက်ချ, block အရေအတွက်ကို အပေါ်တင်။
+t7.056	Primary index: block တစ်ခုစီ entry တစ်ခု။ Secondary: record တစ်ခုစီ တစ်ခု။ Multilevel: levels + 1 ခါ ဖတ်။
+t7.057	အသေးစိတ်
+t7.058	Scenario တစ်ခုကို နေရာတိုင်း ပြန်သုံးတယ်: အရှည်ပုံသေ EMPLOYEE record <b>r = 30,000</b> ပါ file, block pointer <b>P = 6</b> byte, record pointer <b>P<sub>R</sub> = 7</b> byte။ တွက်ပြထားတဲ့ အဖြေလွှာက <b>B = 512</b> byte နဲ့ 10-byte Phone field သုံး; review worksheet က B = 512 နဲ့ 9-byte Phone; ယခင်မေးခွန်းက <b>B = 1024</b> နဲ့ 9-byte Phone သုံးတယ်။ <mark class="hl">ပေးထားတဲ့ field စာရင်းကနေ R ကို အမြဲ ပြန်တွက်ပါ။</mark>
+t7.059	Data file
+t7.060	bfr အတွက် floor, block က record အပိုင်းအစ မကိုင်နိုင်လို့ (unspanned); b အတွက် ceiling, နောက်ဆုံး မပြည့်တဲ့ block ကို ရေတွက်ဖို့။
+t7.061	Index မပါဘဲ data file ရှာခြင်း
+t7.062	Linear search: အကောင်းဆုံး block 1, အဆိုးဆုံး b = 7,500 block, ပျမ်းမျှ b/2 = 3,750 block။
+t7.063	Key နဲ့ စီထားတဲ့ file ပေါ် binary search: log<sub>2</sub>(7,500) ≈ 13 block access ခန့်။
+t7.064	Single-level index
+t7.065	File ကို field နဲ့ မစီထားရင် သင့်တော်တဲ့ index က <b>secondary index</b>: non-ordering field ပေါ် index, key ဖြစ်ဖြစ် မဖြစ်ဖြစ် field ဘာမဆိုပေါ် ဖန်တီးနိုင်။
+t7.066	Multilevel index
+t7.067	Case (B = 512)
+t7.071	Index block စုစုပေါင်း
+t7.072	Access များ
+t7.073	Ssn ပေါ် primary (entry 7,500)
+t7.074	Ssn ပေါ် secondary (entry 30,000)
+t7.075	<b>Pointer size အရေးကြီး</b>အဖြေလွှာက index entry တိုင်းကို 6-byte block pointer နဲ့ ဆောက်တယ်။ Review worksheet နဲ့ ယခင်မေးခွန်းက secondary index က <b>record</b> အဆင့်ကို ညွှန်တယ်လို့ ရှင်းရှင်း ပြောလို့ အဲ့မှာ entry က key + 7-byte record pointer = 16 byte။ ယခင်မေးခွန်း (Q6) က အဲ့ပုံစံကို တွက်တယ်။
+t7.076	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t7.077	Flashcard များ
+t7.078	Quiz
+t7.079	လေ့ကျင့်ခန်း: Index practice
+t7.080	နောက်တစ်ခု: T8 Query optimization
+t8.001	<span class="num n2">8</span> Heuristic query optimization
+t8.002	<b>တစ်ကြောင်းတည်းနဲ့</b>ကိုယ်လိုချင်တဲ့ အဖြေကို ပြော; DBMS က အဲ့ဒါရဖို့ အစျေးအပေါဆုံး အဆင့်အစဉ်ကို တွက်တယ်။
+t8.003	SQL က <b>declarative</b>: နည်းလမ်း မဟုတ်ဘဲ ရလဒ်ကို ဖော်ပြတယ်။ မေးခွန်းတူကို အစဉ်အမျိုးမျိုးနဲ့ တွက်နိုင်ပြီး တချို့ အစဉ်တွေက အဆထောင်ချီ နှေးတယ်။ အစဉ်ရွေးတဲ့ DBMS အပိုင်းက <b>query optimizer</b>။
+t8.004	Query tree များ
+t8.005	Query ကို tree အဖြစ် ဆွဲနိုင်တယ်။ Table တွေက အောက်ခြေက leaf, operation (<span class="sym ra">σ</span>, <span class="sym ra">π</span>, <span class="sym ra">⋈</span>, ×) တစ်ခုစီက node, data က ထိပ်က အဖြေဆီ အပေါ်တက်စီးတယ်။ Tree ကို ပြန်ရေးရင် အဖြေ မပြောင်းဘဲ အဆင့်တွေ ပြောင်းတယ်။
+t8.006	လက်တွေ့စည်းမျဉ်းများ (heuristic)
+t8.007	AND အများပါ filter ကို filter အသေးတွေအဖြစ် <b>ခွဲ</b>, တစ်ခုစီ သီးခြား ရွှေ့နိုင်အောင်။
+t8.008	<b>စောစော filter</b>: filter တစ်ခုစီကို tree အောက်ဘက် ရွှေ့ပြီး သူစစ်တဲ့ table အပေါ်တည့်တည့် ထား။ Row နည်းနည်းပဲ အပေါ်တက်။
+t8.009	<b>အားလုံးတွဲမယ့်အစား join</b>: Cartesian product နောက် ကိုက်ညီမှု condition လိုက်တာကို join နဲ့ အစားထိုး။
+t8.010	<b>လိုတာပဲ သယ်</b>: နောက်မှ သုံးမယ့် column (join key နဲ့ output) တွေကိုသာ တတ်နိုင်သမျှ အောက်ဘက်မှာ ထား။
+t8.011	ဘာကြောင့် အရေးကြီးလဲ
+t8.012	Member 1,000 ကို loan 50,000 နဲ့ တွဲရင် filter မလုပ်ခင် ပေါင်းစပ်မှု သန်း 50 ရတယ်။ Member တွေကို လိုတဲ့ 20 ယောက်အထိ အရင် filter, ပြီးမှ join ရင် အလုပ် အရမ်းနည်းတယ်။ အဖြေတူ, ကုန်ကျစရိတ် အရမ်းကွာ။
+t8.013	သိထားရမယ့် စကားလုံးများ
+t8.023	မှတ်ထားပါ
+t8.024	ကိုယ်လိုချင်တာ ပြော; optimizer က ဘယ်လိုလဲ ဆုံးဖြတ်။
+t8.025	<mark class="hl">စောစော filter, အားလုံးတွဲမယ့်အစား join, လိုတဲ့ column ပဲ သယ်။</mark>
+t8.026	အသေးစိတ်
+t8.027	Query ကို <b>query tree</b> အဖြစ် အရင်ရေးတယ်: အောက်ခြေမှာ base relation တွေရဲ့ Cartesian product, အပေါ်မှာ <code class="kw">WHERE</code> clause တစ်ခုလုံးရဲ့ selection ကြီးတစ်ခု, ထိပ်မှာ projection။ Heuristic optimization က အဲ့ tree ကို run ရ ပိုသက်သာတဲ့ ညီမျှ tree အဖြစ် ပြန်ရေးတယ်။
+t8.028	အဆင့် လေးဆင့်
+t8.029	<b>Cascade selection</b> — conjunctive <span class="sym ra">σ</span> တစ်ခုကို condition တစ်ခုစီ <span class="sym ra">σ</span> တစ်ခုအဖြစ် ခွဲ။
+t8.030	<b>Selection ကို အောက်ရွှေ့</b> — <span class="sym ra">σ</span> တစ်ခုစီကို tree အောက်ဘက် တတ်နိုင်သမျှ ရွှေ့ပြီး သူကန့်သတ်တဲ့ relation ဘေးမှာ ထား (ဥပမာ <span class="ra-sym">σ<sub>ProdType = 'Widget'</sub></span> ကို Product အပေါ်တည့်တည့်, <span class="ra-sym">σ<sub>Date.Month = July</sub></span> ကို Invoice အပေါ်တည့်တည့်)။
+t8.031	<b>Select ပါ Cartesian product က join ဖြစ်</b> — × နောက် join condition ပေါ် <span class="sym ra">σ</span> လိုက်တာကို အဲ့ condition ပါ <span class="sym ra">⋈</span> နဲ့ အစားထိုး။
+t8.032	<b>Projection push-down</b> — နောက်မှ လိုတဲ့ attribute (join key နဲ့ output column) တွေကိုသာ အပေါ်တက်စေဖို့ tree အောက်ပိုင်းမှာ <span class="sym ra">π</span> node ထည့်; ဥပမာ Invoice အပေါ် <span class="ra-sym">π<sub>InvID, CustID</sub></span>, Customer အပေါ် <span class="ra-sym">π<sub>ID, Type</sub></span>။
+t8.033	<span class="fig-n">1</span>Widget query နဲ့ သူ့ မူလ query tree
+t8.034	<span class="fig-n">2</span>အဆင့် 1: selection ကို cascade
+t8.035	<span class="fig-n">3</span>အဆင့် 2: selection တွေကို အောက်ရွှေ့
+t8.036	<span class="fig-n">4</span>အဆင့် 3: Cartesian product နဲ့ selection က join ဖြစ်
+t8.037	<span class="fig-n">5</span>အဆင့် 4: projection တွေကို အောက်တွန်း
+t8.038	Join အစဉ် ရွေးခြင်း
+t8.039	ယခင်မေးခွန်းက optimizer က Enrollment ကို Student နဲ့ အရင် join မလား Course နဲ့ အရင် join မလား ဘယ်လို ဆုံးဖြတ်လဲ, ထည့်စဉ်းစားတဲ့ အချက်တွေ ဘာလဲ မေးတယ်။
+t8.040	Worksheet ဥပမာ
+t8.041	လက်ရေးအဖြေ: Course နဲ့ Enrollment ရဲ့ Cartesian product အပေါ် <span class="sym ra">σ</span>, အဲ့အပေါ် <span class="sym ra">π</span> Title ကနေ စ; <span class="sym ra">σ</span> Grade = 'A' နဲ့ <span class="sym ra">σ</span> Instructor = "…" အဖြစ် cascade; <span class="sym ra">σ</span> Grade = 'A' ကို Enrollment ပေါ်, <span class="sym ra">σ</span> Instructor = "…" ကို Course ပေါ် အောက်ရွှေ့; product ကို join နဲ့ အစားထိုး; <span class="sym ra">π</span> Title ကို ထိပ်မှာ ထား။
+t8.042	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t8.043	Flashcard များ
+t8.044	Quiz
+t8.045	နောက်တစ်ခု: T9 Transactions

@@ -1,0 +1,114 @@
+# DBS: Labs 3-10, cheat, mock and exam headers
+lab3.001	<span class="num n1">3</span> ER design: Inventory နဲ့ Vote
+lab3.002	Inventory requirement များ
+lab3.003	Product (code, နာမည်, ရောင်းတဲ့ဌာန, supplier contact) မှတ်; supplier တစ်ခုစီနဲ့ order, product တစ်ခုစီ line ပါ; customer ဆီ ထုတ်ပေးတဲ့ invoice, product တစ်ခုစီ line ပါ; နေ့ကုန်မှသာ ပြောင်းတဲ့ ဈေးနှုန်းမှတ်တမ်း; ပြင်နိုင်တဲ့ customer အသေးစိတ်; စုစုပေါင်းနဲ့ ဝယ်ယူမှုတစ်ခုစီ ကျန်တဲ့ stock။
+lab3.004	Entity များ: Supplier, Product, Department, Customer, Invoice။ Relationship များ: Supply (N:M, Qty, Amount, RemainQty ပါ), sold by (N:1), Issue (1:N), in (M:N, Qty, Amount ပါ)။ Price_change က Price နဲ့ Datetime ကိုင်တဲ့ Product ရဲ့ multivalued attribute။ Cardinality နဲ့ participation အကြောင်းပြချက် ခေါင်းစဉ် 3 မှာ။
+lab3.005	Vote requirement များ
+lab3.006	U.S. STATE (Name, Region), CONGRESS_PERSON (Name, District, Start_date, Party), BILL (Bill_name, Date_of_vote, Passed_or_failed, Sponsor), နဲ့ congressperson တစ်ယောက်စီ bill တစ်ခုစီပေါ် ဘယ်လို မဲပေးလဲ။ Diagram: STATE 1—N CONGRESS_PERSON (have, congressperson ဘက်မှာ total), CONGRESS_PERSON M—N BILL (sponsored), CONGRESS_PERSON M—N BILL (voted, attribute Result)။
+lab4.001	<span class="num n1">4</span> Relational algebra အဖြေလွှာ
+lab4.002	Company schema: EMPLOYEE, DEPARTMENT, WORKS_ON(Essn, Pno, Hours)။
+lab5.001	<span class="num n1">5</span> Intermediate SQL, အပိုင်း 1
+lab5.002	ကွဲပြားတဲ့ customer address type တစ်ခုစီရဲ့ အရေအတွက်: AddressType ပေါ် <code class="kw">GROUP BY</code>။
+lab5.003	Address တစ်ခုထက်ပိုတဲ့ customer ဘယ်နှစ်ယောက်: <code class="kw">HAVING</code> <code class="kw">COUNT</code> &gt; 1 ပါ <code class="kw">FROM</code> ထဲ subquery, ပြီးရင် အပြင်မှာ <code class="kw">COUNT(*)</code>။
+lab5.004	Address တစ်ခုထက်ပိုတဲ့ customer တွေရဲ့ CustomerID, ပထမနာမည်နဲ့ မျိုးနွယ်နာမည်: column သုံးခုပေါ် <code class="kw">GROUP BY</code>, <code class="kw">HAVING</code> COUNT(c.CustomerID) &gt; 1။
+lab5.005	Product တစ်ခုစီရဲ့ ProductID, Name နဲ့ စုစုပေါင်း ဝင်ငွေ: p.ProductID, p.Name ပေါ် <code class="kw">GROUP BY</code> နဲ့ SUM(sod.LineTotal), <code class="kw">ORDER BY</code> TotalRevenue DESC။
+lab5.006	StandardCost &gt; 800 ပါ product တွေ order လုပ်ခဲ့တဲ့ customer များ: <code class="kw">DISTINCT</code> ပါ table လေးခု join။
+lab5.007	Customer အရေအတွက်အလိုက် ထိပ်ဆုံးမြို့ လေးမြို့နဲ့ နိုင်ငံ: City, CountryRegion ပေါ် <code class="kw">GROUP BY</code>, <code class="kw">ORDER BY</code> count DESC <code class="kw">LIMIT</code> 4။
+lab5.008	Sales order တစ်ခုစီရဲ့ product အရေအတွက်, AVG(UnitPrice) &gt; 300 ဖြစ်တာတွေသာ: row 19 ခု။
+lab5.009	ရပ်ဆိုင်းထားတဲ့ product များ: <code>WHERE p.SellEndDate IS NOT NULL</code>, row 98 ခု။
+lab5.010	9–10 semantics
+lab5.011	"Customer တစ်ယောက်စီရဲ့ ပျမ်းမျှ total due ကို ရှာပြီး နာမည်နဲ့ ပျမ်းမျှ total due ကို အမြင့်ဆုံးကနေ အသေးဆုံး ပြပါ။" "Product category တစ်ခုစီက အဈေးအကြီးဆုံး ဈေးနှုန်းကို ထုတ်ပါ" (category နာမည်အလိုက် group လုပ်ထားတဲ့ MAX(ListPrice))။
+lab6.001	<span class="num n1">6</span> Intermediate SQL, အပိုင်း 2
+lab6.002	London မှာ မနေတဲ့ customer တွေရဲ့ TotalDue ရဲ့ <code class="kw">SUM</code>, <code class="kw">AVG</code>, <code class="kw">MIN</code>, <code class="kw">MAX</code>: လက်ခံတဲ့ ပုံစံနှစ်ခု, <code class="kw">NOT IN</code> subquery ဒါမှမဟုတ် <code>a.City NOT LIKE 'London'</code>။
+lab6.003	ရုံးချုပ်ဆီ ပို့တဲ့ order များ: AddressType = 'Main Office' ဖြစ်တဲ့နေရာမှာ SalesOrderHeader.ShipToAddressID ကို CustomerAddress.AddressID နဲ့ join။
+lab6.004	ရပ်ဆိုင်းထားတဲ့ product များ — အပိုင်း 1 မေးခွန်း 8 နဲ့ query တူ။ <span class="flag">ထပ်နေ</span>
+lab6.005	Bike parent category ထဲက အနက်နဲ့ အပြာ product တွေရဲ့ နာမည်, အရောင်, list price နဲ့ category ကို list price အကြီးကနေ စီ: လက်ခံတဲ့ ပုံစံနှစ်ခု (ParentProductCategoryID IN subquery, ဒါမှမဟုတ် category Name <code class="kw">LIKE</code> '%Bikes%'); row 43 ခု။
+lab6.006	Parent category တစ်ခုစီရဲ့ တိုက်ရိုက် sub-category များ: ProductCategory ရဲ့ self-join (ခေါင်းစဉ် 5)။
+lab6.007	Address အများရှိလား Y/N flag ပါ customer နဲ့ address တွေကို CountryRegion, LastName, FirstName နဲ့ စီ: COUNT(…) <code class="kw">OVER</code> (<code class="kw">PARTITION BY</code> CustomerID) ပေါ် CASE။
+lab6.008	7–9 semantics
+lab6.009	မေးခွန်း 9 က "product category တစ်ခုစီက အဈေးအကြီးဆုံး ဈေးနှုန်း ထုတ်" ကို ထပ်မေးတယ်။ မေးခွန်း 7 နဲ့ 8 က မူရင်းမှာ မယုံကြည်ရ (ခေါင်းစဉ် 5 ကြည့်)။ <span class="flag">မကိုက်ညီ</span>
+lab7.001	<span class="num n2">7</span> Index တွက်ချက်ခြင်း
+lab7.002	B = 512, P = 6, P<sub>R</sub> = 7, R = 115 ပါ record 30,000 EMPLOYEE file ပေါ် မေးခွန်း ဆယ့်တစ်ခု။
+lab7.003	မေးတာ
+lab7.004	အဖြေ
+lab7.005	Record size
+lab7.007	bfr, block, ကျန်တဲ့နေရာ
+lab7.008	Block တစ်ခု record 4; block 7,500; 52 byte
+lab7.009	Linear search access များ
+lab7.010	အကောင်းဆုံး 1, အဆိုးဆုံး 7,500, ပျမ်းမျှ 3,750
+lab7.011	Data file ပေါ် binary search
+lab7.013	Ssn ပေါ် primary index, single level
+lab7.014	bfr<sub>i</sub> = 34; entry 7,500; block 221; 8 + 1 = 9 access
+lab7.015	File ကို Ssn နဲ့ မစီထား: ဘယ် index
+lab7.016	Secondary index (non-ordering field ပေါ် index)
+lab7.017	Ssn ပေါ် secondary single-level
+lab7.018	Block 883; 10 + 1 = 11 access
+lab7.019	Department_code ပေါ် dense secondary index, bfr<sub>i</sub>
+lab7.020	Entry 15 byte; block တစ်ခု 34
+lab7.021	Q8 အတွက် entry, block, access
+lab7.022	Entry 30,000; block 883; 10 + 1 = 11
+lab7.023	Multilevel primary index
+lab7.024	221 / 7 / 1 → 3 level, block 229, access 4
+lab7.025	Multilevel secondary index
+lab7.026	883 / 26 / 1 → 3 level, block 910, access 4
+lab7.027	Q8 က ညီညီမျှမျှ ဖြန့်ထားတဲ့ ကွဲပြားတဲ့ Department_code တန်ဖိုး 1,000 လို့ ပြောပေမဲ့ အဖြေက index ကို record တစ်ခုစီ entry တစ်ခုနဲ့ dense အဖြစ် သဘောထားတယ်; ကွဲပြားတဲ့ တန်ဖိုး အရေအတွက်ကို မသုံးဘူး။
+lab8.001	<span class="num n2">8</span> Heuristic optimization
+lab8.002	Slide ခြောက်ခု: <span class="ra-sym">π<sub>Type</sub>(σ<sub>ProdType = 'Widget'</sub>(σ<sub>Date.Month = July</sub>(Customer ⋈ Invoice ⋈ LineItem ⋈ Product)))</span> အတွက် မူလ query tree, ပြီးရင် "heuristic optimization အတွင်း query tree ကို ညီမျှတဲ့ tree အဖြစ် ပြောင်းတဲ့ အဆင့်တွေ ပြပါ" task, နောက်မှာ ပြောင်းထားတဲ့ tree လေးခု: cascade selection, selection ကို အောက်ရွှေ့, select ပါ Cartesian product ကို join, projection။ အဆင့်တွေ ခေါင်းစဉ် 8 မှာ။
+lab9.001	<span class="num n2">9</span> Transaction များ
+lab9.002	မေးတာ
+lab9.003	အဖြေ
+lab9.004	Query 3 ပြီးနောက် Session A က 10001 အတွက် မြင်တဲ့ balance
+lab9.005	100 လျော့ — session က ကိုယ့် commit မလုပ်ရသေးတဲ့ ပြောင်းလဲမှုကို မြင်
+lab9.006	Session B မြင်တဲ့ balance
+lab9.007	မူလ — commit မလုပ်ရသေးတဲ့ ပြောင်းလဲမှုကို တခြား session တွေ မမြင်
+lab9.008	Query 4 က 10001 ကနေ 500 ထုတ်လား?
+lab9.009	မထုတ် — connection A က lock ကိုင်ထား
+lab9.010	Query 5 က 10001 ကနေ 10002 ဆီ 100 လွှဲလား?
+lab9.011	မလွှဲ — A ရဲ့ transaction commit မလုပ်ရသေး
+lab9.012	Query 7 မှာ ဘာဖြစ်လဲ?
+lab9.013	<code class="kw">COMMIT</code> က ပြောင်းလဲမှုကို အမြဲတမ်း ဖြစ်စေလို့ လွှဲမှု ပြီးဆုံး
+lab9.014	Query 10 ပြီးနောက် 10003 ရဲ့ balance နဲ့ အကြောင်းရင်း
+lab9.015	1000 — connection A က rollback လုပ်ပြီး ပြောင်းလဲမှုတွေ ပယ်ဖျက်
+lab9.016	စပေမဲ့ commit ရော rollback ရော ဘယ်တော့မှ မလုပ်
+lab9.017	DBMS အများစုက အလိုအလျောက် rollback; အဲ့အထိ တခြား session တွေ ပြောင်းလဲမှုကို မမြင်
+lab10.001	<span class="num n2">10</span> User, privilege နဲ့ role
+lab10.002	MySQL ထဲ HR schema ပေါ် task ဆယ့်တစ်ခု: host မပါ <code class="kw">CREATE USER</code> ဘာကြောင့် မှားလဲ; password မျှသုံးတဲ့ localhost account လေးခု; statement တစ်ခုထဲ grant တဲ့ hr role; role အတွက် hr.* ပေါ် <code class="kw">SELECT</code>; password ပြောင်းဖို့ <code class="kw">ALTER</code> USER; column-level <code class="kw">SELECT</code> ပါ Docker subnet ကို ကန့်သတ်ထားတဲ့ salary_app account; director အတွက် hr.employees ပေါ် <code class="kw">UPDATE</code>; မှားပေးထားတဲ့ grant ကို revoke; hr.* ပေါ် <code class="kw">INSERT</code>, <code class="kw">UPDATE</code>, <code class="kw">DELETE</code> ပါ VPN-address developer; နုတ်ထွက်တဲ့ user ကို အားလုံး revoke ပြီး drop; <code class="kw">GRANT</code> statement ဖတ်ခြင်း။ Statement အားလုံး ခေါင်းစဉ် 10 မှာ။
+mock.001	Flashcard များ
+mock.002	Quiz
+mock.003	Mock paper များ
+mock.004	Key နဲ့ constraint
+mock.005	Index လေ့ကျင့်ခန်း
+mock.006	Transaction session များ
+mock.007	Referential action များ
+mock.008	SQL clause အစဉ်
+mock.009	Mock paper များ
+mock.010	မေးခွန်း 8 · 90 မှတ် · 3 နာရီ · ယခင်မေးခွန်းနဲ့ ပုံစံတူ။
+exam.001	ယခင်မေးခွန်း
+exam.002	Mid-semester မေးခွန်း · မေးခွန်း 8 · 90 မှတ် · 3 နာရီ · PDF မှတ်စု ဖွင့်ခွင့်ရှိ, internet မရ။
+cheat.001	အနှစ်ချုပ်
+cheat.002	<span class="badge b1">T7</span> Index ပုံသေနည်းများ
+cheat.003	Index က block ကို ညွှန်ရင် block pointer; record ကို ညွှန်ရင် record pointer။
+cheat.004	<span class="badge b1">T2</span> Referential action များ
+cheat.005	Action
+cheat.006	ညွှန်ခံရတဲ့ row ဖျက်ခံရ / key update ဖြစ်ရင်
+cheat.008	ညွှန်နေတဲ့ row တွေ ဖျက်ခံရ / ကိုက်အောင် update ဖြစ်
+cheat.010	ညွှန်နေတဲ့ FK က <code class="kw">NULL</code> ဖြစ်
+cheat.012	ညွှန်နေတဲ့ FK က column ရဲ့ <code class="kw">DEFAULT</code> ယူ
+cheat.013	<span class="badge b2">T4</span> Relational algebra သင်္ကေတများ
+cheat.014	<b><span class="sym ra">σ</span></b> row ရွေး
+cheat.015	<b><span class="sym ra">π</span></b> column ရွေး, ထပ်တာ မပါ
+cheat.016	<b><span class="sym ra">∪</span> − <span class="sym ra">∩</span></b> set operation များ
+cheat.018	<b><span class="sym ra">⋈</span></b> join (= ပေါ် equijoin)
+cheat.019	<b><span class="sym ra">ρ</span></b> rename · <b><span class="sym ra">÷</span></b> division · <b>←</b> assignment
+cheat.020	စာသားပုံစံ: <code>sigma_(cond)(R)</code> · <code>pi_(a,b)(R)</code> · <code>join_(R,S)</code>
+cheat.021	<span class="badge b2">T8</span> Heuristic optimization အစဉ်
+cheat.022	<b><span class="sym ra">σ</span> ကို cascade</b> → <b><span class="sym ra">σ</span> ကို အောက်ရွှေ့</b> → <b>× + <span class="sym ra">σ</span> ⇒ <span class="sym ra">⋈</span></b> → <b><span class="sym ra">π</span> ကို အောက်တွန်း</b>။ Tree အောက်ပိုင်းက projection တွေက join key နဲ့ output column ကိုသာ သယ်တယ်။
+cheat.023	<span class="badge gr">T10</span> MySQL privilege များ
+cheat.024	<span class="badge gr">T1 · T9</span> အမြန်မှတ်ရန်
+cheat.026	Tuple ကို ခွဲခြားတဲ့ attribute အစု ဘာမဆို; <b>candidate key</b> = minimal superkey
+cheat.028	တခြား table ရဲ့ primary key ဆီ ချိတ်; <code class="kw">NULL</code> ဖြစ်နိုင်
+cheat.030	Referential integrity ကိုသာ ချိုးဖောက်နိုင်
+cheat.031	<b>Commit မလုပ်ရသေးတဲ့ ပြောင်းလဲမှု</b>
+cheat.032	ကိုယ့် session က မြင်, တခြားသူ မမြင်; lock ထားတဲ့ row ပေါ် တခြားသူကို ပိတ်ဆို့
+cheat.033	အမြဲတမ်း ဖြစ်စေ / ပယ်ဖျက်; ဖွင့်ထားဆဲ transaction ကို ပုံမှန် အလိုအလျောက် rollback
+cheat.035	မျဉ်းနှစ်ထပ် = total, မျဉ်းတစ်ထပ် = partial

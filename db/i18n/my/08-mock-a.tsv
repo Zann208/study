@@ -1,0 +1,99 @@
+# DBS: Mock paper A
+ma1.001	<span class="badge b1">Q1 · 10</span> Referential action များ
+ma1.002	1.1) COMPANY data သုံးပြီး ဒီ constraint ရဲ့ အဓိပ္ပာယ်ကို technical ကျကျ ရှင်းပြပါ။
+ma1.003	1.2) Constraint ကို ပြင်ပါ: (1) ဝန်ထမ်းတွေ အလုပ်လုပ်နေဆဲ project ကို ဖျက်မရ, (2) project ကို နံပါတ်ပြန်ပေးရင် WORKS_ON က နံပါတ်အသစ်ကို အလိုအလျောက် လိုက်။
+ma1.004	နမူနာ အဖြေ
+ma1.005	<b>1.1</b> WORKS_ON ထဲက Pno က PROJECT.Pnumber ကို ညွှန်တဲ့ foreign key: Pno တိုင်းက ရှိပြီးသား project ရဲ့ နံပါတ် ဖြစ်ရမယ်။
+ma1.006	<b><code class="kw">ON DELETE CASCADE</code>:</b> project ကို ဖျက်ရင် အဲ့ project အတွက် WORKS_ON row တိုင်းလည်း ဖျက်တယ်။ Project 10 (Computerization) ကို ဖျက်ရင် &lt;'333445555', 10, 10.0&gt;, &lt;'999887777', 10, 10.0&gt; နဲ့ &lt;'987987987', 10, 35.0&gt; ကို ဖျက်တယ်။
+ma1.007	<b><code class="kw">ON UPDATE SET NULL</code>:</b> project နံပါတ် ပြောင်းရင် ကိုက်တဲ့ WORKS_ON row တွေမှာ Pno ကို <code class="kw">NULL</code> ထားတယ်။ ဒါပေမဲ့ Pno က WORKS_ON ရဲ့ primary key (Essn, Pno) ရဲ့ အစိတ်အပိုင်းမို့ <code class="kw">NULL</code> က entity integrity ကို ချိုးဖောက်: project 10 ကို 11 ပြောင်းတာ ငြင်းခံရတယ်။
+ma1.008	ရှင်းလင်းချက်
+ma1.009	<b>Foreign key က primary key ရဲ့ အစိတ်အပိုင်းလား စစ်ပါ။</b> Pno က ဖြစ်လို့ ဒီမှာ <code class="kw">SET NULL</code> ဘယ်တော့မှ မအောင်မြင်။ ဒါကို သတိထားမိတာက ရိုးရိုးဖော်ပြချက်က လွတ်သွားတဲ့ အမှတ်ကို ရစေတယ်။
+ma1.010	<b>Requirement (1)</b> ဆိုတာ "ငြင်း": <code class="kw">RESTRICT</code> (ဒါမှမဟုတ် <code class="kw">NO ACTION</code>, statement အဆုံးမှာ စစ်ပြီး ငြင်းတာပဲ)။
+ma1.011	<b>Requirement (2)</b> ဆိုတာ "ပြောင်းလဲမှုကို ကူး": update ပေါ် <code class="kw">CASCADE</code>။
+ma1.012	Action တစ်ခုစီက ဘယ် row တွေကို ထိလဲ ပြဖို့ COMPANY state ထဲက <b>တကယ့် tuple တွေ သုံးပါ</b>။
+ma1.013	ကိုယ့်ရမှတ်
+ma2.001	<span class="badge b1">Q2 · 15</span> COMPANY data နဲ့ ဥပမာပြ
+ma2.002	စာကြောင်းတစ်ကြောင်းစီကို ဥပမာပြဖို့ COMPANY database ထဲက နမူနာ data ပြပါ။
+ma2.003	2.1) Relation မှာ candidate key တစ်ခုထက် ပိုရှိနိုင်တယ်။<br>2.2) Primary key တန်ဖိုး ဘာမှ <code class="kw">NULL</code> မဖြစ်နိုင်။<br>2.3) Foreign key က ကိုယ့် relation ကိုယ်တိုင်ကို ညွှန်နိုင်တယ်။<br>2.4) Insert operation က schema-based constraint လေးခုထဲက ဘာကိုမဆို ချိုးဖောက်နိုင်တယ်။<br>2.5) Primary key လည်းမဟုတ် foreign key လည်းမဟုတ်တဲ့ attribute ကို update လုပ်တာက domain constraint ကိုသာ ချိုးဖောက်နိုင်တယ်။
+ma2.004	နမူနာ အဖြေ
+ma2.005	<b>2.1</b> DEPARTMENT မှာ {Dnumber} ရော {Dname} ရော unique: &lt;'Research', 5, …&gt;, &lt;'Administration', 4, …&gt;, &lt;'Headquarters', 1, …&gt;။ ဌာနနှစ်ခု နံပါတ် ဒါမှမဟုတ် နာမည် တူ မမျှလို့ နှစ်ခုလုံး candidate key; Dnumber ကို primary key ရွေးပြီး Dname ကို <code class="kw">UNIQUE</code> ကြေညာတယ်။
+ma2.006	<b>2.2</b> <code class="kw">INSERT INTO</code> DEPT_LOCATIONS VALUES (<code class="kw">NULL</code>, 'Austin') ငြင်းခံရ: Dnumber က primary key (Dnumber, Dlocation) ရဲ့ အစိတ်အပိုင်း, <code class="kw">NULL</code> key က tuple ကို မခွဲခြားနိုင်။
+ma2.007	<b>2.3</b> EMPLOYEE.Super_ssn က EMPLOYEE.Ssn ကို ညွှန်တယ်။ &lt;'John', 'B', 'Smith', '123456789', …, Super_ssn = '333445555', Dno = 5&gt; ထဲမှာ 333445555 က relation တူထဲက Franklin Wong ရဲ့ Ssn။
+ma2.008	Domain: Salary = 'high' ပါ ဝန်ထမ်း ထည့်။
+ma2.009	Key: Ssn '999887777' (Alicia Zelaya ရဲ့ ဖြစ်ပြီးသား) ပါ ဝန်ထမ်း ထည့်။
+ma2.010	Entity integrity: Ssn <code class="kw">NULL</code> ပါ ဝန်ထမ်း ထည့်။
+ma2.011	Referential integrity: Dno = 7 (ဌာန 7 မရှိ) ပါ ဝန်ထမ်း ထည့်။
+ma2.012	<b>2.5</b> <code class="kw">UPDATE</code> EMPLOYEE SET Salary = 'high' <code class="kw">WHERE</code> Ssn = '123456789' က Salary ရဲ့ domain ကို ချိုးဖောက်တယ်။ Salary = 28000 နဲ့ update တူက ဘာမှ မချိုးဖောက်: Salary က key မဟုတ်လို့ ထပ်နေတဲ့ ဒါမှမဟုတ် <code class="kw">NULL</code> key မဖြစ်နိုင်, ဘာကမှ သူ့ကို မညွှန်။
+ma2.013	ရှင်းလင်းချက်
+ma2.014	<b>တစ်ခုစီ 3 မှတ်:</b> တကယ့် tuple ဒါမှမဟုတ် statement နဲ့ အကြောင်းရင်း။
+ma2.015	<b>2.1</b> Candidate key ဆိုတာ minimal superkey ဘာမဆို။ Textbook COMPANY DDL က ဒီအကြောင်းကြောင့်ပဲ Dname ကို <code class="kw">UNIQUE</code> ကြေညာတယ်။
+ma2.016	<b>2.4</b> Insert က tuple အသစ်တစ်ခုလုံး ထည့်လို့ စစ်ဆေးမှု လေးခုလုံး run တယ်: domain, key, entity integrity, referential integrity။ Constraint တစ်ခုစီအတွက် statement တစ်ခု ပေးပါ။
+ma2.017	<b>2.5</b> Delete အကြောင်း ယခင်မေးခွန်း စာကြောင်းနဲ့ နှိုင်းယှဉ်ပါ: operation က ဘာပြောင်းလဲ ဆိုတာကနေ အကြောင်းပြပါ။ ရိုးရိုး attribute ကို uniqueness အတွက် မနှိုင်းယှဉ်, <code class="kw">NULL</code> key မဖြစ်နိုင်, ဘယ်သူမှ မညွှန်လို့ သူ့ domain ကိုသာ စစ်တယ်။
+ma2.018	ကိုယ့်ရမှတ်
+ma3.001	<span class="badge b1">Q3 · 10</span> Query semantics
+ma3.002	အောက်က query ရဲ့ အဓိပ္ပာယ်ကို ရှင်းပြပြီး COMPANY state ပေါ် ရလဒ် ပေးပါ။
+ma3.003	နမူနာ အဖြေ
+ma3.004	Project တစ်ခုစီအတွက် project နံပါတ်နဲ့ တစ်ခုစီ အနည်းဆုံး 10 နာရီ ရှိတဲ့ assignment တွေရဲ့ စုစုပေါင်းနာရီကို ပြပါ, ဒါပေမဲ့ အဲ့လိုနာရီ စုစုပေါင်း 40 ထက် ကြီးတဲ့ project တွေကိုသာ။
+ma3.006	ထားတဲ့ row များ (Hours ≥ 10)
+ma3.008	ထားလား?
+ma3.009	ထား
+ma3.011	ထား
+ma3.012	ထား
+ma3.014	ထား
+ma3.015	ရလဒ်: (1, 52.5), (3, 50.0), (10, 55.0), (30, 50.0)။
+ma3.016	ရှင်းလင်းချက်
+ma3.017	<b><code class="kw">WHERE</code> အရင်:</b> 10 နာရီအောက် row တွေကို မပေါင်းခင် ဖယ်တယ်: (123456789, 2, 7.5) နဲ့ (987987987, 30, 5.0)။
+ma3.018	<b><code class="kw">NULL</code> နာရီ:</b> (888665555, 20, <code class="kw">NULL</code>) ကိုလည်း ဖယ်တယ်, <code class="kw">NULL</code> ≥ 10 က unknown ဖြစ်ပြီး <code class="kw">WHERE</code> က condition true ဖြစ်တဲ့ row တွေကိုသာ ထားလို့။
+ma3.019	<b><code class="kw">GROUP BY</code> Pno, ပြီးရင် project တစ်ခုစီ <code class="kw">SUM</code></b>; <code class="kw">HAVING</code> က စုစုပေါင်း 40 ထက်ကြီးတဲ့ group တွေကို ထားတယ်။ 40 အတိအကျ ဆိုရင် မပါဘူး။
+ma3.020	<b>စာကြောင်းကို အရင်ရေးပါ</b>, ပြီးမှ မေးခွန်းက ရလဒ်တောင်းရင် တွက်ထားတဲ့ ဇယား။
+ma3.021	ကိုယ့်ရမှတ်
+ma4.001	<span class="badge b1">Q4 · 10</span> Datalog ကနေ RA, SQL နဲ့ အင်္ဂလိပ်
+ma4.002	ယခင်မေးခွန်းရဲ့ CUSTOMERS / PRODUCTS / SUPPLIERS / ORDERS / OFFERS schema ကို သုံးပြီး Datalog query တစ်ခုစီကို (1) relational algebra, (2) SQL, (3) အင်္ဂလိပ် အဖြစ် ပြောင်းပါ။
+ma4.003	နမူနာ အဖြေ
+ma4.006	ရှင်းလင်းချက်
+ma4.007	<b>နေရာများ:</b> OFFERS(Sname = x, PID = y, Price = z)။ CUSTOMERS(CID = c, FName = x, …)။ ORDERS(CID = c, SName = s, …)။ SUPPLIERS(SName = s, SAddress လျစ်လျူရှု, Chain = "GreenMart")။
+ma4.008	<b>မျှသုံးတဲ့ variable တွေက join:</b> c က CUSTOMERS နဲ့ ORDERS ကို ချိတ်; s က ORDERS နဲ့ SUPPLIERS ကို ချိတ်။
+ma4.009	<b>Subgoal ထဲက constant က</b> အဲ့ attribute ပေါ် <b>selection</b>: <span class="sym ra">σ</span> Chain = 'GreenMart'။
+ma4.010	<b>Head က projection ကို ဆုံးဖြတ်:</b> c နဲ့ s ကို join ဖို့ သုံးပေမဲ့ x (FName) ကိုသာ ပြန်ပေးတယ်။
+ma4.011	ကိုယ့်ရမှတ်
+ma5.001	<span class="badge b1">Q5 · 10</span> Safe လား မဟုတ်လား
+ma5.002	Rule တစ်ခုစီ safe လား ဖော်ပြပါ။ မဟုတ်ရင် ဘာကြောင့်လဲ ရှင်းပြပါ။
+ma5.003	နမူနာ အဖြေ
+ma5.004	<b>Safe။</b> x ကို R က, y ကို T က bind လုပ်တယ်။ ရလဒ်က R နဲ့ T ရဲ့ product။
+ma5.005	<b>Safe။</b> x ကို positive subgoal R(x) က bind လုပ်; NOT T(x) က R ရဲ့ တန်ဖိုးတွေကိုသာ ဖယ်တယ်။
+ma5.006	<b>Safe မဟုတ်။</b> y က head ထဲရော comparison x &gt; y ထဲရော ပေါ်ပေမဲ့ positive relational subgoal တစ်ခုမှာမှ မပေါ်လို့ x တစ်ခုစီအတွက် ပိုငယ်တဲ့ y အဆုံးမရှိ ရှိတယ်။
+ma5.007	<b>Safe မဟုတ်။</b> x က head နဲ့ negate လုပ်ထားတဲ့ subgoal ထဲမှာသာ ပေါ်: R ထဲ မရှိတဲ့ တန်ဖိုးတိုင်း ကိုက်တယ်, အဆုံးမရှိတဲ့ အစု။
+ma5.008	<b>Safe။</b> x နဲ့ y နှစ်ခုလုံး R(x, y) က bind လုပ်; y &lt; 10 က filter ပဲ။
+ma5.009	ရှင်းလင်းချက်
+ma5.010	<b>ယခင်မေးခွန်းနဲ့ စစ်နည်းတူ:</b> head, NOT ဒါမှမဟုတ် comparison ထဲက variable တိုင်း positive relational subgoal တစ်ခုထဲမှာလည်း ပေါ်ရမယ်။
+ma5.011	<b>Variable တစ်ခုချင်း သွားပါ</b>, ဘယ် subgoal က bind လုပ်လဲ ရေးပါ။ ဘာမှ မလုပ်ရင် variable ကို နာမည်ပေးပြီး သူ့တန်ဖိုး ဘာကြောင့် အကန့်အသတ်မရှိလဲ ပြောပါ။
+ma5.012	<b>ပြင်နည်း:</b> 3) S(x, y) &lt;- R(x) AND T(y) AND x &gt; y; 4) S(x) &lt;- U(x) AND NOT R(x), U က candidate တန်ဖိုးတွေရဲ့ relation။
+ma5.013	ကိုယ့်ရမှတ်
+ma6.001	<span class="badge b1">Q6 · 20</span> Index တွက်ချက်ခြင်း, B = 512
+ma6.002	Block size B = 512 byte, block pointer P = 6 byte, record pointer P<sub>R</sub> = 7 byte။ STAFF file မှာ ID (10), NAME (30), DEPTCODE (6), EMAIL (40), PHONE (10), SALARY (8), HIREDATE (8) field ပါ အရှည်ပုံသေ record r = 20,000 ရှိ။ File ကို key field ID နဲ့ စီထားတယ်။
+ma6.003	1) Blocking factor (unspanned) နဲ့ block အရေအတွက် ရှာပါ။<br>2) ID ပေါ် primary index ဆောက်ထားတယ်။ bfr<sub>i</sub> ရှာပါ။<br>3) ပထမအဆင့် entry နဲ့ ပထမအဆင့် block အရေအတွက် ရှာပါ။<br>4) Multilevel index ရဲ့ level အရေအတွက်နဲ့ block စုစုပေါင်း ရှာပါ။<br>5) Multilevel index ကနေ ID နဲ့ record ထုတ်ဖို့ block access ရှာပြီး data file ပေါ် binary search နဲ့ နှိုင်းယှဉ်ပါ။
+ma6.004	နမူနာ အဖြေ
+ma6.005	ရှင်းလင်းချက်
+ma6.006	<b>Primary index → block pointer။</b> Data block တွေကို ညွှန်လို့ record pointer မဟုတ်ဘဲ P = 6။
+ma6.007	<b>Primary index → sparse။</b> File ကို index key နဲ့ စီထားလို့ data block တစ်ခုစီ entry တစ်ခု (block anchor) လုံလောက်: r1 = b = 5,000။ မစီထားတဲ့ field ပေါ် secondary index က record တစ်ခုစီ entry တစ်ခု လိုခဲ့တဲ့ ယခင်မေးခွန်းနဲ့ နှိုင်းယှဉ်ပါ။
+ma6.008	<b>Rounding:</b> 512 / 112 = 4.57 → 4 (အောက်); 5,000 / 32 = 156.25 → 157 (အပေါ်); 157 / 32 = 4.9 → 5 (အပေါ်)။
+ma6.009	<b>Binary search:</b> 2<sup>12</sup> = 4,096 &lt; 5,000 ≤ 8,192 = 2<sup>13</sup>, ဒါကြောင့် access 13။ Index က 4 ပဲ လိုတယ်။
+ma6.010	ကိုယ့်ရမှတ်
+ma7.001	<span class="badge b1">Q7 · 5</span> Selection နေရာချထားခြင်း
+ma7.002	အောက်က query tree ကနေ optimizer က <span class="sym ra">σ</span> Dno = 5 ကို join တွေနောက်မှ မဟုတ်ဘဲ join တွေမတိုင်ခင် ဘာကြောင့် ကျင့်သုံးလဲ? အကျိုးကျေးဇူး ခန့်မှန်းဖို့ ဘယ်အချက်အလက် သုံးလဲ?
+ma7.003	နမူနာ အဖြေ
+ma7.004	Selection ကို အရင်ကျင့်သုံးရင် join ထဲ ဝင်တဲ့ EMPLOYEE tuple အရေအတွက် လျော့လို့ နောက်က operation တိုင်းက tuple နဲ့ block နည်းနည်း ဖတ်ပြီး ထုတ်တယ်; selection က EMPLOYEE attribute တွေကိုသာ သုံးလို့ ရလဒ် တူတယ်။ ဒါက "selection တွေကို တတ်နိုင်သမျှ စောစော လုပ်" heuristic။
+ma7.005	အကျိုးကျေးဇူး ခန့်မှန်းဖို့ optimizer က catalog statistics သုံးတယ်: EMPLOYEE tuple အရေအတွက် r နဲ့ block b, Dno ရဲ့ ကွဲပြားတဲ့ တန်ဖိုး အရေအတွက် (selectivity ≈ 1 / NDV(Dno), ဒါကြောင့် tuple r / NDV(Dno) ခန့် ကျန်), အဲ့ tuple တွေ တိုက်ရိုက်ထုတ်ဖို့ Dno ပေါ် index ရှိလား, WORKS_ON နဲ့ PROJECT ရဲ့ အရွယ်။
+ma7.006	ရှင်းလင်းချက်
+ma7.007	<b>အပိုင်းနှစ်ပိုင်း, အဖြေနှစ်ခု:</b> "ဘာကြောင့် စောစော" က intermediate result လျော့ခြင်း; "ဘယ်အချက်အလက်" က catalog statistics။
+ma7.008	<b>Selectivity:</b> ညီညီမျှမျှ ဖြန့်ထားရင် equality condition က row တွေရဲ့ 1 / (ကွဲပြားတဲ့ တန်ဖိုး အရေအတွက်) ခန့်ကို ထားတယ်။
+ma7.009	<b>တရားဝင်မှု:</b> selection ရဲ့ attribute အားလုံး input တစ်ခုကလာမှသာ join အောက် ရွှေ့နိုင်တယ်။
+ma7.010	ကိုယ့်ရမှတ်
+ma8.001	<span class="badge b1">Q8 · 10</span> Push-down projection
+ma8.002	အောက်က query tree ပေါ်မှာ push-down projection ကို ပြပါ။
+ma8.003	နမူနာ အဖြေ
+ma8.004	ရှင်းလင်းချက်
+ma8.005	<b>Leaf များ:</b> STUDENT က StID (join) နဲ့ Name (output) လို; Major နဲ့ Year ကို Year ပေါ် selection ပြီးမှ ဖယ်။ ENROLMENT က StID နဲ့ CrsID (join) လို; Grade ကို သူ့ selection ပြီးမှ ဖယ်။ COURSE က Code (join) နဲ့ Title (output) လို; Credits ကို ဖယ်။
+ma8.006	<b>Join တွေကြား:</b> ပထမ join ပြီးနောက် Name (output) နဲ့ CrsID (နောက် join) ကိုသာ လိုသေးလို့ <span class="sym ra">π</span> Name, CrsID ထည့်တယ်။
+ma8.007	<b><span class="sym ra">π</span> တစ်ခုစီက သူ့ <span class="sym ra">σ</span> အပေါ်မှာ ရှိ</b>, selection က Year ဒါမှမဟုတ် Grade ကို လိုသေးလို့။
+ma8.008	ကိုယ့်ရမှတ်

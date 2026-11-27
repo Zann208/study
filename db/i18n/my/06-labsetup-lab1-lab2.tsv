@@ -1,0 +1,169 @@
+# DBS: Labs index, setup, Lab 1, Lab 2
+labs.001	Lab များ
+labs.002	Setup လမ်းညွှန် တစ်ခုနဲ့ တွက်ပြထားတဲ့ အဖြေပါ lab အစု ဆယ်ခု။
+labsetup.001	<span class="num n1">S</span> Setup: COMPANY database ကို restore ခြင်း
+labsetup.002	နောက်ပိုင်း lab တွေက textbook ထဲက COMPANY database ပေါ် <code class="kw">INSERT</code>, <code class="kw">UPDATE</code>, <code class="kw">DELETE</code> နဲ့ query တွေ run တယ်: Figure 5.6 နဲ့ row တူတဲ့ table ခြောက်ခု, foreign key အားလုံး ပါ။ Script တစ်ခုက အားလုံးကို ဖန်တီးပြီး ဖြည့်ပေးတယ်။
+labsetup.003	<a class="btn" href="./files/company_sql_gen_script_with_FK.sql" download>company_sql_gen_script_with_FK.sql ကို download လုပ်ပါ</a>
+labsetup.004	နည်းလမ်း 1: Restore database
+labsetup.005	DBeaver ရဲ့ ဘယ်ဘက် panel မှာ ကိုယ့် MySQL connection အောက်က <b>Databases</b> ကို right-click နှိပ်ပြီး <b>Create New Database</b> ရွေးပါ။
+labsetup.006	<code>company</code> (charset utf8mb4) လို့ နာမည်ပေးပြီး OK နှိပ်ပါ။
+labsetup.007	Database အသစ် <b>company</b> ကို right-click, ပြီးရင် <b>Tools → Restore database</b>။
+labsetup.008	<b>Input</b> မှာ <code>company_sql_gen_script_with_FK.sql</code> ကို ရွေးပြီး <b>Start</b> နှိပ်ပါ။
+labsetup.009	<b>Yes</b> နဲ့ အတည်ပြုပါ။ Restore က အဲ့ database ထဲက data ကို overwrite လုပ်နိုင်တယ်လို့ warning ပြော, database အသစ်အတွက် မျှော်လင့်ထားတာပဲ။
+labsetup.010	အဆင့် 1 ကနေ 3: database ဖန်တီး, ပြီးရင် Tools → Restore database
+labsetup.011	အဆင့် 4: script ရွေးပြီး Start နှိပ်
+labsetup.012	နည်းလမ်း 2: SQL editor ထဲမှာ script ကို run
+labsetup.013	Restore database fail ဖြစ်ရင် သုံးပါ, ဥပမာ DBeaver က install မလုပ်ထားတဲ့ local MySQL client တောင်းရင် (MySQL ကို Docker ထဲ run ရင် အဖြစ်များ)။
+labsetup.014	<b>company</b> database ကို right-click → <b>SQL Editor</b> → <b>Open SQL script</b> (ဒါမှမဟုတ် <b>New SQL script</b>)။
+labsetup.015	Script တစ်ခုလုံးကို editor ထဲ ကူးထည့်ပါ။
+labsetup.016	Toolbar မှာ active database က &lt; N/A &gt; မဟုတ်ဘဲ <b>company</b> ပြကြောင်း စစ်ပါ။
+labsetup.017	Execute statement (Ctrl+Enter) မဟုတ်ဘဲ <b>Execute SQL Script</b> (Alt+X) နှိပ်ပါ: script မှာ statement အများ ပါပြီး အပေါ်ကနေ အောက်အထိ အားလုံး run ရမယ်။
+labsetup.018	နည်းလမ်း 2: company database ပေါ် SQL editor ဖွင့်
+labsetup.019	Script တစ်ခုလုံး paste ပြီး Execute SQL Script နဲ့ run
+labsetup.020	ရလဒ် စစ်ပါ
+labsetup.021	<b>Databases</b> ကို ရွေးပြီး F5 နှိပ်ကာ panel ကို refresh, ပြီးရင် run ပါ:
+labsetup.022	Table
+labsetup.023	Row များ
+labsetup.024	Primary key
+labsetup.025	Foreign key များ
+labsetup.028	mgr_ssn → EMPLOYEE (နောက်မှ fk_mgr_ssn အဖြစ် ထည့်)
+labsetup.044	Script ကို ဖတ်ခြင်း
+labsetup.045	<b>အစဉ် အရေးကြီးတယ်။</b> Table တစ်ခုစီကို သူ့ကို foreign key နဲ့ ညွှန်တဲ့ table မတိုင်ခင် ဖန်တီးတယ်: DEPARTMENT, DEPT_LOCATIONS, EMPLOYEE, PROJECT, WORKS_ON, DEPENDENT။ <code class="kw">CREATE TABLE</code> တစ်ခုစီနောက် သူ့ INSERT တွေ လိုက်တယ်။
+labsetup.046	<b>Foreign key နှစ်ခုကို အဆုံးမှာ <code class="kw">ALTER TABLE</code> နဲ့ ထည့်တယ်။</b> DEPARTMENT.mgr_ssn က EMPLOYEE ကို ညွှန်, EMPLOYEE.dno က DEPARTMENT ကို ညွှန်: table တစ်ခုစီက တစ်ခုကို အရင်ရှိဖို့ လိုတယ်။ Script က DEPARTMENT ကို manager key မပါဘဲ ဖန်တီး, table နှစ်ခုလုံး ဖြည့်, ပြီးမှ <code>fk_mgr_ssn</code> ထည့်တယ်။ EMPLOYEE.super_ssn က EMPLOYEE ကိုယ်တိုင်ကို ညွှန်လို့ <code>fk_super_ssn</code> ကိုလည်း ဝန်ထမ်းအားလုံး ဝင်ပြီးမှ ထည့်တယ်, ဒါကြောင့် supervisor မထည့်ရသေးလို့ insert fail ဖြစ်တာ မရှိ။
+labsetup.047	<b>Referential action မရှိ။</b> Foreign key တစ်ခုမှာမှ <code class="kw">ON DELETE</code> ဒါမှမဟုတ် <code class="kw">ON UPDATE</code> မပါလို့ default သက်ရောက်: ချိတ်ဆက်မှု ပြတ်စေမယ့် delete ဒါမှမဟုတ် key ပြောင်းလဲမှုကို ငြင်းတယ်။
+labsetup.048	<b>Relationship တန်ဖိုးတွေက စာလုံးအသေး</b> ('daughter', 'son', 'spouse')။ MySQL ရဲ့ default နှိုင်းယှဉ်မှုက case ကို လျစ်လျူရှုလို့ <code>WHERE relationship = 'Daughter'</code> ကလည်း ကိုက်ဆဲ။
+labsetup.049	<b>Table နာမည်တွေက စာလုံးအကြီး။</b> Docker (Linux) ထဲက MySQL က table နာမည်ကို case-sensitive သဘောထားတယ်: <code>employee</code> မဟုတ်ဘဲ <code>EMPLOYEE</code> ရေးပါ။
+labsetup.050	<b>အဆုံးက <code class="kw">COMMIT</code></b> က auto-commit ပိတ်ထားရင် insert တွေကို အမြဲတမ်း ဖြစ်စေ; DBeaver ရဲ့ default Auto mode မှာ statement တစ်ခုစီ commit ဖြစ်ပြီးသား။
+labsetup.051	အစကနေ ပြန်စ
+labsetup.052	Script ကို ဒုတိယအကြိမ် run ရင် ပထမ <code class="kw">CREATE TABLE</code> မှာ error 1050 (table ရှိပြီးသား) နဲ့ ရပ်တယ်။ အစကနေ ပြန်ဆောက်ဖို့ database ကို ဖယ်ပြီး ပြန် restore ပါ။ ဒါက အထဲက table နဲ့ row အားလုံးကို ဖျက်တယ်။
+lab1.001	<span class="num n1">1</span> Relational model review worksheet
+lab1.002	ကျောင်း schema အသေးပေါ် ဖြည့်ရတဲ့ review: Student(Student_number, fname, lname, Class, Plan), Course(Code, Title, Instructor, Textbook), Enrollment(Student_number, CourseID, Grade)။
+lab1.003	အဓိပ္ပာယ်ဖွင့်ဆိုချက်များ
+lab1.004	Database, data, miniworld / universe of discourse, DBMS, application program, query vs transaction။ အဖြေတွေ ခေါင်းစဉ် 1 မှာ။
+lab1.005	Key များ
+lab1.006	Table သုံးခုရဲ့ primary key နဲ့ Enrollment ရဲ့ foreign key တွေကို မှတ်သားပါ။ လက်ရေးအဖြေက key attribute တွေကို 2 + 2 + 2 + 1 + 1 = 8 လို့ ရေတွက်တယ်။
+lab1.007	Constraint ထည့်ခြင်း
+lab1.008	Enrollment ကို referential constraint ထည့်ရင် ဘာဖြစ်လဲ: ညွှန်ခံရတဲ့ Student foreign key ကို update ဒါမှမဟုတ် delete လုပ်ရင် Enrollment table က update ဖြစ်တယ်။
+lab1.009	Student ကို AdvisorID <code class="kw">VARCHAR(255) NOT NULL</code> ထည့်, ပြီးရင် <code class="kw">ON UPDATE CASCADE</code> နဲ့ <code class="kw">ON DELETE SET NULL</code> ပါ foreign key။ SQL က ခေါင်းစဉ် 2 မှာ။
+lab1.010	Relation ဖော်ပြချက်များ
+lab1.011	ကျောင်း data ပေါ်မှာ relation state, အစဉ်မရှိ tuple, <code class="kw">NULL</code> ရဲ့ အဓိပ္ပာယ်များ, key က superkey, NULL ဖြစ်နိုင်တဲ့ FK တို့ကို ဥပမာပြပါ။ ခေါင်းစဉ် 1 မှာ ပါတယ်။
+lab1.012	Join အရေအတွက်
+lab1.013	Course နဲ့ Enrollment ကို Code = CourseID ပေါ် join ရင် row 8 ခု ရတယ်, foreign-key တန်ဖိုး တစ်ခုစီ တစ်ခု။
+lab1.014	Relational algebra
+lab1.015	Datalog နဲ့ recursion
+lab1.016	Recursive CTE မေးခွန်းနဲ့ Drinker / Frequents / Likes / Sells relation ပေါ် Datalog လေ့ကျင့်ခန်း (Happy(d) ကို Frequents, Likes, Sells ကနေ သတ်မှတ်)။
+lab1.017	Heuristic optimization နဲ့ index တွက်ချက်ခြင်း
+lab1.018	Query-tree ပြောင်းခြင်း (လက်နဲ့ဖြေ, ခေါင်းစဉ် 8) နဲ့ B = 512 နဲ့ record pointer ပါ အပိုင်းငါးပိုင်း secondary-index တွက်ချက်မှု။
+lab2.001	<span class="num n1">2</span> School database: DDL လေ့ကျင့်ခန်း
+lab2.002	Kindergarten system အတွက် <code class="kw">CREATE</code> statement ခြောက်ခု။ Column type နဲ့ constraint တစ်ခုစီက requirement ထဲက စာကြောင်းတစ်ကြောင်းကလာတာမို့ requirement ကို အရင်ဖတ်ပြီး စည်းမျဉ်းစကားလုံးတိုင်း မှတ်ပါ: <i>unique</i>, <i>optional</i>, <i>must</i>, <i>only</i>, <i>between</i>, <i>linked to</i>, <i>automatically</i>။
+lab2.003	Kindergarten School System အတွက် requirement များ
+lab2.004	ကျောင်းသား, သူတို့ရဲ့ ဆက်သွယ်ရမယ့်သူ, ဝန်ထမ်းတွေကို တိကျစွာ ခြေရာခံတဲ့ system ဖန်တီးဖို့ ရည်ရွယ်တယ်။ Student တိုင်းအတွက် unique ID, နာမည်အပြည့်, ရွေးချယ်နိုင်တဲ့ nickname မှတ်ရမယ်, မှတ်ထားတဲ့ အသက်က 3 နဲ့ 5 နှစ်ကြားမှာ အတိအကျ ရှိရမယ်လို့ တင်းကျပ်တဲ့ စည်းမျဉ်း ပါ။ Contact (Parent/Guardian) တစ်ယောက်စီကိုလည်း unique ခွဲခြားနိုင်ပြီး သက်ဆိုင်ရာ ကျောင်းသားနဲ့ ချိတ်ရမယ်, မှတ်ထားတဲ့ ဆွေမျိုးတော်စပ်မှုက 'Mother,' 'Father,' ဒါမှမဟုတ် 'Other' သာ ဖြစ်ကြောင်း စစ်ရမယ်။ အချက်အလက် မပျောက်အောင် contact အတွက် ဖုန်းနံပါတ် မပေးရင် အလိုအလျောက် 'N/A' လို့ မှတ်ရမယ်။ Physical resource ဘက်မှာ classroom တိုင်း unique identifier နဲ့ unique နာမည် ရှိရမယ်။ ဝန်ထမ်းအတွက် employee တိုင်း unique ခွဲခြားနိုင်ရမယ်, ဝန်ထမ်းအားလုံး လူကြီးဖြစ်ရမယ်, ဆိုလိုတာက အသက် 18 ထက် တင်းကျပ်စွာ ကြီးရမယ်လို့ business rule ကျင့်သုံးရမယ်။ နောက်ဆုံး ကျောင်းသားကို classroom တစ်ခုနဲ့ တာဝန်ပေးထားတဲ့ ဝန်ထမ်း (ဆရာ) နဲ့ ချိတ်ရမယ်။ ဒီချိတ်ဆက်မှု ပြည့်စုံရမယ်, ဆိုလိုတာက ကျောင်းသားနဲ့ classroom ကို အမြဲ သတ်မှတ်ရမယ်။ အရေးအကြီးဆုံးက တာဝန်ပေးထားတဲ့ ဆရာ ကျောင်းက ထွက်ပြီး သူ့ staff record ဖျက်ခံရရင် သက်ဆိုင်ရာ assignment ကို ဖျက်ခြင်းကနေ ကာကွယ်ရမယ်။ အဲ့အစား assignment record ပေါ်က staff identifier က ကျောင်းအုပ်အတွက် သီးသန့်ထားတဲ့ Staff ID 1 ဆီ အလိုအလျောက် default ဖြစ်ရမယ်, data integrity ဆက်တိုက် ထိန်းသိမ်းဖို့။
+lab2.005	စကားလုံးကနေ SQL ဆီ
+lab2.006	Requirement စကားလုံးများ
+lab2.008	unique ID, unique ခွဲခြား
+lab2.009	unique နာမည် (ဒုတိယ unique column)
+lab2.010	ရှိရမယ်, အမြဲ သတ်မှတ်ရမယ်
+lab2.011	ရွေးချယ်နိုင် (optional)
+lab2.012	ဘာမှ မထည့်: default အနေနဲ့ <code class="kw">NULL</code> ခွင့်ပြု
+lab2.013	3 နဲ့ 5 ကြား, 'Mother', 'Father' ဒါမှမဟုတ် 'Other' သာ, အနည်းဆုံး 18
+lab2.014	မပေးရင် အလိုအလျောက် …
+lab2.015	နဲ့ ချိတ်
+lab2.016	Parent row ဖျက်ခံရရင် … အဖြစ် သတ်မှတ်
+lab2.017	<code class="kw">CREATE TABLE</code> တိုင်း ပုံစံတူ: နာမည်, ပြီးရင် ကွင်း <code class="sym">( )</code> ထဲမှာ column စာရင်း, item တွေကို comma <code class="sym">,</code> နဲ့ ခြား, နောက်ဆုံး item နောက် comma မပါ, အဆုံးမှာ semicolon <code class="sym">;</code>။ Table မှာ အနည်းဆုံး column တစ်ခု ရှိရမယ်။
+lab2.018	Q1 · Schema ဖန်တီး · 1 မှတ်
+lab2.019	“SCHOOL” နာမည်ရှိ schema ဖန်တီးဖို့ လိုတဲ့ SQL statement ကို ရေးပါ။
+lab2.020	နမူနာ အဖြေ
+lab2.021	ရှင်းလင်းချက်
+lab2.022	Schema က ဆက်စပ် table တွေအတွက် နာမည်ပေးထားတဲ့ container။ MySQL မှာ <code>CREATE SCHEMA SCHOOL</code> နဲ့ <code>CREATE DATABASE SCHOOL</code> က အတိအကျ အတူတူ လုပ်တယ်။
+lab2.023	မေးခွန်းက ပထမစာကြောင်းကိုသာ တောင်းတယ်။ <code>USE SCHOOL</code> က လက်ရှိ database ဖြစ်စေလို့ နောက်က <code class="kw">CREATE TABLE</code> statement တွေ အရင်ရွေးထားတဲ့ database ထဲ မဟုတ်ဘဲ SCHOOL ထဲ ရောက်တယ် (ဒါမှမဟုတ် "No database selected" နဲ့ fail ဖြစ်)။
+lab2.024	DBeaver မှာ ဘယ်ဘက် panel က ကိုယ့်ဘာသာ refresh မဖြစ်ဘူး: schema အသစ်ကို မြင်ဖို့ <b>Databases</b> ရွေးပြီး F5 နှိပ်ပါ, editor က နာမည်တွေကို အဲ့ဒါနဲ့ စစ်အောင် toolbar ရဲ့ database selector မှာ ရွေးပါ။
+lab2.025	Q2 · Students · 2 မှတ်
+lab2.026	အောက်က column နဲ့ constraint တွေပါတဲ့ “Students” table ဖန်တီးဖို့ လိုတဲ့ SQL statement ကို ရေးပါ။ Age attribute ကို 3 နဲ့ 5 ကြား တန်ဖိုးတွေသာ ကန့်သတ်ထားကြောင်း သေချာပါစေ။
+lab2.040	နမူနာ အဖြေ
+lab2.041	ရှင်းလင်းချက်
+lab2.042	<b>StudentID။</b> "unique ID" က ကျောင်းသားတစ်ယောက်စီကို ခွဲခြားလို့ primary key။ <code class="kw">PRIMARY KEY</code> က unique နဲ့ <code class="kw">NULL</code> မဖြစ်ကြောင်း ပါပြီးသား; <code class="kw">NOT NULL</code> ကို diagram နဲ့ ကိုက်အောင် ရေးတာ, ဘာမှ မထိခိုက်။ Diagram မှာ key က စာလုံးထူ column။
+lab2.043	<b>FirstName, LastName။</b> <code>VARCHAR(50)</code> က စာလုံး 50 အထိ text သိမ်းပြီး လိုသလောက်ပဲ နေရာယူတယ်။ နာမည်အပြည့် လိုအပ်လို့ <code class="kw">NOT NULL</code>။
+lab2.044	<b>NickName။</b> Requirement က "optional nickname" လို့ ပြောတယ်။ Optional ဆိုတာ <code class="kw">NULL</code> ခွင့်ပြုတာ, default ပဲမို့ ဘာမှ မထည့်။ <code class="kw">NOT NULL</code> ချန်ထားတာက အဖြေ။
+lab2.045	<b>Age။</b> <code>CHECK</code> က validator: condition ကို false ဖြစ်စေတဲ့ <code class="kw">INSERT</code> ဒါမှမဟုတ် <code class="kw">UPDATE</code> ကို ငြင်းတယ်။ <code>BETWEEN 3 AND 5</code> က အစွန်းနှစ်ဖက်လုံး ပါ; <code>Age &gt;= 3 AND Age &lt;= 5</code> နဲ့ တူတယ်။ အသက် 3, 4, 5 အောင်; 2 နဲ့ 6 ငြင်းခံရ။
+lab2.046	<b>Column စာကြောင်းထဲ စကားလုံး အစဉ်:</b> နာမည်, type, ပြီးမှ စည်းမျဉ်းများ။ Comma တွေက column ခြား; နောက်ဆုံး column မှာ <code>)</code> ရှေ့ comma မပါ။
+lab2.047	Q3 · Parents · 2 မှတ်
+lab2.048	Students table ထဲက ကျောင်းသားတွေနဲ့ သက်ဆိုင်တဲ့ မိဘအချက်အလက် သိမ်းမယ့် <b>Parents</b> table ဖန်တီးဖို့ လိုတဲ့ SQL statement ကို ရေးပါ။ Table က အောက်မှာ အသေးစိတ်ဖော်ပြထားတဲ့ column နဲ့ constraint requirement တွေနဲ့ ကိုက်ရမယ်။ RelationToStudent တန်ဖိုးတွေကို 'Mother', 'Father' ဒါမှမဟုတ် 'Other' သာ ကန့်သတ်ထားကြောင်း သေချာပါစေ။
+lab2.078	နမူနာ အဖြေ
+lab2.079	ရှင်းလင်းချက်
+lab2.080	<b>PhoneNumber က ကိန်းဂဏန်း မဟုတ်, text။</b> ဖုန်းနံပါတ်တွေ 0 နဲ့ စနိုင်, + ဒါမှမဟုတ် - ပါနိုင်, ဂဏန်းတွက်ချက်မှုမှာ ဘယ်တော့မှ မသုံး။ လက်တွေ့စည်းမျဉ်း: တွက်ချက်မှာ မဟုတ်ရင် text အဖြစ် သိမ်းပါ။
+lab2.081	<b><code>DEFAULT 'N/A'</code></b> က "ဖုန်းနံပါတ် မပေးရင်… အလိုအလျောက် 'N/A' လို့ မှတ်" ကနေ လာတယ်။ Default ကို <code class="kw">INSERT</code> က column ကို ချန်ထားမှသာ သုံးတယ်။ <code class="kw">NULL</code> ကို တိုက်ရိုက်ရေးရင် <code class="kw">NULL</code> သိမ်းတယ်, <code class="kw">DEFAULT</code> က column ကို မဖြစ်မနေ မဖြစ်စေလို့။ <code>NOT NULL DEFAULT 'N/A'</code> ဆိုရင် တိုက်ရိုက် <code class="kw">NULL</code> ကိုလည်း တားမယ်; diagram က ဒီမှာ <code class="kw">NOT NULL</code> မပြဘူး။
+lab2.082	<b>Text တန်ဖိုးတွေကို single quote</b> <code class="sym">' '</code> ထဲ ထည့်: <code>'N/A'</code>, <code>'Mother'</code>။ ကိန်းဂဏန်းတွေ မထည့်။
+lab2.083	<b>RelationToStudent။</b> <code>IN (list)</code> ဆိုတာ "ဒီတန်ဖိုးတွေထဲက တစ်ခု ဖြစ်ရမယ်"; 'Uncle' ငြင်းခံရ။ <code>VARCHAR(10)</code> က အရှည်ဆုံး တန်ဖိုး (စာလုံး 6) ဆံ့တယ်။ <code>CHECK ('Mother' OR 'Father' OR 'Other')</code> ပုံစံက column ကို လုံးဝ မစစ်; column နာမည် ပါရမယ်။
+lab2.084	<b>Foreign key။</b> "သက်ဆိုင်ရာ ကျောင်းသားနဲ့ ချိတ်" (diagram ထဲက အစက်မျဉ်း) က <code>FOREIGN KEY (StudentID) REFERENCES Students(StudentID)</code> ဖြစ်လာတယ်: ဒီမှာ သိမ်းတဲ့ StudentID က Students ထဲ ရှိပြီးသား ဖြစ်ရမယ်။ ဒီလိုဖတ်ပါ: ဒီ table ရဲ့ StudentID → ညွှန်တယ် → Students, column StudentID။
+lab2.085	<b>နှစ်ဖက်လုံး type တူ။</b> Parents.StudentID နဲ့ Students.StudentID နှစ်ခုလုံး <code class="kw">INT</code>။
+lab2.086	<b>ဖန်တီးအစဉ်။</b> Foreign key က မရှိသေးတဲ့ table ကို မညွှန်နိုင်လို့ Students က Parents မတိုင်ခင် ရှိရမယ်။
+lab2.087	<b>Parents.StudentID ပေါ် <code class="kw">NOT NULL</code> မရှိ</b>: diagram က ရိုးရိုး <code>int</code> ပြလို့ ကျောင်းသားနဲ့ မချိတ်တဲ့ contact ကို ခွင့်ပြုတယ်။
+lab2.088	Q4 · Rooms · 2 မှတ်
+lab2.089	<b>Rooms</b> table ဖန်တီးဖို့ SQL statement ရေးပါ။
+lab2.096	နမူနာ အဖြေ
+lab2.097	ရှင်းလင်းချက်
+lab2.098	<b>RoomID</b>: "unique identifier" → primary key။
+lab2.099	<b>RoomName</b>: "unique နာမည်" → <code>UNIQUE</code>။ Diagram က <code class="kw">NOT NULL</code> ကိုသာ ပြ; <code class="kw">UNIQUE</code> က requirement စာသားကလာတာ။ Diagram က ဖွဲ့စည်းပုံ ပေး, စာပိုဒ်က စည်းမျဉ်း ပေး။
+lab2.100	<b><code class="kw">PRIMARY KEY</code> vs <code class="kw">UNIQUE</code>။</b> နှစ်ခုလုံး ထပ်တာကို တားတယ်။ Table မှာ primary key တစ်ခုပဲ ရှိ: တရားဝင် identifier, <code class="kw">NULL</code> ဘယ်တော့မှ မဖြစ်, တခြား table တွေ ညွှန်တဲ့ဟာ။ <code class="kw">UNIQUE</code> column အများ ရှိနိုင်: ခေါင်းစဉ် 1 ရဲ့ alternate (candidate) key များ။
+lab2.101	Q5 · Employees · 2 မှတ်
+lab2.102	<b>Employees</b> table ဖန်တီးဖို့ SQL statement ရေးပါ။ Age attribute ကို 18 နဲ့ အထက် ဒါမှမဟုတ် ညီတဲ့ တန်ဖိုးတွေသာ ကန့်သတ်ထားကြောင်း သေချာပါစေ။
+lab2.116	နမူနာ အဖြေ
+lab2.117	ရှင်းလင်းချက်
+lab2.118	Students နဲ့ ပုံစံတူ။ JobTitle မှာ diagram ထဲ <code class="kw">NOT NULL</code> မရှိလို့ optional။
+lab2.119	<b>နှိုင်းယှဉ်စကားလုံးကနေ operator ဆီ:</b> "18 နဲ့ အထက် ဒါမှမဟုတ် ညီ", "အနည်းဆုံး 18" → <code>&gt;= 18</code> (18 ခွင့်ပြု)။ "18 ထက် တင်းကျပ်စွာ ကြီး", "18 အထက်" → <code>&gt; 18</code> (18 ငြင်း)။
+lab2.120	<b>မေးခွန်းနဲ့ requirement မကိုက်ညီ။</b> မေးခွန်းက "18 နဲ့ အထက် ဒါမှမဟုတ် ညီ" ပြော; requirement စာပိုဒ်က "18 ထက် တင်းကျပ်စွာ ကြီး" ပြော, အဖြေလွှာက <code>Age &gt; 18</code> သုံးတယ်။ မေးထားတဲ့အတိုင်း ဖြေပြီး ကွာခြားချက်ကို မှတ်ချက်ပေးပါ။
+lab2.121	Q6 · StudentRoomAssignment · 5 မှတ်
+lab2.122	<b>StudentRoomAssignment</b> table ကို သတ်မှတ်တဲ့ SQL statement ရေးပါ။ Table မှာ column လေးခု လိုတယ်: <b>ID</b> က <b>Primary Key (PK)</b> အဖြစ် assignment record တစ်ခုစီကို unique ခွဲခြားတယ်။ <b>StudentID</b> နဲ့ <b>RoomID</b> နှစ်ခုလုံး <b><code class="kw">NOT NULL</code></b>, ဆိုလိုတာက assignment တိုင်း ရှိပြီးသား ကျောင်းသားနဲ့ ရှိပြီးသား အခန်းနဲ့ ချိတ်ရမယ်။ <b>TeacherID</b> column ကို <b><code class="kw">DEFAULT</code> 1</b> တန်ဖိုးနဲ့ သတ်မှတ်ထားလို့ ဆရာကို တိုက်ရိုက် မချပေးရင် system က employee ID 1 ကို default contact အဖြစ် အလိုအလျောက် သုံးတယ်။ Table က <b>Foreign Key (FK)</b> constraint သုံးခုနဲ့ <b>referential integrity</b> ကို ကျင့်သုံးတယ်: StudentID နဲ့ RoomID အတွက် ရိုးရိုးချိတ်ဆက်မှု နှစ်ခု, တတိယတစ်ခုကို <b>fk_sra_teacher</b> လို့ တိုက်ရိုက်နာမည်ပေးပြီး <b>TeacherID</b> ကို Employees table နဲ့ ချိတ်တယ်။ အရေးကြီးတာက ဒီနောက်ဆုံး FK မှာ တာဝန်ပေးထားတဲ့ ဆရာရဲ့ record ဖျက်ခံရရင် (ဥပမာ နုတ်ထွက်) TeacherID ကို 1 အဖြစ် အလိုအလျောက် ပြောင်းတဲ့ action ပါပြီး assignment record မပျောက်ဘဲ data ကိုက်ညီမှု ထိန်းထားတယ်။
+lab2.135	နမူနာ အဖြေ
+lab2.136	ရှင်းလင်းချက်
+lab2.137	Row တစ်ခုစီက "ဒီကျောင်းသား ဒီအခန်းမှာ ဒီဆရာနဲ့" ဆိုလိုတယ်။ မေးခွန်းကို စာကြောင်းတစ်ကြောင်းချင်း ယူပါ:
+lab2.138	စာကြောင်း
+lab2.140	ID က Primary Key အဖြစ် ဆောင်ရွက်
+lab2.141	StudentID နဲ့ RoomID က <code class="kw">NOT NULL</code>
+lab2.142	နှစ်ခုလုံးပေါ် <code>NOT NULL</code>: ကျောင်းသားနဲ့ အခန်း မပါဘဲ assignment မရှိ
+lab2.144	StudentID နဲ့ RoomID အတွက် ရိုးရိုးချိတ်ဆက်မှု နှစ်ခု
+lab2.145	ရိုးရိုး <code>FOREIGN KEY … REFERENCES …</code> နှစ်ခု, နာမည်မပါ, action မပါ
+lab2.146	တတိယတစ်ခု, fk_sra_teacher လို့ တိုက်ရိုက်နာမည်ပေး
+lab2.147	အဲ့ <code class="kw">FOREIGN KEY</code> ရှေ့မှာ <code>CONSTRAINT fk_sra_teacher</code>
+lab2.148	ဆရာရဲ့ record ဖျက်ခံရရင် TeacherID ကို 1 ပြောင်း
+lab2.149	<b>Constraint ကို ဘာကြောင့် နာမည်ပေးလဲ။</b> Constraint တိုင်းမှာ နာမည်ရှိ; မပေးရင် MySQL က <code>studentroomassignment_ibfk_3</code> လို တစ်ခု ထုတ်ပေးတယ်။ ရွေးထားတဲ့ နာမည်ကို နောက်မှ သုံးနိုင်: <code>ALTER TABLE StudentRoomAssignment DROP FOREIGN KEY fk_sra_teacher;</code>
+lab2.150	<b><code class="kw">ON DELETE SET DEFAULT</code> က ဘာလုပ်လဲ။</b>
+lab2.151	Assignment 12 မှာ <code>TeacherID = 7</code>။
+lab2.152	Employee 7 နုတ်ထွက်: <code>DELETE FROM Employees WHERE EmployeeID = 7;</code>
+lab2.153	Action မရေးရင် assignment 12 က 7 ကို ညွှန်နေဆဲမို့ delete ကို ငြင်းမယ် (default က ငြင်းတာ)။
+lab2.154	<code class="kw">SET DEFAULT</code> နဲ့ဆို assignment 12 ရဲ့ TeacherID က သူ့ default 1 ဖြစ်တယ်။ Assignment ကျန်ရှိပြီး အခု ကျောင်းအုပ်ကို ညွှန်တယ်။
+lab2.155	Action
+lab2.156	Delete ပြီးနောက် assignment 12
+lab2.157	ကိုက်လား?
+lab2.158	အတူ ဖျက်ခံရ
+lab2.159	မကိုက်: record မပျောက်ရ
+lab2.160	TeacherID က <code class="kw">NULL</code> ဖြစ်
+lab2.161	မကိုက်: 1 ဖြစ်ရမယ်
+lab2.162	<code>RESTRICT</code> / မရှိ
+lab2.163	ဆရာကို ဖျက်တာ ငြင်းခံရ
+lab2.164	မကိုက်: ဆရာကို ဖျက်နိုင်ရမယ်
+lab2.165	TeacherID က 1 ဖြစ်
+lab2.166	ကိုက်
+lab2.167	<b>Condition နှစ်ခု။</b> Column မှာ <code class="kw">DEFAULT</code> (ဒီမှာ 1) လိုပြီး employee 1 ရှိရမယ်, မဟုတ်ရင် တန်ဖိုးအသစ်က ဘာမှ မညွှန်။ Students, Rooms, Employees အားလုံးကို ဒီ table မတိုင်ခင် ဖန်တီးရမယ်။
+lab2.168	<b>MySQL</b>MySQL ရဲ့ default storage engine InnoDB က table definition ထဲက <code>ON DELETE SET DEFAULT</code> ကို ငြင်းတယ်။ Valid standard SQL ဖြစ်ပြီး တင်သွင်းရမယ့် အဖြေ။ MySQL မှာ လေ့ကျင့်ဖို့ table ကို run ချင်ရင် <code>ON DELETE SET NULL</code> သုံးပြီး TeacherID က 1 အစား <code class="kw">NULL</code> ဖြစ်တာကို ကြည့်ပါ။
+lab2.169	Run ပြီး စမ်းကြည့်ပါ
+lab2.170	Statement တွေကို အစဉ်အတိုင်း တစ်ခုချင်း run ပါ (cursor ကို statement ထဲထား, Ctrl+Enter)။ ပြီးရင် ဒီ insert တွေ စမ်းပါ; comment တစ်ခုစီက ဘာဖြစ်ရမလဲ ပြောတယ်။ <code class="kw">CHECK</code> constraint တွေကို MySQL 8.0.16 ကစပြီး ကျင့်သုံးတယ်။
+lab2.171	အဖြစ်များတဲ့ error များ
+lab2.172	Message
+lab2.173	အကြောင်းရင်း
+lab2.174	ပြင်နည်း
+lab2.176	Column စာရင်း မပါတဲ့ <code>CREATE TABLE name;</code>
+lab2.177	Column တွေကို ကွင်းထဲ ထည့်ပါ
+lab2.179	X မှာ ဒါမှမဟုတ် X ရှေ့တည့်တည့်မှာ စာလုံးပေါင်းမှား ဒါမှမဟုတ် comma ကျန် (ဥပမာ <code>VRRCHAR</code>)
+lab2.180	Quote ထားတဲ့ နေရာက စကားလုံးကို ပြင်ပါ; line နံပါတ်ကို statement အစကနေ ရေတွက်တယ်
+lab2.182	Statement ကို အရင် run ခဲ့ပြီး
+lab2.183	Statement အသစ်ကိုသာ run ပါ, ဒါမှမဟုတ် <code>DROP TABLE X;</code> အရင်လုပ် (parent မတိုင်ခင် child table)
+lab2.185	<code>USE SCHOOL;</code> မရှိ
+lab2.186	<code>USE SCHOOL;</code> run ပါ ဒါမှမဟုတ် toolbar မှာ ရွေးပါ
+lab2.188	ထည့်တဲ့ တန်ဖိုးက <code class="kw">CHECK</code> ကို ချိုးဖောက်
+lab2.189	စည်းမျဉ်း စမ်းသပ်ရင် မျှော်လင့်ထားတာ
+lab2.191	ကိုက်ညီတဲ့ parent row မရှိတဲ့ foreign key တန်ဖိုး
+lab2.192	Parent row ကို အရင်ထည့်ပါ
+lab2.193	DBeaver အနီရောင် အစက်မျဉ်း, "Table … not found"
+lab2.194	Editor ရဲ့ database က &lt; N/A &gt; ပြ ဒါမှမဟုတ် panel ကို refresh မလုပ်ရသေး
+lab2.195	Toolbar မှာ database ရွေးပြီး Databases ပေါ် F5 နှိပ်ပါ; ဒါတွေ editor warning, MySQL error မဟုတ်

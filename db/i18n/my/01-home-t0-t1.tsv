@@ -1,0 +1,230 @@
+# DBS: Home, T0, T1
+home.001	Database Systems
+home.003	T1–3 · Model, DDL, ER
+home.004	T4–6 · Algebra, SQL, Datalog
+home.005	T7–8 · Indexing, optimization
+home.006	T9–10 · Transaction, privilege
+home.007	Model နဲ့ ဒီဇိုင်း
+home.008	ခေါင်းစဉ် 1–3။ Database ဆိုတာ ဘာလဲ, table, key နဲ့ <code class="kw">NULL</code>, စည်းမျဉ်းပါ table ဆောက်ခြင်း, ER diagram ဆွဲခြင်း။
+home.009	Query language များ
+home.010	ခေါင်းစဉ် 4–6။ Relational algebra, join နဲ့ grouping ပါ SQL query, recursion ပါ Datalog rule။
+home.011	Storage နဲ့ optimization
+home.012	ခေါင်းစဉ် 7–8။ Data က disk block ထဲ ဘယ်လို ရှိလဲ, index က read အရေအတွက်ကို ဘယ်လို လျှော့လဲ, DBMS က query ကို ဘယ်လို စီစဉ်လဲ။
+home.013	Database ကို လည်ပတ်ခြင်း
+home.014	ခေါင်းစဉ် 9–10။ Transaction, commit နဲ့ rollback, တခြား session တွေ ဘာမြင်နိုင်လဲ, MySQL user, role နဲ့ privilege။
+home.015	ခေါင်းစဉ်တစ်ခုစီကို ဘယ်မှာ လေ့ကျင့်လဲ
+home.016	ခေါင်းစဉ်
+home.017	လေ့ကျင့်ခန်း
+home.018	တွက်ပြထားတဲ့ lab
+home.019	ယခင်မေးခွန်း
+home.021	Relational model review worksheet
+home.023	School database DDL
+home.024	Flashcard, quiz
+home.026	Flashcard, quiz
+home.027	Relational algebra အဖြေလွှာ
+home.029	Intermediate SQL အပိုင်း 1 နဲ့ 2
+home.030	Flashcard, quiz
+home.031	Review worksheet ထဲက Datalog အပိုင်း
+home.034	Flashcard, quiz
+home.035	Heuristic optimization query tree များ
+home.037	Transaction lab
+home.038	Flashcard, quiz
+home.039	User, privilege နဲ့ role
+home.040	ခေါင်းစဉ် 9 နဲ့ 10 က mid-semester စာမေးပွဲ နောက်က lab တွေကလာတာ; စာမေးပွဲမှာ မပါဘူး။
+topics.001	ခေါင်းစဉ်များ
+t0.001	<span class="num n1">0</span> ဒီကစပါ: ပုံကြီး
+t0.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Database ဆိုတာ စနစ်တကျ စုစည်းထားပြီး မျှသုံးတဲ့ အချက်အလက် သိုလှောင်ရာ, DBMS က အဲ့ဒါကို ကိုယ့်ကိုယ်စား ထိန်းသိမ်းတဲ့ program။
+t0.003	ကျောင်းစာကြည့်တိုက်ကို စဉ်းစားပါ။ Member, စာအုပ်, ဘယ်သူ ဘာငှားလဲ မှတ်တမ်း ရှိတယ်။ အားလုံးကို spreadsheet တစ်ခုထဲ ထားနိုင်ပေမဲ့ မြန်မြန် ပျက်တယ်: စာကြည့်တိုက်မှူး နှစ်ယောက် row တူကို တပြိုင်နက် ပြင်, တစ်ယောက်က မရှိတဲ့ member နံပါတ် ရိုက်, မီးပျက်ရင် ပြင်တာ တစ်ဝက် ပျောက်, file ဖွင့်တဲ့သူတိုင်း အားလုံးကို ပြောင်းနိုင်။
+t0.004	<b>DBMS</b> (database management system) က အဲ့ပြဿနာတွေကို အတိအကျ ဖြေရှင်းတယ်။ Data သိမ်း, ပြောင်းလဲမှုတိုင်းမှာ စည်းမျဉ်းစစ်, လူအများကို ဘေးကင်းစွာ တပြိုင်နက် အလုပ်လုပ်ခွင့်ပေး, row သန်းနဲ့ချီမှာတောင် မြန်မြန်ရှာ, ဘယ်သူ ဘာလုပ်ခွင့်ရှိလဲ ထိန်းချုပ်တယ်။
+t0.005	ခေါင်းစဉ် ဆယ်ခု ဘယ်လို ဆက်စပ်လဲ
+t0.006	အဆင့်
+t0.007	ဖြေတဲ့ မေးခွန်း
+t0.008	ခေါင်းစဉ်
+t0.009	နားလည်
+t0.010	Relational database က data ကို ဘယ်လို ကိုင်ထားလဲ?
+t0.011	ဒီဇိုင်း
+t0.012	ကိုယ့် system က ဘယ်အရာနဲ့ ဆက်နွယ်မှုတွေ လိုလဲ? (အရင် ဆွဲပါ)
+t0.013	ဆောက်
+t0.014	Table နဲ့ သူ့စည်းမျဉ်းတွေကို ဘယ်လို ဖန်တီးမလဲ?
+t0.015	မေး
+t0.016	အဖြေတွေ ဘယ်လို ထုတ်ယူမလဲ? (မေးခွန်းရေးနည်း သုံးမျိုး)
+t0.017	သိမ်း
+t0.018	Data က disk ပေါ် ဘယ်မှာ ရှိလဲ, ဘယ်လို မြန်မြန်ရှာလဲ?
+t0.019	စီစဉ်
+t0.020	DBMS က အဖြေထုတ်ဖို့ အစျေးအပေါဆုံးနည်းကို ဘယ်လို ရွေးလဲ?
+t0.021	ဘေးကင်းစွာ ပြောင်း
+t0.022	လူအများ data ကို တပြိုင်နက် ပြောင်းရင် ဘာဖြစ်လဲ?
+t0.023	ကာကွယ်
+t0.024	ဘယ်သူ ဘာကို ဖတ်/ပြောင်းခွင့်ရှိလဲ?
+t0.025	ဥပမာ: library database
+t0.029	သိထားရမယ့် စကားလုံးများ
+t0.039	မှတ်ထားပါ
+t0.040	DBMS က data သိမ်း, စည်းမျဉ်းကျင့်သုံး, user အများကို တပြိုင်နက် ကိုင်တွယ်, data မြန်မြန်ရှာ, access ထိန်းချုပ်။
+t0.041	ခေါင်းစဉ် ဆယ်ခုက လမ်းကြောင်း တစ်ခုကို လိုက်တယ်: နားလည်, ဒီဇိုင်း, ဆောက်, မေး, သိမ်း, စီစဉ်, ဘေးကင်းစွာ ပြောင်း, ကာကွယ်။
+t0.042	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t0.043	Flashcard များ
+t0.044	Quiz
+t0.045	နောက်တစ်ခု: T1 Relational model
+t1.001	<span class="num n1">1</span> Database နဲ့ relational model
+t1.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Relational database မှာ အားလုံးကို table ထဲ သိမ်းပြီး table တွေကို ကိုက်ညီတဲ့ တန်ဖိုးတွေနဲ့ ချိတ်တယ်။
+t1.003	<b>Table</b> (တရားဝင်နာမည်: <b>relation</b>) က ဇယားကွက်။ <b>Row</b> (<b>tuple</b>) တစ်ခုစီက အရာတစ်ခု, ဥပမာ member တစ်ယောက်။ <b>Column</b> (<b>attribute</b>) တစ်ခုစီက အဲ့အရာရဲ့ ဂုဏ်သတ္တိ တစ်ခု, ဥပမာ member ရဲ့ နာမည်။ Column တစ်ခု ကိုင်ခွင့်ရှိတဲ့ တန်ဖိုးအစုက သူ့ <b>domain</b>, ဥပမာ "ကိန်းပြည့်" ဒါမှမဟုတ် "ရက်စွဲ"။
+t1.010	Blueprint vs ပါဝင်ချက်
+t1.011	<b>Schema</b> က blueprint: table ရဲ့ နာမည်နဲ့ column များ, <code>Member(MemberID, Name, Phone)</code>။ ရှားရှားပဲ ပြောင်းတယ်။ <b>State</b> က table ထဲမှာ အခုရှိနေတဲ့ row တွေ။ တစ်ယောက်ယောက် row ထည့်, ပြင်, ဖျက်တိုင်း ပြောင်းတယ်။ Row တွေရဲ့ အစဉ်က အရေးမကြီး: ရောမွှေလိုက်လည်း table တူပဲ။
+t1.012	Key: row တွေကို ခွဲခြားခြင်း
+t1.013	<b>Superkey</b> ဆိုတာ တန်ဖိုးတွေ ဘယ်တော့မှ မထပ်တဲ့ column အစု ဘာမဆို, ဒါကြောင့် row တစ်ခုတိတိကို အမြဲ ရွေးထုတ်တယ်။ <code>{MemberID, Name}</code> က superkey။
+t1.014	<b>Candidate key</b> က အပိုမပါတဲ့ superkey: column တစ်ခုခု ဖယ်ရင် unique မဖြစ်တော့ဘူး။ <code>{MemberID}</code> က တစ်ခု။
+t1.015	<b>Primary key (PK)</b> က တရားဝင် ID အဖြစ် ရွေးတဲ့ candidate key။ <code class="kw">NULL</code> မဖြစ်ရ။
+t1.016	<b>Foreign key (FK)</b> ဆိုတာ table တစ်ခုထဲက တခြား table ရဲ့ key တန်ဖိုးကို ကိုင်တဲ့ column။ <code>Loan.MemberID</code> က <code>Member.MemberID</code> ကို ညွှန်တယ်။ အဲ့ညွှန်တာက table တွေကို ချိတ်ပုံပဲ။
+t1.017	ဒီနေ့ unique ဖြစ်ရုံ မလုံလောက်ဘူး
+t1.018	အခု member နှစ်ယောက် နာမည်တူ မရှိလို့ <code>{Name}</code> က unique ပုံပေါ်တယ်။ ဒါပေမဲ့ key မဟုတ်ဘူး: မနက်ဖြန် ဒုတိယ Ana ဝင်လာနိုင်တယ်။ <mark class="hl">Key ဆိုတာ ဒီနေ့ table ထဲက row တွေအတွက်သာ မဟုတ်ဘဲ table က ဘယ်တော့မှာမဆို ကိုင်နိုင်တဲ့ row အစုတိုင်းအတွက် မှန်ရမယ့် စည်းမျဉ်း။</mark>
+t1.019	Table တစ်ခုမှာ candidate key တစ်ခုထက် ပိုရှိနိုင်
+t1.020	မော်တော်ဆိုင်ကယ်ကို နံပါတ်ပြား (ပြည်နယ်, ဂဏန်း, စာလုံး တွဲ) နဲ့ရော engine နံပါတ်နဲ့ရော ခွဲခြားနိုင်တယ်။ နှစ်ခုလုံး candidate key။ တစ်ခုကို primary key ရွေး; ကျန်တာ unique ဆက်ဖြစ်ပြီး alternate key လို့ ခေါ်တယ်။
+t1.021	NULL ဆိုတာ "ဒီမှာ တန်ဖိုး မရှိ"
+t1.022	Ben ရဲ့ ဖုန်းက <code class="kw">NULL</code>။ ဖုန်းနံပါတ် မသိ, ဖုန်းမရှိ (မသက်ဆိုင်), ဒါမှမဟုတ် မထည့်ရသေး ဆိုလိုနိုင်တယ်။ <mark class="hl"><code class="kw">NULL</code> က သုည မဟုတ်, string ဗလာ မဟုတ်။</mark>
+t1.023	Schema ထဲ ရေးထားတဲ့ စည်းမျဉ်း လေးခု
+t1.024	စည်းမျဉ်း
+t1.025	အဓိပ္ပာယ်
+t1.026	ချိုးဖောက်တာ
+t1.028	တန်ဖိုးတစ်ခုစီက type မှန်တဲ့ တန်ဖိုးတစ်ခုတည်း။
+t1.029	Number column ထဲ <code>'high'</code> ထည့်
+t1.031	Row နှစ်ခု key တန်ဖိုး တူမဖြစ်ရ။
+t1.032	ID 1 နဲ့ ဒုတိယ member
+t1.034	Primary key တန်ဖိုးက <code class="kw">NULL</code> ဘယ်တော့မှ မဖြစ်ရ။
+t1.035	ID မရှိတဲ့ member
+t1.037	Foreign key က တကယ်ရှိတဲ့ row ကို ညွှန်ရမယ်, ဒါမှမဟုတ် <code class="kw">NULL</code> ဖြစ်ရမယ်။
+t1.038	Member 9 မရှိဘဲ member 9 အတွက် loan
+t1.039	တခြား စည်းမျဉ်း နှစ်မျိုးလည်း ရှိတယ်။ တချို့ model ထဲ ပါပြီးသား: table က တူညီတဲ့ row နှစ်ခု ဘယ်တော့မှ မကိုင်။ တချို့ business ကလာပြီး schema ထဲ မရေးနိုင်, ဥပမာ "member တစ်ယောက် စာအုပ် ငါးအုပ်အထိသာ ငှားနိုင်"; application က အဲ့ဒါကို စစ်ရမယ်။
+t1.040	သိထားရမယ့် စကားလုံးများ
+t1.057	မှတ်ထားပါ
+t1.058	Table = relation, row = tuple, column = attribute။
+t1.059	Key က valid state တိုင်းမှာ unique ပြီး minimal; superkey က unique ဖြစ်ရုံပဲ လို။
+t1.060	Primary key က row တစ်ခုစီကို ခွဲခြားပြီး <code class="kw">NULL</code> ဘယ်တော့မှ မဖြစ်။
+t1.061	Foreign key က တခြား table ရဲ့ key ကို ညွှန်ပြီး <code class="kw">NULL</code> ဖြစ်နိုင်။
+t1.062	အသေးစိတ်
+t1.063	အဓိပ္ပာယ်ဖွင့်ဆိုချက်များ
+t1.064	<b>Database</b> က ဆက်စပ်တဲ့ data အစု။
+t1.065	<b>Data</b> က မှတ်တမ်းတင်နိုင်ပြီး အဓိပ္ပာယ်ပါဝင်တဲ့ သိရှိထားသော အချက်အလက်များ။
+t1.066	Database က လက်တွေ့ကမ္ဘာရဲ့ ရှုထောင့်တစ်ခုကို ကိုယ်စားပြုတယ်, <b>miniworld</b> ဒါမှမဟုတ် <b>universe of discourse (UoD)</b> လို့ ခေါ်တယ်။
+t1.067	<b>DBMS</b> (database management system) က database ကို သတ်မှတ်, တည်ဆောက်, ကိုင်တွယ်, user နဲ့ application အမျိုးမျိုးကြား မျှဝေတဲ့ process ကို လွယ်ကူစေတဲ့ ယေဘုယျသုံး software system။
+t1.068	<b>Application program</b> က DBMS ဆီ query ဒါမှမဟုတ် data တောင်းဆိုမှု ပို့ပြီး database ကို ရယူတယ်။
+t1.069	<b>Query</b> က ပုံမှန် data တချို့ကို ထုတ်ယူစေ; <b>transaction</b> က data တချို့ကို ဖတ်ပြီး တချို့ကို database ထဲ ရေးစေနိုင်တယ်။
+t1.070	DBMS က ဘာတွေ လုပ်ခွင့်ပေးလဲ
+t1.071	တက္ကသိုလ် database သေးသေးတစ်ခုမှာ record file ငါးခု: STUDENT, COURSE, SECTION, GRADE_REPORT နဲ့ PREREQUISITE။
+t1.072	လုပ်ဆောင်ချက်
+t1.073	အဓိပ္ပာယ်
+t1.074	တက္ကသိုလ် ဥပမာ
+t1.076	ဖွဲ့စည်းပုံ, data type နဲ့ constraint တွေ သတ်မှတ်
+t1.077	Student_number က integer; Name က စာလုံး 30 အထိ string
+t1.079	DBMS ထိန်းချုပ်တဲ့ storage medium ပေါ် data သိမ်း
+t1.080	ကျောင်းသား, course နဲ့ အမှတ်တစ်ခုစီကို record အဖြစ် ထည့်
+t1.082	Data ကို query နဲ့ update
+t1.083	Smith ရဲ့ transcript ထုတ်; Smith ရဲ့ class ကို 1 ကနေ 2 ပြောင်း
+t1.085	User နဲ့ program အများကို data ကို တပြိုင်နက် သုံးခွင့်ပေး
+t1.086	Registrar နဲ့ ဆရာတွေ အမှတ်တူပေါ် အလုပ်လုပ်
+t1.087	<span class="fig-n">1</span>Figure 1.2: ကျောင်းသားနဲ့ course information သိမ်းတဲ့ database
+t1.088	<span class="fig-n">2</span>Figure 1.2 (ဆက်): GRADE_REPORT နဲ့ PREREQUISITE
+t1.089	Database ချဉ်းကပ်ပုံရဲ့ လက္ခဏာများ
+t1.090	လက္ခဏာ
+t1.091	အဓိပ္ပာယ်
+t1.093	Database က ကိုယ်ပိုင် definition ကို data ဘေးမှာ (catalog ထဲ) သိမ်းလို့ DBMS တစ်ခုက database ဘာမဆိုကို ဝန်ဆောင်နိုင်။
+t1.095	သုံးတဲ့ program တွေကို ပြန်မရေးဘဲ storage structure ပြောင်းနိုင် (program-data independence)။
+t1.097	User တစ်ယောက်စီက data တူရဲ့ အစုခွဲ ဒါမှမဟုတ် စီစဉ်ပုံ မတူတာကို မြင်နိုင်။
+t1.099	User အများ data ကို တပြိုင်နက် ပြောင်းပြီး transaction တစ်ခုစီ မှန်မှန်, အပြည့်အစုံ ဒါမှမဟုတ် လုံးဝမဖြစ် run ဆဲ။
+t1.100	ဒီဇိုင်း အဆင့်များ
+t1.101	<b>Requirements collection and analysis</b>: user တွေ လိုတာကို data ရော operation ရော ရေးချ။
+t1.102	<b>Conceptual design</b>: data ရဲ့ အဆင့်မြင့် ဖော်ပြချက်, ပုံမှန် ER ဒါမှမဟုတ် UML diagram။ DBMS ဘာမှ မမှီခို။
+t1.103	<b>Logical design</b> (data model mapping): conceptual design ကို တကယ့် DBMS ရဲ့ data model, ဥပမာ relation schema အဖြစ် ပြောင်း။
+t1.104	<b>Physical design</b>: storage structure, index နဲ့ access path ရွေး။
+t1.105	ဒီဇိုင်းပြီးနောက်: implement, data ထည့်, ပြီးရင် ထိန်းသိမ်း။
+t1.106	<span class="fig-n">3</span>Figure 3.1: database ဒီဇိုင်းရဲ့ အဓိက အဆင့်များ
+t1.107	Database schema
+t1.108	Database ရဲ့ ဖော်ပြချက်က သူ့ <b>schema</b>။ ဒီဇိုင်းအတွင်း သတ်မှတ်ပြီး ခဏခဏ မပြောင်းဖို့ မျှော်လင့်တယ်။ <b>Schema diagram</b> က relation တစ်ခုစီကို attribute တွေနဲ့ ပြတယ်, ဥပမာ STUDENT(Name, Student_number, Class, Major) နဲ့ COURSE(Course_name, Course_number, Credit_hours, Department)။
+t1.109	<span class="fig-n">4</span>Figure 2.1: တက္ကသိုလ် database အတွက် schema diagram
+t1.110	Relational model ရဲ့ မူလ
+t1.111	IBM Research ရဲ့ Edgar F. Codd က 1970 မှာ မိတ်ဆက်ခဲ့ပြီး သင်္ချာ relation ပေါ် အခြေခံတယ်။ Commercial system တွေ 1980s အစောပိုင်းမှာ (IBM SQL/DS, Oracle) လိုက်လာ; MySQL, MariaDB, PostgreSQL လို open-source system တွေ နောက်ပိုင်း လာတယ်။
+t1.112	Relation schema နဲ့ relation state
+t1.113	Relation state <span class="ra-sym">r(R)</span> က <span class="ra-sym">dom(A<sub>1</sub>) × dom(A<sub>2</sub>) × … × dom(A<sub>n</sub>)</span> ရဲ့ အစုခွဲ, A<sub>1</sub> … A<sub>n</sub> က attribute များ။ Student_number, CourseID နဲ့ Grade attribute ပါ Enrollment relation အတွက် <span class="ra-sym">r(Enrollment) ⊆ dom(Student_number) × dom(CourseID) × dom(Grade)</span>: tuple (row) တစ်ခုစီက အဲ့ domain တွေကနေ ဆွဲထုတ်တဲ့ ဖြစ်နိုင်တဲ့ ပေါင်းစပ်မှု တစ်ခု, r(Enrollment) က Enrollment relation ရဲ့ ဖြစ်နိုင်တဲ့ state တစ်ခု။
+t1.114	စကားလုံး
+t1.115	ဆိုလိုတာ
+t1.117	Table
+t1.119	Relation နာမည်နဲ့ attribute များ (column ခေါင်းစဉ်)
+t1.121	Column
+t1.123	Row
+t1.125	အချိန်တစ်ခုမှာ relation ထဲက tuple အစု
+t1.126	<span class="fig-n">5</span>Figure 5.1: relation STUDENT ရဲ့ attribute နဲ့ tuple များ
+t1.127	Domain နဲ့ data type
+t1.128	<mark class="hl">Domain က တန်ဖိုး ဘာကိုဆိုလိုလဲ ပြော; data type က ဘယ်လိုရေးလဲ ပြော။</mark> STUDENT(Name, Ssn, Home_phone, Address, Office_phone, Age, Gpa) မှာ Ssn ရဲ့ domain က valid ဂဏန်းကိုးလုံး Social Security number အစု, data type က <code>ddd-dd-dddd</code> ပုံစံ character string။
+t1.129	Relation ရဲ့ လက္ခဏာများ
+t1.130	<b>Degree။</b> Attribute n ခုပါ relation မှာ degree n ရှိ။ အထက်က STUDENT မှာ degree 7။
+t1.131	<b>Cartesian product ရဲ့ အစုခွဲ။</b> dom(A1) = {1, 2, 3, 4}, dom(A2) = {John, Jack, Jessica}, dom(A3) = {M, F, N/A} ဆို product မှာ ဖြစ်နိုင်တဲ့ tuple 4 × 3 × 3 = 36 ရှိ။ Relation state က အဲ့ထဲက အစုခွဲ ဘာမဆို, ဥပမာ {(1, John, M), (2, Jessica, F)}။
+t1.132	<b>Tuple အစဉ်။</b> Relation က set ဖြစ်လို့ tuple တွေမှာ အစဉ် မရှိ။
+t1.133	<b>Tuple အတွင်း အစဉ်။</b> ပုံမှန် definition အောက်မှာ tuple က တန်ဖိုးတွေရဲ့ အစဉ်လိုက်စာရင်း, ဒါကြောင့် တန်ဖိုးတွေက schema ရဲ့ attribute အစဉ်ကို လိုက်။ Tuple ကို (attribute, value) အတွဲအစုအဖြစ် သတ်မှတ်ရင် အစဉ် အရေးမကြီးတော့။
+t1.134	<b>Atomic value။</b> တန်ဖိုးတစ်ခုစီက တန်ဖိုးတစ်ခုတည်း; cell တစ်ခုထဲ list ဒါမှမဟုတ် nested value မရှိ။
+t1.135	<b><code class="kw">NULL</code>။</b> မသိ ဒါမှမဟုတ် မသက်ဆိုင်တဲ့ တန်ဖိုးကို မှတ်သား။ ရုံးခန်းမရှိလို့ ကျောင်းသားတချို့မှာ Office_phone က <code class="kw">NULL</code>။
+t1.136	Constraint အမျိုးအစား သုံးမျိုး
+t1.137	အမျိုးအစား
+t1.138	ဘယ်ကလာလဲ
+t1.139	ဥပမာ
+t1.141	Relational model ကိုယ်တိုင်
+t1.142	ထပ်နေတဲ့ tuple မရှိ
+t1.144	DDL နဲ့ schema ထဲ ရေး
+t1.145	Domain, key, <code class="kw">NOT NULL</code>, entity integrity, referential integrity
+t1.147	Schema က ဖော်ပြမနိုင်တဲ့ miniworld ရဲ့ စည်းမျဉ်းများ
+t1.148	ဝန်ထမ်းရဲ့ လစာက supervisor ထက် မကျော်ရ
+t1.149	<b>Domain constraint:</b> attribute A ရဲ့ တန်ဖိုးတိုင်းက dom(A) ထဲက atomic value ဖြစ်ပြီး data type နဲ့ ကိုက်။
+t1.150	Superkey နဲ့ key, တွက်ပြထား
+t1.151	STUDENT(<u>ID</u>, Fname, Lname, Major, GPA), ID က unique:
+t1.169	Distinct tuple t1 နဲ့ t2 ဘာမဆိုအတွက် <span class="ra-sym">t1[SK] ≠ t2[SK]</span> ဆိုရင် set SK က <b>superkey</b>။ <mark class="hl"><b>Key</b> ဆိုတာ minimal လည်း ဖြစ်တဲ့ superkey: attribute တစ်ခုခု ဖယ်ရင် superkey မဟုတ်တော့ဘူး။</mark>
+t1.170	Set
+t1.171	ရလဒ်
+t1.172	ဘာကြောင့်
+t1.173	Superkey, key မဟုတ်
+t1.174	ID ပါလို့ unique, ဒါပေမဲ့ Fname နဲ့ Lname ကို ဖယ်နိုင်
+t1.175	Superkey, key မဟုတ်
+t1.176	Fname ဖယ်လည်း <code>{ID}</code> unique ဆဲ
+t1.177	Superkey မဟုတ်
+t1.178	John သုံးခါ ပေါ်
+t1.179	Superkey မဟုတ်
+t1.180	ဒီ state မှာ unique, ဒါပေမဲ့ တခြား state မှာ ကျောင်းသားနှစ်ယောက် နာမည်အပြည့် တူနိုင်
+t1.182	Unique, ဘာမှ ဖယ်လို့မရ
+t1.183	<mark class="hl">Uniqueness က superkey ရော key ရော အကျုံးဝင်; minimality က key အတွက်သာ လို။</mark>
+t1.184	Candidate key များ
+t1.185	MOTORBIKE(Province, Digits, Alphabets, Engine_number, Color, cc, Make, Model)။ နံပါတ်ပြား <code>{Province, Digits, Alphabets}</code> က ဆိုင်ကယ်ကို ခွဲခြားပြီး <code>{Engine_number}</code> ကလည်း ခွဲခြားတယ်။ နှစ်ခုလုံး minimal ဖြစ်လို့ နှစ်ခုလုံး <b>candidate key</b>။ တစ်ခုကို primary key ရွေး; ကျန်တာ alternate key။ <code>{Digits, Alphabets}</code> တစ်ခုတည်းက key မဟုတ်: နံပါတ်ပြားတူကို ပြည်နယ်နှစ်ခုမှာ ထုတ်ပေးနိုင်။
+t1.186	Relational database schema နဲ့ state
+t1.187	Relational database schema S က relation schema အစု S = {R1, R2, …, Rm} နဲ့ integrity constraint အစု။ Database state က အချိန်တစ်ခုမှာ relation state တွေရဲ့ အစု။ COMPANY schema မှာ relation ခြောက်ခု:
+t1.188	COMPANY ရဲ့ state တစ်ခုကို key တန်ဖိုးတွေ လိုက်ပြီး ဖြေထားတဲ့ မေးခွန်းများ:
+t1.189	မေးခွန်း
+t1.190	လမ်းကြောင်း
+t1.191	အဖြေ
+t1.192	John Smith ရဲ့ supervisor က ဘယ်သူလဲ?
+t1.195	Research ဌာနကို ဘယ်သူ စီမံလဲ?
+t1.198	ဝန်ထမ်း ဘယ်နှစ်ယောက်မှာ သမီး ရှိလဲ?
+t1.200	နှစ်ယောက် (Wong နဲ့ Smith)
+t1.201	Alicia က ProductX မှာ အလုပ်လုပ်လား?
+t1.204	<span class="fig-n">6</span>Figure 5.5: COMPANY database ရဲ့ schema diagram
+t1.205	<span class="fig-n">7</span>Figure 5.6: COMPANY ရဲ့ ဖြစ်နိုင်တဲ့ database state တစ်ခု
+t1.206	Entity integrity နဲ့ referential integrity
+t1.207	<b>Entity integrity:</b> <mark class="hl">primary key တန်ဖိုး ဘာမှ <code class="kw">NULL</code> မဖြစ်ရ, key က tuple တစ်ခုစီကို ခွဲခြားတာမို့။</mark>
+t1.208	<b>Referential integrity</b> က relation နှစ်ခုထဲက tuple တွေကို ကိုက်ညီအောင် ထိန်းတယ်။ R1 ထဲက attribute အစု FK က R2 ကို reference လုပ်တဲ့ foreign key ဖြစ်တာ:
+t1.209	FK က R2 ရဲ့ primary key PK နဲ့ domain တူ, နဲ့
+t1.210	r1(R1) ထဲက tuple t1 တစ်ခုရဲ့ FK တန်ဖိုးတိုင်းက r2(R2) ထဲက tuple t2 တစ်ခုရဲ့ PK တန်ဖိုးနဲ့ တူ (ဒီအခါ t1[FK] = t2[PK] ဖြစ်ပြီး t1 က t2 ကို ညွှန်), ဒါမှမဟုတ် <code class="kw">NULL</code>။
+t1.211	COMPANY ထဲက foreign key
+t1.212	Reference လုပ်တာ
+t1.214	EMPLOYEE.Ssn (relation တူ)
+t1.227	John Smith ရဲ့ Dno ကို 7 ပြောင်းရင် referential integrity ချိုးဖောက်: ဌာန 1, 4 နဲ့ 5 ရှိပေမဲ့ ဌာန 7 မရှိ။
+t1.228	<span class="fig-n">8</span>Figure 5.7: COMPANY ထဲက referential integrity constraint များ
+t1.229	ဥပမာပြနိုင်ရမယ့် ဖော်ပြချက် ငါးခု
+t1.230	<b>Relation ထဲက tuple တွေမှာ အစဉ်မရှိ။</b> Row တွေရဲ့ အစဉ် ဘာမဆို relation တူပဲ။
+t1.231	<b><code class="kw">NULL</code> မှာ အဓိပ္ပာယ် အမျိုးမျိုး ရှိနိုင်။</b> Worksheet ဥပမာက Plan က <code class="kw">NULL</code> ဖြစ်တဲ့ ကျောင်းသားကို ထည့်တယ်: တန်ဖိုး မသိ, မသက်ဆိုင်, ဒါမှမဟုတ် မရသေး ဖြစ်နိုင်။
+t1.232	<b>Key တွေက အမြဲ superkey။</b> <b>Superkey</b> က tuple ကို unique ခွဲခြားတဲ့ attribute အစု ဘာမဆို။ <b>Candidate key</b> က minimal superkey: သူ့ proper subset ဘာမှ tuple ကို unique မခွဲခြားနိုင်။
+t1.233	<b>Tuple ထဲက foreign-key တန်ဖိုး <code class="kw">NULL</code> ဖြစ်နိုင်။</b> Foreign key (FK) က table တစ်ခုရဲ့ attribute နဲ့ တခြား table ရဲ့ primary key ကြား ချိတ်ဆက်မှု; FK တန်ဖိုးတွေ <code class="kw">NULL</code> ဖြစ်ခွင့်ရှိ။
+t1.234	<b>Delete operation က referential integrity ကိုသာ ချိုးဖောက်နိုင်</b>, key constraint ဒါမှမဟုတ် entity integrity ကို မဟုတ်။
+t1.235	Primary key / foreign key ပေါ် join
+t1.236	Course (primary key Code) ကို Enrollment (foreign key CourseID) နဲ့ join ရင် join လုပ်တဲ့ field ထဲက foreign-key တန်ဖိုး အရေအတွက်လောက် row ပြန်တယ်: Enrollment row ရှစ်ခုက ရလဒ် row ရှစ်ခု ပေးတယ်။
+t1.237	Referential-action constraint ကို ရှင်းပြခြင်း
+t1.238	ယခင်မေးခွန်းက ဒီ constraint ကို technical ဖတ်ပုံ ("… မှာ update တစ်ခုခုရှိရင် … ဖြစ်မယ်") နဲ့ နုတ်ထွက်တဲ့ supervisor က သူ့လက်အောက်ငယ်သားတွေကို supervisor မရှိဘဲ ထားခဲ့, ဝန်ထမ်းအသစ်ကို HR supervisor အလိုအလျောက် ချပေးအောင် ပြင်ဆင်ခိုင်းတယ်။
+t1.239	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t1.240	Flashcard များ
+t1.241	Quiz
+t1.242	လေ့ကျင့်ခန်း: Keys and constraints
+t1.243	နောက်တစ်ခု: T2 SQL DDL/DML

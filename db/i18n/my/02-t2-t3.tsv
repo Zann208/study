@@ -1,0 +1,252 @@
+# DBS: T2, T3
+t2.001	<span class="num n1">2</span> SQL DDL နဲ့ DML: table, constraint နဲ့ data ပြောင်းလဲမှု
+t2.002	<b>တစ်ကြောင်းတည်းနဲ့</b>DDL က table အလွတ်တွေ ဆောက်ပြီး data လိုက်နာရမယ့် စည်းမျဉ်းတွေ ရေးတဲ့ SQL အပိုင်း။
+t2.003	SQL က relational DBMS နဲ့ စကားပြောဖို့ ရိုက်တဲ့ ဘာသာစကား။ သူ့ command တွေ အုပ်စုလိုက် ခွဲထားတယ်:
+t2.004	အုပ်စု
+t2.005	အရှည်
+t2.006	ဘာလုပ်လဲ
+t2.007	Command များ
+t2.010	ဖွဲ့စည်းပုံ ဆောက်, ပြောင်း
+t2.013	Row ဖတ်, ပြောင်း
+t2.016	Permission ပေး, ရုပ်သိမ်း
+t2.019	ပြောင်းလဲမှု အုပ်စုတစ်ခုကို သိမ်း ဒါမှမဟုတ် ပြန်ဖျက်
+t2.020	စည်းမျဉ်းပါ table
+t2.021	Column နောက်က စည်းမျဉ်းတိုင်းက <b>constraint</b>။ ရေးပြီးတာနဲ့ DBMS က အဲ့ဒါ ချိုးဖောက်မယ့် ပြောင်းလဲမှု ဘာမဆို ငြင်းတယ်။ စစ်ဖို့ ကိုယ်မှတ်ထားစရာ မလို; database က စစ်ပေးတယ်။
+t2.022	Table နှစ်ခု ချိတ်ခြင်း
+t2.023	Member ပြောင်းရင် loan တွေ ဘာဖြစ်လဲ?
+t2.024	<code>ON DELETE</code> နဲ့ <code>ON UPDATE</code> နောက်က စကားလုံးတွေက <b>referential action</b>။ "member row ဖျက်ခံရရင်, ဒါမှမဟုတ် သူ့ ID ပြောင်းရင်, အဲ့ဒါကို ညွှန်နေတဲ့ loan row တွေ ဘာဖြစ်ရမလဲ?" ကို ဖြေတယ်။
+t2.025	Action
+t2.026	ဒီလို စဉ်းစား
+t2.027	Loan row တွေအတွက် ရလဒ်
+t2.029	Parent နောက် လိုက်
+t2.030	အတူ ဖျက်ခံရ, ဒါမှမဟုတ် MemberID က တန်ဖိုးအသစ် ပြောင်း
+t2.032	ချိတ်ဆက်မှု ဖြုတ်
+t2.033	MemberID က <code class="kw">NULL</code> ဖြစ်
+t2.035	အရန်တန်ဖိုးဆီ ပြန်ချိတ်
+t2.036	MemberID က column ရဲ့ <code class="kw">DEFAULT</code> တန်ဖိုး ဖြစ်
+t2.038	ငြင်း
+t2.039	Member ကို ဖျက်တာ ဒါမှမဟုတ် ပြင်တာ ငြင်းပယ်ခံရ; ဘာမှ မပြောင်း
+t2.040	Action မရေးရင် MySQL က <code class="kw">NO ACTION</code> သုံးတယ်, MySQL မှာ <code class="kw">RESTRICT</code> နဲ့ အတူတူ အလုပ်လုပ်တယ်။
+t2.041	Column တစ်ခုစီအတွက် type ရွေးခြင်း
+t2.042	Column တိုင်း data type ရတယ်။ အသုံးများတာ: ကိန်းပြည့်အတွက် <code>INT</code>, ငွေအတွက် <code>DECIMAL(10,2)</code>, အရှည်ပြောင်းတဲ့ စာသားအတွက် <code>VARCHAR(n)</code>, အရှည်အမြဲတူ code အတွက် <code>CHAR(n)</code>, YYYY-MM-DD ရက်စွဲအတွက် <code>DATE</code>။
+t2.043	စည်းမျဉ်းက column နှစ်ခုကို နှိုင်းယှဉ်နိုင်
+t2.044	<code class="kw">CREATE TABLE</code> အဆုံးက <code class="kw">CHECK</code> ကို row တိုင်းမှာ စစ်ပြီး အဲ့ row ရဲ့ column တွေကို နှိုင်းယှဉ်နိုင်တယ်, ဥပမာ "ငှားတဲ့နေ့ မတိုင်ခင် loan ပြန်မပေးနိုင်": <code>CHECK (ReturnDate &gt;= LoanDate)</code>။
+t2.045	Data ပြောင်းခြင်း: INSERT, UPDATE, DELETE
+t2.046	<code>INSERT</code> က row ထည့်: <code>INSERT INTO Member VALUES (3, 'Ana', 'ana@mail.com');</code>
+t2.047	<code>UPDATE</code> က row ပြင်: <code>UPDATE Member SET Email = 'new@mail.com' WHERE MemberID = 3;</code>
+t2.048	<code>DELETE</code> က row ဖယ်: <code>DELETE FROM Loan WHERE MemberID = 3;</code>
+t2.049	<code class="kw">WHERE</code> clause က ဘယ် row တွေ ပြောင်းမလဲ ဆုံးဖြတ်တယ်။ မေ့ရင် <code class="kw">UPDATE</code> က row အားလုံး ပြောင်းပြီး <code class="kw">DELETE</code> က table ကို ဗလာ ဖြစ်စေတယ်။
+t2.050	Table ကိုယ်တိုင် ပြောင်းခြင်း: ALTER နဲ့ DROP
+t2.051	<code>ALTER TABLE</code> က data ရှိပြီးသား table ရဲ့ ဖွဲ့စည်းပုံ ပြောင်းတယ်: column ထည့်, ဖယ်, default ပြောင်း, constraint ထည့်/ဖယ်။ <code>DROP TABLE</code> က table တစ်ခုလုံးကို row တွေနဲ့အတူ ဖယ်တယ်။ <code class="kw">DELETE</code> က table ကို ဗလာ ဖြစ်စေ; <code class="kw">DROP</code> က ပျောက်သွားစေ။
+t2.052	သိထားရမယ့် စကားလုံးများ
+t2.068	Referential action
+t2.074	မှတ်ထားပါ
+t2.075	DDL က ဖွဲ့စည်းပုံ ဆောက်; constraint တွေက DBMS က စစ်ပေးတဲ့ စည်းမျဉ်းများ။
+t2.076	<code class="kw">CASCADE</code> လိုက်, <code class="kw">SET NULL</code> ဖြုတ်, <code class="kw">SET DEFAULT</code> ပြန်ချိတ်, <code class="kw">RESTRICT</code> ငြင်း။
+t2.077	<mark class="hl">MySQL မှာ action မရေးရင် <code class="kw">RESTRICT</code>။</mark>
+t2.078	အသေးစိတ်
+t2.079	SQL နဲ့ သူ့ command အုပ်စုများ
+t2.080	SQL (Structured Query Language) က relational database နဲ့ အလုပ်လုပ်ဖို့ စံ ဘာသာစကား။ IBM က အစမှာ Structured English Query Language, SEQUEL လို့ ခေါ်ခဲ့တယ်။ MySQL, PostgreSQL, SQL Server, Oracle နဲ့ SQLite အားလုံး ထောက်ပံ့ပြီး တစ်ခုစီမှာ ကွာခြားချက် အသေးလေးတွေ ရှိတယ်။
+t2.081	အုပ်စု
+t2.082	အရှည်
+t2.083	Command များ
+t2.094	<span class="fig-n">1</span>SQL command အုပ်စုများနဲ့ သူတို့ရဲ့ command များ
+t2.095	ဝေါဟာရ
+t2.096	SQL က relational ဝေါဟာရ relation, tuple နဲ့ attribute အစား <b>table</b>, <b>row</b> နဲ့ <b>column</b> လို့ ခေါ်တယ်။ အဓိက data definition command က <code>CREATE</code>။
+t2.097	<span class="fig-n">2</span>DEPARTMENT ကို table အဖြစ်: row, column နဲ့ CREATE statement
+t2.098	Schema နဲ့ catalog
+t2.099	<b>SQL schema</b> (database တစ်ခု): schema နာမည်နဲ့ ခွဲခြား, authorization identifier နဲ့ element တစ်ခုစီရဲ့ descriptor ပါ။ သူ့ element တွေက table, constraint, view, domain နဲ့ authorization grant လို တခြား construct များ။
+t2.100	<mark class="hl">SQL statement တိုင်း semicolon <code class="sym">;</code> နဲ့ ဆုံးတယ်။</mark>
+t2.101	<b>Catalog:</b> နာမည်ပေးထားတဲ့ schema အစု။ Database တွေကိုယ်တိုင်အကြောင်း data ကိုင်တဲ့ အထူး schema <code>INFORMATION_SCHEMA</code> အမြဲပါတယ်။ Catalog တွေကို cluster အဖြစ် ထပ်စုနိုင်တယ်။
+t2.102	PostgreSQL နဲ့ SQL Server: database (catalog) ကို အရင်ဖန်တီး, ပြီးမှ သူ့ table တွေကို HR, SALES, COMPANY လို schema အများထဲ စီ။ MySQL: <code class="kw">DATABASE</code> နဲ့ <code class="kw">SCHEMA</code> က အဆင့်တူ။
+t2.104	<code class="kw">CREATE TABLE</code> statement က (1) table နာမည်, (2) attribute နဲ့ type များ, (3) constraint များကို ပေးတယ်။ Table ရှေ့မှာ schema နာမည် ထည့်နိုင်: <code>CREATE TABLE COMPANY.EMPLOYEE …</code> ဒါမှမဟုတ် ရိုးရိုး <code>CREATE TABLE EMPLOYEE …</code>။
+t2.107	ဖန်တီးပုံ
+t2.108	သိမ်းလား
+t2.109	Relation နဲ့ tuple တွေကို DBMS က file အဖြစ် သိမ်း
+t2.110	Physical file မရှိ
+t2.111	Primary key နဲ့ foreign key, ဥပမာနဲ့
+t2.112	နာမည်စာရင်းက John Smith နာမည်တူ ကျောင်းသားနှစ်ယောက်ကို ခွဲမခြားနိုင်ဘူး။ Primary key က row တိုင်းကို ကိုယ်ပိုင် identifier (StudentID 101 နဲ့ 103) ပေးပြီး တခြား table ထဲက foreign key က အဲ့ဒါကို ပြန်ညွှန်တယ်: enrolment table က CourseID နဲ့ StudentID သိမ်းပြီး နှစ်ခုလုံး foreign key။
+t2.113	<span class="fig-n">3</span>Primary key နဲ့ foreign key: student, course နဲ့ enrolment table များ
+t2.114	SQL ထဲက COMPANY schema
+t2.115	Figure 6.1 က COMPANY table ခြောက်ခုလုံးကို <code class="kw">CREATE TABLE</code> နဲ့ သတ်မှတ်ထားတယ်, <code class="kw">NOT NULL</code> column, primary key, <code class="kw">UNIQUE</code> ဌာနနာမည်နဲ့ foreign key အားလုံး ပါတယ်။
+t2.116	<span class="fig-n">4</span>Figure 6.1: EMPLOYEE, DEPARTMENT နဲ့ DEPT_LOCATIONS အတွက် CREATE TABLE
+t2.117	<span class="fig-n">5</span>Figure 6.1 (ဆက်): PROJECT, WORKS_ON နဲ့ DEPENDENT အတွက် CREATE TABLE
+t2.118	Data type များ
+t2.119	အဓိက အမျိုးအစား လေးခု: numeric, character string, date နဲ့ time, boolean နဲ့ bit။
+t2.120	<b>Numeric:</b> ကိန်းပြည့် <code>INTEGER</code> / <code>INT</code>, <code>SMALLINT</code>; ဒဿမ <code>FLOAT</code> ဒါမှမဟုတ် <code>REAL</code>, နဲ့ <code>DOUBLE PRECISION</code>။
+t2.121	MySQL type
+t2.122	Byte
+t2.123	Signed အပိုင်းအခြား
+t2.124	Unsigned အပိုင်းအခြား
+t2.140	<b>Character string:</b> အရှည်ပုံသေ <code>CHAR(n)</code> / <code>CHARACTER(n)</code>; အရှည်ပြောင်း <code>VARCHAR(n)</code> / <code>CHAR VARYING(n)</code> / <code>CHARACTER VARYING(n)</code>။ <code>CHAR(10)</code> က <mark class="hl">စာလုံး 10 လုံး အမြဲ ချန်ထားလို့ 'Cat' ကို space 7 ခု ဖြည့်တယ်;</mark> <code>VARCHAR(10)</code> က 'Cat' နဲ့ အရှည်ပြ field အသေးလေးပဲ သိမ်းတယ်။
+t2.141	<b><code class="kw">DATE</code>:</b> နေရာ ဆယ်ခု, YYYY-MM-DD။ <b><code class="kw">TIME</code>:</b> HH:MM:SS။ RDBMS တွေမှာ ရက်စွဲပုံစံ ပြောင်းတဲ့ function တွေ ပါတယ်။
+t2.142	<b><code class="kw">TIMESTAMP</code>:</b> <code class="kw">DATE</code> နဲ့ <code class="kw">TIME</code> အပြင် စက္ကန့်အပိုင်းအစအတွက် အနည်းဆုံး နေရာ ခြောက်ခု, ရွေးချယ်နိုင်တဲ့ <code>WITH TIME ZONE</code> qualifier ပါ။
+t2.143	<b><code class="kw">INTERVAL</code>:</b> date, time ဒါမှမဟုတ် timestamp ကို တိုး/လျှော့ဖို့ သုံးတဲ့ နှိုင်းရ တန်ဖိုး, ဥပမာ <code>order_date + INTERVAL '14' DAY</code>။ MySQL မှာ <code class="kw">INTERVAL</code> column type မရှိ; <code>SELECT order_date + INTERVAL '1' MONTH FROM ORDERS;</code> လို date expression ထဲမှာသာ keyword အဖြစ် သုံးတယ်။ <code class="kw">DATE</code>, <code class="kw">TIME</code>, <code class="kw">TIMESTAMP</code> နဲ့ <code class="kw">INTERVAL</code> တန်ဖိုးတွေကို နှိုင်းယှဉ်ဖို့ string အဖြစ် cast လုပ်နိုင်တယ်။
+t2.144	<b>Bit string:</b> <code>BIT(n)</code>, <code>BIT VARYING(n)</code>။ <b>Boolean:</b> TRUE, FALSE ဒါမှမဟုတ် <code class="kw">NULL</code>။
+t2.145	Domain များ
+t2.146	Domain က attribute definition ထဲ သုံးတဲ့ နာမည်ပေးထားသော type။ Domain ပြောင်းရင် အဲ့ဒါသုံးတဲ့ attribute အားလုံး ပြောင်းပြီး schema ဖတ်ရ ပိုလွယ်တယ်: <code>CREATE DOMAIN SSN_TYPE AS CHAR(9);</code>။ <mark class="hl">MySQL က <code class="kw">CREATE DOMAIN</code> ကို မထောက်ပံ့။</mark>
+t2.147	SQL ထဲက constraint များ
+t2.148	SQL က relational model ရဲ့ အခြေခံ constraint သုံးခုကို ထောက်ပံ့တယ်: <b>key constraint</b> (primary key တန်ဖိုး မထပ်ရ), <b>entity integrity</b> (primary key တန်ဖိုး <code class="kw">NULL</code> မဖြစ်ရ), <b>referential integrity</b> (foreign key တန်ဖိုးက primary key တန်ဖိုးအဖြစ် ရှိပြီးသား ဖြစ်ရမယ်, ဒါမှမဟုတ် <code class="kw">NULL</code>)။
+t2.149	Clause
+t2.150	ဘာလုပ်လဲ
+t2.151	ဥပမာ
+t2.153	Attribute အတွက် <code class="kw">NULL</code> ခွင့်မပြု
+t2.155	တန်ဖိုး မပေးရင် သိမ်းမယ့် တန်ဖိုး။ <code class="kw">DEFAULT</code> clause မပါရင် <code class="kw">NOT NULL</code> မဟုတ်တဲ့ attribute ရဲ့ default က <code class="kw">NULL</code>။
+t2.157	Attribute ဒါမှမဟုတ် domain တန်ဖိုးကို ကန့်သတ် (value validator)
+t2.159	Primary key ဖွဲ့တဲ့ attribute တစ်ခု ဒါမှမဟုတ် အများ
+t2.160	<code>Dnumber INT PRIMARY KEY</code> ဒါမှမဟုတ် <code>PRIMARY KEY (Dnumber)</code>
+t2.162	Alternate (secondary) key, relational model ရဲ့ candidate key များ
+t2.164	Referential integrity; default အနေနဲ့ ချိုးဖောက်တဲ့ ပြောင်းလဲမှုကို ငြင်း
+t2.165	<span class="fig-n">6</span>EMPLOYEE attribute တွေပေါ် NOT NULL
+t2.166	<span class="fig-n">7</span>Dno ပေါ် DEFAULT 1
+t2.167	<span class="fig-n">8</span>Attribute ပေါ်နဲ့ domain ပေါ် CHECK
+t2.168	<span class="fig-n">9</span>Dnumber ပေါ် PRIMARY KEY
+t2.169	<span class="fig-n">10</span>Dname ပေါ် UNIQUE
+t2.170	Referential triggered action များ
+t2.171	<mark class="hl">Foreign key ချိုးဖောက်ရင် default action က ပြောင်းလဲမှုကို ငြင်းတာ။</mark>
+t2.172	အဲ့အစား <code>ON DELETE</code> နဲ့/ဒါမှမဟုတ် <code>ON UPDATE</code> နောက်မှာ referential triggered action clause ထည့်နိုင်: <code>SET NULL</code>, <code>CASCADE</code> ဒါမှမဟုတ် <code>SET DEFAULT</code>။
+t2.173	<code class="kw">SET NULL</code> နဲ့ <code class="kw">SET DEFAULT</code> က <code class="kw">ON DELETE</code> ရော <code class="kw">ON UPDATE</code> ရော အတူတူ လုပ်တယ်: ညွှန်နေတဲ့ တန်ဖိုးက <code class="kw">NULL</code> ဒါမှမဟုတ် default ဖြစ်။
+t2.174	<code class="kw">CASCADE</code> က WORKS_ON လို "relationship" relation တွေနဲ့ ကိုက်တယ်, ဆက်စပ် row နှစ်ခုလုံး ရှိနေမှသာ သူ့ row တွေ အဓိပ္ပာယ်ရှိလို့။
+t2.175	Constraint နာမည်ပေးခြင်း
+t2.176	<code>CONSTRAINT</code> keyword က constraint ကို နာမည်ပေးလို့ နောက်မှ ဖျက်/ပြင်နိုင်တယ်။
+t2.177	<span class="fig-n">11</span>နာမည်ပေးထားတဲ့ constraint: EMPPK, EMPSUPERFK, EMPDEPTFK
+t2.178	Tuple ပေါ် CHECK
+t2.179	<code class="kw">CREATE TABLE</code> အဆုံးက <code class="kw">CHECK</code> clause က row-based constraint: <mark class="hl">tuple တစ်ခုစီအတွက် စစ်ပြီး row တူရဲ့ attribute တွေကို နှိုင်းယှဉ်နိုင်တယ်။</mark>
+t2.183	ရလဒ်
+t2.185	ချိုးဖောက် (manager စတင်ပြီးနောက် ဖန်တီး)
+t2.187	ချိုးဖောက်
+t2.189	ကိုက်ညီ
+t2.190	<span class="fig-n">12</span>Tuple-based CHECK နဲ့ ချိုးဖောက်တဲ့ row များ
+t2.191	INSERT, DELETE နဲ့ UPDATE
+t2.192	ဒီ command သုံးခုက ဖွဲ့စည်းပုံ မဟုတ်ဘဲ data ကို ပြောင်းတယ်။ <code>INSERT</code> က table ထဲ tuple တစ်ခု ဒါမှမဟုတ် အများ ထည့်တယ်။ <code>UPDATE</code> နဲ့ <code>DELETE</code> က <code class="kw">WHERE</code> condition နဲ့ ကိုက်တဲ့ tuple တိုင်းကို ပြင်/ဖယ်လို့ statement တစ်ခုက row အများကို ထိနိုင်တယ်။
+t2.193	INSERT: table အစဉ်အတိုင်း တန်ဖိုးများ
+t2.194	Table နာမည်နဲ့ attribute တိုင်းအတွက် တန်ဖိုးတစ်ခုစီကို <code class="kw">CREATE TABLE</code> ထဲက attribute အစဉ်အတိုင်း, NULL တွေပါ ရေးပါ။ Type နဲ့ DDL ထဲက constraint တိုင်း (<code class="kw">NOT NULL</code>, key, <code class="kw">CHECK</code>, foreign key) ကို အလိုအလျောက် စစ်တယ်။
+t2.195	<span class="fig-n">13</span>CREATE TABLE အစဉ်အတိုင်း တန်ဖိုးတွေနဲ့ INSERT
+t2.196	INSERT: attribute နာမည်ပေး
+t2.197	Attribute တွေကို နာမည်ပေးပြီး အဲ့အစဉ်နဲ့ တန်ဖိုးပေးပါ။ <code class="kw">NOT NULL</code> ဖြစ်ပြီး <code class="kw">DEFAULT</code> မရှိတဲ့ attribute တိုင်း ပါရမယ်; ချန်ထားတာတွေ <code class="kw">DEFAULT</code> ဒါမှမဟုတ် <code class="kw">NULL</code> ရတယ်။
+t2.198	<span class="fig-n">14</span>Attribute နာမည်ပေး INSERT; ကျန်တာ NULL ဖြစ်
+t2.199	INSERT: row အများ တစ်ခါတည်း
+t2.200	<code class="kw">INSERT</code> တစ်ခုထဲမှာ tuple တွေကို comma <code class="sym">,</code> နဲ့ ခြားတယ်။
+t2.201	INSERT: query ကနေ row များ
+t2.202	VALUES အစား <code class="kw">SELECT</code> က row တွေ ပေးတယ်။ သူ့ column တွေက ဖော်ပြထားတဲ့ attribute တွေနဲ့ အရေအတွက်, အစဉ်, type ကိုက်ရမယ်။
+t2.203	WORKS_ON_INFO က snapshot: နောက်ပိုင်း WORKS_ON ပြောင်းလဲမှုတွေ မရောက်။
+t2.204	<span class="fig-n">15</span>INSERT … SELECT က query ကနေ WORKS_ON_INFO ကို ဖြည့်
+t2.205	Table ကူးခြင်း
+t2.207	ကူးတာ
+t2.208	Row များ
+t2.209	Column, type, <code class="kw">NOT NULL</code>, default, primary key နဲ့ index (MySQL မှာ foreign key မပါ)
+t2.210	မရှိ: table ဗလာ
+t2.211	<code class="kw">SELECT</code> ရလဒ်ရဲ့ column နဲ့ type; primary key ဒါမှမဟုတ် တခြား constraint မပါ
+t2.212	<code class="kw">SELECT</code> ပြန်ပေးတဲ့ row များ
+t2.213	<span class="fig-n">16</span>CREATE TABLE … LIKE: column တူ, row မရှိ
+t2.214	<span class="fig-n">17</span>CREATE TABLE … AS SELECT: ဌာန 5 ရဲ့ ဖွဲ့စည်းပုံနဲ့ row များ
+t2.216	Table တစ်ခုကနေ tuple တွေ ဖယ်; <code class="kw">WHERE</code> clause က ဘယ်ဟာ ရွေးတယ်။
+t2.217	<b><code class="kw">WHERE</code> clause မပါရင် row အားလုံး ဖျက်</b>: <code>DELETE FROM EMPLOYEE;</code> က table ဗလာ ချန်ခဲ့ (table ကိုယ်တိုင် ကျန်)။
+t2.218	Referential integrity ကို ကျင့်သုံးတယ်။ တခြား table ထဲက row တွေကို <code class="kw">ON DELETE CASCADE</code> လို referential action ကနေသာ သက်ရောက်တယ်။
+t2.219	ဖျက်တဲ့ row အရေအတွက်က <code class="kw">WHERE</code> clause နဲ့ ကိုက်တဲ့ အရေအတွက်။
+t2.220	<b>COMPANY database ပေါ်မှာ</b>ဒီ <code class="kw">DELETE</code> ကို error 1451 (parent row ဖျက်မရ) နဲ့ ငြင်းတယ်: WORKS_ON, DEPENDENT, DEPARTMENT.Mgr_ssn နဲ့ တခြားဝန်ထမ်းတွေရဲ့ Super_ssn က ဌာန 5 ဝန်ထမ်းတွေကို ညွှန်နေဆဲ, အဲ့ foreign key တစ်ခုမှာမှ <code class="kw">ON DELETE</code> action မရှိ။ ညွှန်နေတဲ့ row တွေကို အရင်ဖျက်ပါ, ဒါမှမဟုတ် <code class="kw">CREATE TABLE</code> … AS နဲ့ လုပ်ထားတဲ့ copy ပေါ် လေ့ကျင့်ပါ။
+t2.221	<span class="fig-n">18</span>DELETE FROM EMPLOYEE WHERE Dno = 5
+t2.223	<code>SET</code> က ပြောင်းမယ့် attribute နဲ့ တန်ဖိုးအသစ်တွေ ဖော်ပြ; <code>WHERE</code> က tuple တွေ ရွေး။ <code class="kw">UPDATE</code> တစ်ခုက table တစ်ခုရဲ့ row တွေကိုသာ ပြောင်းပြီး referential integrity ကို ကျင့်သုံးတယ်။
+t2.224	SET ရဲ့ ညာဘက်မှာ attribute နာမည်က သူ့လက်ရှိတန်ဖိုး, ဒါကြောင့် <code>Salary * 1.1</code> ကို row တစ်ခုချင်း တွက်တယ်။ <code class="kw">WHERE</code> မပါရင် row တိုင်း update ဖြစ်။
+t2.225	<span class="fig-n">19</span>UPDATE PROJECT: မတိုင်မီနဲ့ ပြီးနောက်
+t2.226	<span class="fig-n">20</span>UPDATE EMPLOYEE: ဌာန 5 အတွက် 10% လစာတိုး
+t2.228	နာမည်ပေးထားတဲ့ schema element (schema, table, domain ဒါမှမဟုတ် constraint) ကို data နဲ့အတူ ဖယ်။
+t2.229	<b><code class="kw">CASCADE</code></b>: element နဲ့ သူ့ကို မှီခိုတဲ့ အရာအားလုံး ဖယ်။ <code>DROP SCHEMA COMPANY CASCADE;</code> က schema ကို table, view, constraint အားလုံးနဲ့ ဖယ်တယ်။
+t2.230	<b><code class="kw">RESTRICT</code></b>: ဘာမှ မမှီခိုမှသာ ဖယ် (schema အတွက်: ဗလာဖြစ်မှသာ); မဟုတ်ရင် <code class="kw">DROP</code> မ run။
+t2.231	MySQL: <code>DROP DATABASE company;</code> (ဒါမှမဟုတ် <code>DROP SCHEMA company;</code>) က အားလုံးကို အမြဲဖယ်ပြီး <code class="kw">CASCADE</code> / <code class="kw">RESTRICT</code> မယူ။ <code>DROP TABLE</code> က စကားလုံးနှစ်ခုကို လက်ခံပေမဲ့ လျစ်လျူရှု; foreign key က ညွှန်နေဆဲ table ကို drop မရ။
+t2.232	<code class="kw">DROP</code> က table ကို ဖယ်; <code class="kw">DELETE</code> က row တွေဖယ်ပြီး table ကို ထား။
+t2.234	ရှိပြီးသား table ရဲ့ ဖွဲ့စည်းပုံ ပြောင်း: column ထည့်/ဖယ်, column definition ပြောင်း, constraint ထည့်/ဖယ်။
+t2.235	<b>Column ဖယ်ခြင်း။</b> <code>CASCADE</code> က column နဲ့ သူ့ကို ညွှန်တဲ့ constraint, view, index အားလုံး ဖယ်; <code>RESTRICT</code> က ဘာမဆို ညွှန်နေရင် fail ဖြစ်လို့ dependency တွေ အရင်ဖယ်ရမယ်။ MySQL မှာ <code>ALTER TABLE EMPLOYEE DROP COLUMN Address;</code> ရေး; foreign key က column ကို သုံးနေရင် fail။
+t2.236	<b>Column definition ပြောင်းခြင်း။</b>
+t2.237	<b>Constraint ပြောင်းခြင်း။</b> နာမည်ပေးထားတဲ့ constraint ကိုသာ နာမည်နဲ့ drop နိုင်။ Constraint အသစ် (နာမည်ပါ/မပါ) ကို ADD <code class="kw">CONSTRAINT</code> နဲ့ ထည့်တယ်။
+t2.238	<b>နာမည်နဲ့ စာလုံးအကြီးအသေး</b><code>COMPANY.EMPLOYEE</code> က schema COMPANY ထဲက table EMPLOYEE။ Docker (Linux) ပေါ် MySQL မှာ database နဲ့ table နာမည်တွေ case-sensitive: database ကို <code>company</code> လို့ ဖန်တီးပြီး script က <code>EMPLOYEE</code> ဖန်တီးရင် <code>company.EMPLOYEE</code> ရေးပါ, ဒါမှမဟုတ် <code>USE company;</code> ပြီးမှ <code>EMPLOYEE</code>။ Column နာမည်တွေက ဘယ်တော့မှ case-sensitive မဖြစ်။
+t2.239	<span class="fig-n">21</span>DEFAULT မပါ ADD COLUMN: row တိုင်းမှာ NULL
+t2.240	<span class="fig-n">22</span>DEFAULT &#x27;not specify&#x27; ပါ ADD COLUMN
+t2.241	Lab: schema နဲ့ table ဖန်တီးခြင်း
+t2.242	Lab: constraint ဝေါဟာရ
+t2.243	Clause
+t2.244	အကျိုးသက်ရောက်မှု
+t2.245	Lab ဥပမာ
+t2.247	Row တစ်ခုစီရဲ့ unique identifier
+t2.249	တန်ဖိုး ပေးရမယ်
+t2.251	Row နှစ်ခု တန်ဖိုးတူ မမျှ
+t2.253	တန်ဖိုး မပေးရင် သုံးမယ့် တန်ဖိုး
+t2.255	Row-level condition
+t2.257	တခြား table ရဲ့ primary key ဆီ ချိတ်
+t2.259	ညွှန်းဆိုနိုင်အောင် constraint ကို နာမည်ပေး
+t2.260	Lab: referential action များ
+t2.261	<code>ON DELETE</code> ဒါမှမဟုတ် <code>ON UPDATE</code> နောက်က action က ညွှန်ခံရတဲ့ row ဖျက်ခံရရင် ဒါမှမဟုတ် သူ့ key ပြောင်းရင် ညွှန်နေတဲ့ row တွေ ဘာဖြစ်မလဲ ပြောတယ်။
+t2.262	<b><code class="kw">SET DEFAULT</code></b> — lab ရဲ့ assignment table က row ကို ထားပြီး သီးသန့်ထားတဲ့ ဆရာဆီ ပြန်ချိတ်: <code>TeacherID INT DEFAULT 1 … ON DELETE SET DEFAULT</code>။
+t2.263	<b><code class="kw">SET NULL</code></b> — "course instructor ဖယ်ခံရရင် သက်ဆိုင်ရာ AdvisorID ကို NULL ထား" အတွက် worksheet ရဲ့ အဖြေ။
+t2.264	<b><code class="kw">CASCADE</code></b> — "instructor နာမည် update ဖြစ်ရင် Student table ဆီ cascade ဖြစ်ရမယ်" အတွက် worksheet ရဲ့ အဖြေ။
+t2.265	<b>MySQL က ဒါကို လက်ခံမလား?</b>ရေးထားတဲ့အတိုင်း မလက်ခံ။ MySQL က <code>NOT NULL</code> ကြေညာထားတဲ့ column ပေါ် <code>SET NULL</code> ကို ငြင်းလို့ worksheet ရဲ့ <code>AdvisorID … NOT NULL</code> နဲ့ <code>ON DELETE SET NULL</code> fail ဖြစ်; <code class="kw">NOT NULL</code> ကို ဖယ်ပါ။ MySQL က ညွှန်ခံရတဲ့ column ကို index လုပ်ထားဖို့လည်း လိုတယ်, အကောင်းဆုံးက parent ရဲ့ primary key။ DDL lab ရဲ့ <code>ON DELETE SET DEFAULT</code> က standard SQL ဖြစ်ပေမဲ့ MySQL ရဲ့ InnoDB engine က ငြင်းတယ်; PostgreSQL လို system တွေမှာ run တယ်။
+t2.266	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t2.267	Flashcard များ
+t2.268	Quiz
+t2.269	လေ့ကျင့်ခန်း: Referential actions
+t2.270	နောက်တစ်ခု: T3 ER modelling
+t3.001	<span class="num n1">3</span> ER modelling: entity, cardinality နဲ့ participation
+t3.002	<b>တစ်ကြောင်းတည်းနဲ့</b>ER diagram က table မဆောက်ခင် ဆွဲထားတဲ့ ကိုယ့် data ပုံ။
+t3.003	<code>CREATE TABLE</code> မရေးခင် system က ဘာတွေ မှတ်ထားရမလဲ ကြမ်းဆွဲတယ်။ ER က <b>Entity–Relationship</b>။
+t3.004	အစိတ်အပိုင်း
+t3.005	ပုံသဏ္ဌာန်
+t3.006	အဓိပ္ပာယ်
+t3.007	Library ဥပမာ
+t3.009	ထောင့်မှန်စတုဂံ
+t3.010	သိမ်းတဲ့ အရာ အမျိုးအစား
+t3.013	ဘဲဥပုံ
+t3.014	အဲ့အရာရဲ့ ဂုဏ်သတ္တိ
+t3.017	ဘဲဥပုံ, နာမည်ကို မျဉ်းသားထား
+t3.018	တစ်ခုစီကို ခွဲခြားတဲ့ ဂုဏ်သတ္တိ
+t3.021	ဘဲဥပုံ နှစ်ထပ်
+t3.022	အရာတစ်ခုအတွက် တန်ဖိုး အများ ကိုင်နိုင်
+t3.023	Member ရဲ့ ဖုန်းနံပါတ်များ
+t3.025	စိန်ပုံ
+t3.026	အရာတွေ ဘယ်လို ဆက်နွယ်လဲ
+t3.028	Cardinality: ဘယ်နှစ်ခု?
+t3.029	စိန်ပုံရဲ့ ဘေးတစ်ဖက်စီမှာ 1, N ဒါမှမဟုတ် M ရေးတယ်။
+t3.030	<b>1 : 1</b> — ဘေးတစ်ဖက်စီမှာ တစ်ခု။ Member တစ်ယောက်မှာ library card တစ်ခု။
+t3.031	<b>1 : N</b> — တစ်ဖက်မှာ တစ်ခု, တစ်ဖက်မှာ အများ။ ဌာနခွဲတစ်ခုမှာ စာအုပ်အများ; စာအုပ်တစ်အုပ်စီက ဌာနခွဲတစ်ခုထဲ။
+t3.032	<b>M : N</b> — နှစ်ဖက်လုံး အများ။ Member တစ်ယောက် စာအုပ်အများ ငှား, စာအုပ်တစ်အုပ်ကို အချိန်ကြာလာတာနဲ့ member အများ ငှား။
+t3.033	Participation: ရမယ်လား, နိုင်လား?
+t3.034	Entity ကနေ စိန်ပုံဆီ <b>မျဉ်းနှစ်ထပ်</b> က <b>total</b> participation: တစ်ခုချင်းစီ ပါဝင်ရမယ်။ <b>မျဉ်းတစ်ထပ်</b> က <b>partial</b>: တချို့ မပါနိုင်။ Loan တိုင်း member တစ်ယောက်ဆီ ပိုင်ရမယ် (total), ဒါပေမဲ့ member က ဘာမှ ငှားထားစရာ မလို (partial)။
+t3.035	Relationship ပေါ်က attribute များ
+t3.036	တချို့ အချက်တွေက ဘယ်အရာနဲ့မှ မဆိုင်ဘဲ ချိတ်ဆက်မှုနဲ့ ဆိုင်တယ်။ ပြန်ပေးရမယ့်ရက်က member ဒါမှမဟုတ် စာအုပ်ရဲ့ ဂုဏ်သတ္တိ မဟုတ်; ငှားမှု တစ်ခုရဲ့ ဂုဏ်သတ္တိ။ ဒါကြောင့် <code>DueDate</code> က <i>borrows</i> စိန်ပုံမှာ ချိတ်တယ်။
+t3.037	သိထားရမယ့် စကားလုံးများ
+t3.048	မှတ်ထားပါ
+t3.049	ထောင့်မှန်စတုဂံ = entity type, ဘဲဥ = attribute, စိန် = relationship။
+t3.050	<mark class="hl">1:1, 1:N, M:N က ဘယ်နှစ်ခုလဲ ပြော; မျဉ်းနှစ်ထပ် = ရမယ်, မျဉ်းတစ်ထပ် = နိုင်။</mark>
+t3.051	ချိတ်ဆက်မှုကိုယ်တိုင်အကြောင်း အချက်က စိန်ပုံပေါ် ရောက်တယ်။
+t3.052	အသေးစိတ်
+t3.053	Notation ဖတ်ခြင်း
+t3.054	ထောင့်မှန်စတုဂံတွေက <b>entity type</b>; ဘဲဥတွေက <b>attribute</b>; key attribute ကို မျဉ်းသားထား; စိန်တွေက <b>relationship type</b>။
+t3.055	အနားသတ်နှစ်ထပ် attribute ဘဲဥက <b>multivalued attribute</b> ကို ပြတယ် (inventory diagram ရဲ့ Price_change, Price နဲ့ Datetime နဲ့ ဈေးနှုန်းမှတ်တမ်း ကိုင်)။
+t3.056	Attribute တွေက relationship ပေါ်လည်း ချိတ်နိုင် (Supply မှာ Qty, Amount, RemainQty; "in" မှာ Qty နဲ့ Amount)။
+t3.057	<b>Cardinality ratio</b> ကို relationship ရဲ့ အစွန်းတစ်ဖက်စီမှာ ရေး: 1, N ဒါမှမဟုတ် M။
+t3.058	<b>Participation</b>: မျဉ်းနှစ်ထပ်က <b>total</b> participation (instance တိုင်း ပါဝင်ရမယ်); မျဉ်းတစ်ထပ်က <b>partial</b>။
+t3.059	Inventory: constraint တွေကို ဘယ်လို အကြောင်းပြခဲ့လဲ
+t3.060	Relationship
+t3.063	Supplier — Supply — Product (N : M)
+t3.064	Product တစ်ခုစီကို supplier 1 ကနေ N အထိ ထောက်ပံ့နိုင်; supplier တစ်ခုစီက product N အထိ ထောက်ပံ့နိုင်
+t3.065	Product တိုင်းကို supplier တစ်ခုခု ထောက်ပံ့ရမယ် (total, မျဉ်းနှစ်ထပ်)။ Supplier က ဘာမှ မထောက်ပံ့ဖူးနိုင် (partial)
+t3.066	Product — sold by — Department (N : 1)
+t3.067	Product တစ်ခုစီကို ဌာန 1 ခုက ရောင်း; ဌာနတစ်ခုက product N အထိ ရောင်း
+t3.068	Product တိုင်းကို ဌာနတစ်ခု ရောင်းရမယ် (total)။ ဌာနတိုင်း product မရောင်း, ဥပမာ HR (partial)
+t3.069	Customer — Issue — Invoice (1 : N)
+t3.070	Customer တစ်ယောက်မှာ invoice အများ ရှိနိုင်; invoice တစ်ခုကို customer တစ်ယောက်တည်းဆီ ထုတ်ပေး
+t3.071	Invoice တိုင်းမှာ customer ရှိရမယ် (total)။ Customer က ဘာမှ မဝယ်ဖူးနိုင် (partial)
+t3.072	Product — in — Invoice (M : N)
+t3.073	Product တစ်ခုက invoice အများထဲ ပါနိုင်; invoice တစ်ခုမှာ product အများ ပါနိုင်
+t3.074	Invoice တိုင်းမှာ product အနည်းဆုံး တစ်ခု ပါရမယ် (total)။ Product တိုင်း invoice ထဲ မပါ (partial)
+t3.075	<span class="fig-n">1</span>Inventory database: ER diagram
+t3.076	<span class="fig-n">2</span>Inventory database: ER-to-relational mapping, အဆင့် 1 ကနေ 6
+t3.077	Vote: legislative database ပေါ်မှာ အတွေးတူ
+t3.078	STATE (Name, Region) — have — CONGRESS_PERSON: congressperson တစ်ယောက်က ပြည်နယ်တစ်ခုတိတိကို ကိုယ်စားပြုရမယ် (1 : N, congressperson ဘက်မှာ total); ပြည်နယ်တစ်ခုမှာ congressperson အများ ရှိနိုင်။
+t3.079	CONGRESS_PERSON — sponsored — BILL: bill တစ်ခုကို လူ M ယောက် sponsor လုပ်နိုင် (M : N)။
+t3.080	Result attribute ပါ CONGRESS_PERSON — voted — BILL: congressperson တစ်ယောက်စီက bill N ခုအတွက် မဲပေးနိုင် (M : N)။
+t3.081	Enumerated domain တွေက diagram မှာ မဟုတ်ဘဲ requirement ထဲမှာ ပေါ်: Region, Party, Passed_or_failed နဲ့ Vote တစ်ခုစီမှာ ပုံသေ တန်ဖိုးအစု ရှိ။
+t3.082	<span class="fig-n">3</span>Congress voting database: ER diagram
+t3.083	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t3.084	Flashcard များ
+t3.085	Quiz
+t3.086	နောက်တစ်ခု: T4 Relational algebra

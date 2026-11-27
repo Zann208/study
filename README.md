@@ -76,6 +76,16 @@ Academic affiliation can still appear on the professional portfolio/resume where
 7. Preserve `.nojekyll` for direct static GitHub Pages hosting.
 8. Before adding new material, rewrite its framing into the console's own neutral topic structure rather than copying university labels.
 
+## Burmese reading layer
+
+DBS, SPM and MIS can be read in Burmese with the EN / MY switch in the top bar. The translations are static, so no translation API is involved.
+
+- `shared/v3/lang.js` is the runtime. Each console loads it with `data-store` (localStorage key) and `data-bundle` (path to its bundle).
+- Translatable elements carry `data-i18n="group.NNN"` keys.
+- Translations are kept in `<console>/i18n/my/*.tsv` as `key<TAB>html` lines. `tools/build_my.py` (with `tools/i18n_tag.py` for tagging) builds them into `<console>/i18n/my.js` (`window.SC_MY`). The bundle is only fetched when MY is selected.
+- When a key is missing, its English text stays on the page. Switching back to EN restores the original HTML exactly.
+- Do not tag elements that contain form controls, canvases, or `id` attributes that scripts rely on.
+
 ## Technology
 
 Vanilla HTML, CSS and JavaScript hosted with GitHub Pages. No framework is required for the central hub.

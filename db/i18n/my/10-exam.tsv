@@ -1,0 +1,110 @@
+# DBS: Past paper
+x1.001	<span class="badge b1">Q1 · 10</span> Referential action များ
+x1.002	1.1) ဒီ constraint ရဲ့ အဓိပ္ပာယ်ကို technical ကျကျ ရှင်းပြပါ, ဥပမာ … မှာ update တစ်ခုခုရှိရင် … ဖြစ်မယ်။
+x1.003	1.2) Constraint ကို ပြင်ပါ: (1) supervisor နုတ်ထွက်ရင် လက်အောက်ငယ်သားတွေမှာ supervisor မရှိ, (2) ဝန်ထမ်းအသစ် ဝင်ရင် HR ဝန်ထမ်းတစ်ယောက်ကို supervisor အဖြစ် အလိုအလျောက် ချပေး။ Code, နာမည် ဒါမှမဟုတ် တခြား data ကို ယူဆနိုင်တယ်။
+x1.004	နမူနာ အဖြေ
+x1.005	<b>1.1</b> DEPTMGRFK က EMPLOYEE ထဲက <code>super_ssn</code> ကို table တူထဲက <code>Ssn</code> ကို ညွှန်တဲ့ foreign key ဖြစ်စေတယ် (supervision relationship အတွက် self-referencing foreign key)။ NULL မဟုတ်တဲ့ super_ssn တိုင်းက ရှိပြီးသား ဝန်ထမ်းရဲ့ Ssn နဲ့ တူရမယ်။
+x1.006	<b><code class="kw">ON DELETE SET DEFAULT</code>:</b> supervisor ရဲ့ tuple ကို EMPLOYEE ကနေ ဖျက်ရင် သူကြီးကြပ်ခဲ့တဲ့ ဝန်ထမ်းတိုင်းရဲ့ super_ssn ကို super_ssn ရဲ့ default တန်ဖိုး ထားတယ်။ ဥပမာ Franklin Wong (Ssn 333445555) ကို ဖျက်ရင် Smith, Narayan, English တို့ရဲ့ super_ssn က 333445555 ကနေ default ဆီ ပြောင်းတယ်။ Default ကိုယ်တိုင် ရှိပြီးသား Ssn ဖြစ်ရမယ်, မဟုတ်ရင် delete ငြင်းခံရတယ်။
+x1.007	<b><code class="kw">ON UPDATE CASCADE</code>:</b> supervisor ရဲ့ Ssn ပြောင်းရင် တန်ဖိုးအသစ်ကို လက်အောက်ငယ်သားတိုင်းရဲ့ super_ssn ဆီ ကူးတယ်။ ဥပမာ Wong ရဲ့ Ssn ကို 333445555 ကနေ 333445599 ပြောင်းရင် Smith, Narayan, English ရဲ့ super_ssn က 333445599 ဖြစ်တယ်။
+x1.008	<b>1.2</b> HR officer ရဲ့ Ssn က <code>111111111</code> ဖြစ်ပြီး EMPLOYEE ထဲ ရှိပြီးသားလို့ ယူဆပါ။
+x1.009	ရှင်းလင်းချက်
+x1.010	<b>Clause ကို ဘယ်ကနေ ညာ ဖတ်ပါ။</b> <code class="kw">FOREIGN KEY</code> (super_ssn) က child column; <code class="kw">REFERENCES</code> EMPLOYEE(Ssn) က parent key။ နှစ်ခုလုံး EMPLOYEE ထဲ ရှိလို့ ဝန်ထမ်း row တစ်ခုက နောက်တစ်ခုကို ညွှန်တယ်။
+x1.011	<b>Referential action တစ်ခုစီက parent row ပေါ် event တစ်ခုကို ဖြေတယ်။</b> <code class="kw">ON DELETE</code> က parent row ပျောက်ရင် child တွေ ဘာဖြစ်လဲ ပြော; <code class="kw">ON UPDATE</code> က parent key တန်ဖိုး ပြောင်းရင် ဘာဖြစ်လဲ ပြော။ အဖြေကောင်းက တကယ့် tuple တွေသုံးပြီး event, ထိခိုက်တဲ့ row, တန်ဖိုးအသစ်ကို နာမည်တပ်တယ်။
+x1.012	<b>Requirement (1)</b> "supervisor မရှိ" ဆိုတာ child တန်ဖိုး <code class="kw">NULL</code> ဖြစ်တာ, ဒါကြောင့် delete action က <code class="kw">SET DEFAULT</code> ကနေ <code class="kw">SET NULL</code> ပြောင်းတယ်။ ဒါကြောင့် super_ssn က <code class="kw">NULL</code> ခွင့်ပြုရမယ် (primary key ရဲ့ အစိတ်အပိုင်း မဟုတ်လို့ entity integrity မသက်ဆိုင်)။
+x1.013	<b>Requirement (2)</b> က foreign key action အကြောင်း မဟုတ်ဘဲ <code class="kw">INSERT</code> အကြောင်း။ Referential action တွေက parent ရဲ့ delete နဲ့ update မှာသာ အလုပ်လုပ်လို့ အလိုအလျောက် HR supervisor က column ပေါ် <code class="kw">DEFAULT</code> ကလာတယ်: <code class="kw">INSERT</code> က super_ssn ကို ချန်ရင် default ကို သိမ်းတယ်။ HR ဝန်ထမ်း အရင်ရှိရမယ်, မဟုတ်ရင် foreign key က insert ကို ငြင်းတယ်။
+x1.014	<b>ပြောင်းဖို့ မတောင်းတာကို ထားပါ။</b> <code class="kw">ON UPDATE CASCADE</code> ဆက်ထား။
+x1.015	<b>နာမည် စစ်ချက်။</b> Constraint ကို DEPTMGRFK လို့ နာမည်ပေးထားပေမဲ့ ဌာန manager key မဟုတ်ဘဲ supervisor key; နာမည်က အဓိပ္ပာယ်ကို မပြောင်း။
+x1.016	MySQL (InnoDB) မှာ <code class="kw">SET DEFAULT</code> ကို parse လုပ်ပေမဲ့ ငြင်းတယ်, column ကို <code>ALTER TABLE … ALTER super_ssn SET DEFAULT …</code> နဲ့ ပြောင်းတယ်။ Standard SQL မှာ drop က <code>DROP CONSTRAINT DEPTMGRFK</code>။
+x2.001	<span class="badge b1">Q2 · 15</span> COMPANY data နဲ့ ဥပမာပြ
+x2.002	COMPANY database သုံးပြီး စာကြောင်းတစ်ကြောင်းစီကို ဥပမာပြဖို့ နမူနာ data ပြပါ။
+x2.003	ပေးထားတဲ့ ဥပမာ: relation state r(R) က dom(A1) × dom(A2) × … × dom(An) ရဲ့ အစုခွဲ။ အဖြေ: A1 = {1, 4, 5}, A2 = {Houston, Bellaire, Stafford} ဖြစ်ရင် DEPT_LOCATIONS ရဲ့ relation state r1, r1 = {&lt;1, Houston&gt;, &lt;5, Bellaire&gt;}။
+x2.004	2.1) Relation ထဲက tuple တွေမှာ အစဉ်တစ်ခုခု မရှိ။<br>2.2) <code class="kw">NULL</code> တန်ဖိုးတွေမှာ အဓိပ္ပာယ် အမျိုးမျိုး ရှိနိုင်။<br>2.3) Key တွေက အမြဲ superkey။<br>2.4) လက်ရှိ state r1(R1) ရဲ့ tuple t1 ထဲက FK တန်ဖိုး <code class="kw">NULL</code> ဖြစ်နိုင်။<br>2.5) Delete operation က referential integrity ကိုသာ ချိုးဖောက်နိုင်, key constraint ရော entity integrity ရော မဟုတ်။
+x2.005	နမူနာ အဖြေ
+x2.006	<b>2.1</b> r1(DEPT_LOCATIONS) = {&lt;1, Houston&gt;, &lt;4, Stafford&gt;, &lt;5, Bellaire&gt;} နဲ့ r2(DEPT_LOCATIONS) = {&lt;5, Bellaire&gt;, &lt;1, Houston&gt;, &lt;4, Stafford&gt;} က relation state တူ။ Relation က tuple အစု ဖြစ်လို့ အစဉ်ကွဲ ရေးရုံနဲ့ relation မတူ မဖြစ်။
+x2.007	<b>မသက်ဆိုင်:</b> James Borg, &lt;'James', 'E', 'Borg', '888665555', …, Super_ssn = <code class="kw">NULL</code>, Dno = 1&gt;။ ကုမ္ပဏီရဲ့ ထိပ်ဆုံးမှာ ရှိလို့ supervisor မရှိ။
+x2.008	<b>မသိ:</b> WORKS_ON &lt;'888665555', 20, <code class="kw">NULL</code>&gt;။ Borg က project 20 မှာ အလုပ်လုပ်ပေမဲ့ သူ့နာရီ မသိ။
+x2.009	<b>ရှိပေမဲ့ မမှတ်ရသေး:</b> ဝန်ထမ်းအသစ် &lt;'Cecilia', 'F', 'Kolonsky', '677678989', Bdate = <code class="kw">NULL</code>, …&gt;။ သူ့မှာ မွေးနေ့ ရှိပေမဲ့ မထည့်ရသေး။
+x2.010	<b>2.3</b> EMPLOYEE မှာ {Ssn} က key: tuple နှစ်ခု Ssn မမျှ (123456789, 333445555, 999887777, …), ဒါကြောင့် tuple နှစ်ခု ဘာမဆိုအတွက် t1[Ssn] ≠ t2[Ssn], အဲ့ဒါ superkey condition အတိအကျပဲ။ Key က minimal လည်း ဖြစ်တဲ့ superkey။ ပြောင်းပြန် မမှန်: {Ssn, Lname} က superkey ဖြစ်ပေမဲ့ Lname ဖယ်နိုင်လို့ key မဟုတ်။
+x2.011	<b>2.4</b> EMPLOYEE ထဲက Super_ssn က EMPLOYEE.Ssn ကို ညွှန်တဲ့ foreign key။ Tuple t1 = &lt;'James', 'E', 'Borg', '888665555', …, Super_ssn = <code class="kw">NULL</code>, Dno = 1&gt; မှာ foreign key တန်ဖိုးက <code class="kw">NULL</code> ဖြစ်ပြီး state က valid ဆဲ, foreign key တန်ဖိုးက ရှိပြီးသား primary key နဲ့ ကိုက်ရမယ် ဒါမှမဟုတ် <code class="kw">NULL</code> ဖြစ်ရမယ်လို့။
+x2.012	<b>2.5</b> Alicia Zelaya ကို ဖျက်ရင်, <code>DELETE FROM EMPLOYEE WHERE Ssn = '999887777'</code>, WORKS_ON &lt;'999887777', 30, 30.0&gt; နဲ့ &lt;'999887777', 10, 10.0&gt; က မရှိတော့တဲ့ ဝန်ထမ်းကို ညွှန်နေလို့ referential integrity ချိုးဖောက်တယ်။ Delete က တန်ဖိုးအသစ် မထည့်လို့ ထပ်နေတဲ့ key ဒါမှမဟုတ် <code class="kw">NULL</code> primary key မဖန်တီးနိုင်; tuple တစ်ခုကို ဖယ်ရုံပဲ။
+x2.013	ရှင်းလင်းချက်
+x2.014	<b>စာကြောင်းတစ်ကြောင်းစီ 3 မှတ်:</b> COMPANY ထဲက မှန်ကန်တဲ့ ဥပမာ tuple ဒါမှမဟုတ် state တစ်ခုနဲ့ ဘာကြောင့် စာကြောင်းကို ပြလဲ ပြောတဲ့ စာကြောင်းတစ်ကြောင်း။ Tuple တွေကို ပေးထားတဲ့ ဥပမာလို angle bracket <code class="sym">&lt; &gt;</code> ထဲ schema အစဉ်နဲ့ ရေးပါ။
+x2.015	<b>2.1</b> က relation ရဲ့ set definition အကြောင်း။ Tuple တူကို အစဉ်နှစ်မျိုးနဲ့ပြပြီး state တစ်ခုတည်းလို့ ခေါ်တာက အရှင်းဆုံး သက်သေ။
+x2.016	<b>2.2</b> အဓိပ္ပာယ် သုံးမျိုးက တန်ဖိုး မသိ, တန်ဖိုး ရှိပေမဲ့ မရနိုင်, attribute မသက်ဆိုင်။ နှစ်မျိုးကို COMPANY state ကနေ တိုက်ရိုက်ယူနိုင် (Borg ရဲ့ Super_ssn နဲ့ project 20 ပေါ် သူ့ Hours)။
+x2.017	<b>2.3</b> Definition တွေကနေ စပါ: superkey = uniqueness; key = uniqueness + minimality။ Key က definition အရ ပထမ condition နဲ့ ကိုက်လို့ အမြဲ superkey။ Counterexample {Ssn, Lname} ထည့်ရင် ပြောင်းပြန် မမှန်တာ သိကြောင်း ပြတယ်။
+x2.018	<b>2.4</b> Primary key ရဲ့ အစိတ်အပိုင်း မဟုတ်တဲ့ foreign key ကို ရွေးပါ။ EMPLOYEE ထဲက Super_ssn ဒါမှမဟုတ် Dno ရ; WORKS_ON ထဲက Essn မရ, အဲ့မှာ <code class="kw">NULL</code> က entity integrity ကို ချိုးဖောက်လို့။
+x2.019	<b>2.5</b> Operation တစ်ခုစီ ဘာပြောင်းလဲ ဆိုတာကနေ အကြောင်းပြပါ။ Insert နဲ့ update က တန်ဖိုးထည့်လို့ domain, key, entity integrity, referential integrity ကို ချိုးဖောက်နိုင်။ Delete က tuple ကိုသာ ဖယ်လို့ ဖြစ်နိုင်တဲ့ ပျက်စီးမှုက ညွှန်စရာမရှိ reference သာ။ DBMS က ငြင်းမလား, cascade မလား, <code class="kw">NULL</code> ထားမလား ဆိုတာ referential action ပေါ် မူတည်တယ်။
+x3.001	<span class="badge b1">Q3 · 10</span> Query semantics
+x3.002	အောက်က query ရဲ့ အဓိပ္ပာယ် (semantics) ကို ရှင်းပြပါ။
+x3.003	နမူနာ အဖြေ
+x3.004	ဌာနတစ်ခုစီအတွက် ဌာနနံပါတ်နဲ့ 40,000 ထက် ပိုရတဲ့ ဝန်ထမ်းအရေအတွက်ကို ပြပါ, ဒါပေမဲ့ အဲ့လိုဝန်ထမ်း ငါးယောက်ထက် ပိုရှိတဲ့ ဌာနတွေကိုသာ။
+x3.005	Processing အစဉ်: <code class="kw">FROM</code> EMPLOYEE က ဝန်ထမ်းအားလုံး ယူ; <code class="kw">WHERE</code> Salary &gt; 40000 က 40,000 ထက် ပိုရတဲ့ ဝန်ထမ်းတွေကိုသာ ထား; <code class="kw">GROUP BY</code> Dno က ကျန်တဲ့ ဝန်ထမ်းတွေကို ဌာနတစ်ခုစီ group တစ်ခုထဲ ထည့်; <code class="kw">HAVING</code> <code class="kw">COUNT(*)</code> &gt; 5 က ဝန်ထမ်း ငါးယောက်ထက်ပိုတဲ့ group တွေကိုသာ ထား; <code class="kw">SELECT</code> က ထားတဲ့ group တစ်ခုစီရဲ့ ဌာနနံပါတ်နဲ့ count ကို ထုတ်။
+x3.006	ရှင်းလင်းချက်
+x3.007	<b>ရေးအစဉ် မဟုတ်ဘဲ processing အစဉ်နဲ့ ဖတ်ပါ</b>: <code class="kw">FROM</code> → <code class="kw">WHERE</code> → <code class="kw">GROUP BY</code> → <code class="kw">HAVING</code> → <code class="kw">SELECT</code>။
+x3.008	<b><code class="kw">WHERE</code> က grouping မတိုင်ခင် row တွေ filter</b> လုပ်လို့ <code class="kw">COUNT(*)</code> က ဌာနထဲက ဝန်ထမ်းတိုင်း မဟုတ်ဘဲ 40,000 ထက် ပိုရတဲ့ ဝန်ထမ်းတွေကိုသာ ရေတွက်တယ်။ အဖြေအများစု လွတ်သွားတဲ့ အချက် ဒါပဲ။
+x3.009	<b><code class="kw">HAVING</code> က ရေတွက်ပြီးနောက် group တစ်ခုလုံးကို filter</b> လုပ်တယ်။ လစာမြင့်သူ မရှိတဲ့ ဌာနက group မဖွဲ့လို့ 0 နဲ့တောင် မပေါ်ဘူး။
+x3.010	<b>နယ်နိမိတ်:</b> &gt; 40000 က 40,000 အတိအကျ လစာ (Franklin Wong) ကို ဖယ်တယ်။
+x3.011	<b>COMPANY state ပေါ်မှာ</b> Wallace (43,000, Dno 4) နဲ့ Borg (55,000, Dno 1) သာ 40,000 ထက် ပိုရလို့ group တိုင်းမှာ ဝန်ထမ်းတစ်ယောက်ပဲ ရှိပြီး ရလဒ် ဗလာ။ Query က မှန်တယ်; နမူနာ data မှာ အဲ့လိုဌာန မရှိရုံပဲ။
+x3.012	<b>စာကြောင်းတစ်ကြောင်း အရင်, ပြီးမှ အဆင့်တွေ။</b> စာကြောင်းက အမှတ်အများစု ရစေ; အဆင့်တွေက ဘာကြောင့်လဲ နားလည်ကြောင်း ပြတယ်။
+x4.001	<span class="badge b1">Q4 · 10</span> Datalog ကနေ RA, SQL နဲ့ အင်္ဂလိပ်
+x4.002	Datalog query နှစ်ခုကို (1) relational algebra, (2) SQL, (3) အင်္ဂလိပ် query အဖြစ် ပြောင်းပါ။
+x4.003	နမူနာ အဖြေ
+x4.006	ရှင်းလင်းချက်
+x4.007	<b>Argument တိုင်းကို နေရာအလိုက် attribute နဲ့ ကိုက်ပါ။</b> CUSTOMERS(_, x, y, _, z) ဆိုတာ CID ကို လျစ်လျူရှု, x = FName, y = LName, CAddress ကို လျစ်လျူရှု, z = Account။
+x4.008	<b>Head ထဲက variable တွေက projection ဖြစ်တယ်။</b> ans(x, y) → <span class="sym ra">π</span> FName, LName။ ans(x) → <span class="sym ra">π</span> SName။
+x4.009	<b>Comparison နဲ့ constant တွေက selection ဖြစ်တယ်။</b> z &lt; 500 → <span class="sym ra">σ</span> Account &lt; 500။ z = "Chiang Mai" → <span class="sym ra">σ</span> SAddress = 'Chiang Mai'။ PRODUCTS ရဲ့ တတိယနေရာက constant "As seen on TV" → <span class="sym ra">σ</span> Category = 'As seen on TV'။
+x4.010	<b>Subgoal နှစ်ခု မျှသုံးတဲ့ variable က join condition ဖြစ်တယ်။</b> x က SUPPLIERS နဲ့ OFFERS ထဲ ပေါ် → SUPPLIERS.SName = OFFERS.Sname။ y က OFFERS နဲ့ PRODUCTS ထဲ ပေါ် → OFFERS.PID = PRODUCTS.PID။
+x4.011	<b>Underscore တွေ</b>က ကိုက်ပေမဲ့ မသုံးတဲ့ attribute တွေမို့ အဖြေထဲ ဘယ်နေရာမှ မပေါ်။
+x4.012	SQL ထဲက <b><code class="kw">DISTINCT</code></b> က Datalog နဲ့ relational algebra ရဲ့ set ရလဒ်နဲ့ ကိုက်တယ်; ရိုးရိုး <code class="kw">SELECT</code> က supplier ကို ကိုက်တဲ့ product တစ်ခုစီ တစ်ခါ ပြန်ပေးနိုင်တယ်။
+x4.013	<b>အင်္ဂလိပ် စာကြောင်း</b>က အဆင့်တွေ မဟုတ်ဘဲ ရလဒ်ကို ဖော်ပြ: ဘာကို စာရင်းပြလဲ, ဘယ် condition နဲ့ ကိုက်လဲ။
+x5.001	<span class="badge b1">Q5 · 10</span> ဒီ rule တွေ ဘာကြောင့် safe မဖြစ်လဲ
+x5.002	အောက်က rule တွေ ဘာကြောင့် safe မဖြစ်လဲ ရှင်းပြပါ။
+x5.003	နမူနာ အဖြေ
+x5.004	Head ထဲ, negate လုပ်ထားတဲ့ subgoal ထဲ ဒါမှမဟုတ် arithmetic comparison ထဲ ပေါ်တဲ့ variable တိုင်းက body ရဲ့ positive (negate မလုပ်ထား) relational subgoal အနည်းဆုံး တစ်ခုထဲမှာလည်း ပေါ်မှသာ rule က safe။ မဟုတ်ရင် variable က database ထဲ သိမ်းထားတဲ့ တန်ဖိုးတွေနဲ့ မကန့်သတ်ဘဲ အဖြေက အဆုံးမရှိ ဖြစ်နိုင်တယ်။
+x5.005	<b>S(x) &lt;- R(y):</b> x က head ထဲ ပေါ်ပေမဲ့ relational subgoal တစ်ခုမှာမှ မပေါ်; y ကိုသာ R က bind လုပ်တယ်။ ဒါကြောင့် x က ဘယ်တန်ဖိုးမဆို ဖြစ်နိုင်ပြီး R မဗလာတိုင်း S က အဆုံးမရှိ။
+x5.006	<b>S(x) &lt;- R(y) AND NOT R(x):</b> x က head နဲ့ negate လုပ်ထားတဲ့ subgoal NOT R(x) ထဲမှာသာ ပေါ်။ Negation က variable ကို bind မလုပ်: R ထဲ မရှိတဲ့ တန်ဖိုးတိုင်း ကိုက်ပြီး အဲ့လိုတန်ဖိုး အဆုံးမရှိ ရှိတယ်။
+x5.007	<b>S(x) &lt;- R(y) AND x &lt; y:</b> x က head နဲ့ comparison x &lt; y ထဲမှာသာ ပေါ်။ R ထဲက y တိုင်းအတွက် y ထက်ငယ်တဲ့ တန်ဖိုး အဆုံးမရှိ ရှိတယ်။
+x5.008	ရှင်းလင်းချက်
+x5.009	<b>Safety rule ကို အရင်ဖော်ပြပါ</b>; ပြီးရင် အပိုင်းတစ်ခုစီက အဲ့ rule ကို တစ်ခါ ကျင့်သုံးတာပဲ။
+x5.010	<b>Variable တစ်ခုချင်း စစ်ပါ။</b> Head, NOT, ဒါမှမဟုတ် comparison ထဲက variable တိုင်းအတွက် မေးပါ: body ထဲက positive relation အတွင်းမှာ ရှိလား? မရှိရင် rule က unsafe။
+x5.011	<b>သက်သေပြဖို့ instance အသေးလေး သုံးပါ။</b> R = {1, 5} နဲ့: rule 1 က ဖြစ်နိုင်တဲ့ တန်ဖိုးတိုင်း ပြန်ပေး; rule 2 က 1 နဲ့ 5 မှလွဲ တန်ဖိုးတိုင်း ပြန်ပေး; rule 3 က 5 ထက်ငယ်တဲ့ တန်ဖိုးတိုင်း ပြန်ပေး (…, 2, 3, 4, အနုတ်ကိန်းနဲ့ အပိုင်းကိန်းပါ)။
+x5.012	<b>ပြင်နည်း (နားလည်ကြောင်း ပြ):</b> x ကို positive subgoal မှာ bind ပါ, ဥပမာ S(x) &lt;- R(x), S(x) &lt;- T(x) AND NOT R(x), S(x) &lt;- R(x) AND R(y) AND x &lt; y။
+x6.001	<span class="badge b1">Q6 · 20</span> Index တွက်ချက်ခြင်း, B = 1024
+x6.002	Block size B = 1024 byte, block pointer P = 6 byte, record pointer P<sub>R</sub> = 7 byte။ EMPLOYEE file မှာ NAME (30), SSN (9), DEPARTMENTCODE (9), ADDRESS (40), PHONE (9), BIRTHDATE (8), SEX (1), JOBCODE (4), SALARY (4) field ပါ အရှည်ပုံသေ record r = 30,000 ရှိ။
+x6.003	1) Data file ရဲ့ blocking factor (unspanned) နဲ့ block အရေအတွက် ရှာပါ။
+x6.004	File ကို key မဟုတ်တဲ့ field DEPARTMENTCODE နဲ့ စီထားတယ်။ SSN ပေါ် secondary index ဆောက်ထားပြီး pointer တစ်ခုစီက record အဆင့်ကို ညွှန်တယ်။
+x6.005	2) ပထမအဆင့် index blocking factor bfr<sub>i</sub> ရှာပါ။<br>3) ပထမအဆင့် index entry အရေအတွက်နဲ့ ပထမအဆင့် block အရေအတွက် ရှာပါ။<br>4) အဲ့ပေါ် ဆောက်တဲ့ multilevel index ရဲ့ level အရေအတွက်နဲ့ block စုစုပေါင်း ရှာပါ။<br>5) ပေးထားတဲ့ SSN တစ်ခုအတွက် multilevel index ကနေ record ဆီ ရောက်ဖို့ block access အရေအတွက် ရှာပါ။
+x6.006	နမူနာ အဖြေ
+x6.007	ရှင်းလင်းချက်
+x6.008	<b>Record size:</b> field တိုင်း ပေါင်းပါ။ 1024 / 114 = 8.98, unspanned file က record ကို block တွေကြား ခွဲမရလို့ အောက်ချ: bfr = 8။ ပြီးရင် 30,000 / 8 = 3,750 အတိအကျ။
+x6.009	<b>Index entry = key field + pointer။</b> Pointer type ကို မေးခွန်းက ဆုံးဖြတ်တယ်: "record အဆင့်ကို ညွှန်" ဆိုတာ block pointer (6 byte) မဟုတ်ဘဲ record pointer (7 byte)။ 9 + 7 = 16, 1024 / 16 = 64 အတိအကျ။
+x6.010	<b>Dense လား sparse လား?</b> File ကို SSN မဟုတ်ဘဲ DEPARTMENTCODE နဲ့ စီထားလို့ SSN တန်ဖိုးတွေ block တွေကြား ပြန့်ကျဲနေ။ ဒါကြောင့် secondary index မှာ record တိုင်းအတွက် entry တစ်ခု ရှိရမယ်: entry 30,000။ 30,000 / 64 = 468.75, block 469 အဖြစ် အပေါ်တင်။
+x6.011	<b>Multilevel index:</b> အပေါ်အဆင့်တစ်ခုစီမှာ အောက်အဆင့်ရဲ့ block တစ်ခုစီ entry တစ်ခု ရှိပြီး စံနည်းက အဆင့်တိုင်းမှာ fan-out fo = bfr<sub>i</sub> = 64 တူကို သုံးတယ်။ Block တစ်ခု ကျန်တဲ့အထိ စား, အပေါ်တင်: 469 → 8 → 1။ Level ရေတွက် (3) ပြီး block ပေါင်း (478)။
+x6.012	<b>Access များ:</b> index level တစ်ခုစီ block တစ်ခု ဖတ် (3), ပြီးရင် data block တစ်ခု (1)။ စုစုပေါင်း 4, မစီထားတဲ့ field ပေါ် linear search ရဲ့ 3,750 / 2 = 1,875 ခန့်နဲ့ နှိုင်းယှဉ်ရင်။
+x6.013	<b>အဆင့်တစ်ခုစီအတွက် အမှတ်ပေးတယ်။</b> ပုံသေနည်း, အစားထိုးထားတဲ့ ဂဏန်း, rounding ဦးတည်ချက်ကို အမြဲရေးပါ; နည်းလမ်းမှန်ပြီး ဂဏန်းတွက်တာ အနည်းငယ်မှားရင်လည်း အမှတ်အများစု ရဆဲ။
+x7.001	<span class="badge b1">Q7 · 5</span> Join အစဉ်
+x7.002	အောက်က query tree ကနေ ENROLMENT ကို STUDENT နဲ့ အရင် join မလား, COURSE နဲ့ အရင် join မလား, optimizer က အဖြေကို ဘယ်လို ဆုံးဖြတ်လဲ? ထည့်စဉ်းစားတဲ့ အချက်တွေ ဘာလဲ?
+x7.003	နမူနာ အဖြေ
+x7.004	Optimizer က အခြား join အစဉ်များ, (<span class="sym ra">σ</span>(ENROLMENT) <span class="sym ra">⋈</span> STUDENT) <span class="sym ra">⋈</span> COURSE နဲ့ (<span class="sym ra">σ</span>(ENROLMENT) <span class="sym ra">⋈</span> COURSE) <span class="sym ra">⋈</span> STUDENT ကို စာရင်းလုပ်, catalog ထဲက statistics ကနေ တစ်ခုစီရဲ့ ကုန်ကျစရိတ် ခန့်မှန်း, ပိုသက်သာတဲ့ plan ကို run တယ်။
+x7.005	ထည့်စဉ်းစားတဲ့ အချက်များ:
+x7.006	<b>Input အရွယ်:</b> STUDENT နဲ့ COURSE ရဲ့ tuple နဲ့ block အရေအတွက်, <span class="sym ra">σ</span> Grade = A ပြီးနောက် ENROLMENT tuple ဘယ်နှစ်ခု ကျန်လဲ (သူ့ selectivity)။
+x7.007	<b>Intermediate result အရွယ်:</b> StID/ID နဲ့ CrsID/Code ရဲ့ ကွဲပြားတဲ့ တန်ဖိုး အရေအတွက်ကနေ ခန့်မှန်းတဲ့ join selectivity။ Tuple နည်းတဲ့ ဒါမှမဟုတ် ကျဉ်းတဲ့ join ကို အရင်လုပ်လို့ နောက် join က နည်းနည်း ဖတ်ရတယ်။
+x7.008	<b>Access path နဲ့ join algorithm:</b> STUDENT.ID ဒါမှမဟုတ် COURSE.Code ပေါ် index ရှိလား (index nested-loop), input တွေ sort လုပ်ထားလား (sort-merge), ဒါမှမဟုတ် hash join က memory ထဲ ဆံ့လား။
+x7.009	<b>ရနိုင်တဲ့ memory buffer</b>, intermediate result ကို disk ပေါ် ရေးမယ့်အစား pipeline လုပ်နိုင်လား။
+x7.010	<b>ကုန်ကျစရိတ် တိုင်းတာမှု:</b> အဓိက block access အရေအတွက်, CPU နဲ့ memory ကုန်ကျစရိတ်ပါ။
+x7.011	ရှင်းလင်းချက်
+x7.012	<b>မေးခွန်းက "ဘယ်လို" ပြီးမှ "ဘာ" မေးတယ်။</b> "ဘယ်လို" ကို စာကြောင်းတစ်ကြောင်းနဲ့ ဖြေ: အစဉ်တွေ စာရင်းလုပ်, တစ်ခုစီ ကုန်ကျစရိတ် ခန့်မှန်း, အနိမ့်ဆုံး ရွေး။
+x7.013	<b>ဒီမှာ join နှစ်ခုလုံး foreign key ကနေ primary key ဆီ လိုက်တယ်</b>, ဒါကြောင့် တစ်ခုစီက ရွေးထားတဲ့ enrolment တစ်ခုစီ row အများဆုံး တစ်ခု ထုတ်တယ်။ ဒါကြောင့် ကွာခြားချက်က ကုန်ကျစရိတ်မှာ: ဘယ် table သေးလဲ, ဘယ် key မှာ index ရှိလဲ, intermediate tuple ဘယ်လောက် ကျယ်လဲ။
+x7.014	<b>Optimizer က အရင်ကျင့်သုံးတဲ့ heuristic များ:</b> selection တွေကို စောစောလုပ် (<span class="sym ra">σ</span> Grade = A ကို အောက်တွန်းပြီးသား), မသုံးတဲ့ column တွေကို project ဖယ် (Title နဲ့ Major ပဲ လို), Cartesian product ရှောင်။
+x7.015	<b>5 မှတ်</b> ဆိုတာ ဆုံးဖြတ်နည်းနဲ့ နာမည်တပ်ထားတဲ့ ထည့်စဉ်းစားချက် သုံးလေးခု, တစ်ခုစီ အကြောင်းပြချက်တိုနဲ့။
+x8.001	<span class="badge b1">Q8 · 10</span> Push-down projection
+x8.002	အောက်က database နဲ့ query ကနေ ပေးထားတဲ့ query tree ပေါ် ထပ်မံ optimization အတွက် push-down projection ကို ပြပါ။
+x8.003	နမူနာ အဖြေ
+x8.004	Branch တစ်ခုစီမှာ ထားတဲ့ attribute များ: CUSTOMER ကနေ ID (join) နဲ့ Name (output) သာ; Type ဖယ်။ INVOICE ကနေ CustID (join), Date နဲ့ Amount (selection နဲ့ output) သာ; InvID ဖယ်။ LineItem နဲ့ Product ကို query က မသုံး။
+x8.005	ရှင်းလင်းချက်
+x8.006	<b>အပေါ်ကနေ အောက် လုပ်ပါ။</b> Operator တစ်ခုစီ လိုတဲ့ attribute တွေ ရေးပါ: နောက်ဆုံး <span class="sym ra">π</span> က Name, Date, Amount လို; join က Customer.ID နဲ့ Invoice.CustID လို။
+x8.007	<b>Leaf တစ်ခုစီ အပေါ်မှာ <span class="sym ra">π</span> ထည့်ပါ</b>, tree အပေါ်ပိုင်းမှာ လိုတဲ့ attribute တွေကိုသာ ထား: CUSTOMER → ID, Name; INVOICE → CustID, Date, Amount။
+x8.008	INVOICE ပေါ်က <b>selection အပေါ်မှာ <span class="sym ra">π</span> ထား</b>ပါ, ဒါမှမဟုတ် Date နဲ့ Amount ပါဆဲ ဖြစ်အောင် သေချာပါစေ, selection က လိုလို့။
+x8.009	<b>Conjunctive selection ကို</b> cascade (<span class="sym ra">σ</span> Date.Month = July (<span class="sym ra">σ</span> Amount &gt; 3000 (INVOICE))) အဖြစ် <b>ခွဲ</b>ပါ, condition တစ်ခုစီကို သီးခြား ရွှေ့ပြီး စီနိုင်အောင်။ ပိုရွေးချယ်တဲ့ condition ကို အောက်ခြေမှာ ထားပါ။
+x8.010	<b>ထိပ်က <span class="sym ra">π</span> ကို ထားပါ။</b> Join output က ရလဒ်မှာ မပြတဲ့ ID နဲ့ CustID ကို သယ်နေဆဲ။
+x8.011	<b>ဘာကြောင့် အထောက်အကူဖြစ်လဲ:</b> ကျဉ်းတဲ့ tuple ဆိုတာ block တစ်ခုထဲ tuple ပိုဆံ့, ဒါကြောင့် intermediate result တွေ ရေး/ဖတ်ဖို့ block နည်းနည်း လို, join က data နည်းနည်း ကိုင်တွယ်ရ။ အဖြေ မပြောင်း။

@@ -1,0 +1,88 @@
+# DBS: T4, T5
+t4.001	<span class="num n1">4</span> Relational algebra
+t4.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Relational algebra က table ယူပြီး table ပြန်ပေးတဲ့ operation အစု အသေးလေး, ဒါကြောင့် ဆက်တိုက်ချိတ်ပြီး မေးခွန်းတစ်ခု ဖွဲ့နိုင်တယ်။
+t4.003	SQL syntax မသင်ခင် query တိုင်းကို ဆောက်တဲ့ အဆင့်အနည်းငယ်ကို မြင်ထားရင် အထောက်အကူဖြစ်တယ်။ <mark class="hl">အဆင့်တစ်ခုစီက table ပြန်ပေးလို့ တစ်ခုရဲ့ ရလဒ်ကို နောက်တစ်ခုထဲ တိုက်ရိုက် ထည့်နိုင်တယ်</mark>, ဟင်းချက်နည်းအဆင့်တွေလိုပဲ။ အဆင့်တွေကို ကိုယ်တိုင် ရေးပြရလို့ <b>procedural</b> လို့ ခေါ်တယ်။
+t4.004	သင်္ကေတ
+t4.005	နာမည်
+t4.006	ဘာလုပ်လဲ
+t4.007	Library ဥပမာ
+t4.009	စစ်ဆေးမှု အောင်တဲ့ <b>row</b> တွေကိုသာ ထား (filter)
+t4.011	<b>Column</b> တချို့ကိုသာ ထား; ထပ်နေတဲ့ row တွေ ဖယ်
+t4.015	Table တစ်ခုရဲ့ row တိုင်းကို နောက်တစ်ခုရဲ့ row တိုင်းနဲ့ တွဲ
+t4.018	Condition နဲ့ ကိုက်တဲ့ row တွေကိုသာ တွဲ
+t4.020	Union, intersection, difference
+t4.021	Column တူတဲ့ table နှစ်ခုပေါ် set operation
+t4.022	ဌာနခွဲ A က member <span class="ra-sym">∪</span> ဌာနခွဲ B က member
+t4.024	Table ဒါမှမဟုတ် column ကို နာမည်အသစ်ပေး
+t4.026	ဆက်တိုက်ချိတ်ထားတဲ့ expression ဖတ်ခြင်း
+t4.027	အတွင်းကနေ အပြင်ဘက် ဖတ်ပါ။ "စာအုပ် 7 ငှားခဲ့တဲ့ member နာမည်များ":
+t4.028	Select (<span class="sym ra">σ</span>) က row ပေါ် အလုပ်လုပ်; project (<span class="sym ra">π</span>) က column ပေါ် အလုပ်လုပ်။
+t4.029	သိထားရမယ့် စကားလုံးများ
+t4.035	မှတ်ထားပါ
+t4.036	Operation တိုင်းက table ယူပြီး table ပြန်ပေးတယ်။
+t4.037	<span class="sym ra">σ</span> က row filter, <span class="sym ra">π</span> က column ရွေး (ထပ်နေတာတွေ ဖယ်)။
+t4.038	Nested expression တွေကို အတွင်းကနေ အပြင် ဖတ်ပါ။
+t4.039	အသေးစိတ်
+t4.040	<span class="fig-n">1</span>Relational algebra လေ့ကျင့်ခန်းတွေမှာ သုံးတဲ့ COMPANY နမူနာ database
+t4.041	ဘာလဲ
+t4.042	<b>Procedural query language</b>: relational query တွေအတွက် သီအိုရီ အခြေခံ ပေးတဲ့ operation (algebraic operation) အစု။ Operation တစ်ခုစီက relation တစ်ခု ဒါမှမဟုတ် နှစ်ခု ယူပြီး table ထုတ်ပေးတယ်။
+t4.043	အခြေခံ
+t4.044	သင်္ကေတ
+t4.045	ထပ်ဆောင်း
+t4.046	သင်္ကေတ
+t4.059	Condition နဲ့ ကိုက်တဲ့ tuple တွေကို (အလျားလိုက်) ရွေး: <span class="ra-sym">σ<sub>&lt;condition&gt;</sub>(Relation)</span>။ နှိုင်းယှဉ် operator =, ≠, &lt;, ≤, &gt;, ≥; connective AND (∧), OR (∨), NOT (¬)။
+t4.061	Attribute တချို့ရဲ့ တန်ဖိုးတွေကို (ဒေါင်လိုက်) ပြန်ပေး, ကျန်တာ ချန်, <b>ထပ်နေတဲ့ row တွေ ဖယ်</b>: <span class="ra-sym">π<sub>attr1, attr2, …</sub>(Relation)</span>။
+t4.062	Union နဲ့ join
+t4.063	Union က relation နှစ်ခုပေါ် binary operator ဖြစ်ပြီး ထပ်နေတာတွေ ဖယ်တယ်။ Join က condition တစ်ခုပေါ် table နှစ်ခု ပေါင်း: <span class="ra-sym">(Relation1) ⋈<sub>condition</sub> (Relation2)</span>။ Attribute တန်ဖိုး တူတာပေါ် join ရင် <b>equijoin</b>။
+t4.064	သင်္ကေတတွေကို ရိုးရိုးစာသားနဲ့ ရေးခြင်း
+t4.065	သင်္ကေတ
+t4.066	စာသားပုံစံ
+t4.067	ဥပမာ
+t4.068	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t4.069	Flashcard များ
+t4.070	Quiz
+t4.071	နောက်တစ်ခု: T5 Intermediate SQL
+t5.001	<span class="num n1">5</span> Intermediate SQL
+t5.002	<b>တစ်ကြောင်းတည်းနဲ့</b>SQL က မေးခွန်းမေးဖို့ တကယ်ရိုက်တဲ့ ဘာသာစကား; <code class="kw">SELECT</code> တိုင်းက clause အနည်းငယ်နဲ့ ဖွဲ့ထားတဲ့ ချက်နည်း။
+t5.003	မေးခွန်းရဲ့ ပုံသဏ္ဌာန်
+t5.004	Clause တွေကို <code class="kw">SELECT</code>, <code class="kw">FROM</code>, <code class="kw">WHERE</code>, <code class="kw">GROUP BY</code>, <code class="kw">HAVING</code>, <code class="kw">ORDER BY</code>, <code class="kw">LIMIT</code> အစဉ်နဲ့ <b>ရေး</b>တယ်။ DBMS က နံပါတ်ပြထားတဲ့ အစဉ်နဲ့ <b>စဉ်းစား</b>တယ်: <mark class="hl">table တွေ အရင်လို, ပြီးရင် row filter, group ဖွဲ့, group filter, အဲ့နောက်မှသာ ပြမယ့် column ရွေး။</mark>
+t5.005	အစိတ်အပိုင်းများ
+t5.006	အစိတ်အပိုင်း
+t5.007	အဓိပ္ပာယ်
+t5.008	Algebra မှာ အတွေးတူ
+t5.009	Row တစ်ခုချင်း filter
+t5.010	<code>SELECT</code> စာရင်း
+t5.011	Column ရွေး
+t5.012	Table နှစ်ခုက ကိုက်တဲ့ row တွေ ပေါင်း
+t5.013	Aggregate function: တန်ဖိုးအများကို တစ်ခုတည်း ပြောင်း
+t5.014	ကွဲပြားတဲ့ တန်ဖိုးတစ်ခုစီအတွက် bucket တစ်ခု; aggregate တွေ bucket တစ်ခုချင်း run
+t5.015	Bucket တစ်ခုလုံးကို filter, ပုံမှန် aggregate နဲ့
+t5.016	ထပ်နေတဲ့ ရလဒ် row တွေ ဖယ်
+t5.018	တခြား <code class="kw">SELECT</code> ထဲမှာ သုံးတဲ့ <code class="kw">SELECT</code> တစ်ခုလုံး
+t5.019	WHERE လား HAVING လား?
+t5.020	မေးပါ: "<mark class="hl">ဒါကို row တစ်ခုတည်းပေါ် စစ်နိုင်လား?</mark>" ရရင် <code>WHERE</code> ထဲ (<code>DueDate &gt;= …</code>)။ ဖြေဖို့ group တစ်ခုလုံး လိုရင် (<code>COUNT(*) &gt; 2</code>) <code>HAVING</code> ထဲ။
+t5.021	Window function များ
+t5.022	<code>COUNT(*) OVER (PARTITION BY MemberID)</code> ကလည်း group အလိုက် ရေတွက်ပေမဲ့ <mark class="hl"><code class="kw">GROUP BY</code> နဲ့မတူ row တိုင်းကို ထားပြီး</mark> group ရဲ့ count ကို row တစ်ခုစီဘေးမှာ ရေးတယ်။
+t5.023	သိထားရမယ့် စကားလုံးများ
+t5.040	မှတ်ထားပါ
+t5.041	ရေး: <code class="kw">SELECT</code> <code class="kw">FROM</code> <code class="kw">WHERE</code> <code class="kw">GROUP BY</code> <code class="kw">HAVING</code> <code class="kw">ORDER BY</code> <code class="kw">LIMIT</code>။
+t5.042	Run: <code class="kw">FROM</code> <code class="kw">WHERE</code> <code class="kw">GROUP BY</code> <code class="kw">HAVING</code> <code class="kw">SELECT</code> <code class="kw">ORDER BY</code> <code class="kw">LIMIT</code>။
+t5.043	Row တစ်ခု condition က <code class="kw">WHERE</code> ထဲ; group condition က <code class="kw">HAVING</code> ထဲ။
+t5.044	အသေးစိတ်
+t5.045	Intermediate lab နှစ်ခုကို sales database (Customer, CustomerAddress, Address, Product, ProductCategory, SalesOrderHeader, SalesOrderDetail) ပေါ် run တယ်။
+t5.046	Grouping နဲ့ HAVING
+t5.047	Standard SQL က <code class="kw">SELECT</code> ထဲက aggregate မဟုတ်တဲ့ column တိုင်း <code class="kw">GROUP BY</code> ထဲ ပါဖို့ လိုတယ်။
+t5.048	FROM ထဲက subquery
+t5.049	Table အများကို join, DISTINCT, LIMIT
+t5.050	NOT IN subquery vs NOT LIKE
+t5.051	Lab 2 မေးခွန်း 1 (London မှာ မဟုတ်တဲ့ customer တွေရဲ့ order စုစုပေါင်း) မှာ လက်ခံတဲ့ အဖြေနှစ်ခု: <code>NOT IN (London customer subquery)</code> နဲ့ <code>WHERE a.City NOT LIKE 'London'</code> ပါ ရိုးရိုး join။
+t5.052	Self-join
+t5.053	Window function ပါ CASE
+t5.054	Query semantics
+t5.055	မေးခွန်းအများက "query ရဲ့ အဓိပ္ပာယ်ကို ဖော်ပြတဲ့ စာကြောင်းတို" တောင်းတယ်။ Lab အဖြေတွေက ဒီလို: <i>customer တစ်ယောက်စီရဲ့ ပျမ်းမျှ total due ကို အမြင့်ဆုံးကနေ အနိမ့်ဆုံး ရှာ</i>; <i>product category တစ်ခုစီက အဈေးအကြီးဆုံး ဈေးနှုန်း ထုတ်</i>။ ယခင်မေးခွန်းက EMPLOYEE ပေါ် <code class="kw">GROUP BY</code> … <code class="kw">HAVING</code> query အတွက် အတူတူ မေးတယ်။
+t5.056	<b>မကိုက်ညီ</b>Lab 2 မေးခွန်း 7 နဲ့ 8 က <code>SELECT * FROM Product … LIKE '%Helmet%' …</code> query တူကို နှစ်ခါပြပြီး ("ဈေးနှုန်း စုစုပေါင်း", "အနည်းဆုံး တစ်ခါ order ခံရတဲ့ product") အဖြေတွေက query နဲ့ မကိုက်။ အဲ့အဖြေနှစ်ခုကို မယုံကြည်ရဘူးလို့ သဘောထားပါ။
+t5.057	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t5.058	Flashcard များ
+t5.059	Quiz
+t5.060	လေ့ကျင့်ခန်း: SQL clause အစဉ်
+t5.061	နောက်တစ်ခု: T6 Datalog

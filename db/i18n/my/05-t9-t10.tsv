@@ -1,0 +1,68 @@
+# DBS: T9, T10
+t9.001	<span class="num n2">9</span> Transaction, commit နဲ့ rollback
+t9.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Transaction ဆိုတာ အားလုံးဖြစ်ရမယ်, ဒါမှမဟုတ် တစ်ခုမှ မဖြစ်ရမယ့် ပြောင်းလဲမှု အုပ်စု။
+t9.003	Account A ကနေ B ဆီ 100 လွှဲတာက ပြောင်းလဲမှု နှစ်ခု: A ကနေ 100 နုတ်, B ကို 100 ထည့်။ အကြားမှာ system crash ရင် ငွေပျောက်တယ်။ နှစ်ခုလုံးကို <b>transaction</b> ထဲ ထည့်ရင် unit တစ်ခုတည်း ဖြစ်တယ်။
+t9.004	လူနှစ်ယောက် တပြိုင်နက်
+t9.005	<mark class="hl">ကိုယ့် transaction ထဲမှာ <code class="kw">COMMIT</code> မလုပ်ခင်တောင် <b>ကိုယ့်ပြောင်းလဲမှုကို</b> ချက်ချင်း <b>မြင်ရ</b>တယ်။</mark>
+t9.006	တခြား session တွေက ကိုယ် <code class="kw">COMMIT</code> မလုပ်မချင်း <b>မမြင်ရ</b>ဘူး။ နောက်ဆုံး သိမ်းထားတဲ့ တန်ဖိုးကိုပဲ ဆက်မြင်တယ်။
+t9.007	Row တစ်ခု ပြောင်းနေစဉ် အဲ့ပေါ် <b>lock</b> ကိုင်ထားတယ်။ Row တူကို ပြောင်းဖို့ ကြိုးစားတဲ့ တခြားသူက ကိုယ် <code class="kw">COMMIT</code> ဒါမှမဟုတ် <code class="kw">ROLLBACK</code> လုပ်တဲ့အထိ <b>စောင့်</b>ရတယ်။
+t9.008	<mark class="hl">Transaction ကို ဘယ်တော့မှ မပြီးဆုံးရင် DBMS က ပုံမှန် rollback လုပ်တယ်</mark> (ဥပမာ connection ပိတ်တဲ့အခါ)။
+t9.009	ACID: ကတိ လေးခု
+t9.010	စာလုံး
+t9.011	ဂုဏ်သတ္တိ
+t9.012	အဓိပ္ပာယ်
+t9.014	အားလုံး ဒါမှမဟုတ် ဘာမှမဖြစ်
+t9.016	အရင်ရော နောက်ရော စည်းမျဉ်းတွေ မှန်ဆဲ
+t9.018	ကိုယ့်ရဲ့ တစ်ဝက်တစ်ပျက် အလုပ်ကို တခြားသူ မမြင်
+t9.020	Commit လုပ်ပြီးရင် crash ဖြစ်လည်း ကျန်ရှိ
+t9.021	သိထားရမယ့် စကားလုံးများ
+t9.033	မှတ်ထားပါ
+t9.034	Transaction က အားလုံး ဒါမှမဟုတ် ဘာမှမဖြစ်: <code class="kw">COMMIT</code> က သိမ်း, <code class="kw">ROLLBACK</code> က ပြန်ဖျက်။
+t9.035	ကိုယ့် commit မလုပ်ရသေးတဲ့ ပြောင်းလဲမှုကို ကိုယ်မြင်; တခြားသူ မမြင်။
+t9.036	<mark class="hl">Row ပြောင်းရင် lock ဖြစ်; ပြောင်းချင်တဲ့ တခြားသူ စောင့်ရမယ်။</mark>
+t9.037	အသေးစိတ်
+t9.038	Lab က bank account 10001–10003 ပေါ် session နှစ်ခု (connection A နဲ့ B) run ပြီး နံပါတ်တပ် query တစ်ခုစီနောက် session တစ်ခုစီ ဘာမြင်လဲ မေးတယ်။
+t9.039	Session က transaction တူထဲမှာ <b>ကိုယ့် commit မလုပ်ရသေးတဲ့ ပြောင်းလဲမှုကို မြင်</b>တယ်: A က 100 နုတ်ပြီးရင် A က လျော့သွားတဲ့ balance ကို ဖတ်တယ်။
+t9.040	တခြား session က <b>commit မလုပ်ရသေးတဲ့ ပြောင်းလဲမှုကို မမြင်</b> (default isolation အပြုအမူ): B က မူလ balance ကို ဆက်ဖတ်တယ်။
+t9.041	A က row ပေါ် lock ကိုင်ထားစဉ် B ရဲ့ ငွေထုတ်မှုနဲ့ လွှဲမှု <b>မပြီးဆုံးနိုင်</b>; A ရဲ့ commit မလုပ်ရသေးတဲ့ transaction ကို စောင့်တယ်။
+t9.042	A က <b><code class="kw">COMMIT</code></b> run ပြီးရင် ပြောင်းလဲမှုက အမြဲတမ်းဖြစ်ပြီး B ရဲ့ လွှဲမှု ပြီးဆုံးတယ်။
+t9.043	A က <b><code class="kw">ROLLBACK</code></b> run ပြီးရင် A ရဲ့ ပြောင်းလဲမှုအားလုံး ပယ်ဖျက်ခံရ (account 10003 က 1000 ပြန်ဖြစ်)။
+t9.044	စတင်ပြီး commit ရော rollback ရော မလုပ်တဲ့ transaction ကို DBMS အများစုမှာ အလိုအလျောက် rollback လုပ်တယ်; အဲ့အထိ တခြား session တွေ သူ့ပြောင်းလဲမှုကို မမြင်။
+t9.045	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t9.046	Flashcard များ
+t9.047	Quiz
+t9.048	လေ့ကျင့်ခန်း: Transaction sessions
+t9.049	နောက်တစ်ခု: T10 Privileges
+t10.001	<span class="num n2">10</span> User, privilege နဲ့ role (MySQL)
+t10.002	<b>တစ်ကြောင်းတည်းနဲ့</b>Account တိုင်း လိုတဲ့ permission ကိုသာ ရတယ်, <code class="kw">GRANT</code> နဲ့ ပေးပြီး <code class="kw">REVOKE</code> နဲ့ ပြန်ယူ။
+t10.003	Database က မျှသုံးတာမို့ ဘယ်သူ ဖတ်နိုင်, ဘယ်သူ ပြောင်းနိုင်လဲ ဆုံးဖြတ်ရတယ်။ <mark class="hl">MySQL မှာ account ဆိုတာ <b>user နာမည်နဲ့ ချိတ်ဆက်တဲ့ host</b>:</mark> <code>'ana'@'localhost'</code> က <code>'ana'@'%'</code> နဲ့ မတူတဲ့ account, <code>%</code> က ဘယ် host မဆို။
+t10.004	Privilege နဲ့ သက်ရောက်ရာ နေရာ
+t10.005	အဆင့်
+t10.006	ရေးပုံ
+t10.007	အကျုံးဝင်တာ
+t10.009	Server ပေါ်က database အားလုံး
+t10.011	Database တစ်ခုထဲက table အားလုံး
+t10.013	Table တစ်ခု
+t10.015	Table တစ်ခုရဲ့ column တချို့သာ
+t10.016	Role: permission အထုပ်
+t10.017	Privilege ငါးခုတူကို စာကြည့်တိုက်မှူး နှစ်ဆယ်ဆီ တစ်ယောက်ချင်း grant မယ့်အစား <b>role</b> တစ်ခု ဖန်တီး, role ကို privilege တစ်ခါ grant, လူတစ်ယောက်စီကို role ကို grant ပါ။ Role ပြောင်းရင် ကိုင်ထားသူအားလုံး ပြောင်းတယ်။
+t10.018	MySQL 8 မှာ grant ထားတဲ့ role က အလိုအလျောက် မဖွင့်ဘူး: user က <code>SET ROLE</code> run ရမယ်, ဒါမှမဟုတ် administrator က <code>SET DEFAULT ROLE</code> နဲ့ သတ်မှတ်ပေးရမယ်။
+t10.019	Least privilege
+t10.020	Account တစ်ခုစီကို အလုပ်လုပ်နိုင်ရုံ အနည်းဆုံး permission အစု, အကျဉ်းဆုံး host အစုကနေ ပေးပါ။ အလွဲသုံးခံရရင် ပျက်စီးမှု ကန့်သတ်ထားနိုင်တယ်။
+t10.021	သိထားရမယ့် စကားလုံးများ
+t10.033	မှတ်ထားပါ
+t10.034	Account က user@host; % က ဘယ် host မဆို။
+t10.035	<code class="kw">GRANT</code> ပေး, <code class="kw">REVOKE</code> ပြန်ယူ, global, database, table ဒါမှမဟုတ် column အဆင့်မှာ။
+t10.036	Role တွေက privilege ကို အထုပ်လုပ်; အလုပ်ဖြစ်ရုံ အနည်းဆုံး ပေး။
+t10.037	အသေးစိတ်
+t10.038	Account တွေက user@host
+t10.039	Host မပါတဲ့ <code>CREATE USER 'thisisme' IDENTIFIED BY '…'</code> ကို <code>'thisisme'@'%'</code> အဖြစ် ယူဆလို့ ဘယ် host ကမဆို ချိတ်ဆက်နိုင်တယ်။ Database နဲ့ host တူပေါ်က application အတွက် မှန်တဲ့ပုံစံက <code>'thisisme'@'localhost'</code>; host ချန်ရင် least privilege နိယာမကို ချိုးဖောက်တယ်။
+t10.040	Role များ
+t10.041	Database, table နဲ့ column အဆင့် grant ခြင်း
+t10.042	Revoke နဲ့ ဖယ်ရှားခြင်း
+t10.043	<b><code class="kw">GRANT</code> ကို ဖတ်ခြင်း</b>: <code>GRANT SELECT, INSERT, UPDATE ON hr.employees TO 'myuser'@'localhost' IDENTIFIED BY 'mypassword'</code> က server နဲ့ host တူကနေ ချိတ်ဆက်တဲ့ user myuser ကို အဲ့ password နဲ့ ဝန်ထမ်းမှတ်တမ်း ထုတ်ယူ, ထည့်, ပြင်ခွင့် ပေးတယ်။
+t10.044	<b>မှတ်ချက်</b>"<code class="kw">UPDATE</code> privilege ကို ထားပြီး grant ပေးနိုင်စွမ်းကို ဖယ်" အတွက် lab ရဲ့ အဖြေက <code class="kw">UPDATE</code> ကိုယ်တိုင်ကို revoke လုပ်တယ် (<code>REVOKE UPDATE … FROM 'dan'@'localhost'</code>)။ <code class="kw">UPDATE</code> ကို ထားပြီး ဆက်ပေးခွင့်ကိုသာ ဖယ်ဖို့ grant option ကို revoke ပါ: <code>REVOKE GRANT OPTION ON hr.employees FROM 'dan'@'localhost'</code>။
+t10.045	ဒီခေါင်းစဉ်ကို လေ့ကျင့်ပါ
+t10.046	Flashcard များ
+t10.047	Quiz
+t10.048	နောက်တစ်ခု: Flashcard များ

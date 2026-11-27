@@ -1,0 +1,94 @@
+# DBS: Mock paper B
+mb1.001	<span class="badge b1">Q1 · 10</span> Referential action များ
+mb1.002	1.1) COMPANY data သုံးပြီး ဒီ constraint ရဲ့ အဓိပ္ပာယ်ကို technical ကျကျ ရှင်းပြပါ။
+mb1.003	1.2) ပြင်ပါ: (1) manager ထွက်ရင် CEO က အဲ့ဌာနရဲ့ acting manager အလိုအလျောက် ဖြစ်, (2) manager ရဲ့ Ssn ပြောင်းတာကို ငြင်း။
+mb1.004	နမူနာ အဖြေ
+mb1.005	<b>1.1</b> DEPARTMENT ထဲက Mgr_ssn က EMPLOYEE.Ssn ကို ညွှန်တဲ့ foreign key: manager တိုင်း ရှိပြီးသား ဝန်ထမ်း ဖြစ်ရမယ်။
+mb1.006	<b><code class="kw">ON DELETE SET NULL</code>:</b> manager ကို ဖျက်ရင် ဌာနရဲ့ Mgr_ssn ကို <code class="kw">NULL</code> ထားတယ်။ Franklin Wong (333445555) ကို ဖျက်ရင် Research &lt;'Research', 5, <code class="kw">NULL</code>, …&gt; က manager မရှိ ဖြစ်တယ်။ Textbook DDL မှာလို Mgr_ssn ကို <code class="kw">NOT NULL</code> ကြေညာထားရင် အဲ့အစား delete ကို ငြင်းတယ်။
+mb1.007	<b><code class="kw">ON UPDATE CASCADE</code>:</b> manager ရဲ့ Ssn ပြောင်းရင် တန်ဖိုးအသစ်ကို Mgr_ssn ဆီ ကူးတယ်။ Wong ရဲ့ Ssn ကို 333445599 ပြောင်းရင် Research ရဲ့ Mgr_ssn က 333445599 ဖြစ်တယ်။
+mb1.008	<b>1.2</b> CEO James Borg ရဲ့ Ssn က 888665555။
+mb1.009	ရှင်းလင်းချက်
+mb1.010	<b>Requirement (1)</b> မှာ အပိုင်းနှစ်ခုလုံး လို: delete ပေါ် <code class="kw">SET DEFAULT</code> နဲ့ ရှိပြီးသား Ssn ဖြစ်တဲ့ <code class="kw">DEFAULT</code> တန်ဖိုး။ <code class="kw">DEFAULT</code> clause မပါရင် သတ်မှတ်စရာ ဘာမှ မရှိ။
+mb1.011	<b>Requirement (2)</b> ဆိုတာ ငြင်း: update ပေါ် <code class="kw">RESTRICT</code> ဒါမှမဟုတ် <code class="kw">NO ACTION</code>။
+mb1.012	<b>Edge case:</b> CEO ကိုယ်တိုင် ဖျက်ခံရရင် default က မရှိတဲ့ row ကို ညွှန်မှာမို့ အဲ့ delete ကို ငြင်းတယ်။
+mb1.013	Action က <code class="kw">SET NULL</code> ဖြစ်ရင် <b><code class="kw">NOT NULL</code> ကို ဖော်ပြပါ</b>; action run နိုင်မနိုင် အဲ့ဒါက ဆုံးဖြတ်တယ်။
+mb1.014	ကိုယ့်ရမှတ်
+mb2.001	<span class="badge b1">Q2 · 15</span> COMPANY data နဲ့ ဥပမာပြ
+mb2.002	စာကြောင်းတစ်ကြောင်းစီကို ဥပမာပြဖို့ COMPANY database ထဲက နမူနာ data ပြပါ။
+mb2.003	2.1) Superkey က key ဖြစ်စရာ မလို။<br>2.2) Tuple အတွင်းက တန်ဖိုးတွေမှာ အစဉ်ရှိတယ်။<br>2.3) Constraint ချိုးဖောက်တဲ့ database state က valid state မဟုတ်။<br>2.4) Relation တိုင်းမှာ key အနည်းဆုံး တစ်ခု ရှိတယ်။<br>2.5) Key တန်ဖိုး unique ဖြစ်ပေမဲ့ insert က referential integrity ကို ချိုးဖောက်နိုင်တယ်။
+mb2.004	နမူနာ အဖြေ
+mb2.005	<b>2.1</b> EMPLOYEE မှာ {Ssn, Lname} က superkey, tuple နှစ်ခု မမျှလို့ (Ssn တစ်ခုတည်း unique ပြီးသား)။ Key မဟုတ်: Lname ဖယ်ရင် {Ssn} ကျန်ပြီး unique ဆဲမို့ minimal မဟုတ်။
+mb2.006	<b>2.2</b> DEPARTMENT(Dname, Dnumber, Mgr_ssn, Mgr_start_date): &lt;'Research', 5, '333445555', '1988-05-22'&gt; ကို နေရာအလိုက် ဖတ်တယ်။ Tuple &lt;5, 'Research', '1988-05-22', '333445555'&gt; က ဒီ schema အောက်မှာ မတူတဲ့, invalid tuple: 5 ကို နာမည်အဖြစ်, ရက်စွဲကို manager Ssn အဖြစ် ဖတ်မယ်။
+mb2.007	<b>2.3</b> COMPANY state ကို WORKS_ON &lt;'123456789', 40, 5.0&gt; ထည့်ရင် invalid state ရ: project 40 မရှိလို့ referential integrity ချိုးဖောက်။ အဲ့ tuple မပါတဲ့ state က constraint တိုင်းနဲ့ ကိုက်ပြီး valid။
+mb2.008	<b>2.4</b> DEPT_LOCATIONS မှာ ပိုသေးတဲ့ key မရှိလို့ key က attribute အားလုံး: {Dnumber, Dlocation}, &lt;5, 'Bellaire'&gt; နဲ့ &lt;5, 'Houston'&gt; မှာလို။ Relation မှာ ထပ်နေတဲ့ tuple မပါနိုင်လို့ attribute အားလုံး အစုက superkey အမြဲဖြစ်ပြီး သူ့ minimal subset တစ်ခုက key။
+mb2.009	<b>2.5</b> <code class="kw">INSERT INTO</code> EMPLOYEE (Fname, Lname, Ssn, Dno) VALUES ('Cecilia', 'Kolonsky', '677678989', 7): Ssn 677678989 အသစ်ဖြစ်လို့ key constraint မှန်ပေမဲ့ Dno 7 က ဘယ်ဌာနနဲ့မှ မကိုက်လို့ referential integrity ချိုးဖောက်တယ်။
+mb2.010	ရှင်းလင်းချက်
+mb2.011	<b>2.1</b> က ယခင်မေးခွန်းရဲ့ "key တွေက အမြဲ superkey" ရဲ့ ပြောင်းပြန်။ ဖယ်လို့ရတဲ့ attribute တစ်ခုပါ superkey ကို ပြပါ။
+mb2.012	<b>2.2</b> ပုံမှန် definition အောက်မှာ tuple က attribute တွေနဲ့ နေရာအလိုက် ကိုက်တဲ့ တန်ဖိုး အစဉ်လိုက်စာရင်း; အခြား definition (attribute–value အတွဲအစု) အောက်မှာ အစဉ် အရေးမကြီး။ Schema အစဉ်ကို ဖော်ပြပါ။
+mb2.013	<b>2.3</b> Valid state က integrity constraint အားလုံးနဲ့ ကိုက်တယ်; constraint တစ်ခုခု ချိုးဖောက်ရင် invalid ဖြစ်တယ်။
+mb2.014	<b>2.4</b> အကြောင်းပြချက်က set definition: ထပ်နေတဲ့ tuple မရှိ ဆိုတာ attribute အားလုံးပေါင်း unique ဖြစ်တယ်။
+mb2.015	<b>2.5</b> Insert က constraint လေးခုလုံးကို သီးခြားစစ်လို့ တစ်ခုအောင်တာက တခြားဟာတွေ အောင်တယ်လို့ မဆိုလို။
+mb2.016	ကိုယ့်ရမှတ်
+mb3.001	<span class="badge b1">Q3 · 10</span> Query semantics
+mb3.002	အောက်က query ရဲ့ အဓိပ္ပာယ်ကို ရှင်းပြပြီး COMPANY state ပေါ် ရလဒ် ပေးပါ။
+mb3.003	နမူနာ အဖြေ
+mb3.004	Dependent အနည်းဆုံး နှစ်ယောက်ရှိတဲ့ ဝန်ထမ်းတစ်ယောက်စီအတွက် ဝန်ထမ်းရဲ့ မျိုးနွယ်နာမည်နဲ့ dependent အရေအတွက်ကို ပြပါ။
+mb3.005	ရလဒ်: (Wong, 3) နဲ့ (Smith, 3)။ Wallace မှာ dependent တစ်ယောက်ပဲ ရှိလို့ <code class="kw">HAVING</code> က ဖယ်; dependent မရှိတဲ့ ဝန်ထမ်းတွေက DEPENDENT နဲ့ ဘယ်တော့မှ join မဖြစ်လို့ group မဖွဲ့။
+mb3.006	ရှင်းလင်းချက်
+mb3.007	<b><code class="kw">WHERE</code> E.Ssn = D.Essn</b> က join: (ဝန်ထမ်း, dependent) အတွဲတစ်ခုစီ row တစ်ခု။
+mb3.008	<b><code class="kw">GROUP BY</code> E.Ssn</b> က ဝန်ထမ်းတစ်ယောက်စီ group တစ်ခု ဖွဲ့လို့ မျိုးနွယ်နာမည်တူ ဝန်ထမ်းနှစ်ယောက် မပေါင်းမိ။ E.Lname ကို <code class="kw">SELECT</code> ထဲ ပေါ်နိုင်အောင် <code class="kw">GROUP BY</code> ထဲ ထည့်တယ်။
+mb3.009	<b><code class="kw">COUNT(*)</code></b> က group တစ်ခုစီရဲ့ join ထားတဲ့ row တွေကို ရေတွက်တယ်, အဲ့ဒါက dependent အရေအတွက်။
+mb3.010	<b>Data:</b> 333445555 (Wong): Alice, Theodore, Joy = 3။ 123456789 (Smith): Michael, Alice, Elizabeth = 3။ 987654321 (Wallace): Abner = 1။
+mb3.011	ကိုယ့်ရမှတ်
+mb4.001	<span class="badge b1">Q4 · 10</span> Datalog ကနေ RA, SQL နဲ့ အင်္ဂလိပ်
+mb4.002	ယခင်မေးခွန်းရဲ့ CUSTOMERS / PRODUCTS / SUPPLIERS / ORDERS / OFFERS schema ကို သုံးပြီး Datalog query တစ်ခုစီကို (1) relational algebra, (2) SQL, (3) အင်္ဂလိပ် အဖြစ် ပြောင်းပါ။
+mb4.003	နမူနာ အဖြေ
+mb4.006	ရှင်းလင်းချက်
+mb4.007	<b>NOT က</b> relational algebra မှာ <b>set difference</b>, SQL မှာ <code class="kw">NOT IN</code> (ဒါမှမဟုတ် <code class="kw">NOT EXISTS</code>) ဖြစ်တယ်။ Difference ရဲ့ နှစ်ဖက်လုံး attribute တူရမယ်, ဒါကြောင့် တစ်ဖက်စီမှာ PID ကို အရင် project လုပ်ပါ။
+mb4.008	<b>Rule 1 က safe:</b> x ကို positive subgoal PRODUCTS က bind လုပ်တယ်။
+mb4.009	<b>Subgoal ထဲက constant များ</b> ("Snack", "Sunrise") က အဲ့နေရာရဲ့ attribute ပေါ် selection ဖြစ်တယ်။
+mb4.010	<b>Comparison များ</b> (q &gt; 10) က bind ထားတဲ့ attribute ပေါ် selection။
+mb4.011	ကိုယ့်ရမှတ်
+mb5.001	<span class="badge b1">Q5 · 10</span> ဒီ rule တွေ ဘာကြောင့် safe မဖြစ်လဲ
+mb5.002	အောက်က rule တွေ ဘာကြောင့် safe မဖြစ်လဲ ရှင်းပြပြီး တစ်ခုစီကို safe ဖြစ်အောင် ပြန်ရေးပါ။
+mb5.003	နမူနာ အဖြေ
+mb5.004	<b>S(x, y) &lt;- R(x):</b> y က head ထဲ ပေါ်ပေမဲ့ relational subgoal တစ်ခုမှာမှ မပေါ်လို့ ဘယ်တန်ဖိုးမဆို ဖြစ်နိုင်။ Safe ပုံစံ: S(x, y) &lt;- R(x) AND T(y)။
+mb5.005	<b>S(x) &lt;- R(x) AND NOT T(y):</b> y က negate လုပ်ထားတဲ့ subgoal ထဲမှာသာ ပေါ်။ NOT T(y) က y ကို bind မလုပ်လို့ body က y အဆုံးမရှိ ကျော်တယ်။ Safe ပုံစံ: S(x) &lt;- R(x, y) AND NOT T(y)။
+mb5.006	<b>S(x) &lt;- R(x) AND y &gt; x:</b> y က comparison ထဲမှာသာ ပေါ်။ Safe ပုံစံ: S(x) &lt;- R(x) AND U(y) AND y &gt; x။
+mb5.007	ရှင်းလင်းချက်
+mb5.008	Rule ကို unsafe ဖြစ်စေဖို့ <b>variable က head ထဲ ရှိစရာ မလို</b>: 2 နဲ့ 3 မှာ head က S(x), x က safe, ဒါပေမဲ့ y က ပြဿနာ။
+mb5.009	<b>ပြင်တာ</b> ဆိုတာ ပြဿနာ variable ကို positive relational subgoal နဲ့ bind တာ။ အဓိပ္ပာယ်ရှိတဲ့ တန်ဖိုး ပေးနိုင်တဲ့ relation ဘာမဆို ရတယ်; ဘယ်ဟာကို ယူဆလဲ ပြောပါ။
+mb5.010	ကိုယ့်ရမှတ်
+mb6.001	<span class="badge b1">Q6 · 20</span> Index တွက်ချက်ခြင်း, B = 2048
+mb6.002	Block size B = 2048 byte, block pointer P = 8 byte, record pointer P<sub>R</sub> = 9 byte။ MEMBER file မှာ ID (8), NAME (40), EMAIL (32), DEPT (4), ADDRESS (80), PHONE (12), SALARY (8), HIREDATE (8), STATUS (1), JOBCODE (7) field ပါ အရှည်ပုံသေ record r = 50,000 ရှိ။ File ကို ID နဲ့ စီထားတယ်။ Key field EMAIL ပေါ် record pointer နဲ့ secondary index ဆောက်ထားတယ်။
+mb6.003	1) bfr (unspanned) နဲ့ block အရေအတွက် ရှာပါ။<br>2) bfr<sub>i</sub> ရှာပါ။<br>3) ပထမအဆင့် entry နဲ့ block အရေအတွက် ရှာပါ။<br>4) Multilevel index ရဲ့ level အရေအတွက်နဲ့ block စုစုပေါင်း ရှာပါ။<br>5) Multilevel index နဲ့ EMAIL ဖြင့် record ထုတ်ဖို့ block access နဲ့ index မပါ linear search ရဲ့ ပျမ်းမျှကို ရှာပါ။
+mb6.004	နမူနာ အဖြေ
+mb6.005	ရှင်းလင်းချက်
+mb6.006	<b>Key ပေါ် secondary index:</b> file ကို ID နဲ့ စီထားလို့ EMAIL တန်ဖိုးတွေ ပြန့်ကျဲနေ; record တစ်ခုစီ entry တစ်ခု (dense)။
+mb6.007	မေးခွန်းက ပြောထားလို့ <b>record pointer</b> (9 byte); block pointer နဲ့ဆို entry က 40 byte ဖြစ်ပြီး bfri = 51။
+mb6.008	<b>Rounding ကို ဂရုစိုက်:</b> 2048 / 41 = 49.95 → 49 (50 × 41 = 2,050 က ကြီးလွန်း)။ 50,000 / 49 = 1,020.4 → 1,021။ 1,021 / 49 = 20.8 → 21။
+mb6.009	<b>Key ပေါ် linear search</b> က record တွေ့တာနဲ့ ရပ်လို့ ပျမ်းမျှ block တစ်ဝက်: 2,500။ Key မဟုတ်တဲ့ field ပေါ်ဆို 5,000 လုံး ဖတ်ရမယ်။
+mb6.010	ကိုယ့်ရမှတ်
+mb7.001	<span class="badge b1">Q7 · 5</span> Heuristic optimization
+mb7.002	အောက်က query tree က “1957 နောက်မှ မွေးပြီး 'Aquarius' project မှာ အလုပ်လုပ်တဲ့ ဝန်ထမ်းတွေရဲ့ မျိုးနွယ်နာမည်” အတွက် canonical tree။ Optimizer က ကျင့်သုံးတဲ့ heuristic အဆင့်တွေကို ဖော်ပြပြီး နောက်ဆုံး tree က PROJECT ကို ဘာကြောင့် အရင် join လဲ ရှင်းပြပါ။
+mb7.003	နမူနာ အဖြေ
+mb7.004	Conjunctive selection ကို condition တစ်ခုချင်းစီ cascade အဖြစ် ခွဲ။
+mb7.005	Selection တစ်ခုစီကို တတ်နိုင်သမျှ အောက်တွန်း: <span class="sym ra">σ</span> Pname = 'Aquarius' ကို PROJECT ပေါ်, <span class="sym ra">σ</span> Bdate &gt; '1957-12-31' ကို EMPLOYEE ပေါ်။
+mb7.006	အကန့်အသတ်အများဆုံး selection ကို အရင်ကျင့်သုံးအောင် leaf တွေကို ပြန်စီ: <span class="sym ra">σ</span> Pname = 'Aquarius' က project တစ်ခုတည်း ပြန်ပေးလို့ PROJECT ကို WORKS_ON နဲ့ အရင် join, EMPLOYEE ကို နောက်ဆုံး။
+mb7.007	Join condition လိုက်တဲ့ Cartesian product တစ်ခုစီကို join နဲ့ အစားထိုး: PROJECT <span class="sym ra">⋈</span> Pnumber = Pno WORKS_ON, ပြီးရင် <span class="sym ra">⋈</span> Essn = Ssn EMPLOYEE။
+mb7.008	လိုတဲ့ attribute တွေကိုသာ tree အပေါ်တက်အောင် projection တွေကို အောက်တွန်း။
+mb7.009	PROJECT ရဲ့ selection က အရွေးချယ်အမြင့်ဆုံး (tuple တစ်ခု) ဖြစ်လို့ အရင်ဆုံး; ပထမ join က အဲ့ project တစ်ခုရဲ့ WORKS_ON row တွေကိုသာ ထုတ်ပေးတယ်, ဖြစ်နိုင်သမျှ အသေးဆုံး intermediate result။
+mb7.010	ရှင်းလင်းချက်
+mb7.011	<b>အစဉ်လိုက် အဆင့်ငါးဆင့်:</b> <span class="sym ra">σ</span> cascade, <span class="sym ra">σ</span> အောက်တွန်း, အကန့်အသတ်အများဆုံး အရင်, × + <span class="sym ra">σ</span> → <span class="sym ra">⋈</span>, <span class="sym ra">π</span> အောက်တွန်း။
+mb7.012	<b>“ဘာကြောင့် PROJECT အရင်”</b> ကို selectivity နဲ့ ဖြေ: Pname က unique ဖြစ်လို့ tuple တစ်ခု။ အသေးဆုံး relation ကနေ စရင် နောက်က join တိုင်း သေးနေတယ်။
+mb7.013	<b>Cartesian product ရှောင်ပါ</b>: join တစ်ခုစီမှာ join condition ရှိဆဲ ဖြစ်အောင်သာ ပြန်စီပါ။
+mb7.014	ကိုယ့်ရမှတ်
+mb8.001	<span class="badge b1">Q8 · 10</span> Push-down projection
+mb8.002	အောက်က query tree (COMPANY schema) ပေါ်မှာ push-down projection ကို ပြပါ။
+mb8.003	နမူနာ အဖြေ
+mb8.004	EMPLOYEE က သူ့ selection ပြီးနောက် Lname (output) နဲ့ Dno (join) ကိုသာ ထား; ကျန် attribute ရှစ်ခု ဖယ်။ DEPARTMENT က Dnumber (join) နဲ့ Dname (output) ကိုသာ ထား; Mgr_ssn နဲ့ Mgr_start_date ကို selection ပြီးနောက် ဖယ်။
+mb8.005	ရှင်းလင်းချက်
+mb8.006	<b>Leaf တစ်ခုစီ အပေါ်မှာ ဘာလိုလဲ စာရင်းလုပ်ပါ:</b> output attribute နဲ့ join attribute။
+mb8.007	<b>Selection တွေက သူတို့ attribute ကို လိုဆဲ</b> (Salary, Mgr_start_date), ဒါကြောင့် <span class="sym ra">π</span> တစ်ခုစီက သူ့ <span class="sym ra">σ</span> အပေါ်မှာ ရှိ။
+mb8.008	<b>EMPLOYEE က ကျယ်</b> (attribute ဆယ်ခု), ဒါကြောင့် attribute နှစ်ခုဆီ project လုပ်တာက အများဆုံး ချွေတာပေးတယ်။
+mb8.009	ကိုယ့်ရမှတ်
