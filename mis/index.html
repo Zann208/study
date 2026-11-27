@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script src="../shared/v3/boot.js?v=20261127-1" data-console="mis"></script>
+<title>Information Systems</title>
+<meta name="description" content="Study console for information systems in business: plain-language topics on the role of IS, business processes, enterprise applications and collaboration, case files on ethics, security and process mining, with a glossary, flashcards, a quiz and sorting drills.">
+<meta name="theme-color" content="#0f0e0f">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  background:var(--bg);min-height:100vh;overflow-x:hidden}
+a{color:var(--vi);text-decoration:none}
+::selection{background:color-mix(in srgb,var(--vi) 32%,transparent)}
+:focus-visible{outline:2px solid var(--vi);outline-offset:2px;border-radius:5px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+
+/* ---------- layout ---------- */
+.wrap{max-width:1000px;margin:0 auto;padding:30px 18px 90px}
+.tab{display:none}
+.tab.on{display:block;animation:fade .22s ease}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(25px,4.4vw,36px);font-weight:800;letter-spacing:-.9px;line-height:1.14}
+.pre,.kicker{font-family:var(--mono);color:var(--vi);font-size:11px;display:block;letter-spacing:2.2px;
+  margin-bottom:8px;font-weight:700;text-transform:uppercase}
+h2.title{font-size:clamp(23px,4vw,32px);font-weight:800;letter-spacing:-.8px;line-height:1.16;margin-bottom:2px}
+.lede,.lead{color:var(--dim);margin-top:11px;font-size:16px;max-width:660px}
+h3{font-size:17.5px;font-weight:700;letter-spacing:-.25px}
+h4{font-family:var(--mono);font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--vi);
+  margin-top:19px;margin-bottom:2px;font-weight:700}
+p{margin-top:9px}
+b,strong{font-weight:680;color:var(--ink)}
+
+/* ---------- panels / cards ---------- */
+.panel,.card,.item{background:var(--panel);border:1px solid var(--line);border-radius:13px;
+  padding:19px 21px;margin-top:16px;position:relative;scroll-margin-top:118px}
+.panel::before{content:"";position:absolute;top:-1px;left:18px;width:38px;height:2px;background:var(--vi);border-radius:2px}
+.panel.pc::before{background:var(--cy)} .panel.pg::before{background:var(--gr)} .panel.pa::before{background:var(--am)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-top:16px}
+.grid2 .card{margin-top:0}
+
+/* ---------- badges / chips ---------- */
+.badge{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;
+  border-radius:5px;border:1px solid var(--line2);color:var(--faint);font-weight:700;display:inline-block}
+.badge.b1,.badge.vi{color:var(--vi);border-color:var(--vi);background:color-mix(in srgb,var(--vi) 10%,transparent)}
+.badge.b2,.badge.cy{color:var(--cy);border-color:var(--cy);background:color-mix(in srgb,var(--cy) 10%,transparent)}
+.badge.bb{color:var(--rd);border-color:var(--rd);background:color-mix(in srgb,var(--rd) 10%,transparent)}
+.badge.bw{color:var(--am);border-color:var(--am);background:color-mix(in srgb,var(--am) 10%,transparent)}
+.badge.gr{color:var(--gr);border-color:var(--gr)}
+.chiprow{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.9px;text-transform:uppercase;color:var(--faint);
+  border:1px solid var(--line2);border-radius:20px;padding:5px 12px;font-weight:600}
+.chip.c1{color:var(--vi);border-color:color-mix(in srgb,var(--vi) 45%,transparent)}
+.chip.c2{color:var(--cy);border-color:color-mix(in srgb,var(--cy) 45%,transparent)}
+
+/* ---------- tables ---------- */
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:11px;display:table}
+th,td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:1.3px;text-transform:uppercase;color:var(--vi);
+  font-weight:700;background:color-mix(in srgb,var(--vi) 7%,transparent);border-bottom:1px solid var(--line2)}
+tr:last-child td{border-bottom:0}
+.tscroll{overflow-x:auto;margin-top:10px}
+@media(max-width:640px){table{font-size:13px}th,td{padding:7px 8px}}
+
+/* ---------- callouts ---------- */
+.tip,.box{border-radius:9px;padding:11px 14px;margin-top:12px;font-size:14.5px;line-height:1.62}
+.tip b:first-child,.box b:first-child{font-family:var(--mono);font-size:10.5px;letter-spacing:.8px;
+  text-transform:uppercase;display:block;margin-bottom:3px}
+.t-good,.box.rl{background:color-mix(in srgb,var(--gr) 9%,var(--panel));border:1px solid color-mix(in srgb,var(--gr) 28%,transparent)}
+.t-good b:first-child,.box.rl b:first-child{color:var(--gr)}
+.t-warn,.box.trap{background:color-mix(in srgb,var(--am) 10%,var(--panel));border:1px solid color-mix(in srgb,var(--am) 30%,transparent)}
+.t-warn b:first-child,.box.trap b:first-child{color:var(--am)}
+.t-info,.box.wild{background:color-mix(in srgb,var(--cy) 9%,var(--panel));border:1px solid color-mix(in srgb,var(--cy) 26%,transparent)}
+.t-info b:first-child,.box.wild b:first-child{color:var(--cy)}
+.lesson{background:color-mix(in srgb,var(--gr) 9%,var(--panel));border-left:2px solid var(--gr);
+  border-radius:0 9px 9px 0;padding:10px 13px;margin-top:11px;font-size:14px}
+.lesson b:first-child{color:var(--gr);font-family:var(--mono);font-size:10.5px;letter-spacing:.8px;text-transform:uppercase}
+
+/* ---------- notes accordions ---------- */
+.switch{display:flex;gap:7px;margin-top:16px;flex-wrap:wrap}
+.sw{background:var(--panel);border:1px solid var(--line2);color:var(--dim);border-radius:9px;padding:9px 15px;
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.4px;cursor:pointer;transition:.14s}
+.sw:hover{color:var(--ink)}
+.sw.on1{color:var(--vi);border-color:var(--vi);background:color-mix(in srgb,var(--vi) 12%,transparent)}
+.sw.on2{color:var(--cy);border-color:var(--cy);background:color-mix(in srgb,var(--cy) 12%,transparent)}
+details.note{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-top:11px;
+  overflow:hidden;scroll-margin-top:118px}
+details.note[open]{border-color:var(--line2)}
+details.note>summary{cursor:pointer;padding:13px 16px;font-size:16px;font-weight:650;letter-spacing:-.2px;
+  display:flex;align-items:center;gap:11px;user-select:none;list-style:none}
+details.note>summary::-webkit-details-marker{display:none}
+details.note>summary::after{content:"+";margin-left:auto;font-family:var(--mono);font-size:17px;
+  color:var(--faint);font-weight:400;transition:.16s}
+details.note[open]>summary::after{content:"−";color:var(--vi)}
+details.note>summary:hover{background:var(--panel2)}
+.num{width:25px;height:25px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;font-weight:800;flex:0 0 auto}
+.n1{background:color-mix(in srgb,var(--vi) 17%,transparent);color:var(--vi);border:1px solid color-mix(in srgb,var(--vi) 42%,transparent)}
+.n2{background:color-mix(in srgb,var(--cy) 17%,transparent);color:var(--cy);border:1px solid color-mix(in srgb,var(--cy) 42%,transparent)}
+details.note>.body{padding:2px 16px 16px;border-top:1px solid var(--line);font-size:15px}
+details.note>.body>p:first-child{margin-top:12px}
+
+/* ---------- misc content ---------- */
+.mini{font-size:13px;color:var(--faint);display:inline-block}
+p.mini,.sub2{font-size:13px;color:var(--faint);margin-top:7px;display:block}
+.formula{font-family:var(--mono);font-size:14px;background:var(--panel3);border:1px solid var(--line2);
+  border-left:2px solid var(--vi);border-radius:0 9px 9px 0;padding:13px 15px;margin-top:12px;
+  color:var(--vi2);line-height:1.85;overflow-x:auto}
+.kbd,code{font-family:var(--mono);font-size:.88em;background:var(--panel3);color:var(--vi);
+  padding:1px 6px;border-radius:4px;border:1px solid var(--line)}
+ul.clean{list-style:none;margin-top:10px}
+ul.clean li{position:relative;padding-left:17px;margin-top:7px;font-size:15px}
+ul.clean li::before{content:"▸";position:absolute;left:0;color:var(--vi);font-size:12px;top:1px}
+ul:not(.clean){margin:9px 0 0 19px}
+ul:not(.clean) li{margin-top:6px}
+ol{margin:9px 0 0 21px}
+ol li{margin-top:7px}
+ol li::marker{font-family:var(--mono);color:var(--vi);font-size:12.5px}
+
+/* ---------- flashcards ---------- */
+.fc-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.btn{background:var(--panel);border:1px solid var(--line2);color:var(--dim);border-radius:9px;
+  padding:8px 14px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer;transition:.14s}
+.btn:hover{color:var(--ink);border-color:var(--vi)}
+.btn.primary{color:var(--vi);border-color:var(--vi);background:color-mix(in srgb,var(--vi) 12%,transparent)}
+.fc-stage{margin-top:16px}
+.fc{position:relative;min-height:230px;perspective:1400px;cursor:pointer}
+.fc .face{position:absolute;inset:0;backface-visibility:hidden;background:var(--panel);
+  border:1px solid var(--line2);border-radius:14px;padding:26px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;transition:transform .42s cubic-bezier(.4,.2,.2,1)}
+.fc .front{transform:rotateY(0)}
+.fc .back{transform:rotateY(180deg);background:var(--panel2);border-color:var(--vi)}
+.fc.flip .front{transform:rotateY(-180deg)}
+.fc.flip .back{transform:rotateY(0)}
+.fc .tag{position:absolute;top:14px;left:14px}
+.fc .q{font-size:19px;font-weight:650;letter-spacing:-.3px;max-width:600px}
+.fc .a{font-size:16px;color:var(--dim);max-width:620px;line-height:1.7}
+.fc .hint{position:absolute;bottom:13px;font-family:var(--mono);font-size:10px;letter-spacing:1.4px;
+  text-transform:uppercase;color:var(--faint)}
+.fc-nav{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:14px;flex-wrap:wrap}
+.fc-count{font-family:var(--mono);font-size:12px;color:var(--faint);min-width:66px;text-align:center}
+.fc-score{text-align:center;margin-top:11px;font-family:var(--mono);font-size:12px;color:var(--faint)}
+.fc-score .g{color:var(--gr)} .fc-score .r{color:var(--am)}
+
+/* ---------- quiz ---------- */
+.qbar{height:4px;background:var(--panel3);border-radius:3px;overflow:hidden;margin-top:16px}
+.qbar>div{height:100%;background:linear-gradient(90deg,var(--vi),var(--cy));transition:width .3s}
+.qmeta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;
+  color:var(--faint);margin-top:9px;letter-spacing:.5px}
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:20px 22px;margin-top:11px}
+.qcard h3{font-size:17.5px;line-height:1.5;margin-bottom:14px;font-weight:650}
+.opt{display:flex;align-items:flex-start;gap:11px;width:100%;text-align:left;background:var(--panel2);
+  border:1px solid var(--line2);color:var(--ink);border-radius:10px;padding:12px 14px;margin-top:8px;
+  cursor:pointer;font-size:15px;font-family:inherit;line-height:1.5;transition:.13s}
+.opt:hover{border-color:var(--vi)}
+.opt .mark{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--line2);flex:0 0 auto;margin-top:2px}
+.opt.sel{border-color:var(--vi)} .opt.sel .mark{background:var(--vi);border-color:var(--vi)}
+.opt.ok{border-color:var(--gr);background:color-mix(in srgb,var(--gr) 12%,var(--panel2))}
+.opt.ok .mark{background:var(--gr);border-color:var(--gr)}
+.opt.no{border-color:var(--rd);background:color-mix(in srgb,var(--rd) 12%,var(--panel2))}
+.opt.no .mark{background:var(--rd);border-color:var(--rd)}
+.opt.dim{opacity:.44}
+.expl{display:none} .expl.show{display:block}
+.qactions{display:flex;gap:9px;margin-top:15px}
+.qresult{text-align:center}
+.qresult .big{font-family:var(--mono);font-size:44px;font-weight:800;color:var(--vi);margin:6px 0}
+.review-item{text-align:left;font-size:13.5px;padding:7px 11px;border-radius:8px;margin-top:6px;
+  border:1px solid var(--line);background:var(--panel2)}
+.review-item.good{border-color:color-mix(in srgb,var(--gr) 40%,transparent);color:var(--gr)}
+.review-item.bad{border-color:color-mix(in srgb,var(--rd) 40%,transparent);color:var(--rd)}
+
+/* ---------- cheat sheet ---------- */
+.cheat h3{margin-top:24px;display:flex;align-items:center;gap:9px;font-size:16.5px}
+.cheat .card{margin-top:10px;padding:15px 17px}
+
+
+/* ---------- footer ---------- */
+.footer{text-align:center;color:var(--faint);font-family:var(--mono);font-size:10.5px;
+  padding:26px 0 46px;letter-spacing:.7px}
+.kv{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.kv:last-child{border-bottom:0}
+.kv b{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--faint);min-width:118px;padding-top:3px}
+@media(max-width:560px){.kv{flex-direction:column;gap:2px}}
+
+/* ---------- code blocks ---------- */
+  border-left:2px solid var(--cy);border-radius:0 9px 9px 0;padding:12px 15px;margin-top:12px;
+  color:var(--ink);line-height:1.7;overflow-x:auto;white-space:pre}
+
+/* ---------- worked labs / exam ---------- */
+.qa{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line2)}
+.qa:first-of-type{border-top:0;padding-top:0}
+.qa .qn{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--cy);font-weight:700;display:block;margin-bottom:4px}
+.qa p{margin-top:7px}
+.flag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.9px;text-transform:uppercase;
+  padding:2px 7px;border-radius:5px;border:1px solid color-mix(in srgb,var(--am) 55%,transparent);color:var(--am);
+  background:color-mix(in srgb,var(--am) 10%,transparent);font-weight:700;vertical-align:middle;margin-left:6px}
+.flag.ok{border-color:color-mix(in srgb,var(--gr) 55%,transparent);color:var(--gr);background:color-mix(in srgb,var(--gr) 10%,transparent)}
+.flag.no{border-color:color-mix(in srgb,var(--rd) 55%,transparent);color:var(--rd);background:color-mix(in srgb,var(--rd) 10%,transparent)}
+
+/* ---------- resources ---------- */
+.files td:first-child{white-space:nowrap}
+.files a{font-family:var(--mono);font-size:13px}
+.files .sz{color:var(--faint);font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+
+/* ---------- topics: course-detail block ---------- */
+details.deep{--deep-glow:color-mix(in srgb,var(--vi) 72%,#fff);margin-top:20px;border:1px solid var(--line2);border-radius:10px;background:var(--panel2);
+  box-shadow:0 0 16px -8px color-mix(in srgb,var(--deep-glow) 55%,transparent);transition:box-shadow .3s,border-color .3s}
+html[data-theme="light"] details.deep{--deep-glow:var(--vi)}
+details.deep>summary{position:relative}
+details.deep>summary::before{content:"";position:absolute;inset:-1px;border-radius:10px;padding:1.5px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--deep-glow) 55%,transparent) 28%,var(--deep-glow) 44% 56%,color-mix(in srgb,var(--deep-glow) 55%,transparent) 72%,transparent) no-repeat,
+    linear-gradient(90deg,transparent,color-mix(in srgb,var(--deep-glow) 55%,transparent) 28%,var(--deep-glow) 44% 56%,color-mix(in srgb,var(--deep-glow) 55%,transparent) 72%,transparent) no-repeat;
+  background-size:28% 55%,28% 55%;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  filter:drop-shadow(0 0 3px var(--deep-glow)) drop-shadow(0 0 6px color-mix(in srgb,var(--deep-glow) 60%,transparent));
+  animation:deepRun 6s linear infinite}
+@keyframes deepRun{
+  0%{background-position:-45% 0,145% 100%}
+  50%{background-position:145% 0,145% 100%}
+  100%{background-position:145% 0,-45% 100%}}
+details.deep:hover{border-color:color-mix(in srgb,var(--deep-glow) 40%,var(--line2));box-shadow:0 0 20px -6px color-mix(in srgb,var(--deep-glow) 65%,transparent)}
+details.deep:hover>summary::before{animation-duration:3s}
+details.deep:hover>summary{color:var(--ink)}
+details.deep[open]{box-shadow:none}
+details.deep[open]>summary::before{display:none}
+@media (prefers-reduced-motion:reduce){details.deep>summary::before{display:none}details.deep{border-color:color-mix(in srgb,var(--deep-glow) 45%,var(--line2))}}
+details.deep>summary{list-style:none;cursor:pointer;padding:11px 15px;font-family:var(--mono);font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;font-weight:700;color:var(--faint);display:flex;align-items:center;gap:8px}
+details.deep>summary::-webkit-details-marker{display:none}
+details.deep>summary::after{content:"+";margin-left:auto;font-size:14px}
+details.deep[open]>summary::after{content:"−"}
+details.deep[open]>summary{border-bottom:1px solid var(--line2);color:var(--ink)}
+details.deep>.deep-body{padding:4px 15px 15px}
+.lesson b:first-child{display:block;margin-bottom:5px}
+a.chip.tlink{text-transform:none;letter-spacing:.2px;font-size:12px;text-decoration:none;cursor:pointer}
+a.chip.tlink:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
+
+/* ---------- labelled controls ---------- */
+.ctlrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:12px}
+.ctl-label{font-family:var(--mono);font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--faint);font-weight:700;min-width:104px}
+.ctl-gap{flex:1}
+#main [hidden]{display:none!important}
+.ctlrow .fld{width:auto;min-width:240px}
+.sc-seg{flex-wrap:wrap}
+.sc-seg>button[aria-pressed="true"]{color:var(--vi);font-weight:700}
+.drilltabs{margin:-6px 0 22px}
+a.sc-tab{text-decoration:none}
+.topic-next{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line2)}
+.topic-next .ctl-label{min-width:0;margin-right:4px}
+@media(max-width:760px){.ctl-label{min-width:100%}.ctlrow .fld{min-width:0;width:100%}.topic-next .ctl-gap{display:none}}
+
+/* ---------- terms ---------- */
+.fld{border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-family:var(--mono);font-size:13.5px;background:var(--panel2);color:var(--ink);width:100%}
+.fld:focus{outline:1px solid var(--cy);border-color:var(--cy)}
+.flag.gen{border-color:var(--line2);color:var(--faint);background:transparent;font-weight:600}
+#termT .tterm{font-weight:700;color:var(--ink);white-space:nowrap}
+
+/* ---------- drills ---------- */
+.fc{position:relative}
+.ixrow{display:grid;grid-template-columns:28px 1fr 150px 70px;gap:10px;align-items:center;padding:9px 0;border-top:1px dashed var(--line2)}
+.ixrow:first-child{border-top:0}
+.ixrow .ixn{color:var(--faint);font-size:12px}
+.ixrow label{font-size:14.5px}
+.ixrow .ixw{grid-column:2 / -1;margin-top:2px}
+.whrow{grid-template-columns:1fr auto 90px}
+.rfgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.rfgrid .opt{margin-top:0;align-items:flex-start}
+.rfgrid table{font-size:13px}
+.btn.odbad{border-color:var(--rd);color:var(--rd);background:color-mix(in srgb,var(--rd) 10%,transparent)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:760px){
+  .ixrow{grid-template-columns:22px 1fr;}
+  .ixrow .fld,.ixrow .ixst{grid-column:2}
+  .whrow{grid-template-columns:1fr}
+  .whrow .ixst{grid-column:1}
+  .rfgrid{grid-template-columns:1fr}
+}
+
+/* ---------- figures ---------- */
+.fld.good{border-color:var(--gr);background:color-mix(in srgb,var(--gr) 12%,var(--panel2))}
+.fld.bad{border-color:var(--rd);background:color-mix(in srgb,var(--rd) 10%,var(--panel2))}
+.whrow .choices{display:flex;flex-wrap:wrap;gap:6px}
+.rlgrid{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:14px 0 18px}
+.figs:has(> .fig:only-child){grid-template-columns:minmax(0,640px)}
+.fig{margin:0;border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:var(--panel);display:flex;flex-direction:column}
+.fig-open{display:block;width:100%;padding:0;border:0;background:#fff;cursor:zoom-in;line-height:0}
+.fig-open:focus-visible{outline:2px solid var(--vi);outline-offset:-2px}
+.fig img{display:block;width:100%;height:auto}
+.fig figcaption{padding:8px 11px;font-size:12.5px;line-height:1.4;color:var(--muted);border-top:1px solid var(--line2)}
+.fig figcaption .fig-n{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-right:6px}
+.lb{position:fixed;inset:0;z-index:2000;background:rgba(8,8,10,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 64px 24px}
+.lb[hidden]{display:none}
+.lb img{max-width:100%;max-height:calc(100vh - 140px);object-fit:contain;background:#fff;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.lb p{color:#e8e8ea;font-size:14px;margin:14px 0 0;text-align:center;max-width:900px}
+.lb-btn{position:absolute;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;border-radius:8px;font:600 13px/1 var(--mono, monospace);padding:10px 12px;cursor:pointer}
+.lb-btn:hover{background:rgba(255,255,255,.18)}
+.lb-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.lb-close{top:14px;right:14px}
+.lb-prev{left:12px;top:50%;transform:translateY(-50%)}
+.lb-next{right:12px;top:50%;transform:translateY(-50%)}
+.lb-count{position:absolute;top:20px;left:18px;color:#bbb;font:12px var(--mono, monospace)}
+@media (max-width:760px){.figs{grid-template-columns:minmax(0,1fr)}.lb{padding:52px 8px 16px}.lb-prev,.lb-next{top:auto;bottom:14px;transform:none}.lb img{max-height:calc(100vh - 170px)}}
+
+code.sym{font-weight:700;color:var(--vi);background:color-mix(in srgb,var(--vi) 16%,transparent);border:1px solid color-mix(in srgb,var(--vi) 40%,transparent);padding:0 .38em;border-radius:4px;font-size:.95em}
+code.kw{font-weight:600}
+mark.hl{background:color-mix(in srgb,var(--vi) 20%,transparent);color:var(--ink);border-bottom:2px solid color-mix(in srgb,var(--vi) 70%,transparent);padding:1px 3px;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+html[data-theme="light"] mark.hl{background:color-mix(in srgb,#ffd84d 45%,transparent);border-bottom-color:color-mix(in srgb,var(--vi) 55%,transparent)}
+@media print{mark.hl{background:#fff3a0}}
+
+/* sorters: prompt on its own line, choices under it */
+.whrow{grid-template-columns:minmax(0,1fr) 90px;row-gap:8px}
+.whrow>span:first-child{grid-column:1/-1;font-size:15px}
+.whrow .choices{grid-column:1}
+.whrow .ixst{grid-column:2;align-self:center}
+.whrow .choices .btn{white-space:normal;text-align:left}
+@media(max-width:760px){.whrow{grid-template-columns:1fr}.whrow .ixst{grid-column:1}}
+</style></head>
+<body data-study-console="mis" data-console-id="mis" data-console-name="Information Systems">
+<main id="main">
+<!-- ============ HOME ============ -->
+<section class="tab on" id="home"><div class="wrap">
+  <h1>Information Systems</h1>
+  <p class="lede">How organisations use information systems: strategy, business processes, enterprise applications, collaboration, ethics, security and building new systems.</p>
+  <div class="chiprow">
+    <span class="chip c1">T1–4 · Organisations and the networked enterprise</span>
+    <span class="chip c2">T5–8 · IT infrastructure</span>
+    <span class="chip c1">T9–12 · Key system applications</span>
+    <span class="chip c2">T13–15 · Building and managing systems</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <span class="badge b1">Part 1</span>
+      <h3 style="margin-bottom:8px">Organisations, management and the networked enterprise</h3>
+      <p style="font-size:14.5px">Topics 1–4. The role of IS in business today, business processes and types of systems, IS and strategy, ethical and social issues.</p>
+      <p class="sub2">Here: <a href="#/topics/t1">T1</a> · <a href="#/topics/t2">T2</a> · <a href="#/cases/c1">C1 Ethics case</a></p>
+    </div>
+    <div class="card">
+      <span class="badge b2">Part 2</span>
+      <h3 style="margin-bottom:8px">Information technology infrastructure</h3>
+      <p style="font-size:14.5px">Topics 5–8. Infrastructure and emerging technologies, databases and business intelligence, networks and wireless, securing information systems.</p>
+      <p class="sub2">Here: <a href="#/cases/c2">C2 Security case</a></p>
+    </div>
+    <div class="card">
+      <span class="badge b1">Part 3</span>
+      <h3 style="margin-bottom:8px">Key system applications</h3>
+      <p style="font-size:14.5px">Topics 9–12. Enterprise applications, e-commerce, knowledge management, decision making.</p>
+    </div>
+    <div class="card">
+      <span class="badge gr">Part 4</span>
+      <h3 style="margin-bottom:8px">Building and managing systems</h3>
+      <p style="font-size:14.5px">Topics 13–15. Building information systems, managing projects, managing global systems.</p>
+      <p class="sub2">Here: <a href="#/cases/c3">C3 Process mining case</a></p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Where each topic is practised</h3>
+    <div class="tscroll"><table>
+      <tr><th>Topic</th><th>Drill</th></tr>
+      <tr><td class="mono">T0</td><td>Flashcards, quiz</td></tr>
+      <tr><td class="mono">T1</td><td><a href="#/obj">Strategy sorter</a>, flashcards, quiz</td></tr>
+      <tr><td class="mono">T2</td><td><a href="#/sys">Which system?</a>, <a href="#/fn">Business functions</a>, <a href="#/collab">Time and place</a>, flashcards, quiz</td></tr>
+      <tr><td class="mono">C1</td><td><a href="#/eth">Ethical principles</a>, flashcards, quiz</td></tr>
+      <tr><td class="mono">C2–C3</td><td>Flashcards, quiz</td></tr>
+    </table></div>
+  </div>
+</div></section>
+
+<!-- ============ TOPICS ============ -->
+<section class="tab" id="topics"><div class="wrap">
+  <h1>Topics</h1>
+  <details class="note" open id="t0" data-short="Start here">
+    <summary><span class="num n1">0</span> Start here: what an information system is</summary>
+    <div class="body">
+<div class="lesson"><b>In one line</b>An information system collects, processes, stores and distributes information so people in an organisation can run it, control it and make decisions.</div>
+<p>Every business runs on information: what was sold, what is in stock, who owes money, which customers are unhappy. An <b>information system (IS)</b> is the set of parts that turns raw facts into that information and puts it in front of the right people. <mark class="hl">An IS is never just the computers.</mark> It always has three dimensions: the <b>organisation</b> that uses it, the <b>management</b> that decides with it, and the <b>technology</b> it runs on.</p>
+<p>Information technology (IT) is the hardware, software, data and networks. It is the platform. The IS is what the organisation builds on that platform to do its work.</p>
+<h4>Example: Doi Roast</h4>
+<p>To keep the ideas concrete, the topics follow <b>Doi Roast</b>, a Chiang Mai coffee company with about 40 staff. It buys green beans from hill-tribe farms, roasts them, sells to cafés across northern Thailand and ships bags to customers who order online.</p>
+<h4>How the subject is organised</h4>
+<div class="tscroll"><table>
+  <tr><th>Part</th><th>Question it answers</th><th>Topics</th></tr>
+  <tr><td>Organisations, management and the networked enterprise</td><td>Why do firms use IS, what kinds exist, how do they create advantage and what ethical problems come with them?</td><td class="mono">T1–T4</td></tr>
+  <tr><td>IT infrastructure</td><td>What hardware, software, data, networks and security does an IS stand on?</td><td class="mono">T5–T8</td></tr>
+  <tr><td>Key system applications</td><td>How do ERP, SCM, CRM, e-commerce, knowledge and decision systems create value?</td><td class="mono">T9–T12</td></tr>
+  <tr><td>Building and managing systems</td><td>How are new systems built, run as projects and managed across countries?</td><td class="mono">T13–T15</td></tr>
+</table></div>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Information system">Information system</a><a class="chip c2 tlink" href="#/terms" data-term="Information technology">Information technology</a><a class="chip c1 tlink" href="#/terms" data-term="Data">Data</a><a class="chip c2 tlink" href="#/terms" data-term="Information">Information</a><a class="chip c1 tlink" href="#/terms" data-term="Organisation">Organisation</a><a class="chip c2 tlink" href="#/terms" data-term="Management">Management</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>IT is the platform; IS is what is built on it.</li><li>Three dimensions of every IS: organisation, management, technology.</li></ul></div>
+<div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="0">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="0">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t1">Next: T1 IS in business today</a></div>
+    </div>
+  </details>
+
+  <details class="note" id="t1" data-short="IS in business today">
+    <summary><span class="num n1">1</span> Information systems in global business today</summary>
+    <div class="body">
+<div class="lesson"><b>In one line</b>Firms invest in information systems to reach six strategic objectives, and understanding any IS means looking at the organisation, the management and the technology together.</div>
+<h4>Why information systems matter</h4>
+<p>Spending shows how central IT has become. Businesses spent about <b>$4 trillion</b> on IT worldwide in 2019. In 1999 private firms put 14% of their invested capital into IT; by 2013 it was 33%. Gartner forecasts <b>$6.37 trillion</b> for 2026 (up 14.2% on $5.57 trillion in 2025) and more than <b>$7.35 trillion</b> in 2027, driven mostly by AI infrastructure, data centres, software and cloud.</p>
+<p>Firms use IS to <b>sense and respond</b> to customer demand as it changes, keep inventories low and work more efficiently. Supply chains run fast on just-in-time inventory. Markets keep shifting too: newspaper readership falls while online video and blogs grow, social networks give customers a public voice, and AI is changing what work looks like.</p>
+<h4>What is new in IS</h4>
+<div class="tscroll"><table>
+  <tr><th>Change</th><th>Examples</th><th>What it means</th></tr>
+  <tr><td><b>New technology</b></td><td>Cloud computing, big data, the mobile digital platform, AI</td><td>Computing moves online as services (SaaS); firms mine huge volumes of web, email and social data; smartphones and tablets become the main platform; intelligent automation spreads.</td></tr>
+  <tr><td><b>New management usage</b></td><td>Online collaboration, business intelligence, virtual meetings</td><td>Social tools and shared documents coordinate teams; dashboards give managers real-time performance figures; video calls cut travel time and cost.</td></tr>
+  <tr><td><b>Changing organisations</b></td><td>Social business, teleworking, co-creation of business value</td><td>Firms use social platforms with employees, customers and suppliers; work happens away from the office (55% of US businesses run some remote work programme); value shifts from products to solutions and experiences built with networks of partners.</td></tr>
+</table></div>
+<p>Two themes keep returning through the subject: <b>collaboration and community</b>, and <b>data analysis that supports decisions</b>.</p>
+<h4>The digital firm</h4>
+<p>A <b>digital firm</b> is one where nearly all important relationships with customers, suppliers and employees are digitally enabled. Its core business processes (hiring, developing products, fulfilling orders, planning marketing) run over digital networks, and its key assets (intellectual property, core competencies, financial and human assets) are managed digitally.</p>
+<ul class="clean">
+  <li>Information for key decisions is available any time, anywhere.</li>
+  <li>It senses and responds to its environment instead of simply producing and selling.</li>
+  <li>It is flexible and agile.</li>
+  <li><b>Time shifting</b>: business is no longer limited to the 9-to-5 day. <b>Space shifting</b>: it is no longer tied to one physical location.</li>
+</ul>
+<p>IS now helps decide and drive corporate strategy. Strategy and systems depend on each other: a change in strategy needs changes to hardware, software, databases and networks, and <mark class="hl">what a firm wants to do in five years is often limited by what its systems will let it do.</mark></p>
+<h4>Six strategic business objectives</h4>
+<div class="tscroll"><table>
+  <tr><th>Objective</th><th>Means</th><th>Example</th></tr>
+  <tr><td><b>Operational excellence</b></td><td>More efficient operations, so higher profit</td><td>Walmart's Retail Link connects suppliers to every store: when a customer buys an item, the supplier knows to ship a replacement. Walmart earns about $28 of sales per square foot against Target's $23 and under $12 for others.</td></tr>
+  <tr><td><b>New products, services and business models</b></td><td>New digital offerings and new ways to produce, deliver and sell them</td><td>Music and film moved from records, tapes and CDs to iTunes, Netflix and legal online distribution.</td></tr>
+  <tr><td><b>Customer and supplier intimacy</b></td><td>Knowing customers well: relational rather than transactional marketing</td><td>High-end hotels record guests' check-in times, room temperature and favourite TV channels, and set up the room before they arrive.</td></tr>
+  <tr><td><b>Improved decision making</b></td><td>Good, real-time information leads to better decisions on the spot</td><td>A telecom company uses live data on complaints and network performance to send repair crews where they matter most.</td></tr>
+  <tr><td><b>Competitive advantage</b></td><td>Doing things better than competitors</td><td>Charging less for better products; responding to customers in real time.</td></tr>
+  <tr><td><b>Survival</b></td><td>Some IS investment is simply the cost of staying in business</td><td>A bank without ATMs; industries legally required to keep digital records (toxic substances, public accounting).</td></tr>
+</table></div>
+<p>At Doi Roast, linking café stock levels to the roasting schedule is operational excellence; a coffee subscription box is a new business model; remembering each café's preferred roast is customer intimacy.</p>
+<h4>IT or IS? Data or information?</h4>
+<p><b>Information technology</b> is all the hardware and software a firm needs. An <b>information system</b> is a set of interrelated components that collect, process, store and distribute information to support decision making and control.</p>
+<p><b>Data</b> are raw facts. <b>Information</b> is data shaped into a form that is meaningful and useful to people. A supermarket checkout scans millions of barcodes (data); analysed, they become sales totals and stock levels (information).</p>
+<div class="tscroll"><table>
+  <tr><th>Activity</th><th>What happens</th><th>Doi Roast</th></tr>
+  <tr><td><b>Input</b></td><td>Collect or capture data</td><td>Café orders typed into the order screen</td></tr>
+  <tr><td><b>Processing</b></td><td>Convert data into a meaningful form</td><td>Orders totalled by roast and by day</td></tr>
+  <tr><td><b>Output</b></td><td>Present the information to the people who need it</td><td>Tomorrow's roasting list for the roastery</td></tr>
+  <tr><td><b>Feedback</b></td><td>Output returned to help people evaluate or correct the system</td><td>The roaster flags that one roast keeps selling out</td></tr>
+</table></div>
+<h4>Three dimensions of an IS</h4>
+<p><b>Organisation.</b> People, structure, business processes, politics and culture. Structure shows the division of labour, authority and responsibility: <b>senior management</b> makes long-range strategic decisions, <b>middle management</b> carries out the programmes and plans, <b>operational management</b> monitors day-to-day work. Work is split into <b>business functions</b> (sales and marketing, manufacturing and production, finance and accounting, human resources), each with formal rules. <b>Culture</b> is the set of assumptions and values most people accept ("customer service", "quality"); not everyone agrees with it, which leads to politics, and both affect any IS.</p>
+<p><b>Management.</b> Managers make sense of the business environment, make decisions and form action plans to solve problems. They allocate human and financial resources, lead, and create new products and ideas driven largely by new knowledge and information.</p>
+<p><b>Technology.</b> Hardware, software, data management, and networking and telecommunications. <mark class="hl">IT is the platform on which an IS is built: the enabler.</mark></p>
+<h4>Perspectives on IS</h4>
+<div class="tscroll"><table>
+  <tr><th>Approach</th><th>Disciplines</th><th>Focus</th></tr>
+  <tr><td><b>Technical</b></td><td>Computer science, management science, operations research</td><td>Physical technology, mathematical models of computation, formal proofs of what systems can do</td></tr>
+  <tr><td><b>Behavioural</b></td><td>Sociology, psychology, economics</td><td>Effects of technology on individuals, groups and society</td></tr>
+  <tr><td><b>Sociotechnical</b></td><td>Both</td><td>Considers together the technology, the business, the managers and employees, and the environment</td></tr>
+</table></div>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Digital firm">Digital firm</a><a class="chip c2 tlink" href="#/terms" data-term="Time shifting">Time shifting</a><a class="chip c1 tlink" href="#/terms" data-term="Space shifting">Space shifting</a><a class="chip c2 tlink" href="#/terms" data-term="Operational excellence">Operational excellence</a><a class="chip c1 tlink" href="#/terms" data-term="Customer intimacy">Customer intimacy</a><a class="chip c2 tlink" href="#/terms" data-term="Competitive advantage">Competitive advantage</a><a class="chip c1 tlink" href="#/terms" data-term="Cloud computing">Cloud computing</a><a class="chip c2 tlink" href="#/terms" data-term="Big data">Big data</a><a class="chip c1 tlink" href="#/terms" data-term="Business intelligence">Business intelligence</a><a class="chip c2 tlink" href="#/terms" data-term="Feedback">Feedback</a><a class="chip c1 tlink" href="#/terms" data-term="Senior management">Senior management</a><a class="chip c2 tlink" href="#/terms" data-term="Middle management">Middle management</a><a class="chip c1 tlink" href="#/terms" data-term="Operational management">Operational management</a><a class="chip c2 tlink" href="#/terms" data-term="Culture">Culture</a><a class="chip c1 tlink" href="#/terms" data-term="Sociotechnical approach">Sociotechnical approach</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Six objectives: operational excellence, new products/services/models, customer and supplier intimacy, improved decisions, competitive advantage, survival.</li><li>Data are raw facts; information is data made meaningful.</li><li>IS activities: input, processing, output, plus feedback.</li><li>Three dimensions: organisation, management, technology. Three perspectives: technical, behavioural, sociotechnical.</li></ul></div>
+<details class="deep"><summary>Details</summary><div class="deep-body">
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/s01-06.webp" data-cap="IT spending worldwide by segment, 2012 to 2024" aria-label="Enlarge: IT spending worldwide by segment, 2012 to 2024"><img src="./img/s01-06.webp" width="1280" height="720" loading="lazy" decoding="async" alt="IT spending worldwide by segment, 2012 to 2024"></button><figcaption><span class="fig-n">1</span>IT spending worldwide by segment, 2012 to 2024</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/s01-04.webp" data-cap="IT spending trend" aria-label="Enlarge: IT spending trend"><img src="./img/s01-04.webp" width="1280" height="720" loading="lazy" decoding="async" alt="IT spending trend"></button><figcaption><span class="fig-n">2</span>IT spending trend</figcaption></figure></div>
+<h4>Gartner IT spending outlook by segment</h4>
+<div class="tscroll"><table>
+  <tr><th>Segment</th><th>2026</th><th>2027</th></tr>
+  <tr><td>Software</td><td>~$1.47 trillion</td><td>~$1.68 trillion</td></tr>
+  <tr><td>IT services</td><td>~$1.57 trillion</td><td>~$1.63 trillion</td></tr>
+  <tr><td>Communications services</td><td>~$1.35 trillion</td><td>~$1.39 trillion</td></tr>
+  <tr><td>Data centre systems</td><td>~$822 billion</td><td>~$1.37 trillion (AI compute demand)</td></tr>
+  <tr><td>Devices</td><td>~$868 billion</td><td>~$916 billion</td></tr>
+  <tr><td>Infrastructure as a service (IaaS)</td><td>~$287 billion</td><td>~$367 billion</td></tr>
+</table></div>
+<p>Memory-related price rises ("memflation") have pushed hardware and data centre costs up. Earlier figures for comparison: US business spent $817 billion on IS hardware, software and telecoms in 2014; Gartner projected $4.5 trillion for 2022 (enterprise software the fastest-growing segment at 11.5%) and $5.1 trillion for 2024 (up 8% on 2023). Statista expected about $3.61 trillion in 2020, a 5.4% fall caused by the COVID-19 pandemic.</p>
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/s01-39.webp" data-cap="Understanding an IS: organisations, management and technology" aria-label="Enlarge: Understanding an IS: organisations, management and technology"><img src="./img/s01-39.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Understanding an IS: organisations, management and technology"></button><figcaption><span class="fig-n">3</span>Understanding an IS: organisations, management and technology</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/s01-41.webp" data-cap="Levels of management in an organisation" aria-label="Enlarge: Levels of management in an organisation"><img src="./img/s01-41.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Levels of management in an organisation"></button><figcaption><span class="fig-n">4</span>Levels of management in an organisation</figcaption></figure></div>
+<h4>Review questions</h4>
+<div class="qa"><span class="qn">Q1</span><p><b>How are information systems transforming business, and how do they relate to globalisation?</b></p><p>Cloud, mobile, big data and AI change how firms work: collaboration goes online, managers see real-time dashboards, work moves out of the office, and value is created with networks of suppliers and customers. The same networks let firms coordinate production, suppliers and customers across countries, so supply chains become global and collaborative.</p></div>
+<div class="qa"><span class="qn">Q2</span><p><b>Why are information systems so essential for business management today?</b></p><p>They are how firms reach the six strategic objectives. Strategy and systems are interdependent, and some systems are needed simply to survive.</p></div>
+<div class="qa"><span class="qn">Q3</span><p><b>What is an information system and what are its components?</b></p><p>Interrelated components that collect (input), process, store and distribute (output) information for decision making and control, with feedback. Its dimensions are organisation, management and technology; the technology part is hardware, software, data management and networking.</p></div>
+<div class="qa"><span class="qn">Q4</span><p><b>Which academic disciplines study information systems?</b></p><p>Technical: computer science, management science, operations research. Behavioural: sociology, psychology, economics. The sociotechnical view combines both.</p></div>
+</div></details>
+<div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="1">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="1">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/topics/t2">Next: T2 E-business and collaboration</a></div>
+    </div>
+  </details>
+
+  <details class="note" id="t2" data-short="E-business and collaboration">
+    <summary><span class="num n1">2</span> Global e-business and collaboration</summary>
+    <div class="body">
+<div class="lesson"><b>In one line</b>Business processes are how work gets coordinated; each business function has its own systems, enterprise applications join them up, and collaboration tools connect the people.</div>
+<h4>Business processes</h4>
+<p>A <b>business process</b> is the collection of activities needed to produce a good or service, supported by flows of materials, information and knowledge. It is the way work is coordinated. <mark class="hl">How well processes are designed and coordinated often decides how well the business performs</mark>, so a process can be a competitive strength or a weakness.</p>
+<div class="tscroll"><table>
+  <tr><th>Function</th><th>Example processes</th></tr>
+  <tr><td><b>Manufacturing and production</b></td><td>Assembling the product, checking quality, producing bills of materials</td></tr>
+  <tr><td><b>Sales and marketing</b></td><td>Identifying customers, making customers aware of the product, selling it</td></tr>
+  <tr><td><b>Finance and accounting</b></td><td>Paying creditors, creating financial statements, managing cash</td></tr>
+  <tr><td><b>Human resources</b></td><td>Hiring, evaluating performance, managing benefits, training</td></tr>
+</table></div>
+<p>Many processes are <b>cross-functional</b>. Fulfilling one order at Doi Roast:</p>
+<ol>
+  <li>Sales receives a café's order.</li>
+  <li>Accounting checks the café's credit.</li>
+  <li>Production roasts and packs the beans.</li>
+  <li>The order ships, perhaps through a logistics company.</li>
+  <li>Sales handles after-sales service.</li>
+</ol>
+<p>Something as simple as filling an order needs coordination across several functions.</p>
+<h4>Business process re-engineering</h4>
+<p>Studying and improving processes can bring large gains. New technology changes the process itself:</p>
+<ul class="clean">
+  <li>Manual steps become automated.</li>
+  <li>Sequential steps happen at the same time.</li>
+  <li>Many people access and share the same information.</li>
+  <li>Entirely new processes appear, such as downloading an e-book or a music track instead of buying a physical copy.</li>
+  <li>AI supports or performs steps.</li>
+</ul>
+<h4>Systems for each function</h4>
+<p>No single system covers everything. Each function has its own systems, and cross-functional enterprise systems sit on top.</p>
+<div class="tscroll"><table>
+  <tr><th>Function</th><th>Systems</th></tr>
+  <tr><td><b>Marketing</b></td><td>Interactive marketing, sales force automation, CRM, sales management, market research and forecasting, advertising and promotion, product management</td></tr>
+  <tr><td><b>Manufacturing</b></td><td>Manufacturing resource planning (ERP), manufacturing execution systems, engineering systems: together computer-integrated manufacturing</td></tr>
+  <tr><td><b>Human resources</b></td><td>Strategic (workforce planning, succession), tactical (labour cost analysis, training effectiveness), operational (recruiting, payroll, benefits)</td></tr>
+  <tr><td><b>Accounting</b></td><td>Order processing, inventory control, accounts receivable, accounts payable, payroll, general ledger</td></tr>
+  <tr><td><b>Finance</b></td><td>Cash management, investment management, capital budgeting, financial planning</td></tr>
+</table></div>
+<p><b>Marketing.</b> Marketing plans, promotes and sells existing products in existing markets and develops new products and markets. <b>Interactive marketing</b> uses the internet for two-way exchanges with customers (chat, discussion groups, web forms, email, and now mostly social media). <b>Targeted marketing</b> aims online effort four ways: <b>community</b> (ads tailored to virtual communities), <b>content</b> (banners on relevant pages), <b>context</b> (ads matched to what the user is doing, like Google's smart ads) and <b>online behaviour</b> (cookies, link tracking). <b>Sales force automation (SFA)</b> lets sales staff work in the field: record sales, email clients, track progress. An integrated SFA solution follows the sale from inquiry to customise to commit to order.</p>
+<p><b>Manufacturing.</b> Manufacturers once built to stock and reordered when inventory fell below a threshold. Just-in-time inventory, build-to-order, end-to-end supply chain visibility, contract manufacturing and web-based collaboration changed plant management. <b>Computer-integrated manufacturing (CIM)</b> aims to simplify production processes and product designs, automate production and business functions, integrate all production and support processes, and create flexible, agile manufacturing. <b>Computer-aided manufacturing (CAM)</b> automates production through manufacturing execution systems, process control, machine control and robot control. A manufacturing system combines five resources: materials, equipment, personnel, instructions and production facilities.</p>
+<p><b>Human resources.</b> Recruiting happens online, employee records live in databases, and an HR management system (HRMS) tracks hiring, job changes, pay changes and terminations. Skills inventories help assign people well; the same data supports training plans, computer-based appraisals and succession planning.</p>
+<p><b>Accounting and finance.</b> Order processing captures customer orders and feeds inventory and receivables. Inventory control records stock changes and produces shipping and reorder information. Accounts receivable records what customers owe and produces invoices and statements. Accounts payable records purchases from and payments to suppliers. Payroll records work and pay. The general ledger consolidates the others into financial statements. Finance systems forecast and manage cash, manage investment portfolios, evaluate the risk and return of capital spending, and forecast financing needs.</p>
+<h4>Systems by kind of question</h4>
+<div class="tscroll"><table>
+  <tr><th>System</th><th>Supports</th><th>Doi Roast</th></tr>
+  <tr><td><b>Transaction processing system (TPS)</b></td><td>Records the routine transactions of the business: sales, receipts, deposits, payroll, credit decisions, material flows. Answers routine questions: what is in stock, has this customer paid?</td><td>Every café order and online sale</td></tr>
+  <tr><td><b>Business intelligence system</b></td><td>Non-routine decisions, where the way to find the answer is not defined in advance</td><td>Should we open a café of our own in Bangkok?</td></tr>
+</table></div>
+<p>A TPS is often the firm's interface with the outside world, and its data feed many other systems and processes.</p>
+<h4>Enterprise applications</h4>
+<p>Enterprise applications span several functions and focus on whole business processes carried out with customers, suppliers, partners and employees.</p>
+<div class="tscroll"><table>
+  <tr><th>Application</th><th>Goal</th><th>Faces</th></tr>
+  <tr><td><b>ERP</b> enterprise resource planning</td><td>Efficient internal production and distribution; one central store for information that used to be split across functions</td><td>Internal processes</td></tr>
+  <tr><td><b>SCM</b> supply chain management</td><td>Efficient sourcing and procurement; share information with suppliers to keep stock low (an inter-organisational system)</td><td>Suppliers</td></tr>
+  <tr><td><b>CRM</b> customer relationship management</td><td>Acquire and keep profitable customers through marketing, sales and service</td><td>Customers</td></tr>
+  <tr><td><b>PRM</b> partner relationship management</td><td>Acquire and keep partners who help sell the firm's products</td><td>Partners and distributors</td></tr>
+  <tr><td><b>KMS</b> knowledge management systems</td><td>Capture the knowledge inside the organisation; support collaboration and decisions</td><td>Employees</td></tr>
+</table></div>
+<p>SCM and CRM are linked: what customers want (CRM) drives what must be sourced and made (SCM).</p>
+<h4>Collaboration</h4>
+<p><b>Collaboration</b> is working with others towards shared, explicit goals. It matters more than ever because:</p>
+<ul class="clean">
+  <li><b>The nature of work changed.</b> Stages of production once happened separately and passed work on; now they interact constantly.</li>
+  <li><b>Professional work grew.</b> More jobs, often in services, need education, shared information and exchanged opinions; each person has expertise but must work with others.</li>
+  <li><b>The firm is organised differently.</b> Strict hierarchy gave way to teams that set their own methods while senior managers measure results; power and decisions are decentralised.</li>
+  <li><b>The firm's scope widened.</b> Production and development are spread across the globe.</li>
+  <li><b>Innovation is emphasised.</b> New ideas more often come from groups building on each other's ideas than from lone geniuses.</li>
+  <li><b>Work culture changed.</b> Diverse teams produce better results faster, people prefer teamwork, and firms tap the crowd (crowdsourcing).</li>
+</ul>
+<p>Social media add conversations, transparency and immediate positive or negative feedback, letting firms sense and respond from design through delivery. Tools include email and messaging, wikis, virtual worlds, virtual meeting systems and telepresence, and cloud suites with shared storage such as Google Workspace.</p>
+<div class="tscroll"><table>
+  <tr><th></th><th>Same time (synchronous)</th><th>Different time (asynchronous)</th></tr>
+  <tr><td><b>Same place</b> (co-located)</td><td>Face-to-face interaction: decision rooms, shared displays and tables, wall displays</td><td>Continuous task: team rooms, large public displays, shift-work groupware, project management</td></tr>
+  <tr><td><b>Different place</b> (remote)</td><td>Remote interaction: video conferencing, instant messaging, virtual worlds, shared screens, multi-user editors</td><td>Communication and coordination: email, bulletin boards, blogs, group calendars, workflow, version control, wikis</td></tr>
+</table></div>
+<h4>The IS function</h4>
+<p>The IS department is made up of <b>programmers</b>, <b>systems analysts</b> (who link the IS group with the rest of the business) and <b>IS managers</b>, led by a <b>CIO</b> (chief information officer). Many firms also have a <b>CSO</b> (security), <b>CPO</b> (privacy) and <b>CKO</b> (knowledge).</p>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Business process">Business process</a><a class="chip c2 tlink" href="#/terms" data-term="Cross-functional process">Cross-functional process</a><a class="chip c1 tlink" href="#/terms" data-term="Business process re-engineering">Business process re-engineering</a><a class="chip c2 tlink" href="#/terms" data-term="Interactive marketing">Interactive marketing</a><a class="chip c1 tlink" href="#/terms" data-term="Targeted marketing">Targeted marketing</a><a class="chip c2 tlink" href="#/terms" data-term="SFA">SFA</a><a class="chip c1 tlink" href="#/terms" data-term="CIM">CIM</a><a class="chip c2 tlink" href="#/terms" data-term="CAM">CAM</a><a class="chip c1 tlink" href="#/terms" data-term="HRMS">HRMS</a><a class="chip c2 tlink" href="#/terms" data-term="General ledger">General ledger</a><a class="chip c1 tlink" href="#/terms" data-term="TPS">TPS</a><a class="chip c2 tlink" href="#/terms" data-term="ERP">ERP</a><a class="chip c1 tlink" href="#/terms" data-term="SCM">SCM</a><a class="chip c2 tlink" href="#/terms" data-term="CRM">CRM</a><a class="chip c1 tlink" href="#/terms" data-term="PRM">PRM</a><a class="chip c2 tlink" href="#/terms" data-term="KMS">KMS</a><a class="chip c1 tlink" href="#/terms" data-term="Collaboration">Collaboration</a><a class="chip c2 tlink" href="#/terms" data-term="Crowdsourcing">Crowdsourcing</a><a class="chip c1 tlink" href="#/terms" data-term="Telepresence">Telepresence</a><a class="chip c2 tlink" href="#/terms" data-term="CIO">CIO</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Four functions: sales and marketing, manufacturing and production, finance and accounting, human resources.</li><li>TPS answers routine, predefined questions; BI supports non-routine decisions.</li><li>Enterprise applications: ERP (inside), SCM (suppliers), CRM (customers), PRM (partners), KMS (employees).</li><li>Collaboration matrix: same or different time × same or different place.</li></ul></div>
+<details class="deep"><summary>Details</summary><div class="deep-body">
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/s02-10.webp" data-cap="Marketing information systems" aria-label="Enlarge: Marketing information systems"><img src="./img/s02-10.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Marketing information systems"></button><figcaption><span class="fig-n">1</span>Marketing information systems</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/s02-13.webp" data-cap="Integrated sales force automation" aria-label="Enlarge: Integrated sales force automation"><img src="./img/s02-13.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Integrated sales force automation"></button><figcaption><span class="fig-n">2</span>Integrated sales force automation</figcaption></figure></div>
+<h4>Targeted marketing in one table</h4>
+<div class="tscroll"><table>
+  <tr><th>Tool</th><th>How it targets</th></tr>
+  <tr><td>Community</td><td>Tailors web advertising to particular virtual communities</td></tr>
+  <tr><td>Content</td><td>Places banners and billboards on pages whose content matches</td></tr>
+  <tr><td>Context</td><td>Matches ads to the user's current activity (Google's smart ads)</td></tr>
+  <tr><td>Online behaviour</td><td>Uses cookies and tracked links</td></tr>
+</table></div>
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/s02-16.webp" data-cap="Manufacturing information systems inside computer-integrated manufacturing" aria-label="Enlarge: Manufacturing information systems inside computer-integrated manufacturing"><img src="./img/s02-16.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Manufacturing information systems inside computer-integrated manufacturing"></button><figcaption><span class="fig-n">3</span>Manufacturing information systems inside computer-integrated manufacturing</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/s02-19.webp" data-cap="Human resource systems by level" aria-label="Enlarge: Human resource systems by level"><img src="./img/s02-19.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Human resource systems by level"></button><figcaption><span class="fig-n">4</span>Human resource systems by level</figcaption></figure></div>
+<h4>Human resource systems by level</h4>
+<div class="tscroll"><table>
+  <tr><th>Level</th><th>Staffing</th><th>Training and development</th><th>Compensation</th></tr>
+  <tr><td>Strategic</td><td>HR planning, labour force tracking</td><td>Succession planning</td><td>Contract costing, salary forecasting</td></tr>
+  <tr><td>Tactical</td><td>Labour cost analysis and budgeting, turnover analysis</td><td>Training effectiveness, career matching</td><td>Compensation effectiveness and equity analysis, benefit preference analysis</td></tr>
+  <tr><td>Operational</td><td>Recruiting, workforce planning and scheduling</td><td>Skills assessment, performance evaluations</td><td>Payroll control, benefits administration</td></tr>
+</table></div>
+<div class="figs"><figure class="fig"><button class="fig-open" type="button" data-full="./img/s02-31.webp" data-cap="Enterprise application architecture: who each system faces" aria-label="Enlarge: Enterprise application architecture: who each system faces"><img src="./img/s02-31.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Enterprise application architecture: who each system faces"></button><figcaption><span class="fig-n">5</span>Enterprise application architecture: who each system faces</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/s02-32.webp" data-cap="Enterprise applications across the functional areas" aria-label="Enlarge: Enterprise applications across the functional areas"><img src="./img/s02-32.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Enterprise applications across the functional areas"></button><figcaption><span class="fig-n">6</span>Enterprise applications across the functional areas</figcaption></figure><figure class="fig"><button class="fig-open" type="button" data-full="./img/s02-46.webp" data-cap="Time/space collaboration and social tool matrix" aria-label="Enlarge: Time/space collaboration and social tool matrix"><img src="./img/s02-46.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Time/space collaboration and social tool matrix"></button><figcaption><span class="fig-n">7</span>Time/space collaboration and social tool matrix</figcaption></figure></div>
+</div></details>
+<div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="2">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="2">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/cases">Next: Case files</a></div>
+    </div>
+  </details>
+</div></section>
+
+<!-- ============ CASE FILES ============ -->
+<section class="tab" id="cases"><div class="wrap">
+  <h1>Case files</h1>
+  <p class="lede">Three cases on ethics, security and building systems, each with the ideas needed to analyse it and an answer outline.</p>
+
+  <details class="note" open id="c1" data-short="Ethics: a social network">
+    <summary><span class="num n2">C1</span> Ethics: a social network's privacy record</summary>
+    <div class="body">
+<div class="lesson"><b>In one line</b>A business model built on users' personal data keeps colliding with privacy, safety, competition and copyright, and ethical analysis gives a structured way to judge it.</div>
+<h4>The case in brief</h4>
+<ul class="clean">
+  <li>Meta (Facebook, Instagram, WhatsApp) earns most of its money from advertising built on personal data, so user privacy and revenue pull against each other.</li>
+  <li><b>Beacon</b> (2007) posted users' purchases on other sites to their friends' feeds without permission; after a petition of 50,000+ users it was withdrawn.</li>
+  <li>The FTC acted twice: a 2012 order to stop deceiving users about privacy controls, then a record $5 billion fine in 2019 for breaking that order.</li>
+  <li><b>Cambridge Analytica</b>: a quiz app collected data on its users and their friends, building a database of more than 87 million people that was used to target political messaging in the 2016 US election.</li>
+  <li>Data-sharing deals with at least 60 device makers gave access to users' friends' data without consent. Settlements include $650 million (facial recognition, Illinois) and $725 million (class action).</li>
+  <li>Under the EU's <b>GDPR</b>: a record €1.2 billion fine in 2023 for moving EU data to the US, plus earlier fines for children's data, forced consent to personalised ads and a breach affecting 530 million users.</li>
+  <li>Internal documents showed the firm knew Instagram could harm teenage girls' mental health and that a feed change rewarded outrage, yet did little.</li>
+  <li>The FTC called the Instagram and WhatsApp purchases moves to crush competition; the EU is investigating under its Digital Markets Act.</li>
+  <li>Its AI assistant was rolled out in all apps with no way to turn it off, gave made-up answers, was trained on public user posts with no easy opt-out, and reportedly on copyrighted books used without permission.</li>
+  <li>The firm points to its ESG reporting, but its model still depends on largely unrestricted use of personal data.</li>
+</ul>
+<h4>Ideas to apply</h4>
+<p><b>Five moral dimensions</b> of the information age: <b>information rights and obligations</b> (privacy), <b>property rights and obligations</b> (intellectual property), <b>accountability and control</b>, <b>system quality</b> (data and system errors) and <b>quality of life</b> (social and mental effects).</p>
+<p><b>Basic concepts.</b> <b>Responsibility</b>: accepting the costs, duties and obligations of decisions you make. <b>Accountability</b>: mechanisms exist to find who took an action. <b>Liability</b>: laws let people recover damages done to them. <b>Due process</b>: laws are known and applied fairly, with a right of appeal.</p>
+<p><b>Ethical analysis in five steps</b>:</p>
+<ol>
+  <li>Identify and describe the facts clearly.</li>
+  <li>Define the conflict or dilemma and the higher-order values involved (privacy, freedom, protection of property).</li>
+  <li>Identify the stakeholders.</li>
+  <li>Identify the options you can reasonably take.</li>
+  <li>Identify the likely consequences of each option.</li>
+</ol>
+<div class="tscroll"><table>
+  <tr><th>Candidate principle</th><th>Test</th></tr>
+  <tr><td><b>Golden Rule</b></td><td>Do unto others as you would have them do unto you.</td></tr>
+  <tr><td><b>Kant's categorical imperative</b></td><td>If an action is not right for everyone to take, it is not right for anyone.</td></tr>
+  <tr><td><b>Slippery slope</b> (Descartes' rule of change)</td><td>If an action cannot be taken repeatedly, it is not right to take at all.</td></tr>
+  <tr><td><b>Utilitarian principle</b></td><td>Take the action that achieves the higher or greater value.</td></tr>
+  <tr><td><b>Risk aversion principle</b></td><td>Take the action that produces the least harm or the least potential cost.</td></tr>
+  <tr><td><b>No free lunch</b></td><td>Assume almost all tangible and intangible objects belong to someone unless stated otherwise; if someone created something useful to you, they probably want compensation.</td></tr>
+</table></div>
+<p><b>Fair information practices</b> (the basis of most privacy law, including GDPR): notice of what is collected, choice and consent, access to your own data, security of the data, and enforcement. GDPR adds explicit opt-in consent, the right to be forgotten, and limits on moving data out of the EU. <b>ESG</b> (environmental, social and governance) judges a company on more than profit and loss.</p>
+<h4>Questions</h4>
+<div class="qa"><span class="qn">Q1</span><p><b>Pick one ethical dilemma from the case and analyse it.</b></p><p>Example: Cambridge Analytica. Facts: a quiz app took data on its users and their friends without the friends' knowledge, and the data was sold for political targeting. Dilemma: users' information rights versus the firm's revenue from an open developer platform. Stakeholders: users, their friends, app developers, advertisers, voters, regulators, shareholders. Options: allow broad developer access; restrict access to consenting users only; audit apps and ban misuse. Consequences: open access grows revenue but led to fines and lost trust; restriction costs some ad and developer value but protects users. Principles: it fails the Golden Rule and Kant's imperative (no one would accept their data being taken this way), and risk aversion favours restriction.</p></div>
+<div class="qa"><span class="qn">Q2</span><p><b>Can Meta run a successful business without invading privacy?</b></p><p>Arguments for: contextual ads based on page content rather than personal profiles, opt-in personalisation, subscriptions (Meta now sells ad-free subscriptions in the EU), and trust as a competitive advantage. Arguments against: revenue depends on precise targeting, and less data means lower ad prices. A defensible answer: yes, but at lower margins, with consent-based data use and privacy by default.</p></div>
+<div class="qa"><span class="qn">Q3</span><p><b>What ethical issues arise in developing and using its AI?</b></p><p>Property rights (training on copyrighted books and on users' posts without permission or payment: the no-free-lunch rule), information rights (no easy opt-out from data scraping), system quality (hallucinated answers, such as claiming to have a child), quality of life (misinformation, no option to turn the assistant off) and accountability (who is responsible when the AI misleads).</p></div>
+<div class="qa"><span class="qn">Q4</span><p><b>What is the ESG movement and how might it affect Meta's future?</b></p><p>ESG rates firms on environmental, social and governance performance. Investors increasingly screen on it, regulators lean on it, and employees and users care about it. Poor social scores on privacy, teen safety and misinformation could raise Meta's cost of capital, invite tougher regulation and push it to change its data practices.</p></div>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Five moral dimensions">Five moral dimensions</a><a class="chip c2 tlink" href="#/terms" data-term="Responsibility">Responsibility</a><a class="chip c1 tlink" href="#/terms" data-term="Accountability">Accountability</a><a class="chip c2 tlink" href="#/terms" data-term="Liability">Liability</a><a class="chip c1 tlink" href="#/terms" data-term="Due process">Due process</a><a class="chip c2 tlink" href="#/terms" data-term="Golden Rule">Golden Rule</a><a class="chip c1 tlink" href="#/terms" data-term="Categorical imperative">Categorical imperative</a><a class="chip c2 tlink" href="#/terms" data-term="Slippery slope">Slippery slope</a><a class="chip c1 tlink" href="#/terms" data-term="Utilitarian principle">Utilitarian principle</a><a class="chip c2 tlink" href="#/terms" data-term="Risk aversion principle">Risk aversion principle</a><a class="chip c1 tlink" href="#/terms" data-term="No free lunch">No free lunch</a><a class="chip c2 tlink" href="#/terms" data-term="GDPR">GDPR</a><a class="chip c1 tlink" href="#/terms" data-term="Fair information practices">Fair information practices</a><a class="chip c2 tlink" href="#/terms" data-term="ESG">ESG</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Analysis: facts → dilemma and values → stakeholders → options → consequences.</li><li>Six principles: Golden Rule, Kant, slippery slope, utilitarian, risk aversion, no free lunch.</li><li>Five moral dimensions: information rights, property rights, accountability and control, system quality, quality of life.</li></ul></div>
+<div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="3">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="3">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/cases/c2">Next: C2 Security</a></div>
+    </div>
+  </details>
+
+  <details class="note" id="c2" data-short="Security: ransomware">
+    <summary><span class="num n2">C2</span> Security: ransomware stops a health payment network</summary>
+    <div class="body">
+<div class="lesson"><b>In one line</b>One missing control (multifactor authentication on a remote access tool) let a ransomware group shut down a system the whole US health sector depends on.</div>
+<h4>The case in brief</h4>
+<ul class="clean">
+  <li><b>Ransomware</b> encrypts files or locks a system and demands payment, usually in cryptocurrency, for the decryption key.</li>
+  <li>Change Healthcare, owned by UnitedHealth Group since 2022 ($8 billion), processes claims, payments and prescriptions for more than 67,000 pharmacies and handles about 15 billion claims ($1.5 trillion) a year, roughly a third of all US patient records.</li>
+  <li>February 2024: an affiliate of the <b>BlackCat/ALPHV</b> group, which sells ransomware as a service, got in through a remote access application without <b>multifactor authentication</b>, stole a reported 6 TB of data and encrypted systems.</li>
+  <li>The company disconnected more than 110 services. Eligibility checks, prior authorisations, claims and prescriptions stalled across hospitals, doctors, pharmacies and patients, and providers' cash flow dried up.</li>
+  <li>It paid a reported $22 million in Bitcoin. The affiliate said it was never paid, kept the data, and another group (RansomHub) later demanded a second ransom.</li>
+  <li>UnitedHealth advanced more than $3 billion to providers, criticised as too little. Recovery took over a month; class actions and a federal investigation followed.</li>
+  <li>Healthcare is among the most attacked critical infrastructure: ransomware hit 46 hospital systems in 2023, up from 25 in 2022.</li>
+</ul>
+<h4>Ideas to apply</h4>
+<div class="tscroll"><table>
+  <tr><th>Dimension</th><th>In this case</th></tr>
+  <tr><td><b>People</b></td><td>Set security standards and guidelines</td></tr>
+  <tr><td><b>Organisation</b></td><td>Put the standards into practice; promote best practice</td></tr>
+  <tr><td><b>Technology</b></td><td>Ransomware, cryptocurrencies, decryption keys</td></tr>
+  <tr><td><b>Business challenge</b></td><td>Large, complex infrastructure; many access points; uneven security</td></tr>
+  <tr><td><b>Solution</b></td><td>Prevent unauthorised access; back up and recover systems; protect critical infrastructure</td></tr>
+</table></div>
+<p><b>Security</b> is the policies, procedures and technical measures that prevent unauthorised access, change, theft or damage. <b>Controls</b> are the methods and standards that protect assets, keep records accurate and make sure management's standards are followed.</p>
+<ul class="clean">
+  <li><b>Framework</b>: risk assessment, a security policy and acceptable use policy, identity management, disaster recovery and business continuity planning, regular IS audits.</li>
+  <li><b>Tools</b>: multifactor authentication, firewalls, intrusion detection, anti-malware, encryption, patching, network segmentation, tested offline backups, an incident response plan.</li>
+</ul>
+<h4>Questions</h4>
+<div class="qa"><span class="qn">Q1</span><p><b>How did the attack's impact reach beyond Change Healthcare's own clients?</b></p><p>Because it sits in the middle of the system, the outage stopped claims and prescriptions for hospitals, doctors and pharmacies that had no direct link to it, cut providers' income, delayed patients' care and medicines, exposed millions of people's health and identity data, and showed how one weak point can disrupt national critical infrastructure.</p></div>
+<div class="qa"><span class="qn">Q2</span><p><b>How could it have been prevented?</b></p><p>Multifactor authentication on every remote access point; regular risk assessments and audits after the acquisition; least-privilege access and network segmentation so one entry does not reach everything; monitoring and intrusion detection to catch data being copied out; tested offline backups and a practised incident response plan to limit downtime.</p></div>
+<div class="qa"><span class="qn">Q3</span><p><b>Is paying the ransom an effective solution?</b></p><p>Mostly no. There is no guarantee the data is deleted (here it was not), payment funds and encourages more attacks, the same data can be ransomed again, and some payments break sanctions law. Paying can shorten an outage when there is no backup, which is the argument for good backups instead.</p></div>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Ransomware">Ransomware</a><a class="chip c2 tlink" href="#/terms" data-term="Ransomware as a service">Ransomware as a service</a><a class="chip c1 tlink" href="#/terms" data-term="Multifactor authentication">Multifactor authentication</a><a class="chip c2 tlink" href="#/terms" data-term="Security">Security</a><a class="chip c1 tlink" href="#/terms" data-term="Controls">Controls</a><a class="chip c2 tlink" href="#/terms" data-term="Risk assessment">Risk assessment</a><a class="chip c1 tlink" href="#/terms" data-term="Security policy">Security policy</a><a class="chip c2 tlink" href="#/terms" data-term="Business continuity planning">Business continuity planning</a><a class="chip c1 tlink" href="#/terms" data-term="Disaster recovery planning">Disaster recovery planning</a><a class="chip c2 tlink" href="#/terms" data-term="Incident response plan">Incident response plan</a><a class="chip c1 tlink" href="#/terms" data-term="Critical infrastructure">Critical infrastructure</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>The entry point was ordinary: remote access without MFA.</li><li>Prevention, detection, recovery: MFA and segmentation, monitoring, tested backups and a response plan.</li><li>Paying does not guarantee recovery or deletion of stolen data.</li></ul></div>
+<div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="4">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="4">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/cases/c3">Next: C3 Process mining</a></div>
+    </div>
+  </details>
+
+  <details class="note" id="c3" data-short="Building systems: process mining">
+    <summary><span class="num n2">C3</span> Building systems: process mining and business process management</summary>
+    <div class="body">
+<div class="lesson"><b>In one line</b>Process mining reads the event logs a firm's systems already keep to show how processes really run, so inefficiencies can be found and fixed in weeks rather than months.</div>
+<h4>The case in brief</h4>
+<ul class="clean">
+  <li>Celonis (Munich and New York, 3,000+ staff, 1,400+ customer companies) makes <b>process mining</b> software that sits on top of existing systems such as SAP and Salesforce.</li>
+  <li>Processes drift from their designed path over time, and new products, acquisitions and customer expectations add pressure. Consultants used to find the problems slowly and expensively; the software finds them in four to eight weeks.</li>
+  <li>It covers accounts payable and receivable, procurement, order management, inventory and opportunity management, on-premises or as SaaS.</li>
+  <li>Deutsche Telekom Services Europe saved over €66 million in its <b>procure-to-pay</b> process (2 million order items and 9 million invoices a year) by finding duplicate payments and missed cash discounts.</li>
+  <li>Avnet freed more than €6 million of working capital by catching early supplier deliveries; Kraft Heinz cut overdue payments by 30% by rethinking cash discounts.</li>
+  <li><b>Execution management</b> goes beyond finding problems to recommending and taking actions. Newer tools add a machine learning workbench, a natural-language process assistant (Process Copilot) built on a process query language, and a "digital twin" of the business's processes for AI and partner apps.</li>
+</ul>
+<h4>Ideas to apply</h4>
+<p>Building a new system is <b>planned organisational change</b>. Four kinds, from least to most risk and reward:</p>
+<div class="tscroll"><table>
+  <tr><th>Change</th><th>What it does</th><th>Example</th></tr>
+  <tr><td><b>Automation</b></td><td>Helps people do existing tasks faster</td><td>A roast-order screen replacing paper slips</td></tr>
+  <tr><td><b>Rationalisation of procedures</b></td><td>Streamlines standard operating procedures and removes bottlenecks</td><td>One product code list used by sales and the roastery</td></tr>
+  <tr><td><b>Business process redesign</b></td><td>Analyses, simplifies and redesigns whole processes</td><td>Cafés reorder automatically when their stock runs low</td></tr>
+  <tr><td><b>Paradigm shift</b></td><td>Rethinks the nature of the business itself</td><td>Selling coffee as a subscription service</td></tr>
+</table></div>
+<p><b>Business process management (BPM)</b> is continuous improvement in five steps:</p>
+<ol>
+  <li>Identify processes for change.</li>
+  <li>Analyse the existing processes.</li>
+  <li>Design the new process.</li>
+  <li>Implement the new process.</li>
+  <li>Measure continuously.</li>
+</ol>
+<p>Process mining speeds up steps 2 and 5 by working from real event data instead of interviews and diagrams.</p>
+<h4>Questions</h4>
+<div class="qa"><span class="qn">Q1</span><p><b>How can process mining give a business competitive advantage?</b></p><p>Operational excellence (lower costs, fewer duplicate payments, freed working capital), better customer service through smoother order handling, and faster, data-based decisions. Competitors still relying on slow consultant reviews improve more slowly.</p></div>
+<div class="qa"><span class="qn">Q2</span><p><b>Which companies benefit, and what should they consider before adopting it?</b></p><p>Large firms with high-volume, repeated processes and ERP or CRM systems that keep event logs: manufacturing, distribution, telecoms, retail, finance. Management: clear goals, executive support, budget, return on investment. Organisation: willingness to change processes and roles, staff training, process ownership. Technology: data quality and access to logs, integration with existing systems, cloud or on-premises, security and privacy of the data.</p></div>
+<div class="qa"><span class="qn">Q3</span><p><b>How does adding AI help?</b></p><p>AI handles huge volumes of process data, spots patterns and anomalies, predicts problems, recommends fixes, and lets non-technical staff ask questions in plain language. The process data in turn gives AI the business context it needs to be useful.</p></div>
+<h4>Words to know</h4><div class="chiprow"><a class="chip c1 tlink" href="#/terms" data-term="Planned organisational change">Planned organisational change</a><a class="chip c2 tlink" href="#/terms" data-term="Automation">Automation</a><a class="chip c1 tlink" href="#/terms" data-term="Rationalisation of procedures">Rationalisation of procedures</a><a class="chip c2 tlink" href="#/terms" data-term="Business process redesign">Business process redesign</a><a class="chip c1 tlink" href="#/terms" data-term="Paradigm shift">Paradigm shift</a><a class="chip c2 tlink" href="#/terms" data-term="BPM">BPM</a><a class="chip c1 tlink" href="#/terms" data-term="Process mining">Process mining</a><a class="chip c2 tlink" href="#/terms" data-term="Procure-to-pay">Procure-to-pay</a><a class="chip c1 tlink" href="#/terms" data-term="Execution management">Execution management</a><a class="chip c2 tlink" href="#/terms" data-term="Digital twin">Digital twin</a></div>
+<div class="tip t-good"><b>Remember</b><ul class="clean"><li>Change: automation → rationalisation → redesign → paradigm shift, rising risk and reward.</li><li>BPM: identify, analyse, design, implement, measure.</li><li>Process mining = reconstructing real processes from system event logs.</li></ul></div>
+<div class="topic-next"><span class="ctl-label">Practise this topic</span><a class="btn" href="#/flash" data-goflash="5">Flashcards</a><a class="btn" href="#/quiz" data-goquiz="5">Quiz</a><span class="ctl-gap"></span><a class="btn primary" href="#/flash">Next: Flashcards</a></div>
+    </div>
+  </details>
+</div></section>
+
+<!-- ============ TERMS ============ -->
+<section class="tab" id="terms"><div class="wrap">
+  <h1>Terms</h1>
+  <div class="ctlrow"><span class="ctl-label">Search</span><input class="fld" id="termF" placeholder="e.g. TPS, CRM, ransomware, Golden Rule" autocomplete="off" style="flex:1;min-width:200px"></div>
+  <div class="ctlrow"><span class="ctl-label">Topic</span><div class="sc-seg" id="termTopics"></div></div>
+  <div class="ctlrow"><span class="ctl-label">Show</span><div class="sc-seg" id="termShow"><button type="button" aria-pressed="true" data-v="all">All terms</button><button type="button" aria-pressed="false" data-v="short">Short forms only</button></div></div>
+  <p class="sub2" id="termCount"></p>
+  <div class="panel"><div class="tscroll"><table id="termT"></table></div></div>
+</div></section>
+
+<!-- ============ COURSE PLAN ============ -->
+<section class="tab" id="plan"><div class="wrap">
+  <h1>Course plan</h1>
+  <p class="lede">15 weeks in four modules.</p>
+  <div class="panel">
+    <div class="tscroll"><table>
+      <tr><th>Week</th><th>Topic</th><th>Covers</th><th>Here</th></tr>
+      <tr><td class="mono">1</td><td><a href="#/topics/t1">Information systems in global business today</a></td><td>The role of IS in business, perspectives on IS, contemporary approaches</td><td class="mono"><a href="#/topics/t1">T1</a></td></tr>
+      <tr><td class="mono">2</td><td><a href="#/topics/t2">Global e-business and collaboration</a></td><td>Business processes and IS, types of IS, systems for collaboration and social business, the IS function</td><td class="mono"><a href="#/topics/t2">T2</a></td></tr>
+      <tr><td class="mono">3</td><td>Information systems, organisations and strategy</td><td>Organisations and IS, how IS affect firms, using IS for competitive advantage, management issues</td><td></td></tr>
+      <tr><td class="mono">4</td><td>Ethical and social issues in information systems</td><td>Ethical and social issues, ethics in an information society, the moral dimensions of IS</td><td class="mono"><a href="#/cases/c1">C1</a></td></tr>
+      <tr><td class="mono">5</td><td>IT infrastructure and emerging technologies</td><td>Infrastructure and its components, hardware and software platform trends, management issues</td><td></td></tr>
+      <tr><td class="mono">6</td><td>Foundations of business intelligence: databases and information management</td><td>Traditional files, the database approach, databases for performance and decisions, managing data resources</td><td></td></tr>
+      <tr><td class="mono">7</td><td>Telecommunications, the internet and wireless technology</td><td>Networking in business, communication networks, the global internet, the wireless revolution</td><td></td></tr>
+      <tr><td class="mono">8</td><td>Securing information systems</td><td>Vulnerability and abuse, the business value of security, a framework for security and control, protection tools</td><td class="mono"><a href="#/cases/c2">C2</a></td></tr>
+      <tr><td class="mono">9</td><td>Enterprise applications</td><td>Enterprise systems, supply chain management, customer relationship management, new opportunities and challenges</td><td></td></tr>
+      <tr><td class="mono">10</td><td>E-commerce: digital markets, digital goods</td><td>E-commerce and the internet, business and technology, mobile commerce, building an e-commerce presence</td><td></td></tr>
+      <tr><td class="mono">11</td><td>Managing knowledge</td><td>The knowledge management landscape, enterprise-wide KM systems, knowledge work systems, intelligent techniques</td><td></td></tr>
+      <tr><td class="mono">12</td><td>Enhancing decision making</td><td>Decision making and IS, business intelligence in the enterprise, BI constituencies</td><td></td></tr>
+      <tr><td class="mono">13</td><td>Building information systems</td><td>Systems as planned organisational change, systems development, alternative approaches, development for the digital firm</td><td class="mono"><a href="#/cases/c3">C3</a></td></tr>
+      <tr><td class="mono">14</td><td>Managing projects</td><td>Why project management matters, selecting projects, the business value of IS, managing project risk</td><td></td></tr>
+      <tr><td class="mono">15</td><td>Managing global systems</td><td>Growth of international IS, organising and managing global systems, global value chains</td><td></td></tr>
+    </table></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-bottom:10px">Marking</h3>
+      <div class="kv"><b>Case study presentations</b><span>15%</span></div>
+      <div class="kv"><b>Assignment</b><span>25%</span></div>
+      <div class="kv"><b>Midterm examination</b><span>30%</span></div>
+      <div class="kv"><b>Final examination</b><span>30%</span></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:10px">Further reading</h3>
+      <p style="font-size:14.5px">Kenneth C. Laudon and Jane P. Laudon, <i>Management Information Systems: Managing the Digital Firm</i>, 18th edition, 2026.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ CHEAT SHEET ============ -->
+<section class="tab" id="cheat"><div class="wrap">
+  <h1>Cheat Sheet</h1>
+  <div class="cheat">
+    <h3><span class="badge b1">T1</span> Strategy and the digital firm</h3>
+    <div class="card"><div class="tscroll"><table>
+      <tr><td><b>Six objectives</b></td><td>Operational excellence · new products, services and business models · customer and supplier intimacy · improved decision making · competitive advantage · survival</td></tr>
+      <tr><td><b>What's new</b></td><td>Technology: cloud, big data, mobile, AI · Management: online collaboration, BI, virtual meetings · Organisations: social business, teleworking, co-created value</td></tr>
+      <tr><td><b>Digital firm</b></td><td>Relationships and core processes digitally enabled · sense and respond · flexible · time shifting and space shifting</td></tr>
+    </table></div></div>
+
+    <h3><span class="badge b1">T1</span> What an IS is</h3>
+    <div class="card"><div class="formula">IT = hardware + software + data management + networking (the platform)<br>IS = components that collect, process, store, distribute information for decisions and control<br>input → processing → output, with feedback · data (raw facts) → information (meaningful)</div>
+      <div class="tscroll"><table>
+        <tr><td><b>Dimensions</b></td><td>Organisation (people, structure, processes, politics, culture) · Management · Technology</td></tr>
+        <tr><td><b>Levels</b></td><td>Senior (strategic, long range) · Middle (programmes and plans) · Operational (day to day)</td></tr>
+        <tr><td><b>Perspectives</b></td><td>Technical (computer science) · Behavioural (sociology, psychology, economics) · Sociotechnical (both)</td></tr>
+      </table></div></div>
+
+    <h3><span class="badge b2">T2</span> Systems map</h3>
+    <div class="card"><div class="tscroll"><table>
+      <tr><td><b>Marketing</b></td><td>Interactive marketing · targeted marketing (community, content, context, online behaviour) · SFA (inquiry → customise → commit → order)</td></tr>
+      <tr><td><b>Manufacturing</b></td><td>CIM: simplify, automate, integrate, flexible · ERP/MRP, execution systems, engineering systems · CAM · five resources: materials, equipment, personnel, instructions, facilities</td></tr>
+      <tr><td><b>HR</b></td><td>Strategic, tactical, operational · staffing, training and development, compensation</td></tr>
+      <tr><td><b>Accounting</b></td><td>Order processing · inventory control · receivable · payable · payroll · general ledger</td></tr>
+      <tr><td><b>Finance</b></td><td>Cash management · investment management · capital budgeting · financial planning</td></tr>
+      <tr><td><b>TPS vs BI</b></td><td>TPS: routine, predefined questions · BI: non-routine decisions</td></tr>
+      <tr><td><b>Enterprise</b></td><td>ERP inside · SCM suppliers · CRM customers · PRM partners · KMS employees</td></tr>
+    </table></div></div>
+
+    <h3><span class="badge b2">T2</span> Collaboration</h3>
+    <div class="card"><div class="tscroll"><table>
+      <tr><td><b>Why now</b></td><td>Nature of work · professional work · organisation of the firm · scope of the firm · innovation · culture of work</td></tr>
+      <tr><td><b>Same time, same place</b></td><td>Decision rooms, shared displays</td></tr>
+      <tr><td><b>Same time, different place</b></td><td>Video conferencing, instant messaging, shared screens</td></tr>
+      <tr><td><b>Different time, same place</b></td><td>Team rooms, public displays, shift-work groupware</td></tr>
+      <tr><td><b>Different time, different place</b></td><td>Email, blogs, wikis, group calendars, version control</td></tr>
+      <tr><td><b>IS function</b></td><td>Programmers · systems analysts · IS managers · CIO · CSO · CPO · CKO</td></tr>
+    </table></div></div>
+
+    <h3><span class="badge b1">C1</span> Ethics</h3>
+    <div class="card"><div class="tscroll"><table>
+      <tr><td><b>Analysis</b></td><td>Facts → dilemma and values → stakeholders → options → consequences</td></tr>
+      <tr><td><b>Principles</b></td><td>Golden Rule · Kant's categorical imperative · slippery slope · utilitarian · risk aversion · no free lunch</td></tr>
+      <tr><td><b>Moral dimensions</b></td><td>Information rights · property rights · accountability and control · system quality · quality of life</td></tr>
+      <tr><td><b>Concepts</b></td><td>Responsibility · accountability · liability · due process</td></tr>
+    </table></div></div>
+
+    <h3><span class="badge b2">C2</span> Security</h3>
+    <div class="card"><div class="tscroll"><table>
+      <tr><td><b>Framework</b></td><td>Risk assessment · security and acceptable use policy · identity management · disaster recovery and business continuity · IS audit</td></tr>
+      <tr><td><b>Tools</b></td><td>MFA · firewalls · intrusion detection · anti-malware · encryption · segmentation · tested backups · incident response plan</td></tr>
+    </table></div></div>
+
+    <h3><span class="badge gr">C3</span> Building systems</h3>
+    <div class="card"><div class="tscroll"><table>
+      <tr><td><b>Change</b></td><td>Automation → rationalisation of procedures → business process redesign → paradigm shift (risk and reward rise)</td></tr>
+      <tr><td><b>BPM</b></td><td>Identify → analyse → design → implement → measure continuously</td></tr>
+    </table></div></div>
+  </div>
+</div></section>
+
+<!-- ============ DOWNLOADS ============ -->
+<section class="tab" id="resources"><div class="wrap">
+  <h1>Downloads</h1>
+  <p class="lede">Slides in topic order.</p>
+  <div class="panel">
+    <div class="tscroll"><table class="files">
+      <tr><th>Topic</th><th>File</th><th>Covers</th><th>Pages</th></tr>
+      <tr><td class="mono">T1</td><td><a href="./files/01-information-systems-in-business-today.pdf">01-information-systems-in-business-today.pdf</a></td><td>IT spending, what's new in IS, the digital firm, six strategic objectives, IT vs IS, dimensions and perspectives</td><td class="sz">47</td></tr>
+      <tr><td class="mono">T2</td><td><a href="./files/02-e-business-and-collaboration.pdf">02-e-business-and-collaboration.pdf</a></td><td>Business processes, functional systems, TPS and BI, enterprise applications, collaboration, the IS function</td><td class="sz">47</td></tr>
+    </table></div>
+  </div>
+</div></section>
+
+<!-- ============ DRILL: FLASHCARDS ============ -->
+<section class="tab" id="flash"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash" aria-selected="true" aria-current="page">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/obj">Strategy sorter</a><a class="sc-tab" href="#/sys">Which system?</a><a class="sc-tab" href="#/fn">Business functions</a><a class="sc-tab" href="#/collab">Time and place</a><a class="sc-tab" href="#/eth">Ethical principles</a></nav>
+  <h1>Flashcards</h1>
+  <div class="panel">
+    <div class="ctlrow"><span class="ctl-label">Deck</span>
+      <div class="sc-seg" id="fcDeck"><button type="button" aria-pressed="true" data-v="c">Concepts</button><button type="button" aria-pressed="false" data-v="t">Terms</button><button type="button" aria-pressed="false" data-v="both">Both</button></div></div>
+    <div class="ctlrow" id="fcDirRow" hidden><span class="ctl-label">Show first</span>
+      <div class="sc-seg" id="fcDir"><button type="button" aria-pressed="true" data-v="term">Term</button><button type="button" aria-pressed="false" data-v="meaning">Meaning</button></div></div>
+    <div class="ctlrow"><span class="ctl-label">Topic</span><select class="fld" id="fcTopic"></select></div>
+    <div class="ctlrow"><span class="ctl-label">Cards</span>
+      <div class="sc-seg" id="fcWhich"><button type="button" aria-pressed="true" data-v="all">All</button><button type="button" aria-pressed="false" data-v="unknown">Not yet known</button></div>
+      <span class="ctl-gap"></span><button class="btn" id="fcShuffle">Restart round</button><button class="btn" id="fcReset">Clear known marks</button></div>
+    <div class="qbar" style="margin-top:14px"><div id="fcKnownBar" style="width:0"></div></div>
+    <p class="sub2" id="fcKnownTxt"></p>
+    <div class="fc-stage">
+      <div class="fc" id="fcCard">
+        <div class="face front"><span class="tag badge b1" id="fcTag"></span><div class="q" id="fcQ"></div><span class="hint">click to flip</span><span class="flag ok" id="fcKnownMark" style="position:absolute;top:14px;right:14px;display:none">known</span></div>
+        <div class="face back"><div class="a" id="fcA"></div><span class="hint">click to flip back</span></div>
+      </div>
+      <div class="qcard qresult" id="fcDone" style="display:none"></div>
+      <div class="fc-nav" id="fcNavRow">
+        <button class="btn" id="fcAgain">Again</button>
+        <span class="fc-count" id="fcCount"></span>
+        <button class="btn" id="fcNext">Skip</button>
+        <button class="btn primary" id="fcKnow">Got it</button>
+      </div>
+      <div class="fc-score" id="fcScore"></div>
+    </div>
+    <p class="sub2">Keyboard: <b>Space</b> flip · <b>G</b> got it · <b>A</b> again · <b>→</b> skip.</p>
+  </div>
+</div></section>
+
+<!-- ============ DRILL: QUIZ ============ -->
+<section class="tab" id="quiz"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz" aria-selected="true" aria-current="page">Quiz</a><a class="sc-tab" href="#/obj">Strategy sorter</a><a class="sc-tab" href="#/sys">Which system?</a><a class="sc-tab" href="#/fn">Business functions</a><a class="sc-tab" href="#/collab">Time and place</a><a class="sc-tab" href="#/eth">Ethical principles</a></nav>
+  <h1>Quiz</h1>
+  <div class="panel pc"><div id="quizShell" class="quiz-shell"></div></div>
+</div></section>
+
+<!-- ============ DRILL: STRATEGY SORTER ============ -->
+<section class="tab" id="obj"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/obj" aria-selected="true" aria-current="page">Strategy sorter</a><a class="sc-tab" href="#/sys">Which system?</a><a class="sc-tab" href="#/fn">Business functions</a><a class="sc-tab" href="#/collab">Time and place</a><a class="sc-tab" href="#/eth">Ethical principles</a></nav>
+  <h1>Strategy sorter</h1>
+  <p class="lede">Which strategic business objective does each investment mainly serve?</p>
+  <div class="panel">
+    <div id="objList"></div>
+    <div class="qactions"><span class="sub2" id="objScore" style="margin-right:auto"></span><button class="btn" id="objNew">Shuffle again</button></div>
+  </div>
+</div></section>
+
+<!-- ============ DRILL: WHICH SYSTEM ============ -->
+<section class="tab" id="sys"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/obj">Strategy sorter</a><a class="sc-tab" href="#/sys" aria-selected="true" aria-current="page">Which system?</a><a class="sc-tab" href="#/fn">Business functions</a><a class="sc-tab" href="#/collab">Time and place</a><a class="sc-tab" href="#/eth">Ethical principles</a></nav>
+  <h1>Which system?</h1>
+  <p class="lede">Doi Roast needs each of these. Which kind of system does it?</p>
+  <div class="panel">
+    <div id="sysList"></div>
+    <div class="qactions"><span class="sub2" id="sysScore" style="margin-right:auto"></span><button class="btn" id="sysNew">Shuffle again</button></div>
+  </div>
+</div></section>
+
+<!-- ============ DRILL: BUSINESS FUNCTIONS ============ -->
+<section class="tab" id="fn"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/obj">Strategy sorter</a><a class="sc-tab" href="#/sys">Which system?</a><a class="sc-tab" href="#/fn" aria-selected="true" aria-current="page">Business functions</a><a class="sc-tab" href="#/collab">Time and place</a><a class="sc-tab" href="#/eth">Ethical principles</a></nav>
+  <h1>Business functions</h1>
+  <p class="lede">Which business function owns each process or system?</p>
+  <div class="panel">
+    <div id="fnList"></div>
+    <div class="qactions"><span class="sub2" id="fnScore" style="margin-right:auto"></span><button class="btn" id="fnNew">Shuffle again</button></div>
+  </div>
+</div></section>
+
+<!-- ============ DRILL: TIME AND PLACE ============ -->
+<section class="tab" id="collab"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/obj">Strategy sorter</a><a class="sc-tab" href="#/sys">Which system?</a><a class="sc-tab" href="#/fn">Business functions</a><a class="sc-tab" href="#/collab" aria-selected="true" aria-current="page">Time and place</a><a class="sc-tab" href="#/eth">Ethical principles</a></nav>
+  <h1>Time and place</h1>
+  <p class="lede">Place each way of working in the time/space collaboration matrix.</p>
+  <div class="panel">
+    <div id="clList"></div>
+    <div class="qactions"><span class="sub2" id="clScore" style="margin-right:auto"></span><button class="btn" id="clNew">Shuffle again</button></div>
+  </div>
+</div></section>
+
+<!-- ============ DRILL: ETHICAL PRINCIPLES ============ -->
+<section class="tab" id="eth"><div class="wrap">
+  <nav class="sc-tabs drilltabs" aria-label="Drills"><a class="sc-tab" href="#/flash">Flashcards</a><a class="sc-tab" href="#/quiz">Quiz</a><a class="sc-tab" href="#/obj">Strategy sorter</a><a class="sc-tab" href="#/sys">Which system?</a><a class="sc-tab" href="#/fn">Business functions</a><a class="sc-tab" href="#/collab">Time and place</a><a class="sc-tab" href="#/eth" aria-selected="true" aria-current="page">Ethical principles</a></nav>
+  <h1>Ethical principles</h1>
+  <p class="lede">Which candidate principle is each person using?</p>
+  <div class="panel">
+    <div class="qmeta"><span id="etCount"></span><span id="etScore"></span></div>
+    <div class="qcard"><h3 id="etQ"></h3><div class="rlgrid" id="etOpts"></div><div id="etFeedback"></div>
+      <div class="qactions"><button class="btn" id="etRestart">Start over</button><button class="btn primary" id="etNext">Next</button></div></div>
+  </div>
+</div></section>
+
+<!-- ============ ABOUT ============ -->
+<section class="tab" id="author"><div class="wrap">
+  <h1>About</h1>
+  <div class="panel pc">
+    <h3>This console</h3>
+    <div class="kv"><b>Title</b><span>Information Systems</span></div>
+    <div class="kv"><b>Covered</b><span id="abCovered"></span></div>
+    <div class="kv"><b>Practice</b><span id="abPractice"></span></div>
+  </div>
+  <div class="panel pg">
+    <h3>Built with</h3>
+    <p>HTML, CSS and JavaScript on the shared Study Console frame. No framework or build step.</p>
+    <p class="sub2">Zann</p>
+  </div>
+</div></section>
+
+<div class="footer">Information Systems</div>
+</main>
+
+<script>
+/* [term, stands for, meaning, topic]  topics: 0 T0, 1 T1, 2 T2, 3 C1, 4 C2, 5 C3 */
+var TERMS = [
+ ["Information system","IS","Interrelated components that collect, process, store and distribute information to support decision making and control in an organisation.",0],
+ ["Information technology","IT","All the hardware and software a firm needs to reach its business objectives: the platform an IS is built on.",0],
+ ["Data","","Raw facts, such as barcodes scanned at a checkout.",0],
+ ["Information","","Data shaped into a form that is meaningful and useful to people, such as sales totals.",0],
+ ["Organisation","","The people, structure, business processes, politics and culture that use an IS. One of its three dimensions.",0],
+ ["Management","","Making sense of the environment, making decisions and forming plans; allocating resources and leading. One of the three dimensions of an IS.",0],
+
+ ["Digital firm","","A firm where nearly all important relationships with customers, suppliers and employees, and its core processes and key assets, are digitally enabled.",1],
+ ["Sense and respond","","Reacting quickly to changes in customer demand and the environment, instead of simply producing and selling.",1],
+ ["Time shifting","","Business no longer limited to the 9-to-5 working day.",1],
+ ["Space shifting","","Business no longer tied to one physical location.",1],
+ ["Just-in-time","JIT","Inventory that arrives just when it is needed, keeping stock low.",1],
+ ["Cloud computing","","A flexible collection of computers on the internet doing tasks once done on corporate computers; applications delivered online as services.",1],
+ ["SaaS","Software as a Service","Business applications delivered over the internet as a service.",1],
+ ["Big data","","Huge volumes of data (web traffic, email, social media) that firms capture and analyse for insight.",1],
+ ["Mobile digital platform","","Smartphones and tablets with apps for collaboration, location-based services and communication.",1],
+ ["Business intelligence","BI","Data analytics and interactive dashboards giving managers real-time performance information; also systems that support non-routine decisions.",1],
+ ["Social business","","Using social networking platforms to deepen interactions with employees, customers and suppliers.",1],
+ ["Teleworking","","Working away from the traditional office using internet, laptops and mobile devices.",1],
+ ["Co-creation of business value","","Value shifts from products to solutions and experiences built with networks of suppliers and customers.",1],
+ ["Strategic information system","","An IS that helps decide and drive corporate strategy.",1],
+ ["Operational excellence","","Strategic objective: more efficient operations leading to higher profit. Walmart's Retail Link is the classic example.",1],
+ ["Customer intimacy","","Strategic objective: knowing customers and suppliers well; relational rather than transactional marketing.",1],
+ ["Competitive advantage","","Strategic objective: doing things better than competitors, such as charging less for better products or responding in real time.",1],
+ ["Survival","","Strategic objective: investing in IS because the business cannot operate or comply without it.",1],
+ ["Retail Link","","Walmart's system linking suppliers to every store so replacements ship as soon as items sell.",1],
+ ["Relational marketing","","Marketing built on a long-term relationship with each customer rather than single sales.",1],
+ ["Input","","Capturing or collecting raw data.",1],
+ ["Processing","","Converting raw data into a meaningful form.",1],
+ ["Output","","Presenting processed information to the people who need it.",1],
+ ["Feedback","","Output returned to people in the organisation to help them evaluate or correct the system.",1],
+ ["Senior management","","Makes long-range strategic decisions.",1],
+ ["Middle management","","Carries out the programmes and plans of senior management.",1],
+ ["Operational management","","Monitors the day-to-day activities of the business.",1],
+ ["Business functions","","Specialised tasks: sales and marketing, manufacturing and production, finance and accounting, human resources.",1],
+ ["Culture","","The assumptions and values most people in an organisation accept; disagreement with it leads to politics.",1],
+ ["Technical approach","","Studies IS through computer science, management science and operations research: technology, models, formal capabilities.",1],
+ ["Behavioural approach","","Studies IS through sociology, psychology and economics: effects on people, groups and society.",1],
+ ["Sociotechnical approach","","Considers technology, business, managers and employees, and the environment together.",1],
+
+ ["Business process","","The collection of activities needed to produce a good or service, supported by flows of materials, information and knowledge.",2],
+ ["Cross-functional process","","A process that needs several business functions, such as fulfilling an order.",2],
+ ["Business process re-engineering","BPR","Analysing and radically improving business processes, often by using new technology.",2],
+ ["Marketing information systems","","Systems that support planning, promoting and selling products and developing new markets.",2],
+ ["Interactive marketing","","Customer-focused marketing using the internet for two-way exchanges: chat, forms, email, social media.",2],
+ ["Targeted marketing","","Aiming online marketing by community, content, context and online behaviour.",2],
+ ["SFA","Sales Force Automation","Tools that let sales staff record sales, contact clients and track progress from the field.",2],
+ ["CIM","Computer-Integrated Manufacturing","Simplifies, automates and integrates all production and support processes for flexible, high-quality manufacturing.",2],
+ ["CAM","Computer-Aided Manufacturing","Systems that automate production: execution systems, process control, machine control, robot control.",2],
+ ["MES","Manufacturing Execution System","Monitors, tracks and controls the five manufacturing resources on the shop floor.",2],
+ ["MRP","Material Requirements Planning","Plans the materials needed for production.",2],
+ ["HRMS","Human Resource Management System","Tracks hiring, job changes, pay, terminations, skills, training and appraisals.",2],
+ ["Succession planning","","Planning who will fill key roles, using the skills database.",2],
+ ["Order processing","","Captures customer orders and produces data for inventory control and accounts receivable.",2],
+ ["Inventory control","","Records changes in stock and produces shipping and reorder information.",2],
+ ["Accounts receivable","","Records what customers owe; produces invoices, statements and credit reports.",2],
+ ["Accounts payable","","Records purchases from, amounts owed to and payments to suppliers.",2],
+ ["Payroll","","Records employee work and pay; produces paychecks and payroll reports.",2],
+ ["General ledger","","Consolidates the other accounting systems into periodic financial statements.",2],
+ ["Capital budgeting","","Evaluates the risk and return of capital spending and the portfolio of projects.",2],
+ ["TPS","Transaction Processing System","Records the routine transactions of the business and answers routine, predefined questions.",2],
+ ["Enterprise applications","","Systems that span several functions and focus on whole business processes.",2],
+ ["ERP","Enterprise Resource Planning","Manages all resources of the firm, storing information from separate functions in one central place.",2],
+ ["SCM","Supply Chain Management","Inter-organisational system sharing information with suppliers to source efficiently and keep stock low.",2],
+ ["CRM","Customer Relationship Management","Sales, marketing and service tools to acquire and keep profitable customers.",2],
+ ["PRM","Partner Relationship Management","Acquiring and keeping partners who help sell the firm's products.",2],
+ ["KMS","Knowledge Management Systems","Capture the knowledge inside the organisation and support collaboration.",2],
+ ["Inter-organisational system","","A system that links a firm with other firms, such as suppliers.",2],
+ ["Collaboration","","Working with others towards shared, explicit goals.",2],
+ ["Crowdsourcing","","Using the crowd, often online, to supply ideas, content or work.",2],
+ ["Wiki","","A website that a group edits together.",2],
+ ["Telepresence","","High-end video conferencing that makes remote participants seem to be in the room.",2],
+ ["Synchronous","","At the same time.",2],
+ ["Asynchronous","","At different times.",2],
+ ["Systems analyst","","Links the IS group with the rest of the business, translating business needs into system requirements.",2],
+ ["CIO","Chief Information Officer","Senior manager in charge of the firm's IS function.",2],
+ ["CSO","Chief Security Officer","Senior manager in charge of information security.",2],
+ ["CPO","Chief Privacy Officer","Senior manager responsible for privacy law compliance.",2],
+ ["CKO","Chief Knowledge Officer","Senior manager in charge of knowledge management.",2],
+
+ ["Ethics","","Principles of right and wrong that people use to guide their behaviour.",3],
+ ["Five moral dimensions","","Information rights and obligations, property rights and obligations, accountability and control, system quality, quality of life.",3],
+ ["Responsibility","","Accepting the costs, duties and obligations of the decisions you make.",3],
+ ["Accountability","","Mechanisms exist to find who took an action and who is responsible.",3],
+ ["Liability","","Laws let people recover damages done to them by others.",3],
+ ["Due process","","Laws are known and applied fairly, with a right to appeal.",3],
+ ["Ethical analysis","","Facts, dilemma and values, stakeholders, options, consequences.",3],
+ ["Golden Rule","","Do unto others as you would have them do unto you.",3],
+ ["Categorical imperative","","Kant: if an action is not right for everyone to take, it is not right for anyone.",3],
+ ["Slippery slope","","Descartes' rule of change: if an action cannot be taken repeatedly, it is not right to take at all.",3],
+ ["Utilitarian principle","","Take the action that achieves the higher or greater value.",3],
+ ["Risk aversion principle","","Take the action that produces the least harm or least potential cost.",3],
+ ["No free lunch","","Assume objects belong to someone unless stated otherwise; creators of useful work expect compensation.",3],
+ ["Fair information practices","FIP","Principles for collecting and using personal data: notice, choice and consent, access, security, enforcement.",3],
+ ["GDPR","General Data Protection Regulation","EU privacy law requiring explicit consent, rights over one's data and limits on moving data out of the EU.",3],
+ ["Informed consent","","Consent given with full knowledge of the facts needed to decide.",3],
+ ["Opt-in","","Personal data is not used unless the person agrees.",3],
+ ["Opt-out","","Personal data is used unless the person asks for it not to be.",3],
+ ["ESG","Environmental, Social and Governance","Judging a company on its environmental, social and governance performance, not only profit and loss.",3],
+ ["Digital Markets Act","DMA","EU law limiting anti-competitive behaviour by large online platforms.",3],
+ ["Antitrust","","Law against actions that destroy or block competition.",3],
+
+ ["Ransomware","","Malware that encrypts files or locks a system and demands payment for the decryption key.",4],
+ ["Ransomware as a service","RaaS","A group rents its ransomware to affiliates and takes a share of each ransom.",4],
+ ["Malware","","Malicious software such as viruses, worms, Trojan horses, spyware and ransomware.",4],
+ ["Multifactor authentication","MFA","Login that needs two or more kinds of proof, such as a password plus a phone code.",4],
+ ["Security","","Policies, procedures and technical measures that prevent unauthorised access, alteration, theft or damage.",4],
+ ["Controls","","Methods, policies and procedures that protect assets, keep records accurate and enforce management standards.",4],
+ ["Data exfiltration","","Copying data out of an organisation without permission.",4],
+ ["Risk assessment","","Estimating how likely each threat is and how much damage it would cause.",4],
+ ["Security policy","","Statements ranking information risks, setting security goals and how to reach them.",4],
+ ["Acceptable use policy","AUP","Rules for acceptable use of the firm's information resources and equipment.",4],
+ ["Identity management","","Business processes and tools for identifying valid users and controlling their access.",4],
+ ["Disaster recovery planning","","Plans for restoring computing and communication services after a disruption.",4],
+ ["Business continuity planning","","Plans for how the business keeps operating after a disaster.",4],
+ ["Incident response plan","","A prepared, tested procedure for detecting, containing and recovering from a security incident.",4],
+ ["Network segmentation","","Dividing a network so an intruder in one part cannot reach all of it.",4],
+ ["Critical infrastructure","","Systems a country depends on, such as energy, water and healthcare.",4],
+
+ ["Planned organisational change","","Building a new IS changes the organisation; it should be planned.",5],
+ ["Automation","","Change that helps people perform existing tasks faster. Lowest risk and reward.",5],
+ ["Rationalisation of procedures","","Streamlining standard operating procedures and removing bottlenecks.",5],
+ ["Business process redesign","","Analysing, simplifying and redesigning whole business processes.",5],
+ ["Paradigm shift","","Rethinking the nature of the business itself. Highest risk and reward.",5],
+ ["BPM","Business Process Management","Continuous improvement: identify, analyse, design, implement, measure.",5],
+ ["Process mining","","Reconstructing how processes really run from the event logs of existing systems.",5],
+ ["Event log","","A system's record of each step in a process: what happened, when and to which case.",5],
+ ["Procure-to-pay","P2P","The full cycle of obtaining goods or services from a supplier and paying for them.",5],
+ ["Execution management","","Going beyond finding process problems to recommending and taking the actions that fix them.",5],
+ ["Digital twin","","A live digital copy of the business's processes used as one source of truth.",5],
+ ["Working capital","","Money tied up in day-to-day operations, such as stock and unpaid invoices.",5]
+];
+
+var CARDS = [
+ {t:0,q:"What is an information system?",a:"Interrelated components that collect, process, store and distribute information to support decision making and control."},
+ {t:0,q:"IT vs IS",a:"IT is the hardware, software, data management and networks: the platform. IS is what the organisation builds on it to do its work."},
+ {t:0,q:"The three dimensions of an IS",a:"Organisation, management, technology."},
+ {t:0,q:"Data vs information",a:"Data are raw facts. Information is data made meaningful and useful to people."},
+ {t:1,q:"Three kinds of change in IS today",a:"New technology (cloud, big data, mobile, AI), new management usage (online collaboration, BI, virtual meetings), changing organisations (social business, teleworking, co-created value)."},
+ {t:1,q:"Two recurring themes",a:"Collaboration and community; data analysis supporting decisions."},
+ {t:1,q:"What makes a digital firm?",a:"Relationships, core processes and key assets are digitally enabled; information anywhere, any time; sense and respond; flexible; time and space shifting."},
+ {t:1,q:"Why do strategy and systems depend on each other?",a:"A change in strategy needs changes to hardware, software, databases and networks, and what a firm wants to do is often limited by what its systems allow."},
+ {t:1,q:"The six strategic business objectives",a:"Operational excellence; new products, services and business models; customer and supplier intimacy; improved decision making; competitive advantage; survival."},
+ {t:1,q:"Walmart's Retail Link",a:"Operational excellence: suppliers see each sale and ship replacements. About $28 sales per square foot vs Target's $23."},
+ {t:1,q:"Hotels that remember guests' preferences",a:"Customer intimacy: relational marketing that sets up the room for each guest."},
+ {t:1,q:"A bank that must offer ATMs",a:"Survival: some IS investment is the cost of staying in business or meeting regulation."},
+ {t:1,q:"The four IS activities",a:"Input, processing, output, and feedback."},
+ {t:1,q:"Supermarket checkout: data or information?",a:"The scanned barcodes are data; the sales totals and stock levels produced from them are information."},
+ {t:1,q:"Five parts of the organisation dimension",a:"People, structure, business processes, politics, culture."},
+ {t:1,q:"Three levels of management",a:"Senior (long-range strategy), middle (programmes and plans), operational (day-to-day monitoring)."},
+ {t:1,q:"What managers do",a:"Make sense of the environment, decide, plan, allocate human and financial resources, lead, and create new products and ideas."},
+ {t:1,q:"Four parts of the technology dimension",a:"Hardware, software, data management, networking and telecommunications."},
+ {t:1,q:"Three perspectives on IS",a:"Technical (computer science, maths models), behavioural (sociology, psychology, economics), sociotechnical (technology, business, people and environment together)."},
+ {t:1,q:"IT spending forecast for 2026",a:"About $6.37 trillion, up 14.2% on $5.57 trillion in 2025, driven by AI, data centres, software and cloud."},
+ {t:1,q:"Share of invested capital going to IT",a:"14% in 1999, 33% in 2013."},
+ {t:2,q:"What is a business process?",a:"The activities needed to produce a good or service, supported by flows of materials, information and knowledge: how work is coordinated."},
+ {t:2,q:"Why can a business process be a strength or a weakness?",a:"Business performance often depends on how well processes are designed and coordinated."},
+ {t:2,q:"Steps in fulfilling an order",a:"Sales takes the order, accounting checks credit, production builds it, it ships, sales handles after-sales service."},
+ {t:2,q:"How new technology changes a process",a:"Manual steps automated, sequential steps run concurrently, many people share information, new processes invented, AI support."},
+ {t:2,q:"Four ways to target online marketing",a:"Community, content, context, online behaviour."},
+ {t:2,q:"Sales force automation stages",a:"Inquiry, customise, commit, order."},
+ {t:2,q:"Four goals of CIM",a:"Simplify, automate, integrate, and create flexible, agile manufacturing."},
+ {t:2,q:"Five manufacturing resources",a:"Materials, equipment, personnel, instructions, production facilities."},
+ {t:2,q:"Six accounting information systems",a:"Order processing, inventory control, accounts receivable, accounts payable, payroll, general ledger."},
+ {t:2,q:"Four financial management systems",a:"Cash management, investment management, capital budgeting, financial planning."},
+ {t:2,q:"TPS vs business intelligence",a:"TPS: routine, predefined questions from transaction data. BI: non-routine decisions where the method is not defined in advance."},
+ {t:2,q:"Enterprise applications and whom they face",a:"ERP internal processes, SCM suppliers, CRM customers, PRM partners, KMS employees."},
+ {t:2,q:"Why collaboration matters more today",a:"Changing nature of work, growth of professional work, changing organisation and scope of the firm, emphasis on innovation, changing work culture."},
+ {t:2,q:"Time/space matrix quadrants",a:"Same time same place: face-to-face. Same time different place: remote interaction. Different time same place: continuous task. Different time different place: communication and coordination."},
+ {t:2,q:"Who works in the IS function?",a:"Programmers, systems analysts, IS managers, led by the CIO; often a CSO, CPO and CKO."},
+ {t:3,q:"Five steps of ethical analysis",a:"Identify the facts; define the dilemma and values; identify stakeholders; identify options; identify consequences."},
+ {t:3,q:"Six candidate ethical principles",a:"Golden Rule, Kant's categorical imperative, slippery slope, utilitarian, risk aversion, no free lunch."},
+ {t:3,q:"Five moral dimensions",a:"Information rights, property rights, accountability and control, system quality, quality of life."},
+ {t:3,q:"Responsibility, accountability, liability",a:"Accepting the consequences of decisions; mechanisms to find who acted; laws to recover damages."},
+ {t:3,q:"Cambridge Analytica in one line",a:"A quiz app took data on its users and their friends, over 87 million people, which was used for political targeting."},
+ {t:3,q:"Meta's largest GDPR fine",a:"€1.2 billion in 2023 for transferring EU users' data to the US."},
+ {t:3,q:"Ethical issues in Meta's AI",a:"Training on copyrighted and personal content without permission, no opt-out, made-up answers, misinformation, unclear accountability."},
+ {t:4,q:"How did attackers get into Change Healthcare?",a:"Through a remote access application without multifactor authentication."},
+ {t:4,q:"Why did the attack spread so far?",a:"The company sits in the middle of US health payments, so hospitals, pharmacies and patients who never used it directly were affected."},
+ {t:4,q:"Does paying a ransom work?",a:"Not reliably: data may not be deleted, attackers can demand again, and payment funds more attacks."},
+ {t:4,q:"Prevention, detection, recovery",a:"MFA and segmentation; monitoring and intrusion detection; tested backups and an incident response plan."},
+ {t:5,q:"Four kinds of organisational change",a:"Automation, rationalisation of procedures, business process redesign, paradigm shift: risk and reward rise in that order."},
+ {t:5,q:"Five steps of BPM",a:"Identify processes for change, analyse existing processes, design the new process, implement it, measure continuously."},
+ {t:5,q:"What process mining uses",a:"Event logs already kept by systems like ERP and CRM, to show how processes really run."},
+ {t:5,q:"Deutsche Telekom Services Europe result",a:"Saved over €66 million in procure-to-pay by finding duplicate payments and missed cash discounts."}
+];
+
+var QUIZ = [
+ {t:0,q:"Which statement best describes the difference between IT and an IS?",o:["IT is the platform; an IS is built on it to support an organisation's work","They mean the same thing","An IS is only the hardware","IT includes the organisation and management"],a:0,e:"IT is hardware, software, data and networks; the IS adds the organisation and management that use it."},
+ {t:0,q:"Which is NOT one of the three dimensions of an information system?",o:["Marketing","Organisation","Management","Technology"],a:0,e:"Marketing is a business function, not a dimension."},
+ {t:0,q:"Sales totals produced from scanned barcodes are",o:["information","data","feedback","hardware"],a:0,e:"Barcodes are raw data; totals are meaningful information."},
+ {t:1,q:"Walmart's Retail Link mainly supports which objective?",o:["Operational excellence","Survival","New business models","Improved decision making"],a:0,e:"It links suppliers to sales to replenish efficiently."},
+ {t:1,q:"Moving from CDs to streaming is an example of",o:["new products, services and business models","customer intimacy","survival","operational excellence"],a:0,e:"A new way to produce, deliver and sell a product."},
+ {t:1,q:"Hotels setting room temperature to each guest's preference shows",o:["customer intimacy","operational excellence","survival","competitive advantage only"],a:0,e:"Relational marketing: knowing the customer."},
+ {t:1,q:"A bank invests in ATMs mainly because customers expect them. The objective is",o:["survival","new business models","customer intimacy","improved decision making"],a:0,e:"Some systems are the cost of staying in business."},
+ {t:1,q:"Which is an example of 'new management usage' of IS?",o:["Interactive dashboards","Teleworking","Cloud computing","Co-creation of value"],a:0,e:"BI dashboards, online collaboration and virtual meetings are new management uses."},
+ {t:1,q:"Business that is no longer tied to one physical location is",o:["space shifting","time shifting","teleworking only","sense and respond"],a:0,e:"Time shifting is about hours; space shifting is about location."},
+ {t:1,q:"Which activity presents information to the people who need it?",o:["Output","Input","Processing","Feedback"],a:0,e:"Feedback is output returned to evaluate or correct the system."},
+ {t:1,q:"Which level of management makes long-range strategic decisions?",o:["Senior","Middle","Operational","Knowledge workers"],a:0,e:"Middle carries out plans; operational monitors daily activity."},
+ {t:1,q:"Studying the effects of IS on groups and society is the",o:["behavioural approach","technical approach","operations research approach","hardware approach"],a:0,e:"Behavioural draws on sociology, psychology and economics."},
+ {t:1,q:"The sociotechnical approach considers",o:["technology, business, people and environment together","only computer science","only economics","only hardware cost"],a:0,e:"It joins the technical and behavioural views."},
+ {t:1,q:"Gartner's forecast for worldwide IT spending in 2026 is about",o:["$6.37 trillion","$817 billion","$3.61 trillion","$15 trillion"],a:0,e:"Up 14.2% on 2025, driven largely by AI."},
+ {t:1,q:"Which is part of the technology dimension?",o:["Data management","Culture","Politics","Leadership"],a:0,e:"Technology: hardware, software, data management, networking."},
+ {t:1,q:"An organisation's shared assumptions and values are its",o:["culture","structure","business process","strategy"],a:0,e:"Disagreement with the culture leads to politics."},
+ {t:2,q:"A business process is",o:["the activities needed to produce a good or service","a single software program","an organisation chart","a database table"],a:0,e:"Supported by flows of materials, information and knowledge."},
+ {t:2,q:"Fulfilling an order involves sales, accounting and production. It is",o:["a cross-functional process","a functional process","a TPS","a paradigm shift"],a:0,e:"It crosses several business functions."},
+ {t:2,q:"Placing banner ads on pages whose subject matches the product is targeting by",o:["content","community","context","online behaviour"],a:0,e:"Context matches ads to the user's current activity."},
+ {t:2,q:"Using cookies to target ads is targeting by",o:["online behaviour","community","content","context"],a:0,e:"Tracking what users do online."},
+ {t:2,q:"Which system lets sales staff record orders and contact clients from the field?",o:["Sales force automation","CAM","General ledger","KMS"],a:0,e:"SFA takes technology into the field."},
+ {t:2,q:"Robot control and machine control are part of",o:["computer-aided manufacturing","CRM","financial planning","HRMS"],a:0,e:"CAM automates the production process."},
+ {t:2,q:"Which is NOT one of the five manufacturing resources?",o:["Customers","Materials","Equipment","Instructions"],a:0,e:"Materials, equipment, personnel, instructions, production facilities."},
+ {t:2,q:"Which accounting system consolidates the others into financial statements?",o:["General ledger","Accounts payable","Payroll","Order processing"],a:0,e:"The general ledger produces periodic statements."},
+ {t:2,q:"Recording amounts customers owe and sending invoices is",o:["accounts receivable","accounts payable","capital budgeting","inventory control"],a:0,e:"Payable is what the firm owes suppliers."},
+ {t:2,q:"Evaluating the risk and return of capital spending is",o:["capital budgeting","cash management","payroll","investment management"],a:0,e:"It optimises the portfolio of capital projects."},
+ {t:2,q:"Succession planning is supported by",o:["an HR management system","SCM","CAM","the general ledger"],a:0,e:"It uses the skills database."},
+ {t:2,q:"A system that answers 'What are today's stock levels?' is a",o:["TPS","business intelligence system","KMS","paradigm shift"],a:0,e:"Routine, predefined questions come from transaction processing."},
+ {t:2,q:"Business intelligence systems mainly support",o:["non-routine decisions","routine weekly reports","payroll","order entry"],a:0,e:"The way to the answer is not defined in advance."},
+ {t:2,q:"Which enterprise application faces suppliers?",o:["SCM","CRM","PRM","KMS"],a:0,e:"SCM covers sourcing and procurement."},
+ {t:2,q:"Which enterprise application stores information from separate functions in one central place?",o:["ERP","CRM","PRM","SFA"],a:0,e:"ERP manages all the firm's resources."},
+ {t:2,q:"Acquiring and keeping partners who help sell the firm's products is",o:["PRM","CRM","SCM","ERP"],a:0,e:"Partner relationship management."},
+ {t:2,q:"Email, wikis and version control are tools for",o:["different time, different place","same time, same place","same time, different place","different time, same place"],a:0,e:"Asynchronous, remote communication and coordination."},
+ {t:2,q:"Video conferencing fits which quadrant?",o:["Same time, different place","Same time, same place","Different time, same place","Different time, different place"],a:0,e:"Synchronous but remote."},
+ {t:2,q:"Which is a reason collaboration matters more today?",o:["Power and decision making are becoming decentralised","Firms are becoming more hierarchical","Fewer jobs need shared information","Production now happens in one place"],a:0,e:"Teams set their own methods while senior managers measure results."},
+ {t:2,q:"Who links the IS group with the rest of the business?",o:["Systems analysts","Programmers","The CSO","End users"],a:0,e:"They translate business needs into system requirements."},
+ {t:2,q:"The senior manager in charge of the IS function is the",o:["CIO","CKO","CPO","CSO"],a:0,e:"Chief information officer."},
+ {t:3,q:"Which is the first step of ethical analysis?",o:["Identify and describe the facts","List the options","Pick a principle","Predict consequences"],a:0,e:"Facts, dilemma and values, stakeholders, options, consequences."},
+ {t:3,q:"'If an action is not right for everyone to take, it is not right for anyone' is",o:["Kant's categorical imperative","the Golden Rule","the utilitarian principle","the slippery slope rule"],a:0,e:"Kant's test of universality."},
+ {t:3,q:"Training AI on books without paying the authors most clearly breaks",o:["the no free lunch rule","the risk aversion principle","the slippery slope rule","due process"],a:0,e:"Creators of useful work expect compensation."},
+ {t:3,q:"Privacy belongs to which moral dimension?",o:["Information rights and obligations","Property rights","System quality","Quality of life"],a:0,e:"Information rights concern what information people can keep private."},
+ {t:3,q:"Laws that let people recover damages done to them create",o:["liability","accountability","responsibility","due process"],a:0,e:"Accountability is about finding who acted."},
+ {t:3,q:"The Cambridge Analytica data came from",o:["a quiz app that collected data on users and their friends","a hacked password database","a government leak","a payment processor"],a:0,e:"Friends' data was taken without their knowledge."},
+ {t:3,q:"Meta's €1.2 billion fine in 2023 was imposed under",o:["the GDPR","the Digital Markets Act","US antitrust law","an FTC order"],a:0,e:"For transferring EU users' data to the US."},
+ {t:3,q:"ESG judges a company on",o:["environmental, social and governance performance","only its profit and loss","only its emissions","its share price"],a:0,e:"It looks beyond financial results."},
+ {t:4,q:"How did the attackers get into Change Healthcare?",o:["A remote access application without multifactor authentication","A stolen laptop","A flaw in a hospital's website","An insider sold the password"],a:0,e:"A single missing control opened the network."},
+ {t:4,q:"Ransomware as a service means",o:["a group rents its ransomware to affiliates for a share of ransoms","a security firm sells ransomware protection","victims pay a monthly fee","governments licence ransomware"],a:0,e:"BlackCat/ALPHV ran this model."},
+ {t:4,q:"Which control most directly limits how far an intruder can move once inside?",o:["Network segmentation","An acceptable use policy","Payroll controls","Encryption of email subjects"],a:0,e:"Segmentation stops one entry point reaching everything."},
+ {t:4,q:"Why is paying a ransom a poor solution?",o:["The stolen data may not be deleted and attackers can demand again","Bitcoin cannot be traced","Insurance always pays instead","It is always cheaper to rebuild"],a:0,e:"Here the affiliate kept the data and a second ransom was demanded."},
+ {t:4,q:"Plans for how the business keeps operating after a disaster are",o:["business continuity planning","risk assessment","identity management","an acceptable use policy"],a:0,e:"Disaster recovery restores IT; continuity keeps the business running."},
+ {t:5,q:"Which kind of change carries the highest risk and reward?",o:["Paradigm shift","Automation","Rationalisation of procedures","Business process redesign"],a:0,e:"Automation is lowest; paradigm shift rethinks the whole business."},
+ {t:5,q:"Streamlining standard operating procedures and removing bottlenecks is",o:["rationalisation of procedures","automation","paradigm shift","process mining"],a:0,e:"It often follows automation."},
+ {t:5,q:"Which is the second step of BPM?",o:["Analyse existing processes","Identify processes for change","Implement the new process","Measure continuously"],a:0,e:"Identify, analyse, design, implement, measure."},
+ {t:5,q:"Process mining works mainly from",o:["event logs in existing systems","interviews with staff","customer surveys","paper flowcharts"],a:0,e:"It reconstructs real processes from system data."},
+ {t:5,q:"Procure-to-pay covers",o:["obtaining goods from a supplier and paying for them","selling to customers","hiring staff","closing the books"],a:0,e:"Deutsche Telekom found duplicate payments here."}
+];
+
+/* drill items: [prompt, answer] */
+var OBJ = [
+ ["Suppliers see each store's sales and ship replacement stock automatically.","Operational excellence"],
+ ["Doi Roast launches a monthly coffee subscription delivered to homes.","New products and models"],
+ ["The CRM records which roast each café prefers and suggests it when they reorder.","Customer intimacy"],
+ ["A dashboard shows today's sales by shop so the manager moves staff to the busiest one.","Improved decisions"],
+ ["Doi Roast offers same-day delivery that no rival roaster can match.","Competitive advantage"],
+ ["A food company keeps digital safety records because the law requires it.","Survival"],
+ ["Robots in the roastery cut packing time by half.","Operational excellence"],
+ ["A bank adds a mobile app because every competitor already has one.","Survival"],
+ ["A streaming service replaces DVD rental.","New products and models"],
+ ["A hotel sets the room temperature to each guest's saved preference.","Customer intimacy"],
+ ["A telecom firm uses live network data to decide where to send repair crews.","Improved decisions"],
+ ["A retailer sells better products for less than its rivals by running a leaner supply chain.","Competitive advantage"]
+];
+var OBJS = ['Operational excellence','New products and models','Customer intimacy','Improved decisions','Competitive advantage','Survival'];
+
+var SYS = [
+ ["Record each online order and card payment.","TPS"],
+ ["Check whether a café has paid last month's invoice.","TPS"],
+ ["Decide whether to open a café in Bangkok, with no fixed method for the answer.","BI"],
+ ["Find which regions are growing fastest and why.","BI"],
+ ["Keep finance, roasting, stock and HR data in one central database.","ERP"],
+ ["Share stock levels with farms so green beans arrive just in time.","SCM"],
+ ["Plan purchases from suppliers to keep inventory low.","SCM"],
+ ["Track every café customer's orders, complaints and preferred roast.","CRM"],
+ ["Send loyalty offers to customers who stopped ordering.","CRM"],
+ ["Store roasting profiles and lessons learned so new roasters can find them.","KMS"],
+ ["Help staff find the colleague who knows how to fix the espresso machines.","KMS"]
+];
+var SYSS = ['TPS','BI','ERP','SCM','CRM','KMS'];
+
+var FN = [
+ ["Assembling the product","Manufacturing"],["Quality checks","Manufacturing"],["Producing bills of materials","Manufacturing"],["Shop floor scheduling","Manufacturing"],
+ ["Identifying customers","Sales & marketing"],["Making customers aware of the product","Sales & marketing"],["Sales force automation","Sales & marketing"],["Market research and forecasting","Sales & marketing"],
+ ["Paying creditors","Finance & accounting"],["Creating financial statements","Finance & accounting"],["Managing cash","Finance & accounting"],["General ledger","Finance & accounting"],
+ ["Hiring employees","Human resources"],["Evaluating job performance","Human resources"],["Managing benefits plans","Human resources"],["Succession planning","Human resources"]
+];
+var FNS = ['Sales & marketing','Manufacturing','Finance & accounting','Human resources'];
+
+var CL = [
+ ["Team meets in a decision room with a shared display.","Same time, same place"],
+ ["Brainstorm around a shared touch table.","Same time, same place"],
+ ["Weekly video call between Chiang Mai and Bangkok staff.","Same time, different place"],
+ ["Two people edit the same document live from home.","Same time, different place"],
+ ["Instant messaging during a launch.","Same time, different place"],
+ ["Night shift leaves notes on the roastery's wall display for the morning shift.","Different time, same place"],
+ ["A project room where each team updates the task board on its own shift.","Different time, same place"],
+ ["Email to a supplier in another country.","Different time, different place"],
+ ["Updating a shared wiki of roasting recipes.","Different time, different place"],
+ ["Pushing code changes to version control for a colleague to review tomorrow.","Different time, different place"],
+ ["A group calendar for booking the tasting room.","Different time, different place"]
+];
+var CLS = ['Same time, same place','Same time, different place','Different time, same place','Different time, different place'];
+
+var ETH = [
+ ["\"I would not want my friends' data taken without asking, so I won't take theirs.\"","Golden Rule"],
+ ["\"If every app scraped users' data like this, nobody could trust any app. So no app should.\"","Categorical imperative"],
+ ["\"Selling one small dataset seems harmless, but if we did it every month it would be clearly wrong.\"","Slippery slope"],
+ ["\"Blocking misinformation upsets a few advertisers but protects millions of users, so we block it.\"","Utilitarian"],
+ ["\"We don't know how risky the new feature is for teenagers, so we choose the option that could do the least harm.\"","Risk aversion"],
+ ["\"Those authors created the books; if we use them to train our AI, we should pay.\"","No free lunch"],
+ ["\"Ask: would I be happy if a company tracked my purchases like this?\"","Golden Rule"],
+ ["\"The feature makes the most people better off overall, so it is the right choice.\"","Utilitarian"],
+ ["\"Copying a little code once seems harmless, but if I keep doing it, it turns into something clearly wrong.\"","Slippery slope"],
+ ["\"Assume the photos belong to someone unless they say otherwise.\"","No free lunch"]
+];
+var ETHS = ['Golden Rule','Categorical imperative','Slippery slope','Utilitarian','Risk aversion','No free lunch'];
+
+/* ================= HELPERS ================= */
+var $=function(id){return document.getElementById(id)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function LSget(k,d){try{var v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}}
+function LSset(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function segBind(id,cb){var el=$(id);el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||!el.contains(b))return;segSet(id,b.dataset.v);cb(b.dataset.v,b)})}
+function segSet(id,v){$(id).querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',String(x.dataset.v===String(v)))})}
+var TOPIC_NAMES={0:'Start here',1:'IS in business today',2:'E-business and collaboration',3:'Ethics case',4:'Security case',5:'Process mining case'};
+var TOPIC_CODE={0:'T0',1:'T1',2:'T2',3:'C1',4:'C2',5:'C3'};
+var TOPIC_HREF={0:'#/topics/t0',1:'#/topics/t1',2:'#/topics/t2',3:'#/cases/c1',4:'#/cases/c2',5:'#/cases/c3'};
+var TOPIC_IDS=[0,1,2,3,4,5];
+function code(t){return TOPIC_CODE[t]}
+function topicLabel(t){return code(t)+' '+TOPIC_NAMES[t]}
+
+/* ================= TABS ================= */
+var TABS=['home','topics','cases','terms','flash','quiz','obj','sys','fn','collab','eth','plan','cheat','resources','author'];
+var ALIAS={drills:'flash'};
+var scrollMem={};
+function go(tab,noPush){
+  if(ALIAS[tab]) tab=ALIAS[tab];
+  if(TABS.indexOf(tab)<0) tab='home';
+  var cur=document.querySelector('.tab.on');
+  if(cur) scrollMem[cur.id]=window.scrollY;
+  TABS.forEach(function(t){var el=$(t); if(el) el.classList.toggle('on',t===tab)});
+  if(tab==='terms') renderTerms();
+  buildRail(tab);
+  LSset('misTab',tab);
+  if(!noPush){
+    var y=scrollMem[tab]||0;
+    requestAnimationFrame(function(){window.scrollTo({top:y,behavior:'instant'})});
+  }
+}
+
+/* ================= SECTIONS (menu sub-items) ================= */
+function anchorsFor(tab){
+  var out=[];
+  if(tab==='topics'||tab==='cases'){
+    document.querySelectorAll('#'+tab+' details.note').forEach(function(d,i){
+      if(!d.id) d.id=tab+'_'+i;
+      var s=d.querySelector('summary'); var n=s&&s.querySelector('.num');
+      var k=tab==='topics'?'T '+(n?n.textContent.trim():i):(n?n.textContent.trim():'C'+(i+1));
+      out.push({id:d.id,k:k,t:d.dataset.short||(s?s.textContent.replace(/^\s*C?\d+\s*/,'').trim():'section')});
+    });
+  } else if(tab==='cheat'){
+    document.querySelectorAll('#cheat .cheat h3').forEach(function(h,i){
+      if(!h.id) h.id='cs_'+i;
+      var b=h.querySelector('.badge');
+      out.push({id:h.id,k:b?b.textContent.trim():'·',t:h.textContent.replace(/^[TC][\d\s·–-]*\s*/,'').trim()});
+    });
+  }
+  return out;
+}
+function buildRail(){ if(window.StudyShell&&StudyShell.refreshSections) StudyShell.refreshSections(); }
+
+/* ================= TERMS ================= */
+var termTopic='all', termShortOnly=false;
+function abbr(s){return /^[A-Z][A-Za-z0-9]{1,5}$/.test(s)&&(s.match(/[A-Z]/g)||[]).length>=2}
+function isShort(t){return abbr(t[0])||(!!t[1]&&abbr(t[1]))}
+function renderTerms(){
+  var q=($('termF').value||'').trim().toLowerCase();
+  var rows=TERMS.filter(function(t){
+    if(termTopic!=='all'&&t[3]!==+termTopic) return false;
+    if(termShortOnly&&!isShort(t)) return false;
+    if(!q) return true;
+    return (t[0]+' '+t[1]+' '+t[2]).toLowerCase().indexOf(q)>=0;
+  });
+  var html='<tr><th style="width:170px">Term</th><th style="width:220px">Stands for</th><th>Meaning</th><th style="width:70px">Topic</th></tr>';
+  html+=rows.map(function(t){
+    return '<tr><td class="mono tterm">'+esc(t[0])+'</td><td>'+esc(t[1]||'')+'</td><td>'+esc(t[2])+'</td><td class="mono"><a href="'+TOPIC_HREF[t[3]]+'">'+code(t[3])+'</a></td></tr>';
+  }).join('');
+  if(!rows.length) html+='<tr><td colspan="4" class="sub2">No term matches. Clear the search or pick All topics.</td></tr>';
+  $('termT').innerHTML=html;
+  $('termCount').textContent=rows.length+' of '+TERMS.length+' terms';
+}
+(function(){
+  var bar=$('termTopics');
+  var opts=['all'].concat(TOPIC_IDS);
+  bar.innerHTML=opts.map(function(t){return '<button type="button" aria-pressed="'+(t==='all')+'" data-v="'+t+'" title="'+(t==='all'?'All topics':esc(topicLabel(t)))+'">'+(t==='all'?'All':code(t))+'</button>'}).join('');
+  segBind('termTopics',function(v){termTopic=v;renderTerms()});
+  segBind('termShow',function(v){termShortOnly=v==='short';renderTerms()});
+  $('termF').addEventListener('input',renderTerms);
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a.tlink'); if(!a) return;
+    e.preventDefault();
+    $('termF').value=a.dataset.term; termTopic='all'; termShortOnly=false; segSet('termTopics','all'); segSet('termShow','all');
+    location.hash='#/terms'; go('terms'); window.scrollTo({top:0,behavior:'instant'});
+  });
+})();
+
+/* ================= FLASHCARDS ================= */
+var ALLCARDS=[];
+CARDS.forEach(function(c,i){ALLCARDS.push({id:'c'+i,kind:'c',t:c.t,q:c.q,a:c.a})});
+TERMS.forEach(function(t,i){ALLCARDS.push({id:'t'+i,kind:'t',t:t[3],term:t[0],sf:t[1],m:t[2]})});
+var fc={deck:'c',topic:'all',flipDir:false,skipKnown:false,queue:[],cur:null,got:0,again:0,missed:{}};
+var known={};
+try{known=JSON.parse(LSget('misFcKnown','{}'))||{}}catch(e){known={}}
+function fcPool(){
+  return ALLCARDS.filter(function(c){
+    if(fc.deck!=='both'&&c.kind!==fc.deck) return false;
+    if(fc.topic!=='all'&&c.t!==+fc.topic) return false;
+    return true;
+  });
+}
+function fcStart(onlyMissed){
+  var pool=fcPool();
+  if(onlyMissed) pool=pool.filter(function(c){return fc.missed[c.id]});
+  else if(fc.skipKnown) pool=pool.filter(function(c){return !known[c.id]});
+  fc.queue=shuffle(pool.slice()); fc.got=0; fc.again=0; fc.missed={};
+  fcShow();
+}
+function fcFace(c){
+  if(c.kind==='c') return {q:c.q,a:c.a};
+  var name=c.term+(c.sf?' ('+c.sf+')':'');
+  return fc.flipDir?{q:c.m,a:name}:{q:name,a:c.m};
+}
+function fcShow(){
+  var card=$('fcCard'), done=$('fcDone');
+  var pool=fcPool(), kn=pool.filter(function(c){return known[c.id]}).length;
+  $('fcKnownBar').style.width=(pool.length?kn/pool.length*100:0)+'%';
+  $('fcKnownTxt').textContent=kn+' of '+pool.length+' cards in this deck marked known';
+  if(!fc.queue.length){
+    card.style.display='none'; $('fcNavRow').style.display='none'; done.style.display='';
+    var nm=Object.keys(fc.missed).length;
+    done.innerHTML='<div class="big">'+(fc.got)+' got it</div><p>'+nm+' missed</p>'+
+      '<div class="qactions" style="justify-content:center">'+(nm?'<button class="btn primary" id="fcMissed">Study the missed ones</button>':'')+'<button class="btn" id="fcRestart">Start a new round</button></div>';
+    var m=$('fcMissed'); if(m) m.onclick=function(){fcStart(true)};
+    $('fcRestart').onclick=function(){fcStart(false)};
+    $('fcCount').textContent='';
+    return;
+  }
+  card.style.display=''; $('fcNavRow').style.display=''; done.style.display='none';
+  var c=fc.queue[0]; fc.cur=c; var f=fcFace(c);
+  card.classList.remove('flip');
+  setTimeout(function(){
+    $('fcQ').textContent=f.q; $('fcA').textContent=f.a;
+    var tag=$('fcTag'); tag.textContent=(c.kind==='t'?'Term · ':'')+topicLabel(c.t);
+    tag.className='tag badge '+(c.kind==='t'?'b2':'b1');
+    $('fcKnownMark').style.display=known[c.id]?'':'none';
+  },120);
+  $('fcCount').textContent=fc.queue.length+' left';
+  $('fcScore').innerHTML='<b class="g">'+fc.got+' got it</b> &nbsp;·&nbsp; <b class="r">'+fc.again+' again</b>';
+}
+function fcGot(){
+  if(!fc.cur) return;
+  known[fc.cur.id]=1; LSset('misFcKnown',JSON.stringify(known));
+  fc.queue.shift(); fc.got++; fcShow();
+}
+function fcAgain(){
+  if(!fc.cur) return;
+  var c=fc.queue.shift(); fc.missed[c.id]=1; fc.again++;
+  delete known[c.id]; LSset('misFcKnown',JSON.stringify(known));
+  fc.queue.splice(Math.min(3,fc.queue.length),0,c); fcShow();
+}
+function fcSkip(){ if(fc.queue.length>1){fc.queue.push(fc.queue.shift()); fcShow()} }
+(function(){
+  var sel=$('fcTopic');
+  sel.innerHTML='<option value="all">All topics</option>'+TOPIC_IDS.map(function(t){return '<option value="'+t+'">'+topicLabel(t)+'</option>'}).join('');
+  sel.addEventListener('change',function(){fc.topic=sel.value;fcStart(false)});
+  segBind('fcDeck',function(v){fc.deck=v; $('fcDirRow').hidden=v==='c'; fcStart(false)});
+  segBind('fcDir',function(v){fc.flipDir=v==='meaning'; fcShow()});
+  segBind('fcWhich',function(v){fc.skipKnown=v==='unknown'; fcStart(false)});
+  $('fcShuffle').addEventListener('click',function(){fcStart(false)});
+  $('fcReset').addEventListener('click',function(){
+    fcPool().forEach(function(c){delete known[c.id]}); LSset('misFcKnown',JSON.stringify(known)); fcStart(false);
+  });
+  $('fcCard').addEventListener('click',function(){this.classList.toggle('flip')});
+  $('fcKnow').addEventListener('click',fcGot);
+  $('fcAgain').addEventListener('click',fcAgain);
+  $('fcNext').addEventListener('click',fcSkip);
+  fcStart(false);
+})();
+
+/* ================= QUIZ ================= */
+var qz={topics:{},len:10,list:[],i:0,score:0,res:[],answered:false};
+TOPIC_IDS.forEach(function(t){qz.topics[t]=true});
+function qzPool(){return QUIZ.filter(function(q){return qz.topics[q.t]})}
+function qzSetup(){
+  var counts={}; QUIZ.forEach(function(q){counts[q.t]=(counts[q.t]||0)+1});
+  var all=Object.keys(qz.topics).every(function(k){return qz.topics[k]});
+  var html='<div class="qcard"><h3>Build a quiz</h3><p class="sub2">Pick one or more topics and a length, then start. Questions and answer order are shuffled every time.</p>'+
+    '<div class="ctlrow"><span class="ctl-label">Topics</span><div class="sc-seg" id="qzTopics"><button type="button" aria-pressed="'+all+'" data-t="all">All</button>'+
+    TOPIC_IDS.map(function(t){return '<button type="button" aria-pressed="'+(qz.topics[t]&&!all)+'" data-t="'+t+'" title="'+esc(topicLabel(t))+' ('+(counts[t]||0)+' questions)">'+code(t)+'</button>'}).join('')+'</div></div>'+
+    '<div class="ctlrow"><span class="ctl-label">Length</span><div class="sc-seg" id="qzLen">'+[10,20,40,0].map(function(n){return '<button type="button" aria-pressed="'+(qz.len===n)+'" data-n="'+n+'">'+(n?n+' questions':'All')+'</button>'}).join('')+'</div></div>'+
+    '<p class="sub2" id="qzAvail"></p>'+
+    '<div class="qactions"><button class="btn primary" id="qzGo">Start quiz</button></div>';
+  var last=LSget('misQuizLast','');
+  if(last) html+='<p class="sub2">Last result: '+esc(last)+'</p>';
+  html+='</div>';
+  $('quizShell').innerHTML=html;
+  var avail=qzPool().length; $('qzAvail').textContent=avail+' questions available in the selected topics.';
+  $('qzGo').disabled=!avail;
+  $('qzTopics').onclick=function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var allOn=Object.keys(qz.topics).every(function(k){return qz.topics[k]});
+    if(b.dataset.t==='all'){Object.keys(qz.topics).forEach(function(k){qz.topics[k]=true})}
+    else if(allOn){Object.keys(qz.topics).forEach(function(k){qz.topics[k]=false});qz.topics[b.dataset.t]=true}
+    else{qz.topics[b.dataset.t]=!qz.topics[b.dataset.t]; if(!Object.keys(qz.topics).some(function(k){return qz.topics[k]})) qz.topics[b.dataset.t]=true}
+    qzSetup();
+  };
+  $('qzLen').onclick=function(e){var b=e.target.closest('button'); if(!b) return; qz.len=+b.dataset.n; qzSetup()};
+  $('qzGo').onclick=function(){qzBegin(shuffle(qzPool().slice()))};
+}
+function qzBegin(list){
+  if(qz.len&&list.length>qz.len) list=list.slice(0,qz.len);
+  qz.list=list.map(function(q){
+    var idx=shuffle(q.o.map(function(_,i){return i}));
+    return {t:q.t,q:q.q,o:idx.map(function(i){return q.o[i]}),a:idx.indexOf(q.a),e:q.e,src:q};
+  });
+  qz.i=0;qz.score=0;qz.res=[];qzRender();
+}
+function qzRender(){
+  var q=qz.list[qz.i]; qz.answered=false;
+  $('quizShell').innerHTML=
+    '<div class="qbar"><div style="width:'+(qz.i/qz.list.length*100)+'%"></div></div>'+
+    '<div class="qmeta"><span>Question '+(qz.i+1)+' of '+qz.list.length+' · '+esc(topicLabel(q.t))+'</span><span id="qzScore">Score: '+qz.score+'</span></div>'+
+    '<div class="qcard"><h3>'+esc(q.q)+'</h3>'+
+    q.o.map(function(o,i){return '<button class="opt" data-i="'+i+'"><span class="mark">'+'ABCD'[i]+'</span><span>'+esc(o)+'</span></button>'}).join('')+
+    '<div class="expl tip t-info" id="expl"><b>Why</b>'+esc(q.e)+'</div>'+
+    '<div class="qactions"><button class="btn" id="qzQuit">End quiz</button><button class="btn primary" id="nextBtn" style="display:none">'+(qz.i===qz.list.length-1?'See results':'Next')+'</button></div></div>';
+  $('quizShell').querySelectorAll('.opt').forEach(function(el){el.addEventListener('click',function(){qzAnswer(+el.dataset.i)})});
+  $('nextBtn').onclick=qzNext;
+  $('qzQuit').onclick=function(){qz.list=qz.list.slice(0,qz.res.length); if(qz.res.length) qzResults(); else qzSetup()};
+}
+function qzAnswer(i){
+  if(qz.answered) return; qz.answered=true;
+  var q=qz.list[qz.i], ok=i===q.a; if(ok) qz.score++;
+  qz.res.push({q:q,ok:ok,pick:i});
+  $('quizShell').querySelectorAll('.opt').forEach(function(el){
+    var k=+el.dataset.i; el.style.pointerEvents='none';
+    if(k===q.a) el.classList.add('ok'); else if(k===i) el.classList.add('no'); else el.classList.add('dim');
+  });
+  $('expl').classList.add('show'); $('nextBtn').style.display=''; $('qzScore').textContent='Score: '+qz.score;
+}
+function qzNext(){ qz.i++; if(qz.i<qz.list.length) qzRender(); else qzResults(); }
+function qzResults(){
+  var n=qz.res.length, pct=n?Math.round(qz.score/n*100):0;
+  LSset('misQuizLast',qz.score+' / '+n+' ('+pct+'%)');
+  var best=parseInt(LSget('misBest','0'),10)||0; if(pct>best) LSset('misBest',String(pct));
+  var by={}; qz.res.forEach(function(r){var t=r.q.t; by[t]=by[t]||{n:0,ok:0}; by[t].n++; if(r.ok) by[t].ok++});
+  var missed=qz.res.filter(function(r){return !r.ok});
+  $('quizShell').innerHTML='<div class="qcard qresult"><div class="big">'+qz.score+' / '+n+'</div><p>'+pct+'%</p>'+
+    '<div class="tscroll" style="max-width:560px;margin:14px auto"><table><tr><th>Topic</th><th>Correct</th></tr>'+
+    Object.keys(by).sort(function(a,b){return a-b}).map(function(t){var x=by[t];return '<tr><td>'+esc(topicLabel(+t))+'</td><td class="mono">'+x.ok+' / '+x.n+(x.ok<x.n?' <a href="'+TOPIC_HREF[t]+'" class="sub2">review</a>':'')+'</td></tr>'}).join('')+'</table></div>'+
+    '<div style="max-width:620px;margin:0 auto 18px;text-align:left">'+
+    qz.res.map(function(r,i){return '<div class="review-item '+(r.ok?'good':'bad')+'">'+(r.ok?'Correct':'Missed')+' · Q'+(i+1)+' · '+esc(r.q.q)+(r.ok?'':'<br><span class="sub2">Answer: '+esc(r.q.o[r.q.a])+'</span>')+'</div>'}).join('')+
+    '</div><div class="qactions" style="justify-content:center">'+(missed.length?'<button class="btn primary" id="qzRetry">Retry the '+missed.length+' missed</button>':'')+'<button class="btn" id="qzNew">New quiz</button></div></div>';
+  var r=$('qzRetry'); if(r) r.onclick=function(){var keep=qz.len;qz.len=0;qzBegin(shuffle(missed.map(function(m){return m.q.src})));qz.len=keep};
+  $('qzNew').onclick=qzSetup;
+}
+qzSetup();
+
+/* ================= SORTING DRILLS ================= */
+function choiceDrill(listId,scoreId,items,choices,rule){
+  var it=shuffle(items.slice()),sc={n:0,ok:0};
+  $(listId).innerHTML=it.map(function(w,i){return '<div class="ixrow whrow"><span>'+esc(w[0])+'</span><span class="choices">'+choices.map(function(c){return '<button class="btn" data-i="'+i+'" data-c="'+esc(c)+'">'+esc(c)+'</button>'}).join(' ')+'</span><span class="ixst"></span></div>'}).join('');
+  $(scoreId).textContent='';
+  $(listId).onclick=function(e){
+    var b=e.target.closest('button');if(!b)return;var row=b.closest('.whrow');if(row.dataset.done)return;row.dataset.done=1;
+    var w=it[+b.dataset.i],good=b.dataset.c===w[1];sc.n++;if(good)sc.ok++;
+    row.querySelectorAll('button').forEach(function(x){x.disabled=true;if(x.dataset.c===w[1])x.classList.add('primary')});
+    row.querySelector('.ixst').innerHTML=good?'<span class="flag ok">correct</span>':'<span class="flag no">'+esc(w[1])+'</span>';
+    $(scoreId).textContent=sc.ok+' / '+sc.n+' correct'+(sc.n===it.length&&rule?'. '+rule:'');
+  };
+}
+function objDraw(){choiceDrill('objList','objScore',OBJ,OBJS,'Ask what the investment mainly improves: efficiency, the offering, the relationship, the decision, the edge over rivals, or the ability to stay in business at all.')}
+$('objNew').onclick=objDraw;objDraw();
+function sysDraw(){choiceDrill('sysList','sysScore',SYS,SYSS,'TPS records routine transactions; BI answers non-routine questions; ERP joins internal functions; SCM faces suppliers; CRM faces customers; KMS captures what employees know.')}
+$('sysNew').onclick=sysDraw;sysDraw();
+function fnDraw(){choiceDrill('fnList','fnScore',FN,FNS,'')}
+$('fnNew').onclick=fnDraw;fnDraw();
+function clDraw(){choiceDrill('clList','clScore',CL,CLS,'Synchronous tools need everyone at once; asynchronous tools let work wait for the next person.')}
+$('clNew').onclick=clDraw;clDraw();
+
+/* ================= ETHICAL PRINCIPLES ================= */
+var ETH_TERM={'Golden Rule':'Golden Rule','Categorical imperative':'Categorical imperative','Slippery slope':'Slippery slope','Utilitarian':'Utilitarian principle','Risk aversion':'Risk aversion principle','No free lunch':'No free lunch'};
+var ET={list:[],i:0,ok:0,done:false};
+function etStart(){ET.list=shuffle(ETH.slice());ET.i=0;ET.ok=0;$('etNext').hidden=false;etShow()}
+function etShow(){
+  if(ET.i>=ET.list.length){$('etQ').textContent='Finished: '+ET.ok+' of '+ET.list.length+' correct.';$('etOpts').innerHTML='';$('etFeedback').innerHTML='';$('etNext').hidden=true;$('etCount').textContent='';return}
+  ET.done=false;$('etNext').hidden=true;
+  var it=ET.list[ET.i];$('etQ').textContent=it[0];$('etCount').textContent='Card '+(ET.i+1)+' of '+ET.list.length;$('etScore').textContent='Score: '+ET.ok;
+  $('etOpts').innerHTML=ETHS.map(function(r){return '<button class="btn" data-r="'+r+'">'+r+'</button>'}).join('');$('etFeedback').innerHTML='';
+}
+$('etOpts').onclick=function(e){
+  var b=e.target.closest('button');if(!b||ET.done)return;ET.done=true;
+  var it=ET.list[ET.i],good=b.dataset.r===it[1];if(good)ET.ok++;
+  $('etOpts').querySelectorAll('button').forEach(function(x){x.disabled=true;if(x.dataset.r===it[1])x.classList.add('primary')});
+  var info=TERMS.filter(function(t){return t[0]===ETH_TERM[it[1]]})[0];
+  $('etFeedback').innerHTML='<div class="tip '+(good?'t-good':'t-warn')+'"><b>'+(good?'Correct':'Not quite: '+esc(it[1]))+'</b>'+(info?esc(info[2]):'')+'</div>';
+  $('etScore').textContent='Score: '+ET.ok;$('etNext').hidden=false;
+};
+$('etNext').onclick=function(){ET.i++;etShow()};
+$('etRestart').onclick=etStart;
+etStart();
+
+/* ================= ABOUT ================= */
+(function(){
+  var nt=document.querySelectorAll('#topics details.note').length, nc=document.querySelectorAll('#cases details.note').length;
+  $('abCovered').textContent=nt+' topics on information systems in business, e-business and collaboration, and '+nc+' case files on ethics, security and building systems';
+  $('abPractice').textContent=(CARDS.length+TERMS.length)+' flashcards ('+CARDS.length+' concepts and '+TERMS.length+' terms), '+QUIZ.length+' quiz questions, five sorting drills';
+})();
+
+/* ================= TOPIC → PRACTICE LINKS ================= */
+document.addEventListener('click',function(e){
+  var f=e.target.closest('[data-goflash]'), q=e.target.closest('[data-goquiz]');
+  if(f){e.preventDefault(); fc.topic=f.dataset.goflash; $('fcTopic').value=fc.topic; fc.deck='c'; segSet('fcDeck','c'); $('fcDirRow').hidden=true; fcStart(false); location.hash='#/flash'; go('flash'); window.scrollTo({top:0,behavior:'instant'})}
+  if(q){e.preventDefault(); Object.keys(qz.topics).forEach(function(k){qz.topics[k]=k===q.dataset.goquiz}); qz.len=0; qzSetup(); location.hash='#/quiz'; go('quiz'); window.scrollTo({top:0,behavior:'instant'})}
+});
+
+/* ================= KEYBOARD ================= */
+document.addEventListener('keydown',function(e){
+  if(/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) return;
+  if(!$('flash').classList.contains('on')) return;
+  if(e.key===' '){e.preventDefault();$('fcCard').classList.toggle('flip')}
+  else if(e.key==='ArrowRight'){fcSkip()}
+  else if(e.key.toLowerCase()==='g'){fcGot()}
+  else if(e.key.toLowerCase()==='a'){fcAgain()}
+});
+
+/* ================= BOOT ================= */
+go(LSget('misTab','home'),true);
+
+/* ================= SLIDE FIGURES: LIGHTBOX ================= */
+(function(){
+  var lb=document.createElement('div'); lb.className='lb'; lb.hidden=true; lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true'); lb.setAttribute('aria-label','Figure');
+  lb.innerHTML='<span class="lb-count"></span><button class="lb-btn lb-close" type="button">Close</button><button class="lb-btn lb-prev" type="button" aria-label="Previous figure">Prev</button><button class="lb-btn lb-next" type="button" aria-label="Next figure">Next</button><img alt=""><p></p>';
+  document.body.appendChild(lb);
+  var img=lb.querySelector('img'), cap=lb.querySelector('p'), cnt=lb.querySelector('.lb-count'), list=[], idx=0, back=null;
+  function show(i){ idx=(i+list.length)%list.length; var b=list[idx]; img.src=b.dataset.full; img.alt=b.dataset.cap; cap.textContent=b.dataset.cap; cnt.textContent=(idx+1)+' / '+list.length; var one=list.length<2; lb.querySelector('.lb-prev').hidden=one; lb.querySelector('.lb-next').hidden=one; }
+  function close(){ lb.hidden=true; img.removeAttribute('src'); document.documentElement.style.overflow=''; if(back) back.focus(); }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.fig-open'); if(!b) return;
+    var scope=b.closest('.deep-body')||b.closest('.figs'); list=[].slice.call(scope.querySelectorAll('.fig-open')); back=b;
+    show(list.indexOf(b)); lb.hidden=false; document.documentElement.style.overflow='hidden'; lb.querySelector('.lb-close').focus();
+  });
+  lb.addEventListener('click',function(e){
+    if(e.target.closest('.lb-close')||e.target===lb) close();
+    else if(e.target.closest('.lb-prev')) show(idx-1);
+    else if(e.target.closest('.lb-next')) show(idx+1);
+  });
+  document.addEventListener('keydown',function(e){
+    if(lb.hidden) return;
+    if(e.key==='Escape') close(); else if(e.key==='ArrowLeft') show(idx-1); else if(e.key==='ArrowRight') show(idx+1);
+  });
+})();
+
+</script>
+<script>
+(function () {
+  function sections(tab) {
+    return function () {
+      return (typeof anchorsFor === 'function' ? anchorsFor(tab) : []).map(function (a) { return { id: a.id, title: a.t, badge: a.k }; });
+    };
+  }
+  function terms() {
+    var out = [];
+    TERMS.forEach(function (t) { out.push({ title: t[0] + (t[1] ? ' (' + t[1] + ')' : ''), meta: 'Term · ' + TOPIC_CODE[t[3]], view: 'terms' }); });
+    CARDS.forEach(function (c) { out.push({ title: c.q, meta: 'Flashcard', view: 'flash' }); });
+    ['topics', 'cases'].forEach(function (view) {
+      document.querySelectorAll('#' + view + ' details.note').forEach(function (d) {
+        var tag = d.querySelector('summary').textContent.replace(/^\s*C?\d+\s*/, '').trim();
+        out.push({ title: tag, meta: view === 'topics' ? 'Topic' : 'Case file', view: view, anchor: d.id });
+        d.querySelectorAll('figcaption').forEach(function (f) { out.push({ title: f.lastChild.textContent.trim(), meta: 'Figure · ' + tag, view: view, anchor: d.id }); });
+        d.querySelectorAll('h4').forEach(function (h) { var t = h.textContent.trim(); if (t.length > 2 && t.length < 80 && t !== 'Words to know' && t !== 'Questions') out.push({ title: t, meta: tag, view: view, anchor: d.id }); });
+      });
+    });
+    document.querySelectorAll('#cheat .cheat h3').forEach(function (h) { out.push({ title: h.textContent.trim(), meta: 'Cheat sheet', view: 'cheat', anchor: h.id || null }); });
+    document.querySelectorAll('#resources .files a').forEach(function (a) { out.push({ title: a.textContent.trim(), meta: 'Download', view: 'resources' }); });
+    [['Strategy sorter','obj'],['Which system?','sys'],['Business functions','fn'],['Time and place','collab'],['Ethical principles','eth'],['Quiz','quiz'],['Flashcards','flash'],['Course plan','plan']].forEach(function (d) { out.push({ title: d[0], meta: d[1] === 'plan' ? 'Course' : 'Drill', view: d[1] }); });
+    return out;
+  }
+  (window.StudyConsole = window.StudyConsole || []).push({
+    id: 'mis',
+    title: 'Information Systems',
+    subtitle: 'Topics, case files, drills',
+    content: '#main',
+    defaultView: 'home',
+    restore: function () { return LSget('misTab', 'home'); },
+    router: { show: function (view, anchor) { go(view, !!anchor); } },
+    viewElement: function (id) { return document.getElementById(ALIAS[id] || id); },
+    terms: terms,
+    progress: { read: function () { return (parseInt(LSget('misBest', '0'), 10) || 0) > 0 ? { quiz: 'visited' } : {}; } },
+    groups: [
+      { label: 'Start', views: [{ id: 'home', title: 'Home' }] },
+      { label: 'Learn', views: [
+        { id: 'topics', title: 'Topics', badge: String(document.querySelectorAll('#topics details.note').length), children: sections('topics') },
+        { id: 'cases', title: 'Case files', badge: String(document.querySelectorAll('#cases details.note').length), children: sections('cases') },
+        { id: 'terms', title: 'Terms', badge: String(TERMS.length) }
+      ] },
+      { label: 'Drill', views: [
+        { id: 'flash', title: 'Flashcards', badge: String(CARDS.length + TERMS.length) },
+        { id: 'quiz', title: 'Quiz', badge: String(QUIZ.length) },
+        { id: 'obj', title: 'Strategy sorter' },
+        { id: 'sys', title: 'Which system?' },
+        { id: 'fn', title: 'Business functions' },
+        { id: 'collab', title: 'Time and place' },
+        { id: 'eth', title: 'Ethical principles' }
+      ] },
+      { label: 'Reference', views: [
+        { id: 'plan', title: 'Course plan', badge: '15' },
+        { id: 'cheat', title: 'Cheat sheet', children: sections('cheat') },
+        { id: 'resources', title: 'Downloads', badge: String(document.querySelectorAll('#resources .files a').length) },
+        { id: 'author', title: 'About' }
+      ] }
+    ]
+  });
+})();
+</script>
+</body>
+</html>

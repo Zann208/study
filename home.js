@@ -65,7 +65,8 @@
       { label: 'Workspace', views: [{ id: 'overview', title: 'Overview', track: false }] },
       { label: 'This semester', views: [
         linkOut('db', 'Database Systems', 'DBS'),
-        linkOut('spm', 'Project Management', 'SPM')
+        linkOut('spm', 'Project Management', 'SPM'),
+        linkOut('mis', 'Information Systems', 'MIS')
       ] },
       { label: 'Subjects', views: [
         linkOut('netdes', 'Network Design', 'NET'),

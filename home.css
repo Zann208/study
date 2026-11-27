@@ -15,6 +15,7 @@
 .home-tile[data-console-id="os"]      { --tile-l: #4a6236; --tile-d: #a8bf8c; }
 .home-tile[data-console-id="db"]      { --tile-l: #1f5f8b; --tile-d: #8fbfe0; }
 .home-tile[data-console-id="spm"]     { --tile-l: #7a3f6e; --tile-d: #d3a3c9; }
+.home-tile[data-console-id="mis"]     { --tile-l: #3f4c8a; --tile-d: #a7b2e3; }
 .home-tile[data-console-id="gdc"]     { --tile-l: #36597a; --tile-d: #98b5d1; }
 .home-tile[data-console-id="ccna"]    { --tile-l: #2b2b2b; --tile-d: #d6d6d6; }
 :root[data-theme="dark"] .home-tile { --tile: var(--tile-d); }

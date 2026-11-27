@@ -28,6 +28,7 @@ UI v2 (`shared/v2/`) stays live as the frozen rollback: each migrated page keeps
 |---|---|---|---|
 | **DBS** | Database Systems | this repository: `db/` | [open](https://zann208.github.io/study/db/) |
 | **SPM** | Software Project Management | this repository: `spm/` | [open](https://zann208.github.io/study/spm/) |
+| **MIS** | Information Systems | this repository: `mis/` | [open](https://zann208.github.io/study/mis/) |
 | **NET** | Network Design & Management | [netdes](https://github.com/Zann208/netdes) | [open](https://zann208.github.io/netdes/) |
 | **WLN** | Wireless Network Engineering | [wnet](https://github.com/Zann208/wnet) | [open](https://zann208.github.io/wnet/) |
 | **ALG** | Algorithms & Data Structures | [algo](https://github.com/Zann208/algo) | [open](https://zann208.github.io/algo/) |
@@ -71,7 +72,7 @@ Academic affiliation can still appear on the professional portfolio/resume where
 3. Do not add overlapping workflows that automatically rewrite generated HTML after normal edits.
 4. Test navigation links and mobile layout after structural changes.
 5. Keep topic-specific content inside its own repo; use this hub only for discovery and shared navigation.
-6. Keep naming consistent: NET, WLN, ALG, PRV, OS, DBS, SPM, GDC and CCN.
+6. Keep naming consistent: NET, WLN, ALG, PRV, OS, DBS, SPM, MIS, GDC and CCN.
 7. Preserve `.nojekyll` for direct static GitHub Pages hosting.
 8. Before adding new material, rewrite its framing into the console's own neutral topic structure rather than copying university labels.
 
